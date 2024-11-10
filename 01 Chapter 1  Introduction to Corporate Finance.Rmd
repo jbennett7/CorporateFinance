@@ -1,0 +1,51 @@
+---
+title: "Introduction to Corporate Finance"
+author: "Joseph Bennett"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Summary and Conclusions
+
+1. Corporate finance has three main areas of concern:
+
+  a. _Capital budgeting_: What long-term investmens should the firm take?
+  b. _Capital structure_: Where will the firm get the long-term financing to
+pay for its investments? Also, what mixture of debt and equity should it use to
+fund operations?
+  c. _Working capital management_: How should the firm manage its everyday
+financial activities?
+
+2. The goal of financial management in a for-profit business is to make
+decisions that increase the value of the stock, or, more generally, increase the
+market value of the equity.
+
+3.  The corporate form of organization is superior to other forms when it comes
+to raising money and transferring ownership interests, but it has the
+significant disadvantage of double taxation.
+
+4. There is the possibility of conflicts between stockholders and management in
+a large corporation. We called these conflicts _agency problems_ and discussed
+how they might be controlled and reduced.
+
+5. The advantages of the corporate form are enhanced by the existence of
+financial markets.
+
+
+# Concept Questions
+
+1. __Agency Problems__ Who owns a corporation? Describe the process whereby the owners control the firm's management. What is the main reason that an agency relationship exists in the corporate form of organization? In this context, what kinds of problems can arise?
+
+2. __Not-for-Profit Firm Goals__ Suppose you were the financial manager of a not-for-profit business (a not-for-profit hospital, perhaps). What kinds of goals do you think would be appropriate?
+
+3. __Goal of the Firm__ Evaluate the following statement: Managers should not focus on the current stock value because doing so will lead to an overemphasis on short-term profits at the expense of long-term profits.
+
+4. __Ethics and Firm Goals__ Can the goal of maximizing the value of the stock conflict with other goals, such as avoiding unethical or illegal behavior? In particular, do you think subjects like customer and employee safety, the environment, and the general good of society fit in this framework, or are they essentially ignored? Think of some specific scenarios to illustrate your answer.
+
+5. __International Firm Goal__
