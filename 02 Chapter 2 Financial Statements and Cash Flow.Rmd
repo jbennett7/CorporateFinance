@@ -35,6 +35,8 @@ Besides introducing you to corporate accounting, the purpose of this chapter has
 
 1. __Building a Balance Sheet__ Bishop, Inc., has current assets of \$5,700, net fixed assets of \$27,000, current liabilities of \$4,400, and long-term debt of \$12,900. What is the value of the shareholders' equity account for this firm? How much is net working capital?
 
+__Solution__
+
 $$
 \begin{aligned}
 \text{Assets} & = \text{Current Assets} + \text{Fixed Assets} = \$5,700 + \$27,000 = \$32,700 \\
@@ -59,6 +61,8 @@ cat("Shareholders' equity: $", se, "\n",
 ---
 
 2. __Building an Income Statement__ Travis, Inc., has sales of \$387,000, costs of \$175,000, deprecation expense of \$40,000, interest expense of \$21,000, and a tax rate of 35%. What is the net income for the firm? Suppose the company paid out \$30,000 in cash dividends. What is the addition to retained earnings?
+
+__Solution__
 
 $$
 \begin{aligned}
@@ -97,6 +101,8 @@ cat("Sales:", sales, "\n",
 
 3. __Market Values and Book Values__ Klingon Cruisers, Inc., purchased new cloaking machinery three years ago for \$9.5 million. The machinery can be sold to the Romulans today for \$6.5 million. Klingon's current balance sheet shows net fixed assets of \$5.2 million, current liabilities of \$2.4 million, and net working capital of \$800,000. If all the current assets were liquidated today, the company would receive \$2.6 million in cash. What is the book value of Klingon's assets today? What is the market value?
 
+__Solution__
+
 ```{r echo=F}
 cloaking.machine.market <- 6.5
 net.fixed.assets <- 5.2
@@ -121,6 +127,8 @@ Step 2: Calculate the market value of all assets.
 ---
 
 4. __Calculating Taxes__ The Locker Co. has \$273 thousand in taxable income. Using the rates from Table 2.3 in the chapter, calculate the company's income taxes. What is the average tax rate? What is the marginal tax rate?
+
+__Solution__
 
 ```{r, echo=F}
 table.2.3 <- data.frame(
@@ -181,6 +189,17 @@ cat(" EBIT:", (ebit <- sum(c(sales,-costs, -deprecation))), "\n",
 
 6. __Calculate Net Capital Spending__ Gordon Driving School's 2011 balance sheet showed net fixed assets of \$1.42 million, and the 2012 balance sheet showed net fixed assets of \$1.69 million. The company's 2012 income statement showed a deprecation expense of \$145,000. What was Gordon's net capital spending for 2012?
 
+__Solution__
+
+Net capital spending is is also called _changes in fixed assets_. The net change
+in fixed assets equals the acquisition of fixed assets minus the sales of fixed
+assets. However, net capital spending can also be calculated.
+
+$$
+\text{Capital spending} = \text{Ending net fixed assets}
+  - \text{Beginning net fixed assets} + \text{Deprecation}
+$$
+
 ```{r}
 fixed.assets.2011 <- 1.42
 fixed.assets.2012 <- 1.69
@@ -203,22 +222,39 @@ tb <- matrix(c(long.term.debt, preferred.stock, common.stock.1.par.value, accumu
 rownames(tb) <- c("Long-term debt", "Preferred stock", "Common stock ($1 par value)",
                 "Accumulated retained earnings", "Capital Surplus")
 colnames(tb) <- c("")
-print(tb)
+knitr::kable(tb, caption="All values in millions of dollars")
 ```
 
 During the past year, Information Control issued 10 million shares of new stock at a total price of \$58 million, and issued \$35 million in new long-term debt. The company generated \$9 million in net income and paid \$2 million in dividends. Construct the current balance sheet reflecting the changes that occurred at Information Control Corp. during the year.
 
+__Solution__
+
 ```{r}
-tb["Long-term debt", ] <- tb["Long-term debt", ] + 35
-tb["Common stock ($1 par value)", ] <- tb["Common stock ($1 par value)", ] + 10
-tb["Accumulated retained earnings", ] <- tb["Accumulated retained earnings", ] + 9 - 2
-tb["Capital Surplus",] <- tb["Capital Surplus", ] + (58 - 10)
-tb
+long.term.debt.current <- tb["Long-term debt",]  + 35
+common.stock.1.par.value.current <- tb["Common stock ($1 par value)", ] + 10
+accumulated.retained.earnings.current <- tb["Accumulated retained earnings", ] + 9 - 2
+capital.surpus.current <- tb["Capital Surplus", ] + (58 - 10)
+tb.current <- matrix(c(long.term.debt.current, preferred.stock,
+                       common.stock.1.par.value.current,
+                       accumulated.retained.earnings.current,
+                       capital.surpus.current), ncol=1)
+rownames(tb.current) <- c("Long-term debt", "Preferred stock", "Common stock ($1 par value)",
+                           "Accumulated retained earnings", "Capital Surplus")
+colnames(tb.current) <- c("")
+knitr::kable(tb.current, caption="All values in millions of dollars")
 ```
 
 ---
 
 8. __Cash Flow to Creditors__ The 2011 balance sheet of Anna's Tennis Shop, Inc., showed long-term debt of \$1.45 million, and the 2012 balance sheet showed long-term debt of \$1.52 million. The 2012 income statement showed an interest expense of \$127,000. What was the firm's cash flow to creditors during 2012?
+
+__Solution__
+
+$$
+\text{Cash Flow to Creditors (CFC)} = \text{interest expense}
+  - (\text{ending long-term debt} - \text{beginning long-term debt})
+  = \$127,000 - (\$1,520,000 - \$1,450,000) = \$57,000
+$$
 
 ```{r}
 long.term.debt.2011 <- 1.45
@@ -231,13 +267,26 @@ interest.payment <- .127
 
 9. __Cash Flow to Stockholders__ The 2011 balance sheet of Anna's Tennis Shop, Inc., showed \$490,000 in the common stock account and \$3.4 million in the additional paid-in surplus account. The 2012 balance sheet showed \$525,000 and \$3.7 million in the same two accounts, respectively. If the company paid out \$275,000 in cash dividends during 2012, what was the cash flow to stockholders for the year?
 
+__Solution__
+
+$$
+\begin{aligned}
+\text{Cash Flow to Stockholders (CFS)} &= \text{dividends}
+    - (\text{Ending Equity} - \text{Beginning Equity}) \\
+  &= \$275,000 - \left[(\$3,700,000 + \$275,000)
+    - (\$3,400,000 + \$490,000)\right] \\
+  &= - \$60,000
+\end{aligned}
+$$
+
 ```{r}
 common.stock.2011 <- .490
 surplus.2011 <- 3.4
 common.stock.2012 <- .525
 surplus.2012 <- 3.7
 dividends.2012 <- .275
-(cf.stockholders <- dividends.2012 -(common.stock.2012 + surplus.2012 - common.stock.2011 - surplus.2011))
+(cf.stockholders <- dividends.2012 -
+    (common.stock.2012 + surplus.2012 - common.stock.2011 - surplus.2011))
 ```
 
 ---
@@ -299,6 +348,10 @@ __Solution__
 
 a. The cash balance has increased from \$55,000 in 2011 to \$65,000. This increase in cash could result from a combination of operating, investing, and financing activities, including cash generated from operations (net income), changes in working capital, and any new financing or debt payments.
 
+$$
+\text{Change in Cash} = \$65,000 - \$55,000 = \$10,000
+$$
+
 b. The change in net working capital is Current Assets $-$ Current Liabilities. For 2012
 
 $$
@@ -350,34 +403,104 @@ Determine the cash flows from the firm and the cash flows to investors of the fi
 
 __Solution__
 
-## Cash Flows:
-
-### Inflows:
-
-* Long term borrowing: \$17
-* Proceeds from sale of stock: \$4
-
-### Outflows:
-
-* Purchase of fixed assets: \$21
-* Purchase of inventories: \$14.5
-
-Net cash flow from the firm is:
+## Cash Flows from the firm:
 
 $$
-\$17 + \$4 - \$21 - \$14.5 = - \$14.5
+\text{Cash flows from the firm} = \text{Purchases of fixed assets}
+  + \text{Purchases of invinetories} = \$21 + \$1.9 = \$22.9
 $$
 
+## Cash Flows to investors
 
-$\$14,500 - \$4,000 = \$10,500$
+We consider creditors as investors.
+
+$$
+\begin{aligned}
+\text{Cash flows to investors}
+  &= \text{Payment of dividends} \\
+  &- \text{Proceeds from long term borrowing}  \\
+  &- \text{Proceeds from the sale of common stock} \\
+  &= \$14.5 - \$17 - \$4 = - \$6.5
+\end{aligned}
+$$
 
 ---
 
-13. __Building an Income Statement__
+13. __Building an Income Statement__ During the year, the Senbet Discount Tire Company has gross sales of \$1.06 million. The firm's cost of goods sold and selling expenses were \$525,000 and \$215,000, respectively. Senbet also has notes payable of \$800,000. These notes carried an interest rate of 7 percent. Deprecation was \$130,000. Senbet's tax rate was 35 percent.
 
+a. What was Senbet's net income?
+b. What was Senbet's operating cash flow?
 
+__Solution__
 
+a. Net Income
 
+$$
+\begin{aligned}
+\text{EBIT} &= \text{gross sales} - \text{cost of goods sold}
+  - \text{selling expenses} - \text{Deprecation} \\
+  &= \$1,060 - \$525 - \$215 - \$130 = \$190 \\ \\
+\text{Gross Income} &= \text{EBIT} - \text{notes payable} \times \text{interest rate} \\
+  &= \$190 - \$56 = \$134 \\ \\
+\text{Net Income} &= \text{Gross Income}
+  - \left(\text{Gross Income} \times \text{Tax Rate}\right) \\
+  &= \$134 - \left(\$134 \times \text{Tax Rate} \right) = \$`r 134 - 134*.35`
+\end{aligned}
+$$
+
+b. Operating Cash Flow
+
+$$
+\text{OCF} = \text{EBIT} + \text{Deprecation} - \text{Taxes}
+  = \$190 + 130 - \$46.9 = \$273.1
+$$
+
+---
+
+14. __Calculating Total Cash Flows__ Schwert Corp. shows the following information on its 2012 income statement: sales = \$185,000; costs = \$98,000; other expenses = \$6,700; deprecation expense = \$16,500; interest expense = \$9,000; taxes = \$19,180; dividends = \$9,500. In addition, you're told that the firm issued \$7,550 in new equity during 2012 and redeemed \$7,100 in outstanding long-term debt.
+
+a. What is the 2012 operating cash flow?
+b. What is the 2012 cash flow to creditors?
+c. What is the 2012 cash flow to stockholders?
+d. If net fixed assets increased by \$26,100 during the year, what was the addition to net working capital (NWC)?
+
+__Solution__
+
+$$
+\begin{aligned}
+\text{EBIT} &= \text{sales} - \text{costs} - \text{other expenses} - \text{deprecation expense} \\
+  &= \$185 - \$98 - \$6.7 - \$16.5 = \$63.8 \\ \\
+\text{OCF} &= \text{EBIT} + \text{Deprecation} - \text{taxes} \\
+  &= \$63.8 + \$16.5 - \$19.18 = \$61.12 \\ \\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{CFC} &= \text{Interest expense} - \text{New net borrowing} \\
+  &= \$9 - (-\$7.1) = \$16.1
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{CFS} &= \text{Dividends} - \text{Net New Equity Raised} \\
+ &= \$9.5 - \$7.55 = \$1.950
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{CFFA} &= \text{Cash Flow to Creditors} + \text{Cash Flow to Stockholders} \\
+  &= \$16.1 + \$1.95 = \$18.05 \\ \\
+\text{CFFA} &= \text{OCF} - \text{Net Capital Spending} - \text{Change in NWC} \\ \\
+\text{Change in NWC} &= \text{OCF} - \text{Net Capital Spending} - \text{CFFA} \\ \\
+\text{Net Capital Spending} &= \$26.1 + \$16.5 = \$42.6 \\ \\
+\text{Change in NWC} &= \$61.12 - \$42.6 - \$18.05 = \$.470
+\end{aligned}
+$$
+
+---
 
 
 
