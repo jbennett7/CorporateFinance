@@ -1037,6 +1037,91 @@ $$
 
 ---
 
+## Growing annuity
+
+Your job pays you only once a year for all the work you did over the previous 12 months. Today, December 31, you just received your salary of \$65,000, and you plan to spend all of it. However, you want to start saving for retirement beginning next year. You have decided that one year from today you will begin depositing 5 percent of your annual salary in an account that will earn 10 percent per year. Your salary will increase at 4 percent per year throughout your career. How much money will you have on the date of your retirement 40 years from today?
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{annuity}} &= C_0 \left( \frac{1 - \left( \frac{1 + g}{1 + r} \right)^T}{r - g}  \right) \\ \\
+\mathbf{C}_{0} &= 65,000 \times .05 \\
+  &= 3,250.00 \\ \\
+\mathbf{PV}_{\text{annuity}} &=  3,250.00 \left( \frac{1 - \left( \frac{1 + .04}{1 + .1} \right)^{40}}{.1 - .4} \right) \\ \\
+  &= 48,420.76
+\end{aligned}
+$$
+
+---
+
+## Present value and interest rates
+
+What is the relationship between the value of an annuity and the level of interest rates? Suppose you just bought a 15-year annuity of \$6,800 per year at the current interest rate of 10 percent per year. What happens to the value of your investment if interest rates suddenly drop to 5 percent? What if interest rates suddenly rise to 15 percent?
+
+$$
+\begin{aligned}
+\mathbf{PV} &= C \times \frac{1 - (1 + r)^{-T}}{r} \\ \\
+\mathbf{PV}_{\text{10\%}} &= 6,800 \times \frac{1 - (1 + .1)^{-15}}{.1} \\
+  &= 51,721.34 \\ \\
+\mathbf{PV}_{\text{5\%}} &= 6,800 \times \frac{1 - (1 + .05)^{-15}}{.05} \\
+  &= 70,581.67 \\ \\
+\mathbf{PV}_{\text{15\%}} &= 6,800 \times \frac{1 - (1 + .15)^{-15}}{.15} \\
+  &= 39,762.12
+\end{aligned}
+$$
+
+There is a non-linear inversely proportional relationship between the interest rate and the value of an annuity. As the interest rate increases the value of the annuity decreases; and as the interest rate decreases the value of the annuity increases. A 5% drop in the interest rate means a \$18,860.33 increase in the value of the annuity; and a 5% increase in interest rates means a \$11,959.22 drop in the value in the annuity.
+
+---
+
+## Calculating the number of payments
+
+You're prepared to make monthly payments of \$350, beginning at the end of this month, into an account that pays 10 percent interest compounded monthly. How many payments will you have made when your account balance reaches \$35,000?
+
+The so
+$$
+\begin{aligned}
+\mathbf{FV}_{\text{annuity}} &= \text{C} \frac{(1 + \frac{r}{m})^{mT} - 1}{\frac{r}{m}} \\ \\
+t &= \frac{ \ln{\left( \frac{\frac{r}{m} \times \text{FV}}{C} + 1  \right)}  }{\ln{(1 + \frac{r}{m})}} \\
+  &= 73.038
+\end{aligned}
+$$
+
+We round up to 74 months.
+
+---
+
+## Calculating annuity present values
+
+You want to borrow \$65,000 from your local bank to buy a new sailboat. You can afford to make monthly payments of \$1,320, but no more. Assuming monthly compounding, what is the highest APR you can afford on a 60-month loan?
+
+with $r$ as the monthly rate $\text{APR} = r \times 12$.
+
+$$
+\begin{aligned}
+\mathbf{PV} &= C \times \frac{1 - (1 + r)^{-T}}{r} \\ \\
+\frac{65,000}{1,320} &= \frac{1 - (1 + r)^{-60}}{r} \\ \\
+0 &= \frac{1 - (1 + r)^{-60}}{r} - 49.24242
+\end{aligned}
+$$
+
+We need to solve for r numerically.
+
+```{r}
+C <- 65000/1320
+f <- function(r) {
+  1/r - 1/(r * (1+r)^60) - C
+}
+
+(root <- uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root)
+
+1320 * (1 - (1+root)^(-60))/(root)
+```
+
+The maximum APR is 0.67%.
+
+---
+
+
 
 
 
