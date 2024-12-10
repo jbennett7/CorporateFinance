@@ -21,13 +21,13 @@ Besides introducing you to corporate accounting, the purpose of this chapter has
 
 # Concepts
 
-##Liquidity
+## Liquidity
 
 True or false: All assets are liquid at some price. Explain.
 
 __True__. All assets are liquid at some price. However, the degree of liquidity and the ability to sell an asset varies. Assets are usually classified based on its liquidity. _Highly liquid assets_ are assets that can be converted to cash very quickly and with minimal loss to value. _Less liquid assets_ cannot be easily converted to cash without significant loss to value.
 
-# Accounting and cash flows
+## Accounting and cash flows
 
 Why might the revenue and cost figures shown on a standard income statement not represent the actual cash inflows and outflows that occurred during a period?
 
@@ -1448,6 +1448,7 @@ You are researching Time Manufacturing and have found the following accounting s
 
 ```{r problem 24 time manufacturing statement of cash flows, echo=F, message=F}
 require(kableExtra)
+require(dplyr)
  # net income, deprecation, deferred taxes
 operations <- c(173, 94, 19)
  # changes in assets and liabilities: accounts receivable, inventories,
