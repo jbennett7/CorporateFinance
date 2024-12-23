@@ -187,7 +187,7 @@ Japans own interest rate in March 2008 was 0.5%. This indicates an extremely low
 
 ---
 
-## Call provision
+## Call provisions
 
 TMCC has the right to buy back the securities on the anniversary date at a price established when the securities were issued (this feature is a term of this particular deal). What impact does this feature have on the desirability of this security as an investment?
 
@@ -227,14 +227,23 @@ First City Bank pays 8 percent simple interest on its savings account balances, 
 
 For a \$5,000 deposit in First Bank with simple interest you simply calculate the value of the deposit as such:
 
+
 $$
-5,000 \times (1 + 10 \times .08) = 9,000
+\begin{aligned}
+\text{Simple interest} &= C \cdot (1 + n \times r) \\
+ &= 5,000 \times (1 + 10 \times .08) \\
+ &= 9,000
+\end{aligned}
 $$
 
 Second Bank uses compound interest.
 
 $$
-5,000 \times (1.08)^{10} = 10,794.62
+\begin{aligned}
+\text{Compound interest} &= C \cdot (1 + r)^{n} \\
+ &= 5,000 \times (1.08)^{10} \\
+ &= 10,794.62
+\end{aligned}
 $$
 
 The difference between the two is:
@@ -301,6 +310,7 @@ The formula for calculating the present value from the future value is:
 $$
 \mathbf{PV} = \frac{\text{FV}}{(1 + r)^t}
 $$
+
 ```{r solution 3}
 present.value <- round(p3.tbl[, future.value /(1+interest.rate)^years,
                               by = seq_len(nrow(p3.tbl))]$V1, 0)
@@ -538,21 +548,49 @@ present.value <- function(fv, discount, period) fv / (1 + discount)^period
 
 Investment X offers to pay you \$4,500 per year for nine years, whereas Investment Y offers to pay you \$7,000 per year for five years. Which of these cash flow streams has the higher present value if discount rate is 5 percent? If the discount rate is 22 percent?
 
-```{r problem 12}
-present.value <- function(fv, discount, period) fv / (1 + discount)^period
+We solve this with the annuity equation:
 
-(inv.x <- present.value(4500, .05, 9))
-(inv.y <- present.value(7000, .05, 5))
-inv.x > inv.y
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{annuity}} &= C \cdot \left[ \frac{1 - (1 + r)^{-T}}{r}  \right]
+\end{aligned}
+$$
+
+```{r problem 12 define pvia}
+pvia <- function(rate, term, growth=0) {
+  (1 - ((1 + growth) / (1 + rate))^(term)) / (rate - growth)
+}
+```
+
+```{r problem 12 define present value of annuity}
+pv.annuity <- function(coupon, rate, term, growth=0, delay=1, payout=1) {
+  rate <- (1 + rate)^payout - 1
+  if(delay < 0)
+    coupon + coupon * pvia(rate, term-1, growth)
+  else
+    present.value(coupon * pvia(rate, term / payout, growth), rate, delay-1)
+}
+```
+
+```{r solution 12}
+(investment.x <- pv.annuity(4500, .05, 9))
+(investment.y <- pv.annuity(7000, .05, 5))
+investment.x > investment.y
 cat("\n")
-(inv.x <- present.value(45000, .22, 9))
-(inv.y <- present.value(7000, .22, 9))
-inv.x > inv.y
+(investment.x <- pv.annuity(4500, .22, 9))
+(investment.y <- pv.annuity(7000, .22, 5))
+investment.x > investment.y
 ```
 
 ---
 
 ## Calculating annuity present value
+
+An investment offers \$4,900 per year for 15 years, with the first payment occurring one year from now. If the required return is 8 percent, what is the value of hte investment? What would the value be if the payments occurred for 40 years? For 75 years? Forever?
+
+---
+
+## Calculating perpetuity value
 
 The Perpetual Life Insurance Co. is trying to sell you an investment policy that will pay you and your heirs \$15,000 per year forever. If the required return on this investment is 5.2 percent, how much will you pay for the policy? Suppose the Perpetual Life Insurance Co. told you the policy costs \$320,000. At what interest rate would this be a fair deal?
 
@@ -956,7 +994,7 @@ $$
 
 ---
 
-## Ballon payments
+## Balloon payments
 
 Audrey Sanborn has just arranged to purchase a \$550,000 vacation home in the Bahamas with a 20 percent down payment. The mortgage has a 6.1 percent stated annual interest rate, compounded monthly, and calls for equal monthly payments over the next 30 years. Her first payment will be due one month from now. However, the mortgage has an eight-year ballon payment, meaning that the balance of the loan must be paid off at the end of Year 8. There were no other transaction costs or finance charges. How much will Audrey's ballon payment be in eight years?
 
@@ -1078,6 +1116,7 @@ There is a non-linear inversely proportional relationship between the interest r
 You're prepared to make monthly payments of \$350, beginning at the end of this month, into an account that pays 10 percent interest compounded monthly. How many payments will you have made when your account balance reaches \$35,000?
 
 The so
+
 $$
 \begin{aligned}
 \mathbf{FV}_{\text{annuity}} &= \text{C} \frac{(1 + \frac{r}{m})^{mT} - 1}{\frac{r}{m}} \\ \\
@@ -1121,10 +1160,490 @@ The maximum APR is 0.67%.
 
 ---
 
+## Calculating loan payments
+
+You need a 30-year, fixed-rate mortgage to buy a new home for \$250,000. Your mortgage bank will lend you the money at a 5.3 percent APR for this 360-month loan. However, you can only afford monthly payments of \$950, so you offer to pay off any remaining loan balance at the end of the loan in the form of a single balloon payment. How large will this balloon payment have to be for you to keep your monthly payment at \$950?
+
+Calculate the future value of the loan in 30 years. This is a 30 year loan of monthly payments thus $n = 30 \times 12 = 360$. The rate is $r = .053/12 = .004417$
+
+$$
+\begin{aligned}
+\mathbf{FV}_{\text{loan}} &= P \times (1 + r)^{n} \\
+\mathbf{FV}_{\text{loan}} &= 250,000 \cdot (1 + .004417)^{360} \\
+  &= 1,221,799
+\end{aligned}
+$$
+
+The monthly payments can be considered an annuity lasting 30 years, with a monthly coupon of \$950.
+
+$$
+\begin{aligned}
+\mathbf{FV}_{\text{payments}} &= \text{PMT} \times \left[ \frac{(1 + r)^{n} - 1}{r}  \right] \\ \\
+\mathbf{FV}_{\text{payments}} &= 950 \times \left[ \frac{(1 + .004417)^{360} - 1}{.004417} \right] \\ \\
+  &= 836,050.60
+\end{aligned}
+$$
+
+The monthly payments will be \$950 a month for the 30 years. The amount of the loan remaining to be paid of (the balloon payment at the end):
+
+$$
+\begin{aligned}
+\mathbf{Balloon} &= \text{FV}_{\text{loan}} - \text{FV}_{\text{payments}} \\
+\mathbf{Balloon} &= 1,221,799 - 836,050.60 \\
+  &= 385,748.40
+\end{aligned}
+$$
+
+The balloon payment will be \$385,748.40.
+
+---
+
+## Present and future values
+
+The present value of the following cash flow stream is \$7,300 when discounted at 8 percent annually. What is the value of the missing cash flow?
+
+```{r}
+year <- c(1,2,3,4)
+cash.flow <- c(1500, '?', 2700, 2900)
+knitr::kable(data.frame(year, cash.flow))
+```
+
+$$
+\begin{aligned}
+\mathbf{PV} &= \frac{C_{1}}{1 + r} + \frac{C_{2}}{(1 + r)^{2}} + \frac{C_{3}}{(1 + r)^3} + \frac{C_{4}}{(1 + r)^4} \\ \\
+7,300 &= \frac{1,500}{1 + .08} + \frac{C_{2}}{(1 + .08)^{2}} + \frac{2,700}{(1 + .08)^3} + \frac{2,900}{(1 + .08)^4} \\ \\
+7,300 &= 1388.89 + \frac{C_{2}}{1.1664} + 2,143.35 + 2,131.59 \\ \\
+1636.17 &= \frac{C_{2}}{1.1664} \\ \\
+\mathbf{C_{2}} & \approx 1,908
+\end{aligned}
+$$
+
+---
+
+## Calculating present values
+
+You just won the TVM Lottery. You will receive \$1 million today plus another 10 annual payments that increase by \$275,000 per year. Thus, in one year you receive \$1.275 million. In two years, you get \$1.55 million, and son on. If the appropriate interest rate is 9 percent, what is the present value of your winnings?
+
+The growth rate is $g = .275$. This is greater than the interest rate of 9%. We cannot use the annuity formula. However, we can calculate the 10 annual payments manually.
+
+The annuity is as follows:
+
+$$
+\begin{aligned}
+\mathbf{PV} &= 1 + \frac{1.275}{(1 + .09)} + \frac{1.55}{(1 + .09)^2} + \cdots + \frac{1 + .275 \cdot n}{(1 + .09)^n} \\ \\
+  &= \sum_{n=0}^{10}{\frac{1 + .275 \cdot n}{(1 + .09)^n}}
+\end{aligned}
+$$
+
+This can be solved via R:
+
+```{r problem 40}
+sum((1 + .275 * (0:10))/(1 + .09)^(0:10))
+```
+
+The present value of the winnings is \$15,885,030.
+
+---
+
+## EAR versus APR
+
+You have just purchased a new warehouse. To finance the purchase, you've arranged for a 30-year mortgage for 80 percent of the \$4,500,00 purchase price. The monthly payment on this loan will be \$27,500. What is the APR on this loan? The EAR?
+
+---
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{loan}} &= .80 \cdot 4,500,000 \\
+\mathbf{FV}_{\text{loan}} &= 0 \text{  (We are paying off the loan)} \\
+\mathbf{PMT} &= 27,500 \\
+\mathbf{m} &= 12 \\
+\mathbf{n} &= m \cdot T = 12 \cdot 30 = 360
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{loan}} &= \frac{27,500}{\left( 1 + \frac{r}{m}  \right)^{mT}} \\ \\
+  3,600,000 &= \frac{27,500}{\left(1 + \frac{r}{12} \right)^{360}} \\ \\
+\end{aligned}
+$$
 
 
 
+```{r problem 41}
+C <- 3600000/27500
+f <- function(r) {
+  1/r - 1/(r * (1+r)^360) - C
+}
+
+(root <- uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root)
+
+27500 * (1 - (1+root)^(-360))/(root)*12
+```
+
+The APR is $r \times 12 = 8.429$%. The EAR is:
+
+$$
+\begin{aligned}
+\mathbf{EAR} &= (1 + r)^{12} - 1 \\
+ &= 8.762\%
+\end{aligned}
+$$
+
+---
+
+## Present value and break-even interest
+
+Consider a firm with a contract to sell an asset for \$115,000 three years from now. The asset costs \$76,000 to produce today. Given a relevant discount rate on this asset of 13 percent per year, will the firm make a profit on this asset? At what rate does the firm just break even?
+
+To find if the firm will make a profit, calculate the present value of \$115,000 to find if it is greater than \$76,000.
+
+$$
+\begin{aligned}
+\mathbf{PV} &= \frac{115,000}{(1 + .13)^3} \\ \\
+ &= 79,7000.77
+\end{aligned}
+$$
+
+So the firm will make a profit of \$3,700.77.
+
+The break even interest rate is the rate where:
+
+$$
+\begin{aligned}
+76,000 &= \frac{115,000}{(1 + r)^3}
+\end{aligned}
+$$
+
+We can calculate this using R.
+
+```{r problem 42}
+n <- 3
+f <- function(r) {
+76000*(1 + r)^3 - 115000
+}
+
+(root <- uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root)
+
+115000/(1 + root)^3
+```
+
+The break even interest rate is 14.8%
+
+---
+
+## Present value and multiple cash flows
+
+What is the present value of \$5,000 per year, at a discount rate of 6 percent, if the first payment is received 6 years from now and the last payment is received 25 years from now?
+
+First calculate the present value of the payments for $5 - 25 = 20$ years.
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{6 years from now}} &= \sum_{n=0}^{20}{\frac{5,000}{(1 + .06)^{n}}} \\ \\
+  &= 5,000 \cdot \frac{1 - (1 + .06)^{-20}}{.06} \\ \\
+  &= 57,349.61
+\end{aligned}
+$$
+
+Now we project this back six years to find its present value today:
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{today}} &= \frac{57,349.61}{(1 + .06)^{5}} \\ \\
+  &= 42,854.96
+\end{aligned}
+$$
+
+---
+
+## Variable interest rates
+
+A 15-year annuity pays \$1,500 per month, and payments are made at the end of each month. If the interest rate is 12 percent compounded monthly for the first seven years, and 6 percent compounded monthly thereafter, what is the present value of the annuity?
 
 
+The annuity equation:
 
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{annuity}} &= C_0 \times \frac{1 - (1 + r)^{-T}}{r}
+\end{aligned}
+$$
+We need to calculate `r` and `T`:
 
+$$
+\begin{aligned}
+r_1 &= \frac{.12}{12} &= .01 \\ \\
+r_2 &= \frac{.06}{12} &= .005 \\ \\
+T_1 &= 12 \times 7 &= 84 \\ \\
+T_2 &= 12 \times 8 &= 96 \\ \\
+C_0 &= 1,500
+\end{aligned}
+$$
+
+We have two separate annuities.
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{first}} &= 1,500 \cdot \frac{1 - (1 + .01)^{-84}}{.01} \\ \\
+  &= 84,972.68 \\ \\
+\mathbf{PV}_{\text{second}} &= 1,500 \cdot \frac{1 - (1 + .005)^{-96}}{.005} \\ \\
+  &= 114,142.80
+\end{aligned}
+$$
+
+The second calculation needs to be projected back to present day:
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{today}} &= \frac{114,142.80}{(1 + .01)^{84}} \\ \\
+ &= 49,482.67
+\end{aligned}
+$$
+
+Therefore the present value is the sum of the two:
+
+$$
+\begin{aligned}
+  75,075.69 + 49,482.67 = 124,558.40
+\end{aligned}
+$$
+
+---
+
+## Comparing cash flow streams
+
+You have your choice of two investment accounts. Investment A is a 15-year annuity that features end-of-month \$1,500 payments and has an interest rate of 8.7 percent compounded monthly. Investment B is an 8 percent continuously compounded lump-sum investment, also good for 15 years. How much money would you need to invest in B today for it to be worth as much as Investment A 15 years from now.
+
+The present value of investment A is:
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{A}} &= 1,500 \times \frac{1 - (1 + \frac{.087}{12})^{180}}{\frac{.087}{12}} \\ \\
+ &= 150,527.10
+\end{aligned}
+$$
+
+For investment B to match this:
+
+$$
+\begin{aligned}
+\mathbf{FV}_{\text{B}} &= C_0 \times e^{180} \\ \\
+C_0 &= \frac{150,527.10}{e^{180}} \\ \\
+ &= 45,337.89
+\end{aligned}
+$$
+
+---
+
+## Calculating present value of a perpetuity
+
+Given an interest rate of 6.1 percent per year, what is the value at Date $t = 7$ of a perpetual stream of \$2,500 annual payments that begins at Date $t = 15$?
+
+So we can pretend that $t = 7$ is the present. Therefore, We find the present value of a perpetuity that begins $15 - 7 = 8$ years from now.
+
+$$
+\begin{aligned}
+\mathbf{PV} &= \frac{C}{r}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\mathbf{PV} &= \frac{2,500}{.061} \\ \\
+  &= 40,983.61
+\end{aligned}
+$$
+
+We now project back 8 years:
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{8 years previous}} &= \frac{40,983.61}{(1 + .061)^{7}} \\ \\
+  &= 27077.12
+\end{aligned}
+$$
+
+---
+
+## Calculating EAR
+
+A local finance company quotes a 16 percent interest rate on one-year loans. So, if you borrow \$26,000, the interest for the year will be \$4,160. Because you must repay a total of \$30,160 in one year, the finance company requires you to pay \$30,160/12, or \$2,513.33, per month over the next 12 months. Is this a 15 percent loan? What rate would legally have to be quoted? What is the effective annual rate?
+
+The loan involves equal monthly payments of \$2,513.33 for 12 months.
+
+$$
+\begin{aligned}
+\mathbf{P} &= C \times \frac{1 - (1 + r)^{-n}}{n}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\mathbf{PMT} &= 2,513.33 \\
+\mathbf{P} &= 26,000 \\
+\mathbf{n} &= 12
+\end{aligned}
+$$
+
+Using R we can solve for `r`:
+
+```{r problem 47}
+n <- 12
+P <- 26000
+C <- 2513.33
+f <- function(r) {
+  (1 - (1 + r)^-n)/r - P/C
+}
+
+(root <- uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root)
+```
+
+The monthly interest is 2.36%.
+
+The APR is: $2.36 \times 12 = 28.32\%$.
+
+The EAR is: $(1 + r)^{m} - 1 = 32.31\%$
+
+Thus, this is not a 15% loan it is significantly higher. The finance company would have to legally quote the __APR__ as 28.33%, reflecting the cost based on monthly compounding.
+
+The __EAR__ of 32.31% accounts for the full compounding effect over the year.
+
+---
+
+## Calculating present values
+
+A 5-year annuity of ten \$5,300 semiannual payments will begin 9 years from now, with the first payment coming 9.5 years from now. If the discount rate is 12 percent compounded monthly, what is the value of this annuity five years from now? What is the value three years from now? What is the current value of the annuity?
+
+The annuity equation
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{annuity}} &= C_0 \times \frac{1 - (1 + r)^{-T}}{r}
+\end{aligned}
+$$
+
+The variables are:
+
+$$
+\begin{aligned}
+\mathbf{C_0} &= 5,300 \\
+\mathbf{T} &= 2 \cdot 5 = 10 \\
+\mathbf{r}_{\text{monthly}} &= \frac{r}{m} = \frac{.12}{12} = 0.01 \\
+\mathbf{r}_{\text{semiannually}} &= (1 + \frac{r}{m})^{m} = (1 + \frac{.12}{12})^{6} - 1 = 0.0615
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{annuity}} &= 5,300 \times \frac{1 - (1 + .0615)^{-10}}{.0615} \\
+  &= 38,732.73
+\end{aligned}
+$$
+
+Discount to 5 years from now
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{discounted five years from now}} &= \frac{38,732.73}{(1 + .01)^{48}} \\
+  &= 24,024.38
+\end{aligned}
+$$
+
+Discounted to 3 years from now
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{discount 3 years}} &= \frac{38,732.73}{(1 + .01)^{72}} \\
+  &= 18,920.79
+\end{aligned}
+$$
+
+Discounted for today
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{today}} &= \frac{38,732.73}{(1 = .01)^{108}} \\
+ &= 13,224.21
+\end{aligned}
+$$
+
+---
+
+## Calculating annuities due
+
+Suppose you are going to receive \$20,000 per year for five years. The appropriate interest rate is 7 percent.
+
+a. What is the present value of the payments if they are in the form of an ordinary annuity? What is the present value if the payments are an annuity due?
+b. Suppose you plan to invest the payments for five years. What is the future value if the payments are an ordinary annuity? What if the payments are an annuity due?
+c. Which has the highest present value, the ordinary annuity or annuity due? Which has the highest future value? Will this always be true?
+
+a.
+
+An ordinary annuity assumes that the first annuity payment begins a full period hence.
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{ordinary annuity}} &= C \times \left( \frac{1 - (1 + r)^{-T}}{r}  \right)
+\end{aligned}
+$$
+
+An annuity due starts at date 0. Thus:
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{annuity due}} &= C + C \times \left( \frac{1 - (1 + r)^{-T}}{r}  \right)
+\end{aligned}
+$$
+
+Which means that the first payment is at date 0. The annuity due has a higher present value than the ordinary annuity.
+
+Thus the value of both annuity types:
+
+$$
+\begin{aligned}
+\mathbf{PV}_{\text{ordinary annuity}} &= 20,000 \times \left( \frac{1 - (1 + .07)^{-5}}{.07}  \right) \\
+  &= 82,003.95 \\
+\mathbf{PV}_{\text{annuity due}} &= 20,000 + 20,000 \times \left( \frac{1 - (1 + .07)^{-5}}{.07}  \right)  \\
+  &= 102,003.90
+\end{aligned}
+$$
+
+b.
+
+$$
+\begin{aligned}
+\mathbf{FV}_{\text{ordinary annuity}} &= C \times \frac{(1 + r)^n - 1}{r} \\ \\
+\mathbf{FV}_{\text{annuity due}} &= \text{FV}_{\text{ordinary annuity}} \times (1 + r)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\mathbf{FV}_{\text{ordinary annuity}} &= 20,000 \times \frac{(1 + .07)^5 - 1}{.07} \\
+  &= 115,014.80 \\ \\
+\mathbf{FV}_{\text{annuity due}} &= 115,014.80 \times (1 + .07) \\
+  &= 123,065.80
+\end{aligned}
+$$
+
+c.
+
+For both the __present value__ and the __future value__ have a higher value because of the earlier payment. In the future value it has an additional period to earn interest.
+
+---
+
+## Calculating annuities due
+
+You want to buy a new sports car from Muscle Motors for \$73,000. The contract is in the form of a 60-month annuity due at a 6.45 percent APR. What will your monthly payment be?
+
+$$
+\begin{aligned}
+\mathbf{r} &= \frac{.0645}{12} \\
+  &= .0.005375  \\ \\
+\mathbf{C} &= 73,000 \times \frac{.005375}{1 - (1 + .005375)^{-60}} \times (1 + .005375) \\
+  &= 1434.29
+\end{aligned}
+$$
+
+---
