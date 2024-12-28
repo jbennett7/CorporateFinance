@@ -1,0 +1,1103 @@
+---
+title: "Making Capital Investment Decisions"
+author: "Joseph Bennett"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Summary
+
+This chapter discussed a number of practical applications of capital budgeting.
+
+1. Capital budgeting must be placed on an incremental basis. This means that sunk costs must be ignored, whereas both opportunity costs and side effects must be considered.
+
+2. In the Baldwin case we computed NPV using the following two steps:
+
+> a. Calculate the net cash flow from all sources for each period.
+> b. Calculate the NPV using these cash flows.
+
+3. Inflation must be handled consistently. One approach is to express both cash flows and the discount rate in real terms. Because both approaches yield the same NPV calculation, the simpler method should be used. The simpler method will generally depend on the type of capital budgeting problem.
+
+4. Operating cash flows (OCF) can be computed in a number of different ways. We presented three different methods for calculating OCF: The top-down approach, the botton-up approach, and the tax shield approach. The three approaches are consistent with each other.
+
+5. The discounted cash flow approach can be applied to many areas of capital budgeting. The last section of this chapter applied the approach to cost-cutting investments, competitive bidding, and choices between equipment of different lives.
+
+# Example Problems
+
+## Relevant cash flows
+
+The Weber-Decker Co. just paid \$1 million in cash for a building as part of a new capital budgeting project. This entire \$1 million is an immediate cash outflow. However, assuming straight-line depreciation over 20 years, only \$50,000 ($=$\$ million/20) is considered an accounting expense in the current year. Current earnings are thereby reduced by only \$50,000. The remaining \$950,000 is exprensed over the following 19 years. For capital budgeting purposes, the relevant cash outflow at Date 0 is the full \$1 million, not the reduction in earnings of only \$50,000.
+
+---
+
+## Sunk costs
+
+The General Milk Company (GMC) is currently evaluating the NPV of establishing a line of chocolate milk. As part of the evaluation, the company paid a consulting firm \$100,000 last year for a test marketing analysis. Is this cost relevant for the capital budgeting decision now confronting GMC's management?
+
+The answer is no. The \$100,000 is not recoverable, so the \$100,000 expenditure is a sunk cost, or spilled milk. In other words, one must ask, "What is the difference between the cash flows of the entire firm with the chocolate milk project and the cash flows of the entire firm without the project?" Since the \$100,000 awas already spent, acceptance of the project does not affect this cash flow. Therefore, the cash flow should be ignored for capital budgeting purposes.
+
+Of course, the decision to spend \$100,000 for a marketing analysis was a capital budgeting decision itself and was perfectly relevant _before_ it was sunk. Our point is that once the company incurred the expense, the cost became irrelevant for any future decision.
+
+---
+
+## Opportunity costs
+
+Suppose the Weinstein Trading Company has an empty warehouse in Philadelphia that can be used to store a new line of electronic pinball machines. The company hopes to sell these machines to affluent northeastern consumers. Should the warehouse be considered a cost in the decision to sell the machines?
+
+The answer is yes. The company could sell the warehouse if the firm decides not to market the pinball machines. Thus, the sales price of the warehouse is an opportunity cost in the pinball machine decision.
+
+---
+
+## Erosion
+
+Suppose the Innovative Motors Corporation (IMC) is determining the NPV of a new convertible sports car. Some of the would-be purchasers are owners of IMC's compact sedans. Are all sales and profits from the new convertible sports car incremental?
+
+The answer is no because some of the cash flow represents transfers from other elements of IMC's product line. This is erosion, which must be included in the NPV calculation. Without taking erosion into account, IMC might erroneously calculate the nPV of the sports car to be, say, \$100 million. If half the customers are transfers from the sedan and lost sedan sales have an NPV of $-\$150$ million, the tru NPV is $-\$50$ million ($=$\$100 million $-$ \$150 million).
+
+---
+
+## Synergy
+
+IMC is also contemplating the formation of a racing team. The team is forecast to lose money for the foreseeable future, with perhaps the best projection showing an NPV of $-\$35$ million for the operation. However, IMC's managers are aware that the team will likely generate great publicity for all of IMC's products. A consultant estimates that the increase in cash flows elsewhere in the firm has a present value of \$65 million. Assuming that the consultant's estimates of synergy are trustworthy, the net present value of the team is \$30 million ($=$\$65 million $-$ \$35 million). The managers should form the team.
+
+---
+
+## Allocated costs
+
+The Voetmann Consutling Corp. devotes one wing of its suite of offices to a library requiring a cash outflow of \$100,000 a year in upkeep. A proposed capital budgeting project is expected to generate revenue equal to 5 percent of the overall firm's sales. An executive at the firm, David Pedersen, argues that \$5,000 ($=$ 5 percent $\times$ \$100,000) should be viewed as the proposed project's share of the library's costs. Is this appropriate for capital budgeting?
+
+The answer is no. One  must ask what the difference is between the cash flows of the entire firm with th eproject and the cash flows of the entire firm without the project. The firm will spend \$100,000 on library upkeep whether or not the proposed project is accepted. Because acceptance of the proposed project does not affect this cash flow, the cash flow should be ignored when calculating the NPV of the project.
+
+---
+
+## Real and nominal rates
+
+Exact formula for real and nominal interest rates:
+
+$$
+\begin{aligned}
+\mathbf{Real\ interest\ rate} &= \frac{1 + \text{nominal interest rate}}{1 + \text{1 + inflation rate}} - 1
+\end{aligned}
+\tag{1}
+$$
+
+Approximate formula for real and nominal interest rates (only applicable when the rates are low.)
+
+$$
+\begin{aligned}
+\mathbf{Real\ interest\ rate} &\cong \text{nominal interest rate} - \text{inflation rate}
+\end{aligned}
+\tag{2}
+$$
+
+The little-known monarchy of Gerberovia recently had a nominal interest rate of 300 percent and an inflation rate of 280 percent. According to equation (2), the real interest rate is:
+
+$$
+300\% - 280\% = 20\%\ \ (\text{Approximate formula})
+$$
+
+However, according to equation (1), this rate is:
+
+$$
+\frac{1 + 300\%}{1 + 280\%} - 1 = 5.26\%\ \ (\text{Exact formula})
+$$
+
+How do we know that the second formula is indeed the exact one? Let's think in terms of hamburgers again. Had you deposited \$1,000 in a Gerberovian bank a year ago, the account would be worth \$4,000 $[=\$1,000 \times (1 + 300\%)]$ today. However, while a hamburger cost \$1 a year ago, it costs \$3.80 $(=1 + 280\%)$ today. Therefore, you would now be able to buy 1,052.6 $(=\$4,000/3.80)$ hamburgers, implying a real interest rate of 5.256 percent.
+
+## Nominal versus real cash flow
+
+Burrows Publishing has just purchased the rights to the next book of famed romantic novelist Barbara Musk. Still unwritten, the book should be available ot the public in four years. Currently, romantic novels sell for \$10.00 in softcover. The publishers believe that inflation will be 6 percent a year over the next four years. Because romantic novels are so popular, the publishers anticipate that their prices will rise about 2 percent per year more than the inflation rate over the next four years. Burrows Publishing plans to sell the novel at \$13.60 $[=(1.08)^{4} \times \$10.00]$ four years from now, anticipating sales of 100,000 copies.
+
+The expected cash flow in the fourth year of \$1.36 million $(=\$13.60 \times 100,000)$ is a _nominal cash flow_. That is, the firm expects to receive \$1.36 million at that time. In other words, a nominal cash flow refers to the actual dollars to be received in the future.
+
+The purchasing power of \$1.36 million in four years is:
+
+$$
+1.08 \text{million} = \frac{1.36 \text{million}}{(1.06)^{4}}
+$$
+
+The figure of \$1.08 million is a _real cash flow_ because it is expressed in terms of purchasing power. Extending our hamberger example, the \$1.36 million to be received in four years will only buy 1.08 million hamburgers because the price of a hamburger will rise from \$1 to \$1.26 $[=\$1 \times (1.06)^{4}]$ over the period.
+
+---
+
+## Depreciation
+
+EOBII Publishers, a competitor of Burrows, recently bought a printing press for \$2,000,000 to be depreciated to zero by the straight-line method over five years. This implies yearly depreciation of \$400,000 $(=\$2,000,000/5)$. Is this \$400,00 figure a real or a nominal quantity?
+
+Depreciation is a _nominal_ quantity because \$400,000 is the actual tax deduction over each of the next five years. Depreciation becomes a real quantity if it is adjusted for purchasing power. Assuming an annual inflation rate of 6 percent, depreciation in the fourth year, expressed as a real quantity is \$316,837 $[=\$400,000/(1.06)^{4}]$.
+
+---
+
+## Real and nominal discounting
+
+Shields Electric forecasts the following nominal cash flows on a particular project:
+
+| | 0 | 1 | 2 |
+|:---:|:---:|:---:|:---:|
+| Cash Flow | -\$1,000 | \$600 | \$650 |
+
+The nominal discount rate is 14 percent, and the inflation rate is forecast to be 5 percent. What is the value of the project?
+
+### Using nominal quantities
+
+The NPV can be calculated as:
+
+$$
+26.47 = - 1,000 + \frac{600}{1.14} + \frac{650}{(1.14)^{2}}
+$$
+
+The project syhould be accpeted.
+
+### Using real quantities
+
+The real cash flows are these:
+
+|  | 0 | 1 | 2 |
+|:---:|:---:|:---:|:---:|
+| Cash Flow | -\$1,000 | \$571.43 | \$589.57 |
+|  |  | $= \left(\frac{\$600}{1.05}\right)$ | $= \left(\frac{\$650}{(1.05)^{2}}\right)$ |
+
+According to equation (1), the real discount rate is 8.57143 percent $(=1.14/1.05 - 1)$. The NPV can be calculated as:
+
+$$
+26.47 = - 1,000 + \frac{571.43}{1.0857143} + \frac{589.57}{1.0857143)^{2}}
+$$
+
+---
+
+## Real and nominal NPV
+
+Altshuler, Inc. generated the following forecast for a capital budgeting project:
+
+```{r example 10 table, echo=F}
+year.0 <- c("$1,210", "", "", "")
+year.1 <- c("", "$1,900", "950", "605")
+year.2 <- c("", "$2,000", "1,000", "605")
+e10.tbl <- data.frame(year.0, year.1, year.2)
+colnames(e10.tbl) <- c("Year 0", "Year 1", "Year 2")
+rownames(e10.tbl) <- c("Capital expenditure", "Revenues (in real terms)", "Cash expenses (in real terms)", "Depreciation (straight-line)")
+knitr::kable(e10.tbl)
+```
+
+The CEO, David Altshuler, estimates inflation to be 10 percent per year over the next two years. In addition, he believes that the cash flows of the project should be discounted at the nominal rate of 15.5 percent. His firm's tax rate is 40 percent.
+
+Mr. Altshuler forecasts all cash flows in _nominal_ terms, leading to the following table and NPV calculation:
+
+| | Year 0 | Year 1 | Year 2 |
+|:---|:---|:---|:---|
+| Capital expenditure | - \$1,210 | | |
+| Revenues | | \$2,090 $(=1,900 \times 1.10)$ | -1,210 $[=1,000 \times (1.10)^{2}]$ |
+| \ \ \ \ -Expenses | |-1,045 $(=950 \times 1.10)$ | -1,210 $[=1,000 \times (1.10)^{2}]$ |
+| \ \ \ \ -Depreciation | | -605 $(=1210/2)$ | -605 |
+| -------------- | | --------- | --------- |
+| Taxable income | | 440 | 605 |
+| \ \ \ \ -Taxes (40%) | | -176 | -242 |
+| -------------- | | -------- | -------- |
+| Income after taxes | | 264 | 363 |
+| \ \ \ \ +Depreciation | | 605 | 605 |
+| -------------- | | -------- | -------- |
+| Cash flow | | 869 | 968 |
+
+$$
+\mathbf{NPV} = - 1,210 + \frac{869}{1.155} + \frac{968}{(1.155)^{2}} = 268
+$$
+
+The firm's CFO, Stuart Weiss, prefers working in real terms. He first calculates the real rate to be 5 percent $(=1.155/1.10 - 1)$. Next, he generates the following table in _real_ quantities:
+
+| | Year 0 | Year 1 | Year 2 |
+|:---|:---|:---|:---|
+| Capital expenditure | - \$1,210 | | |
+| Revenues | | \$1,900 | -2,000 |
+| \ \ \ \ -Expenses | |-950 | -1,000 |
+| \ \ \ \ -Depreciation | | -550 $(=605/1.10)$ | -500 $[=605/(1.10)^{2}]$ |
+| -------------- | | --------- | --------- |
+| Taxable income | | 440 | 500 |
+| \ \ \ \ -Taxes (40%) | | -160 | -200 |
+| -------------- | | -------- | -------- |
+| Income after taxes | | 240 | 300 |
+| \ \ \ \ +Depreciation | | 550 | 500 |
+| -------------- | | -------- | -------- |
+| Cash flow | | 790 | 800 |
+
+Mr. Weiss calculates the value of the project as:
+
+$$
+\mathbf{NPV} = -1,210 + \frac{790}{1.05} + \frac{800}{(1.05)^{2}} = 268
+$$
+
+In explaining his calculations to Mr. Altshuler, Mr. Weiss points out these facts:
+
+1. The capital expenditure occurs at Date 0 (today), so its nominal value and its real value are equal.
+
+2. Because yearly depreciation of \$605 is a nominal quantity, one cnverts it to a real quantity by discounting at the inflation rate of 10 percent.
+
+It is no coincidence that both Mr. Altshuler and Mr. Weiss arrive at the same NPV number. Both methods must always generate the same NPV.
+
+---
+
+## To buy or not to buy
+
+We are considering the purchase of a \$200,000 computer-based inventory management system. It will be depreciated straight-line to zero over its four-year life. It will be worth \$30,000 at the end of that time. The system will save us \$60,000 before taxes in inventory-related costs. The relevant tax rate is 39 percent. Because the new setup is more efficient than our existing one, we can carry less total inventory, thereby freeing up \$45,000 in net working capital. What is the nPV at 16 percent? What is the IRR on this investment?
+
+Let's first calculate the operating cash flow. The aftertax cost savings are $\$60,000 \times (1 - .39) = \$36,600$ per year. The depreciation is $\$200,000/4 = \$50,000$ per year, so the depreciation tax shield is $\$50,000 \times .39 = \$19,500$. Operating cash flow is thus $\$36,000 + 19500 = \$56,100$ per year.
+
+The system involves a \$200,000 up front cost to buy the system. The after tax salvage is $\$30,000 \times (1 - .39) = \$18,300$. Finally, and this is somewhat tricky, the initial investment in net working capital (NWC) is a \$45,000 _inflow_ because the system frees up working capital. Furhtermore, we will have to put this back in at the end of the project's life. What this really means is simple: While the system is in operation, we have \$45,000 to use elsewhere.
+
+To finish our analysis, we can compute the total cash flows:
+
+```{r example 11 table, echo=F}
+year.0 <- c("", " $ 45,000", "- 200,000", "-$155,000")
+year.1 <- c("$56,100", "", "", "$56,100")
+year.2 <- c("$56,100", "", "", "$56,100")
+year.3 <- c("$56,100", "", "", "$56,100")
+year.4 <- c("$56,100", "- 45,000", "18,300", "$29,400")
+e11.tbl <- data.frame(year.0, year.1, year.2, year.3, year.4)
+colnames(e11.tbl) <- c("0", "1", "2", "3", "4")
+rownames(e11.tbl) <- c("Operating cash flow", "Change in NWC", "Capital spending", "Total cash flow")
+e11.tbl
+#knitr::kable(e11.tbl)
+```
+
+At 16 percent, the NPV is -\$12,768, so the investment is not attractive. After some trial and error, we find that the NPV is zero when the discount rate is 11.48 percent, implying an IRR of about 11.5 percent.
+
+```{r example 11 worksheet}
+investment <- 200000
+depreciation <- investment/4
+salvage <- 30000
+savings <- rep(60000,4)
+tax <- .39
+delta.nwc <- c(45000, 0, 0, 0, -45000)
+discount <- .16
+
+# Tax Shield
+(ocf <- c(0, savings * (1 - tax) + depreciation * tax))
+(capital.spending <- c(-investment, 0, 0, 0, salvage * (1 - tax)))
+npv <- function(C, r) C[1] + sum(C[-1] / (1 + r)^(1:length(C[-1])))
+npv(ocf + capital.spending + delta.nwc, discount)
+```
+
+---
+
+# Concepts
+
+## Opportunit cost
+
+In the context of capital budgeting, what is an opportunity cost?
+
+An opportunity cost is the cost of using an item for a project when it can be used for something else or sold for money.
+
+---
+
+## Incremental cash flows
+
+Which of the following should be treated as an incremental cash flow when computing the NPV of an investment?
+
+> a. A reduction in the sales of a company's other products caused by the investment.
+> b. An expenditure on plant and equipment that has not yet been made and will be made only if the project is accepted.
+> c. Costs of research and development undertaken in connection with the product during the past three years.
+> d. Annual depreciation expense from the investment.
+> e. Dividend payments by the firm.
+> f. The resale value of plant and equipment at the end of the project's life.
+> g. Salary and medical costs for production personnel who will be employed only if the project is accepted.
+
+A reduction in the sales of another product (a) is a side effect and is called erosion. It should be considered as an incremental cash flow. An expenditure on plant and equipment that will be made when the project is accepted (b) should also be considered as an incremental cash flow. Research conducted in connection with the product (c) on the other hand is a sunk cost and should not be considered. Depreciation costs (d) is not a real cash flow and should not be considered an incremental cash flow. Dividend payments (e), which will be paid anyway should not be considered a incremental cash flow. Any equipment that is used (f) during the life of the project that is sold at the end, should be considered an incremental cash flow. Any salary and medical costs for people involved (g) in the project should be considered an incremental cash flow.
+
+---
+
+## Incremental cash flows
+
+Your company currently produces and sells steel shaft golf clubs. The board of directors wants you to consider the introduction of a new line of titanium bubble woods with graphite shafts. Which of the following costs are _not_ relevant?
+
+> a. Land you already own that will be used for the project, but otherwise will be sold for \$700,000, its market value.
+> b. A \$300,000 drop in your sales of steel shaft clubs if the titanium woods with graphite shafts are introduced.
+> c. \$200,00 spent on research and development last year on graphite shafts.
+
+The land (a) is an opportunity cost and is therefore relevant. The drop is sales for steel shaft clubs (b) is an erosion side effect and is relevant. However, (c) the money spent on research and development is a sunk cost and is not relevant.
+
+---
+
+## Deprecation
+
+Given the choice, would a firm prefer to use MACRS depreciation or straight-line depreciation? Why?
+
+A firm would rather use MACRS depreciation because it accelerates the depreciation schedule and thus improves the time value money on deferred taxes.
+
+---
+
+## Net working capital
+
+In our capital budgeting examples, we assumed that a firm would recover all of the working capital it invested in a project. Is this a reasonable assumption? When might it not be valid?
+
+The assumption is reasonable in most cases, but not all. If the inventory has a shelf-life then that could decay net working capital. Market conditions could change and thus reduce the demand and price of inventory. Operational issues may occur: theft, damage, etc... A liquidation or force sale for below book value. Finally, the firm may make a strategic decision to leave some working capital in place, such as for continuing operations in a different manner.
+
+---
+
+## Stand-alone principle
+
+Suppose a financial manager is quoted as saying, "Our firm uses the stand-alone principle. Because we treat projects like minifirms in our evaluation process, we include financing costs because they are relevant at the firm level." Critically evaluate this statement.
+
+The standalone principle suggests that each project should be evaluated independently from all others. The overall goal is to determine whether the projects add value to the firm on their own. Financing costs, such as interest expenses, are not included in the cash flows of a project during the capital budgeting process because: They are already reflected in the discount rate, and including them in the cash flows would result in double counting; and the capital budgeting process focuses on the operating performance of the project, independent of how the project is financed.
+
+The statement incorrectly asserts that financing costs should be included because they are relevant at the firm leve. While financinc costs are relevant for the firm's overall financial structure, they are not part of a project's incremental operating cash flows and therefore should not be included in the project's evaluation. Treating a project as a "mini-firm" means evaluating its ability to generate cash flows before financing decision are made, not after.
+
+The correct approach would be to exclude financing costs, and focus on operating cash flows.
+
+
+---
+
+## Equivalent annual cost
+
+When is EAC analysis appropriate for comparing two or more projects? Why is this method used? Are there any implicit assumptions required by this method that you find troubling? Explain.
+
+### When is EAC appropriate?
+
+Equivalent annual cost (EAC) analysis is appropriate when comparing two or more projects that:
+
+1. Have similar benefits but have different lifespans.
+2. Mutually exclusive.
+3. Projects that will continue to provide their respective benefits for the foreseeable future.
+
+For example, EAC is often used when comparing equipment with different useful lives to determine which is the most cost-effective over time.
+
+### Why is the EAC method used?
+
+EAC converts the total cost of each project into an equivalent annual cost, which allows for a direct comparison of projects with different lifespans. This method is used because:
+
+1. __Standardization__: It translates costs into a uniform annual figure, simplifying the comparison of projects with different timeframes.
+2. __Replacement context__: It assumes that the project or asset will be replaced indefinitely, so it helps identify the cost-efficient choice over the long term.
+3. __Time value of money__: By incorporating the discount rate, it accounts for the time value of money, making comparisons more accurate.
+
+### Implicit assumptions and potential issues
+
+1. __Perpetual replacement assumption__: The projects will be replaced with identical versions indefinitely. This may not be realistic if technology changes, market conditions evolve, or the need for the asset diminishes over time.
+2. __Constant cost and benefits__: Costs, benefits, and operational efficiency remain constant over time. However, in reality, maintenance costs may increase, or operational efficiency may decline with age.
+3. __Discount rate consistency__: The discount rate remains constant throughout the analysis period. However, interest rates and the firm's cost of capital can change over time, making the chosen discount rate potentially inaccurate.
+4. __Identical usage profiles__: Each project will deliver the same level of output or benefit over its lifespan; but variations in productivity or performance across different projects may affect the actual cost-effectiveness.
+5. __Ignore intangibles__: The analysis focuses solely on quantifiable costs and benefits. Factors like environmental impact, strategic benefits, or brand value are often excluded but could be significant.
+
+### Conclusion
+
+EAC analysis is a valuable tool for comparing projects with different lifespans, particularly in replacement or repeat scenarios. However, its implicit assumptions, especially perpetual replacement and constant costs/benefits, can be troubling if they do not reflect reality. Decision-makers should carefully assess whether these assumptions are valid for the specific projects being analyzed and consider adjustments or supplementary analyses to address potential shortcomings.
+
+---
+
+## Cash flow and Depreciation
+
+"When evaluating projects, we're only concerned with the relevant incremental aftertax cash flows. Therefore, because depreciation is a noncash expense, we should ignore its effects when evaluating projects." Critically evaluate this statement.
+
+The statement is incorrect because it overlooks the significant role that depreciation plays in project evaluation, particularly through its impact on taxes and cash flows. Depreciation is a noncash expense meaning that id does not directly influence cash outflow. However, it does reduce taxable income which in turn reduces the firm's tax liability, creating a tax shield. The tax shield is a real cash flow benefit, as it reduces the firm's out-of-pocket tax payments. Ignoring this effect would underestimate the project's cash flows and potentially lead to incorrect decisions.
+
+---
+
+## Capital budgeting considerations
+
+A major college textbook publisher has an existing finance texbook. The publisher is debating whether to produce an "essentialized" version, meaning a shorter (and lower-priced) book. What are some of the considerations that should come into play?
+
+1. __Market demand__: The publisher should identify the potential audience for the shorter version, what needs does it satisfy, and how price elasticity might affect sales.
+2. __Cannibalization risk__: The publisher should consider if the shorter version will erode the sales of the full-length textbook and consider differentiation strategies to mitigate the risk.
+3. __Cost implications__: The publisher should consider the costs of editing, layout, and production of the new textbook. Do these sales justify the costs.
+4. __Pricing strategy__: The publisher should determine the best pricing strategy to maximize sales and revenues.
+
+---
+
+To answer the next three questions, refer to the following example. In 2003, Porsche unveiled its new sports utility vehicle (SUV), the Cayenne. With a price tag of over \$40,000, the Cayenne goes from zero to 62 mph in 8.5 seconds. Porsche's decision to enter the SUV market was in response to the runaway success of other high-priced SUVs such as the Mercedes-Benz M class. Vehicles in this class had generated years of very high profits. The Cayenne certainly spiced up the market, and, in 2006, Porsche introduced the Cayenne Turbo S, which goes from zero to 60 mph in 4.8 seconds and has a top speed of 168 mph. The base price for the Cayenne Turbo S in 2011? Almost \$105,000!
+
+Sum analysts questioned Porsche's entry into the luxury SUV market. The analysts were concerned because not only was Porsche a late entry into the market, but also the introduction of the Cayenne might damage Porsche's reputation as a maker of high-performance automobiles.
+
+## Erosion
+
+In evaluating the Cayenne, would you consider the possible damage to Porsche's reputation erosion?
+
+Yes, there is the possible damage to Porsche's reputation as a maker of high-performance automobiles due to erosion. Erosion typically refers to the negative impact a new project has on the sales or profitability of a company's existing products. If introduction of Cayenne reduces sales of Porsche's sports cars, this would be considered financial erosion.
+
+## Capital budgeting
+
+Porsche was one of the last manufacturers to enter the sports utility vehicle market. Why would one company decide to proceed with a product when other companies, at least initially, decide not to enter the market?
+
+A company like Porsche might decide to proceed with a product, even as a late entrant into a market, for several strategic and operational reasons.
+
+1. __Market validation__ Early entrants bear the risk of testing market viability, but late entrants can benefit from observing their success or failure. By 2003, the luxury SUV market had already proven highly profitable, with strong demand for high-end SUVs like the mercedes-Benz M-Class. Porsche could also analyze what worked for competitors and tailor its product to address gaps or enhance desirable features, such as higher performance or unique luxury touches.
+2. __Competitive differentiation__ Porsche may have identified a niche opportunity to differentiate itself in the luxury SUV market by offering a vehicle that combines utility with Porsche's hallmark performance and exclusivity. Entering the market later allowed Porsche to avoid direct competition with established models initially and position the Cayenne as a standout, high-performance luxury SUV.
+3.  __Strategic diversification__ diversifying its product lineup reduced Porsche's reliance on the sports car market, which is more cyclical and sensitive to economic downturns. The SUV market presented an opportunity to tap into a growing customer base that valued utility and luxury---segments Porsche's traditional sports cars did not address.
+4. __Internal readiness__ Porsche may have delayed entry to ensure the Cayenne met its high standards for performance and design. This could have involved refining engineering, securing partnerships (e.g., with Volkswagen for platform sharing), or ensuring the vehicle aligned with Porsche's brand image. Earlier, Porsche might not have had the financial or operational resources to invest in developing an SUV. By 2003, its strong financial position allowed for such an investment.
+5. __Market evolution__ Porsche's entry coincided with a growing luxury SUV market and increasing consumer demand for premium SUVs. This timing allowed Porsche to capitalize on an established and expanding market. Waiting allowed Porsche to incorporate the latest technology and innovations into the Cayenne, giving it a competitive edge over older models from rivals.
+6. __Brand strategy__ Introducing the Cayenne allowed Porsche to attract a broader customer base, including families and those seeking practicality without sacrificing luxury or perfornmance. Porsche's established reputation for performance and exclusivity could ensure the Cayenne's success, even as a late entrant.
+
+### Conclusion
+
+Porsche's decision to enter the luxury SUV market as a latecomer was likely a calculated move based on market validation, differentiation opportunities, strategic diversification, and internal readiness. By carefully positioning the Cayenne to align with its brand values while leveraging lessons from competitors, Porsche turned its late entry into an advantage, achieving significant success in the luxury SUV market.
+
+---
+
+## Capital budgeting
+
+In evaluating the Cayenne, what do you think Porsche needs to assume regarding the substantial profit margins that exist in this market? Is it likely that they will be maintained as the market becomes more competitive, or will Porsche be able to maintain the profit margin because of its image and the performance of the Cayenne?
+
+In evaluating the Cayenne, Porsche needs to make careful assumptions about whether the substantial profit margins in the luxury SUV market can be maintained over time.
+
+1. __Market competitiveness and erosion of margins__ as more automakers enter the luxury SUV market, competition intensifies, often leading to price pressure and narrowing profit margins. Porsche must consider the likelihood that other luxury brands (e.g., Mercedes-Benz, BMW, Audi) will continue to innovate and price aggressively. Over time, the luxury SUV market may become saturated, further pressuring margins as manufacturers compete for a finite customer base.
+2. __Porsche's ability to maintain margins__ Porsche's strong brand image as a premium, high-performance automaker may allow it to maintain higher price points compared to competitors. Customers are often willing to pay a premium for the Porsche badge. The Cayenne's performance (e.g., speed, handling) and luxury features may justify a higher price, protecting margins even in a competitive market. Porsche has a loyal customer base that values exclusivity and quality, reducing sensitivity to price competition.
+3. __Cost management__ Porsche's use of shared platforms and components with Volkswagen (e.g., Touareg) helps reduce production costs, potentially preserving profit margins despite competitive pressures. Maintaining or improving production efficiency can offset any margin caused by increased competition or price reductions.
+4. __Potential risks to margins__ If Porsche overextends its SUV lineup or compromises on quality, it risks diluting its brand, making it harder to justify premium pricing. Increases in raw materials, labor, or regulatory compliance costs (e.g., emissions standards) could squeeze margins unless Porsche can pass these costs on to customers.
+
+### Conclusion
+
+It is unlikely that the substantial profit margins in the luxury SUV market will remain as high indefinitely, given the natural progression of competition and market saturation. However, Porsche's strong brand equity, product differentiation, and cost management strategies give it a better chance than most competitors to maintain healthy margins. To sustain profitability, Porsche must continue to innovate, uphold its premium image, and adapt to market dynamics.
+
+---
+
+# Problems
+
+## Calculating project NPV
+
+Raphael restaurant is considering the purchase of a \$9,000 soffle maker. The souffle maker has an economic life of five years and will be fully depreciated by the straight-line method. The machine will produce 1,500 souffles per year, with each costing \$2.30 to make and priced at \$4.75. Assume that the discount rate is 14 percent and the tax rate is 34 percent. Should Raphael make the purchase?
+
+```{r problem 1: calculating project npv}
+investment <- 9000
+depreciation <- 9000/5
+production <- 1500
+cost <- 2.30
+price <- 4.75
+discount <- .14
+tax <- .34
+
+# Tax shield
+(ocf <- c(0, rep((price - cost) * production * (1 - tax) + depreciation * tax, 5)))
+(capital.spending <- c(-investment, 0, 0, 0, 0, 0))
+npv <- function(C, r) C[1] + sum(C[-1] / (1 + r)^(1:length(C[-1])))
+(npv(ocf + capital.spending, discount))
+```
+
+---
+
+## Calculating project NPV
+
+The Best Manufacturing Company is considering a new investment. Financial projections for the investment are tabulated here. The corporate tax rate is 34 percent. Assume all sales revenue is received in cash, all operating costs and income taxes are paid in cash, and all cash flows occur at the end of the year. All net working capital is recovered at the end of the project.
+
+```{r problem 2: calculating project npv table, echo=F}
+year.0 <- c("$24,000", "", "", "", "300")
+year.1 <- c("", "$12,500", "  2,700", "  6,000", "    350")
+year.2 <- c("", "$13,000", "  2,800", "  6,000", "    400")
+year.3 <- c("", "$13,500", "  2,900", "  6,000", "    300")
+year.4 <- c("", "$10,500", "  2,100", "  6,000", "    ?  ")
+investment <- c(24000, rep(' ', 4))
+depreciation <- c(' ', rep(6000, 4))
+net.working.capital <- c(300, 350, 400, 300, 0)
+p2.tbl <- data.frame(year.0, year.1, year.2, year.3, year.4)
+colnames(p2.tbl) <- c("Year 0", "Year 1", "year 2", "year 3", "year 4")
+rownames(p2.tbl) <- c("Investment", "Sales revenue", "Operating costs", "Depreciation", "Net working capital spending")
+knitr::kable(p2.tbl)
+```
+
+a. Compute the incremental net income of the investment for each year.
+b. Compute the incremental cash flows of the investment for each year.
+c. Suppose the appropriate discount rate is 12 percent. What is the NPV of the project?
+
+```{r problem 2: incremental net income}
+investment <- 24000
+discount <- .12
+tax <- .34
+sales.revenue <- c(12500, 13000,13500,10500)
+operating.costs <- c(2700, 2800, 2900, 2100)
+depreciation <- 6000
+delta.nwc <- c(-300, -50, -50, 100, 300)
+
+(ebitda <- sales.revenue - operating.costs)
+(ebit <- ebitda - depreciation)
+(taxes <- ebit * tax)
+cat("a:", (net.income <- ebit - taxes))
+# Bottom Up
+cat("b:", (ocf <- c(0, net.income + depreciation)))
+(capital.spending <- c(-investment, 0, 0, 0, 0))
+npv <- function(C, r) C[1] + sum(C[-1] / (1 + r)^(1:length(C[-1])))
+npv(ocf + capital.spending + delta.nwc, discount)
+# Answer from book $1,553.87
+```
+
+---
+
+## Calculating project NPV
+
+Down Under Boomerang, Inc., is considering a new three-year expansion project that requires an initial fixed asset investment of \$1.4 million. The fixed asset will be depreciated straight-line to zero over its three-year tax life, after which it will be worthless. The project is estimated to generate \$1,120,000 in annual sales, with costs of \$480,000. The tax rate is 35 percent and the required return is 12 percent. What is the project's NPV?
+
+```{r problem 3: calculating project npv}
+investment <- 1.4
+depreciation <- investment/3
+tax <- .35
+sales <- rep(1.12, 3)
+costs <- rep(.48, 3)
+
+(ebitda <- sales - costs)
+(taxes <- (ebitda - depreciation) * tax)
+# Top Down
+(ocf <- c(0, ebitda - taxes))
+(capital.spending <- c(-investment, 0, 0, 0))
+npv <- function(C, r) C[1] + sum( C[-1] / (1 + r)^(1:length(C[-1])))
+npv(ocf + capital.spending, .12)
+```
+
+With a negative net present value, Down Under Boomerang should not undergo the expansion project.
+
+---
+
+## Calculating project cash flow from assets
+
+In the previous problem, suppose the project requires an initial investment in net working capital of \$285,000 and the fixed asset will have a market value of \$225,000 at the end of the project. What is the project's Year 0 net cash flow? Year 1? Year 2? Year 3? What is the new NPV?
+
+```{r problem 4: calculating project cash flow from assets}
+delta.nwc <- c(-.285, 0, 0, .285)
+salvage <- .225
+
+(capital.spending <- c(-investment, 0, 0, salvage * (1 - tax)))
+npv(ocf + capital.spending + delta.nwc, .12)
+```
+
+The net present value is now positive and thus is worth pursuing.
+
+---
+
+## NPV and Modified ACRS
+
+In the previous problem, suppose the fixed asset actually falls into the three-year MACRS class. All the other facts are the same. What is the project's Year 1 net cash flow now? Year 2? Year 3? What is the new NPV?
+
+```{r problem 5: npv and modified acrs}
+depreciation.schedule <- c(.3333, .4445, .1481)
+
+# Tax shield
+(ocf <- c(0, ebitda * (1 - tax) + investment * depreciation.schedule * tax))
+(book.value <- investment * (1 - sum(depreciation.schedule)))
+(after.tax.salvage.value <- salvage - (tax * (salvage - book.value)))
+(capital.spending <- c(-investment, 0, 0, after.tax.salvage.value))
+npv(ocf + capital.spending + delta.nwc, .12)
+```
+
+Using the MACRS depreciation schedule the net present value is better.
+
+---
+
+## Project evaluation
+
+Your firm is contemplating the purchase of a new \$670,000 computer=based order entry system. The system will be depreciated straight-line to zero over its five-year life. It will be worth \$50,000 at the end of that time. You will save \$240,000 before taxes per year in order processing costs, and you will be able to reduce working capital by \$85,000 (this is a one-time reduction). If the tax rate is 35 percent, what is the IRR for this project?
+
+```{r problem 6: Project evaluation}
+tax <- .35
+investment <- 670
+savings <- rep(240, 5)
+delta.nwc <- c(85, 0, 0, 0, 0, -85)
+salvage <- 50
+depreciation <- 670/5
+
+# Tax Shield
+(ocf <- c(0, savings * (1 - tax) + depreciation * tax))
+(capital.spending <- c(-investment, 0, 0, 0, 0, salvage * (1 - tax)))
+irr <- function(C) {
+  f <- function(r) C[1] + sum(C[-1] / (1 + r)^(1:length(C[-1])))
+  uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root
+}
+irr(ocf + capital.spending + delta.nwc)
+# Answer from book: 20.06%
+```
+
+---
+
+## Project evaluation
+
+Dog Up! Franks is looking at a new sausage system with an installed cost of \$275,000. This cost will be depreciated straight-line to zero over the project's five-year life, at the end of which the sausage system can be scrapped for \$40,000. The sausage system will save the firm \$105,000 per year in pretax operating costs, and the system requires an initial investment in net working capital of \$28,000. If the tax rate is 34 percent and the discount rate is 10 percent, what is the NPV of this project?
+
+```{r problem 7: project evaluation}
+tax <- .34
+discount <- .1
+investment <- 275000
+depreciation <- 275000/5
+salvage <- 40000
+savings <- rep(105000,5)
+delta.nwc <- c(-28000, 0, 0, 0, 0, 28000)
+
+# Tax Shield
+(ocf <- c(0, savings * (1 - tax) + depreciation * tax))
+(capital.spending <- c(-investment, 0, 0, 0, 0, salvage * (1 - tax)))
+npv <- function(C, r) C[1] + sum(C[-1] / (1 + r)^(1:length(C[-1])))
+npv(ocf + capital.spending + delta.nwc, discount)
+```
+
+---
+
+## Calculating salvage value
+
+An asset used in a four-year project falls in the five-year MACRS class for tax purposes. The asset has an acquisition cost of \$7,100,000 and will be sold for \$1,400,000 at the end of the project. If the tax rate is 35 percent, what is the after tax salvage value of the asset?
+
+```{r problem 8: calculating salvage value}
+investment <- 7.1
+tax <- .35
+salvage <- 1.4
+depreciation.schedule.5yr <- c(.2, .32, .192, .1152, .1152, .0576)
+
+(book.value <- investment * (1 - sum(depreciation.schedule.5yr[1:4])))
+(taxable.gain <- salvage - book.value)
+(taxes <- taxable.gain * tax)
+(after.tax.salvage.value <- salvage - taxes)
+```
+
+---
+
+## Calculating NPV
+
+Howell Petroleum is considering a new project that complements its existing business. The machine required for the project costs \$3.8 million. The marketing department predicts that sales related to the project will be \$2.5 million per year for the next four years, after which the market will cease to exist. The machine will be depreciated down to zero over its four-year economic life using the straight-line method. Cost of goods sold and operating expenses related to the project are predicted to be 25 percent of sales. Howell also needs to add net working capital of \$150,000 immediately. The additional net working capital will be recovered in full at the end of the project's life. The corporate tax rate is 35 percent. The required rate of return for Howell is 16 percent. Should Howell proceed with the project?
+
+```{r problem 9: calculating npv}
+investment <- 3.8
+depreciation <- 3.8/4
+sales <- rep(2.5, 4)
+costs <- .25 * sales
+tax <-.35
+discount <- .16
+delta.nwc <- c(-.15, 0, 0, 0, .15)
+
+# Tax Shield
+(ocf <- c(0, (sales - costs) * (1 - tax) + depreciation * tax))
+(capital.spending <- c(-investment, 0, 0, 0, 0))
+npv <- function(C, r) C[1] + sum(C[-1] / (1 + r)^(1:length(C[-1])))
+npv(ocf + capital.spending + delta.nwc, discount)
+```
+
+---
+
+## Calculating EAC
+
+You are evaluating two different silicon wafer milling machines. The Techron I costs \$215,000, has a three-year life, and has pretax operating costs of \$35,000 per year. The Techron II costs \$270,000, has a five-year life, and has pretax operating costs of \$44,000 per year. For both milling machines, use straight-line depreciation to zero over the project's life and assume a salvage value of \$20,000. If your tax rate is 35 percent and your discount rate is 12 percent, compute the EAC for both machines. Which do you prefer? Why?
+
+```{r problem 10: calculating eac}
+techron.i <- 215000
+techron.ii <- 270000
+depreciation.i <- techron.i/3
+depreciation.ii <- techron.ii/5
+salvage <- 20000
+costs.i <- rep(35000,3)
+costs.ii <- rep(44000,5)
+tax <- .35
+discount <- .12
+
+# Tax Shield
+(ocf.i <- c(0, -costs.i * (1 - tax) + depreciation.i * tax))
+(ocf.ii <- c(0, -costs.ii * (1 - tax) + depreciation.ii * tax))
+(capital.spending.i <- c(-techron.i, 0, 0, salvage*(1 - tax)))
+(capital.spending.ii <- c(-techron.ii, 0, 0, 0, 0, salvage*(1 - tax)))
+pv <- function(C, r) sum(C / (1 + r)^(0:(length(C)-1)))
+pvia <- function(r, T) (1 - (1 + r)^(-T)) / r
+# -83,329.16; -82,554.30
+pv(ocf.i + capital.spending.i, discount) / pvia(discount, 3)
+pv(ocf.ii + capital.spending.ii, discount) / pvia(discount, 5)
+```
+
+---
+
+## Cost-cutting proposals
+
+Massey Machine Shop is considering a four-year project to improve its production efficiency. Buying a new machine press for \$640,000 is estimated to result in \$270,000 in annual pretax cost savings. The press falls in the MACRS five-year class, and it will have a salvage value at the end of the project of \$70,000. The press also requires an initial investment in spare parts inventory of \$20,000, along with an additional \$3,500 in inventory for each succeeding year of the project. If the shop's tax rate is 35 percent and its discount rate is 14 percent, should Massey buy and install the machine press?
+
+```{r problem 11: Cost-cutting proposals}
+investment <- 640000
+savings <- rep(270000,4)
+depreciation.marcs.5y <- c(.2, .32, .192, .1152)
+salvage <- 70000
+delta.nwc <- c(-20000, rep(-3500,3), 20000+3500*3)
+tax <- .35
+discount <- .14
+
+# Tax Shield
+(ocf <- c(0, savings * (1 - tax) + investment * depreciation.marcs.5y * tax))
+(book.value <- investment * (1 - sum(depreciation.marcs.5y)))
+salvage.benefit <- ifelse(
+  (tax.gains <- (salvage - book.value) * tax) > 0, tax.gains, -tax.gains
+)
+(capital.spending <- c(-investment, 0, 0, 0, salvage.benefit))
+npv <- function(C, r) C[1] + sum(C[-1] / (1 + r)^(1:length(C[-1])))
+npv(ocf + capital.spending + delta.nwc, discount)
+```
+
+---
+
+## Comparing mutually exclusive projects
+
+Hagar Industrial Systems Company (HISC) is trying to decide between two different conveyor belt systems. System A costs \$290,000, has a four-year life, and requires \$85,000 in pretax annual operating costs. System B costs \$405,000, has a six-year life, and requires \$75,000 in pretax annual operating costs. Both systems are to be depreciated straight-line to zero over their lives and will have zero salvage value. Whichever system is chosen, it will _not_ be replaced when it wears out. If the tax rate is 34 percent and the discount rate is 11 percent, which system should the firm choose?
+
+```{r problem 12: comparing mutually exclusive projects}
+investment.A <- 290
+investment.B <- 405
+operating.costs.A <- rep(85, 4)
+operating.costs.B <- rep(75, 6)
+depreciation.A <- investment.A/4
+depreciation.B <- investment.B/6
+tax <- .34
+discount <- .11
+
+# Tax Shield
+(ocf.A <- c(0, -operating.costs.A * (1 - tax) + depreciation.A * tax))
+(ocf.B <- c(0, -operating.costs.B * (1 - tax) + depreciation.B * tax))
+(capital.spending.A <- c(-investment.A, 0, 0, 0, 0))
+(capital.spending.B <- c(-investment.B, 0, 0, 0, 0, 0, 0))
+npv <- function(C, r) C[1] + sum(C[-1] / (1 + r)^(1:length(C[-1])))
+pvia <- function(r, T) (1 - (1 + r)^(-T)) / r
+npv(ocf.A + capital.spending.A, discount) / pvia(discount, 4)
+npv(ocf.B + capital.spending.B, discount) / pvia(discount, 6)
+```
+
+---
+
+## Comparing mutually exclusive projects
+
+Suppose in the previous problem that HISC always needs a conveyor belt system; when one wears out, it must be replaced. Which system should the firm choose?
+
+The answer would stay the same because the EAC reflects the annualized cost of owning and operating each system over its lifetime, accounting for replacements.
+
+---
+
+## Comparing mutually exclusive projects
+
+Vandalay Industries is considering the purchase of a new machine for the production of latex. Machine A costs \$2,900,000 and will last for six years. Variable costs are 35 percent of sales, and fixed costs are \$195,000 per year. Machine B costs \$5,700,000 and will last for nine years. Variable costs for this machine are 30 percent and fixed costs are \$165,000 per year. The sales for each machine will be \$12 million per year. The required return is 10 percent and the tax rate is 35 percent. Both machines will be depreciated on a straight-line basis. If the company plans to replace the machine when it wears out on a perpetual basis, which machine should you choose?
+
+```{r problem 14: comparing mutually exclusive projects}
+sales <- 12 
+machine.A <- 2.9
+depreciation.A <- machine.A/6
+var.costs.A <- .35 * rep(sales,6)
+fixed.costs.A <- 195
+machine.B <- 5.7
+depreciation.B <- machine.B/9
+var.costs.B <- .3 * rep(sales, 9)
+fixed.costs.B <- 165
+discount <- .1
+tax <- .35
+
+# Tax Shield
+(ocf.A <- c(0, -(var.costs.A + fixed.costs.A) * (1 - tax) + depreciation.A * tax))
+(ocf.B <- c(0, -(var.costs.B + fixed.costs.B) * (1 - tax) + depreciation.B * tax))
+(capital.spending.A <- c(-machine.A, rep(0,6)))
+(capital.spending.B <- c(-machine.B, rep(0,9)))
+npv <- function(C, r) C[1] + sum(C[-1] / (1 + r)^(1:length(C[-1])))
+pvia <- function(r, T) (1 - (1 + r)^(-T)) / r
+npv(ocf.A + capital.spending.A, discount) / pvia(discount, 6)
+npv(ocf.B + capital.spending.B, discount) / pvia(discount, 9)
+```
+
+---
+
+## Capital budgeting with inflation
+
+Consider the following cash flows on two mutually exclusive projects:
+
+```{r problem 15 table, echo=F}
+year <- c(0,1,2,3)
+project.a <- c(-50000, 30000, 25000, 20000)
+project.b <- c(-65000, 29000, 38000, 41000)
+p15.tbl <- data.frame(year, project.a, project.b)
+colnames(p15.tbl) <- c("Year", "Project A", "Project B")
+knitr::kable(p15.tbl)
+```
+
+The cash flows of project A are expressed in real terms, whereas those of project B are expressed in nominal terms. The appropriate nominal discount rate is 13 percent and the inflation rate is 4 percent. Which project should you choose?
+
+We will convert the nominal cash flows to real cash flows and the nominal discount rate to the real discount rate.
+
+```{r problem 15 capital budgeting with inflation}
+(real.project.b <- project.b/(1.04)^(1:4))
+(real.discount <- (1 + .13) / (1 + .04) - 1)
+npv(project.a, real.discount)
+npv(real.project.b, real.discount)
+```
+
+---
+
+## Inflation and company value
+
+Sparkling Water, Inc., expects to sell 2.8 million bottles of drinking water each year in perpetuity. This year each bottle will sell for \$1.25 in real terms and will cost \$.90 in real terms. Sales income and costs occur at year-end. Revenues will rise at a real rate of 6 percent annually, while real costs will rise at a real rate of 5 percent annually. The real discount rate is 10 percent. The corporate tax rate is 34 percent. What is Sparkling worth today?
+
+The present value of a growth perpetuity:
+
+$$
+\mathbf{PV}_{\text{perpetuity}} = \frac{C}{r - g}
+$$
+
+```{r problem 16: Inflation and company value}
+sales <- 2.8
+price.real <- 1.25
+cost.real <- .9
+revenue.growth.real <- .06
+cost.growth.real <- .05
+discount.real <- .1
+tax <- .34
+
+revenues <- sales * price.real
+costs <- sales * cost.real
+ebitda <- revenues - costs
+ebitda.growth.real <- revenue.growth.real - cost.growth.real
+pv.perpetuity <- function(C, g, r) C / (r - g)
+pv.ebitda <- pv.perpetuity(ebitda, ebitda.growth.real, discount.real)
+taxes <- pv.ebitda * tax
+(net.value <- pv.ebitda - taxes)
+```
+
+---
+
+## Calculating nominal cash flow
+
+Etonic Inc. is considering an investment of \$365,000 in an asset with an economic life of five years. The firm estimates that the nominal annual cash revenues and expenses at the end of the first year will be \$245,000 and \$70,000, respectively. Both revenues and expenses will grow thereafter at the annual rate of 3 percent. Etonic will use the straight-line method to depreciate its asset to zero over five years. The salvage value of the asset is estimated to be \$45,000 in nominal terms at that time. The one-time net working capital investment of \$10,000 is required immediately and will be recovered at the end of the project. All corporate cash flows are subject to a 34 percent tax rate. What is the project's total nominal cash flow from assets for each year?
+
+```{r problem 17: calculating nominal cash flow}
+investment <- 365
+revenues.nominal <- 245
+expenses.nominal <- 70
+growth.nominal <- .03
+depreciation <- investment/5
+salvage.nominal <- 45
+delta.nwc.nominal <- c(-10, 0, 0, 0, 0, 10)
+tax <- .34
+
+(revenues.growth.nominal <- revenues.nominal * (1+growth.nominal)^(0:4))
+(expenses.growth.nominal <- expenses.nominal * (1+growth.nominal)^(0:4))
+# Tax Shield
+(ocf.nominal <- c(0, (revenues.growth.nominal - expenses.growth.nominal) *
+    (1 - tax) + depreciation * tax))
+(capital.spending.nominal <- c(-365, 0, 0, 0, 0, 45 * (1 - tax)))
+(cash.flow <- ocf.nominal + capital.spending.nominal + delta.nwc.nominal)
+```
+
+---
+
+## Cash flow valuation
+
+Phillips Industries runs a small manufacturing operation. For this fiscal year, it expects real net cash flows of \$190,000. Phillips is an ongoing operation, but it expects competitive pressures to erode its real net cash flows at 4 percent per year in perpetuity. The appropriate real discount rate for Phillips is 11 percent. All net cash flows are received at year-end. What is the present value of the net cash flows from Phillips' operations?
+
+```{r problem 18: cash flow valuation}
+net.cash.flows <- 190
+growth <- -.04
+discount <- .11
+pv.perpetuity <- function(C, g, r) C / (r - g)
+pv.perpetuity(190, growth, discount)
+```
+
+---
+
+## Equivalent annual cost
+
+Bridgton Golf Academy is evaluating different golf practice equipment. The "Dimple-Max" equipment costs \$94,000, has a three-year life, and costs \$8,600 per year to operate. The relevant discount rate is 12 percent. Assume that the straight-line depreciation method is used and that the equipment is fully depreciated to zero. Furthermore, assume the equipment has a salvage value of \$18,000 at the end of the project's life. The relevant tax rate is 34 percent. All cash flows occur at the end of the year. What is the equivalent annual cost (EAC) of this equipment?
+
+```{r problem 19: equivalent annual cost}
+investment <- 94000
+depreciation <- investment/3
+costs <- rep(8600, 3)
+discount <- .12
+salvage <- 18000
+tax <- .34
+
+# Tax Shield
+(ocf <- c(0, costs * (1 - tax) + depreciation * tax))
+(capital.spending <- c(-investment, 0, 0, salvage * (1 - tax)))
+npv <- function(C, r) sum(C / (1 + r)^(0:(length(C) - 1)))
+pvia <- function(r, T) (1 - (1 + r)^(-T)) / r
+npv(ocf + capital.spending, discount) / pvia(discount, 3)
+```
+
+---
+
+## Calculating project NPV
+
+Scott Investors, Inc., is considering the purchase of a \$360,000 computer with an economic life of five years. The computer will be fully depreciated over five years using the straight-line method. The market value of the computer will be \$60,000 in five years. The computer will replace five office employees whose combined annual salaries are \$105,000. The machine will also immediately lower the firm's required net working capital by \$80,000. This amount of net working capital will need to be replaced once the machine is sold. The corporate tax rate is 34 percent. Is it worthwhile to buy the computer if the appropriate discount rate is 12 percent?
+
+```{r problem 20: calculating project npv}
+investment <- 360
+depreciation <- investment / 5
+salvage <- 60
+savings <- rep(105, 5)
+delta.nwc <- c(80, 0, 0, 0, 0, -80)
+tax <- .34
+discount <- .12
+
+# Tax shield
+(ocf <- c(0, savings * (1 - tax) + depreciation * tax))
+(capital.spending <- c(-investment, 0, 0, 0, 0, salvage * (1 - tax)))
+npv <- function(C, r) sum( C / (1 + r)^(0:(length(C)-1)))
+npv(ocf + capital.spending + delta.nwc, discount)
+```
+
+---
+
+## Calculating NPV and IRR for a replacement
+
+A firm is considering an investment in a new machine with a price of \$18 million to replace its existing machine. The current machine has a book value of \$6 million and a market value of \$4.5 million. The new machine is expected to have a four-year life, and the old machine has four years left in which it can be used. If the firm replaces the old machine with the new machine, it expects to save \$6.7 million in operating costs each year over the next four years. Both machines will have no salvage value in four years. If the firm purchases the new machine, it will also need an investment of \$250,000 in net working capital. The required return on investment is 10 percent, and the tax rate is 39 percent. What are the NPV and IRR of the decision to replace the old machine?
+
+```{r problem 21: calculating npv and irr for a replacement}
+investment <- 18
+depreciation.new <- 18/4
+current.book.value <- 6
+market.value <- 4.5
+savings <- rep(6.7, 4)
+delta.nwc <- c(-.250, 0, 0, 0, .250)
+discount <- .1
+tax <- .39
+
+# Tax shield
+(ocf <- c(0, savings * (1 - tax) + depreciation.new * tax))
+(taxed.salvage.losses <- 1.5 * tax)
+(capital.spending <- c(-18 + 4.5 + taxed.salvage.losses, 0, 0, 0, 0))
+npv <- function(C, r) sum( C / (1 + r)^(0:(length(C)-1)))
+irr <- function(C) {
+  f <- function(x) npv(C, x)
+  uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root
+}
+npv(ocf + capital.spending + delta.nwc, discount)
+irr(ocf + capital.spending + delta.nwc)
+```
+
+---
+
+## Project analysis and inflation
+
+Sanders Enterprises, Inc., has been considering the purchase of a new manufacturing facility for \$270,000. The facility is to be fully depreciated on a straight-line basis over seven years. It is expected to have no resale value after the seven years. Operating revenues from the facility are expected to be \$105,000, in nominal terms, at the end of the first year. The revenues are expected to increase at the inflation rate of 5 percent. Production costs at the end of the first year will be \$30,000, in nominal terms, and they are expected to increase at 6 percent per year. The real discount rate is 8 percent. The corporate tax rate is 34 percent. Sanders has other ongoing profitable operations. Should the company accept the project?
+
+```{r problem 22: project analysis and inflation}
+investment <- 270
+depreciation.nominal <- investment/7
+revenues.nominal.first.year <- 105
+inflation <- .05
+costs.nominal <- 30
+costs.increase <- .06
+discount.real <- .08
+tax <- .34
+
+(capital.spending <- c(-investment, rep(0, 7)))
+
+# Nominal calculation
+(discount.nominal <- (1 + discount.real)*(1 + inflation) - 1)
+(revenues.7yr.nominal <- revenues.nominal.first.year * (1 + inflation)^(0:6))
+(costs.7yr.nominal <- costs.nominal * (1 + costs.increase)^(0:6))
+(after.tax.revenues.nominal <- (revenues.7yr.nominal - costs.7yr.nominal) * (1 - tax))
+(tax.shield.nominal <- depreciation.nominal * tax)
+(ocf.nominal <- c(0, after.tax.revenues.nominal + tax.shield.nominal))
+npv <- function(C , r) sum(C / (1 + r)^(0:(length(C)-1)))
+npv(ocf.nominal + capital.spending, discount.nominal)
+
+# Real calculation
+pv <- function(C, r) C / (1 + r)^(1:(length(C)))
+(ocf.real <- c(0, pv(ocf.nominal[-1], inflation)))
+npv(ocf.real + capital.spending, discount.real)
+```
+
+---
+
+## Calculating project NPV
+
+With the growing popularity of casual surf print clothing, two recent MBA graduates decided to broaden this casual surf concept to encompass a "surf lifestyle for the home." With limited capital, they decided to focus on surf print table and floor lamps to accent people's homes. They projected unit sales of these lamps to be 7,000 in the first year, with growth of 8 percent each year for the next five years. Production of these lamps will require \$35,000 in net working capital to start. Total fixed costs are \$95,000 per year, variable production costs are \$20 per unit, and the units are priced at \$48 each. The equipment needed to begin production will cost \$175,000. The equipment will be depreciated using the straight-line method over a five-year life and is not expected to have a salvage value. The effective tax rate is 34 percent, and the required rate of return is 25 percent. What is the NPV of this project?
+
+```{r problem 23: calculating project npv}
+investment <- 175000
+depreciation <- investment/5
+sales <- 7000 * (1 + .08)^(0:4)
+costs <- 95000 + 20 * sales
+revenues <- sales * 48
+delta.nwc <- c(-35000, 0, 0, 0, 0, 35000)
+tax <- .34
+discount <- .25
+
+(ocf <- c(0, (revenues - costs) * (1 - tax) + depreciation * tax))
+(capital.spending <- c( -investment, rep(0, 5)))
+npv <- function(C, r) sum(C / (1 + r)^(0:(length(C)-1)))
+npv(ocf + capital.spending + delta.nwc, discount)
+```
+
+---
+
+## Calculating project NPV
+
+You have been hired as a consultant for Pristine Urban-Tech Zither, Inc. (PUTZ), manufacturers of fine zithers. The market for zithers is growing quickly. The company bought some land three years ago for \$1 million in anticipation of using it as a toxic waste dump site but has recently hired another company to handle all toxic materials. Based on a recent appraisal, the company believes it could sell the land for \$900,000 on an aftertax basis. In four years, the land could be sold for \$1,200,000 after taxes. The company also hired a marketing firm to analyze the zither market, at a cost of \$125,000. An excerpt of the marketing report is as follows:
+
+> The zither industry will have a rapid expansion in the next four years. With the brand name recognition that PUTZ brings to bear, we feel that the company will be able to sell 6,700, 7,500, 9,100, and 6,200 units each year for the next four years respectively. Again, capitalizing on the name recognition of PUTZ, we feel that a premium price of \$275 can be charged for each zither. Because zithers appear to be a fad, we feel at the end of the four-year period, sales should be discontinued.
+
+PUTZ feels that fixed costs for the project will be \$350,000 per year, and variable costs are 15 percent of sales. The equipment necessary for production will cost \$3.1 million and will be depreciated according to a three-year MACRS schedule. At the end of the project, the equipment can be scrapped for \$300,000. Net working capital of \$120,000 will be required immediately. PUTZ has a 38 percent tax rate, and the required return on the project is 13 percent. What is the NPV of the project? Assume the company has other profitable projects.
+
+The land and the marketing report costs are sunk costs so they do not factor into our calculations.
+
+```{r problem 24: calculating project npv}
+sales.forecast <- c(6700, 7500, 9100, 6200)
+price <- 275
+sales <- sales.forecast * price
+fixed.costs <- 350000
+variable.costs <- sales * .15
+costs <- fixed.costs + variable.costs
+investment <- 3100000
+depreciation <- investment * c(.3333, .4445, .1481, .0741)
+salvage <- 300000
+delta.nwc <- c(-120000, 0, 0, 0, 120000)
+tax <- .38
+discount <- .13
+
+(ocf <- c(0, (sales - costs) * (1 - tax) + depreciation * tax))
+(gains.tax <- (salvage - sum(depreciation)) * tax)
+(capital.expense <- c(-investment, 0, 0, 0, salvage - gains.tax))
+npv <- function(C, r) sum(C / (1 + r)^(0:(length(C)-1)))
+npv(ocf + capital.expense + delta.nwc, discount)
+```
+
+---
+
+## Calculating project NPV
+
+Pilot Plus Pens is deciding when to replace its old machine. The machine's current salvage value is \$2.2 million. Its current book value is \$1.4 million. If not sold, the old machine will require maintenance costs of \$845,000 at the end of the year for the next five years. Depreciation on the old machine is \$280,000 per year. At the end of five years, it will have a salvage value of  \$120,000 and a book value of \$0. A replacement machine costs \$4.3 million now and requires maintenance costs of \$330,000 at the end of each year during its economic life of five years. At the end of the five years, the new machine will have a salvage value of \$800,000. It will be fully depreciated by the straight-line method. In five years a replacement machine will cost \$3,200,000. Pilot will need to purchase this machine regardless of what choice it makes today. The corporate tax rate is 40 percent and the appropriate discount rate is 8 percent. The company is assumed to earn sufficient revenues to generate tax shields from depreciation. Should Pilot Plus Pens replace the old machine now or at the end of five years?
+
+```{r problem 25: calculating project npv}
+current.salvage <- 2200000
+current.book <- 1400000
+maintenance.costs <- rep(-845000, 5)
+depreciation <- 280000
+fiveyr.salvage <- 120000
+fiveyr.book <- 0
+new.machine <- 4300000
+new.maintenance.costs <- rep(-330000, 5)
+new.salvage <- 800000
+new.depreciation <- new.machine/5
+fiveyr.replacement <- 3200000
+tax <- .4
+discount <- .08
+
+(ocf.keep <- c(0, maintenance.costs * (1 - tax) + depreciation * tax))
+(capital.spending.keep <- c(0, 0, 0, 0, 0, fiveyr.salvage * (1 - tax)))
+(ocf.new <- c(0, new.maintenance.costs * (1 - tax) + new.depreciation * tax))
+(aftertax.gains <- (current.salvage - (current.salvage - current.book)* tax))
+(capital.spending.new <- c(-new.machine + aftertax.gains, 0, 0, 0, 0, new.salvage * (1 - tax)))
+npv <- function(C, r) sum(C / (1 + r)^(0:(length(C)-1)))
+pvia <- function(r, T) (1 - (1 + r)^(-T)) / r
+npv(ocf.keep + capital.spending.keep, discount) / pvia(discount, 5)
+npv(ocf.new + capital.spending.new, discount) / pvia(discount, 5)
+```
+
+---
+
+## EAC and inflation
+
+Office Automation, Inc., must choose between two copiers, the XX40 or the RH45. The XX40 costs \$900 and will last for three years. The copier will require a real aftertax cost of \$120 per year after all relevant expenses. The RH45 costs \$1,400 and will last five years. The real aftertax cost for the RH45 will be \$95 per year. All cash flows occur at the end of the year. The inflation rate is expected to be 5 percent per year, and the nominal discount rate is 14 percent. Which copier should the company choose?
+
+```{r problem 26: eac and incflation}
+xx40.investment <- 900
+xx40.aftertax.cost.real <- rep(-120,3)
+rh45.investment <- 1400
+rh45.aftertax.cost.real <- rep(-95,5)
+inflation <- .05
+discount.nominal <- .14
+
+(discount.real <- (1 + discount.nominal) / (1 + inflation) - 1)
+(ocf.xx40.real <- c(0, xx40.aftertax.cost.real * (1 - tax)))
+(ocf.rh45.real <- c(0, rh45.aftertax.cost.real * (1 - tax)))
+(capital.spending.xx40.real <- c(-900, rep(0,3)))
+(capital.spending.rh45.real <- c(-1400, rep(0, 5)))
+npv <- function(C, r) sum(C / (1 + r)^(0:(length(C)-1)))
+pvia <- function(r, T) (1 - (1 + r)^(-T)) / r
+npv(ocf.xx40.real + capital.spending.xx40.real, discount.real) / pvia(discount.real, 3)
+npv(ocf.rh45.real + capital.spending.rh45.real, discount.real) / pvia(discount.real, 5)
+```
+
