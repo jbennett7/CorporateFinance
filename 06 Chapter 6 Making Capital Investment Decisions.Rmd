@@ -1101,3 +1101,25 @@ npv(ocf.xx40.real + capital.spending.xx40.real, discount.real) / pvia(discount.r
 npv(ocf.rh45.real + capital.spending.rh45.real, discount.real) / pvia(discount.real, 5)
 ```
 
+---
+
+## Project analysis and inflation
+
+Dickinson Brothers, Inc., is considering investing in a machine to produce computer keyboards. The price of the machine will be \$975,000, and its economic life is five years. The machine will be fully depreciated by the straight-line method. The machine will produce 20,000 keyboards each year. The price of each keyboard will be \$40 in the first year and will increase by 5 percent per year. The production cost per keyboard will be \$15 in the first year and will increase by 6 percent per year. The project will have an annual fixed cost of \$195,000 and require an immediate investment of \$25,000 in net working capital. The corporate tax rate for the company is 34 percent. If the appropriate discount rate is 11 percent, what is the NPV of the investment?
+
+```{r problem 27: project analysis and inflation}
+investment <- 975000
+depreciation <- investment/5
+production <- rep(20000, 5)
+(price <- 40 * (1 + .05)^(0:4))
+(cost <- 15 * (1 + .06)^(0:4))
+fixed.cost <- 195000
+delta.nwc <- c(-25000, 0, 0, 0, 0, 25000)
+tax <- .34
+discount <- .11
+
+(ocf <- c(0, ((price - cost) * production - fixed.cost) * (1 - tax) + depreciation * tax))
+(capital.spending <- c(-investment, 0, 0, 0, 0, 0))
+npv <- function(C, r) sum(C / (1 + r)^(0:(length(C)-1)))
+npv(ocf + capital.spending + delta.nwc, discount)
+```

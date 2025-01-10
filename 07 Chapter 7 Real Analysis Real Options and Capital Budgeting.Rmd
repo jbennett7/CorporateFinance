@@ -1,0 +1,1110 @@
+---
+title: "Risk analysis, real options, and capital budgeting"
+author: "Joseph Bennett"
+date: "`r Sys.Date()`"
+output: 
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Summary
+
+1. Though NPV is the best capital budgeting approach conceptually, it has been criticized in practice for giving managers a false sense of security. Sensitivity analysis shows NPV under varying assumptions, giving managers a better feel for the project's risks. Unfortunately, sensitivity analysis modifies only one variable at a time, but many variables are likely to vary together in the real world. Scenario analysis examines a project's performance under different scenarios (such as war breaking out or oil prices skyrocketing). Finally, managers want to know how bad forecasts must be before a project loses money. Break-even analysis calculates the sales figure at which the project breaks even. Though break-even analysis is frequently performed on an accounting profit basis, we suggest that a net present value basis is more appropriate.
+
+2. Monte Carlo simulation begins with a model of the firm's cash flows, based on both the interactions between different variables and the movement of each individual variable over time. Random sampling generates a distribution of these cash flows for each period, leading to a net present value calculation.
+
+3. We analyze the hidden options in capital budgeting, such as the option to expand, the option to abandon, and timing options.
+
+4. Decision trees represent an approach for valuing projects with these hidden, or real, options.
+
+# Concept
+
+## Forcasting risk
+
+What is forecasting risk? In general, would the degree of forecasting risk be greater for a new product or a cost-cutting proposal? Why?
+
+Forecasting risk is the exercise of understanding the risks involved in capital budgeting decisions. There are different methods to forecasting risk such as sensitivity analysis, which helps to understand how a change in one variable will affect the NPV of a decision; to scenario analysis, which models different scenarios so that a more comprehensive picture of variable changes can be visualized; to break even analysis which attempts to determine the minimal market conditions to break even on an investment; to monte carlo simulations, which is a more sophisticated and complete scenario analysis method that takes into account all possible scenarios and their probability of coming true. In general, a new project would have a greater degree of risk than a cost-cutting proposal because a cost-cutting proposal is executed on an on-going project that should have already proven themselves. However, scale and scope do play a factor in risk analysis.
+
+---
+
+## Sensitivity analysis and scenario analysis
+
+What is the essential difference between sensitivity analysis and scenario analysis?
+
+Sensitivity analysis attempts to assess risk by varying one variable at a time, using either a pessimistic value or an optimistic value, while keeping all other variables as expected. Scenario analysis takes into account that variables are likely to vary together based on different market, political, or other scenarios. It is more realistic in its approach. Both however attempt to model risk through three different estimates: a pessimistic estimate, an expected estimate, and an optimistic estimate and using NPV to determine outcome.
+
+---
+
+## Break-even point
+
+As a shareholder of a firm that is contemplating a new project, would you be more concerned with the accounting break-even point, the cash break-even point (the point at which operating cash flow is zero), or the financial break-even point? Why?
+
+As a shareholder, I would be more concerned with the cash break-even point of the project because that will tell me if the project was worth pursuing in the first place. The accounting break-even point is more of a tax purposes figure that will help accountant determine what their tax obligations are. The financial break-even point factors in financial information, such as interest rates on loans, which is irrelevant to the project itself or can cause double-counting since interest rates should be factored into the discount rate of the company.
+
+---
+
+## Real options
+
+Why does traditional NPV analysis tend to underestimate the true value of a capital budgeting project?
+
+Traditional NPV analysis does not take into account the options a manager have other then going with a project or not going with a project. For instance, a manager may decide to expand the project if it is successful. This would raise the NPV of the project. On the other hand, if implemented, and it becomes apparent that the project is not successful, the manager has the option to abandon the project before its termination date. This would also raise the NPV of the project because the expenditures would not be going on for the full life of the project.
+
+---
+
+## Real options
+
+The Mango Republic has just liberalized its markets and is now permitting foreign investors. Tesla Manufacturing has analyzed starting a project in the country and has determined that the project has a negative NPV. Why might the company go ahead with the project? What type of option is most likely to add value to this project?
+
+To determine why Tesla Manufacturing might want to start a new project in the Mango Republic, despite having a negative NPV, we need to understand what options Tesla has. First off Tesla may have the option to expand if the initial project begins to succeed. This may be because they have determined that, if successful, they may be able to grab more market share than the initial assessment determined. On the other hand if the project fails, they may have determined that if they can determine this by a certain date, they can cut their losses earlier and recoup some of their losses. Both of these options would add more value to the NPV.
+
+---
+
+## Sensitivity and break-even analysis
+
+How does sensitivity analysis interact with break-even analysis?
+
+Break-even analysis is a nice complement to sensitivity analysis because it sheds light on the severity of incorrect forecasts. During sensitivity analysis, you need to make multiple types of estimates for example, most pessimistic, expected, and most optimistic outcomes. Break-even analysis will determine, from an accounting perspective or from a present value perspective, what the sales requirements are to break even. Sensitivity analysis can identify the most critical variables (price, cost, volume, etc...) that would cause the project to fall below the break-even point. Sensitivity analysis can be used to test the robustness of the break-even point. Finally, sensitivity analysis can help in identifying and quantifying risks associated with the different scenarios.
+
+---
+
+## Option to wait
+
+An option can often have more than one source of value. Consider a logging company. The company can log the timber today or wait another year (or more) to log the timber. What advantages would waiting one year potentially have?
+
+For the logging company the advantage of waiting a year could mean that the trees are bigger, and thus you can potentially have greater volume of product (wood). Waiting a year could also mean you have a buyer who will offer more for the product. There are many potential benefits for waiting a yeay. However, there are also some disadvantages of waiting a year.
+
+---
+
+## Project analysis
+
+You are discussing a project analysis with a coworker. The project involves real options, such as expanding the project if successful, or abandoning the project if it fails. Your coworker makes the following statement: "This analysis is ridiculous. We looked at expanding or abandoning the project in two years, but there are many other options we should consider. For example, we could expand in one year, and expand further in two years. Or we could expand in one year, and abandon the projec tin two years. There are two many options for us to examine. Because of this, anything this analysis would give us is worthless." How would you evaluate this statement? Consider that with any capital budgeting project there are an infinite number of real options, when do you stop the option analysis on an individual project?
+
+While it is true there are many different options to consider. We should consider some of the most obvious because they will give insights into not only the options that are considered, but into other options as well. For instance. If you consider both expanding and abandoning the project after a year, depending on success. This will give insights into the same decision on year two, etc...
+
+---
+
+# Problems
+
+## Sensitivity analysis and break-even point
+
+We are evaluating a project that costs \$644,000, has an eight-year life, and has no salvage value. Assume that depreciation is straight line to zero over the life of the project. Sales are projected at 70,000 units per year. Price per unit is \$37, variable cost per unit is \$21, and fixed costs are \$725,000 per year. The tax rate is 35 percent, and we require a 15 percent return on this project.
+
+> a. Calculate the accounting break-even point.
+> b. Calculate the base-case cash flow and NPV. What is the sensitivity of NPV to changes in the sales figures? Explain what your answer tells you about a 500-unit decrease in projected sales.
+> c. What is the sensitivity of OCF to changes in the variable cost figure? Explain what your answer tells you about a \$1 decrease in estimated variable costs.
+
+To calculate the accounting break-even sales figures we calculate the point where variable and fixed costs equal the revenues:
+
+We first calculate the pretax contribution margin:
+
+$$
+\mathbf{Contribution\ margin} = \text{Sales price} - \text{Variable cost}
+$$
+
+The accounting break-even point is calculated:
+
+$$
+\mathbf{Break\ even\ units} = \frac{\text{fixed costs} + \text{depreciation}}{\text{sales price} - \text{variable cost}}
+$$
+
+```{r problem 1: sensitivity analysis and break-even point: part a}
+investment <- 644000
+depreciation <- investment/8
+sales <- 70000
+sales.price <- 37
+variable.cost <- 21
+fixed.costs <- 725000
+tax <- .35
+discount <- .15
+
+(break.even <- (fixed.costs + depreciation) / (sales.price - variable.cost))
+
+# Plots
+var.sales <- seq(from=0, to=70000, by=1000)
+revenues.eq <- function(x) x * sales.price
+costs.eq <- function(x) x * variable.cost + fixed.costs
+ebit.eq <- function(x) revenues.eq(x) - costs.eq(x) - depreciation
+plot((sales.forecasts <- var.sales), revenues.eq(sales.forecasts), col="blue", type="l")
+lines(sales.forecasts, costs.eq(sales.forecasts), col="red", type="l")
+abline(h=fixed.costs)
+```
+
+The base case (or expected) cash flow and NPV:
+
+```{r problem 1: sensitivity analysis and break-even point: part b: base case}
+(contribution.margin <- sales.price - variable.cost)
+(ebitda <- contribution.margin * rep(sales,8) - fixed.costs)
+(ocf <- c(0, ebitda * (1 - tax) + depreciation * tax))
+(capital.spending <- c(-investment, rep(0, 8)))
+npv <- function(C, r) sum(C /(1 + r)^(0:(length(C)-1)))
+(npv.expected <- npv(ocf + capital.spending, discount))
+```
+
+We now calculate the NPV sensitivity to sales:
+
+```{r problem 1: sensitivity analysis and break-even point: part b: 500 unit decrease in sales}
+pvia <- function(r, T) (1 - (1 + r)^(-T)) / r
+500 * contribution.margin * pvia(discount, 8)
+```
+
+To calculate the OCF's sensitivity to variable costs:
+
+$$
+\mathbf{Change\ in\ OCF} = - \text{Change in variable cost per unit} \times \text{sales volume} \times (1 - \text{tax rate})
+$$
+
+```{r problem 1: sensitivity analysis and break-even point: part c: ocf sensivity to cost}
+(delta.ocf <- - (-1) * sales * (1 - tax))
+```
+
+---
+
+## Senario analysis
+
+In the previous problem suppose the projections given for price, quantity, variable costs, and fixed costs are all accurate to within $\pm 10$ percent. Calculate the best-case and worst-case NPV figures.
+
+```{r problem 2: Scenario analysis}
+investment <- 644000
+depreciation <- investment/8
+sales <- 70000 * c(.9, 1.1)
+sales.price <- 37 * c(.9, 1.1)
+variable.cost <- 21 * c(1.1, .9)
+fixed.costs <- 725000 * c(1.1, .9)
+tax <- .35
+discount <- .15
+
+(ocf.best <- c(0, rep(((sales.price[2] - variable.cost[2]) * sales[2]) -
+  fixed.costs[2], 8) * (1 - tax) + depreciation * tax))
+(ocf.worst <- c(0, rep(((sales.price[1] - variable.cost[1]) * sales[1]) -
+  fixed.costs[1], 8) * (1 - tax) + depreciation * tax))
+(npv.best <- npv(ocf.best + capital.spending, discount))
+(npv.worst <- npv(ocf.worst + capital.spending, discount))
+```
+
+This is an additional look to try to replicate Table 7.3 on page 211.
+
+```{r problem 2: matrix scenario analysis}
+investment <- 644000
+depreciation <- investment/8
+sales <- 70000
+sales.price <- 37
+variable.cost <- 21
+fixed.costs <- 725000
+tax <- .35
+discount <- .15
+
+worst.case <- c(.9 * sales,
+               .9 * sales.price,
+               1.1 * variable.cost,
+               1.1 * fixed.costs)
+expected.case <- c(sales,
+                   sales.price,
+                   variable.cost,
+                   fixed.costs)
+best.case <- c(1.1 * sales,
+               1.1 * sales.price,
+               .9 * variable.cost,
+               .9 * fixed.costs)
+scenario.matrix <- matrix(c(worst.case, expected.case, best.case), ncol=3)
+colnames(scenario.matrix) <- c("Pessimistic", "Expected", "Optimistic")
+rownames(scenario.matrix) <- c("Sales volume", "Sales price", "Variable cost", "Fixed costs")
+knitr::kable(scenario.matrix)
+```
+
+Now varying one of the variables and keeping the rest as expected:
+
+```{r problem 2: scenario analysis}
+ocf <- function(C) { c(0, ((C[2] - C[3]) * C[1] - C[4]) * (1 - tax) +
+  depreciation * tax) }
+(sales.vol.w <- c(scenario.matrix[1,1], scenario.matrix[,2][-1]))
+(sales.vol.b <- c(scenario.matrix[1,3], scenario.matrix[,2][-1]))
+(sales.price.w <- c(scenario.matrix[1,2], scenario.matrix[2,1], scenario.matrix[,2][3:4]))
+(sales.price.b <- c(scenario.matrix[1,2], scenario.matrix[2,3], scenario.matrix[,2][3:4]))
+(variable.cost.w <- c(scenario.matrix[,2][1:2], scenario.matrix[3,1], scenario.matrix[,2][4]))
+(variable.cost.b <- c(scenario.matrix[,2][1:2], scenario.matrix[3,3], scenario.matrix[,2][4]))
+(fixed.costs.w <- c(scenario.matrix[,2][1:3], scenario.matrix[4,1]))
+(fixed.costs.b <- c(scenario.matrix[,2][1:3], scenario.matrix[4,3]))
+scenario.results <- matrix(c(npv(ocf(sales.vol.w), discount),
+                             npv(ocf(sales.price.w), discount),
+                             npv(ocf(variable.cost.w), discount),
+                             npv(ocf(fixed.costs.w), discount),
+                             rep(npv.expected, 4),
+                             npv(ocf(sales.vol.b), discount),
+                             npv(ocf(sales.price.b), discount),
+                             npv(ocf(variable.cost.b), discount),
+                             npv(ocf(fixed.costs.b), discount)), ncol=3)
+colnames(scenario.results) <- c("Pessimistic", "Expected", "Optimistic")
+rownames(scenario.results) <- c("Sales Volume", "Sales Price", "Variable cost", "Fixed costs")
+knitr::kable(scenario.results, caption="NPV results for sensitivity analysis")
+```
+
+---
+
+## Calculating break-even
+
+In each of the following cases, find the unknown variable. Ignore taxes.
+
+```{r problem 3: calculating break-even: table, echo=F}
+accounting.break.even <- c("95,300", "143,806", "7,835")
+unit.price <- c("$ 41", "  ? ", "  97")
+unit.variable.cost <- c("$30", " 56", " ? ")
+fixed.costs <- c("$ 820,000", " 2,750,000", "   160,000")
+depreciation <- c("      ?", "$1,150,000", "    105,000")
+p3.tbl <- matrix(c(accounting.break.even, unit.price, unit.variable.cost, fixed.costs, depreciation), nrow=3)
+colnames(p3.tbl) <- c("Break-even", "Price", "Variable Cost", "Fixed Costs", "Depreciation")
+p3.tbl
+```
+
+The equation for the accounting break even:
+
+$$
+\begin{aligned}
+\mathbf{Break\ even} &= \frac{\text{fixed costs} + \text{depreciation}}{\text{unit price} - \text{unit variable cost}} \\ \\
+\mathbf{Unit\ price} &= \frac{\text{fixed costs} + \text{depreciation}}{\text{break even}} + \text{unit variable cost} \\ \\
+\mathbf{Unit\ variable\ cost} &= - \frac{\text{fixed costs} + \text{depreciation}}{\text{break even}} + \text{unit price} \\ \\
+\mathbf{Depreciation} &= \text{Break even} \times (\text{unit price} - \text{unit variable cost}) - \text{fixed costs}
+\end{aligned}
+$$
+
+
+```{r problem 3: calculating break-even}
+(unit.price <- (2750000 + 1150000) / 143806 + 56)
+(unit.variable.cost <- - (160000 + 105000) / 7835 + 97)
+(depreciation <- 95300 * (41 - 30) - 820000)
+```
+
+---
+
+## Financial break-even
+
+L.J.'s Toys Inc. just purchased a \$390,000 machine to produce toy cars. The machine will be fully depreciated by the straight-line method over its five-year economic life. Each toy sells for \$25. The variable cost per toy is \$11, and the firm incurs fixed costs of \$280,000 each year. The corporate tax rate for the company is 34 percent. The appropriate discount rate is 12 percent. What is the financial break-even point for the project?
+
+The Financial (or present value) break-even point is calculated:
+
+$$
+\begin{aligned}
+\mathbf{EAC} &= \frac{\text{initial investment}}{\text{PVIA}} \\ \\
+\mathbf{PV}_{\text{break even}} &= \frac{\text{EAC} + \text{fixed costs} \times (1 - t_{c})
+  - \text{depreciation} \times t_{c}}{(\text{sales price} - \text{variable costs}) \times (1 - t_{c})}
+\end{aligned}
+$$
+
+```{r problem 4: financial break-even}
+investment <- 390000
+depreciation <- investment/5
+unit.price <- 25
+unit.variable.cost <- 11
+fixed.costs <- 280000
+tax <- .34
+discount <- .12
+
+pvia <- function(r, T) (1 - (1 + r)^(-T))
+eac <- investment / pvia(discount, 5)
+(financial.break.even <- (eac + fixed.costs * (1 - tax) - depreciation * tax) /
+    ((unit.price - unit.variable.cost)*(1-tax)))
+```
+
+---
+
+## Option to wait
+
+Your company is deciding whether to invest in a new machine. The new machine will increase cash flow by \$475,000 per year. You believe the technology used in the machine has a 10-year life; in other words, no matter when you purchase the machine, it will be obsolete 10 years from today. The machine is currently priced at \$2,900,000. The cost of the machine will decline by \$210,000 per year until it reaches \$2,270,000, where it will remain. If your required return is 9 percent, should you purchase the machine? If so, when should you purchase it?
+
+```{r problem 5: option to wait}
+contribution.margin <- 475000
+(investment <- c(2900000 - 210000 * c(0, 1, 2, 3), rep(2270000, 6)))
+discount <- .09
+cash.flow <- 475000
+pvia <- function(r, T) (1 - (1 + r)^(-T)) / r
+pv.annuity <- cash.flow * pvia(discount, 10)
+pv <- function(C, r, T) C * (1 + r)^(-T)
+pv.c <- c(pv.annuity - investment[1])
+for(y in 1:9){
+  pv.c <- c(pv.c, pv(pv.annuity, discount, y) - investment[y+1])
+}
+pv.c
+```
+
+Yes, you should purchase the machine and purchase it now.
+
+---
+
+## Decision trees
+
+Ang Electonics, Inc., has developed a new DVDR. If the DVDR is successful, the present value of the payoff (when the product is brought to market) is \$34 million. If the DVDR fails, the present value of the payoff is \$12 million. If the product goes directly to market, there is a 50 percent chance of success. Alternatively, Ang can delay the launch by one year and spend \$1.3 million to test market the DVDR. Test marketing would allow the firm to improve the product and increase the probability of success to 80 percent. The appropriate discount rate is 11 percent. Should the firm conduct test marketing?
+
+```{r problem 6: decision trees}
+discount <- .11
+npv <- function(C, r) sum(C / ( 1 + r) ^ (0:(length(C)-1)))
+pv <- function(F, r, t) F / (1 + r) ^ (t)
+(test.payoff <- .8 * 34 + .2 * 12)
+(no.test.payoff <- .5 * 34 + .5 * 12)
+(pv.test.payoff <- pv(test.payoff, discount, 1))
+(npv.test <- pv.test.payoff - 1.3)
+(npv.no.test <- no.test.payoff)
+```
+
+---
+
+## Decision trees
+
+The manager for a growing firm is considering the launch of a new product. If the product goes directly to market, there  is a 50 percent chance of success. For \$175,000 the manager can conduct a focus group that will increase the product's chance of success to 65 percent. Alternatively, the manager has the option to pay a consulting firm \$390,000 to research the market and refine the product. The consulting firm successfully launches new products 80 percent of the time. If the firm successfully launches the product, the payoff will be \$1.9 million. If the product is a failure, the NPV is zero. Which action will result in the highest expected payoff to the firm?
+
+```{r problem 7: decision trees}
+payoff <- 1900000
+(launch <- .5 * payoff)
+(focus.group <- .65 * payoff - 175000)
+(consulting <- .8 * payoff - 390000)
+```
+
+---
+
+## Decision trees
+
+B&B has a new baby powder ready to market. If the firm goes directly to the market with the product, there is only a 55 percent chance of success. However, the firm can conduct customer segment research, which will take a year and cost \$1.2 million. By going through research, B&B will be able to better target potential customers and will increase the probability of success to 70 percent. If successful, the baby powder will bring a present value profit (at time of initial selling) of \$19 million. If unsuccessful, the present value payoff is only \$6 million. Should the firm conduct customer segment research or go directly to market? The appropriate discount rate is 15 percent.
+
+```{r problem 8: decision trees}
+payoff.success <- 19
+payoff.fail <- 6
+discount <- .15
+(launch <- .55 * 19 + .45 * 6)
+(research <- (.7 * 19 + .3 * 6) / (1 + discount) - 1.2)
+```
+
+---
+
+## Financial break-even analysis
+
+You are considering investing in a company that cultivates abalone for sale to local restaurants. Use the following information:
+
+```{r problem 9: financial break-even analysis table, echo=F}
+p9.tbl <- matrix(c("= $35", "= $6.10", "= $375,000", "= $120,000", "= 35%"),
+                 ncol=1)
+rownames(p9.tbl) <- c("Sales price per abalone",
+                      "Variable costs per abalone",
+                      "Fixed costs per year",
+                      "Depreciation per year",
+                      "Tax rate")
+knitr::kable(p9.tbl)
+```
+
+The discount rate for the company is 15 percent, the initial investment in equipment is \$840,000, and the project's economic life is seven years. Assume the equipment is depreciated on a straight-line basis over the project's life.
+
+a. What is the accounting break-even level for the project?
+b. What is the financial break-even level for the project?
+
+The accounting break-even number of units to sell can be calculated:
+
+$$
+\frac{\text{fixed costs} + \text{depreciation}}{\text{sales price}
+  - \text{variable cost}}
+$$
+
+The financial break-even number of units is calculated as:
+
+$$
+\begin{aligned}
+\mathbf{EAC} &= \frac{\text{initial investment}}{\text{PVIA}} \\ \\
+\mathbf{Break\ even} &= \frac{\text{EAC} + \text{fixed costs} \times (1 - t_{c})
+  - \text{depreciation} \times t_{c}}{(\text{sales price} - \text{variable costs}) \times (1 - t_{c})}
+\end{aligned}
+$$
+
+```{r problem 9: financial break-even analysis}
+sales.price <- 35
+variable.cost <- 6.10
+fixed.costs <- 375000
+depreciation <- 120000
+tax <- .35
+discount <- .15
+investment <- 840000
+
+(accounting.break.even <- (fixed.costs + depreciation) /
+  (sales.price - variable.cost))
+pvia <- function(r, t) (1 - (1 + r)^(-t)) / r
+(eac <- investment / pvia(discount, 7))
+(financial.break.even <- (eac + fixed.costs * (1 - tax) - depreciation * tax) /
+    ((sales.price - variable.cost)*(1-tax)))
+```
+
+---
+
+## Financial break-even
+
+Niko has purchased a brand new machine to produce its High Flight line of shoes. The machine has an economic life of five years. The depreciation schedule for the machine is straight-line with no salvage value. The machine costs \$575,000. The sales price per pair of shoes is \$60, while the variable cost is \$14. \$165,000 of fixed costs per year are attributed to the machine. Assume that the corporate tax rate is 34 percent and the appropriate discount rate is 8 percent. What is the financial break-even point?
+
+```{r problem 10: financial break-even}
+investment <- 575000
+depreciation <- investment / 5
+sales.price <- 60
+variable.cost <- 14
+fixed.costs <- 165000
+tax <- .34
+discount <- .08
+
+pvia <- function(r, t) (1 - (1 + r)^(-t)) / r
+(eac <- investment / pvia(discount, 5))
+(financial.break.even <- (eac + fixed.costs * (1 - tax) - depreciation * tax) /
+    ((sales.price - variable.cost)* (1 - tax)))
+```
+
+---
+
+## Break-even intuition
+
+Consider a project with a required return of $R$ percent that costs \$$I$ and will last for $N$ years. The project uses straight-line depreciation to zero over the $N$-year life; there are neither salvage value nor net working capital requirements.
+
+a. At the accounting break-even level of output, what is the IRR of this project? The payback period? The NPV?
+b. At the cash break-even level of output, what is the IRR of this project? The payback period? The NPV?
+c. At the financial break-even level of output, what is the IRR of this project? The payback period? The NPV?
+
+At the accounting break-even level of output, the net income (NI) is zero.
+
+That means that the total revenue (TR) equals total costs (TC):
+
+$$
+\text{TR} = \text{TC} = \text{variable costs (VC)} + \text{fixed costs (FC)} + D
+$$
+
+At the accounting break-even, there is no net income, so the project's cash flows only cover costs and depreciation. Since depreciation is a non-cash expense, the project will have a negative IRR because it does not generate any excess cash flow. The project will never pay back its initial investment because the cash flows are insufficient to cover $I$. The NPV will also be negative, as the project does not generate enough cash flows to meet the required return.
+
+At cash break-even level, the operating cash flow (OCF) is zero.
+
+$$
+\begin{aligned}
+\mathbf{OCF} &= \text{EBIT} + D - \text{taxes} \\
+\text{EBIT} + D &= \text{taxes}
+\end{aligned}
+$$
+
+The IRR at cash break-even is zero because there are no returns on the initial investment. The payback period is infinite because the project will not pay back the initial investment. NPV is negative because there are no positive cash flows to meet the required return.
+
+At the financial break-even:
+
+$$
+\mathbf{NPV} = 0 = \sum^{N}_{t=1}{\frac{\text{OCF}}{(1 + R)^{t}}} - I
+$$
+
+The IRR, at the financial break-even, equals the required return (R) because NPV is zero. The payback period can be calculated by summing the cash flows until they equal the initial investment (I). It will be finitie and reflect the time needed to recover I. The NPV, by definition will be zero at the financial break-even point.
+
+| Metric | Accounting break-even | Cash break-even | financial break-even |
+|---:|---:|---:|---:|
+| __IRR__ | Negative | Zero | Equals $R$ |
+| __Payback period__ | Infinite | Infinite | Finite |
+| __NPV__ | Negative | Negative | Zero |
+
+---
+
+## Sensitivity analysis
+
+Consider a four-year project with the following information: Initial fixed asset investment $= \$480,000$; straight-line depreciation to zero over the four-year life; zero salvage value; price $= \$37$; variable costs $= \$23$; fixed costs $= \$195,000$; quantity sold = 90,000 units; tax rate = 34 percent. How sensitive is OCF to changes in quantity sold?
+
+We can calculate the sensitivity as thus:
+
+$$
+\begin{aligned}
+\mathbf{Q} &= \text{quantity sold} \\
+\mathbf{OCF} &= [(37Q - 23Q - 195,000) \times (1 - 0.34)]
+  + (120,000 \times 0.34) \\
+  &= [(14Q - 195,000) \times 0.66] + 40,800 \\
+  &= (9.24Q - 128,700) + 40,800 \\
+  &= 9.24Q - 87,900
+\end{aligned}
+$$
+
+The sensitivity of Q to OCF:
+
+$$
+\frac{\partial{\text{OCF}}}{\partial{Q}} = 9.24
+$$
+
+Thus, an increase in quantity sold by 1,000 would increase OCF:
+
+$$
+9.24 \times 1,000 = 9,240
+$$
+
+---
+
+## Project analysis
+
+You are considering a new product launch. The project will cost \$820,000, have a four-year life, and have no salvage value; depreciation is straight-line to zero. Sales are projected at 450 units per year, price per unit will be \$18,000; variable cost per unit will be \$15,400; and fixed costs will be \$610,000 per year. The required return on the project is 15 percent, and the relevant tax rate is 35 percent.
+
+a. Based on your experience, you think the unit sales, variable cost, and fixed cost projections given here are probably accurate to within $\pm 10$ percent. What are the upper and lower bounds for these projections? What is the base-case NPV? What are the best-case and worst-case scenarios?
+
+b. Evaluate the sensitivity of your base-case NPV to changes in fixed costs.
+
+c. What is the accounting break-even level fo output for this project?
+
+$$
+\begin{aligned}
+\mathbf{OCF} &= [(18,000Q - 15,400Q - 610,000) \times (1 - 0.35)] 
+  + (205,000 \times 0.35) \\
+  &= (1690Q - 396,500) + 71,750 \\
+  &= 1690Q - 324,750
+\end{aligned}
+$$
+
+The sensitivity of OCF is:
+
+$$
+\frac{ \partial \text{OCF}}{\partial Q} = 1,690
+$$
+
+Which is the same for the net present value (NPV)
+
+$$
+\frac{\partial \text{NPV}}{\partial Q} = 1,690
+$$
+
+```{r problem 13: project analysis}
+investment <- 820000
+depreciation <- investment/4
+sales <- 450 * c(.9, 1, 1.1)
+unit.price <- 18000
+variable.cost <- 15400
+fixed.costs <- 610000
+tax <- .35
+discount <- .15
+
+(contribution.margin <- unit.price - variable.cost)
+(ocf <- (contribution.margin * sales - fixed.costs) * (1 - tax) +
+    depreciation * tax)
+npv <- function(C, r) sum(C / (1 + r)^(0:(length(C)-1)))
+npvs <- c(npv(ocf[1], discount),
+          npv(ocf[2], discount),
+          npv(ocf[3], discount))
+```
+
+```{r problem 13: part a: table, echo=F}
+p13.tbl <- matrix(c(sales, npvs), ncol=2)
+rownames(p13.tbl) <- c("Worst case", "Base case", "Best case")
+colnames(p13.tbl) <- c("Sales volume", "NPV")
+knitr::kable(p13.tbl, caption="Variable Sales")
+```
+
+For changes in fixed costs, if we vary the fixed costs (F) by $\pm$ 10 percent.
+
+$$
+\begin{aligned}
+\mathbf{Contribution\ margin} &= \text{unit price} - \text{variable cost} \\
+  &= 2,600 \\ \\
+\mathbf{OCF} &= (2,600 \times 450 - F) \times (1 - 0.35)
+  + (205,000 \times 0.35) \\
+  &= 760,500 - .65F + 71,750 \\
+  &= 688,750 - .65F
+\end{aligned}
+$$
+
+The sensitivity of OCF is:
+
+$$
+\frac{\partial \text{OCF}}{\partial F} = .65
+$$
+
+Which is the same as NPV:
+
+$$
+\frac{\partial \text{NPV}}{\partial F} = .65
+$$
+
+```{r problem 13: part b}
+fixed.costs <- 610000 * c(1.1, 1, .9)
+sales <- 450
+
+(ocf <- (contribution.margin * sales - fixed.costs) * (1 - tax) +
+    depreciation * tax)
+npvs <-c(npv(ocf[1], discount),
+         npv(ocf[2], discount),
+         npv(ocf[3], discount))
+```
+
+```{r problem 13: part b: table, echo=F}
+p13.tbl.2 <- matrix(c(fixed.costs, npvs), ncol=2)
+rownames(p13.tbl.2) <- c("Worst case", "Base case", "Best case")
+colnames(p13.tbl.2) <- c("Fixed Costs", "NPV")
+knitr::kable(p13.tbl.2, caption="Variable Fixed Costs")
+```
+
+The accounting break-even level of output:
+
+$$
+\begin{aligned}
+\frac{\text{fixed costs} + \text{depreciation}}
+  {\text{unit price} - \text{variable cost}} &=
+\frac{610,000 + 205,000}{18,000 - 15,400} \\
+  &= 313.4615 \text{ Units}
+\end{aligned}
+$$
+---
+
+## Project analysis
+
+McGilla Golf has decided to sell a new line of golf clubs. The clubs will sell for \$875 per set and have a variable cost of \$430 per set. The company has spent \$150,000 for a marketing study that determined the company will lose sales of 12,000 sets of its high-priced clubs. The high-priced clubs sell at \$1,100 and have variable costs of \$620. The company will also increase sales of its cheap clubs by 15,000 sets. The cheap clubs sell for \$400 and have variable costs of \$210 per set. The fixed costs each year will be \$9,300,000. The company has also spent \$1,000,000 on research and development for the new clubs. The plant and equipment required will cost \$29,400,000 and will be depreciated on a straight-line basis. The new clubs will also require an increase in net working capital of \$1,400,000 that will be returned at the end of the project. The tax rate is 40 percent, and the cost of capital is 14 percent. Calculate the payback period, the NPV, and the IRR.
+
+```{r problem 14}
+# New set of golf clubs
+unit.price.new <- 875
+variable.cost.new <-430
+est.volume.new <- 60000
+fixed.costs <- 9300000
+investment <- 29400000
+depreciation <- investment/7
+net.working.capital <- 1400000
+# Effects on high end golf club sales
+est.loss.sales.high <- -12000
+unit.price.high <- 1100
+variable.cost.high <- 620
+# Effects on low end golf club sales
+est.inc.sales.low <- 15000
+unit.price.low <- 400
+variable.cost.low <- 210
+# Tax and discount rates
+tax <- .40
+discount <- .14
+
+# capital spending
+capital.spending <- c(-investment-net.working.capital,
+  rep(0,6), net.working.capital)
+
+# Revenues and variable costs
+new.clubs <- unit.price.new - variable.cost.new
+high.clubs <- unit.price.high - variable.cost.high
+low.clubs <- unit.price.low - variable.cost.low
+
+(net.all <- new.clubs * est.volume.new +
+           high.clubs * est.loss.sales.high +
+           low.clubs * est.inc.sales.low - fixed.costs)
+
+(ocf <- c(0, rep(net.all  * (1 - tax) + depreciation * tax, 7)))
+
+payback <- function(C) {
+  cumsum.C <- cumsum(C)
+  pb.idx <- which(cumsum.C >= 0)[1]
+  if (pb.idx > 1){
+    prior.cf <- cumsum.C[pb.idx-1]
+    current.cf <- cumsum.C[pb.idx]
+    additional.time <- abs(prior.cf) / (current.cf - prior.cf)
+    payback.period <- (pb.idx - 1) + additional.time - 1
+  } else {
+    payback.period <- pb.idx - 1
+  }
+  payback.period
+}
+npv <- function(C, r) sum(C / (1 + r)^(0:(length(C)-1)))
+irr <- function(C) {
+  f <- function(r) sum(C / (1 + r)^(0:(length(C)-1)))
+  uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root
+}
+payback(ocf + capital.spending)
+irr(ocf + capital.spending)
+npv(ocf + capital.spending, discount)
+```
+
+---
+
+## Scenario analysis
+
+In the previous problem, you feel that the values are accurate to within only $\pm$ 10 percent. What are the best-case and worst-case NPVs? (_Hint_: The price and variable costs for the two existing sets of clubs are known with certainty; only the sales gained or lost are uncertain.)
+
+```{r problem 15}
+# New set of golf clubs
+unit.price.new <- 875 * c(1.1, 1, .9)
+variable.cost.new <-430 * c(.9, 1, 1.1)
+est.volume.new <- 60000 * c(1.1, 1, .9)
+fixed.costs <- 9300000 * c(.9, 1, 1.1)
+investment <- 29400000
+depreciation <- investment/7
+net.working.capital <- 1400000 * c(.9, 1, 1.1)
+# Effects on high end golf club sales
+est.loss.sales.high <- -12000 * c(1.1, 1, .9)
+unit.price.high <- 1100
+variable.cost.high <- 620
+# Effects on low end golf club sales
+est.inc.sales.low <- 15000 * c(.9, 1, 1.1)
+unit.price.low <- 400
+variable.cost.low <- 210
+# Tax and discount rates
+tax <- .40
+discount <- .14
+
+
+# capital spending
+(capital.spending.best <- c(-investment-net.working.capital[1],
+  rep(0,6), net.working.capital[1]))
+(capital.spending.base <- c(-investment-net.working.capital[2],
+  rep(0,6), net.working.capital[2]))
+(capital.spending.worst <- c(-investment-net.working.capital[3],
+  rep(0,6), net.working.capital[3]))
+
+# Revenues and variable costs
+new.clubs <- unit.price.new - variable.cost.new
+high.clubs <- unit.price.high - variable.cost.high
+low.clubs <- unit.price.low - variable.cost.low
+
+(net.all <- new.clubs * est.volume.new +
+           high.clubs * est.loss.sales.high +
+           low.clubs * est.inc.sales.low - fixed.costs)
+
+(ocf.worst <- c(0, rep(net.all[1]  * (1 - tax) + depreciation * tax, 7)))
+(ocf.base <- c(0, rep(net.all[2]  * (1 - tax) + depreciation * tax, 7)))
+(ocf.best <- c(0, rep(net.all[3]  * (1 - tax) + depreciation * tax, 7)))
+
+npv <- function(C, r) sum(C / (1 + r)^(0:(length(C)-1)))
+npv(ocf.best + capital.spending.best, discount)
+npv(ocf.base + capital.spending.base, discount)
+npv(ocf.worst + capital.spending.worst, discount)
+```
+
+---
+
+## Sensitivity analysis
+
+McGilla Golf would like to know the sensitivity of NPV to changes in the price of the new clubs and the quantity of new clubs sold. What is the sensitivity of the NPV to each of these variables?
+
+$$
+\begin{aligned}
+\text{P} &= \text{unit price} \\
+\text{V} &= \text{variable cost} \\
+\text{Q} &= \text{quantity sold} \\
+\text{NPV} &= \text{net present value} \\ \\
+\frac{\partial \text{NPV}}{\partial \text{P}} &=\ \  ?\\ \\
+\frac{\partial \text{NPV}}{\partial \text{Q}} &= \text{P} - \text{V}
+\end{aligned}
+$$
+
+---
+
+## Abandonment value
+
+We are examining a new project. We expect to sell 9,000 units per year at \$35 net cash flow apiece for the next 10 years. In other words, the annual operating cash flow is projected to be $\$35 \times 9,000 = \$315,000$. The relevant discount rate is 16 percent, and the initial investment required is \$1,350,000.
+
+a. What is the base-case NPV?
+
+b. After the first year, the project can be dismantled and sold for \$950,000. If expected sales are revised based on the first year's performance, when would it make sense to abandon the project?
+
+c. Explain how the \$950,000 abandonment value can be viewed as the opportunity cost of keeping the project in one year.
+
+```{r problem 17: abandonment value: part a}
+volume <- 9000
+net.unit.cash.flow <- 35
+cash.flow <- 315000
+discount <- .16
+investment <- 1350000
+pv <- function(C, r, t) C / (1 + r)^t
+pvia <- function(r, t) (1 - (1 + r)^(-t)) / r
+(npv.base <- pvia(discount, 10) * cash.flow - investment)
+```
+
+b. The project should be abandoned if the net present value of the cash flows is less than the first year present value of the abandonment value (\$950,000) plus the first year cash flow.
+
+```{r problem 17: abandonment value: part b}
+m.cash.flow <- cash.flow
+#(m.cash.flow <- cash.flow * 1:10*.1)
+(abandon <- pv(950000+m.cash.flow, discount, 1) - investment)
+(proceed <- pvia(discount, 10) * m.cash.flow - investment)
+proceed < abandon
+```
+
+However, it can be shown that, if the cash.flows are less than 90% of the expected cash flows in the first year and is expected to remain that way, the project should be abandoned.
+
+c. The abandonment value can be viewed as an opportunity cost because if you kept the project going you would be foregoing the value of selling the equipment.
+
+---
+
+## Abandonment
+
+In the previous problem, suppose you think it is likely that expected sales will be revised upward to 11,000 units if the first year is a success and revised downward to 4,000 units if the first year is not a success.
+
+a. If success and failure are equally likely, what is the NPV of the project? Consider the possibility of abandonment in answering.
+
+b. What is the value of the option to abandon?
+
+
+```{r problem 18: abandonment}
+abandonment.value <- 950000
+cash.flow.success <- 35*11000
+cash.flow.failure <- 35*4000
+investment <- 1350000
+discount <- .16
+pv <- function(C, r, t) C / (1 + r)^t
+pvia <- function(r, t) (1 - (1 + r)^(-t)) / r
+(pv.abandon <- pv(abandonment.value+cash.flow.failure, discount, 1))
+(pv.success <- pvia(discount, 10) * cash.flow.success)
+(npv <- .5 * pv.abandon + .5 * pv.success - investment)
+(npv.abandon <- pv.abandon - investment)
+```
+
+## Abandonment and expansion
+
+In the previous problem, suppose the scale of the project can be doubled in one year in the sense that twice as many units can be produced and sold. Naturally, expansion would be desirable only if the project were a success. This implies that if the project is a success, projected sales after expansion will be 22,000. Again assuming that success and failure are equally likely, what is the NPV of the project? Note that abandonment is still an option if the project is a failure. What is the value of the option to expand?
+
+```{r problem 19: abandonment and expansion}
+cash.flow <- 35*11000
+cash.flow.expand <- 35*22000
+
+(pv.expand <- pv(cash.flow, discount, 1) + pvia(discount, 9) * cash.flow.expand)
+(npv <- .5 * pv.abandon + .5 * pv.expand - investment)
+(npv.expand <- pv.expand - investment)
+```
+
+---
+
+## Break-even analysis
+
+Your buddy comes to you with a sure-fire way to make some quick money and help pay off your student loans. His idea is to sell T-shirts with the words "I get" on them. "You get it?" He says, "You see all those bumper stickers and T-shirts that say 'got milk' or 'got surf.' So this says, 'I get.' It's funny! All we have to do is buy a used silk screen press for \$5,600 and we are in business!" Assume there are no fixed costs, and you depreciate the \$5,600 in the first period. Taxes are 30 percent.
+
+a. What is the accounting break-even point if each shirt costs \$4.50 to make and you can sell them for \$10 apiece?
+
+Now assume one year has passed and you have sold 5,000 shirts! You find out that the Dairy Farmers of America have copyrighted the "got milk" slogan and are requiring you to pay \$15,000 to continue operations. You expect this craze will last for another three years and that your discount rate is 12 percent.
+
+b. What is the financial break-even point for your enterprise now?
+
+The fixed costs are zero.
+
+$$
+\begin{aligned}
+\mathbf{Accounting\ break\ even} &= \frac{\text{depreciation}}{\text{price} - \text{cost}} \\ \\
+  &= \frac{5,600}{10 - 4.5} \\ \\
+  &= 1,018.18
+\end{aligned}
+$$
+
+b. We disregard cash flows from previous periods, depreciation is zero and the fixed costs are still zero.
+
+```{r problem 20: break-even analysis: part b}
+payout <- 15000
+contribution.margin <- 10 - 4.5
+discount <- .12
+tax <- .3
+
+pvia <- function(r, t) (1 - (1 + r)^(-t)) / r
+eac <- 15000 / pvia(discount, 3)
+(eac / (contribution.margin * (1 - tax)))
+```
+
+---
+
+## Decision trees
+
+Young screenwriter Carl Draper has just finished his first script. It has action, drama, and humor, and he thinks it will be a blockbuster. He takes the script to every motion picture studio in town and tries to sell it but to no avail. Finally, ACME studios offers to buy the script for either (a) \$10,000 or (b) 1 percent of the movie's profits. There are two decisions the studio will have to make. First is to decide if the script is good or bad, and second if the movie is good or bad. First, there is a 90 percent chance that the script is bad. If it is bad, the studio does nothing more and throws the script out. If the script is good, they will shoot the movie. After the movie is shot, the studio will review it, and there is a 60 percent chance that the movie is bad. If the movie is bad, the movie will not be promoted and will not turn a profit. If the movie is good, the studio will promote heavily; the average profit for this type of movie is \$15 million. Carl rejects the \$10,000 and says he wants the 1 percent of profits. Was this a good decision by Carl?
+
+```{r problem 21: decision trees}
+payout.1p <- 15000000 * .01
+payout.10 <- 10000
+
+(.1 * .4 * payout.1p)
+```
+
+No Carl did not make the right decision.
+
+---
+
+## Option to wait
+
+Hickock Mining is evaluating when to open a gold mine. The mine has 48,000 ounces of gold left that can be mined, and mining operations will produce 6,000 ounces per year. The required return on the gold mine is 12 percent, and it will cost \$34 million to open the mine. When the mine is opened, the company will sign a contract that will guarantee the price of gold for the remaining life of the mine. If the mine is opened today, each ounce of gold will generate an aftertax cash flow of \$1,400 per ounce. If the company waits one year, there is a 60 percent probability that the contract price will generate an aftertax cash flow of \$1,600 per ounce and a 40 percent probability that the after cash flow will be \$1,300 per ounce. What is the value of the option to wait?
+
+```{r problem 22: option to wait}
+reserves <- 48000
+production <- 6000
+mine.life <- reserves / production
+discount <- .12
+investment <- 34000000
+(price.today <- 1400)
+pv <- function(C, r, t) C / (1 + r)^t
+(price.1yr <- .6 * 1600 + .4 * 1300)
+
+pvia <- function(r, t) (1 - (1 + r)^(-t)) / r
+pvia(discount, mine.life)
+production*price.today
+(pv.today <- pvia(discount, mine.life) * production * price.today - investment)
+production*price.1yr
+pv(pvia(discount, mine.life) * production * price.1yr, discount, 1)
+(pv.1yr <- pv(pvia(discount, mine.life) * production * price.1yr, discount, 1) - investment)
+# Because of opportunity cost we subtract the pv of opening today.
+(value.waiting.1.yr <- pv.1yr - pv.today)
+```
+
+Hickock Mining should take the price offered today.
+
+---
+
+## Abandonment decisions
+
+Allied Products, Inc., is considering a new product launch. The firm expects to have an annual operating cash flow of \$10.5 million for the next 10 years. Allied Products uses a discount rate of 13 percent for new product launches. The initial investment is \$51 million. Assume that the project has no salvage value at the end of its economic life.
+
+a. What is the NPV of the new product?
+
+b. After the first year, the project can be dismantled and sold for \$31 million. If the estimates of remaining cash flows are revised based on the first year's experience, at what level of expected cash flows does it make sense to abandon the project?
+
+```{r problem 23: abandonment decisions}
+ocf <- 10.5
+discount <- .13
+investment <- 51
+depreciation <- investment/10
+pvia <- function(r, t) (1 - (1 + r)^(-t)) / r
+(npv <- pvia(discount, 10) * ocf - investment)
+```
+
+To find when it would make sense to abandon the project we equate the remaining nine cash flows, discounted one year back, to what we can get for dismantling and selling the project
+
+$$
+\begin{aligned}
+31,000,000 &= C_{\text{year 1}} \times \frac{1 - (1 + .13)^{-9}}{.13} \\
+31,000,000 &= C_{\text{year 1}} \times 5.131655 \\ \\
+C_{\text{year 1}} &= \frac{31,000,000}{5.131655} \\ \\
+C_{\text{year 0}} &= \frac{6,040936}{(1.13)} \\
+ &= 5,345,961
+\end{aligned}
+$$
+
+---
+
+## Expansion decisions
+
+Applied Nanotech is thinking about introducing a new surface cleaning machine. The marketing department has come up with the estimate that Applied Nanotech can sell 15 units per year at \$305,000 net cash flow per unit for the next five years. The engineering department has come up with the estimate that developing the machine will take a \$15 million initial investment. The finance department has estimated that a 16 percent discount rate should be used.
+
+a. What is the base-case NPV?
+
+b. If unsuccessful, after the first year the project can be dismantled and will have an aftertax salvage value of \$11 million. Also, after the first year, expected cash flows will be revised up to 20 units per year or to 0 units, with equal probability. What is the revised NPV?
+
+```{r probrlem 24: expansion decision}
+volume <- 15
+net.per.unit <- 305000
+investment <- 15000000
+discount <- .16
+lifespan <- 5
+
+pvia <- function(r, t) (1 - (1 + r)^(-t)) / r
+pv <- function(C, r, t) C / (1 + r)^t
+(npv <- pvia(discount, lifespan) * (volume * net.per.unit) - investment)
+
+salvage <- 11000000
+revised.volume <- 20
+pv <- function(C, r, t) C / (1 + r)^t
+(pv.yr1 <- pv(volume * net.per.unit, discount, 1))
+(npv.unsuccessful <- .5 * salvage)
+(npv.successful <- .5 * pvia(discount, 4) * (revised.volume * net.per.unit))
+(npv.total <- pv.yr1 + pv(npv.unsuccessful + npv.successful, discount, 1) - investment)
+```
+
+---
+
+## Scenario analysis
+
+You are the financial analyst for a tennis racket manufacturer. The company is considering using a graphite-like material in its tennis rackets. The company has estimated the information in the following table about the market for a racket with the new material. The company expects to sell the racket for six years. The equipment required for the project has no salvage value. The required return for projects of this type is 13 percent, and the company has a 40 percent tax rate. Should you recommend the project?
+
+```{r problem 25: scenario analysis: table, echo=F}
+pessimistic <- c("105,000", "20%", "$  150", "$  104", "$ 965,000", "$1,900,00")
+expected <- c("120,000", "23%", "$  155", "$  99", "$ 920,000", "$1,800,00")
+optimistic <- c("145,000", "25%", "$  161", "$  98", "$ 890,000", "$1,700,000")
+
+p25.tbl <- data.frame(pessimistic, expected, optimistic)
+colnames(p25.tbl) <- c("Pessimistic", "Expected", "Optimistic")
+rownames(p25.tbl) <- c("Market size", "Market share", "Selling price",
+  "Variable costs per unit", "Fixed costs per year", "Initial investment")
+knitr::kable(p25.tbl)
+```
+
+```{r problem 25: scenario analysis}
+lifespan <- 6
+discount <- .13
+tax <- .4
+market.size <- c(105000, 120000, 145000)
+market.share <- c(.2, .23, .25)
+selling.price <- c(150, 155, 161)
+variable.cost <- c(104, 99, 98)
+fixed.costs <- c(965000, 920000, 890000)
+initial.investment <- c(1900000, 1800000, 1700000)
+depreciation <- initial.investment/lifespan
+
+
+options(scipen=999)
+pessimistic <- c(105000, .20, 150, 104, 965000, 1900000)
+expected <- c(120000, .23, 155, 99, 920000, 1800000)
+optimistic <- c(145000, .25, 161, 98, 890000, 17000000)
+m25 <- matrix(c(pessimistic, expected, optimistic), ncol=3, byrow=F)
+colnames(m25) <- c("Pessimistic", "Expected", "Optimistic")
+rownames(m25) <- c("Market size", "Market share", "Selling price",
+  "Variable costs per unit", "Fixed costs per year", "Initial investment")
+knitr::kable(m25)
+
+(contribution.margin <- selling.price[2] - variable.cost[2])
+(revenues <- market.size[2] * market.share[2] * contribution.margin -
+  fixed.costs[2])
+
+(expected.results <- rep(
+  (((selling.price[2] - variable.cost[2]) * market.share[2] * market.size[2] -
+      fixed.costs[2]) * (1 - tax) + depreciation[2] * tax) *
+    pvia(discount, lifespan) - initial.investment[2], 6))
+
+(pessimistic.results <- c(
+  (((selling.price[1] - variable.cost[2]) * market.share[2] * market.size[2] -
+     fixed.costs[2]) * (1 - tax) + depreciation[2] * tax) *
+  pvia(discount, lifespan) - initial.investment[2],
+
+  (((selling.price[2] - variable.cost[1]) * market.share[2] * market.size[2] -
+      fixed.costs[2]) * (1 - tax) + depreciation[2] * tax) *
+    pvia(discount, lifespan) - initial.investment[2],
+  
+  (((selling.price[2] - variable.cost[2]) * market.share[1] * market.size[2] -
+      fixed.costs[2]) * (1 - tax) + depreciation[2] * tax) *
+    pvia(discount, lifespan) - initial.investment[2],
+  
+  (((selling.price[2] - variable.cost[2]) * market.share[2] * market.size[1] -
+      fixed.costs[2]) * (1 - tax) + depreciation[2] * tax) *
+    pvia(discount, lifespan) - initial.investment[2],
+  
+  (((selling.price[2] - variable.cost[2]) * market.share[2] * market.size[2] -
+      fixed.costs[1]) * (1 - tax) + depreciation[2] * tax) *
+    pvia(discount, lifespan) - initial.investment[2],
+  
+  (((selling.price[2] - variable.cost[2]) * market.share[2] * market.size[2] -
+      fixed.costs[2]) * (1 - tax) + depreciation[1] * tax) *
+    pvia(discount, lifespan) - initial.investment[1]))
+
+(optimistic.results <- c(
+  (((selling.price[3] - variable.cost[2]) * market.share[2] * market.size[2] -
+     fixed.costs[2]) * (1 - tax) + depreciation[2] * tax) *
+  pvia(discount, lifespan) - initial.investment[2],
+
+  (((selling.price[2] - variable.cost[3]) * market.share[2] * market.size[2] -
+      fixed.costs[2]) * (1 - tax) + depreciation[2] * tax) *
+    pvia(discount, lifespan) - initial.investment[2],
+  
+  (((selling.price[2] - variable.cost[2]) * market.share[3] * market.size[2] -
+      fixed.costs[2]) * (1 - tax) + depreciation[2] * tax) *
+    pvia(discount, lifespan) - initial.investment[2],
+  
+  (((selling.price[2] - variable.cost[2]) * market.share[2] * market.size[3] -
+      fixed.costs[2]) * (1 - tax) + depreciation[2] * tax) *
+    pvia(discount, lifespan) - initial.investment[2],
+  
+  (((selling.price[2] - variable.cost[2]) * market.share[2] * market.size[2] -
+      fixed.costs[3]) * (1 - tax) + depreciation[2] * tax) *
+    pvia(discount, lifespan) - initial.investment[2],
+  
+  (((selling.price[2] - variable.cost[2]) * market.share[2] * market.size[2] -
+      fixed.costs[2]) * (1 - tax) + depreciation[3] * tax) *
+    pvia(discount, lifespan) - initial.investment[3]))
+
+m25.results <- matrix(c(pessimistic.results,
+                        expected.results,
+                        optimistic.results),
+                      ncol=3)
+colnames(m25.results) <- c("Pessimistic", "Expected", "Optimistic")
+rownames(m25.results) <- c("Market size", "Market share", "Selling price",
+  "Variable costs per unit", "Fixed costs per year", "Initial investment")
+
+knitr::kable(m25.results)
+
+sum(1/length(m25.results) * m25.results)
+```
+
+Taking all possibilities listed in the above table as equally probable, I would recommend the project.
+
+---

@@ -1,0 +1,822 @@
+---
+title: "Interest rates and bond valuations"
+author: "Joseph Bennett"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(ggplot2)
+```
+
+# Summary
+
+* Determining bond prices and yields is an application of basic discounted cash flow principles.
+* Bond values move in the idrection opposite that of interest rates, leading to potential gains or losses for bond investors.
+* Bonds are rated based on their default risk. Some bonds, such as Treasury bonds, have no risk of default, whereas so-called junk bonds have substantial default risk.
+* Almost all bond trading is OTC, with little or no market transparency in many cases. As a result, bond price and volume information can be difficult to find for some types of bonds.
+* Bond yields and interest rates reflect six different factors: the real interest rate and five premiums that investors demand as compensation for inflation, interest rate risk, default risk, taxability, and lack of liquidity.
+
+---
+
+# Questions
+
+## Treasury bonds
+
+Is it true that a U.S. Treasury security is risk-free?
+
+No U.S. Treasuries are not risk free. They have no default risk, but there is an interest rate risk. If the interest rates increase then the value of the bond decreases.
+
+---
+
+## Interest rate risk
+
+Which has greater interest rate risk, a 30-year Treasury bond or a 30-year BB corporate bond?
+
+Interest rate sensitivity is increased the longer the time to maturity and the smaller the coupon rate. These bonds have the same time to maturity. However, a treasury bond should have a lower coupon rate than the BB corporate bond. Therefore, the 30-year Treasury bond has higher interest rate risks.
+
+---
+
+## Treasury pricing
+
+With regard to bid and ask prices on a Treasury bond, is it possible for the bid price to be higher? Why or why not?
+
+The bid price is the price a person is willing to pay for the bond, the ask price is the price a person is willing to sell the bond for. In very special circumstances yes, the bid price can be higher than the ask price. If there are technical glitches, or market inefficiencies, the bid price can be higher than the ask price. However, these are very extrodinary circumstances and very rare. They are situations that would be considered errors or glitches.
+
+---
+
+## Yield to maturity
+
+Treasury bid and ask quotes are sometimes given in terms of yields, so there would be a bid yield and an ask yield. Which do you think would be larger? Explain.
+
+When Treasury bid and ask quotes are expressed in terms of yields, then the relationship between the bid-ask is reversed. The bid yield > ask yield. This is because there is an inverse relationship between price and yield for bonds.
+
+---
+
+## Coupon rate
+
+How does a bond issuer decide on the appropriate coupon rate to set on its bonds? Explain the difference between the coupon rate and the required return on a bond.
+
+A bond issuer decides on the appropriate coupon rate based on several factors to ensure the bonds are attractive to investors while meeting the issuer's financial goals. The factors include:
+
+1. Prevailing market interest rates - The issuer considers current interest rates for similar bonds in the market. The coupon rate must be competitive with the yields on bonds of comparable credit quality and maturity.
+
+2. Issuer's creditworthiness - Highly rated issuers can offer lower coupon rates because investors perceive less risk. Lower-rated issuers must offer higher coupon rates to attract investors.
+
+3. Bond maturity - Longer-term bonds typically require higher coupon rates to compensate for investors for the greater risk of holding a bond over an extended period.
+
+4. Market conditions - Economic conditions, investor sentiment, and demand for bonds in the market influence the coupon rate.
+
+5. Special features - Bonds with special features, such as callable or convertible provisions, often have higher or lower coupon rates to reflect the value or risk of those features.
+
+The difference between the coupon rate and the required return rate or yield to maturity.
+
+* The coupon rate is the fixed annual interest rate stated on the bond at issuance. It determines the periodic interest payments (coupon payments) made to bondholders.
+
+* The required return, or yield to maturity (YTM), is the rate of return investors demand based on the bond's p rice, credit risk, and time to maturity. Unlike the coupon rate, the required return fluctuates with market conditions. It reflects the bond's attractiveness relative to other investments and the risk premium investors require.
+
+---
+
+## Real and nominal returns
+
+Are there circumstances under which an investor might be more concerned about the nominal return on an investment than the real return?
+
+---
+
+## Bond ratings
+
+Companies pay rating agencies such as Moody's and S&P to rate their bonds, and the costs can be substantial. However, companies are not required to have their bonds rated in the first place; doing so is strictly voluntary. Why do you think they do it?
+
+Companies would pay for such services because it helps them when they go to market with their bonds. Having a AAA rating is a highly sought after rating and allows companies to offer more favorable and sought after bonds.
+
+However, some companies may not want a rating if their bonds are considered to be risky.
+
+---
+
+## Bond ratings
+
+U.S. Treasury bonds are not rated. Why? Often, junk bonds are not rated. Why?
+
+U.S. Treasury bonds are not rated because they are considered to be zero risk of default. They don't need the rating. Junk bonds are not rated because their bonds are considered too risky and their ratings would be considered low.
+
+---
+
+## Term structure
+
+What is the difference between the term structure of interest rates and the yield curve?
+
+The term structure is the theoretical concept that describes the relationship between rates and maturities, while the yield curve is the practical, graphical representation of this relationship at a specific time.
+
+The term structure of interest rates refers to the relationship between interest rates (or yields) and the time to maturity for debt securities of the same credit quality. It represents the theoretical foundation that explains how interest rates vary with different maturities. The term structure of interest rates is a broader concept that encomapsses the factors driving the relationship between interest rates and maturities, such as expectations of future interest rates, liquidity perferences, and risk premiums. Term structure of interest rates is used to understand and model interest rate behaviors, such as in pricing bonds or derivative instruments.
+
+The yield curve is a graphical representation of the term structure of interest rates at a specific point in time. It plots the yields of similar-quality bonds against their maturities. It is a real-world snapshot of the term structure of interest rates and it focuses on the actual observed yields of bonds in the market, typically for government securities like U.S. Treasury bonds. Their use is as a practical tool for analyzing market conditions, predicting economic trends, and assessing the cost of borrowing or the return on investment.
+
+Another way of thinking of the two is that the term structure of interest rates might explain why long-term rates are typically higher than short-term rates due to inflation expectations and risk premiums. The yield curve, on the other hand, shows the actual yields for 1-year, 5-year, 10-year, and 30-year Treasury bonds as of today.
+
+---
+
+## Crossover bonds
+
+Looking back at the crossover bonds we discussed in the chapter, why do you think split ratings such as these occur?
+
+split ratings occur when different credit rating agencies assign different credit ratings to the same bond or issuer. This can occur because different credit rating agencies use different methodologies to assess credit risk. Also timing of the reviews may affect the rating as well as the emphasis on different risks. Overall, assessing the credit risk of bonds is subjective.
+
+---
+
+## Municipal bonds
+
+Why is it that municipal bonds are not taxed at the federal level, but are taxable across state lines? Why is it that U.S. Treasury bonds are not taxed at the state level?
+
+The tax treatment of municipal bonds and U.S. Treasury bonds reflects policy decisions designed to encourage investment in specific types of government debt and to respect jurisdictional boundaries of taxation.
+
+---
+
+## Bond market
+
+What are the implications for bond investors of the lack of transparency in the bond market?
+
+Some of the implications of the lack of transparency in the bond market include: difficulty in determining fair pricing, high transaction costs, less liquidity, access to information, etc...
+
+---
+
+## Treasury Market
+
+Take a look back at Figure 8.4. Notice the wide range of coupon rates. Why are they so different?
+
+---
+
+## Rating agencies
+
+A controversy erupted regarding bond-rating agencies when some agencies began to provide unsolicited bond ratings. Why do you think this is controversial?
+
+---
+
+## Bonds as equity
+
+The 100-year bonds we discussed in the chapter have something in common with junk bonds. Critics charge that, in both cases, the issuers are really selling equity in disguise. What are the issues here? Why would a company want to sell "equity in disguise?"
+
+---
+
+## Bond prices versus yields
+
+a. What is the relationship between the price of a bond and its YTM?
+b. Explain why some bonds sell at a premium over par value while other bonds sell at a discount. What do you know about the relationship between the coupon rate and the YTM for premium bonds? What about for discount bonds? For bonds selling at par value?
+c. What is the relationship between the current yield and YTM for premium bonds? For discount bonds? For bonds selling at par value?
+
+---
+
+## Interest rate risk
+
+All else being the same, which has more interest rate risk, a long-term bond or a short-term bond? What about a long-term, high coupon bond compared to a short-term, low coupon bond?
+
+---
+
+# Problems
+
+## Valuing bonds
+
+What is the price of a 15-year, zero coupon bond paying \$1,000 at maturity if the YTM is:
+
+a. 5 percent?
+b. 10 percent?
+c. 15 percent?
+
+```{r problem 1: valuing bonds}
+ttm <- 15
+ytm <- c(.05, .1, .15)
+par <- 1000
+pv <- function(F, r, t) F / (1 + r)^t
+pv(par, ytm, ttm)
+```
+
+---
+
+## Valuing bonds
+
+Microhard has issued a bond with the following characteristics:
+
+* Par: \$1,000
+* Time to maturity: 15 years
+* Coupon rate: 7 percent
+* Semiannual payments
+
+Calculate the price of this bond if the YTM is:
+
+a. 7 percent
+b. 9 percent
+c. 5 percent
+
+```{r problem 2: valuing bonds}
+ttm <- 15
+ytm <- c(.07, .09, .05)
+coupon.rate <- .07
+par <- 1000
+pvia <- function(r, t) (1 - (1 + r)^(-t)) / r
+pv <- function(F, r, t) F / (1 + r)^(t)
+bond.value <- function(F, C, r, t) C * pvia(r, t) + pv(F, r, t)
+coupon <- coupon.rate * par
+bond.value(par, coupon, ytm, ttm)
+```
+
+---
+
+## Bond yields
+
+Watters Umbrella Corp. issued 15-year bonds 2 years ago at a coupon rate of 6.4 percent. The bonds make semiannual payments. If these bonds currently sell for 105 percent of par value, what is the YTM?
+
+```{r problem 3: bond yields}
+ttm <- 15 - 2
+coupon.rate <- .064
+par <- 1000
+value <- 1.05 * par
+f <- function(r) (coupon.rate * par) * (1 - (1 + r)^(-ttm)) / r + par / (1 + r)^ttm - value
+uniroot(f, lower=1e-6, upper=1, tol=1e-8)$root
+```
+
+---
+
+## Coupon rates
+
+Rhiannon Corporation has bonds on the market with 11.5 years to maturity, a YTM of 7.6 percent, and a current price of \$1,060. The bonds make semiannual payments. What must the coupon rate be on these bonds?
+
+The semiannual YTM is $.076 / 2 = .038$. The remaining number of payments is $11.5 * 2 = 23$.
+
+The value of a bond equation is
+
+$$
+\begin{aligned}
+\mathbf{Bond\ value} &= \text{value of the coupon payments}
+  + \text{value of the lump sum payment at the end} \\
+  &= C \times \frac{1 - (1 + r)^{-T}}{r} + \frac{F}{(1 + r)^{T}} \\
+\text{where}\\
+\mathbf{C} &= \text{Coupon paid each period} \\
+\mathbf{r} &= \text{Discount rate per period} \\
+\mathbf{T} &= \text{Number of periods} \\
+\mathbf{F} &= \text{Face value of the bond}
+\end{aligned}
+$$
+
+We can calculate the value of the lump sum payment at the end.  We will assume a face value of \$1,000:
+
+$$
+\frac{1000}{(1 + .038)^{23}} = 424.09
+$$
+
+We can subtract this from the current price value to get the present value of the annuity payments:
+
+$$
+1060 - 424.09 = 635.91
+$$
+
+Then the coupon payments can be calculated:
+
+$$
+\begin{aligned}
+645.91 &= C \times \frac{1 - (1.038)^{-23}}{.038} \\
+  &= C \times 15.15545 \\ \\
+C &= \frac{645.91}{15.15545} \\
+  & \approx 42 \\ \\
+\mathbf{Coupon\ rate} &= \frac{42 \times 2 \text{ semi annual payments}}{1000} \\
+  &= .084 = 84\%
+\end{aligned}
+$$
+
+---
+
+## Valuing bonds
+
+Even though most corporate bonds in the United States make coupon payments semiannually, bonds issued elsewhere often have annual coupon payments. Suppose a German company issues a bond with a par value of 1,000 euros, 19 years to maturity, and a coupon rate of 4.5 percent paid annually. If the yield to maturity is 3.9 percent, what is the current price of the bond?
+
+The equation for the bond value is:
+
+$$
+\begin{aligned}
+\mathbf{Bond\ value} &= \text{value of the coupon payments}
+  + \text{value of the lump sum payment at the end} \\
+  &= C \times \frac{1 - (1 + r)^{-T}}{r} + \frac{F}{(1 + r)^{T}} \\
+\text{where}\\
+\mathbf{C} &= \text{Coupon paid each period} \\
+\mathbf{r} &= \text{Discount rate per period} \\
+\mathbf{T} &= \text{Number of periods} \\
+\mathbf{F} &= \text{Face value of the bond}
+\end{aligned}
+$$
+
+First lets calculate the present value of the coupon payments:
+
+$$
+\begin{aligned}
+\mathbf{C} &= F \times \text{YTM} \\
+  &= 1000 \times .045 \\
+  &= 45 \\ \\
+45 \times \frac{1 - (1 + .039)^{-19}}{.039} &= 596.08
+\end{aligned}
+$$
+
+The present value of the lump sum:
+
+$$
+\begin{aligned}
+\frac{1000}{(1.038)^{19}} &= 492.32
+\end{aligned}
+$$
+
+The price of the bond is:
+
+$$
+596.08 + 492.32 = 1088.40
+$$
+
+---
+
+## Bond yields
+
+A Japanese company has a bond outstanding that sells for 92 percent of its 100,000 yen par value. The bond has a coupon rate of 2.8 percent paid annually and matures in 21 years. What is the yield to maturity of this bond?
+
+The price of the bond is:
+
+$$
+100,000 * .92 = 92,000
+$$
+
+Other variables:
+
+$$
+\begin{aligned}
+C &= \text{coupon rate} \times \text{par value} \\
+  &= .028 * 100,000 \\
+  &= 2,800 \\
+F &= 100,000 \\
+T &= 21 \\
+92,000 &= 2,800 \times \frac{1 - (1 + r)^{-T}}{r} + \frac{100,000}{(1 + r)^{T}}
+\end{aligned}
+$$
+
+Using `R` we can calculate the value of $r$ (Yield to maturity)
+
+```{r problem 6}
+C <- 2800
+F <- 100000
+T <- 21
+V <- 92000
+f <- function(r) 2800 * (1 - (1 + r)^(-T)) / r + 100000 / (1 + r)^T - V
+uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root
+```
+
+---
+
+## Calculating real rates of return
+
+If Treasury bills are currently paying 4.5 percent and the inflation rate is 2.1 percent, what is the approximate real rate of interest? The exact real rate?
+
+$$
+\begin{aligned}
+\mathbf{Real\ rate} &\approx r + h \\
+  &= 4.5\% + 2.1\% \\
+  &= 6.6\% \\ \\
+1 + R &= (1 + r) \times (1 + h) \\ \\
+1 + r &= \frac{1 + R}{1 + h} \\
+r &= \frac{1 + R}{1 + h} - 1 \\ \\
+r &= \frac{1.045}{1.021} - 1 \\
+  &= .023506 = 2.35\%
+\end{aligned}
+$$
+
+---
+
+## Inflation and nominal returns
+
+Suppose the real rate is 2.4 percent and the inflation rate is 3.1 percent. What rate would you expect to see on a Treasury bill?
+
+$$
+\begin{aligned}
+\mathbf{Nominal\ rate} &= (1 + r) \times (1 + h) - 1 \\
+  &= (1 + .024) \times (1 + .031) - 1 \\
+  &= 0.0557 = 5.57\%
+\end{aligned}
+$$
+
+---
+
+## Nominal and real returns
+
+An investment offers a 14 percent total return over the coming year. Alan Wingspan thinks the total real return on this investment will be only 10 percent. What does Alan believe the inflation rate will be over the next year?
+
+$$
+\begin{aligned}
+h &= \frac{1 + R}{1 + r} - 1 \\ \\
+  &= .0364 = 3.64\%
+\end{aligned}
+$$
+
+---
+
+## Nominal versus real returns
+
+Say you own an asset that had a total return last year of 12.5 percent. If the inflation rate last year was 5.3 percent, what was your real return?
+
+$$
+\begin{aligned}
+(1 + R) &= (1 + r) \times (1 + h) \\ \\
+r &= \frac{(1 + R)}{(1 + h)} - 1 \\
+  &= \frac{1.125}{1.053} - 1 \\
+  &= .0684 = 6.84\%
+\end{aligned}
+$$
+
+---
+
+## Using Treasury quotes
+
+Locate the Treasury bond in Figure 8.4 maturing in February 2037. What is its coupon rate? What is its bid price? What was the _previous day's_ ask price?
+
+|Maturity|Coupon|Bid|Asked|Chg|Asked Yield|
+|---:|---:|---:|---:|---:|---:|
+|2037 Feb|4.750|109:11|109:13|-11|4.1519|
+
+The coupon rate is 4.75%. The bid price is 109$\frac{11}{32}$. The previous day's ask price is 109$\frac{2}{32}$.
+
+---
+
+## Using Treasury quotes
+
+Locate the Treasury bond in Figure 8.4 maturing in November 2039. Is this a premium or a discount bond? What is its current yield? What is its yield to maturity? What is the bid-ask spread?
+
+|Maturity|Coupon|Bid|Asked|Chg|Asked Yield|
+|---:|---:|---:|---:|---:|---:|
+|2039 Nov|4.375|102:11|102:12|-11|4.2306|
+
+With a bid price of 102$\frac{11}{32}$% and an ask price 102$\frac{12}{32}$% of the face value, the bond is a premium bond. Its current yield is $\frac{4.375}{1000 \times 102.34375} = .0427 = 4.27\%$ . The bid-ask spread is $102 \frac{11}{32} - 102 \frac{12}{32} = - \frac{1}{32}$.
+
+---
+
+## Zero coupon bonds
+
+You buy a zero coupon bond at the beginning of the year that has a face value of \$1,000, a YTM of 7 percent, and 25 years to maturity. If you hold the bond for the entire year, how much in interest income will you have to declare on your tax return?
+
+The equation for analyzing a zero coupon bond is the same as the present value formula:
+
+$$
+\begin{aligned}
+\mathbf{Bond\ value} &= \frac{\text{face value}}{(1 + r)^T}
+\end{aligned}
+$$
+
+The bond value is:
+
+$$
+\frac{1,000}{(1 + .07)^{25}} = 184.25
+$$
+
+Therefore, the taxable income on interest is:
+
+$$
+1,000 - 184.25 = 815.75
+$$
+
+---
+
+## Bond price movement
+
+Miller Corporation has a premium bond making semiannual payments. The bond pays a coupon of 8 percent, has a YTM of 6 percent, and has 13 years to maturity. The Modigliani Company has a discount bond making semiannual payments. This bond pays a coupon of 6 percent, has a YTM of 8 percent, and also has 13 years to maturity. If interest rates remain unchanged, what do you expect the price of these bonds to be 1 year from now? In 3 years? In 8 years? In 12 years? In 13 years? What's going on here? Illustrate your answers by graphing bond prices versus time to maturity.
+
+The bond equation
+
+$$
+\begin{aligned}
+\mathbf{Coupon} &= \text{coupon rate} \times \text{par value} \\ \\
+\mathbf{Bond\ value} &= C \times \frac{1 - (1 + r)^{-T}}{r} + \frac{F}{(1 + r)^{T}}
+\end{aligned}
+$$
+
+The bonds pay semiannual payments, that means the time period is $13 \times 2 = 26$. The YTM is 6 percent that means the true yield per period is 3 percent. The present value of the Miller Corporation premium bond (assume par value \$1,000) is:
+
+$$
+\begin{aligned}
+\mathbf{Coupon}_{\text{per period}} &= \frac{.08 \times 1,000}{2} = 40 \\ \\
+\mathbf{Bond\ value}_{\text{Miller}} &= 40 \times \frac{1 - (1 + .03)^{-26}}{.03} + \frac{1,000}{(1 + .03)^{26}} \\
+  &= 715.0737 + 463.6947 \\
+  &\approx 1178.77
+\end{aligned}
+$$
+
+The present value of the Modigliani Company discount bond (assume par value \$1,000, YTM per period is 4 percent and coupon payments of 30 per period) is:
+
+$$
+\begin{aligned}
+\mathbf{Coupon}_{\text{Modigliani}} &=  \frac{.06 \times 1,000}{2} = 30 \\ \\
+\mathbf{Bond\ value}_{\text{Modigliani}} &= 30 \times \frac{1 - (1 + .04)^{-26}}{.04} + \frac{1,000}{(1 + .04)^{26}} \\
+  &= 479.4831 + 360.6892 \\
+  &\approx 840.17
+\end{aligned}
+$$
+
+For values of 1 year, 3 years, 8 years, 12 years, and 13 years:
+
+```{r problem 14: bond price movement}
+bond.value <- function(C, F, r, t) C * (1 - (1 + r)^(-t)) / r + F / (1 + r)^(t)
+years <- c(2, 6, 16, 24, 26)
+supp <- c(rep('miller', length(years)), rep('modigliani', length(years)))
+values <- c(bond.value(40, 1000, .03, 26-years), bond.value(30, 1000, .04, 26-years))
+df <- data.frame(supp, years, values)
+g <- ggplot(df, aes(x=years, y=values, colour=supp)) +
+  geom_line() + geom_point()
+g
+```
+
+As the maturity date comes closer and closer, the values of the two bonds converge to the par value of the bond because that will be the payout.
+
+---
+
+## Interest rate risk
+
+Laurel, Inc., and Hardy Corp. both have 7 percent coupon bonds outstanding, with semiannual interest payments, and both are priced at par value. The Laurel, Inc., bond has 2 years to maturity, whereas the Hardy Corp. bond has 15 years to maturity. If interest rates suddenly rise by 2 percent, what is the percentage change in the price of these bonds? If interest rates were to suddenly fall by 2 percent instead, what would the percentage change in the price of these bonds be then? Illustrate your answers by graphing bond prices versus YTM. What does this problem tell you about the interest rate risk of longer-term bonds?
+
+The sensitivity of bonds to interest rates depends on two things: the time to maturity and the coupon rate.
+
+The percentage change in price:
+
+$$
+\text{Percent change} = \frac{\text{new price} - \text{old price}}{\text{old price}} \times 100
+$$
+
+```{r problem 15: interest rate risk}
+bond.value <- function(C, F, r, t) C * (1 - (1 + r)^(-t)) / r + F / (1 + r)^(t)
+percent.change <- function(old, new) (new - old) / old * 100
+rate.change <- c(-.02, 0, .02)
+supp <- c(rep('Laurel', length(rate.change)), rep('Hardy', length(rate.change)))
+(Laurel.values <- bond.value(70/2, 1000, (.07 + rate.change)/2, 4))
+(Laurel.rate.drops <- percent.change(Laurel.values[1], Laurel.values[2]))
+(Laurel.rate.increases <- percent.change(Laurel.values[3], Laurel.values[2]))
+(Laurel.values[1] - Laurel.values[2]) / Laurel.values[2] * 100
+(Laurel.values[3] - Laurel.values[2]) / Laurel.values[2] * 100
+(Hardy.values <- bond.value(70/2, 1000, (.07 + rate.change)/2, 30))
+(Hard.rate.drops <- percent.change(Hardy.values[1], Hardy.values[2]))
+(Hard.rate.drops <- percent.change(Hardy.values[3], Hardy.values[2]))
+values <- c(Laurel.values, Hardy.values)
+df <- data.frame(supp, rate.change, values)
+g <- ggplot(df, aes(x=rate.change, y=values, colour=supp)) +
+  geom_line() + geom_point()
+g
+```
+
+Both bonds have the same coupon rate, but different maturity dates. Hardy's interest rate risk is greater, because the maturity date is far off.
+
+---
+
+## Interest rate risk
+
+The Faulk Corp. has a 6 percent coupon bond outstanding. The Gonas Company has a 14 percent bond outstanding. Both bonds have 12 years to maturity, make semiannual payments, and have a YTM of 10 percent. If interest rates suddenly rise by 2 percent, what is the percentage change in the price of these bonds? What if interest rates suddenly fall by 2 percent instead? What does this problem tell you about the interest rate risk of lower coupon bonds?
+
+The percentage change in price:
+
+$$
+\text{Percent change} = \frac{\text{new price} - \text{old price}}{\text{old price}} \times 100
+$$
+
+```{r problem 16: interest rate risk}
+bond.value <- function(C, F, r, t) C * (1 - (1 + r)^(-t)) / r + F / (1 + r)^(t)
+percent.change <- function(old, new) (new - old) / old * 100
+rate.change <- c(-.02, 0, .02)
+supp <- c(rep('Faulk', length(rate.change)), rep('Gonas', length(rate.change)))
+(Faulk.values <- bond.value(60/2, 1000, (.1 + rate.change)/2, 24))
+(Faulk.values[1] - Faulk.values[2]) / Faulk.values[2] * 100
+(Faulk.values[3] - Faulk.values[2]) / Faulk.values[2] * 100
+(Gonas.values <- bond.value(140/2, 1000, (.1 + rate.change)/2, 24))
+(Gonas.values[1] - Gonas.values[2]) / Gonas.values[2] * 100
+(Gonas.values[3] - Gonas.values[2]) / Gonas.values[2] * 100
+values <- c(Faulk.values, Gonas.values)
+df <- data.frame(supp, rate.change, values)
+g <- ggplot(df, aes(x=rate.change, y=values, colour=supp)) +
+  geom_line() + geom_point()
+g
+```
+
+---
+
+## Bond yields
+
+Hacker Software has 6.2 percent coupon bonds on the market with 9 years to maturity. The bonds make semiannual payments and currently sell for 105 percent of par. What is the current yield on the bonds? The YTM? The effective annual yield?
+
+The current yield is the bond's annual coupon divided by its current market value, (assume par value = \$1,000):
+
+$$
+\begin{aligned}
+\mathbf{V} &= \text{Market value} \\
+  &= \text{percent of par} \times \text{par value} \\
+  &= 1.05 \times 1,000 \\
+  &= 1,050 \\ \\
+\mathbf{C} &= \text{coupon} \\
+  &= \text{coupon rate} \times \text{par value} \\
+  &= .062 \times 1,000 \\
+  &= 62 \\ \\
+\mathbf{Current\ yield} &= \frac{\text{coupon}}{\text{market value}} \\
+  &= \frac{C}{V} \\
+  &= \frac{62}{1,050} \\
+  &= .059 = 5.9\%
+\end{aligned}
+$$
+
+The YTM (yield to maturity) rate is the present value of the interest payments and redemption value of a bond with the present price of a bond. Since these bonds are semiannual we need to adjust the payment period and the coupon payments. The payment period is multiplied by two and the coupon payments are divided by two.
+
+```{r problem 17: bond yields}
+coupon <- 62/2
+period <- 9 * 2
+par <- 1000
+market <- 1050
+f <- function(r) coupon * (1 - (1 + r)^(-period)) / r + par / (1 + r)^(period) - market
+uniroot(f, lower=1e-4, upper=1, tol=1e-8)$root
+```
+
+This yield (2.74%) is the annual yield. In order to find the effective annual yield, this rate is equivalent to 1.37% every six months:
+
+$$
+\mathbf{Effective\ annual\ rate} = (1 + .0137)^2 - 1 = .0276 \approx 2.76\%
+$$
+
+---
+
+## Bond yields
+
+Pembroke Co. wants to issue new 20-year bonds for some much needed expansion projects. The company currently has 7 percent coupon bonds on the market that sell for \$1,063, amke semiannual payments, and mature in 20 years. What coupon rate should the company set on its new bonds if it wants them to sell at par?
+
+We need to find the YTM for the 7 percent coupon bonds.
+
+The current coupon is:
+
+$$
+\begin{aligned}
+\mathbf{Coupon\ payment} &= \text{coupon rate} \times \text{par value} \\
+  &= .07 \times 1,000 \\
+  &= 70
+\end{aligned}
+$$
+
+```{r problem 18: bond yields}
+coupon <- 70/2
+par <- 1000
+market <- 1063
+period <- 20 * 2
+f <- function(r) coupon * (1 - (1 + r)^(-period)) / r + par / (1 + r)^(period) - market
+uniroot(f, lower=1e-4, upper=1, tol=1e-8)$root
+# The book's answer is 6.44% which is the answer if I regard this as an annual
+# payment. Need to verify.
+```
+
+---
+
+## Accrued interest
+
+You purchase a bond with an invoice price of \$950. The bond has a coupon rate of 6.8 percent, and there are 2 months to the next semiannual coupon date. What is the clean price of the bond?
+
+$$
+\begin{aligned}
+\mathbf{Coupon} &= \frac{\text{coupon rate} \times \text{par value}}{2} \\
+  &= 34 \\ \\
+\mathbf{Clean\ price} &= 950 - \frac{4}{6}_{\text{accrued}} \times 34 \\
+  &= 939.33
+\end{aligned}
+$$
+
+
+## Accrued interest
+
+You purchase a bond with a coupon rate of 5.9 percent and a clean price of \$1,053. If the next semiannual coupon payment is due in four months, what is the invoice price?
+
+$$
+\begin{aligned}
+\mathbf{Coupon}_{\text{6 month payment}} &= \frac{\text{coupon rate} \times \text{par value}}{2} \\
+  &= \frac{.059 * 1,000}{2} \\
+  &= 29.50 \\ \\
+\mathbf{Invoice\ price} &= \frac{29.50}{6} \times 4_{\text{months}} + 1,053 \\
+  &= 1072.67
+\end{aligned}
+$$
+
+---
+
+## Finding the bond maturity
+
+Argos Corp. has 9 percent coupon bonds making annual payments with a YTM of 7.81 percent. The current yield on these bonds is 8.42 percent. How many years do these bonds have left until they mature?
+
+$$
+\begin{aligned}
+\mathbf{Coupon\ payments} &= \text{coupon rate} \times \text{par} \\
+  &= .09 \times 1,000 \\
+  &= 90 \\ \\
+\mathbf{Bond\ value} &= \frac{\text{coupon payments}}{\text{current yield}} \\
+  &= 1,068.88
+\end{aligned}
+$$
+
+We now solve for the period:
+
+$$
+\begin{aligned}
+\text{coupon payments} \times \frac{1 - (1 + \text{YTM})^{-\text{period}}}{\text{YTM}} + \frac{\text{par value}}{(1 + \text{YTM})^{\text{period}}}
+ &= 1,068.88 \\ \\
+ 0 = 90 \times \frac{1 - 1.0781^{-\text{period}}}{.0781} + \frac{1,000}{1.0781^{\text{period}}} - 1,068.88
+\end{aligned}
+$$
+
+```{r problem 21: finding the bond maturity}
+f <- function(t) 90 * (1 - 1.0781^(-t)) / .0781 + 1000/1.0781^(t) - 1068.88
+uniroot(f, lower=1, upper=30, tol=1e-2)$root
+# Verify
+f <- function(r) 90 * (1 - (1 + r)^(-8)) / r + 1000 / (1 + r)^(8) - 1068.88
+uniroot(f, lower=1e-4, upper=1, tol=1e-8)$root
+```
+
+---
+
+## Using bond quotes
+
+Suppose the following bond quote for IOU Corporation appears in the financial page of today's newspaper. Assume the bond has a face value of \$1,000 and the current date is April 15, 2012. What is the yield to maturity of the bond? What is the current yield?
+
+|Company|Coupon|Maturity|Last Price|Last Yield|Est Vol|
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|IOU|7.240|Apr 15, 2021|105.312|??|1,827|
+
+$$
+\begin{aligned}
+\mathbf{Coupon\ payments} &= .0724 \times 1,000 \\
+  &= 72.40 \\ \\
+\mathbf{Bond\ value} &= 1.05312 \times 1000 \\
+  &= 1,053.12 \\ \\
+\mathbf{Number\ of\ periods} &= 9\ \text{ years}
+\end{aligned}
+$$
+
+The YTM (yield to maturity):
+
+```{r problem 22: using bond quotes}
+f <- function(r) 72.40 * (1 - (1 + r)^(-9)) / r + 1000 / (1 + r)^(9) - 1053.12
+uniroot(f, lower=1e-4, upper=1, tol=1e-8)$root
+```
+
+The current yield:
+
+$$
+\frac{72.40}{1053.12} = .0687 = 6.87\%
+$$
+
+---
+
+## Finding the maturity
+
+You've just found a 10 percent coupon bond on the market that sells for par value. What is the maturity on this bond?
+
+If a bond with a 10% coupon rate sells at par value, the maturity of the bond is irrelevant to its current price. This is because, while maturity affects the bond's price, it doesn't directly determine whether it sells at par.
+
+The bond value is determined by the coupon annuity payments, and the total lump sum at the end of the period. If the value is at par, then the two parts of the equation balance out. Therefore, there is no way to find the maturity.
+
+---
+
+## Interest on Zeros
+
+Tesla Corporation needs to raise funds to finance a plant expansion, and it has decided to issue 25-year zero coupon bonds to raise the money. The required return on the bonds will be 7 percent.
+
+a. What will these bonds sell for at issuance?
+b. Using the IRS amortization rule, what interest deduction can the company take on these bonds int he first year? In the last year?
+c. Repeat part (b) using athe straight-line method for the interest deduction.
+d. Based on your answers in (b) and (c), which interest deduction method would Tesla Corporation prefer? Why?
+
+The present value of the bond:
+
+$$
+\begin{aligned}
+\mathbf{Bond\ value} &= \frac{\text{par value}}{(1 + \text{rate})^{\text{maturity}}} \\
+ &= \frac{1000}{(1.07)^{25}} \\
+  &= 184.25
+\end{aligned}
+$$
+
+__NOTE:__ Need to overview amortization rules. (page 118)
+
+---
+
+## Zero coupon bonds
+
+Suppose your company needs to raise \$45 million and you want to issue 30-year bonds for this purpose. Assume the required return on your bond issue will be 6 percent, and you're evaluating two issue alternatives: A semiannual coupon bond with a 6 percent coupon rate and a zero coupon bond. Your company's tax rate is 35 percent.
+
+a. How many of the coupon bonds would you need to issue to raise the \$45 million? How many of the zeros would you need to issue?
+b. In 30 years, what will your company's repayment be if you issue the coupon bonds? What if you issue the zeros?
+c. Based on your answers in (a) and (b), why would you ever want to issue the zeros? To answer, calculate the firm's after tax cash outflows for the first year under the two different scenarios. Assume the IRS amortization rules apply for the zero coupon bonds.
+
+For the coupon bonds you would issue 45,000 bonds. For zero coupon bonds:
+
+$$
+\begin{aligned}
+\mathbf{45\ million} &= \text{number of bonds} \times \frac{1000}{(1 + .06)^{30}} \\ \\
+\mathbf{N} &= \frac{45,000,000 \times (1.06)^{30}}{1,000} \\ \\
+  &= 258,458\ \ \text{bonds}
+\end{aligned}
+$$
+
+
+__NOTE:__ Need to overview amortization rules. (page 118)
+
+---
