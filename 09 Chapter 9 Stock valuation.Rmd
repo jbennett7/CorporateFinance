@@ -91,11 +91,15 @@ For companies that retain earnings instead of paying dividends, the retained ear
 
 Dividends are a direct return to shareholders and a key componenet of the cash flows used to determine the intrinsic value of a stock. Even if a company doesn't currently pay dividends, its stock value reflects the expectation of future payouts or reinvested earnings that lead to higher future value.
 
+---
+
 ## Stock valuation
 
 A substantial percentage of the companies listed on the NYSE and the NSADAQ don't pay dividends, but investors are nonetheless willing to buy shares in them. How is this possible given your answer to the previous question?
 
 As stated in section 4 of the previous answer, the companies that do not pay dividends currently do have an expectation that eventually they will generate dividends. These companies are usually high growth companies that are constantly reinvesting their profits now to generate higher returns in the future.
+
+---
 
 ## Dividend policy
 
@@ -131,6 +135,8 @@ Dividends are typically taxed as income for shareholders, while capital gains ar
 
 By retaining earnings, a company might signal confidence in its growth prospects, suggesting that it expects to generate higher returns through reinvestment. Also, once a company establishes a dividend policy, cutting or suspending dividends can negatively impact investor confidence. Some companies avoid initiating dividends to maintain flexibility.
 
+---
+
 ## Dividend growth model
 
 Under what two assumptions can we use the dividend growth model presented in the chapter to determine the value of a share of stock? Comment on the reasonableness of these assumptions.
@@ -157,10 +163,13 @@ The second assumption is reasonable when: the firm's dividend policy is stable, 
 
 The second assumption is not reasonable when: the firm plans to shift its dividend policy (e.g., from reinvestment to returning more capital to shareholders in the form of dividends or buybacks); earnings volatility causes fluctuations in the retention ratio; the firm faces new growth opportunities or competitive pressures requiring higher or lower retention of earnings; a significant change in financial strategy occurs, such as debt reduction or acquisitions, which affects how earnings are allocated.
 
+---
+
 ## Common versus preferred stock
 
 Suppose a company has a preferred stock issue and a common stock issue. Both have just paid a \$2 dividend. Which do you think will have a higher price, a share of the preferred or a share of the common?
 
+---
 
 ## Dividend growth model
 
@@ -192,19 +201,27 @@ The two components of this equation is $\frac{\text{Div}_1}{P_0}$, the __dividen
 
 Which of the two components are larger depends on the type of company: high growth companies will have a larger capital gains yield because they will be reinvesting most of their earnings to drive growth. Mature company's in stable markets will have a higher dividend yield because they prioritize returning cash back to investors. Mature companies that return all earning as dividends are called _cash cows_.
 
+---
+
 ## Growth rate
 
 In the context of the dividend growth model, is it true that the growth rate in dividends and the growth rate in the price of the stock are identical?
 
 Yes, according to the dividend growth model, the growth rate in dividends and the growth rate in the price of the stock are the same. They are called the __capital gains yield__.
 
+---
+
 ## Price--earnings ratio
 
 What are the three factors that determine a company's price--earnings ratio?
 
+---
+
 ##  Corporate ethics
 
 Is it unfair or unethical for corporations to create classes of stock with unequal voting rights?
+
+---
 
 ## Stock valuation
 
@@ -254,6 +271,8 @@ P_{15} &= \frac{\text{Div}_{16}}{R - g}\\
 \end{aligned}
 $$
 
+---
+
 ## Stock values
 
 The next dividend payment by ECY, Inc., will be \$3.20 per share. The dividends are anticipated to maintain a growth rate of 6 percent, forever. If ECY stock currently sells for \$63.50 per share, what is the required return?
@@ -265,6 +284,8 @@ R &= \frac{\text{Div}}{P_0} + g\\
   &= .11 = 11\%
 \end{aligned}
 $$
+
+---
 
 ## Stock values
 
@@ -279,6 +300,8 @@ $$
 
 The dividend yield is 5\% and the capital gains yield is 6\%
 
+---
+
 ## Stock values
 
 White Wedding Corporation will pay a \$2.65 per share dividend next year. The company pledges to increase its dividend by 4.75 percent per year, indefinitely. If the company has a dividend yield of 4.3 percent, what is the required return on the company's stock?
@@ -291,6 +314,8 @@ R &= \text{dividend yield} + \text{capital gains yield}\\
 \end{aligned}
 $$
 
+---
+
 ## Stock valuation
 
 Siblings, Inc., is expected to maintain a constant 6.4 percent growth rate in its dividends, indefinitely. If the company has a dividend yield of 4.3 percent, what is the required return on the company's stock?
@@ -302,6 +327,8 @@ R &= \text{dividend yield} + \text{capital gains yield}\\
   &= .107 = 10.7\%
 \end{aligned}
 $$
+
+---
 
 ## Stock valuation
 
@@ -328,6 +355,8 @@ $$
 \end{aligned}
 $$
 
+---
+
 ## Valuing preferred stock
 
 Ayden, Inc., has an issue of preferred stock outstanding that pays a \$5.90 dividend every year, in perpetuity. If this issue currently sells for \$87 per share, what is the required return?
@@ -342,6 +371,8 @@ R &= \frac{\text{Div}}{P_0}\\
   &= .0678 = 6.78\%
 \end{aligned}
 $$
+
+---
 
 ## Growth rate
 
@@ -358,6 +389,8 @@ g &= \text{retention ratio} \times \text{return on retained earnings (ROE)}\\
 \end{aligned}
 $$
 
+---
+
 ## Stock valuation and PE
 
 The Germinating Flower Co. has earnings of \$1.75 per share. The benchmark PE for the company is 18. What stock price would you consider appropriate? What if the benchmark PE were 21?
@@ -370,6 +403,8 @@ P &= \text{PE} \cdot E\\
   &= 31.50
 \end{aligned}
 $$
+
+---
 
 ## Stock valuation
 
@@ -421,6 +456,8 @@ $$
 P_0 = 7.92 + 6.76 + 49.84 = 64.52
 $$
 
+---
+
 ## Nonconstant growth
 
 Metallica Bearings, Inc., is a young start-up company. No dividends will be paid on the stock over the next nine years, because the firm needs to plow back its earnings to fuel growth. The company will pay a \$15 per share dividend in 10 years and will increase the dividend by 5.5 percent per year thereafter. If the required return on this stock is 13 percent, what is the current share price?
@@ -436,6 +473,8 @@ Now we discount back
 $$
 PV = \frac{200}{(1.13)^{9}} = 66.58
 $$
+
+---
 
 ## Nonconstant dividends
 
@@ -457,6 +496,8 @@ $$
 P_{0} = \frac{15}{(1.12)} + \frac{18}{(1.12)^2} + \frac{21}{(1.12)^3}
   + \frac{24}{(1.12)^4} + \frac{27}{(1.12)^5} = 73.26
 $$
+
+---
 
 ## Nonconstant dividends
 
@@ -484,6 +525,8 @@ $$
 20.18 + 22.23 = 42.41
 $$
 
+---
+
 ## Differential growth
 
 Hughes Co. is growing quickly. Dividends are expected to grow at a rate of 20 percent for the next three years, with the growth rate falling off to a constant 5 percent thereafter. If the required return is 12 percent and the company just paid a \$2.80 dividend, what is the current share price?
@@ -500,6 +543,8 @@ D_4 &= 4.84 \times 1.05 = 5.08\\
   + \frac{\left(\frac{5.08}{.07}\right)}{(1.12)^3} = 61.13
 \end{aligned}
 $$
+
+---
 
 ## Differential growth
 
@@ -520,6 +565,8 @@ D_1 &= \frac{65}{52.62} = 1.24
 \end{aligned}
 $$
 
+---
+
 ## Negative growth
 
 Antiques R Us is a mature manufacturing firm. The company just paid a dividend of \$9, but management expects to reduce the payout by 4 percent per year, indefinitely. If you require an 11 percent return on this stock, what will you pay for a share today?
@@ -530,6 +577,8 @@ D_1  &= 9 \cdot (1 - .04) = 8.64\\
 P_0 &= \frac{D_1}{(.11 + .04)} = 57.60
 \end{aligned}
 $$
+
+---
 
 ## Finding the dividend
 
@@ -544,6 +593,8 @@ D_0 &= \frac{D_1}{(1 + g)} = \frac{3.79}{1.05} = 3.61\\ \\
 \end{aligned}
 $$
 
+---
+
 ## Valuing preferred stock
 
 Fifth National Bank just issued some new preferred stock. The issue will pay an annual dividend of \$8 in perpetuity, beginning five years from now. If the market requires a return of 5.6 percent on this investment, how much does a share of preferred stock cost today?
@@ -555,6 +606,8 @@ P_0 &= \frac{\frac{D}{R}}{(1 + R)^5}\\
   &= 108.79
 \end{aligned}
 $$
+
+---
 
 ## Using stock quotes
 
@@ -593,6 +646,8 @@ $$
 \end{aligned}
 $$
 
+---
+
 ## Taxes and stock price
 
 You own \$100,000 worth of Smart Money stock. One year from now, you will receive a dividend of \$2.25 per share. You will receive a \$2.40 dividend two years from now. You will sell the stock for \$65 per share three years from now. Dividends are taxed at the rate of 28 percent. Assume there is no capital gains tax. The aftertax required rate of return is 15 percent. How many shares of stock do you own?
@@ -606,6 +661,8 @@ P_0 &= \left(\frac{2.25}{(1.15)} + \frac{2.40}{(1.15)^2}\right)(1 - .28)
 \end{aligned}
 $$
 
+---
+
 ## Nonconstant growth and quarterly dividends
 
 Pasqually Mineral Water, Inc., will pay a quarterly dividend per share of \$.80 at the end of each of the next 12 quarters. Thereafter, the dividend will grow at a quarterly rate of 1 percent, forever. The appropriate rate of return on the stock is 10 percent, compounded quarterly. What is the current stock price?
@@ -617,6 +674,8 @@ $$
 R &= \frac{10}{4} = 2.5\%\\
 \end{aligned}
 $$
+
+---
 
 For the first 12 quarters:
 
@@ -635,6 +694,8 @@ P_{\text{total}} &= 8.21 + 40.05 = 48.26
 \end{aligned}
 $$
 
+---
+
 ## Finding the dividend
 
 Briley, Inc., is expected to pay equal dividends at the end of each of the next two years. Thereafter, the dividend will grow at a constant annual rate of 4 percent, forever. The current stock price is \$45. What is next year's dividend payment if the required rate of return is 11 percent.
@@ -652,6 +713,8 @@ D_1 &= \frac{45}{13.77091}\\
   &= 3.27
 \end{aligned}
 $$
+
+---
 
 ## Finding the required return
 
@@ -675,6 +738,8 @@ R &= \frac{D}{P_0} + g\\
 \end{aligned}
 $$
 
+---
+
 ## Dividend growth
 
 Four years ago, Bling Diamond, Inc., paid a dividend of \$1.35 per share. Bling paid a dividend of \$1.77 per share yesterday. Dividends will grow over the next five years at the same rate they grew over the last four years. Thereafter dividends will grow at 5 percent per year. What will Bling Diamond's cash dividend be in seven years?
@@ -692,6 +757,8 @@ D_7 &= 2.4825 \cdot (1.05)^2\\
     &= 2.74
 \end{aligned}
 $$
+
+---
 
 ## Price-earnings ratio
 
@@ -735,6 +802,8 @@ P &= 7,916,667 + 1,666,667\\
 \end{aligned}
 $$
 
+---
+
 ## Growth opportunities
 
 The Stambaugh Corporation currently has earnings per share of \$9.40. The company has no growth and pays out all earnings as dividends. It has a new project that will require an investment of \$1.95 per share in one year. The project is only a two-year project, and it will increase earnings in the two years following the investment by \$2.75 and \$3.05, respectively. Investors require a return of 12 percent on Stambaugh stock.
@@ -753,6 +822,8 @@ P_0 &= \frac{12.15}{1.12} + \frac{15.20}{(1.12)^2} + \frac{\frac{9.40}{.12}}{(1.
 P_4 &= P_0 = 78.33
 \end{aligned}
 $$
+
+---
 
 ## Growth opportunities
 
@@ -778,6 +849,8 @@ P_0 &= \frac{D}{R}\\
 \end{aligned}
 $$
 
+---
+
 ## Growth opportunities
 
 California Real Estate, Inc.,  expects to earn \$71 million per year in perpetuity if it does not undertake any new projects. The firm has an opportunity to invest \$16 million toady and \$5 million in one year in real estate. The new investment will generate annual earnings of \$11 million in perpetuity, beginning two years from today. The firm has 15 million shares of common stock outstanding, and the required rate of return on the stock is 12 percent. Land investments are not depreciable. Ignore taxes.
@@ -798,6 +871,8 @@ P_{\text{with investment}} &= 39.44 + \frac{52.61}{15}\\
 \end{aligned}
 $$
 
+---
+
 ## Stock valuation and PE
 
 Ramsay Corp. currently has an EPS of \$2.35, and the benchmark PE for the company is 21. Earnings are expected to grow at 7 percent per year.
@@ -805,3 +880,75 @@ Ramsay Corp. currently has an EPS of \$2.35, and the benchmark PE for the compan
 a. What is your estimate of the current stock price?
 b. What is the target stock price in one year?
 c. Assuming the company pays no dividends, what is the implied return on the company's stock over the next year? What does this tell you about the implicit stock return using PE valuation?
+
+$$
+\begin{aligned}
+P_0 &= \text{PE} \cdot \text{EPS}\\
+    &= 2.35 \cdot 21\\
+    &= 49.35\\\\
+P_1 &= \text{PE} \cdot (1 + g) \cdot \text{EPS}\\
+    &= 2.35 \cdot 1.07 \cdot 21\\
+    &= 52.80\\\\
+\text{Implied return} &= \frac{\text{target price}
+  - \text{current price}}{\text{current price}}\\
+  &= \frac{52.80 - 49.35}{49.35}\\
+  &\approx .07 = 7\%
+\end{aligned}
+$$
+
+The implied stock return of 7 percent matches the earnings growth rate. This tells us that, under the assumption of a constant PE ratio and no dividends, the return on stock is entirely driven by earnings growth. This highlights the relationship between the PE ratio, earnings growth, and stock returns in valuation.
+
+---
+
+## Stock valuation and EV
+
+FFDP Corp. has yearly sales of \$28 million and costs of \$12 million. The company's balance sheet shows debt of \$54 million and cash of \$18 million. There are 950,000 shares outstanding and the industry EV/EBITDA multiple is 7.5. What is the company's enterprise value? What is the stock price per share?
+
+$$
+\begin{aligned}
+\text{EBITDA} &= 28 - 12 = 16\ \text{million}\\\\
+\text{EV} &\approx \text{industry multiple} \cdot \text{EBITDA}\\
+  &= 7.5 \cdot 16 = 120\ \text{million}\\\\
+P &= \frac{120+18-54}{.95} = 88.42
+\end{aligned}
+$$
+
+---
+
+## Stock valuation and cash flows
+
+Eberhart Manufacturing has projected sales of \$145 million next year. Costs are expected to be \$81 million and net investment is expected to be \$15 million. Each of these values is expected to grow at 14 percent the following year, with the growth rate declining by 2 percent per year until the growth rate reaches 6 percent, where it is expected to remain indefinitely. There are 5.5 million shares of stock outstanding and investors require a return of 13 percent return on the company's stock. The corporate tax rate is 40 percent.
+
+a. What is your estimate of the current stock price?
+b. Suppose instead that you estimate the terminal value of the company using a PE multiple. The industry PE multiple is 11. What is your new estimate of the company's stock price?
+
+We will solve this with `R`:
+
+```{r problem 31: stock valuation and cash flows}
+options(scipen=99)
+# all in millions
+sales <- 145
+costs <- 81
+net.investment <- 15
+shares <- 5.5
+# 
+(g <- c(0, .14 - c(0, .02, .04, .06, .08)))
+g.p <- .06
+r <- .13
+tax <- .4
+#
+(ebitda <- cumprod(1+g)*(sales-costs))
+(net.income <- ebitda * (1 - tax))
+(retained.earnings <- net.investment * cumprod(1+g))
+(payout <- net.income - retained.earnings)
+(price <- sum(payout/(1+r)^(1:6) + payout[6] / (1+r)^6))/shares
+
+## Using PE
+pe <- 11
+eps <- net.income / shares
+(price.pe <- pe * eps)
+```
+
+
+
+
