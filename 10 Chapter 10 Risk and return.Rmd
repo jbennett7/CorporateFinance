@@ -1,0 +1,637 @@
+---
+title: "Risk and Return"
+author: "Joseph Bennett"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r table 10.1, echo=F}
+year <- seq(from=1926, to=2011, by=1)
+large.cap <- c(11.14, 37.13, 43.31, -8.91, -25.26, -43.86, -8.85, 52.88, -2.34,
+               47.22, 32.80, -35.26, 33.20, -.91, -10.08, -11.77, 21.07, 25.76,
+               19.69, 36.46, -8.18, 5.24, 5.10, 18.06, 30.58, 24.55, 18.50,
+               -1.10, 52.40, 31.43, 6.63, -10.85, 43.34, 11.90, .48, 26.81,
+               -8.78, 22.69, 16.36, 12.36, -10.10, 23.94, 11.00, -8.47, 3.94,
+               14.30, 18.99, -14.69, -26.47, 37.23, 23.93, -7.16, 6.57, 18.61,
+               32.50, -4.92, 21.55, 22.56, 6.27, 31.73, 18.67, 5.25, 16.61,
+               31.69, -3.10, 30.46, 7.62, 10.08, 1.32, 37.58, 22.96, 33.36,
+               28.58, 21.04, -9.10, -11.89, -22.10, 28.68, 10.88, 4.91, 15.79,
+               5.49, -37.00, 26.46, 15.06, 2.11)
+lt.bonds <- c(7.90, 10.36, -1.37, 5.23, 5.80, -8.04, 14.11, .31, 12.98, 5.88,
+              8.22, -.13, 6.26, 5.71, 10.34, -8.66, 2.67, 2.50, 2.88, 5.17, 4.07,
+              -1.15, 2.10, 7.02, -1.44, -3.53, 1.82, -.88, 7.89, -1.03, -3.14,
+              5.25, -6.70, -1.35, 7.74, 3.02, 4.63, 1.37, 4.43, 1.40, -1.61,
+              -6.38, 5.33, -7.45, 12.24, 12.67, 9.15, -12.66, -3.28, 4.67, 18.34,
+              2.31, -2.07, -2.76, -5.91, -.16, 49.99, -2.11, 16.53, 39.03, 32.51,
+              -8.09, 8.71, 22.15, 5.44, 20.04, 8.09, 22.32, -11.46, 37.28, -2.59,
+              17.70, 19.22, -12.76, 22.16, 5.30, 14.08, 1.62, 10.34, 10.35, .28,
+              10.85, 19.24, -25.61, 7.73, 35.75)
+t.bills <- c(3.30, 3.15, 4.05, 4.47, 2.27, 1.15, .88, .52, .27, .17, .17, .27,
+             .06, .04, .04, .14, .34, .38, .38, .38, .38, .62, 1.06, 1.12, 1.22,
+             1.56, 1.75, 1.87, .93, 1.80, 2.66, 3.28, 1.71, 3.48, 2.81, 2.40,
+             2.82, 3.23, 3.62, 4.06, 4.94, 4.39, 5.49, 6.90, 6.50, 4.36, 4.23,
+             7.29, 7.99, 5.87, 5.07, 5.45, 7.64, 10.56, 12.10, 14.60, 10.94,
+             8.99, 9.90, 7.71, 6.09, 5.88, 6.94, 8.44, 7.69, 5.43, 3.48, 3.03,
+             4.39, 5.61, 5.14, 5.19, 4.86, 4.80, 5.98, 3.33, 1.61, 1.03, 1.43,
+             3.30, 4.97, 4.52, 1.24, 0.15, 0.14, 0.06)
+c.price.idx <- c(-1.12, -2.26, -1.16, .58, -6.40, -9.32, -10.27, .76, 1.52, 2.99,
+                 1.45, 2.86, -2.78, .00, .71, 9.93, 0.03, 2.96, 2.30, 2.25,
+                 18.15, 8.84, 2.99, -2.07, 5.93, 6.00, .75, .75, -.74, .37, 2.99,
+                 2.90, 1.76, 1.73, 1.36, .67, 1.33, 1.64, .97, 1.92, 3.46, 3.04,
+                 4.72, 6.20, 5.57, 3.27, 3.41, 8.71, 12.34, 6.94, 4.86, 6.70,
+                 9.02, 13.29, 12.52, 9.92, 3.83, 3.79, 3.95, 3.80, 1.10, 4.43,
+                 4.42, 4.65, 6.11, 3.06, 2.90, 2.75, 2.67, 2.54, 3.32, 1.70,
+                 1.61, 2.68, 3.39, 1.55, 2.38, 1.88, 3.26, 3.42, 2.54, 4.08, .09,
+                 2.72, 1.50, 2.96)
+t10.1.tbl <- data.frame(large.cap, lt.bonds, t.bills, c.price.idx)
+colnames(t10.1.tbl) <- c("Large-Company Stocks",
+                         "Long-Term Government Bonds",
+                         "U.S. Treasury Bills",
+                         "Consumer Price Index")
+rownames(t10.1.tbl) <- year
+#knitr::kable(t10.1.tbl)
+```
+
+```{r table 10.2, echo=F}
+arithmetic.mean <- c(16.5, 11.8, 6.4, 6.1, 5.5, 3.6, 3.1)
+standard.deviation <- c(32.5, 20.3, 8.4, 9.8, 5.7, 3.1, 4.2)
+t10.2.tbl <- data.frame(arithmetic.mean, standard.deviation)
+colnames(t10.2.tbl) <- c("Arithmetic Mean (%)", "Standard Deviation (%)")
+rownames(t10.2.tbl) <- c("Small-company stocks'", "Large-company stocks",
+                         "Long-term corporate bonds",
+                         "Long-term government bonds",
+                         "Intermediate-term government bonds",
+                         "U.S. Treasury bonds", "Inflation")
+#knitr::kable(t10.2.tbl)
+```
+
+# Summary
+
+1. This chapter presented returns for a number of different asset classes. The general conclusion is that stocks have outperformed bonds over most of the 20th century, though stocks have also exhibited more risk.
+
+2. The statistical measures in this chapter are necessary building blocks for the material of the next three chapters. In particular, standard deviation and variance measure the variability of the return on an individual security and on portfolios of securities. In the next chapter, we will argue that standard deviation and variance are appropriate measures of the risk of an individual security if an investor's portfolio is composed of that security only.
+
+# Concepts
+
+## Investment selection
+
+Given that eGain Communications was up by almost 412 percent for 2011, why didn't all investors hold eGain Communications?
+
+Individual investors have different reasons to be selling stock, whether the stock is up or down. They may have different risk tolerances, strategies, access to information, and personal biases. Investment involves uncertainty, and even high performing stocks might not align with every investor's goals or constraints.
+
+---
+
+## Investment selection
+
+Given that First Solar was down by 74 percent for 2011, why did some investors hold the stock? Why didn't they sell out before the price declined so sharply?
+
+Again, due to different investor's risk tolerances, strategies, access to information, and personal biases, investors will make different decisions.
+
+---
+
+## Risk and return
+
+We have seen that over long periods stock investments have tended to substantially outperform bond investments. However, it is not at all uncommon to observe investors with long horizons holding their investments entirely in bonds. Are such investors irrational?
+
+While the historical outperformance of stocks over bonds is a compelling argument for stock investment in the long term, holding bonds is not inherently irrational. It reflects individual preferences, financial goals, and circumstances. For some investors, the stability, income, and lower perceived risk of bonds outwigh the potential for higher returns from stocks. A well-considered investment strategy aligned with one's objectives and risk tolerance is rational, regadless of the historical performance of asset classes.
+
+---
+
+## Stocks versus gambling
+
+Critically evaluate the following statement: Playing the stock market is like gambling. Such speculative investing has no social value, other than the pleasure people get from this form of gambling.
+
+While speculative investing can be highly risky, it is not like gambling. Gambling has no inherent value other than the thrill of winning money. Although the primary purpose of investing is to generate profit, it has the benefit of supporting businesses that benefit society as a whole.
+
+---
+
+## Effects of inflation
+
+Look at Table 10.1 and Figure 10.7 in the text. When were T-bill rates at their highest over the period from 1926 through 2011? Why do you think they were so high during this period? What relationship underlies your answer?
+
+```{r concept 5}
+t.bills <- t10.1.tbl$`U.S. Treasury Bills`
+c.price.idx <- t10.1.tbl$`Consumer Price Index`
+
+t.bills[t.bills > (.6 * max(t.bills))]
+c.price.idx[t.bills > (.6 * max(t.bills))]
+```
+
+T-bill rates were at their highest when the consumer price index was at its highest. T-bill rates follow the consumer price index.
+
+---
+
+## Risk premiums
+
+Is it possible for the risk premium to be negative before an investment is undertaken? Can the risk premium be negative after the fact? Explain.
+
+The risk premium is the excess return on a risky asset when compared to a risk-free asset. The risk premium can be negative if the return on the risk is less than the return on the risk-free asset.
+
+A negative risk premium is possible if the expected return is lower than the risk-free rate, often due to mispricing, hedging needs, or irrational behavior. A negative risk premium can occur if the realized return is lower than the risk-free rate due to unforeseen risks, adverse market conditions, or misjudgments about the investment.
+
+---
+
+## Returns
+
+Two years ago, General Materials' and Standard Fixtures' stock prices were the same. During the first year, General Materials' stock price increased by 10 percent while Standard Fixtures' stock price decreased by 10 percent. During the second year, General Materials' stock price decreased by 10 percent and Standard Fixtures' stock price increased by 10 percent. Do these two stocks have the same price today? Explain.
+
+Yes the price is the same. Say General Materials' and Standard Fixtures' stock price was at \$10 in the first year. If General Materials' stock price increased by 10 percent then the new price is \$11. If Standard Fixtures' stock price fell 10 percent then the new price is \$9. Now in year two, if General Materials' stock price falls 10 percent the new price is $\$11 cdot .9 = \$9.9$; while Standard Fixtures' stock price increases 10 percent then the new price is $\$9 \cdot 1.1 = \$9.9$
+
+---
+
+## Arithmetic versus geometric returns
+
+What is the difference between arithmetic and geometric returns? Suppose you have invested in a stock for the last 10 years. Which number is more important to you, the arithmetic or geometric return?
+
+The geometric average tells you what you actually earned per year on average, compounded annually. The arithmetic average tells you what you earned in a typical year and is an unbiased estimate of the true mean of the distribution. The geometric average is very useful in describing the actual historical investment experience. The arithmetic average is useful in making estimates of the future.
+
+The geometric average would be more important to me to understand what I earned per year on average, compounded annually on my investment.
+
+---
+
+## Historical returns
+
+The historical asset class returns presented in the chapter are not adjusted for inflation. What would happen to the estimated risk premium if we did account for inflation? The returns are also not adjusted for taxes. What would happen to the returns if we accounted for taxes? What would happen to the volatility?
+
+If the asset class returns were adjusted for inflation the estimated risk premium would stay the same because inflation would affect the risk free asset as well. The risk premium is reduced when taxes are factored in because taxes only apply on profits. Volatility would also be reduced by both because they would tend to smooth out the volatility.
+
+---
+
+## Calculating returns
+
+Suppose a stock had an initial price of \$75 per share, paid a dividend of \$1.20 per share during the year, and had an ending share price of \$86. Compute the percentage total return.
+
+$$
+\begin{aligned}
+\text{Dividend yield} &= \frac{D_{t+1}}{P_{t}}\\
+  &= \frac{1.20}{75}\\
+  &= 0.016 = 1.6\%\\\\
+\text{Capital gains} &= \frac{P_{t+1} - P_{t}}{P_{t}}\\
+  &= \frac{86 - 75}{75}\\
+  &= 0.1467 = 14.67\%\\\\
+\text{Total return} &= 1.6\% + 14.67\% = 16.27\%
+\end{aligned}
+$$
+
+---
+
+## Calculating yields
+
+In problem 1, what was the dividend yield? The capital gains:
+
+$$
+\begin{aligned}
+\text{Dividend yield} &= 1.6\%\\\\
+\text{Capital gains} &= 14.67\%
+\end{aligned}
+$$
+
+---
+
+## Calculating returns
+
+Rework problems 1 and 2 assuming the ending share price is \$67.
+
+$$
+\begin{aligned}
+\text{Dividend yield} &= \frac{D_{t+1}}{P_{t}}\\
+  &= \frac{1.20}{75}\\
+  &= 0.016 = 1.6\%\\\\
+\text{Capital gains} &= \frac{P_{t+1} - P_{t}}{P_{t}}\\
+  &= \frac{67 - 75}{75}\\
+  &= -0.1067 = -10.67\%\\\\
+\text{Total return} &= 1.6\% + -10.67\% = -9.07\%
+\end{aligned}
+$$
+
+---
+
+## Calculating returns
+
+Suppose you bought a 6 percent coupon bond one year ago for \$1,040. The bond sells for \$1,063 today.
+
+a. Assuming a \$1,000 face value, what was you total dollar return on this investment over the past year?
+b. What was your total nominal rate of return on this investment over the past year?
+c. If the inflation rate last year was 3 percent, what was your total real of return on this investment?
+
+The bond price has increased $1,063 - 1040 = 23\$$. This increase plus the 6 percent coupon (\$60).
+
+$$
+\begin{aligned}
+\text{Total dollar return} &= 60 + 23 = 83\ \text{dollars}\\\\
+\text{Nominal rate of return} &= \frac{\text{Total return}}
+  {\text{Initial price}}\\
+  &= \frac{83}{1040}\\
+  &= 0.0799 = 7.99\%\\\\
+1 + r_{\text{real}} &= \frac{1 + r_{\text{nominal}}}
+  {1 + \text{Inflation rate}}\\
+  r_{\text{real}} &= \frac{1 + r_{\text{nominal}}}
+  {1 + \text{Inflation rate}} - 1\\
+  r_{\text{real}} &= 0.0484 = 4.84\%
+\end{aligned}
+$$
+
+---
+
+## Nominal versus real returns
+
+What was the arithmetic average annual return on large-company stocks from 1926 through 2011?
+
+a. In nominal terms?
+b. In real terms?
+
+```{r problem 5: nominal versus real returns}
+# Nominal
+mean(large.cap)
+
+# Real
+mean(large.cap - c.price.idx)
+(1 + mean(large.cap)/100)/(1 + mean(c.price.idx)/100) - 1
+```
+
+---
+
+## Bond returns
+
+What is the historical real return on long-term government bonds? On long-term corporate bonds?
+
+```{r problem 6: bond returns}
+# 2.91% and 3.20%
+lt.gov.bonds.mean <- t10.2.tbl["Long-term government bonds","Arithmetic Mean (%)"]/100
+lt.corp.bonds.mean <- t10.2.tbl["Long-term corporate bonds","Arithmetic Mean (%)"]/100
+inflation <- t10.2.tbl["Inflation", "Arithmetic Mean (%)"]/100
+
+(real.lt.gov.bonds <- (1 + lt.gov.bonds.mean)/(1 + inflation) - 1)
+(real.lt.corp.bonds <- (1 + lt.corp.bonds.mean)/(1 + inflation) - 1)
+```
+
+---
+
+## Calculating returns and variability
+
+Using the following returns, calculate the average returns, the variances, and the standard deviation for $X$ and $Y$:
+
+```{r problem 7: calculating returns and variablity}
+year <- c(1, 2, 3, 4, 5)
+X <- c(8, 21, -27, 11, 18)
+Y <- c(12, 27, -32, 18, 24)
+# Mean
+mean(X)
+mean(Y)
+
+# Variance
+(X.var <- sum((X - mean(X))^2)/(length(X) - 1))
+var(X)
+(Y.var <- sum((Y - mean(Y))^2)/(length(Y) - 1))
+var(Y)
+
+# Standard deviation
+sqrt(X.var)
+sqrt(Y.var)
+
+```
+
+---
+
+## Risk premiums
+
+Refer to Table 10.1 in the text and look at the periods from 1973 through 1978.
+
+a. Calculate the arithmetic average returns for large-company stocks and T-bills over this period.
+b. Calculate the standard deviation of the returns for large-company stocks and T-bills over this period.
+c. Calculate the observed risk premium in each year for the large-company stocks versus the T-bills. What was the arithmetic average risk premium over this period? What was the standard deviation of the risk premium over this period?
+
+```{r problem 8: risk premiums}
+start <- which(rownames(t10.1.tbl) == "1973")
+end <- which(rownames(t10.1.tbl) == "1978")
+tmp.73.78 <- t10.1.tbl[start:end,c("Large-Company Stocks", "U.S. Treasury Bills")]
+colnames(tmp.73.78) <- c("lt.stocks", "t.bills")
+(lt.stocks <- tmp.73.78$lt.stocks)
+(t.bills <- tmp.73.78$t.bills)
+# Arithmetic average returns
+(lt.stocks.mean <- mean(lt.stocks))
+(t.bills.mean <- mean(t.bills))
+# SD
+(lt.stocks.sd <- sqrt(sum((lt.stocks - lt.stocks.mean)^2)/
+  (length(lt.stocks) - 1)))
+sqrt(var(lt.stocks))
+sd(lt.stocks)
+(t.bills.sd <- sqrt(sum((t.bills - t.bills.mean)^2)/
+  (length(lt.stocks) - 1)))
+sqrt(var(t.bills))
+sd(t.bills)
+# risk premium
+(lt.t.risk.premium <- lt.stocks - t.bills)
+# Arithmetic average risk premium
+mean(lt.t.risk.premium)
+# Standard deviation risk premium
+sd(lt.t.risk.premium)
+```
+
+---
+
+## Calculating returns and variability
+
+You've observed the following returns on Mary Ann Data Corporation's stock over the past five years: 27 percent, 13 percent, 18 percent, -14 percent, and 9 percent.
+
+a. What was the arithmetic average return on Mary Ann's stock over this five-year period?
+b. What was the variance of Mary Ann's returns over this period? The standard deviation?
+
+```{r problem 9: calculating returns and variability}
+madc <- c(27, 13, 18, -14, 9)
+# Arithmetic average
+(madc.mean <- mean(madc))
+# Variance
+(madc.var <- sum((madc - madc.mean)^2)/(length(madc)-1))
+var(madc)
+# Standard deviation
+sqrt(madc.var)
+sd(madc)
+```
+
+---
+
+## Calculating real returns and risk premiums
+
+In Problem 9, suppose the average inflation rate over this period was 4.2 percent, and the average T-bill rate over the period was 5.1 percent.
+
+a. What was the average real return on Mary Ann's stock?
+b. What was the average nominal risk premium on Mary Ann's stock?
+
+$$
+\begin{aligned}
+r_{\text{real}} &= \frac{1 + r_{\text{nominal}}}{1 + \text{inflation}} - 1\\
+  &= \frac{1 + .106}{1 + .042} - 1\\
+  &= \frac{1.106}{1.042} - 1\\
+  &= .0614 = 6.14\%\\\\
+\text{Risk premium} &= 10.6 - 5.1 = 5.5\%
+\end{aligned}
+$$
+
+---
+
+## Calculating real rates
+
+Given the information in Problem 10, what was the average real risk-free rate over this time period? What was the average real risk premium?
+
+The real risk-free rate is the real rate of the T-bills:
+
+$$
+\begin{aligned}
+\text{T-bills}_{\text{real}} &= \frac{1.051}{1.042} - 1\\
+   &= .0086 = .86\%\\\\
+\text{Risk premium}_{\text{real}} &= r_{\text{real}}
+   - \text{T-bills}_{\text{real}}\\
+   &= 6.14 - .86 = 5.28\%
+\end{aligned}
+$$
+
+---
+
+## Holding period return
+
+A stock has had returns of 16.12 percent, 12.11 percent, 5.83 percent, 26.14 percent, and -13.19 percent over the past five years, repsectively. What was the holding period return for the stock?
+
+```{r problem 12: holding period return}
+R <- c(16.12, 12.11, 5.83, 26.14, -13.19)
+prod(1+R/100)
+```
+
+---
+
+## Calculating returns
+
+You purchased a zero coupon bond one year ago for \$109.83. The market interest rate is now 9 percent. If the bond had 25 years to maturity when you originally purchased it, what was your total return for the past year.
+
+$$
+\begin{aligned}
+\text{Bond value}_{\text{today}} &= \frac{1000}{(1 + .09)^{24}}\\
+  &= 126.40\\\\
+\text{Total return} &= \frac{126.40 - 109.83}{109.83} \times 100\\
+  &= 15.09\%
+\end{aligned}
+$$
+
+---
+
+## Calculating returns
+
+You bought a share of 4 percent preferred stock for \$94.89 last year. The market price for your stock is now \$96.12. What was your total return for last year?
+
+$$
+\begin{aligned}
+\text{Dividend} &= 100 \times .04\\
+  &= 4.00\\
+\text{Capital gains} &= 96.12 - 94.89\\
+  &= 1.23\\
+\text{Total return} &= \frac{4.00 + 1.23}{94.89}\\
+  &= .0551 = 5.51\%
+\end{aligned}
+$$
+
+---
+
+## Calculating returns
+
+You bought a stock three months ago for \$43.18 per share. The stock paid no dividends. The current share price is \$46.21. What is the APR of your investment? The EAR?
+
+$$
+\begin{aligned}
+\text{Periods} &= \frac{12 \text{months}}{3 \text{months}} = 4\\\\
+\text{Holding period return} &= \frac{46.21 - 43.18}{43.18}\\
+  &= .0702 = 7.02\%\\\\
+\text{APR} &= \text{HPR} \times \text{Number of periods in a year}\\
+  &= .0702 \times 4 = .2808 = 28.08\%\\\\
+\text{EAR} &= (1 + \text{HPR})^{P} - 1\\
+  &= (1 + .0702)^{4} - 1\\
+  &= .3118 = 31.18\%
+\end{aligned}
+$$
+
+---
+
+## Calculating real returns
+
+Refer to Table 10.1. What was the average real return for Treasury bills from 1926 through 1932?
+
+```{r problem 16: Calculating real returns}
+start <- which(rownames(t10.1.tbl) == "1926")
+end <- which(rownames(t10.1.tbl) == "1932")
+tmp.26.32 <- t10.1.tbl[start:end,c("U.S. Treasury Bills", "Consumer Price Index")]
+colnames(tmp.26.32) <- c("t.bills", "cpi")
+# convert to real returns
+tmp.26.32 <- tmp.26.32/100
+(real.returns <- (1 + tmp.26.32$t.bills)/(1 + tmp.26.32$cpi) - 1)
+(mean(real.returns))
+```
+
+---
+
+## Return distributions
+
+Refer back to Table 10.2. What range of returns would you expect to see 68 percent of the time for long-term corporate bonds? What about 95 percent of the time?
+
+```{r problem 17: return distributions}
+(lt.corp.bonds <- t10.2.tbl["Long-term corporate bonds",])
+```
+
+For one standard deviation (68\%), the range is the mean $\pm$ the standard deviation, which is between -2.0\% and 14.8\%. For two standard deviations (95\%) is between -10.4\% and 23.2\%.
+
+---
+
+## Return distributions
+
+Refer back to Table 10.2. What range of returns would you expect to see 68 percent of the time for large-company stocks? What about 95 percent of the time?
+
+```{r problem 18: return distributions}
+(lg.corp.stocks <- t10.2.tbl["Large-company stocks",])
+```
+
+For one standard deviation (68\%), the range is the mean $\pm$ the standard deviation, which is between -8.5\% and 32.1\%. For two standard deviations (95\%) is between -28.8\% and 52.4\%.
+
+---
+
+## Calculating returns and variablity
+
+You find a certain stock that had returns of 12 percent, -21 percent, 9 percent, and 32 percent for four of the last five years. If the average return of the stock over this period was 11 percent, what was the stock's return for the missing year? What is the standard deviation of the stock's returns?
+
+```{r problem 19: calculating returns and variability}
+(missing.year <- (11 - sum(c(12, -21, 9, 32)/5))*5)
+sr <- c(12, -21, 9, 32, missing.year)
+(sr.sd <- sqrt(sum((sr - mean(sr))^2)/(length(sr) - 1)))
+sd(sr)
+```
+
+---
+
+## Arithmetic and geometric returns
+
+A stock has had returns of 27 percent, 12 percent, 32 percent, -12 percent, 19 percent, and -31 percent over the last six years. What are the arithmetic and geometric returns for the stock?
+
+```{r problem 20: arithmetic and geometric returns}
+sr <- c(27, 12, 32, -12, 19, -31)/100
+# Arithmetic mean
+mean(sr)*100
+# Geometric mean
+(prod(1+sr)^(1/length(sr)) - 1)*100
+```
+
+---
+
+## Arithmetic and geometric returns
+
+A stock has had the following year-end prices and dividends:
+
+```{r problem 21: arithmetic and geometric returns: table, echo=F}
+year <- c(1, 2, 3, 4, 5, 6)
+price <- c(61.18, 64.83, 72.18, 63.12, 69.27, 76.93)
+dividend <- c(0, .72, .78, .86, .95, 1.08)
+knitr::kable(data.frame(year, price, dividend))
+```
+
+What are the arithmetic and geometric returns for the stock?
+
+```{r problem 21: arithmetic and geometric returns}
+(returns <- (diff(price) + dividend[-1]) / head(price, -1))
+mean(returns)
+prod(1+returns)^(1/length(returns)) - 1
+```
+
+---
+
+## Calculating returns
+
+Refer to Table 10.1 in the text and look at the period from 1973 through 1980.
+
+a. Calculate the average return for Treasury bills and the average annual inflation rate (consumer price index) for this period.
+b. Calculate the standard deviation of Treasury bill returns and inflation over this period.
+c. Calculate the real return for each year. What is the average real return for Treasury bills?
+d. Many people consider Treasury bills to be risk-free. What do these calculations tell you about the potential risks of Treasury bills?
+
+```{r problem 22: calculating returns}
+start <- which(rownames(t10.1.tbl) == "1973")
+end <- which(rownames(t10.1.tbl) == "1980")
+tmp.73.80 <- t10.1.tbl[start:end,c("U.S. Treasury Bills", "Consumer Price Index")]
+colnames(tmp.73.80) <- c("t.bills", "cpi")
+t.bills <- tmp.73.80$t.bills
+cpi <- tmp.73.80$cpi
+# Arithmetic mean
+(t.bills.mean <- mean(tmp.73.80$t.bills))
+(cpi.mean <- mean(tmp.73.80$cpi))
+# Standard deviation
+(t.bills.sd <- sqrt(sum((t.bills - t.bills.mean)^2)/ (length(t.bills) - 1)))
+sd(t.bills)
+(cpi.sd <- sqrt(sum((cpi - cpi.mean)^2) / (length(cpi) - 1)))
+sd(cpi)
+# Real returns
+(rr.t.bills <- ((1 + t.bills/100) / (1 + cpi/100) - 1)*100)
+mean(rr.t.bills)
+```
+
+While Treasury bills may be risk free from default, looking at real returns, we can see that they are not risk free from degrading purchasing power.
+
+---
+
+## Calculating investment returns
+
+You bought one of Bergen Manufacturing Co.'s 7 percent coupon bonds one year ago for \$1080.50. These bonds make annual payments and mature six years from now. Suppose you decide to sell your bonds today when the required return on the bonds is 5.5 percent. If the inflation rate was 3.2 percent over the past year, what would be your total real return on the investment?
+
+$$
+\begin{aligned}
+F &= 1,000\\
+C &= .07 \times 1,000 = 70\\
+r &= .055\\
+\text{Bond value}_{\text{current}} &= C \times \frac{1 - (1 + r)^{-t}}{r} + \frac{F}{(1 + r)^t}\\
+  &= 70 \times \frac{1 - (1.055)^{-6}}{.055} + \frac{1,000}{(1.055)^6}\\
+  &= 730.24\\
+\text{Nominal return} &= \frac{730.24 - 1080.50 + 70}{1080.50}\\
+  &= -.3242 = -32.42\%\\
+\text{Real return} &= \frac{1 - .3242}{1 + .032} - 1\\
+  &= -.3452 = -34.52\%
+\end{aligned}
+$$
+
+---
+
+## Using return distributions
+
+Suppose the returns on long-term government bonds are normally distributed. Based on the historical record, what is the approximate probability that your return on these bonds will be less than -3.7 percent in a given year? What range of returns would you expect to see 95 percent of the time? What range would you expect to see 99 percent of the time?
+
+The arithmetic mean for returns on long-term government bonds is 6.1. The standard deviation is 9.8. -3.7 is one standard deviation to the left of the mean. This means that the probability that the return on the bonds will be less than -3.7 percent in a given year is $\frac{1 - .6826}{2} = .1587$  or 15.87\%. The 95.44\% interval is the two SD range, and the 99.74\% interval is the three SD range.
+
+* The 1 SD range is: -3.7 to 15.9
+* The 2 SD range is: -13.5 to 25.7
+* The 3 SD range is: -23.3 to 35.5
+
+---
+
+## Using return distributions
+
+Assuming that the returns from holding small-company stocks are normally distributed, what is the approximate probability that your money will double in value in a single year? Triple in value?
+
+The arithmetic mean for returns on small-company stocks' is 16.5 and the standard deviation is 32.5.
+
+* 1 SD: -16 to 49
+* 2 SD: -48.5 to 81.5
+* 3 SD: -81 to 114
+
+To double the return would be 100 percent. To triple the return would be 200 percent. This means the probability for doubling your money in one year is between two and three sds.
+
+```{r problem 25: using return distributions}
+(z.score.double <- (100 - 16.5) / 32.5)
+(1 - pnorm(z.score.double))*100
+(z.score.triple <- (200 - 16.5) / 32.5)
+(1 - pnorm(z.score.triple))*100
+```
+
+---
+
+## Distributions
+
+In the previous problem, what is the probability that the return is less than -100 percent? (Think.) What are the implications for the distribution of returns?
+
+---
