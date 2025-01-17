@@ -1,0 +1,442 @@
+---
+title: "Return and Risk"
+author: "Joseph Bennett"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Summary
+
+1. This chapter showed us how to calculate the expected return and variance for individual securities, and the covariance and correlation for pairs of securities. Given these statistics, the expected return and variance for a portfolio of two securities $A$ and $B$ can be written as:
+
+$$
+\begin{aligned}
+\text{Expected return on portfolio} = X_A \overline{R}_{A} + X_B \overline{R}_{B}\\
+\text{Var}(\text{portfolio}) = X_{A}^{2} \sigma_{A}^2 + 2 X_{A} X_{B} \sigma_{AB} + X_{B}^{2} \sigma_{B}^{2}
+\end{aligned}
+$$
+
+2. In our notation, $X$ stands for the proportion of a security in a portfolio. By varying $X$ we can trace out the efficient set of portfolios. We graphed the efficient set for the two-asset case as a curve, pointing out that the degree of curvature or bend in the graph reflects the diversification effect: The lower the correlation between the two securities, the greater the bend. The same general shape of the efficient set holds in a world of many assets.
+
+3. Just as the formula for variance in the two-asset case is computed from a $2\times2$ matrix, the variance formula is computed from an $N \times N$ matrix in the $N$-asset case. We showed that with a large number of assets, there are many more covariance terms than variance terms in the matrix. In fact the variance terms are effectively diversified away in a large portfolio, but the covariance terms are not. Thus, a diversified portofolio can eliminate some, but not all, of the risk of the individual securities.
+
+4. The efficient set of risky assets can be combined with riskless borrowing and lending. In this case a rational investor will always choose to hold the portfolio of risky securities represented by Point $A$ in Figure 11.9. Then he can either borrow or lend at the riskless rate to achieve any desired point on Line $II$ in the figure.
+
+5. The contribution of a security to the risk of a large, well-diversified portfolio is proportional to the covariance of the security's return with the market's return. This contribution, when standardized, is called the beta. The beta of a security can also be interpreted as the responsiveness of a secutiry's return to the market.
+
+6. The CAPM states that:
+
+$$
+\overline{R}_M = R_F + \beta (\overline{R}_M - R_F)
+$$
+
+In other words, the expected return on a security is positively (and lineraly) related to the security's beta.
+
+# Concepts
+
+## Diversifiable and nondiversifiable risks
+
+In broad terms, why is some risk diversifiable? Why are some risks nondiversifiable? Does it follow that an investor can control the level of unsystematic risk in a portfolio, but not the level of systematic risk?
+
+Systematic risk is risk that applies to a diverse set of securities and therefore is not easily diversifiable. However, systematic risk can be managed using risk-free securities (Treasury bills as an example). Nonsystematic risk is risk that applies to a limited set of securities or even to a single security and therefore can be eliminated by diversifying your holding of securities. This type of risk is easily managed.
+
+---
+
+## Systematic versus unsystematic risk
+
+Classify the following events as mostly systematic or mostly unsystematic. Is the distinction clear in every case?
+
+a. Short-term interest rates increase unexpectedly.
+b. The interest rate a company pays on its short-term debt borrowing is increased by its bank.
+c. Oil prices unexpectedly decline.
+d. An oil tanker ruptures, creating a large oil spill.
+e. A manufacturer loses a multimillion-dollar product liability suit.
+f. A Supreme Court decision substantially broadens producer liability for injuries suffered by product users.
+
+---
+
+a. An unexpected increase in short-term interest rates would affect a broad set of securities and therefore would be considered a systematic risk.
+b. An increase in the interest rate of a particular company's short-term borrowing from a particular bank would not by a systematic risk.
+c. An unexpected decline in oil prices would affect many industries since energy is a primary input in almost all products and services. From shipping costs to the cost of electricity, a decline in oil prices would be systematic (in a good way). This would include the oil industry itself (in a negative way) since a decline in oil prices would affect the profits of those companies.
+d. This would be an industry systematic risk. The company that owned the oil tanker would be severly damaged by the incident, but the oil shipping as a whole would come under new scrutiny.
+e. This would depend on the details of the lawsuit, but in general this would only apply to the specific manufacturer and would not be considered a systematic risk.
+f. Again, this would depend on the details of the lawsuit, the products involved, etc... In general, assuming that this applies to a broad set of products, this could be considered systematic.
+
+---
+
+## Expected portfloio returns
+
+If a portfolio has a positive investment in every asset, can the expected return on the portfolio be greater than that on every asset in the portfolio? Can it be less than that on every asset in the portfolio? If you answer yes to one or both of these questions, give an example, to support your answer.
+
+The expected return on a portfolio is a weighted average of the expected returns on the individual securities. Therefore, the expected return on the portfolio can only be as great as the expected return of its highest return asset. Similarly, the expected return on a portfolio can never be less than the expected return on its lowest return asset.
+
+---
+
+## Diversification
+
+True or false: The most important characteristic in determining the expected return of a well-diversified portfolio is the variances of the individual assets in the portfolio. Explain.
+
+The most important characteristic in determining the expected return of a well-diversified portfolio is not the variance but the expected return of the individual assets. The expected return on a portfolio is a weighted average of the expected returns on the individual securities.
+
+---
+
+## Portfolio risk
+
+If a portfolio has a positive investment in every asset, can the standard deviation on the portfolio be less than that on every asset in the portfolio? What about the portfolio beta?
+
+Yes, the standard deviation of a portfolio can be less than the standard deviation of every individual asset in the portfolio, even if there is a positive investment in every asset. This occurs because of diversification. Diversification reduces the portfolio's overall risk by combining assets that are not perfectly correlated. The extent of risk reduction depends on the correlations between the assets. If the assets in the portfolio have less than perfect positive correlation ($\rho < 1$), the portfolio standard deviation will be less than the weighted average of the individual standard deviations and could potentially be lower than the smallest individual asset's standard deviation. The standard deviation of a portfolio with two assets is given by:
+
+$$
+\begin{aligned}
+\sigma_p &= \sqrt{\omega_1^2 \sigma_1^2 + \omega_2^2 \sigma_2^2
+  + 2 \omega_1 \omega_2 \sigma_1 \sigma_2 \rho_{1,2}}\\\\
+\text{Where:}\\
+\omega_i\ \text{: Weight of asset}\ i\ \text{in the portfolio}\\
+\sigma_i\ \text{:Standard deviation of asset }\ i\\
+\rho_{1,2}\ \text{: Correlation coefficient between assets 1 and 2}
+\end{aligned}
+$$
+
+If $\rho_{1,2} < 1$, the portfolio standard deviation will be less than the weighted average of the individual standard deviations.
+
+However, the portfolio beta cannot be less than the beta of every individual asset in the portfolio if there is a positive investment in every asset. The portfolio beta is a weighted average of the individual asset betas, where the weights are the proportions of the portfolio ivnested in each asset. Since all weights are positive, the portfolio beta will fall between the lowest and highest individual asset betas in the portfolio.
+
+$$
+\begin{aligned}
+\beta_p = \sum_{i=1}^n{\omega_i \beta_i}\\\\
+\text{Where:}\\
+\beta_p\ \text{: Portfolio beta}\\
+\omega_i\ \text{: Weight of asset }\ i\\
+\beta_i\ \text{: Beta of asset }\ i
+\end{aligned}
+$$
+
+Because $\omega_i > 0$ and $\beta_i \ge 0$, the portfolio beta cannot be lower than the lowest beta in the portfolio.
+
+---
+
+## Beta and CAPM
+
+Is it possible that a risky asset could have a beta of zero? Explain. Based on the CAPM, what is the expected return on such an asset? Is it possible that a risky asset could have a negative beta? What does the CAPM predict about the expected return on such an asset? Can you give an explanation for your answer?
+
+A risky asset can have a beta of zero. Beta measures the sensitivity of an asset's returns to the returns of the market portfolio. A beta of zero means the asset's returns are uncorrelated with the market. Dispite having no correlation with the market, the asset can still be risky because it may have high idiosyncratic risk (risk specific to the asset).
+
+The expected return on CAPM
+
+$$
+E(R_i) = R_f + \beta_i (E(R_m) - R_f)
+$$
+
+If $\beta_i = 0$, the expected return on the asset is equal to the risk-free rate ($R_f$). This is because the asset does not contribute to systematic risk (market risk), and investors are not compensated for idiosyncratic risk in the CAPM framework.
+
+A risky asset can also have a negative beta. A negative beta means the asset's returns tend to move in the opposite direction of the market. For example, assets like gold or certain defensive stocks might have negative betas because they perform well when the market declines.
+
+---
+
+## Covariance
+
+Briefly explain why the covariance of a security with the rest of a well-diversified portfolio is a more appropriate measure of the risk of the security then the security's variance.
+
+The covariance of a security with the rest of a well-diversified portfolio is a more appropriate measure of the risk of the security than the security's variance because it captures the systematic risk of the security, which is the portion of its risk that affects the overall portfolio.
+
+A security's variance measures its total risk, which includes both idiosyncratic risk (unique to the security) and systematic risk (market-related). In a well-diversified portfolio, idiosyncratic risk is largely eliminated through diversification, leaving only systematic risk as relevant.
+
+The covariance between the security and the portfolio reflects how the security contributes to the portfolio's systematic risk. This is what matters to investors because systematic risk cannot be diversified away. Covariance is directly linked to the security's beta, which measures its sensitivity to market movements.
+
+In models like the Capital Asset Pricing Model (CAPM), only systematic risk is priced because it affects all securities in the market. Covariance determines the security's beta, which influences its expected return.
+
+---
+
+## Beta
+
+Consider the following quotation from a leading investment manager: "The shares of Southern Co. have traded close to \$12 for most of the past three years. Since Southern's stock has demonstrated very little price movement, the stock has a low beta. Texas Instruments, on the other hand, has traded as high as \$150 and as low as its current \$75. Since TI's stock has demonstrated a large amount of price movement, the stock has a very high beta." Do you agree with this analysis? Explain.
+
+No, the analysis in the quotation is incorrect. The statements confuse volatility (price movement) with beta, which measures a stock's sensitivity to the overall market.
+
+Beta measures how much a stock's returns move in relation to the returns of the overall market. A high beta indicates the stock tends to amplify market movements, while a low beta indicates the stock moves less or is less correlated with the market.
+
+Beta is calculated:
+
+$$
+\beta = \frac{\text{Cov}(R_i, R_m)}{\text{Var}(R_m)}
+$$
+
+Where $R_i$ is the stock's return, and $R_m$ is the market's return.
+
+Volatility refers to the total variability in a stock's price or returns, regardless of its relationship with the market. A stock can have high volatility but a low beta if its price movements are largely uncorrelated with the market.
+
+Southern Co.'s low price movement does not necessarily mean it has a low beta. If its returns are closely tied to market returns, it could still have a moderate or high beta. Texas Instruments' high price movement does not guarantee a high beta. If its price movements are driven by factors unrelated to the market (e.g., company-specific news or industry shocks), its beta could be low.
+
+---
+
+## Risk
+
+A broker has advised you not to invest in oil industry stocks because they have high standard deviations. Is the broker's advice sound for a risk-averse investor like yourself? Why or why not?
+
+No, the broker's advice to avoid oil industry stocks solely because they have high standard deviations is not necessarily sound for a risk-averse investor.
+
+1. Stand deviation measures the total risk (volatility) of an individual stock, which includes both systematic risk (market-related) and idiosyncratic risk (specific to the stock or industry). For a risk-averse investor with a diversified portfolio, the relevant measure of risk is systematic risk, as idiosyncratic risk can be diversified away.
+
+2. The decision to include oil industry stocks should consider how these stocks interact with the resto f the portfolio, specifically their correlation with other assets. Even if oil stocks have high standard deviations, they might have low or negative correlations with other assets in the portfolio, providing diversification benefits and potentially reducing the overall portfolio risk.
+
+3. High standard deviation stocks often offer higher expected returns as compensation for their risk (ris-return tradeoff). A risk-averse investor should evaluate whether the higher expected return from oil stocks is worth the additional risk, particularly in the context of their investment goals and portfolio composition.
+
+4. Instead of focusing on standard deviation, the investor should assess the beta of oil stocks, which measures their sensitivity to market movements. A stock with a high beta poses greater systematic risk, which is more relevant for a diversified investor.
+
+The broker's advice to avoid oil industry stocks based solely on their high standard deviations is overly simplistic and does not account for diversification, portfolio context, or the risk-return trade-off. A risk-averse investor should evaluate how oil stocks contribute to the overall portfolio risk and return, rather than excluding them outright due to their volatility.
+
+---
+
+## Security selection
+
+Is the following statement true or false? A risky security cannot have an expected return that is less than the risk-free rate because no risk-averse investor would be willing to hold this asset in equilibrium. Explain.
+
+The statement is false. A risky security can have an expected return that is less than the risk-free rate under certain conditions, and risk-averse investors might still be willing to hold it in equilibrium.
+
+1. A risky security with a negative beta has returns that tend to move in the opposite direction of the market. Such assets act as a hedge against market risk, providing value when the market declines. According to the Capital Asset Pricing Model (CAPM), the expected return on a security is given by:
+
+$$
+E(R_i) = R_f + \beta_i \cdot (E(R_m) - R_f)
+$$
+
+If $\beta_i < 0$, the term $\beta_i \cdot (E(R_m) - R_f)$ is negative, meaning the expected return $E(R_i)$ can be less than the risk-free rate.
+
+2. Risk-averse investors value the ability of negative beta assets to reduce overall portfolio risk, even if the asset's expected return is below the risk-free rate. These assets can improve the portfolio's risk-return profile. In a well-diversified portfolio, holding such an asset can reduce the portfolio's total volatility and enhance its efficiency (e.g., move the portfolio closer to the efficient frontier).
+
+3. In equilibrium, all assets (including those with expected returns below the risk-free rate) are held by investors if they contribute to optimal portfolio construction. The demand for hedging and diversification can justify the inclusion of such assets in portfolios.
+
+Gold or other defensive assets often have low or negative betas because they perform well in economic downturns. Investors may accept a return below the risk-free rate for the protection these assets provide.
+
+The statement is false because risk-averse investors may hold a risky asset with an expected return below the risk-free rate if it offers hedging benefits or enhances the overall portfolio's risk-return characteristics.
+
+---
+
+# Problems
+
+## Determining portfolio weights
+
+What are the portfolio weights for a portfolio that has 135 shares of Stock $A$ that sell for \$47 per share and 105 shares of Stock $B$ that sell for \$41 per share?
+
+$$
+\begin{aligned}
+P_{\text{total}} &= P_A \cdot S_A + P_B \cdot S_B\\
+  &= 6345 + 4305\\
+  &= 10650\\\\
+\omega_A &= \frac{6345}{10650} = 0.596\\
+\omega_B &= \frac{4305}{10650} = 0.404
+\end{aligned}
+$$
+
+---
+
+## Portfolio expected return
+
+You own a portfolio that has \$2,100 invested in Stock $A$ and \$3,200 invested in Stock $B$. If the expected returns on these stocks are 11 percent and 14 percent, respectively, what is the expected return on the portfolio?
+
+$$
+\begin{aligned}
+P_{\text{total}} &= 2,100 + 3,200 = 5,300\\\\
+\omega_A &= .396\\
+\omega_B &= .604\\
+E(R_P) &= \omega_A E(A) + \omega_B E(B)\\
+  &= .396 \cdot .11 + .604 \cdot .14\\
+  &= .1281 = 12.81\%
+\end{aligned}
+$$
+
+---
+
+## Portfolio expected return
+
+You own a portfolio that is 25 percent invested in Stock $X$, 40 percent in Stock $Y$, and 35 percent in Stock $Z$. The expected returns on these three stocks are 11 percent, 17 percent, and 14 percent, respectively. What is the expected return on the portfolio?
+
+$$
+\begin{aligned}
+\overline{R}_P &= I_X R_X + I_Y R_Y + I_Z R_Z\\
+  &= .25 \cdot .11 + .4 \cdot .17 + .35 \cdot .14\\
+  &= .1445 = 14.45\%
+\end{aligned}
+$$
+
+---
+
+## Portfolio expected return
+
+You have \$10,000 to invest in a stock portfolio. Your choices are Stock $X$ with an expected return of 14 percent and Stock $Y$ with an expected return of 9 percent. If your goal is to create a portfolio with an expected return of 12.9 percent, how much money will you invest in Stock $X$? In Stock $Y$.
+
+$$
+\begin{aligned}
+E(R_P) &= w_X \cdot E(R_X) + (1 - w_X) \cdot E(R_Y)\\
+.129 &= w_X \cdot .14 + (1 - w_X) \cdot .09\\
+.129 &= .14 w_X - .09 w_X + .09\\
+.039 &= .05 w_X\\
+w_X &= .78\\
+w_Y &= .22\\\\
+\text{Investment}_{X} &= .78 \cdot 10,000 = 7,800\\
+\text{Investment}_{Y} &= .22 \cdot 10,000 = 2,200
+\end{aligned}
+$$
+
+---
+
+## Calculating reutrns and standard deviations
+
+Based on the following information calculate the expected return and standard deviation for the two stocks:
+
+|Economy|Probability|Return A|Return B|
+|:---:|:---:|:---:|:---:|
+|Recession| .20 | .06 | -.20 |
+|Normal| .55 | .07 | .13 |
+|Boom| .25 | .11 | .33 |
+
+```{r problem 5: calculating returns and standard deviation}
+# States:  R   N    B
+econ <- c(.2, .55, .25)
+stock.A <- c(.06, .07, .11)
+stock.B <- c(-.2, .13, .33)
+(stock.A.mean <- sum(stock.A * econ))
+(stock.B.mean <- sum(stock.B * econ))
+std.dev <- function(x, mean.x, probs) sqrt(sum((x - mean.x)^2 * probs))
+std.dev(stock.A, stock.A.mean, econ)
+std.dev(stock.B, stock.B.mean, econ)
+```
+
+---
+
+## Calculating returns and standard deviations
+
+Based on the following information, calculate the expected return and standard deviation:
+
+|Economy|Probability|Return|
+|:---:|:---:|:---:|
+|Depression|.1|-.105|
+|Recession|.25|.059|
+|Normal|.45|.130|
+|Boom|.2|.211|
+
+```{r problem 6: claculating returns and standard deviation}
+# States:  D    R    N    B
+econ <- c(.10, .25, .45, .20)
+return.rate <- c(-.105, .059, .130, .211)
+(mean.rr <- sum(return.rate * econ))
+std.dev <- function(x, mean.x, probs) sqrt(sum((x - mean.x)^2 * probs))
+std.dev(return.rate, mean.rr, econ)
+```
+
+---
+
+## Calculating expected returns
+
+A portfolio is invested 10 percent in Stock $G$, 65 percent in Stock $J$, and 25 percent in Stock $K$. The expected returns on these stocks are 9 percent, 11 percent, and 14 percent, respectively. What is the portfolio's expected return? How do you interpret your answer?
+
+```{r problem 7: calculating expected returns}
+portfolio <- c(.1, .65, .25)
+probs <- c(.09, .11, .14)
+(mean.return <- sum(portfolio * probs))
+std.dev <- function(x, mean.x, probs) sqrt(sum((x - mean.x)^2 * probs))
+std.dev(portfolio, mean.return, probs)
+```
+
+The portfolio's expected return of `r mean.return*100`\% represents the average return that an investor can anticipate earning from this specific portfolio of stocks.
+
+---
+
+## Returns and standard deviations
+
+Consider the following information:
+
+|Economy|Probability|Stock A|Stock B|Stock C|
+|:---:|:---:|:---:|:---:|:---:|
+|Boom|.65|.07|.15|.33|
+|Bust|.35|.13|.03|-.06|
+
+a. What is the expected return on an equally weighted portfolio of these three stocks?
+
+b. What is the variance of a portfolio invested 20 percent each in A and B, and 60 percent in C?
+
+```{r problem 8 a: returns and standard deviations}
+econ <- c(.65, .35)
+stock.A <- c(.07, .13)
+stock.B <- c(.15, .03)
+stock.C <- c(.33, -.06)
+(stock.A.mean <- sum(stock.A * econ))
+(stock.B.mean <- sum(stock.B * econ))
+(stock.C.mean <- sum(stock.C * econ))
+sum(stock.A.mean/3, stock.B.mean/3, stock.C.mean/3)
+```
+
+```{r problem 8 b: returns and standard deviations}
+weights <- c(.2, .2, .6)
+
+variance <- function(x, mean.x, weights, probs){
+  sum((x - mean.x)^2 * probs * weights)
+}
+variance(stock.A, stock.A.mean, weights[1], econ)
+variance(stock.B, stock.B.mean, weights[2], econ)
+variance(stock.C, stock.C.mean, weights[3], econ)
+```
+
+---
+
+## Returns and standard deviations
+
+Consider the following information:
+
+|Economy|Probability|Stock A|Stock B|Stock C|
+|:---:|:---:|:---:|:---:|:---:|
+|Boom|.20|.24|.45|.33|
+|Good|.35|.09|.10|.15|
+|Poor|.30|.03|-.10|-.05|
+|Bust|.15|-.05|-.25|-.09|
+
+a. Your portfolio is invested 30 percent each in A and C, and 40 percent in B. What is the expected return of the portfolio?
+
+b. What is the variance of this portfolio? The standard deviation?
+
+```{r problem 9: returns and standard deviations}
+econ <- c(.2, .35, .30, .15)
+weights <- c(.3, .3, .4)
+stock.A <- c(.24, .09, .03, -.05)
+stock.B <- c(.45, .10, -.10, -.25)
+stock.C <- c(.33, .15, -.05, -.09)
+
+(portfolio.return.boom <- sum(c(stock.A[1], stock.B[1],
+  stock.C[1])*weights))
+(portfolio.return.good <- sum(c(stock.A[2], stock.B[2],
+  stock.C[2])*weights))
+(portfolio.return.poor <- sum(c(stock.A[3], stock.B[3],
+  stock.C[3])*weights))
+(portfolio.return.bust <- sum(c(stock.A[4], stock.B[4],
+  stock.C[4])*weights))
+
+(portfolio <- c(portfolio.return.boom,
+                portfolio.return.good,
+                portfolio.return.poor,
+                portfolio.return.bust))
+(portfolio.return <- sum(portfolio*econ))
+
+variance <- function(x, mean.x, probs){
+  sum((x - mean.x)^2 * probs)
+}
+portfolio.var <- variance(portfolio, portfolio.return, econ)
+sqrt(portfolio.var)
+```
+
+---
+
+## Calculating portfolio betas
+
+You own a stock portfolio invested 10 percent in Stock Q, 35 percent in Stock R, 20 percent in Stock S, and 35 percent in Stock T. The betas for these four stocks are .75, 1.90, 1.38, and 1.16, respectively. What is the portfolio beta?
+
+```{r problem 10: calculating portfolio betas}
+weights <- c(.1, .35, .2, .35)
+betas <- c(.75, 1.90, 1.38, 1.16)
+
+(portfolio.beta <- sum(weights * betas))
+```
+
+---
