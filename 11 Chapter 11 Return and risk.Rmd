@@ -2,7 +2,9 @@
 title: "Return and Risk"
 author: "Joseph Bennett"
 date: "`r Sys.Date()`"
-output: pdf_document
+output:
+  pdf_document:
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
@@ -19,6 +21,8 @@ $$
 \text{Var}(\text{portfolio}) = X_{A}^{2} \sigma_{A}^2 + 2 X_{A} X_{B} \sigma_{AB} + X_{B}^{2} \sigma_{B}^{2}
 \end{aligned}
 $$
+
+> $X_A$ and $X_B$ are the proportions of the individual assets in the portfolio. $\overline{R}_{A}$ and $\overline{R}_{B}$ are the expected returns of each of the assets. Finally, $\sigma_{A}^{2}$ and $\sigma_{B}^{2}$ are the variances and $\sigma_{AB}$ is the covariance of the two assets.
 
 2. In our notation, $X$ stands for the proportion of a security in a portfolio. By varying $X$ we can trace out the efficient set of portfolios. We graphed the efficient set for the two-asset case as a curve, pointing out that the degree of curvature or bend in the graph reflects the diversification effect: The lower the correlation between the two securities, the greater the bend. The same general shape of the efficient set holds in a world of many assets.
 
@@ -41,6 +45,8 @@ In other words, the expected return on a security is positively (and lineraly) r
 ## Diversifiable and nondiversifiable risks
 
 In broad terms, why is some risk diversifiable? Why are some risks nondiversifiable? Does it follow that an investor can control the level of unsystematic risk in a portfolio, but not the level of systematic risk?
+
+---
 
 Systematic risk is risk that applies to a diverse set of securities and therefore is not easily diversifiable. However, systematic risk can be managed using risk-free securities (Treasury bills as an example). Nonsystematic risk is risk that applies to a limited set of securities or even to a single security and therefore can be eliminated by diversifying your holding of securities. This type of risk is easily managed.
 
@@ -72,7 +78,56 @@ f. Again, this would depend on the details of the lawsuit, the products involved
 
 If a portfolio has a positive investment in every asset, can the expected return on the portfolio be greater than that on every asset in the portfolio? Can it be less than that on every asset in the portfolio? If you answer yes to one or both of these questions, give an example, to support your answer.
 
-The expected return on a portfolio is a weighted average of the expected returns on the individual securities. Therefore, the expected return on the portfolio can only be as great as the expected return of its highest return asset. Similarly, the expected return on a portfolio can never be less than the expected return on its lowest return asset.
+---
+
+The expected return on a portfolio is a weighted average of the expected returns on the individual securities.
+
+$$
+\begin{aligned}
+E(R_p) &= \sum^n_{i=1}{w_i E(R_i)}\\
+\text{Where:}\\
+E(R_p)\ \text{is the expected return of the portfolio,}\\
+w_i\ \text{is the weight of the portfolio invested in asset }\ i,\\
+E(R_i)\ \text{is the expected return of asset }\ i,\\
+n\ \text{is the number of assets in the portfolio.}
+\end{aligned}
+$$
+
+The weights $w_i$ are positive and satisfy $\sum^n_{i=1}{w_i} = 1$.
+
+### Can the expected return of the portfolio be greater than the expected return of every asset?
+
+No. Since the portfolio return is a weighted average of the individual returns, the expected return of the portfolio cannot exceed the highest expected return among the assets. If $E(R_i)$ is the highest expected return among the assets, the portfolio's return $E(R_p)$ will be less than or equal to $E(R_i)$.
+
+### Can the expected return of the portfolio be less than the expected return of every asset?
+
+Yes. This can occur if the weights assigned to the assets in the portfolio disproportionately favor assets with lower expected returns.
+
+#### Example to Illustrate
+
+Suppose a portfolio consists of two assets:
+
+* Asset A: $E(R_A) = 10\%$
+* Asset B: $E(R_B) = 12\%$
+
+weights in the portfolio:
+
+* $w_A = 90\%$
+* $w_B = 10\%$
+
+The portfolio's expected return is:
+
+$$
+\begin{aligned}
+E(R_p) &= (w_A \cdot E(R_A)) + (w_B \cdot E(R_B))\\
+  &= (0.9 \cdot 10\%) + (0.1 \cdot 12\%) = 9\% + 1.2\% = 10.2\%\\
+\text{In this case:}\\
+E(R_p) &= 10.2\%\ \text{, which is less than }\ E(R_B)\ (12\%)\ 
+  \text{ut greater than }\ E(R_A)\ (10\%).
+\end{aligned}
+$$
+
+Thus, $E(R_p)$ lies within the range of the expected returns of the individual assets, and cannot exceed the highest or fall below the lowest expected return among them.
 
 ---
 
@@ -80,7 +135,23 @@ The expected return on a portfolio is a weighted average of the expected returns
 
 True or false: The most important characteristic in determining the expected return of a well-diversified portfolio is the variances of the individual assets in the portfolio. Explain.
 
-The most important characteristic in determining the expected return of a well-diversified portfolio is not the variance but the expected return of the individual assets. The expected return on a portfolio is a weighted average of the expected returns on the individual securities.
+---
+
+The most important characteristic in determining the expected return of a well-diversified portfolio is not the variances of the individual assets, but rather the expected return of the individual assets and their respective weights in the portfolio.
+
+1. __Expected Return Formula__: The expected return of a portfolio is calculated as the weighted average of the expected returns of the individual assets:
+
+$$
+E(R_p) = \sum^n_{i=1}{w_i E(R_i)}
+$$
+
+> Here, $E(R_i)$ is the expected return of asset $i$, and $w_i$ is its weight in the portfolio. Variance does not directly affect the expected return calculation.
+
+2. __Role of Variance__: Variance measures the risk (or volatility) of an asset, not its return. While variance is crucial in determining the portfolio's risk profile (along with covariances between assets), it does not influence the expected return of the portfolio directly.
+
+3. __Diversification__: In a well-diversified portfolio, individual asset variances matter less because diversification reduces the portfolio's overall risk by offsetting the effects of individual asset volatilities through low or negative correlations between asset returns. However, diversification does not change the weighted average of the expected returns, which remains the key determinant of the portfolio's expected return.
+
+The expected return of a well-diversified portfolio is primarily determined by the expected returns of the individual assets and their weights in the portfolio, not by their variances.
 
 ---
 
@@ -88,52 +159,100 @@ The most important characteristic in determining the expected return of a well-d
 
 If a portfolio has a positive investment in every asset, can the standard deviation on the portfolio be less than that on every asset in the portfolio? What about the portfolio beta?
 
-Yes, the standard deviation of a portfolio can be less than the standard deviation of every individual asset in the portfolio, even if there is a positive investment in every asset. This occurs because of diversification. Diversification reduces the portfolio's overall risk by combining assets that are not perfectly correlated. The extent of risk reduction depends on the correlations between the assets. If the assets in the portfolio have less than perfect positive correlation ($\rho < 1$), the portfolio standard deviation will be less than the weighted average of the individual standard deviations and could potentially be lower than the smallest individual asset's standard deviation. The standard deviation of a portfolio with two assets is given by:
-
-$$
-\begin{aligned}
-\sigma_p &= \sqrt{\omega_1^2 \sigma_1^2 + \omega_2^2 \sigma_2^2
-  + 2 \omega_1 \omega_2 \sigma_1 \sigma_2 \rho_{1,2}}\\\\
-\text{Where:}\\
-\omega_i\ \text{: Weight of asset}\ i\ \text{in the portfolio}\\
-\sigma_i\ \text{:Standard deviation of asset }\ i\\
-\rho_{1,2}\ \text{: Correlation coefficient between assets 1 and 2}
-\end{aligned}
-$$
-
-If $\rho_{1,2} < 1$, the portfolio standard deviation will be less than the weighted average of the individual standard deviations.
-
-However, the portfolio beta cannot be less than the beta of every individual asset in the portfolio if there is a positive investment in every asset. The portfolio beta is a weighted average of the individual asset betas, where the weights are the proportions of the portfolio ivnested in each asset. Since all weights are positive, the portfolio beta will fall between the lowest and highest individual asset betas in the portfolio.
-
-$$
-\begin{aligned}
-\beta_p = \sum_{i=1}^n{\omega_i \beta_i}\\\\
-\text{Where:}\\
-\beta_p\ \text{: Portfolio beta}\\
-\omega_i\ \text{: Weight of asset }\ i\\
-\beta_i\ \text{: Beta of asset }\ i
-\end{aligned}
-$$
-
-Because $\omega_i > 0$ and $\beta_i \ge 0$, the portfolio beta cannot be lower than the lowest beta in the portfolio.
-
 ---
 
+Yes, the standard deviation of a portfolio can be less than that of every asset in the portfolio.
+
+The standard deviation of a portfolio is determined by both:
+
+1. The standard deviations of the individual assets.
+2. The correlations (or covariances) between the assets.
+
+If the assets in the portfolio are not perfectly correlated ($\rho < 1$), diversification reduces the portfolio's overall risk. In an ideal scenario, when assets have low or negative correlations, the portfolio's standard deviation can be significantly lower than the standard deviation of each individual asset.
+
+#### Example:
+
+Consider two assets:
+
+* Asset A: Standard deviation = 15\%
+* Asset B: Standard deviation = 20\%
+
+If these assets are combined in a portfolio with positive weights and a correlation coefficient of $\rho = -0.5$, the portfolio's standard deviation can be lower than 15\% the smallest individual standard deviation.
+
+### Portfolio Beta
+
+No, the portfolio beta cannot be less than the beta of every asset in the portfolio.
+
+The portfolio beta is the weighted average of the betas of the individual assets:
+
+$$
+\beta_p = \sum^n_{i=1}{w_i \beta_i}
+$$
+
+Since all weights ($w_i$) are positive and the beta is a linear combination, the portfolio beta will always lie within the range of the smallest and largest betas of the assets. It cannot be lower than the smallest beta in the portfolio.
+
+#### Example
+
+If a portfolio has two assets:
+
+* Asset A: Beta = 0.8
+* Asset B: Beta = 1.2
+
+The portfolio beta will be somewhere between 0.8 and 1.2, depending on the weights assigned to each asset.
+
+__Standard deviation__ can be less than that of every asset in the portfolio due to diversification. However, __portfolio beta__ cannot be less than the beta of every asset because it is a weighted average of individual betas.
+
+---
+  
 ## Beta and CAPM
 
 Is it possible that a risky asset could have a beta of zero? Explain. Based on the CAPM, what is the expected return on such an asset? Is it possible that a risky asset could have a negative beta? What does the CAPM predict about the expected return on such an asset? Can you give an explanation for your answer?
 
-A risky asset can have a beta of zero. Beta measures the sensitivity of an asset's returns to the returns of the market portfolio. A beta of zero means the asset's returns are uncorrelated with the market. Dispite having no correlation with the market, the asset can still be risky because it may have high idiosyncratic risk (risk specific to the asset).
+---
 
-The expected return on CAPM
+Yes, a  risky asset can have a beta of zero. Beta measures the sensitivity of an asset's return to the return of the market portfolio. A beta of zero means the asset's returns are uncorrelated with the market's returns. The asset can still have its own inherent risk (variance), but that risk is unrelated to the market.
+
+### Expected return (CAPM prediction)
+
+According to the Capital Asset Pricing Model (CAPM), the expected return of an asset is given by:
 
 $$
 E(R_i) = R_f + \beta_i (E(R_m) - R_f)
 $$
 
-If $\beta_i = 0$, the expected return on the asset is equal to the risk-free rate ($R_f$). This is because the asset does not contribute to systematic risk (market risk), and investors are not compensated for idiosyncratic risk in the CAPM framework.
+If $\beta_i = 0$, the formula simplifies to:
 
-A risky asset can also have a negative beta. A negative beta means the asset's returns tend to move in the opposite direction of the market. For example, assets like gold or certain defensive stocks might have negative betas because they perform well when the market declines.
+$$
+E(R_i) = R_f
+$$
+
+Thus, the expected return on an asset with a beta of zero equals the risk-free rate, regardless of the asset's inherent risk.
+
+### Can a risky asset have a negative beta?
+
+Yes, a risky asset can have a negative beta.
+
+A negative beta means the asset's returns tend to move in the opposite direction of the market. For example, during market downturns, the asset's returns may increase, making it valuable as a hedge.
+
+Using the CAPM formula:
+
+$$
+E(R_i) = R_f + \beta_i (E(R_m) - R_f)
+$$
+
+If $\beta_i < 0$, the term $\beta_i (E(R_m) - R_f)$ becomes negative. This implies:
+
+$$
+E(R_i) < R_f
+$$
+
+The expected return of an asset with a negative beta is less than the risk-free rate reflecting its value as a hedge against market risk.
+
+### Examples and intuition
+
+A long-term government bond might have a beta near zero if its returns are uncorrelated with stock market movements. Gold is often considered to have a negative beta because it tends to perform well when the stock market declines, serving as a safe-haven asset.
+
+A risky asset can have a beta of zero or a negative beta. For a beta of zero, the expected return equals the risk-free rate. For a negative beta, the expected return is less than the risk-free rate, as predicted by the CAPM. These assets can be valuable for diversification or hedging purposes.
 
 ---
 
@@ -141,13 +260,29 @@ A risky asset can also have a negative beta. A negative beta means the asset's r
 
 Briefly explain why the covariance of a security with the rest of a well-diversified portfolio is a more appropriate measure of the risk of the security then the security's variance.
 
-The covariance of a security with the rest of a well-diversified portfolio is a more appropriate measure of the risk of the security than the security's variance because it captures the systematic risk of the security, which is the portion of its risk that affects the overall portfolio.
+---
 
-A security's variance measures its total risk, which includes both idiosyncratic risk (unique to the security) and systematic risk (market-related). In a well-diversified portfolio, idiosyncratic risk is largely eliminated through diversification, leaving only systematic risk as relevant.
+The covariance of a security with the rest of a well-diversified portfolio is a more appropriate measure of the risk of the security than the security's variance because:
 
-The covariance between the security and the portfolio reflects how the security contributes to the portfolio's systematic risk. This is what matters to investors because systematic risk cannot be diversified away. Covariance is directly linked to the security's beta, which measures its sensitivity to market movements.
+### Systematic vs. idiosyncratic risk:
 
-In models like the Capital Asset Pricing Model (CAPM), only systematic risk is priced because it affects all securities in the market. Covariance determines the security's beta, which influences its expected return.
+Variance captures the total risk of a security, which includes both the systematic risk (market-related) and idiosyncratic risk (unique to the security). In a well-diversified portfolio, idiosyncratic risk is largely diversified away, leaving only systematic risk to matter for portfolio performance. The covariance of the security with the portfolio reflects its contribution to the portfolio's systematic risk, making it the relevant measure.
+
+### Contribution to portfolio risk
+
+The risk a security adds to a portfolio depends on how its returns co-move with the portfolio's returns, not on its standalone variability. Covariance measures this co-movement, showing how the security contributes to the overall portfolio's risk.
+
+### Connection to beta
+
+Covariance is directly related to the security's beta ($\beta$), which measures the sensitivity of the security's returns to the market or portfolio returns:
+
+$$
+\beta_i = \frac{\text{Cov}(R_i, R_p)}{\text{Var}(R_p)}
+$$
+
+> Beta, derived from covariance, is the key metric in models like CAPM to assess a security's risk in the context of a diversified portfolio.
+
+Covariance is a more appropriate measure because it focuses o the systematic risk that matters i a diversified portfolio, while variance includes irrelevant idiosyncratic risk.
 
 ---
 
@@ -155,7 +290,11 @@ In models like the Capital Asset Pricing Model (CAPM), only systematic risk is p
 
 Consider the following quotation from a leading investment manager: "The shares of Southern Co. have traded close to \$12 for most of the past three years. Since Southern's stock has demonstrated very little price movement, the stock has a low beta. Texas Instruments, on the other hand, has traded as high as \$150 and as low as its current \$75. Since TI's stock has demonstrated a large amount of price movement, the stock has a very high beta." Do you agree with this analysis? Explain.
 
+---
+
 No, the analysis in the quotation is incorrect. The statements confuse volatility (price movement) with beta, which measures a stock's sensitivity to the overall market.
+
+### Beta definition
 
 Beta measures how much a stock's returns move in relation to the returns of the overall market. A high beta indicates the stock tends to amplify market movements, while a low beta indicates the stock moves less or is less correlated with the market.
 
@@ -165,11 +304,23 @@ $$
 \beta = \frac{\text{Cov}(R_i, R_m)}{\text{Var}(R_m)}
 $$
 
-Where $R_i$ is the stock's return, and $R_m$ is the market's return.
+* Where $R_i$ is the stock's return
+* $R_m$ is the market's return.
+* Beta indicates how much the stock moves in response to the market, not how much it moves on its own.
 
-Volatility refers to the total variability in a stock's price or returns, regardless of its relationship with the market. A stock can have high volatility but a low beta if its price movements are largely uncorrelated with the market.
+### Volatility vs. beta
 
-Southern Co.'s low price movement does not necessarily mean it has a low beta. If its returns are closely tied to market returns, it could still have a moderate or high beta. Texas Instruments' high price movement does not guarantee a high beta. If its price movements are driven by factors unrelated to the market (e.g., company-specific news or industry shocks), its beta could be low.
+Volatility refers to the total variability of a stock's price or returns. Beta considers only the portion of a stock's movement that is correlated with the overall market. A stock can have high volatility but a low beta if its price movements are largely independent of the market (e.g., idiosyncratic risk).
+
+### Example of incorrect logic
+
+Southern Co.'s low price movement (\$12 consistently) suggests low volatility, but this alone does not imply a low beta. If its returns are highly correlated with the market, it could still have a significant beta. Texas Instruments (TI) shows large price swings, which indicate high volatility. However, if its price movements are not closely tied to market movements, its beta could still be low.
+
+## Proper assessment of beta
+
+To determine beta, one must analyze the stock's returns relative to market returns over time. Historical price movement alone is insufficient.
+
+The statement in the quotation is flawed because it incorrectly equates price movement with beta. While Texas Instruments may have higher volatility than Southern Co., this does not necessarily mean it has a higher beta. Beta reflects market-related risk, which requires analyzing the correlation between the stock's returns and the market's returns, not just the magnitude of price fluctuations.
 
 ---
 
@@ -179,13 +330,21 @@ A broker has advised you not to invest in oil industry stocks because they have 
 
 No, the broker's advice to avoid oil industry stocks solely because they have high standard deviations is not necessarily sound for a risk-averse investor.
 
-1. Stand deviation measures the total risk (volatility) of an individual stock, which includes both systematic risk (market-related) and idiosyncratic risk (specific to the stock or industry). For a risk-averse investor with a diversified portfolio, the relevant measure of risk is systematic risk, as idiosyncratic risk can be diversified away.
+### Standard deviation alone is not the full measure of risk
 
-2. The decision to include oil industry stocks should consider how these stocks interact with the resto f the portfolio, specifically their correlation with other assets. Even if oil stocks have high standard deviations, they might have low or negative correlations with other assets in the portfolio, providing diversification benefits and potentially reducing the overall portfolio risk.
+Stand deviation measures the total risk (volatility) of a stock, which includes both systematic risk (market-related) and idiosyncratic risk (specific to the stock or industry). For a risk-averse investor with a diversified portfolio, the relevant measure of risk is systematic risk, as idiosyncratic risk can be diversified away.
 
-3. High standard deviation stocks often offer higher expected returns as compensation for their risk (ris-return tradeoff). A risk-averse investor should evaluate whether the higher expected return from oil stocks is worth the additional risk, particularly in the context of their investment goals and portfolio composition.
+### Diversification reduces idiosyncratic risk
 
-4. Instead of focusing on standard deviation, the investor should assess the beta of oil stocks, which measures their sensitivity to market movements. A stock with a high beta poses greater systematic risk, which is more relevant for a diversified investor.
+A risk-averse investor can hold a diversified portfolio, where the idiosyncratic risk of individual stocks is minimized or eliminated. High standard deviation (volatility) stocks may still provide valuable diversification benefits if their returns are not perfectly correlated with other assets in the portfolio.
+
+### Potential for high returns
+
+High standard deviation stocks often offer higher expected returns as compensation for their risk (risk-return trade-off). A risk-averse investor should evaluate whether the higher expected return from oil stocks is worth the additional risk, particularly in the context of their investment goals and portfolio composition.
+
+### Risk-adjusted measures are more relevant
+
+Instead of focusing on standard deviation, the investor should assess the beta of oil stocks, which measures their sensitivity to market movements. A stock with a high beta poses greater systematic risk, which is more relevant for a diversified investor.
 
 The broker's advice to avoid oil industry stocks based solely on their high standard deviations is overly simplistic and does not account for diversification, portfolio context, or the risk-return trade-off. A risk-averse investor should evaluate how oil stocks contribute to the overall portfolio risk and return, rather than excluding them outright due to their volatility.
 
@@ -292,6 +451,7 @@ Based on the following information calculate the expected return and standard de
 |Recession| .20 | .06 | -.20 |
 |Normal| .55 | .07 | .13 |
 |Boom| .25 | .11 | .33 |
+
 
 ```{r problem 5: calculating returns and standard deviation}
 # States:  R   N    B
@@ -440,3 +600,799 @@ betas <- c(.75, 1.90, 1.38, 1.16)
 ```
 
 ---
+
+## Calculating portfolio betas
+
+You own a portfolio equally invested in a risk-free asset and two stocks. If one of the stocks has a beta of 1.65 and the total portfolio is equally as risky as the market, what must the beta be for the other stock in your portfolio?
+
+---
+
+$$
+\begin{aligned}
+\text{Betas:}\\
+\beta_{\text{risk free}} &= 0\\
+\beta_{A} &= 1.65\\
+\beta_{B} &= ?\\
+\beta_{\text{portfolio}} &= 1\\\\
+\beta_{\text{portfolio}} &= w_{\text{rf}} \cdot \beta_{\text{rf}}
+  + w_A \cdot \beta_{A} + w_B \cdot \beta_{B}\\
+  &= \frac{1}{3} \cdot 0 + \frac{1}{3} \cdot 1.65 + \frac{1}{3} \cdot \beta_B\\\\
+\text{Solve for}\ \beta_B:\\
+1 &= \frac{1.65}{3} + \frac{\beta_B}{3}\\
+3 &= 1.65 + \beta_B\\
+3 - 1.65 &= \beta_B\\
+\beta_B &= 1.35
+\end{aligned}
+$$
+
+---
+
+## Using CAPM
+
+A stock has a beta of 1.15, the expected return on the market is 11 percent, and the risk-free rate is 5 percent. What must the expected return on this stock be?
+
+$$
+\begin{aligned}
+\overline{R} &= R_F + \beta \times (\overline{R}_M - R_F)\\
+  &= 5 + 1.15 \times (11 - 5)\\
+  &= 11.9
+\end{aligned}
+$$
+
+---
+
+## Using CAPM
+
+A stock has an expected return of 10.2 percent, the risk-free rate is 4 percent, and the market risk premium is 7 percent. What must the beta of the stock be?
+
+$$
+\begin{aligned}
+\overline{R} &= R_F + \beta \times (\overline{R}_M - R_F)\\\\
+\beta &= \frac{\overline{R} - R_F}{(\overline{R}_M - R_F)}\\
+  &= \frac{10.2 - 4}{7 - 4}\\
+  &= 2.07
+\end{aligned}
+$$
+
+---
+
+## Using CAPM
+
+A stock has an expected return of 13.4 percent, its beta is 1.60, and the risk-free rate is 5.5 percent. What must the expected return on the market be?
+
+$$
+\begin{aligned}
+\overline{R} &= R_F + \beta \times (\overline{R}_M - R_F)\\\\
+\overline{R}_M &= \frac{\overline{R} - R_F}{\beta} + R_F\\
+  &= 10.48
+\end{aligned}
+$$
+
+---
+
+## Using CAPM
+
+A stock has a beta of 1.13 and an expected return of 12.1 percent. A risk-free asset currently earns 5 percent.
+
+a. What is the expected return on a portfolio that is equally invested in the two assets?
+b. If a portfolio of the two assets has a beta of .50, what are the portfolio weights?
+c. If a portfolio of the two assets has an expected return of 10 percent, what is its beta?
+d. If a portfolio of the two assets has a beta of 2.26, what are the portfolio weights? How do you interpret the weights for the two assets in this case? Explain.
+
+---
+
+$$
+\begin{aligned}
+\text{Equally weighted assets: }\ w_{\text{stock}} = w_{\text{rf}}\\\\
+E(R_{\text{portfolio}}) &= w_{\text{stock}} \cdot E(R_{\text{stock}})
+  + w_{\text{rf}} \cdot R_{\text{rf}}\\
+  &= \frac{1}{2} \cdot E(R_{\text{stock}}) + \frac{1}{2} \cdot R_{\text{rf}}\\
+  &= .5 \cdot 12.1\% + .5 \cdot 5\%\\
+  &= 8.55\%
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\beta_{\text{portfolio}} &= w_{\text{rf}} \cdot \beta_{\text{rf}} 
+  + w_{\text{stock}} \cdot \beta_{\text{stock}}\\
+  &= w_{\text{rf}} \cdot 0 + w_{\text{stock}} \cdot \beta_{\text{stock}}\\
+0.50 &= w_{\text{stock}} \cdot 1.13\\
+w_{\text{stock}} &= 0.44\\\\
+w_{\text{rf}} &= 1 - 0.44 = 0.56
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+R_{\text{portfolio}} &= w_{\text{rf}} \cdot R_{\text{rf}}
+  + w_{\text{stock}} \cdot R_{\text{stock}}\\
+w_{\text{stock}} &= \frac{R_{\text{portfolio}}}{R_{\text{stock}}}\\
+  &= \frac{10\%}{12.1\%} = 0.83\\
+w_{\text{rf}} &= 1 - 0.83 = 0.17\\\\
+\beta_{\text{portfolio}} &= w_{\text{rf}} \cdot \beta_{\text{rf}}
+  + w_{\text{stock}} \cdot \beta_{\text{stock}}\\
+  &= 0.17 \cdot 0 + 0.83 \cdot 1.13\\
+  &= 0.94
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\beta_{\text{portfolio}} &= w_{\text{rf}} \cdot \beta_{\text{rf}}
+  + w_{\text{stock}} \cdot \beta_{\text{stock}}\\\\
+2.26 &= w_{\text{rf}} \cdot 0 + w_{\text{stock}} \cdot 1.13\\\\
+w_{\text{stock}} &= \frac{2.26}{1.13} = 2\\
+w_{\text{rf}} &= 1 - 2 = -1
+\end{aligned}
+$$
+
+### Interpretation of weights
+
+With $w_{\text{stock}} = 2$ and $w_{\text{rf}} = -1$, the portfolio has a 200\% weight invested in the stock and -100\% invested in the risk-free asset. This means the investor is borrowing an amount equal to the portfolio value at the risk-free rate to fund additional investment in the stock. This strategy is known as __leveraging__. The investor is borrowing funds to increase their exposure to the stock, resulting in a portfolio beta greater than 1.
+
+---
+
+## Using the SML
+
+Asset $W$ has an expected return of 12.3 percent and a beta of 1.3. If the risk-free rate is 4 percent, complete the following table for portfolios of Asset $W$ and a risk-free asset. Illustrate the relationship between portfolio expected return and portfolio beta by plotting the expected returns against the betas. What is the slope of the line that results?
+
+```{r problem 17: using the sml: table, echo=F}
+pct.asset.W <- c(0, .25, .50, .75, 1, 1.25, 1.50)
+df <- data.frame(pct.asset.W,
+                 rep("?", length(pct.asset.W)),
+                 rep("?", length(pct.asset.W)))
+colnames(df) <- c("Percentage of Portfolio in Asset W",
+                  "Portfolio Expected Return",
+                  "Portfolio Beta")
+knitr::kable(df)
+```
+
+---
+
+```{r problem 17: using the sml: calculation}
+asset.W.return <- .123
+asset.W.beta <- 1.3
+asset.rf.rate <- .04
+(portfolio.return <- (1 - pct.asset.W) * asset.rf.rate
+  + pct.asset.W * asset.W.return)
+(portfolio.beta <- pct.asset.W * asset.W.beta)
+
+# Filling out the table
+df <- data.frame(pct.asset.W, portfolio.return, portfolio.beta)
+colnames(df) <- c("Percentage of Portfolio in Asset W",
+                  "Portfolio Expected Return",
+                  "Portfolio Beta")
+knitr::kable(df)
+
+# Plotting the portfolio beta versus the portfolio return
+plot(portfolio.beta, portfolio.return, type='l')
+points(portfolio.beta, portfolio.return)
+```
+
+The slope of the line:
+
+$$
+\begin{aligned}
+\text{Slope} &= \frac{E(R_W) - R_f}{\beta_W}\\\\
+  &= \frac{12.3\% - 4\%}{1.3}\\\\
+  &= 6.38\%
+\end{aligned}
+$$
+
+```{r  problem 17: using the sml: slope}
+# One method of calculating the slope of the line.
+(line.slope <- (portfolio.return[2] - portfolio.return[1])/
+               (portfolio.beta[2] - portfolio.beta[1]))
+
+# Another method of calculating the slope of the line.
+(line.slope <- (asset.W.return - asset.rf.rate) / asset.W.beta)
+```
+
+The relationship between the portfolio expected return and beta is linear. The slope of the line (6.38\%) represents the additional return per unit of beta above the risk-free rate. It reflects the compensation investors require for taking on market risk.
+
+---
+
+## Reward-to-risk ratios
+
+Stock $Y$ has a beta of 1.35 and an expected return of 14 percent. Stock $Z$ has a beta of .80 and an expected return of 11.5 percent. If the risk-free rate is 4.5 percent and the market risk premium is 7.3 percent, are these stocks correctly priced?
+
+---
+
+To determine whether the stocks are correctly priced, we use the Capital Asset Pricing Model (CAPM) to calculate their expected returns based on their betas and compare these values to their given expected returns.
+
+$$
+\begin{aligned}
+E(R_i) &= R_f + \beta_i \cdot \text{Market Risk Premium}\\\\
+\text{Where:}\\
+E(R_i) &= \text{Expected return of stock } i,\\
+R_f &= 4.5\%\ \text{:Risk-free rate,}\\
+\beta_i\ &= \text{:Beta of stick } i,\\
+\text{Market Risk Premium} &= 7.3\%\\
+\end{aligned}
+$$
+
+The expected return of each stock should be.
+
+$$
+\begin{aligned}
+E(R_Y) &= 4.5\% + 1.35 \cdot 7.3\%\\
+  &= 14.35\%\\\\
+E(R_Z) &= 4.5\% + 0.80 \cdot 7.3\%\\
+  &= 10.34\%
+\end{aligned}
+$$
+
+Comparing these results we can conclude that Stock Y is under priced because its given return is lower than the return required by CAPM. Similarly, Stock Z is over priced because its given return is higher than the return required by CAPM.
+
+---
+
+## Reward-to-risk ratios
+
+In the previous problem, what would the risk-free rate have to be for the two stocks to be correctly priced?
+
+---
+
+To calculate the required risk-free rate we still use the Capital Asset Price Model.
+
+$$
+\begin{aligned}
+R_i &= R_f + \beta_i \cdot \text{Market Risk Premium}\\\\
+R_f &= R_Y - \beta_i \cdot \text{Market Risk Premium}\\
+  &= 14\% - 1.35 \cdot 7.3\%\\
+  &= 4.15\%
+\end{aligned}
+$$
+
+---
+
+## Portfolio returns
+
+Using information from the previous chapter about capital market history, determine the return on a portfolio that is equally invested in large company stocks and long-term government bonds. What is the return on a portfolio that is equally invested in small-company stocks and Treasury bills?
+
+---
+
+From the previous chapter we will use the following for the expected returns:
+
+```{r table 10: total annual returns 1926 - 2011}
+arithmetic.mean <- c( 16.5, 11.8, 6.4, 6.1, 5.5, 3.6, 3.1)
+standard.deviation <- c(32.5, 20.3, 8.4, 9.8, 5.7, 3.1, 4.2)
+rows <- c("Small-company stocks", "Large-company stocks",
+          "Long-term corporate bonds", "Long-term government bonds",
+          "Intermediate-term government bonds", "U.S. Treasury bills",
+          "Inflation")
+df <- data.frame(rows, arithmetic.mean, standard.deviation)
+colnames(df) <- c("Series", "Arithmetic Mean (%)",
+                  "Dtandard Deviation (%)")
+knitr::kable(df)
+```
+
+For a portfolio that is equally invested in large company stocks and long-term government bonds.
+
+$$
+\begin{aligned}
+R_{\text{portfolio}} &= \frac{1}{2} \cdot R_{\text{lcs}}
+  + \frac{1}{2} R_{\text{ltb}}\\
+  &= \frac{12.8\% + 6.1\%}{2}\\
+  &= 9.45\%
+\end{aligned}
+$$
+
+For a portfolio that is equally invested in small company stocks and long-term government bonds:
+
+$$
+\begin{aligned}
+R_{\text{portfolio}} &= \frac{R_{\text{scs}} + R_{\text{ltb}}}{2}\\
+  &= \frac{16.5\% + 3.6\%}{2}\\
+  &= 10.05\%
+\end{aligned}
+$$
+
+---
+
+## CAPM
+
+Using the CAPM, show that the ratio of the risk premiums on two assets is equal to the ratio of their betas.
+
+---
+
+The Capital Asset Pricing Model:
+
+$$
+\begin{aligned}
+R_i &= R_f + \beta_i \cdot \text{Market Risk Premium}\\\\
+\end{aligned}
+$$
+
+The risk premium of an asset is: $E(R_i) - R_f$:
+
+$$
+\begin{aligned}
+\frac{\left(E(R_A) - R_f \right)}{\left(E(R_B) - R_f \right)}
+  &= \frac{\beta_A}{\beta_B}
+\end{aligned}
+$$
+
+---
+
+## Portfolio returns and deviations
+
+Consider the following information about three stocks:
+
+```{r problem 22: portfolio returns and deviations: table, echo=F}
+state <- c("Boom", "Normal", "Bust")
+prob <- c(.30, .45, .25)
+stock.A <- c(.20, .15, .01)
+stock.B <- c(.25, .11, -.15)
+stock.C <- c(.60, .05, -.50)
+df <- data.frame(state, prob, stock.A, stock.B, stock.C)
+colnames(df) <- c("State of Economy",
+                  "Probability of State of Economy",
+                  "Stock A Return",
+                  "Stock B Return",
+                  "Stock C Return")
+knitr::kable(df)
+```
+
+a. If your portfolio is invested 40 percent each in A and B and 20 percent in C, what is the portfolio expected return? The variance? The standard deviation?
+
+b. If the expected T-bill rate is 3.80 percent, what is the expected risk premium on the portfolio?
+
+c. If the expected inflation is 3.50 percent, what are the approximate and exact expected real returns on the portfolio? What are the approximate and exact expected real risk premiums on the portfolio?
+
+---
+
+Calculate the portfolio expected return
+
+$$
+\begin{aligned}
+E(R_p) &= \sum^{n}_{i=1}{P_i \cdot R_p(i)}\\
+\text{Where:}\\
+P_i & \text{is the probability of state } i,\\
+R_p(i) & \text{is the portfolio return in state } i.
+\end{aligned}
+$$
+
+We calculate the portfolio return for each state of the economy.
+
+$$
+\begin{aligned}
+R_p(i) &= w_A \cdot R_A(i) + w_B \cdot R_B(i) + w_C \cdot R_C(i)\\
+R_p(\text{Boom}) &= .4 \cdot .2 + .4 \cdot .25 + .2 \cdot .6\\
+  &= 0.30\\
+R_p(\text{Normal}) &= .4 \cdot .15 + .4 \cdot .11 + .2 \cdot .05\\
+  &= 0.114\\
+R_p(\text{Bust}) &= .4 \cdot .01 + .4 \cdot (-.15) + .2 \cdot (-.50)\\
+  &= -0.156\\\\
+E(R_p) &= P_{\text{Boom}} \cdot R_p(\text{Boom})
+  + P_{\text{Normal}} \cdot R_p(\text{Normal})
+  + P_{\text{Bust}} \cdot R_p(\text{Bust})\\
+  &= .4 \cdot .3 + .4 \cdot .114 + .2 \cdot (-.156)\\
+  &= .1023 = 10.23\%\\\\
+\end{aligned}
+$$
+
+Calculate the portfolio variance.
+
+$$
+\begin{aligned}
+\sigma_p^2 &= \sum^n_{i=1}{P_i \cdot(R_p(i) - E(R_p))^2}\\
+  &= .4 \cdot (.3 - .1023)^2 + .4 \cdot (.114 - .1023)^2
+  + .2 \cdot (-.156 - .1023)^2\\
+  &= 0.02902\\\\
+\sigma_p &= \sqrt{0.02902} = .1704 = 17.04\%
+\end{aligned}
+$$
+
+The risk premium is the difference between the portfolio's expected return and the T-bill rate
+
+$$
+\begin{aligned}
+\text{Risk Premium} &= E(R_p) - R_f\\
+  &= 10.23\% - 3.80\%\\
+  &= 6.43\%
+\end{aligned}
+$$
+
+The real return (both exact and approximate formulas):
+
+$$
+\begin{aligned}
+1 + \text{Real Return} &= \frac{1 + \text{Nominal Return}}
+    {1 + \text{Inflation Rate}}\\
+\text{Real Return} &= \frac{1 + .1023}{1 + .0350}\\
+  &= .0650 = 6.50\%\\
+\text{Approximate Real Return} &= \text{Nominal Return}
+  - \text{Inflation Rate}\\
+  &= 10.23\% - 3.5\% = 6.73\%
+\end{aligned}
+$$
+
+The real risk premium (both exact and approximate) is:
+
+$$
+\begin{aligned}
+\text{Risk Premium} &= 6.5\% - 3.8\%\\ &= 2.7\%\\
+\text{Risk Premium Approximate} &= 6.73 - 3.8\\ &= 2.93\%
+\end{aligned}
+$$
+
+---
+
+## Analyzing a portfolio
+
+You want to create a portfolio equally as risky as the market, and you have \$1,000,000 to invest. Given this information, fill in the rest of the following table:
+
+```{r problem 23: analyzing a portfolio: table, echo=F}
+Asset <- c("Stock A", "Stock B", "Stock C", "Risk-free asset")
+Investment <- c(180000, 290000, NA, NA)
+Beta <- c( .85, 1.4, 1.45, NA)
+df <- data.frame(Asset, Investment, Beta)
+knitr::kable(df)
+```
+
+---
+
+For a portfolio that is as risky as the market, the $\beta_{\text{portfolio}} = 1$. The expression for the portfolio $\beta$ can be expressed:
+
+$$
+\begin{aligned}
+\beta_{p} &= \frac{\sum(\text{Investment in Asset} \times
+  \text{Beta of Asset})}{\text{Total Investment}} = 1
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\beta_p &= \frac{(I_A \cdot \beta_A) + (I_B \cdot \beta_B)
+  + (I_C \cdot \beta_C)
+  + (I_{\text{risk-free}} \cdot \beta_{\text{risk-free}})}
+  {\text{Total Investment}}\\\\
+  &= \frac{(180,000 \cdot 0.85) + (290,000 \cdot 1.4)
+  + (I_C \cdot 1.45)}{1,000,000}\\\\
+1,000,000 &=  (180,000 \cdot 0.85) + (290,000 \cdot 1.4)
+  + (I_C \cdot 1.45)\\
+593847 &= 1.45 \cdot I_C\\
+I_C &= \frac{593847}{1.45}\\
+  &= 409,549.70 \approx 409,550\\\\
+I_{\text{Risk-free}} &= 1,000,000 - 180,000 - 290,000 - 409,550\\
+  &= 120,450
+\end{aligned}
+$$
+
+```{r problem 23: analyzing a portfolio: table solved, echo=F}
+Asset <- c("Stock A", "Stock B", "Stock C", "Risk-free asset")
+Investment <- c(180000, 290000, 409550, 120450)
+Beta <- c( .85, 1.4, 1.45, 0)
+df <- data.frame(Asset, Investment, Beta)
+knitr::kable(df)
+```
+
+---
+
+## Analyzing a portfolio
+
+You have \$100,000 to invest in a portfolio containing Stock X, Stock Y, and a risk-free asset. You must invest all of your money. your goal is to create a portfolio that has an expected return of 11.22 percent and that has only 96 percent of the risk of the overall market. If X has an expected return of 15.35 percent and a beta of 1.55. Y has an expected return of 9.4 percent and a beta of .7, and the risk-free rate is 4.5 percent, how much money will you invest in Stock X? How do you interpret your answer?
+
+---
+
+Expected return equation:
+
+$$
+\begin{aligned}
+E(R_p) &= w_X \cdot E(R_X) + w_Y \cdot E(R_Y) + w_f \cdot E(R_f)
+\end{aligned}
+$$
+
+Portfolio beta equation:
+
+$$
+\begin{aligned}
+\beta_p &= w_X \cdot \beta_X + w_Y \cdot \beta_Y
+\end{aligned}
+$$
+
+Weight Constraint:
+
+$$
+w_X + w_Y + w_f = 1
+$$
+
+Solve for the weights
+
+$$
+\begin{aligned}
+w_f &= 1 - w_X - w_Y\\\\
+\text{Substitute }w_f\ \text{into the Expected Return Equation:}\\
+11.22 &= w_X(15.35) + w_Y(9.4) + (1 - w_X - w_Y)(4.5)\\
+\text{Simplify:}\\
+11.22 &= 4.5 + w_X (15.35 - 4.5) + w_Y(9.4 - 4.5)\\
+11.22 &= 4.5 + 10.85 w_X + 4.9 w_Y\\\\
+\text{Substitute }w_f\ \text{into the Beta Equation:}\\
+0.96 &= w_X (1.55) + w_Y (0.7)\\
+0.96 &= 1.55 w_X + 0.7 w_Y\\\\
+6.72 &= 10.85 w_X + 4.9 w_Y\\
+0.96 &= 1.55 w_X + 0.7 w_Y\\
+\end{aligned}
+$$
+
+---
+
+## Covariance and correlation
+
+Based on the following information, calculate the expected return and standard deviation of each of the following stocks. Assume each state of the economy is equally likely to happen. What are the covariance and correlation between the returns of the two stocks?
+
+```{r problem 25: covariance and correlation: table, echo=F}
+state <- c("Bear", "Normal", "Bull")
+stock.A <- c(.102, .115, .073)
+stock.B <- c(-.045, .148, .233)
+df <- data.frame(state, stock.A, stock.B)
+knitr::kable(df)
+```
+
+---
+
+```{r problem 25: covariance and correlation: solution}
+(stock.A.return <- mean(stock.A))
+(stock.A.sd <- sqrt(sum((stock.A - stock.A.return)^2)/length(stock.A)))
+(stock.B.return <- mean(stock.B))
+(stock.B.sd <- sqrt(sum((stock.B - stock.B.return)^2)/length(stock.B)))
+(covariance <- sum((stock.A - stock.A.return)*
+                   (stock.B - stock.B.return))/length(stock.B))
+cov(stock.A, stock.B)
+(correlation <- covariance/(stock.A.sd * stock.B.sd))
+cor(stock.A, stock.B)
+```
+
+---
+
+## Covariance and correlation
+
+Based on the following information, calculate the expected return and standard deviation for each of the following stocks. What are the covariance and correlation between the returns of the two stocks?
+
+```{r problem 26: covariance and correlation: table, echo=F}
+state <- c("Bear", "Normal", "Bull")
+probability <- c(.25, .60, .15)
+stock.J <- c(-.2, .138, .218)
+stock.K <- c(.034, .062, .092)
+df <- data.frame(state, probability, stock.J, stock.K)
+knitr::kable(df)
+```
+
+---
+
+```{r problem 26: covariance and correlation: solution}
+(stock.J.return <- weighted.mean(stock.J, probability))
+(stock.J.sd <-sqrt(sum(probability*(stock.J - stock.J.return)^2)/
+                     length(stock.J)))
+(stock.K.return <- weighted.mean(stock.K, probability))
+(stock.K.sd <- sqrt(sum(probability*(stock.K - stock.K.return)^2)/
+                      length(stock.K)))
+(covariance <- sum((stock.J - stock.J.return) *
+                   (stock.K - stock.K.return) * probability) /
+                   length(stock.K))
+(correlation <- covariance / (stock.A.sd * stock.B.sd))
+```
+
+---
+
+## Portfolio standard deviation
+
+Security F has an expected return of 10 percent and a standard deviation of 43 percent per year. Security G has an expected return of 15 percent and a standard deviation of 62 percent per year.
+
+a. What is the expected return on a portfolio composed of 30 percent of Security F and 70 percent of Security G?
+b. If the correlation between the returns of Security F and Security G is .25, what is the standard deviation of the portfolio described in part (a)?
+
+---
+
+$$
+\begin{aligned}
+R_P &= .30 \cdot .10 + .7 \cdot .15\\
+  &= .135 = 13.5\%\\
+\text{Var}_P &= .30^2 \cdot .43^2 + 2 \cdot .3 \cdot .7 \cdot .25
+  + .7^2 \cdot .62^2\\
+  &= 0.31\\
+\sigma_P = \sqrt{\text{Var}_P} = 0.5568
+\end{aligned}
+$$
+
+---
+
+## Portfolio standard deviation
+
+Suppose the expected returns and standard deviations of stocks A and B are $E(R_A) = .09$, $E(R_B) = .15$, $\sigma_A = .36$, and $\sigma_B = .62$.
+
+a. Calculate the expected return and standard deviation of a portfolio that is composed of 35 percent A and 65 percent B when the correlation between the returns on A and B is .5.
+
+b. Calculate the standard deviation of a portfolio with the same portfolio weights as in part (a) when the correlation coefficient between the returns on A and B is -.5.
+
+c. How does the correlation between the returns on A and B affect the standard deviation of the portfolio?
+
+---
+
+```{r problem 28: portfolio standard deviation}
+stock.A.return <- .09
+stock.A.sd <- .36
+stock.B.return <- .15
+stock.B.sd <- .62
+(portfolio.return <- .35 * stock.A.return + .65 * stock.B.return)
+(portfolio.sd.a <- .35^2 * stock.A.sd^2 + 2 * .35 * .65 * .5
+  + .65^2 * stock.B.sd^2)
+(portfolio.sd.b <- .35^2 * stock.A.sd^2 + 2 * .35 * .65 * -.5
+  + .65^2 * stock.B.sd^2)
+(cor.x <- seq(-.75, .75, by=.05))
+(portfolio.sd.y <- .35^2 * stock.A.sd^2 + 2 * .35 * .65 * cor.x
+  + .65^2 * stock.B.sd^2)
+plot(cor.x, portfolio.sd.y, type='l')
+```
+---
+
+## Correlation and beta
+
+You have been provided the following data about the securities of three firms, the market portfolio, and the risk-free asset:
+
+```{r problem 29: Correlation and beta: table, echo=F}
+security <- c("Firm A", "Firm B", "Firm C", "The market portfolio", "The risk-free asset")
+expected.return <- c(.10, .14, .16, .12, .05)
+standard.deviation <- c(.31, NA, .65, .20, NA)
+correlation.with.market <- c(NA, .50, .35, NA, NA)
+beta <- c(.85, 1.40, NA, NA, NA)
+df <- data.frame(security, expected.return, standard.deviation, correlation.with.market, beta)
+colnames(df) <- c("Security", "Expected Return", "Standard Deviation", "Correlation", "Beta")
+knitr::kable(df)
+```
+
+a. Fill in the missing values in the table.
+
+b. Is the stock of Firm A correctly priced according to the capital asset pricing model (CAPM)? What about the stock of Firm B? Firm C? If these securities are not correctly priced, what is your investment recommendation for someone with a well-diversified portfolio?
+
+---
+
+(i) We will start with the correlation of Firm A with the market portfolio.
+
+$$
+\begin{aligned}
+\beta_A &= \frac{\text{Cov}(R_A, R_m)}{\sigma^2_m}\\\\
+\text{Cov}(R_A, R_m) &= \beta_A \cdot \sigma^2_m\\
+  &= (.85) \cdot (.20)^2\\
+  &= .034\\\\
+\rho_{Am} &= \text{Corr}(R_A, R_m)\\
+  &= \frac{\text{Cov}(R_A, R_m)}{\sigma_A \times \sigma_m}\\
+  &= \frac{.034}{.31 \times .20}\\
+  &= .548
+\end{aligned}
+$$
+
+(ii) Next we solve for the standard deviation of Firm B.
+
+$$
+\begin{aligned}
+\beta_B &= \frac{\text{Cov}(R_B, R_m)}{\sigma_m^2}\\
+\text{Cov}(R_B, R_m) &= \beta_B \cdot \sigma_m^2\\
+  &= 1.4 \cdot .2^2\\
+  &= 0.056\\
+\rho_{Bm} &= \frac{\text{Cov}(R_B, R_m)}{\sigma_B \sigma_m}\\\\
+\sigma_B &= \frac{\text{Cov}(R_B, R_m)}{\sigma_m \rho_{Bm}}\\
+  &= \frac{0.056}{.2 \cdot .5}\\
+  &= 0.56
+\end{aligned}
+$$
+
+(iii) Next we solve for $\beta_C$:
+
+$$
+\begin{aligned}
+\rho_{Cm} &= \frac{\text{Cov}(R_C, R_m)}{\sigma_C \cdot \sigma_m}\\
+\text{Cov}(R_C, R_m) &= \rho_{Cm} \cdot \sigma_C \cdot \sigma_m\\
+  &= (.35) \cdot (.65) \cdot (.20)\\
+  &= 0.0455\\\\
+\beta_C &= \frac{\text{Cov}(R_C, R_m)}{\sigma^2_m}\\
+  &= \frac{0.0455}{.2^2}\\
+  &= 1.14
+\end{aligned}
+$$
+
+(iv) The correlation of the market portfolio with itself is 1 because the covariance is the same as its variance.
+
+(v) The $\beta_m$ is 1 as well.
+
+For (vi), (vii), and (viii), by definition a risk-free asset should be quite stable. Therefore there is no variation and no standard deviation (0). The Correlation is also equal to 0 because the asset's price has no relation to the market and thus the beta is also zero.
+
+The table can now be rewritten:
+
+```{r problem 29: Correlation and beta: table 2, echo=F}
+security <- c("Firm A", "Firm B", "Firm C", "The market portfolio", "The risk-free asset")
+expected.return <- c(.10, .14, .16, .12, .05)
+standard.deviation <- c(.31, .56, .65, .20, 0)
+correlation.with.market <- c(.55, .50, .35, 1, 0)
+beta <- c(.85, 1.40, 1.14, 1, 0)
+df <- data.frame(security, expected.return, standard.deviation, correlation.with.market, beta)
+colnames(df) <- c("Security", "Expected Return", "Standard Deviation", "Correlation", "Beta")
+knitr::kable(df)
+```
+
+---
+
+## CML
+
+The market portfolio has an expected return of 12 percent and a standard deviation of 22 percent. The risk-free rate is 5 percent.
+
+a. What is the expected return on a well-diversified portfolio with a standard deviation of 9 percent?
+
+b. What is the standard deviation of a well-diversified portfolio with an expected return of 20 percent?
+
+---
+
+The following plot shows the __capital market line__ (light blue). Along this line, a well-diversified portfolio with a standard deviation of 9 percent would have an expected return of $E(R_p) = R_f + \frac{12 - 5}{22 - 0} = 5 + \frac{7}{22} = 7.9$. The plot displays this as the black point targeted by the orange lines.
+
+```{r problem 30: cml plot a, echo=F}
+x <- 1:22
+y <- 5 + 7/22*x
+plot(x,y, lwd=.2, type='l', xlim=c(0,24), ylim=c(0,14), xlab="Standard Deviation", ylab="Expected Return")
+abline(5, 7/22, lwd=1.3, col='lightblue')
+abline(h=0, lwd=.1)
+abline(v=0, lwd=.1)
+abline(h=5+7/22*9, lwd=.2, col='orange')
+abline(v=9, lwd=.2, col='orange')
+points(9, 5+7/22*9, pch=20, cex=.6)
+```
+
+For b, We have the expected return of a well-diversified portfolio and we want to find the standard deviation. With an expected return of 20 percent we have a standard deviation of $\sigma_p = \frac{(20 - 5) \cdot 22}{7} = 47.1$. This is illustrated in the following plot.
+
+```{r problem 30: cml plot b, echo=F}
+x <- 1:22
+y <- 5 + 7/22*x
+plot(x,y, lwd=.2, type='l', xlim=c(0,50), ylim=c(0,25), xlab="Standard Deviation", ylab="Expected Return")
+abline(5, 7/22, lwd=1.3, col='lightblue')
+abline(h=0, lwd=.1)
+abline(v=0, lwd=.1)
+abline(h=20, lwd=.2, col='orange')
+abline(v=15*22/7, lwd=.2, col='orange')
+points(15*22/7, 20, pch=20, cex=.6)
+```
+
+## Beta and CAPM
+
+A portfolio that combines the risk-free asset and the market portfolio has an expected return of 7 percent and a standard deviation of 10 percent. The risk-free rate is 4 percent, and the expected return on the market portfolio is 12 percent. Assume the capital asset pricing model holds. What expected rate of return would a security earn if it had a .45 correlation with the market portfolio and a standard deviation of 55 percent?
+
+---
+
+$$
+\begin{aligned}
+R_f &= .04\\
+E(R_m) &= .12\\
+\sigma_m &= .1\\
+\rho_{i,m} &= .45\\
+\sigma_i &= .55\\\\
+\beta_i &= \rho_{i,m} \cdot \frac{\sigma_i}{\sigma_m}\\
+  &= (.45) \cdot \frac{.55}{.1}\\
+  &= 2.48\\\\
+E(R_i) &= R_f + \beta_i \cdot (E(R_m) - R_f)\\
+  &= .04 + 2.48 \cdot (.12 - .04)\\
+  &= 0.24
+\end{aligned}
+$$
+
+---
+
+## Beta and CAPM
+
+Suppose the risk-free rate is 4.2 percent and the market portfolio has an expected return of 10.9 percent. The market portfolio has a variance of .0382. Portfolio Z has a correlation coefficient with the market of .28 and a variance of .3285. According to the capital asset pricing model, what is the expected return on Portfolio Z?
+
+---
+
+$$
+\begin{aligned}
+R_f &= .042\\
+E(R_m) &= .109\\
+\sigma^2_m &= .0382\\
+\rho_{z,m} &= .28\\
+\sigma^2_z &= .3285\\\\
+\beta_z &= \rho_{z,m} \cdot \frac{\sigma_z}{\sigma_m}\\
+  &= .28 \cdot \frac{.5731}{.1954}\\
+  &= 0.8212\\\\
+E(R_z) &= R_f + \beta_z \cdot (E(R_m) - R_f)\\
+  &= .042 + .8212 \cdot (.109 - .042)\\
+  &= 0.0970
+\end{aligned}
+$$
