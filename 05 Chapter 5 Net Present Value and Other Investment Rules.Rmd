@@ -1,6 +1,6 @@
 ---
 title: "Net Present Value and Other Investment Rules"
-author: "Joseph Bennett"
+author: "Ross, Westerfield, Jaffe"
 date: "`r Sys.Date()`"
 output:
   pdf_document:

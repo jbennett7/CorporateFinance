@@ -1,6 +1,6 @@
 ---
 title: "Return and Risk"
-author: "Joseph Bennett"
+author: "Ross, Westerfield, Jaffe"
 date: "`r Sys.Date()`"
 output:
   pdf_document:

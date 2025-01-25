@@ -1,6 +1,6 @@
 ---
 title: "Financial Statements and Cash Flow for US Composite Corp."
-author: "Ross"
+author: "Ross, Westerfield, Jaffe"
 date: "`r format(Sys.time(), '%d %b %Y')`"
 output: 
   pdf_document:

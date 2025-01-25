@@ -1,6 +1,6 @@
 ---
 title: "Financial Statements Analysis and Financial Models"
-author: "Ross"
+author: "Ross, Westerfield, Jaffe"
 date: "`r format(Sys.time(), '%d %b %Y')`"
 output: 
   pdf_document:

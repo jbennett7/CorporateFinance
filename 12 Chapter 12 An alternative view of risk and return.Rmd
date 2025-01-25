@@ -1,0 +1,68 @@
+---
+title: "An alternative view of risk and return"
+author: "Ross, Westerfield, Jaffe"
+data: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Summary
+
+1. The APT assumes that stock returns are generated according to factor models. For example, we might describe a stock's return as:
+
+$$
+R = \overline{R} + \beta_I F_I + \beta_{\text{GNP}} F_{\text{GNP}} + \beta_r F_r + \epsilon
+$$
+
+> where I, GNP, and r stand for inflation, gross national product, and the interest rate, respectively. The three factors $F_I$, $F_{\text{GNP}}$, and $F_r$, represent systematic risk because these factors affect many securities. The term $\epsilon$ is considered unsystematic risk because it is unique to each individual security.
+
+2. For convenience, we frequently describe a security's return according to a one-factor model:
+
+   $$
+   R = \overline{R} + \beta F + \epsilon
+   $$
+
+3. As securities are added to a portfolio, the unsystematic risks of the individual securities offset each other. A fully diversified portfolio has no unsystematic risk but still has systematic risk. This result indicates that diversification can eliminate some, but not all, of the risk of individual securities.
+
+4. Because of this, the expected return on a stock is positively related to its systematic risk. In a one-factor model, the systematic risk of a security is simply the beta of the CAPM. Thus, the implications of the CAPM and the one-factor APT are identical. However, each security has many risks in a multifactor model. The expected return on a security is positiviely related to the beta of the security with each factor.
+
+5. Empirical or parametric models that capture the relations between returns and stock attributes such as P/E or M/B ratios can be estimated directly from the data without any appeal to theory. These ratios are also used to measure the styles of portfolio managers and to construct benchmarks and samples against which they are measured.
+
+# Concepts
+
+## Systematic versus unsystematic risk
+
+Describe the difference betweens sytematic risk and unsystematic risk.
+
+---
+
+Systematic risk is a risk that affects a large number of assets, each to a greater or lesser degree. Aslo called market risk or common risk. Unsystematic risk is any risk that specifically affects a single asset or a small group of assets. Also called unique, idiosyncratic, or diversifiable risk.
+
+The return of any stock can be writte as:
+
+$$
+R = \overline{R} + m + \epsilon
+$$
+
+Where m represents systematic risk and $\epsilon$ represents unsystematic or idiosyncratic risk. The unsystematic risks of two particular stocks are unrelated. However, since both stocks are influenced by the same systematic risks, individual stocks' systematic risks, and therefore their total returns, will be related.
+
+As an example, inflation will influence almost all companies to some extent. Some stocks are more influenced by inflation than others, and sompe companies could be inversely related to inflation as well.
+
+Systematic risk, like inflation, is captured on a stock by using the __beta coefficient__.
+
+---
+
+## APT
+
+Consider the following statement: For the APT to be useful, the number of systematic risk factors must be small. Do you agree or disagree with this statement?
+
+---
+
+
+
+---
