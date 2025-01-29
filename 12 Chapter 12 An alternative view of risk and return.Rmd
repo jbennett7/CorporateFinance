@@ -43,7 +43,7 @@ Describe the difference betweens sytematic risk and unsystematic risk.
 
 Systematic risk is a risk that affects a large number of assets, each to a greater or lesser degree. Aslo called market risk or common risk. Unsystematic risk is any risk that specifically affects a single asset or a small group of assets. Also called unique, idiosyncratic, or diversifiable risk.
 
-The return of any stock can be writte as:
+The return of any stock can be written as:
 
 $$
 R = \overline{R} + m + \epsilon
@@ -53,8 +53,6 @@ Where m represents systematic risk and $\epsilon$ represents unsystematic or idi
 
 As an example, inflation will influence almost all companies to some extent. Some stocks are more influenced by inflation than others, and sompe companies could be inversely related to inflation as well.
 
-Systematic risk, like inflation, is captured on a stock by using the __beta coefficient__.
-
 ---
 
 ## APT
@@ -63,6 +61,502 @@ Consider the following statement: For the APT to be useful, the number of system
 
 ---
 
+The usefulness of the Arbitrage Pricing Theory (APT) depends on its practicality and explanatory power. While the APT allows for multiple systematic risk factors to explain asset returns, having a small number of factors is critical for the following reasons:
 
+1. __Practical implementation__: Estimating the sensitivity (betas) of an asset to a large number of factors becomes computationally challenging and prone to errors. A smaller set of factors simplifies the estimation process. Identifying and measuring many factors requires extensive data, which may not always be available or reliable.
+
+2. __Interpretability__: A model with too many factors can become difficult to interpret. Investors and analysts prefer models that clearly link a small number of significant factors to asset returns, making the results more actionable.
+
+3. __Risk of overfitting__: Including too many factors increases the risk of overfitting the model to historical data, which reduces its predictive accuracy for future returns.
+
+4. __Economic meaningfulness__: The factors in APT should ideally represent broad economic risks (e.g., interest rates, inflation, or market-wide productivity). A small number of well-chosen factors can adequately capture the systematic risks that drive asset reutns without becoming unwieldy.
+
+---
+
+## APT
+
+David McClemore, the CFO of Ultra Bread, has decided to use an APT model to estimate the required return on the company's stock. The risk factors he plans to use are the risk premium on the stock market, the inflation rate, and the price of wheat. Because wheat is one of the biggest costs Ultra Bread faces, he feels this is a significant risk factor for Ultra Bread. How would you evaluate his choice of risk factors? Are there other risk factors you might suggest?
+
+---
+
+The choices David made for the risk factors---__market risk premium, inflaction rate,__ and __wheat prices__---appears logical given the nature of Ultra Bread's business.
+
+1. The market risk premium is a fundamental systematic risk factor in most asset pricing models, including APT and CAPM. It captures the sensitivity of Ultra Bread's stock to overall market movements.
+
+2. The inflation rate affects the cost of raw materials, wages, and general business expenses, which can impact Ultra Bread's profitability. For a company in the food industry, inflation can also affect consumer purchasing power and demand for its products.
+
+3. The price of wheat is the primary input cost for Ultra Bread, making it a specific and significant risk factor for the company. However, this factor is more __firm-specific__ than systematic, as it primarily affects companies in the bread and bakery industry.
+
+Additional risk factors David could consider would be:
+
+1. Interest rates - rising interest rates can increase borrowing costs and reduce consumer spending, which can negatively impact Ultra Bread.
+
+2. Consumer spending or economic growth - this is a key driver for demand, with economic growth factors (GDP) acting as proxies for consumer demand.
+
+3. Energy prices, such as oil or natural gas, can have a significant impact for both manufactuirng and transportation making it a systematic risk factor.
+
+---
+
+## Systematic and unsystematic risk
+
+You own stock in the Lewis-Striden Drub Company. Suppose you had expected the following events to occur last month:
+
+a. The government would announce that real GNP had grown 1.2 percent during the previous quarter. The returns of Lewis-Striden are positively related to real GNP.
+
+b. The government would announce that inflation over the previous quarter was 3.7 percent. The returns of Lewis-Striden are negatively related to inflation.
+
+c. Interest rates would rise 2.5 percentage points. The returns of Lewis-Striden are negatively related to interest rates.
+
+d. The president of the firm would announce his retirement. The retirement would be effective six months from the announcement day. The president is well liked: In general, he is considered an asset to the firm.
+
+e. Research data would conclusively prove the efficacy of an experimental drug. Completion of the efficacy testing means the drug will be on the market soon.
+
+Suppose the following events actually occurred:
+
+a. The government announced that real GNP grew 2.3 percent during the previous quarter.
+
+b. The government announced that inflation over the previous quarter was 3.7 percent.
+
+c. Interest rates rose 2.1 percentage points.
+
+d. The president of the firm died suddenly of a heart attack.
+
+e. Research results in the efficacy testing were not as strong as expected. The drug must be tested for another six months, and the efficacy results must be resubmitted to the FDA.
+
+f. Lab researchers had a breakthrough with another drug.
+
+g. A competitor announced that it will begin distribution and sale of a medicine that will compete directly with one of Lewis-Striden's top-selling products.
+
+Discuss how each of the actual occurrences affects the return on your Lewis-Striden stock. Which events represent systematic risk? Which events represent unsystematic risk?
+
+---
+
+a. The unexpected increase in the growth of real GNP by 1.1 percent would likely increase the returns of Lewis-Striden stock because they are positively related to the real GNP. This represents a systematic risk.
+
+b. The announcement of inflation in line with what I expected means there will be no influence on the returns. This is also a systematic risk.
+
+c. The unexpected increase in interest rates by .4 percentage points would have a negative influence on the returns since the returns of the stock are negatively related to interest  rates. This too is a systematic risk.
+
+d. The sudden death of the president would be tragic, and I would give my condulances to his friends and family. The company would be in mourning. From the company's perspective, since he was announcing his retirement, I fully expect that he also has a successor in the wings. This would likely have a diminished negative influence on the return. The death of the president of the company is an unsystematic risk.
+
+e. The annoucnement about the research results is disappointing. It will have a negative impact on returns because it will delay the drug from being brought to market. The disappointing research result is an unsystematic risk.
+
+f. The breakthrough with another drug sounds promising. I would like to hear more about it. This could increase returns, depending on the information. The sudden breakthrough in the drug is an unsystematic risk.
+
+g. The competitor's annoucnement about the distribution of a drug to compete with Lewis-Striden's top-selling products will have negative impact on the returns. This is an unsystematic risk.
+
+---
+
+## Market model versus APT
+
+What are the differences between a _k_-factor model and the market model?
+
+---
+
+A _k_-factor model is a model where each stock's return is generated by:
+
+$$
+R = \overline{R} + \beta_1 F_1 + \beta_2 F_2 + \cdots + \beta_k F_k + \epsilon
+$$
+
+where $\epsilon$ is specific to a particular stock and uncorrelated wht the $\epsilon$ term for other stocks.
+
+As an example we can create a three-factor model using Inflation, GNP, and the change in interest rates as examples of systematic sources of risk. or factors. There is no concensus on what factors really matter in a _k_-factor  model.
+
+In practice, researchers use a one-factor model for returns. They would use an index of stock market returns---like the S&P 500---as the single factor. In this case the model would look like:
+
+$$
+R = \overline{R} + \beta (R_{\text{S\&P 500}} - \overline{R}_{\text{S\&P 500}}) + \epsilon
+$$
+
+When there is only one factor (the returns on the S&P 500 portfolio index), the model is called the __market model__.
+
+---
+
+## APT
+
+In contrast to the CAPM, the APT does not indicate which factors are expected to determine the risk premium of an asset. How can we determine which factors should be included? For example, one risk factor suggested is the company size. Why might this be an important risk factor in an APT model?
+
+---
+
+Unlike the CAPM, which relies solely on the market risk premium, the Arbitrage Pricing Theory (APT) is more flexible and allows for multiple systematic risk factors. However, it does not specify which factors to use. The choice of factors should be guided by economic theory, empirical research, and the specific context of the industry or asset being analyzed. Here's how factors can be identified:
+
+### Criteria for selecting risk factors
+
+To determine which factors to include in an APT model:
+
+* __Economic intuition__: Factors should represent broad, systematic risks that impact the overall economy or specific industries (e.g., interest rates, inflation, GDP growth).
+
+* __Empirical evidence__: Factors should be shown through research to have a consistent and significant impact on asset returns (e.g., the Fama-French size factor).
+
+* __Relevance to the asset__: The factor should capture risks that are particularly important for the asset or portfolio under consideration (e.g., commodity prices for a resource-based company).
+
+### Why company size might be an important risk factor
+
+Company size, often measured by market capitalization, is widely recognized as a significant risk factor in empirical asset pricing models like the Fama-French three-factor model. Here's why:
+
+a. __Systematic risk explanation__: smaller companies are typically more volatile and sensitive to economic cycles than larger companies. They may face higher financing constraints, less access to capital, and greater operational risks, making their returns more sensitive to changes in the macroeconomic environment.
+
+b. __Risk premium justification__: investors often demand a higher return for holding smaller companies because hey are perceived as riskier due to their limited resources, lower market liquidity and higher default risk.
+
+c. __Empirical support__: research has consistently shown a "size effect," where smaller firms tend to have higher average returns than larger firms, even after adjusting for market risk.
+
+### Example of other common factors
+
+In addition to company size, other frequently used factors in APT models include:
+
+* __Value vs. growth (Book-to-Market Ratio)__: captures differences in returns between value and growth stocks.
+
+* __Momentum__: Stocks that have performed well in the past tend to continue performing well.
+
+* __Interest rates__: Reflect changes in the cost of borrowing and economic activity.
+
+* __Inflation__: Affects purchasing power and corporate profitability.
+
+* __Industry-specific factors__: Tailored to industries, such as energy prices for oil companies.
+
+### Conclusion
+
+Company size is an important risk factor because it reflects systematic risks associated with small-cap companies, such as higher volatility and greater sensitivity to economic changes. When building an APT model, factors should be selected based on their economic significance, empirical validity, and relevance to the asset or portfolio under consideration. This ensures the model captures the key drivers of risk and return effectively.
+
+---
+
+## CAPM versus APT
+
+What is the relationship between the one-factor model and the CAPM model?
+
+---
+
+In the CAPM, the beta of a security measures the security's responsiveness to movements in the market portfolio. In the one-factor model of the arbitrage pricing theory (APT), the beta of a security measures its responsiveness to the factor.
+
+Both models assume that the returns of assets are driven by a single source of systematic risk. In the CAPM, this systematic risk is reperesented by the __market portfolio__, which captures the overall market movements. In the one-factor model, the systematic risk is represented by a general factor (e.g., an economic index or a market proxy), but it is not explicitly required to be the market portfolio.
+
+---
+
+## Factor models
+
+How can the return on a portfolio be expressed in terms of a factor model?
+
+---
+
+The return of a stock can be summed up:
+
+$$
+R_i = \overline{R}_i + \beta_i F + \epsilon_i
+\tag{1.1}
+$$
+
+The expected return of a portfolio of stocks is the weighted sum of the expected returns of the individual stocks:
+
+$$
+R_p = \sum^N_{i=1}{X_i R_i}
+\tag{1.2}
+$$
+
+Equation (1.1) states that the return of a stock is determined by three paramters:
+
+$$
+\begin{aligned}
+\overline{R}_i &= \text{expected return of the stock}\\
+\beta_i F &= \text{the beta of each security multiplied by the factor, }\ F\\
+\epsilon_i &= \text{the unsystematic risk of each individual security, }
+\end{aligned}
+$$
+
+For a portfolio of stocks this can be stated in the following model:
+
+$$
+\begin{aligned}
+R_p &= \sum^N_{i=1}{X_i \cdot \overline{R}_i}\ &\text{Weighted average of expected returns}\\
+  &+ F \cdot \sum^N_{i=1}{X_i \cdot \beta_i}\ &\text{Weighted average of betas times F}\\
+  &+ \sum^N_{i=1}{X_i \cdot \epsilon_i}\ &\text{Weighted average of unsystematic risks}
+\end{aligned}
+$$
+
+---
+
+## Data mining
+
+What is data mining? Why might it overstate the relationship between some stock attribute and returns?
+
+---
+
+## Factor selection
+
+What is wrong with measuring the performance of a U.S. growth stock manager against a benchmark composed of British stocks?
+
+---
+
+# Problems
+
+## Factor models
+
+A researcher has deteremined that a two-factor model is appropriate to determine the return on a stock. The factors are the percentage change in GNP and an interest rate. GNP is expected to grow by 3.6 percent, and the interest rate is expected to be 3.1 percent. A stock has a beta of 1.3 on the percentage change in GNP and a beta of -.75 on the interest rate. If the expected rate of return on the stock is 12 percent, what is the revised expected return on the stock if GNP actually grows by 3.2 percent and the interest rate is 3.4 percent?
+
+---
+
+$$
+\begin{aligned}
+R &= \overline{R} + \beta_{\text{GNP}} \Delta F_{\text{GNP}}
+  + \beta_{\text{interest rates}} \Delta F_{\text{interest rates}}\\\\
+R_{\text{actual}} &= 12 + 1.3 \cdot (3.2 - 3.6) + (-.75) \cdot (3.4 - 3.1)\\
+  &= 11.26\%\\
+\end{aligned}
+$$
+
+---
+
+## Factor models
+
+Suppose a three-factor model is appropriate to describe the returns of a stock. Information about those three factors is presented in the following chart:
+
+```{r problem 2: factor models: table, echo=F}
+factor <- c("GDP", "Inflation", "Interest rates")
+beta <- c(.006821, -.90, -.32)
+expected.value <- c(14011, .028, .048)
+actual.value <- c(13982, .026, .046)
+df <-data.frame(factor, beta, expected.value, actual.value)
+knitr::kable(df)
+```
+
+a. What is the systematic risk of the stock return?
+b. Suppose unexpected bad news about the firm was announced that causes the stock price to drop by 1.1 percent. If the expected return on the stock is 12.8 percent, what is the total return on this stock?
+
+```{r problem 2a: factor models}
+beta.gdp <- .006821
+delta.gdp <- diff(c(14011,13982))
+beta.inflation <- -.90
+delta.inflation <- diff(c(.028,.026))
+beta.interest <- -.32
+delta.interest <- diff(c(.048, .046))
+(risk <- beta.gdp * delta.gdp + beta.inflation * delta.inflation + beta.interest * delta.interest)
+```
+
+If unexpected news about the stock caused it to drop 1.1 percent and if the expected return was 12.8 percent then the total return of the stock is $R_{\text{stock}} = 12.8 - .20 - 1.1 = 11.5$%.
+
+---
+
+## Factor models
+
+Suppose a factor model is appropriate to describe the returns on a stock. The current expected return on the stock is 10.5 percent. Information about those factors is presented in the following chart:
+
+```{r problem 3: factor models: table, echo=F}
+factor <- c("Growth in GNP", "Inflation")
+beta <- c(1.87, -1.32)
+expected.value <- c(.021, .043)
+actual.value <- c(.026, .048)
+df <- data.frame(factor, beta, expected.value, actual.value)
+colnames(df) <- c("Factor", "Beta", "Expected value", "Actual value")
+knitr::kable(df)
+```
+
+a. What is the systematic risk of the stock return?
+b. The firm announced that its market share had unexpectedly increased from 23 percent to 27 percent. Investors know from past experience that the stock return will increase by .45 percent for every 1 percent increase in its market share. What is the unsystematic risk of the stock?
+c. What is the total return on this stock?
+
+---
+
+$$
+\begin{aligned}
+R &= \overline{R} + m + \epsilon\\
+m &= \text{Systematic risk}\\
+  &= \beta_{\text{GNP growth}} \cdot F_{\text{GNP growth}} + \beta_{I} \cdot F_{I}\\
+  &= (1.87) \cdot (.026 - .021) + (-1.32) \cdot (.048 - .043)\\
+  &= 1.87 \cdot .005 - 1.32 \cdot .005\\
+  &= 0.00275 = .275\%\\\\
+\epsilon &= \text{Unsystematic risk}\\
+  &= (.27 - .23) \cdot .45\\
+  &= 0.018 = 1.8\%\\\\
+R_S &= \overline{R}_S + m + \epsilon\\
+  &= 10.5 + .275 + 1.8\\
+  &= 12.575\%
+\end{aligned}
+$$
+
+---
+
+## Multifactor models
+
+Suppose stock returns can be explained by the following three-factor model:
+
+$$
+R_i = R_F + \beta_1 F_1 + \beta_2 F_2 - \beta_3 F_3
+$$
+
+Assume there is no firm-specific risk. The information for each stock is presented here:
+
+```{r problem 4: multifactor models: table, echo=F,message=F}
+beta.1 <- c(1.55, .81, .73)
+beta.2 <- c(.80, 1.25, -.14)
+beta.3 <- c(.05, -.20, 1.24)
+df <- data.frame(beta.1, beta.2, beta.3)
+rownames(df) <- c("Stock A", "Stock B", "Stock C")
+colnames(df) <- c("$\\beta_1$", "$\\beta_2$", "$\\beta_3$")
+knitr::kable(df)
+```
+
+The risk premiums for the factors are 6.1 percent, 5.3 percent, and 5.7 percent, respectively. If you create a portfolio with 20 percent invested in Stock A, 20 percent invested in Stock B, and the remainder in Stock C, what is the expression for the return on your portfolio? If the risk-free rate is 3.2 percent, what is the expected return on your portfolio?
+
+---
+
+The Portfolio Beta Calculation
+
+$$
+\begin{aligned}
+\beta_{p1} &= w_{A} \beta_{A1} + w_{B} \beta_{B1} + w_{C} \beta{C1}\\
+  &= 0.2(1.55) + 0.2(0.81) + 0.6(0.73) = 0.91\\\\
+\beta_{p2} &= w_{A} \beta_{A2} + w_{B} \beta_{B2} + w_{C} \beta{C2}\\
+  &= 0.2(0.80) + 0.2(1.25) + 0.6(-0.14) = 0.326\\\\
+\beta_{p3} &= w_{A} \beta_{A3} + w_{B} \beta_{B3} + w_{C} \beta{C3}\\
+  &= 0.2(0.05) + 0.2(-0.20) + 0.6(1.24) = 0.714
+\end{aligned}
+$$
+
+The portfolio equation:
+
+$$
+\begin{aligned}
+R_p &= R_F + \beta_{p1} F_1 + \beta_{p2} F_2 + \beta_{p3} F_3\\
+    &= R_F + 0.91 F_1 + 0.326 F_2 - 0.714 F_3
+\end{aligned}
+$$
+
+The expected return on the portfolio
+
+$$
+\begin{aligned}
+E(R_p) &= R_F + \beta_{p1} F_1 + \beta_{p2} F_2 - \beta_{p3} F_3\\
+  &= .032 + .91 \cdot .061 + .326 \cdot .053 - .714 \cdot .057\\
+  &= 0.064 = 6.4\%
+\end{aligned}
+$$
+
+---
+
+## Multifactor models
+
+Suppose stock returns can be explained by a two-factor model. The firm-specific risks for all stocks are independent. The following table shows the information for two diversified portfolios:
+
+```{r problem 5: multifactor models: table, echo=F}
+beta.1 <- c(.85, 1.45)
+beta.2 <- c(1.15, -.25)
+E.R <- c(.16, .12)
+df <- data.frame(beta.1, beta.2, E.R)
+colnames(df) <- c("$\\beta_1$", "$\\beta_2$", "E(R)")
+rownames(df) <- c("Portfolio A", "Portfolio B")
+knitr::kable(df)
+```
+
+If the risk-free rate is 4 percent, what are the risk premiums for each factor in this model?
+
+---
+
+$$
+\begin{aligned}
+E(R)_{A} &= R_F + \beta_{A1} F_1 + \beta_{A2} F_2\\
+E(R)_{B} &= R_F + \beta_{B1} F_1 + \beta_{B2} F_2
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+.16 &= .04 + 0.85 F_1 + 1.15 F_2\\
+.12 &= .04 + 1.45 F_1 - 0.25 F_2
+\end{aligned}
+$$
+
+Subtract .04 from the left side of both equations.
+
+We can solve this as two equations:
+
+```{r problem 4: multifactor models: equations}
+A <- matrix(c(.85, 1.45, 1.15, -.25),ncol=2)
+B <- matrix(c(.12, .08), ncol=1)
+Fs <- solve(A, B)
+colnames(Fs) <- c("Risk Premiums")
+rownames(Fs) <- c("F1", "F2")
+knitr::kable(Fs)
+```
+
+---
+
+## Market model
+
+The following three stocks are avilable in the market:
+
+```{r problem 6: market model: table, echo=F}
+E.R <- c(.105, .13, .157, .142)
+beta <- c(1.2, .98, 1.37, 1)
+
+df <- data.frame(E.R, beta)
+colnames(df) <- c("E(R)", "$\\beta$")
+rownames(df) <- c("Stock A", "Stock B", "Stock C", "Market")
+knitr::kable(df)
+```
+
+Assume the market model is valid.
+
+a. Write the market model equation for each stock.
+b. What is the return on a portfolio with weights of 30 percent Stock A, 45 percent Stock B, and 25 percent Stock C?
+c. Suppose the return on the market is 15 percent and there are no unsystematic surprises in the returns. What is the return on each stock? What is the return on the protfolio?
+
+---
+
+$$
+\begin{aligned}
+R_i &= \overline{R}_i + \beta (R_{\text{market}} - \overline{R}_{\text{market}}) + \epsilon_i\\\\
+R_A &= 0.105 + 1.20 (R_{\text{market}} - 0.142) + \epsilon_A\\
+R_B &= 0.130 + 0.98 (R_{\text{market}} - 0.142) + \epsilon_B\\
+R_C &= 0.157 + 1.37 (R_{\text{market}} - 0.142) + \epsilon_C\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+R_P &= w_A R_A + w_B R_B + w_C R_C\\
+  &= .3 R_A + .45 R_B + .25 R_C
+\end{aligned}
+$$
+
+The risk premium is $R_{\text{market}} - 0.142 = .15 - 0.142 = .008$
+$$
+\begin{aligned}
+R_A &= 0.105 + 1.20 \cdot .008\\
+  &= 0.1146 = 11.46\%\\
+R_B &= 0.130 + 0.98 \cdot .008\\
+  &= 0.1378 = 13.78\%\\
+R_C &= 0.157 + 1.37 \cdot .008\\
+  &= 0.1680 = 16.80\%\\\\
+R_P &= .3 \cdot .1146 + .45 \cdot .1378 + .25 \cdot .1680\\
+  &= 0.1384 = 13.84\%
+\end{aligned}
+$$
+
+---
+
+## Portfolio risk
+
+You are forming an equally weighted portfolio of stocks. Many stocks have the same beta of .84 for Factor 1 and the same beta of 1.69 for Factor 2. All stocks also have the same expected return of 11 percent. Assume a two-factor model describes the return on each of these stocks.
+
+a. Write the equation of the returns on your portfolio if you place only five stock in it.
+
+b. Write the equation of the returns on your portfolio if you place in it a very large number of stocks that all have the same expected returns and the same betas.
+
+---
+
+$$
+\begin{aligned}
+R_p &= R_f + \beta_{p1} F_1 + \beta_{p2} F_2 + \epsilon_p\\\\
+\beta_{p1} &= \frac{\sum^5_{i=1}{\beta_{i1}}}{5} = \beta_{i1} = 0.84\\
+\beta_{p2} &= \frac{\sum^5_{i=1}{\beta_{i2}}}{5} = \beta_{i2} = 1.69\\\\
+R_p &= R_f + 0.84 F_1 + 1.69 F_2 + \epsilon_p
+\end{aligned}
+$$
+
+For a very large number of stocks, the betas stay the same, but the portfolio-specific risk $\epsilon_p \rightarrow 0$. The equation simplifies to:
+
+$$
+R_p = R_f + 0.84 F_1 + 1.69 F_2
+$$
 
 ---
