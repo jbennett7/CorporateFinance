@@ -1,0 +1,1108 @@
+---
+title: "Risk, Cost of Capital, and Valuation"
+author: "Ross, Westerfield, Jaffe"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+# Summary
+
+1. A firm with excess cash can either pay a dividend or make a capital expenditure. Because stockholders can reinvest the dividend in risky financial assets, the expected return on a capital budgeting project should be at least as great as the expected return on a financial asset of comparable risk.
+
+2. The expected return on any asset is dependent on its beta. THus, we showed how to estimate the beta of a stock. The appropriate procedure employs regression analysis on historical returns.
+
+3. Both beta and covariance measure different concpets. Beta is the slope of the regression line and correlation is the tightness of fit around the regression line.
+
+4. We considered the case of a project with beta risk equal to that of hte firm. If the firm is unlevered, the discount rate on the project is equal to:
+
+$$
+R_F + \beta \times (R_M - R_F)
+$$
+
+> where $R_M$ is the expected return on the market portfolio and $R_F$ is the risk-free rate. In words, the discount rate on the project is equal to the CAPM's estimate of the expected return on the security.
+
+5. The beta of a company is a function of a number of factors. Perhaps the three most important are:
+
+> * Cyclicality of revenues.
+> * Operating leverage.
+> * Financial leverage.
+
+6. If the project's beta differs from that of the firm, the discount rate should be based on the project's beta. We can generally estimate the project's beta by determining the average beta of the project's industry.
+
+7. Sometimes we cannot use the average beta of the project's industry as an estimate of the beta of the project. For example, a new project may not fall neatly into any existing industry. In this case, we can estimate the project's beta by considering the project's cyclicality of revenues and its operating leverage. This approach is qualitative.
+
+8. If a firm uses debt, the discount rate to use is the $R_{\text{WACC}}$. To calculate $R_{\text{WACC}}$, we must estimate the cost of equity and the cost of debt applicable ot a project. If the project is similar to the firm, the cost of equity can be estimated using the SML for the fim's equity. Conceptually, a dividend growth model could be used as well, though it is likely to be far less accurate in practice.
+
+9. New projects are often funded by bonds and stock. The costs of issuance, generally called flotation costs, should be included in any NPV analysis.
+
+---
+
+# Concepts
+
+## Project risk
+
+If you can borrow all the money you need for a project at 6 percent, doesn't it follow that 6 percent is your cost of capital for the project?
+
+---
+
+No, it doesn't necessarily follow that 6 percent is your cost of capital for the project, even if you can borrow all the money at that rate.
+
+1. The cost of capital reflects the overall cost of financing the project, which typically includes both debt and equity. Even if a project is entirely debt-financed, equity holders bear residual risk, and their required return (cost of equity) must be considered when evaluating the project.
+
+$$
+\text{Cost of capital} = \left(\frac{S}{S + B}\right) \times R_S
+  + \left(\frac{B}{S + B}\right) \times R_B \times (1 - t_C)
+$$
+
+2. Borrowing at 6 percent does not mean that the cost of capital is 6 percent because: (i) The borrowing rate reflects the lender's assessment of risk, but if the project is risky, the effective cost of financing could be higher. (ii) Adding more debt increases the firm's financial leverage, which can increase the risk (and cost) of both new and existing debt.
+
+3. The cost of debt is reduced by the tax shield because interest payments are tax-debuctible. The after-tax cost of debt is:
+
+$$
+r_D \cdot (1 - T)
+$$
+
+If the corporate tax rate is $T = 30\%$, the after-tax cost of debt is:
+
+$$
+6\% \cdot (1 - 0.3) = 4.2\%
+$$
+
+4. The cost of capital represents the opportunity cost of investing in a specific project instead of alternative investments with similar risk. Even if the debt rate is 6%, the project's cost of capital depends on the risk-adjusted return required by the market.
+
+Thus the borrowing rate of 6% is the cost of debt, not the cost of capital. The cost of capital must account for:
+
+* The required return on equity.
+* The tax shield on debt.
+* The project's overall risk profile.
+
+---
+
+## WACC and taxes
+
+Why do we use an aftertax figure for cost of debt but not for the cost of equity?
+
+---
+
+Because, while firms can deduct their interest payments before paying taxes, dividends are not tax deductible.
+
+---
+
+## SML cost of equity estimation
+
+If you use the stock beta and the security market line to compute the discount rate for a project, what assumptions are you implicity making?
+
+---
+
+You are assuming that the project is in line with the company's industry. If the project the firm is pursuing is in another industry then the discount rate should be different.
+
+You are also assuming that the project's beta is the same as the industry standard which may not be the case, particularly for new ventures.
+
+You are also assuming that the project follows the same industry.
+
+1. The project has the same risk as the stock
+2. The stock beta accurately measures systematic risk
+3. The market portfolio represents all systematic risk
+4. The project's cash flows are full diversifiable
+5. The capital markets are perfect
+6. The risk-free rate and market risk premium are accurate 
+
+---
+
+## SML cost of equity estimation
+
+What are the advantages of using the SML approach to finding the cost of equity capital? What are the disadvatnages? What are the specific pieces of information needed to use this method? Are all of these variables observable, or do they need to be estimated? What are some of the ways in which you could bet these estimates?
+
+---
+
+The advantages of using the security market line (SML) approach
+
+1. The SML approach explicitly links the required return on equity to the systematic risk of the stock (beta), aligning with modern financial theory.
+
+2. It uses market data (e.g., risk-free rate, beta, and market return), making it a forward-looking method that reflects current market conditions.
+
+3. The formula is straightforward and easy to apply:
+
+$$
+r_E = R_F + \beta \cdot (E(R_M) - R_F)
+$$
+
+4. The SML approach accounts for the fact that different firms (or projects) face different levels of systematic risk, as captured by beta.
+
+5. The CAPM and SML are widely used and understood in both academic and professional finance contexts.
+
+Disadvantages of using the SML approach
+
+1. The SML appraoch relies on the assumptions of the CAPM, which may not always hold in practice (e.g., the market portfolio may not fully capture systematic risk).
+
+2. The approach depends on estimates of the risk-free rate, market risk premium, and beta, which can introduce significant uncertainty.
+
+3. It considers only systematic risk relative to the market and ignores other potential risk factors (e.g., size, value, or industry-specific risks).
+
+4. Beta is based on historical data and assumes that past relationships between the stock and the market will hold in the future, which may not alwys be true.
+
+Information needed for the SML approach
+
+1. Risk-free rate ($R_F$)
+2. Beta ($\beta$)
+3. Expected market return ($E(R_M)$)
+4. Market risk premium ($E(R_M) - R_F$)
+
+---
+
+## Cost of debt estimation
+
+How do you determine the appropriate cost of debt for a company? Does it make a difference if the company's debt is privately placed as opposed to being publicly traded? How would you estimate the cost of debt for a firm whose only debt issues are privately held by institutaional investors?
+
+---
+
+In general, the cost of debt is easier to determine. For bonds with a small risk of defaulting, the current yield to maturity is a good estimate of investor expected returns and the cost of borrowing. The firm can generally obtain this information either by checking the yield on publicly traded bonds or by talking to comercial and investment bankers. If the company's debt is privately held then the the borrowing rate on the prospective loan is the cost of debt.
+
+---
+
+## Cost of capital
+
+Suppose Tom O'Bedlam, president of Bedlam Products, Inc., has hired you to determine the firm's cost of debt and cost of equity capital.
+
+a. The stock currently sells for \$50 per share, and the dividend per share will probably be about \$5. Tom argues, "It will cost us \$5 per share to use the stockholders' money this year, so the cost of equity is equal to 10 percent ($=5/50$)." What's wrong with this conclusion?
+
+b. Based on the most recent financial statements, Bedlam Products' total liabilities are \$8 million. Total interest expense for the coming year will be about \$1 million. Tom therefore reasons, "We owe \$8 million, and we will pay \$1 million interest. Therefore, our cost of debt is obviously \$1 million/8 million = 12.5 percent." What's wrong with this conclusion?
+
+c. Based on his own analysis, Tom is recommending that the company increase its use of equity financing because, "debt costs 12.5 percent, but equity only costs 10 percent; thus equity is cheaper." Ignoring all the other issues, what do you think about the conclusion that the cost of equity is less than the cost of debt?
+
+---
+
+a. This version of the cost of equity is using the dividend discount model, but it only takes into account the dividend yield ($\frac{\text{Div}}{\text{P}} = 10\%$). The total cost also includes the expected growth in dividends, reflecting the return investors require for holding the stock.
+
+$$
+R_S = \frac{\text{Div}}{P} + g
+$$
+
+b. The cost of debt should also include the tax shield on interest. The real cost should be calculated:
+
+$$
+\frac{1}{8} \cdot (1 - \text{tax rate})
+$$
+
+c. The conclusion is incorrect because a company's overall cost of capital is determined by its WACC.
+
+$$
+R_{\text{WACC}} = \frac{S}{S + B} \times R_S + \frac{B}{S + B} \times R_B \times (1 - t_C)
+$$
+
+Therefore, proper comparison should focus on how changes in financing affect WACC rather than comparing debt and equity costs in isolation.
+
+---
+
+## Company risk versus project risk
+
+Both Dow Chemical Company, a large natural gas user, and Superior Oil, a major natural gas producer, are thinking of investing in natural gas wells near Houston. Both are all-equity financed companies. Dow and Superior are looking at identical projects. They've analyzed their respective investments, which would involve a negative cash flow now and positive expected cash flows in the future. These cash flows would be the same for both firms. No debt would be used to finance the projects. Both companies estimate that their projects would have a net present value of \$1 million at an 18 percent discount rate and a -\$1.1 million NPV at a 22 percent discount rate. Dow has a beta of 1.25, whereas Superior has a beta of .75. The expected risk premium on the market is 8 percent, and risk-free bonds are yielding 12 percent. Should either company proceed? Should both? Explain.
+
+---
+
+$$
+\begin{aligned}
+R_{\text{Dow}} &= R_F + \beta \cdot (R_M - R_F)\\
+  &= .12 + (1.25)(.08)\\
+  &= .22\\
+R_{\text{Superior}} &= .12 + (.75)(.08)\\
+  &= .18
+\end{aligned}
+$$
+
+According to the above calculations, since both companies are all equity, Dow should not persue the project because its discount rate is 22\% and Superior should persue the project because its discount rate is 18\%.
+
+---
+
+## Divisional cost of capital
+
+Under what circumstances would it be appropriate for a firm to use different costs of capital for its different operating divisions? If the overall firm WACC was used as the hurdle rate for all divisions, would the riskier divisions or the more conserviative divisions tend to get most of the investment projects? Why? If you were to try to estimate the appropriate cost of captial for different divisions, what problems might you encounter? What are two techniques you could use to develop a rough estimate for each division's cost of capital?
+
+---
+
+In general, you should consider using different costs of capital for different divisions especially if each division is in a different industry. If the overall WACC was used as the discount rate, then the riskier projects (ones with higher beta) would be betting most of the investments because those projects will be discounted at a lower rate than they should.
+
+---
+
+## Leverage
+
+Consider a levered firm's projects that have similar risks to the firm as a whole. Is the discount rate for the projects higher or lower than the rate computed using the security market line? Why?
+
+---
+
+---
+
+## Beta
+
+What factors determine the beta of a stock? Devine and describe each.
+
+---
+
+---
+
+# Problems
+
+## Calculating cost of equity
+
+The Dybvig Corporation's common stock has a beta of 1.21. If the risk-free rate is 3.5 percent and the expected return on the  market is 11 percent, what is Dybvig's cost of equity capital?
+
+---
+
+$$
+\begin{aligned}
+R_S &= R_F + \beta \cdot (R_M - R_F)\\
+  &= .035 + (1.21)(.11 - .035)\\
+  &= 0.1258 = 12.58\%
+\end{aligned}
+$$
+
+---
+
+## Calculating cost of debt
+
+Advance, Inc., is trying to determine its cost of debt. The firm has a debt issue outstanding with 17 years to maturity that is quoted at 95 percent of face value. The issue makes semiannual payments and has a coupon rate of 8 percent annually. What is Advance's pretax cost of debt? If the tax rate is 35 percent, what is the aftertax cost of debt?
+
+---
+
+We solve for r:
+
+$$
+\text{Bond Value} = C \cdot \frac{1 - (1 + r)^{-T}}{r} + \frac{F}{(1 + r)^{T}}
+$$
+
+```{r problem 2: calculating cost of debt}
+f <- function(r) 80*(1-(1+r)^(-17))/r + 1000*(1 + r)^(-17) - 1000*.95
+uniroot(f, lower=1e-4, upper=1, tol=1e-8)$root
+```
+
+The rate is 8.57\%. The after tax rate is $0.0857 \times (1 - .35) = 0.0557$
+
+---
+
+## Calculating cost of debt
+
+Shanken Corp. issued a 30-year, 6.2 percent semiannual bond 7 years ago. The bond currently sells for 108 percent of its face value. The company's tax rate is 35 percent.
+
+a. What is the pretax cost of debt?
+b. What is the aftertax cost of debt?
+c. Which is more relevant, the pretax or the aftertax cost of debt? Why?
+
+---
+
+$$
+\text{Bond Value} = C \cdot \frac{1 - (1 + r)^{-T}}{r} + \frac{F}{(1 + r)^{T}}
+$$
+
+```{r problem 3: calculating cost of debt}
+f <- function(r) 62*(1-(1+r)^(-23))/r + 1000*(1 + r)^(-23) - 1000*1.08
+uniroot(f, lower=1e-4, upper=1, tol=1e-8)$root
+```
+
+The pretax rate is 5.57\%. The after tax rate is $.0557 \times (1 - .35) = 0.0362 = 3.62\%$.
+
+The after tax rate is more relevant because, when determining the cost of capital. Interest payments are tax deductable, where as dividend payments are not.
+
+---
+
+## Calculating cost of debt
+
+For the firm in the previous problem, suppose the book value of the debt issue is \$70 million. In addition, the company has a second debt issue on the market, a zero coupon bond with 12 years left to maturity; the book value of this issue is \$100 million and the bonds sell for 61 percent of par. What is the company's total book value of debt? The total market value? What is your best estimate of the aftertax cost of debt now?
+
+---
+
+The book value of the debt is simply the sum of the book values of the two debt issues:
+
+$$
+\text{Book Value} = 70 + 100 = 170\ \text{million dollars}
+$$
+
+The market value of the debt considers the selling price of the bonds:
+
+$$
+\text{Market Value} = 70 \cdot .95 + 100 \cdot .61 = 127.50\ \text{million dollars}
+$$
+
+For a tax rate of 35\% (we calculated the pretax cost of the previous debt as 8.56\%. The after tax yield is $8.56 \times (1 - .35) = 5.56\%$
+
+To calculate the zero-coupon bond yield:
+
+$$
+\begin{aligned}
+P &= \frac{\text{FV}}{(1 + \text{YTM})^{T}}\\
+\text{Where:}\\
+P &= 0.61 \times 1,000 = 610\\
+\text{FV} &= 1,000\\
+\text{T} &= 12\ \text{years}
+\end{aligned}
+$$
+
+We use `R` to solve for the yield:
+
+```{r problem 4: calculating cost of debt}
+f <- function(r) 1000/(1 + r)^(12) - 610
+uniroot(f, lower=1e-4, upper=1, tol=1e-8)$root
+```
+
+The pretax yield is 4.21\%. The after tax yield is $4.21 \times (1 - .35) = 2.74\%$
+
+The total after tax yield is $5.56 + 2.74 = 8.30\%$.
+
+---
+
+## Calculating WACC
+
+Mullineaux Corporation has a target capital structure of 70 percent common stock and 30 percent debt. Its cost of equity is 13 percent, and the cost of debt is 6 percent. The relevant tax rate is 35 percent. What is Mullineaux's WACC?
+
+---
+
+$$
+\begin{aligned}
+R_{\text{WACC}} &= \frac{S}{V} \cdot R_{S} + \frac{B}{V} \cdot R_{B} \cdot (1 - t_C)\\
+  &= .7 \cdot .13 + .3 \cdot .06 \cdot (1 - .35)\\
+  &= .1027 = 10.27\%
+\end{aligned}
+$$
+
+---
+
+## Taxes and WACC
+
+Miller Manufacturing has a target debt-equity ratio of .55 Its cost of equity is 14 percent, and its cost of debt is 7 percent. If the tax rate is 35 percent, what is Miller's WACC?
+
+---
+
+$$
+\begin{aligned}
+R_{\text{WACC}} &= .45 \cdot .14 + .55 \cdot .07 \cdot (1 - .35)\\
+  &= .0880 = 8.80\%
+\end{aligned}
+$$
+
+---
+
+## Finding the capital structure
+
+Fama's Llamas has a weighted average cost of capital of 9.8 percent. The company's cost of equity is 13 percent, and its cost of debt is 6.5 percent. The tax rate is 35 percent. What is Fama's debt-equity ratio?
+
+---
+
+$$
+\begin{aligned}
+R_{\text{WACC}} &= (1 - \text{DE Ratio}) \cdot R_S + \text{DE Ratio} \cdot R_B \cdot (1 - t_C)\\
+9.8 &= (1 - \text{DE}) \cdot .13 + \text{DE} \cdot .065 \cdot (1 - .35)\\
+.098 &= .13 - .13 \cdot \text{DE} + \text{DE} \cdot .04225\\
+.032 &= .13 \cdot \text{DE} - .0422 \cdot \text{DE}\\
+.032 &= .0878 \cdot \text{DE}\\
+\text{DE} &= \frac{.032}{.0878}\\
+  &= .3645
+\end{aligned}
+$$
+
+---
+
+## Book value versus market value
+
+Filer Manufacturing has 8.3 million shares of common stock outstanding. The current share price is \$53, and the book value per share is \$4. Filer Manufacturing also has two bond issues outstanding. The first bond issue has a face value of \$70 million and a coupon rate of 7 percent and sells for 108.3 percent of par. The second issue has a face value of \$60 million and a coupon rate of 7.5 percent and sells for 108.9 percent of par. The first issue matures in 8 years, the second in 27 years.
+
+a. What are Filer's capital structure weights on a book value basis?
+b. What are Filer's capital structure weights on a market value basis?
+c. Which are more relevant, the book or market value weights? Why?
+
+---
+
+The total book value of equity is 8.3 million $\times$ \$4 $=$ 33.2 million dollars.
+
+The two debt issues book values are 70 + 60 = 130 million.
+
+The book debt to equity ratio is $\frac{130}{33.2} = 3.92$.
+
+The capital structure weights on a book value basis are: $\frac{S}{V} = \frac{33.2}{163.2} = .203$ and $\frac{B}{V} = \frac{130}{163.2} = .797$
+
+For market value basis:
+
+The total market value of equity is 8.3 million $\times$ \$53 $=$ 439.9 million dollars.
+
+The two debt issues market values are: $70 \cdot 1.083 = 75.81$ million dollars and $60 \cdot 108.9 = 65.34$ million dollars. $75.81 + 65.34 = 141.15$.
+
+The market debt to equity ratio is $\frac{141.15}{439.9} = .321$.
+
+The capital structure weights on a market value basis are: $\frac{S}{V} = \frac{439.9}{581.05} = .757$ and $\frac{B}{V} = \frac{141.15}{581.05} = .243$.
+
+---
+
+## Calculating the WACC
+
+In the previous problem, suppose the company's stock has a beta of 1.2. The risk-free rate is 3.1 percent, and the market risk premium is 7 percent. Assume that the overall cost of debt is the weighted average implied by the two outstanding debt issue. Both bonds make semiannual payments. The tax rate is 35 percent. What is the company's WACC?
+
+---
+
+The cost of equity
+
+$$
+\begin{aligned}
+R_S &= R_F + \beta \cdot \text{MRP}\\
+  &= .031 + 1.2 \cdot .07\\
+  &= .115
+\end{aligned}
+$$
+
+The cost of debt
+
+```{r problem 9: calculating the wacc: bond 1}
+ f <- function(r) 70 * (1 - (1 + r)^(-8))/r + 1000 / (1 + r)^(8) - 1083
+uniroot(f, lower=1e-4, upper=1, tol=1e-8)$root
+```
+
+```{r problem 9: calculating the wacc: bond 2}
+f <- function(r) 75 * (1 - (1 + r)^(-27)) / r + 1000 / (1 + r)^(27) - 1089
+uniroot(f, lower=1e-4, upper=1, tol=1e-8)$root
+```
+
+$$
+\begin{aligned}
+R_B &= R_{B1} \cdot W_{B1} + R_{B2} \cdot W_{B2}\\
+\text{Where}\\
+R_{B1} &= .057\\
+W_{B1} &= \frac{70}{130}\\
+R_{B2} &= .068\\
+W_{B2} &= \frac{60}{130}\\\\
+R_B &= .062
+\end{aligned}
+$$
+
+The $R_{\text{WACC}}$ is found:
+
+$$
+\begin{aligned}
+R_{\text{WACC}} &= .757 \cdot .115 + .243 \cdot .062 \cdot (1 - .35)\\
+  &= 0.0968
+\end{aligned}
+$$
+
+Therefore $R_{\text{WACC}} = 9.68\%$.
+
+---
+
+## WACC
+
+Kose, Inc., has a target debt-equity ratio of .45. Its WACC is 11.2 percent, and the tax rate is 35 percent.
+
+a. If Kose's cost of equity is 15 percent, what is its pretax cost of debt?
+b. If instead you know that the aftertax cost of debt is 6.4 percent, what is the cost of equity?
+
+---
+
+$$
+\begin{aligned}
+.112 &= .55 \times .15 + .45 \times R_B\\
+R_B &= \frac{.0295}{.45}\\
+  &= .0656\\\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+.112 &= .55 \times R_S + .45 \times .064 \times (1 - .35)\\
+R_S &= \frac{.09328}{.55}\\
+  &= .1696
+\end{aligned}
+$$
+
+---
+
+## Finding the WACC
+
+Given the following information for Huntington Power Co., find the WACC. Assume the company's tax rate is 35 percent.
+
+* _Debt:_ 5,000 6 percent coupon bonds outstanding, \$1,000 par value, 25 years to maturity, selling for 105 percent of par; the bonds make semiannual payments.
+
+* _Common stock:_ 175,000 shares outstanding, selling for \$58 per share; the beta is 1.10.
+
+* _Market:_ 7 percent market risk premium and 5 percent risk-free rate.
+
+---
+
+$$
+R_{\text{WACC}} = \frac{S}{V} R_S + \frac{B}{V} R_B (1 - t_C)
+$$
+
+Total stock market value $175,000 \times 58 = 10,150,000$.
+
+$$
+\begin{aligned}
+R_S &= R_F + \beta \times \text{Market Premium}\\
+  &= .05 + 1.10 \times .07\\
+  &= .127
+\end{aligned}
+$$
+
+Total bonds market value $5,000 \times 1,000 \times 1.05 = 5,250,000$.
+
+To find the current yield, we solve for r in the following:
+
+$$
+\begin{aligned}
+1,000 \times 1.05 &= 60 \times \frac{1 - (1 + r)^{-25}}{r} + \frac{1,000}{(1 + r)^{25}}\\
+0 &= 60 \times \frac{1 - (1 + r)^{-25}}{r} + \frac{1,000}{(1 + r)^{25}} - 1050
+\end{aligned}
+$$
+
+```{r problem 11: finding the WACC: solve for bond R}
+f <- function(r) 60 * (1 - (1 + r)^(-25))/r + 1000/((1 + r)^25) - 1050
+uniroot(f, lower=1e-4, upper=1, tol=1e-6)$root
+```
+
+We find R_{B} to be 5.62\%.
+
+Total stock market value $175,000 \times 58 = 10,150,000$.
+Total bonds market value $5,000 \times 1,000 \times 1.05 = 5,250,000$.
+
+Now we use the firm's capital structure to solve for $R_{\text{WACC}}$:
+
+$$
+\begin{aligned}
+R_{\text{WACC}} &= \frac{S}{V} R_S + \frac{B}{V} R_B (1 - t_C)\\
+  &= \frac{ 10,150,000 }{15,400,000} (.127) + \frac{5,250,000}{15,400,000} (.0562) (1 - .35)\\
+  &= .0837 + .0124\\
+  &= .0961 = 9.61\%
+\end{aligned}
+$$
+
+The $R_{\text{WACC}}$ for the Huntington Power Co. is 9.61\%.
+
+---
+
+## Finding the WACC
+
+Titan Mining Corporation has 9.3 million shares of common stock outstanding and 260,000 6.8 percent semiannual bonds outstanding, par value \$1,000 each. The common stock currently sells for \$34 per share and has a beta of 1.20, and the bonds have 20 years to maturity and sell for 104 percent of par. The market risk premium is 7 percent, T-bills are yielding 3.5 percent, and Titan Mining's tax rate is 35 percent.
+
+a. What is the firm's market value capital structure?
+b. If Titan Mining is evaluating a new investment project that has the same risk as the firm's typical project, what rate should the firm use to disconnect the project's cash flows?
+
+---
+
+The capital structure of Titan Mining Corporation
+
+Firm value:
+
+$$
+\begin{aligned}
+\text{Value of Stocks} &= 9,300,000 \times 34\\
+  &= 316,200,000
+\end{aligned}
+$$
+
+Outstanding Bond value:
+
+$$
+\begin{aligned}
+\text{Value of Bonds} &= 260,000 \times 1,000 \times 1.04\\
+  &= 270,400,000
+\end{aligned}
+$$
+
+Therefore the capital structure of the firm is: $\frac{316,200,000}{586,600,000} = 0.539 = 53.90\%$ Stocks, and $\frac{270,400,000}{586,600,000} = 0.461 = 46.10\%$ Bonds
+
+If the project has the same risk as the firm's typical project it should be okay to use the firms $R_{\text{WACC}}$.
+
+$$
+\begin{aligned}
+R_{\text{WACC}} &= \frac{S}{V} R_S + \frac{B}{V} R_B\\
+  &= \frac{316,200,000}{586,600,000} R_S + \frac{270,400,000}{586,600,000} R_B
+\end{aligned}
+$$
+
+To find $R_S$:
+
+$$
+\begin{aligned}
+R_S &= R_F + \beta_S (R_M - R_F)\\
+  &= .035 + 1.20 \times .07\\
+  &= .119 = 11.90\%
+\end{aligned}
+$$
+
+To find $R_B$:
+
+Semi annual payments means the period (T) is twice as long, and the payments are half the coupon.
+
+$$
+\begin{aligned}
+1,000 \times 1.04 &= \frac{C}{2} \times \frac{1 - (1 + r)^{-T \cdot 2}}{r} + \frac{F}{(1 + r)^{T \cdot 2}}\\
+1,040 &= \frac{68}{2} \times \frac{1 - (1 + r)^{-20 \cdot 2}}{r} + \frac{F}{(1 + r)^{20 \cdot 2}}
+\end{aligned}
+$$
+
+We solve for $r$:
+
+```{r problem 12: finding the wacc: finding the yield}
+f <- function(r) 68/2 * (1 - (1 + r)^(-20*2)) / r + 1000/(1 + r)^(20*2) - 1040
+uniroot(f, lower=1e-4, upper=1, tol=1e-8)$root
+```
+
+$R_S$ is $3.22\% \times 2 = 6.44\%$.
+
+$$
+\begin{aligned}
+R_{\text{WACC}} &= .539 \cdot .119 + .461 \cdot .0644 \cdot  (1 - .35)\\
+  &= .0938 = 8.34\%
+\end{aligned}
+$$
+
+---
+
+## SML and WACC
+
+An all-equity firm is considering the following projects:
+
+```{r problem 13 sml and wacc: table, echo=F}
+project <- c("W", "X", "Y", "Z")
+beta <- c(.8, .95, 1.15, 1.45)
+irr <- c(.094, .109, .13, .142)
+df <- data.frame(project, beta, irr)
+colnames(df) <- c("Project", "Beta", "IRR")
+knitr::kable(df)
+```
+
+The T-bill rate is 3.5 percent, and the expected return on the market is 11 percent.
+
+a. Which projects have a higher expected return than the firm's 11 percent cost of capital?
+b. Which projects should be accepted?
+c. Which projects would be incorrectly accepted or rejected if the firm's overall cost of capital was used as a hurdle rate?
+
+---
+
+$$
+\begin{aligned}
+R_P &= R_F  + \beta_W \cdot (R_M - R_F)\\\\
+R_W &= .035 + 0.80 \cdot (.11 - .035)\\
+  &= 0.095 = 9.50\%\\
+R_X &= .035 + 0.95 \cdot (.11 - .035)\\
+  &= 0.1063 = 10.63\%\\
+R_Y &= .035 + 1.15 \cdot (.11 - .035)\\
+  &= 0.1213 = 12.13\%\\
+R_Z &= .035 + 1.45 \cdot (.11 - .035)\\
+  &= 0.1438 = 14.38\%
+\end{aligned}
+$$
+
+Projects whose IRR exceeds its required return should be accepted.
+
+* Project W IRR=9.4\% < 9.5\%, should be rejected.
+* Project X IRR=10.9\% > 10.63\%, should be accepted.
+* Project Y IRR=13.0\% > 12.13\%, should be accepted.
+* Project Z IRR=14.2\% < 14.38\%, should be rejected.
+
+If we incorrectly used the firm's overall cost of capital was used then Project X, with an IRR=10.9\% < 11\% would be incorrectly rejected, and Project Z with an IRR=14.2\% would be incorrectly accepted.
+
+---
+
+## Calculating flotation costs
+
+Suppose your company needs \$20 million to build a new assembly line. Your target debt-equity ratio is .75. The flotation costs for new equity is 7 percent, but the flotation costs for debt is only 3 percent. Your boss has decided to fund the project by borrowing money because the flotation costs are lower and the needed funds are relatively small.
+
+a. What do you think about the rationale behind borrowing the entire amount?
+b. What is your company's weighted average flotation cost, assuming all equity is raised externally?
+c. What is the true cost of building the new assembly line after taking flotation costs into account? Does it matter in this case that the entire amount is being raised from debt?
+
+---
+
+The rationale to borrow the entire amount because the flotation costs for deb are lower is overly simplistic and may not be the best financial decision. Here is why:
+
+1. The company's target debt-equity ratio is 0.75, which means the company aims for $\frac{3}{7}$ of its funding to come from debt and $\frac{4}{7}$ from equity. Borrowing the entire \$20 million deviates from this target, potentially increasing the firm's financial risk and cost of capital.
+
+2. While debt flotation costs (3\%) are lower than equity flotation costs (7%), debt has associated risks, such as interest obligations, which could increase financial distress or limit flexibility in future financing.
+
+3. Debt might have a lower flotation cost, but it may also lead to a higher overall cost of capital if overused, as it increases financial leverage and risk.
+
+4. The proper way to assess flotation costs is by calculating the weighted average flotation cost based on the target capital structure, not by solely considering the individual cost of debt.
+
+In conclusion, the rationale of borrowing the entire amount overlooks the importance of maintaing the target capital structure and the broader implications for the compnay's financial health.
+
+The weighted average flotation costs, assuming that all equity is raised externally can be calculated:
+
+The debt-equity ratio is .75:
+
+$$
+\begin{aligned}
+\frac{D}{E} &= 0.75\ \text{or}\ \ D = 0.75E\\\\
+V &= D + E = 0.75E + E = 1.75E\\\\
+w_e &= \frac{D}{V} = \frac{0.75}{1.75} = 0.4286\\
+w_d &= \frac{E}{V} = \frac{1}{1.75} = 0.5714\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+f_O &= \frac{E}{V} f_e + \frac{D}{V} f_d\\
+  &= .5714 \cdot .07 + .4286 \cdot .03\\
+  &= 0.0529 = 5.29\%
+\end{aligned}
+$$
+
+The true cost of building the assembly line accounts for flotation costs. The total funds needed after considering flotation costs can be calculated as:
+
+$$
+\begin{aligned}
+\text{True Cost} &= \frac{\text{Project Cost}}{1 - f_w}
+\end{aligned}
+$$
+
+Substitute the values:
+
+$$
+\begin{aligned}
+\text{True Cost} &= \frac{20,000,000}{1 - 0.052857}\\
+\text{True Cost} &= \frac{20,000,000}{0.947143} = 21,121,950
+\end{aligned}
+$$
+
+The true cost of building the assembly line is approximately \$21.12 million.
+
+---
+
+## Calculating flotation costs
+
+Southern Alliance Company needs to raise \$55 million to start a new project and will raise the money by selling new bonds. The company will generate no internal equity for the foreseeable future. The company has a target captial structure of 65 percent common stock, 5 percent preferred stock, and 30 percent debt. Flotation costs for issuing new common stock are 8 percent, for new preferred stock, 5 percent, and for new debt, 3 percent. What is the true initial cost figure Southern should use when evaluating its project.
+
+---
+
+With a capital structure including preferred stock the flotation formula is:
+
+$$
+\begin{aligned}
+f_O &= \frac{S}{V} f_S + \frac{P}{V} f_P + \frac{D}{V} f_D\\
+f_O &= .65 \cdot .08 + .05 \cdot .05 + .30 \cdot .03\\
+  &= 0.0635 = 6.35\%
+\end{aligned}
+$$
+
+---
+
+## WACC and NPV
+
+Och, Inc., is considering a project that will result in initial aftertax cash savings of \$3.5 million at the end of the first year, and these savings will grow at a rate of 4 percent per year indefinitely. The firm has a target debt-equity ratio of .55, a cost of equity of 13 percent, and an after tax cost of debt of 5.5 percent. The cost-saving proposal is somewhat riskier than the usual projects the firm undertakes; management uses the subjective approach and applies an adjustment factor of +2 percent to the cost of capital for such risky projects. Under what circumstances should Och take on the project?
+
+---
+
+To determine whether Och, Inc., should undertake the project, we need to calculate the adjusted discount rate (WACC) and compare the present value of cash flows with the project's cost. Och should take on the project if the present value of fash flows exceeds the project's cost.
+
+The formula for WACC is
+
+$$
+\begin{aligned}
+\text{WACC} &= w_e \times K_e + w_d \times (1 - t_c)
+\end{aligned}
+$$
+
+The debt-equity ratio (D/E) is 0.55.
+
+$$
+\begin{aligned}
+w_d = \frac{D}{D + E} = \frac{.55}{1.55} = 0.35\\
+w_e = (1 - 0.35) = .65
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{WACC} &= (0.65 \times .13) + (0.35 \times .055) = .0845 + .01925 = 10.375\%
+\end{aligned}
+$$
+
+Since the project is riskier, an adjusted factor of +2\% is applied:
+
+$$
+\text{Adjusted WACC} = 10.375\% + 2\% = 12.375\%
+$$
+
+The project generates perpetual after-tax cash savings ($C_1 = 3.5\ \text{million}$) growing at a rate of $g = 4\%$ per year. The formula for the present value of a growing perpetuity is:
+
+$$
+\begin{aligned}
+\text{PV} &= \frac{C_1}{r - g}\\
+  &= \frac{3.5}{.12375 - .04}\\
+  &= 41.78\ \text{million}
+\end{aligned}
+$$
+
+Och should take on the project if the present value of cash flows (PV) exceeds the cost of the project. If the project's cost is less than or equal to \$41.78 million, the project is acceptable.
+
+---
+
+## Preferred stock and WACC
+
+The Saunders Investment Bank has the following financing outstanding. What is the WACC for the company?
+
+#### Debt:
+
+60,000 bonds with coupon rate of 6 percent and a current price quote of 109.5; the bonds have 20 years to maturity. 230,000 zero coupon bonds with a price quote of 17.5 and 30 years until maturity.
+
+#### Preferred stock:
+
+150,000 shares of 4 percent preferred stock with a current price of \$79, and a par value of \$100.
+
+#### Common stock:
+
+2,600,000 shares of common stock; the current price is \$65, and the beta of the stock is 1.15.
+
+#### Market:
+
+The corporate tax rate is 40 percent, the market risk premium is 7 percent, and the risk-free rate is 4 percent.
+
+---
+
+$$
+\begin{aligned}
+R_{\text{WACC}} &= \frac{S}{V} R_S + \frac{P}{V} R_P + \frac{D}{V} R_D\\\\
+S &= 2,600,000 \times 65\\
+  &= 169,000,000\\
+P &= 150,000 \times 79\\
+  &= 11,850,000\\
+D_{\text{coupon}} &= 60,000 \times 1,000 \times 1.095\\
+  &= 65,700,000\\
+D_{\text{zero-coupon}} &= 230,000 \times .175 \times 1,000\\
+  &= 40,250,000\\
+D_{\text{total}} &= 65,700,000 + 40,250,000 = 105,950,000\\\\
+V &= 169,000,000 + 11,850,000 + 105,950,000\\
+  &= 286,800,000\\\\
+\frac{S}{V} &= 0.6855\\
+\frac{P}{V} &= 0.04806\\
+\frac{D}{V} &= 0.2665\\\\
+R_S &= R_F + \beta_S (R_M - R_F)\\
+  &= 0.04 + 1.15 \cdot .07\\
+  &= 0.1205\\
+R_P &= \frac{\text{Div}}{P}\\
+  &= \frac{.04 \times 100 \text{(par value)}}{79}\\
+  &= .0506 = 5.06\%\\
+\end{aligned}
+$$
+
+To find $R_D$:
+
+```{r problem 17: preferred stock and wacc: bond returns}
+f <- function(r) 60 * (1 - (1 + r)^(-20)) / r + 1000 / (1 + r)^(20) - 1000*1.095
+(r.coupon <- uniroot(f, lower=1e-4, upper=1, tol=1e-8)$root)
+f <- function(r) 1000 / (1 + r)^(30) - 17.5
+(r.zero.coupon <- uniroot(f, lower=1e-4, upper=1, tol=1e-8)$root)
+```
+
+Bond weights:
+
+$$
+\begin{aligned}
+w_{\text{coupon}} &= \frac{65,700,000}{105,950,000}\\
+  &= 0.62\\
+w_{\text{zero}} &= \frac{40,250,000}{105,950,000}\\
+  &= 0.38\\\\
+R_{D} &= .62 \cdot .0522 + .38 \cdot .1444
+  &= 0.0873 = 8.73\%
+\end{aligned}
+$$
+
+Now calculate $R_{\text{WACC}}
+
+$$
+\begin{aligned}
+R_{\text{WACC}} &= w_E \cdot R_S + w_P \cdot R_P + w_D \cdot R_D\\
+  &= (.5893) (.1205) + (.0413) (.0506) + (.3694) (.0311)\\
+  &= .0843 = 8.43\%
+\end{aligned}
+$$
+
+---
+
+## Flotation costs
+
+Goodbye, Inc., recently issued new securities to finance a new TV show. The project costs \$19 million, and the company paid \$1,150,000 in flotation costs. In addition, the equity issued had a flotation cost of 7 percent of the amount raised, whereas the debt issued had a flotation cost of 3 percent of the amount raised. If Goodbye issued new securities in the same proportion as its target capital structure, what is the company's target debt-equity ratio?
+
+---
+
+$$
+\begin{aligned}
+f_o &= \frac{S}{V} \times f_S + \frac{B}{V} \times f_B\\
+\text{Where:}\\
+f_o &= \frac{1,150,000}{19,000000}\\
+  &= .0605 = 6.05\%\\
+f_S &= .07\\
+f_D &= .03\\
+\text{Now:}\ \ \frac{S}{V} + \frac{B}{V} = 1\ \ \text{let }\ \frac{B}{V} = x,\ \frac{S}{V} = (1 - x)\\
+.0605 &= .07 \cdot (1 - x) + .03 \cdot x\\
+.0605 &= .03x - .07x + .07\\
+-.947 &= -4x\\
+x &= \frac{.947}{4} = .23675\\
+\frac{B}{V} &= .23675\\
+\frac{S}{V} &= .76325\\\\
+\text{D/E} &= \frac{.23675}{.76325} = 0.31
+\end{aligned}
+$$
+
+---
+
+## Calculating the cost of equity
+
+Floyd Industries stock has a beta of 1.3. The company just paid a dividend of \$.95, and the dividends are expected to grow at 4.5 percent per year. The expected return on the market is 11 percent, and Treasury bills are yielding 4.3 percent. The most recent stock price for Floyd is \$64.
+
+a. Calculate the cost of equity using DDM method.
+b. Calculate the cost of equity using the SML method.
+c. Why do you think your estimates in (a) and (b) are so different?
+
+---
+
+DDM - Dividend Discount Model
+
+$$
+\begin{aligned}
+R_S &= \frac{\text{Div}}{P} + g\\
+  &= \frac{.95*1.045}{64} + .045\\
+  &= .0605 = 6.05\%
+\end{aligned}
+$$
+
+SML method:
+
+$$
+\begin{aligned}
+R_S &= R_F + \beta \times (R_M - R_F)\\
+  &= .043 + 1.3 \times (.11 - .043)\\
+  &= .1301 = 13.01\%
+\end{aligned}
+$$
+
+The DDM estimate (6.05\%) is much lower than the SML estimate (13.01\%) because:
+
+1. DDM is based only on dividends
+2. SML accounts for systematic risk
+
+---
+
+## Firm valuation
+
+Schultz Industries is considering the purchase of Arras Manufacturing. Arras is currently a supplier for Schultz, and the acquisition would allow Schultz to better control its material supply. The current cash flow from assets from Arras is \$7.5 million. The cash flows are expected to grow at 8 percent for the next five years before leveling off to 4 percent for the indefinite future. The cost of capital for Schultz and Arras is 12 percent and 10 percent, respectively. Arras currently has 3 million shares of stock outstanding and \$25 million in debt outstanding. What is the maximum price per share Schultz should pay for Arras?
+
+---
+
+$$
+\begin{aligned}
+\text{NPV}_{\text{5 years}} &= 7.5 \cdot \frac{1 - \left(\frac{1 + .08}{1 + .10}\right)^{5}}{.10 - .08}\\
+  &= 32.87\\\\
+\text{PV}_{\text{at 5 years}} &= \frac{7.5}{1.08}^5\\
+  &= 11.02\\
+\text{PV}_{\text{perpetuity}} &= \frac{11.02}{.10 - .04}\\
+  &= 183.67\\\\
+\text{Enterprise Value} &= 32.87 + 183.67\\
+  &= 216.54\\\\
+\text{Equity Value} &= \text{Enterprise Value} - \text{Debt}\\
+  &= 216.54 - 25 = 191.54\\\\
+\text{Price Per Share} &= \frac{\text{Equity Value}}{\text{Shares Outstanding}}\\
+  &= \frac{91.54}{3}\\
+  &= 63.85
+\end{aligned}
+$$
+
+---
+
+## Firm valuation
+
+Happy Times, Inc., wants to expand its party stores into the Southeast. In order to establish an immediate presence inthe area, the company is considering the purchase of the privately held Joe's Party Supply. Happy Times currently has debt outstanding with a market value of \$140 million and a YTM of 6 percent. The company's market capitalization is \$380 million, and the required return on equity is 11 percent. Joe's currently has debt outstanding with a market value of \$30.5 million. The EBIT for Joe's next year is projected to be \$12.5 million. EBIT is expected to grow 10 percent per year for the next five years before slowing to 3 percent in perpetuity. Net working capital, capital spending, and deprecation as a percentage of EBIT are expected to be 9 percent, 15 percent, and 8 percent, respectively. Joe's has 1.85 million shares outstanding and the tax rate for both companies is 38 percent.
+
+a. Based on these estimates, what is the maximum share price that Happy Times should be willing to pay for Joe's?
+
+b. After examining your analysis, the CFO of Happy Times is uncomfortable using the perpetual growth rate in cash flows. Instead, she feels that the terminal value should be estimated using the EV/EBITDA mutliple. If the appropriate EV/EBITDA multiple is 8, what is your new estimate of the maximum share price for the purchase?
+
+---
+
+Year 1 FCF:
+
+* EBIT: \$12.5 million
+* Taxes: (38\%): \$4.75 million
+* NOPAT: \$7.75 million
+* Add back Depreciation: \$1 million (8\% of EBIT)
+* Less: Increase in Net Working Capital: \$1.125 million (9\% of EBIT)
+* Less: Capital Spending: \$1.875 million (15\% of EBIT)
+* FCF Year 1: \$5.75 million
+
+```{r problem 21: calculate FCF}
+return.on.equity <- .11
+taxes <- .38
+depreciation <- .08
+delta.nwc <- .09
+capex <- .15
+terminal.growth <- 1.03
+five.year.growth <- 1.1
+ebit <- round(12.5 * five.year.growth^(0:4),2)
+fcf <- as.data.frame(round(ebit * (1 - delta.nwc - capex + depreciation - taxes), 2))
+colnames(fcf) <- c("FCF")
+knitr::kable(fcf)
+```
+
+Year 6:
+
+$$
+\begin{aligned}
+\text{FCF}_6 &= \text{FCF}_5 \times (1.03)\\
+  &= 8.65M
+\end{aligned}
+$$
+
+Find WACC:
+
+$$
+\begin{aligned}
+\text{WACC} &= \frac{E}{V}r_e + \frac{D}{V}r_d \times (1 - \text{Tax Rate})\\
+  &= \frac{380}{520}\times .11 + \frac{140}{520} \times .06 \times (1 - .38)\\
+  &= 9.03\%
+\end{aligned}
+$$
+
+Find the terminal value:
+
+$$
+\begin{aligned}
+\text{TV}_5 &= \frac{\text{FCF}_6}{\text{WACC} - g}\\
+  &= \frac{8.65}{.0903 - .03}\\
+  &= 143.5M
+\end{aligned}
+$$
+
+Discount FCFs and Terminal value:
+
+```{r problem 21: firm valuation: discount}
+terminal.value <- 143.5
+discounted <- c(fcf$FCF / (1.0903)^(1:5), terminal.value / (1.0903)^5)
+sum(discounted)
+```
+
+Find Equity value and share price
+
+$$
+\begin{aligned}
+\text{Equity Value} &= \text{Enterprise value} - \text{Debt}\\
+  &= 119.15M - 30.5M\\
+  &= 88.65M\\
+\text{Share Price} = \frac{88.65M}{1.85M} = 47.97
+\end{aligned}
+$$
+
+Adjust using EV/EBITDA
+
+$$
+\begin{aligned}
+\text{EBITDA} &= \text{EBIT} + \text{Depreciation} = 12.5M + (12.5M \times 0.08) = 13.5M\\
+\text{Terminal value} &= 8 \times \text{EBITDA}_5\\
+  &= 8 \times (8.42M + 8.42M \times 0.08)\\
+  &= 72.72M\\\\
+\text{PV}_{\text{TV}} &= \frac{72.72M}{1.0903^5}\\
+  &= 46.86M\\\\
+\text{New enterprise value} &= \sum^5_{t=1}{\text{PV}_t} + \text{PV}_{\text{TV}}\\
+  &= 43.04M\\\\
+\text{New share price} &= \frac{43.04M}{1.85M} = 23.28
+\end{aligned}
+$$
+
+Final answers:
+
+a. \$49.97 using perpetual growth
+b. \$23.28 using EV/EBITDA
