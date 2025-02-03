@@ -1,0 +1,784 @@
+---
+title: "Efficient Capital Markets and Behavioral Challenges"
+author: "Ross, Westerfield, Jaffe"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(xts)
+```
+
+# Summary
+
+1. An efficient securities market processes the information available to investors about the underlying economic value of the securities and incorporates it into the prices of securities. Market efficiency has two general implications. First, in any given time period, a securities' abnormal return depends on information or news recieved by the market in that period. Second, an investor who uses the same information as the market cannot expect to earn abnormal returns. In other words, systems for playing the market are doomed to fail.
+
+2. What information does the market use to determine stock prices?
+
+> a. The weak form of the efficient market hypothesis says that the market uses the history of stock prices and is therefore efficient with respect to these past prices. This implies that stock selection based on patterns of past stock price movements is no better than random stock selection.
+> b. The semistrong form states that the market uses all publicly available information in setting prices.
+> c. Strong form efficiency states that the market uses all of the information that anybody knows about stocks, even inside information.
+
+3. Behavioral finance states that the market is not always efficient. Adherents argue that:
+
+> a. Investors are not rational.
+> b. Deviations from rationality are similar across investors.
+> c. Arbitrage, being costly, does not eliminate inefficiencies.
+
+4. Behavorists point to many studies, including those showing that small stocks outperform large stocks, value stocks outperform growth stocks, and stock prices adjust slowly to earnings suprises, as empirical confirmation of their beliefs.
+
+5. Four implications of market efficiency for corporate finance are:
+
+> a. Managers cannot fool the market through createive accounting.
+> b. Firms cannot successfully time issues of debt and equity.
+> c. Managers cannot profitably speculate in foreign currencies and other instruments.
+> d. Managers can reap many benefits by paying attention to market prices.
+
+## Efficient Market Hypothesis
+
+### Does not say:
+
+* Prices are uncaused.
+* Investors are foolish and too stupid to be in the market.
+* All shares of stock have the same expected returns.
+* Investors should throw darts to select stocks.
+* There is no upward trend in stock prices.
+
+### Does say:
+
+* Prices reflect underlying value.
+* Financial managers cannot time stock and bond sales.
+* Managers cannot profitably speculate in foreign currencies.
+* Managers cannot boost stock prices through creative accounting.
+
+### Why doesn't everybody believe it?
+
+* There are optical illusions, mirages, and apparent patterns in charts of stock market returns.
+* The truth is less interesting.
+* There is evidence against efficiency:
+
+> * Two different, but financially identical, classes of stock of the same firm selling at different prices.
+> * Earnings surprises.
+> * Small versus large stocks.
+> * Value versus growth stocks.
+> * Crashes and bubbles.
+
+### Three forms:
+
+_Weak form:_ Current prices reflect past prices; chartism (technical analysis) is useless.
+
+_Semistrong form:_ Prices reflect all public information; most financial analysis is useless.
+
+_Strong form:_  Prices reflect all that is knowable; nobody consistently makes superior profits.
+
+---
+
+# Concepts
+
+## Firm value
+
+What rule should a firm follow when making financing decisions? How can firms create valuable financing opportunities?
+
+---
+
+### Rules for financing decisions
+
+1. Match financing with asset life (maturity matching principle)
+
+> * Short-term assets (e.g., inventory) $\rightarrow$ Finance with short-term debt
+> * Long-term assets (e.g., property, equipment) $\rightarrow$ Fianance with long-term debt or equity
+
+2. Minimize cost of capital (optimize capital structure)
+
+> * Balance debt (cheaper, tax-deductible) vs. equity (more expensive, but flexible).
+> * Avoid excessive debt to prevent financial distress.
+
+3. Maintain financial flexibility
+
+> * Keep access to credit and maintain a strong credit rating.
+> * Retain earnings for future investments instead of excessive dividends.
+
+4. Consider risk and leverage
+
+> * Higher debt increases risk (financial distress) but reduces tax burden due to interest deductibility.
+> * Use leverage strategically without overburdening the firm.
+
+5. Align with business strategy
+
+> * Growth firms may prioritize equity financing to avoid excessive debt.
+> * Stable firms may use debt financing to benefit from tax advantages.
+
+6. Ensure sufficient liquidity
+
+> * Maintain enough working capital to meet short-term obligations.
+> * Avoid over-reliance on short-term debt, which can lead to liquidity issues.
+
+### Creating valuable financing opportunities
+
+1. Improve creditworthiness
+
+> * Maintain strong financial ratios (e.g., low debt-to-equity, high interest coverage).
+> * Build a solid credit history to access lower interest rates.
+
+2. Leverage tax shields
+
+> * Use debt strategically to benefit from tax-deductible interest.
+
+3. Take advantage of market timing
+
+> * Issue equity when stock prices are high (reduces dilution).
+> * Issue debt when interest rates are low (reduces cost of borrowing).
+
+4. Diversify financing sources
+
+> * Ue a mix of bank loans, bonds, equity, and retained earnings.
+> * Explore alternative financing (e.g., ventur capital, private equity, convertible debt).
+
+5. Hedge against risk
+
+> * Use derivatives, currency swaps, or fixed-rate debt to reduce financial risk.
+
+6. Enhance investor confidence
+
+> * Maintain transparent financial reporting and stable dividend policies.
+> * Develop a reputaiton for consisten profitability and strong governance.
+
+---
+
+## Efficient market hypothesis
+
+Define the three forms of market efficiency.
+
+---
+
+The Efficien Market Hypothesis (EMH), developed by Eugene Fama, states asset prices fully reflect all available information. THere are three forms of market efficiency:
+
+### Weak form efficiency
+
+Stock prices fully reflect all historical price and volume data. This means past price movements cannot predict future prices. Technical analysis (charting, trends) is useless for gaining consistent profits. Fundamenta analysis (financial statements, earnings reports) may still provide an advantage.
+
+### Semi-strong form efficiency
+
+Stock prices reflect all publicly available information, including historical data, earnings reports, news, and macroeconomic factors. Neither technical analysis nor fundamenta analysis can provide an advantage. Only those with inside information could gain an edge.
+
+### Strong form efficiency
+
+Stock prices reflect all information, both public and private (insider information). No investor, even insiders, can consistently outperform the market. Insider trading would not be profitable, as prices already incorporate private knowledge.
+
+Most markets are considered Semi-strong, meaning public information is quickly priced in, but insiders may still have an advantage.
+
+---
+
+## Efficient market hypothesis
+
+Which of the following statements are true about the efficient market hypothesis?
+
+a. It implies perfect forecasting ability.
+b. It implies that prices reflect all available information.
+c. It implies an irrational market.
+d. It implies that prices do not fluctuate.
+e. It results from keen competition among investors.
+
+---
+
+a. Is false. The efficient market hypothesis does not imply perfect forecasting. It states that all forecasting is difficult because prices already reflect all known information. Future price movements are random and depend on new, unpredictable information.
+
+b. Is true. This is the core idea of the hypothesis. Markets incorporate all known information into prices immediately, meaning new information is the only driver of price changes.
+
+c. Is false. The hypothesis assumes a rational market because investors act on available information, market prices are fair and efficient. Some individuals may act irrationally, but their affects are random and therefore cancel out.
+
+d. Is fale. Prices do flucttuate, but they do so in response to new information. Since new information is unpredictable, price movements are also unpredictable, following a random walk pattern.
+
+e. Is true. The hypothesis is driven by competition among investors who constantly analyze and trade based on new information. This competition ensures that prices quickly adjust to reflect all available data.
+
+---
+
+## Market efficiency implications
+
+Explain why a characteristic of an efficient market is that investments in the market have zero NPVs.
+
+---
+
+If an investment has a positive NPV, then it is undervalued. If it has a negative NPV, then it is overvalued.
+
+In an efficient market, stock prices fully reflect all available information. This means:
+
+1. __Fair pricing:__ Investments are priced correctly based on their risk and expected return.
+2. __No arbitrage opportunities:__ Since prices reflect all known information, investors cannot find "undervalued" or "overvalued" securities to exploit.
+3. __Risk-adjusted returns only:__ Investors earn returns appropriate for the level of risk they take, but they do not earn excess proftis beyond what is justified by risk.
+
+If markets are efficient, all investments are priced at their true intrinsic value. Any new information that could affect an investment's value is already incorporated into its price. Since there are no mispricings, the expected return is exactly equal to the required return, leading to NPV=0.
+
+Mathematically:
+
+$$
+\begin{aligned}
+\text{NPV} &= \sum{ \frac{E(\text{cash flows})}{(1 + r)^t} } - \text{initial investment}
+\end{aligned}
+$$
+
+In an efficient market, the discount rate (r) reflects all risks correctly. Since expected cash flows are fully priced into the asset, the sum of discounted future cash flows equals the initial investment. Thus, NPV=0.
+
+---
+
+## Efficient market hypothesis
+
+A stock market analyst is able to identify mispriced stocks by comparing the average price for the last 10 days to the average price for the last 60 days. If this is true, what do you know about the market?
+
+---
+
+If a stock market analyst can consistently identify mispriced stocks using a 10-day moving average vs. a 60-day moving average, this suggests that the market is not weak-form efficient.
+
+### Understanding weak-form efficiency
+
+Weak-form efficiency states that all past prices and trading volume information are already reflected in current stock prices. This means technical analysis (like moving averages, trend patterns, or momentum indicators) should not provide an advantage in predicting future stock prices.
+
+### What does the analyst's success mean?
+
+If the analyst can consistently profit from this strategy, it implies that stock prices do not fully reflect past prices. This contradicts weak-form efficiency, meaning the market is at least inefficent at the weak form level. Investors can exploit trends to generate excess returns, proving that past price data still holds predictive power.
+
+---
+
+## Semistrong efficiency
+
+If a market is semistrong form efficient, is it also weak form efficient? Explain?
+
+---
+
+Yes, if a market is semi-strong form efficient, it must also be weak-form efficient. Semi-strong form efficiency includes weak-form efficiency. If stock prices already reflect all publicly available information, they must also reflect past price and volume data, which is a subset of public information. This means that if the market is semi-strong efficient, it is at least weak-form efficient because historical prices are already incorporated.
+
+However, the reverse is not true. Weak-form efficiency does not guarantee semi-strong efficiency. A weak-form efficient market may still allow profits from analyzing financial statements, earnings reports, or economic indicators (i.e., fundamental analysis). Only when all public information is fully reflected in stock prices does it become semi-strong efficient.
+
+---
+
+## Efficient market hypothesis
+
+What are the implications of the efficient market hypothesis for investors who buy and sell stocks in an attempt to "beat the market"?
+
+---
+
+The efficient market hypothesis states that stock prices fully reflect all available information, making it difficult for investors to consistently outperform the market. Depending on the level of efficiency, the implications for investors vary:
+
+1. If the market is weak-form efficient, the implication is that technical analysis (chart patterns, moving averages) won't work. Stock prices already reflect all historical price and volume data. Trading strategies based on past price trends will not provide excess returns. Fundamental analysis (analyzing financial statements, earnings, etc.) might still work.
+
+2. If the market is semi-strong form efficient, then the implication is that neither technical analysis nor fundamental analysis will work. Stock prices instantly incorporate all publicly available information (earnings reports, news, financial statements). Investors cannot gain an edge by analyzing financial statements because the market has already priced in that information. Only investors with inside information could possibly gain an advantage.
+
+3. If the market is strong-form efficient, then the implication is that no one can consistently beat the market--not even insiders. Stock prices reflect all information, public private (insider information). Even corporate executives or analysts with privileged data cannot gain an edge. The only way to earn higher returns is by taking more risk.
+
+---
+
+## Stocks versus gambling
+
+Critically evaluate the following statements: Playing the stock market is like gambling. Such speculative investing has no social value other than the pleasure people get from this form of gambling.
+
+---
+
+While the stock market and gambling do have similarities there are some key differences.
+
+### Similarities between stock market investing and gambling
+
+There are some aspects of stock trading, particularly short-term speculation, that resemble gambling:
+
+* __Uncertainty & risk:__ Both gambling and stock market investing involve risk and uncertain outcomes. Investors and gamblers can lose money.
+
+* __Speculative trading can be like betting:__ Some investors engage in high-risk trading (e.g., day trading, options trading, meme stocks) without deep research, much like gamblers betting on luck.
+
+* __Emotional investing & addiction:__ Just like gambling addiction, some investors get caught up in market hype and speculation, making emotional rather than rational decisions.
+
+### Key differences between investing and gambling
+
+Investing--especially long-term investing--is fundamentally differnt from gambling:
+
+* __Positive expected returns (in the long run):__ gambling games (like roulette) have a negative expected return due to the house edge. The stock market, historically, has generated positive long-term returns because companies create value over time through innovation, productivity, and growth.
+
+* __Ownership & wealth creation:__ Investors own a share of a real company, which genrates profits, creates jobs, and drives economic growth. Gambling creates no value--it's a zero-sum or negative-sum game where the casino or book maker always takes a cut.
+
+* __Liquidity & capital allocation:__ The stock market allows business to raise capital for expansion, research, and job creation. Gambling does not fund productive activities; it merely redistributes wealth among players.
+
+### The role of speculation: Does it have social value?
+
+The statement claims that speculative investing has no social value, but this is an oversimplification. While excessive speculation can be harmful, some level of speculation is actually beneficial:
+
+* __Improves market efficiency:__ Speculators help ensure that stock prices quickly reflect all available information, makeing markets more efficient. Without speculators, markets would be less liquid, making it harder for long-term investors to buy or sell stocks.
+
+* __Facilitates price discovery:__ Speculative trading helps determine the fair value of assets by incorporating new information into stock prices. For example: when a biotech company announces promising drug trials, speculators help adjust its stock price accordingly.
+
+* __Downside of excessive speculation:__ Causes market bubbles and crashes, and herd mentality and volatility can amplify market swings, making stock prices deviate from fundamental values.
+
+---
+
+## Efficient market hypothesis
+
+Several celebrated investors and stock pickers frequently mentioned in the financial press have recorded huge returns on their investments over the past two decades. Does the success of these particular investors invalidate the EMH? Explain?
+
+---
+
+The existence of highly successful investors like Warren Buffett, Peter Lynch, and Jim Simons raises questions about whether the efficient market hypothesis truly holds. However, their success does not necessarily invalidate EMH.
+
+### EMH does not say that no one can beat the market
+
+The EMH suggests that markets reflect all available information, making it difficult to consistently outperform the market after adjusting for risk. However, EMH does not say that no one will ever outperform the market--only that doing so consistently is extremely rare and difficult. Some investors will naturally beat the market over long periods due to skill, superior strategies, or even luck.
+
+### Can skill and strategy lead to market outperformance?
+
+While EMH suggests that stock prices fully reflect all available information, some investors may have advantages that help them beat the market:
+
+* __Superior information & analysis:__ Investors like Warren Buffett focus on value investing, identifying stocks that are fundamentally undervalued. Buffett's strategy is based on long-term business fundamentals, not short-term speculation.
+* __Behavioral & market inefficiencies:__ The EMH assumes rational investors, but in reality, psychological biases (e.g., fear, greed, herd behavior) create inefficiencies that skilled investors can exploit. An example is Jim Simon's Renaissance Technologies uses mathematical models to exploit small market inefficiencis before they disappear.
+* __Risk-taking and patience:__ Some investors may simply be more willing to take risks or hold investments for long periods, leading to higher returns.
+
+### Survivorship bias & the role of luck
+
+* The financial media only highlights the winners, but for every successful investor, many others fail and go unnoticed. This is called survivorship bias--we only see the investors who made it, not the thousands who underperformed. If 10,000 investors randomly picked stocks for 30 years, some would outperform simply by luck.
+
+### The strongest evidence supporting EMH
+
+Despite the success of some investors, the majority of professional fund managers fail to beat the market over time. If markets were inefficient, we would expect a majority of skilled professionals to outperform, but they don't.
+
+---
+
+## Efficient market hypothesis
+
+For each of the following scenarios, discuss whether profit opportunities exist from trading in the stock of the firm under the conditions that (1) the market is not weak form efficient, (2) the market is weak form but not semi-strong form efficient, (3) the market is semi-strong form but not strong form efficient, and (4) the market is strong form efficient.
+
+a. The stock price has risen steadily each day for the past 30 days.
+b. The financial statements for a company were released three days ago, and you believe you've uncovered some anomalies in the company's inventory and cost control reporting techniques that are causing the firm's true liquidity strength to be understated.
+c. You observe that the senior management of a company has been buying a lot of the company's stock on the open market over the past week.
+
+---
+
+### Scenario A: The stock price has risen steadily each day for the past 30 days.
+
+__Analysis:__ If past price trends predict future prices, traders could profit using momentum strategies (buying stocks that have been rising).
+
+1. __Not weak-form efficient:__ Yes, traders can exploit momentum by buying rising stocks.
+2. __Weak but not semi-strong:__ No, past prices are already reflected, so momentum strategies won't work.
+3. __Semi-string but not strong:__ No, even fundamental analysis won't help if markets are efficient.
+4. __Strong-form efficient:__ No, even insider info wouldn't help in this case.
+
+### Scenario B: Financial statements for a company were released three days ago, and you believe you've uncovered some anomalies in the company's inventory and cost control reporting techniques that are causing the firm's true liquidity strength to be understated.
+
+__Analysis:__ If these anomalies suggest the company is stronger than reported, the stock price may be undervalued, and you could buy before others recognize the opportunity.
+
+1. __Not weak-form efficient:__ Yes, even historical trends can be useful, but fundamental analysis is the key here.
+2. __Weak but not semi-strong:__ Yes, since markets are not semi-strong, public financial data isn't fully priced in, allowing investors to profit.
+3. __Semi-strong but not strong:__ No, publicly available information is already priced in. If you see it, so does the market.
+4. __Strong-form efficient:__ No, even insider info wouldn't help.
+
+### Scenario C: You boserve that the senior management of a company has been buying a lot of the company's stock on the open market over the past week.
+
+__Analysis__: If insiders are buying, it could indicate confidence in future performance. However, trading based on this information depends on market efficiency.
+
+1. __Not weak-form efficient:__ Yes, past patterns in insider trading could be useful.
+2. __Weak but not semi-strong:__ Yes, if markets are not semi-strong, publicly available insider trades may not be priced in yet.
+3. __Semi-strong but not strong:__ Yes, since this involves insider knowledge, it's not publicly known information, and there's an advantage.
+4. __Strong-form efficient:__ No, if the market is strong-form efficient, even private insider info is already reflected in the stock prices.
+
+---
+
+Use the following information for the next two questions:
+
+Technical analysis is a controversial investement practice. Technical analysis covers a wide array of techniques, which are all used in an attempt to predict the direction of a particular stock or market. Technical analysts look at two major types of information: Historical stock prices and investor sentiment. A technical analyst would argue these two information sets provide information about the future direction of a particular stock or the market as a whole.
+
+## Technical Analysis
+
+What would a technical analyst say about market efficiency?
+
+---
+
+A technical analyst relies on historical stock prices and investor sentiment to predict future stock movements. This directly challenges the efficient market hypothesis, which states that all available information is already reflected in stock prices. The response of a technical analyst to market efficiency depends on whic form of EMH is being considered.
+
+### Weak-form efficiency: The biggest challenge to technical analysis
+
+EMH claims that all past stock prices and trading volume data are already reflected in stock prices, making historical price patterns useless for predicting future prices. A technical analyst would disagree. They believe price trends, momentum, and chart patterns can be used to forecast stock movements. However, extensive studies show technical analysis does not consistently generate excess returns, which supports efficiency.
+
+If markets are weak-form efficient, then technical analysis shouldn't work--but technical traders argue that trends and investor behavior create exploitable opportunities.
+
+### Semi-strong form efficiency: Can public information be useful?
+
+Stock prices reflect all publicly available information, including financial statements, earnings reports, and news. The technical analyst partially agrees, but believes that markets react slowly to new information, creating opportunities. However, fundamental analysis (not technical anaysis) would be needed to exploit these inefficiences, but even that rarely works in semi-strong efficient markets.
+
+If markets are semi-strong efficient, technical analysis has little value. Instead, fundamenta analysis might have some use--though most fund managers still fail to beat the market.
+
+### Strong form efficiency: No hope for technical analysis
+
+Stock prices reflect all information--public and private (insider knowledge), so no one can consistently beat the market. Technical analyst would strongly disagree with this, but they would also have no way of gaining an edge in this type of market. Strong form efficiency is unrealistic becasue insider trading sometimes leads to excess profits, proving that not all information is reflected instantly.
+
+If markets are strong form efficient, then neither technical analysis nor insider information would be useful for profiting.
+
+---
+
+## Investor sentiment
+
+A technical analysis tool that is sometimes used to predict market movements is an investor sentiment index. AAII, the American Associaiton of Individual Investors, publishes an investor sentiment index based on a survey of its memebers. In the following table you will find the percentage of investors who were bullish, bearish, or neutral during a four-week period:
+
+```{r concept 12: investor sentiment: table, echo=F}
+Week <- c(1, 2, 3, 4)
+Bullish <- c(37, 52, 29, 43)
+Bearish <- c(25, 14, 35, 26)
+Neutral <- c(38, 34, 36, 31)
+df <- data.frame(Week, Bullish, Bearish, Neutral)
+knitr::kable(df)
+```
+
+What is the investor sentiment index intended to capture? How might it be useful in technical analysis?
+
+---
+
+The investor sentiment index aims to measure the overall mood or attitude of investors in the market, specifically how many are feeling bullish, bearish, or neutral at any given time. It is usually derived from surveys of investors (like the AAII Investor Sentiment Survey) and captures investor emotions and psychology, which often drive short-term market movements.
+
+The investor sentiment index can be useful in:
+
+1. __Identifying market trends or reversals:__ Technical analysts often believe that investor sentiment can be a leading indicator of market movements. For example, when a high percentage of investors are bullish, it may indicate that the market is overbought, and a reversal or correction might be coming (a form of contrarian analysis). Conversely, a high percentage of bearish sentiment may signal that the market is oversold, and a potential rally migh be on the horizon. An example use is if a period of low bullish sentiment is followed by an increase in bullishness, it might suggest an upcoming bullish trend.
+
+2. __Contrarian indicators:__ Contrarian investors argue that when most investors are bullish, it may indicate that the market is already at or near its peak, and a correction is likely. Conversely, when bearish sentiment is high, the market may be near the bottom, suggesting a buying opportunity. An example is if a sentiment index shows extreme bearishness (e.g., 60\% of investors are bearish), a contrarian might view this as a sign that th emarket is undervalued and consider buying.
+
+3. __Sentiment as a complement to other technical indicators:__ The entiment index can complement other technical analysis tools like moving averages, RSI, MACD, etc., to confirm or challenge the predictions made by those indicators. For instance, if the technical indicators suggest that a stock is overbought, but investor sentiment remains overwhelmingly bullish, the technical analyst may proceed with caution as extreme sentiment could indicate that the trend has more room to run.
+
+4. __Timing the market:__ Since the investor sentiment index reflects how investors feel, it can be particularly useful for timing market entry and exit points. For example, a period of extreme bullishness (e.g., 70\% bullish) might suggest a good time to sell, while extreme bearishness (e.g., 70\% bearish) could indicate a buying opportunity. Sentiment often tends to be a short-term contrarian signal rather than a long-term indicator.
+
+--- 
+
+## Performance of the pros
+
+In the middle to late 1990s, the performance of the pros was unusually poor--on the order of 90 percent of all equity mutual funds underperformed a passively managed index fund. How does this bear on the issue of market efficiency?
+
+---
+
+The unusually poor performance of professional fund managers in the mid-to-late 1990s, where about 90\% of equity mutual funds underperformed a passively managed index fund, strongly supports the efficient market hypothesis--particularly its semi-strong form.
+
+1. If markets were inefficient, skilled fund managers should consistently be able to outperform the market by identifying mispriced securities. However, the fact that most active managers failed to beat a simple index fund suggests that stock prices already reflect all available public information, making it difficult to generate excess returns through stock picking or market timing.
+
+2. The semi-strong form of EMH states that all publicly available information is already incorporated into stock prices. Since mutual funds rely on fundamental and technical analysis--both of which use publicly available information--their failure to outperform index funds implies that these strategies do not provide an edge.
+
+3. Even if some fund managers occasionally beat the market before fees, their higher costs (management fees, trading costs, etc.) erode returns, making passive investing a more attractive option. This aligns with the idea that after accounting for costs, actively managed funds tend to underperform passive index funds over time.
+
+4. If  markets were inefficient, we would expect to see consistent outperformance by skilled managers. Instead, most outperformance appears random and temporary, further supporting the idea that market prices are difficult to predict.
+
+---
+
+## Efficient markets
+
+A hundred years ago or so, companies did not compile annual reports. Even if you owned stock in a particular company, you were unlikely to be allowed to see the balance sheet and income statement for the company. Assuming the market is semistrong form efficient, what does this say about market efficiency then compared to now?
+
+---
+
+### Market efficiency in the past (Early 1900s)
+
+Without publicly available financial statements, stock prices were largely driven by rumors, insider information, and speculation rather than fundamental data. Because only company insiders had access to financial details, markets were likely not even weak-form efficient, let alone semi-strong efficient. Investors relied on word of mouth, newspapers, and personal connections rather than structured analysis. Insiders had a massive advantage, meaning markets were closer to strong-form inefficieny, where only those with private information could profit consistently.
+
+### Market efficiency today
+
+Today, thanks to SEC regulations, mandatory financial reporting, and instant information dissemination, stock prices incorporate publicly available financial data almost immediately. The semi-strong form of EMH states that all publicly available information is already reflected in stock prices, meaning analyzing financial reports, news, and earnings statements shouldn't provide a consistent advantage. With the rise of the internet, algorithmic trading, and financial news services, markets adjust to new information within minutes or even seconds.
+
+### Conclusion
+
+If the market was semi-strong form efficient today, but not even weak-form efficient in the past, then efficiency has dramatically improved over time. The availability of public financial statements, real-time news, and regulatory oversight has leveled the playing field, making it much harder for investors to consistently outperform the market through publicly available data.
+
+---
+
+## Efficient market hypothesis
+
+Aerotech, an aerospace technology research firm, announced this morning that it has hired the world's most knowledgeable and prolific space researchers. Before today Aerotech's stock had been selling for \$100. Assume that no other information is received over the next week and the stock market as a whole does not move.
+
+a. What do you expect will happen to Aerotech's stock?
+b. Consider the following scenarios:
+
+> i. The stock price jumps to \$118 on the day of the announcement. In subsequent days it floats up to \$123, then falls back to \$116.
+> ii. The stock price jumps to \$116 and remains at that level.
+> iii. The stock price gradually climbs to \$116 over the next week.
+
+Which scenario(s) indicate market efficiency? WHich do not? Why?
+
+---
+
+Since Aerotech announced the hiring of top space researchers, this news likely increases expectations for the company's future innovation, research output, and potential profitability. Under the efficient market hypothesis (EMH), if the market is semi-strong form efficient, the stock price should immediately adjust to reflect the value of this new information. If the market is inefficient, the stock price may take time to adjust, or it may overreact or underreact. Thus, if markets are efficient, Aerotech's stock should quickly increase to a new fair value reflecting the announcement.
+
+For the scenarios:
+
+### The stock jumps to \$118, then fluctuates to \$123 before settling at \$116.
+
+This does not indicate market efficiency. The initial jump to \$118 suggests the market reacts quickly to the news, which is expected in an efficient market. However, the further rise to \$123 followed by a drop to \$116 suggests that investors initially overreacted to the news, causing the stock to overshoot its fair value before correcting. This behavior suggests the market is not perfectly efficient and may be prone to irrational exuberance or speculative trading.
+
+### The stock jumps to \$116 and stays there
+
+This does indicate market efficiency. The stock immediately incorporates the new information and adjusts to the correct price without further fluctuation. This aligns with semi-strong form efficiency, where prices reflect all publicly available information without delay or overreaction. This scenario suggests an efficient market, as prices fully and correctly reflect the impact of the announcement without unnecessary movements.
+
+### The stock gradually climbs to \$116 over a week
+
+The slow climb suggests that the market takes time to absorb and react to the new information, which contradicts the efficient market hypothesis. In an efficient market, prices should adjust immediately rather than gradually. This scenario indicates a market inefficiency, as some investors are able to profit from delayed price adjustments.
+
+---
+
+## Efficient market hypothesis
+
+When the 56-year-old founder of  Gult & Western, Inc., died of a heart attack, the stock price immediately jumped from \$18.00 a share to \$20.25, a 12.5 increase. This is evidence of the market inefficiency because an efficient stock market would have anticipated his death and adjusted the price beforehand. Assume that no other information is received and the stock market as a whole does not move. Is this statement about market efficiency true or false? Explain.
+
+---
+
+This is false, the market cannot anticipae unpredictable events like a sudden heart attack, so the price jump does not indicate market inefficiency.
+
+The efficient market hypothesis states that the stock price fully reflects all available information. The sudden death of the founder is not information that was known before. Once the information is publicly available the stock price adjusted to the information as the efficient market hypothesis predicts.
+
+---
+
+## Efficient market hypothesis
+
+Today, the following announcement was made: "Early today the Justice Department reached a decision in the Universal Product Care (UPC) case. UPC has been found guilty of discriminatory practices in hiring. For the next five years, UPC must pay \$2 million each year to a fund representing victims of UPC's policies." Assuming the market is efficient, should investors not buy UPC stock after the announcement because the litigation will cause an abnormally low rate of return? Explain.
+
+---
+
+No, investors should not necessarily avoid buying UPC stock just because of the litigation announcment.
+
+1. __Market efficiency and information incorporation:__ If the market is semi-strong form efficient, all publicly available information, including the litigation ruling, is immediately reflected in UPC's stock price. This means that the expected financial impact of the \$2 million annual payments for five years (a total of \$10 million) has already been factored into the stock prices at the time of the announcement.
+
+2. __No arbitrage opportunity:__ Since the market has already adjusted the stock price based on the new information, investors cannot expect an abnormally low or high rate of return from buying or selling UPC stock after the announcement. Any investor selling after the news is simply selling at a price that already accounts for the penalty, meaning they do not avoid future losses related to this event.
+
+3. __Rational investment decision post-announcement:__ The only reason to avoid UPC stock now would be if an investor believes that the penalty is worse than the  market realizes (e.g., additional hidden costs, reputational damage), the company may face more lega trouble in the future, or the litigation will impact UPC's long-term growth prospects beyond what is already priced in.
+
+---
+
+## Efficient market hypothesis
+
+Newtech Corp. is going to adopt a new chip-testing device that can greatly improve its production efficiency. Do you think the lead engineer can profit from purchasing the firm's stock before the news release on the device? After reading the announcement in _The Wall Street Journal_, should you be able to earn an abnormal return from purchasing the stock if the market is efficient?
+
+---
+
+Yes, the engieer can profit from buying the stock, but it would be illegal insider trading. The lead engineer possesses material, nonpublic information about Newtech Corp.'s upcoming chip-testing device. If they buy shares before the news is publicly released and the stock price rises afterward, they would earn a profit based on private, privileged information. This violates insider trading laws, which prohibit company insiders from trading based on confidential, market-moving information. In an efficient market (especially strong-form efficiency), even insiders would not be able to consistently profit, as all information--including private data--would already be reflected in prices.
+
+No, I would not be able to profit after reading the story in the _Wall Street Journal_. If the market is semi-strong form efficient, all publicly available information (including the announcement) is immediately incorporated into the stock price. By the time you read the article, the stock price has already adjusted to reflect the news. You cannot earn an abnormal return from trading on public information because thousands of investors and traders have already acted on it.
+
+---
+
+## Efficient market hypothesis
+
+TransTrust Corp. has changed how it accounts for inventory. Taxes are unaffected, although the resulting earnings report released this quarter is 20 percent higher than what it would have been under the old accounting system. There is no other surprise in the earnings report, and the change in the accounting treatment was publicly announced. If the market is efficient, will the stock price be higher when the market learns that the reported earnings are higher?
+
+---
+
+No. If the market is efficient and the market already knows of the change, then there should be no change in the price and no real economic impact. The increase in earnings is purely an accounting change, meaning it does not affect cash flows, taxes, revenue, or company's fundamental value.
+
+---
+
+## Efficient market hypothesis
+
+The Durkin Investing Agency has been the best stock picker in the country for the past two years. Before this rise to fame occurred, the Durkin newsletter had 200 subscribers. Those subscribers beat the market consistently, earning substantially higher returns after adjustment for risk and transaction costs. Subscriptions have skyrocketed to 10,000. Now, when the Durking Investing Agency recommends a stock, the price instantly rises several points. The subscribers currently earn only a normal return when they buy recommended stock because the price rises before anybody can act on the information. Briefly explain this phenomenon. Is Durkin's ability to pick stocks consistent with market efficiency?
+
+---
+
+Initially, when Durkin Investing Agency had only 200 subscribers, its stock recommendations were relatively unknown to the broader market. The subscribers who acted on the recommendations before the rest of the market did could buy stocks at lower prices before they increased, leading to consistent above-market returns. However as subscriptions grew to 10,000, the situation changed.
+
+Now, whenever Durkin recommends a stock, thousands of subscribers attempt to buy it immediately. This massive buying pressure immediately drives up the stock price before most investors can act. By the time subscribers can place their trades, the price has already adjusted, eliminating any profit opportunity.
+
+As soon as Durking publishes a recommendation, the information is widely known and immediately priced in. This is consistent with the semi-strong form of market efficiency, which states that all publicly available information is already reflected in stock prices. Since Durkin's recommendations are no longer private information, they can no longer generate excess returns.
+
+Durkin's stock-picking ability is consistent with a semi-strong efficient market. Before Durking became famous, his recommendations provided private information to a small group of subscribers, allowing them to earn excess returns--this suggests the market may not have been fully efficient at that time. Now that his recommendations are widely followed, stock prices adjust instantly, and subscribers only earn normal returns--which aligns with semi-strong form efficiency.
+
+---
+
+## Efficient market hypothesis
+
+Your broker commented that well-managed firms are better investments than poorly managed firms. As evidence your broker cited a recent study examining 100 small manufacturing firms that eight years earlier had been listed in an industry magazine as the best-managed small manufacturers in the country. In the ensuing eight years, the 100 firms listed have not earned more than the normal market return. Your broker continued to say that if the firms were well managed, they should have produced better-than-average returns. If the market is efficient, do you agree with the borker?
+
+---
+
+In an efficient market, particularly a semi-strong form efficient market, stock prices already reflect all publicly available information, including data on management quality. If these firms were publicly recognized as the "best-managed" eight years ago, investors would have immediately incorporated this information into stock prices at that time. As a result, the stock prices would have already been bid up to reflect expectations of superior performance. Future returns would then be normal, as prices had already adjusted to reflect the firms' strong management.
+
+Efficient markets react to unexpected information, not known facts. To consistently earn better-than-market returns, a firm must provide positive surprises, not just be well-managed. If these well-managed firms met expectations but didn't outperform what was already anticipated, their stock returns would only match the market average.
+
+The fact that these firms did not earn more than the market return does not mean they were bad investments. It simply means that the market had already priced in their quality, and their returns matched what was expected.
+
+---
+
+## Efficient market hypothesis
+
+A famous economist just announced in _The Wall Street Journal_ his findings that the recession is over and the economy is again entering an expansion. Assume market efficiency. Can you profit from investing in the stock market after you read this announcement?
+
+---
+
+No, you cannot profit from investing in the stock market after reading this announcement--if the market is efficient. The information will already be priced in. The economist's announcement was published in _The Wall street Journal_ meaning it is public information. In a semi-strong efficient market, stock prices immediately adjust to reflect all publicly available information. By the time you read the news, investors and traders have alredy acted on it driving stock prices up before you can invest.
+
+---
+
+## Efficient market hypothesis
+
+Suppose the market is semistrong form efficient. Can you expect to earn excess returns if you make trades based on:
+
+a. Your broker's information about record earnings for a stock?
+b. Rumors about a merger of a firm?
+c. Yesterday's announcement of a successful new product test?
+
+---
+
+If the market is semi-strong form efficient, stock prices already reflect all publicly available information. This means that only private, non-public (insider) information could lead to excess returns.
+
+a. No, you cannot earn excess returns. Earnings reports are publicly available information and are incorporated into the stock price as soon as they are released. By the time your broker shares this news, the market has already adjusted to reflect the record earnings. Only unexpected earnings surprises (positive or negative) would cause abnormal stock price movements.
+
+b. Maybe, but only if the rumors are not widely known. If the rumor is already widely known and discussed in public forums or financial news, then it is already priced into the stock, and no excess returns are possible. However, if the rumor is not yet fully public and you act before it spreads, there may still be a chance to profit.
+
+c. No. Since the announcement happedned yesterday, the information is already publicly known and priced into the stock. The only way you could profit is if the market had not yet fully reacted, which would suggest the market is inefficient.
+
+---
+
+## Efficient market hypothesis
+
+Imagine that a particular macroeconomic variable that influences your firm's net earnings is positively serially correlated. Assume market efficiency. Would you expect price changes in your stock to be serially correlated? Why or why not?
+
+---
+
+No, you would not expect price changes in your stock to be serially correlated--if the market is efficient. Market efficiency means prices already reflect all available information. In a semi-strong efficient market stock prices immediately adjust to incorporate all publicly available information, including macroeconomic variables that influence net earnings. If a macroeconomic variable is positively serially correlated, investors analysts will already anticipate its impact on net earnings before it fully unfolds. As a result, stock prices will immediately adjust to reflect these expectations, preventing any predictable patterns in future price changes.
+
+Price changes should be random, not predicable. If stock price changes were also serially correlated, then past price movements would help predict future price changes. This would mean investors could consistently profit by trading on past price trends, which contradicts market efficiency. In an efficient market, stock prices follow a random walk, meaning price changes are not systematically related to past price changes.
+
+Only unexpected changes matter. Since stock prices react to new, unexpected information, only surprises in macroeconomic variable (deviations from expected trends) could lead to price changes. If investors already expect a positively seriall correlated macroeconomic trend, then the stock price has already adjusted to reflect that expectation. Only unexpected shifts (not the known correlation) would move stock prices.
+
+---
+
+## Efficient market hypothesis
+
+The efficient market hypothesis implies that all mutual funds should obtain the same expected risk-adjusted returns. Therefore, we can simply pick mutual funds at random. Is this statement true or false? Explain.
+
+---
+
+False. The efficient market hypothesis does not imply that all mutual funds will obtain the same expected risk-adjusted returns.
+
+Efficient market hypothesis implies that active management should not consistently outperform passive strategies on a risk-adjusted basis. Risk-adjusted returns can vary based on the funds strategy. 
+
+Differences in fees and expenses can affect returns.
+
+---
+
+## Efficient market hypothesis
+
+Assume that markets are efficient. During a trading day American Gulf Inc. announces that it has lost a contract for a large golfing project that, prior to the news, it was widely believed to have secured. If the market is efficient, how should the stock price react to this information if no additioanl information is released?
+
+---
+
+In an efficient market, stock prices react quickly and appropriately to new information. The stock price should immediately drop upon the announcement, reflecting the news that American Gulf Inc. has lost th econtract it was previously believed to have secured.
+
+---
+
+## Efficient market hypothesis
+
+Prospectors, Inc., is a publicly traded gold prospecting company in Alaska. Although the firm's searches for gold usually fail, the prospectors occasionally find a rich vein of ore. What pattern would you expect to observe for Prospectors' cumulative abnormal returns if the market is efficient?
+
+---
+
+In an efficient market, stock prices reflect all publicly available information. This includes the probability of success and failure in the gold prospecting business, as well as the occasional discovery of valuable ore. The expected cumulateive abnormal returns (CAR), with normal returns (No new information is released). On a day-to-day basis, Prospectors, Inc. would likely experience normal returns (i.e., returns in line with the overall market, adjusted for the firm's risk profile. This is because stock prices already reflect the firm's expected future performance, which is likely a mixture of frequent failures in prospecting, with occasional discoveries of valuable gold veins. The stock price would generally be low, reflecting the low probability of finding ore. When no news is released, there would likely be no abnormal returns.
+
+When new positive information is released (e.g., a successful gold discovery), the stock price will immediately react positively to the discovery. Since this is a rare event, the market will adjust the stock price upward to reflect the expected increase in the company's future cash flows (from the discovered gold). The cumulative abnormal returns (CAR) will spike upward immediately after the announcement. The CAR will reflect the difference between the stock's actual return and the expected return (which is based on the company's normal performance).
+
+The CAR will be positive and large right after the news of a successful discovery, but will likely decay over time as the market digests the information and the firm's future potential is re-evaluated. This is because the market quickly incorporates the discovery into the stock price, and any follow-up news about the actual commercial value of the find will influence the stock again. If the company doesn't find any more significant gold veins or news about future performance fails to meet expectations, the stock price could gradually decrease, resulting in negative CAR in the longer term. However, the CAR would remain positive for the period immediately after the gold discovery, reflecting the market's reaction to the unexpected good news.
+
+Cumulative abnormal returns will likely revert over time as the market recognizes that gold discoveries are rare, and the firm's overall business model may still be driven by a high failure rate. After the initial excitement, the stock price might trend back toward the average expected return based on the company's overall prospects.
+
+---
+
+## Evidence on market efficiency
+
+Some people argue that the efficient market hypothesis cannot explain the 1987 market crash or the high price-to-earnings ratios of Internet stocks during the late 1990s. What alternative hypothesis is currently used for these two phenomena?
+
+---
+
+The efficient market hypothesis (EMH) suggests that stock prices fully reflect all available information. However, critics argue that the 1987 market crash and the high price-to-earnings (P/E) ratios of internet stocks in the late 1990s challenge this idea. The alternative explanations for these phenomena come from behavioral finance and market anomalies:
+
+### The 1987 market crash: Behavioral finance & feedback loops
+
+On October 19, 1987 ("Black Monday"), global stock markets suffered a sudden and severe decline, with the Dow Jones Industrial Average dropping over 22\% in a single day. This crash happened without any clear fundamental reason, which challenges the EMH.
+
+The alternative explanation is called _behavioral finance & market psychology_:
+
+1. __Herding Behavior:__ Investors panic and sell simply because others are selling creating a self-reinforcing downward spiral.
+
+2. __Overreaction & Investor Sentiment:__ Fear and uncertainty led to excessive selling, far beyond what fundamentals justified.
+
+3. __Portfolio insurance & program trading:__ The widespread use of automated trading strategies, such as portfolio insurance, may have amplified the crash. These strategies automatically sold stocks as prices fell, accelerating the decline.
+
+### The late 1990s internet bubble: Speculative behavior & irrational exuberance
+
+During the late 1990s, technology and itnernet stocks reached sky-high valuations, with many companies trading at absurdly high P/E ratios (or even without profits). Eventually, this bubble burst in early 2000, leading to the dot-com crash.
+
+The alternatove explanation is called _speculative bubble & irrational exuberance_:
+
+1. __Greater fool theory:__ Investors bought stocks not based on fundamentals with the expectation that they could sell them to someone else at a higher price.
+
+2. __Overconfidence & extrapolation:__ Many believed that the internet would change everything, justifying extreme valuations and ignoring traditional valuation metrics.
+
+3. __Momentum investing:__ Investors chased rising prices, pushing valuations to unsustainable levels.
+
+4. __Media & analyst hype:__ Financial media and analysts promoted "New Economy" stocks, fueling speculation.
+
+### Current alternative hypothesis: Behavioral finance & market inefficiencies
+
+Both Black Monday (1987) and the dot-com bubble (1990s) are better explained by behavioral finance, which incorporates:
+
+* Cognitive biases (overreation, overconfidence, and herd behavior)
+* Emotional trading (fear, greed, and panic)
+* Limits to arbitrage (investors unable to correct mispricings)
+
+These ideas suggest that markets can be irrational in the short term, leading to crashes and bubbles, even if they are generally efficient in the long run.
+
+---
+
+# Problems
+
+## Cumulative adnormal returns
+
+Delta, United, and American Airlines announced purchases of planes on July 18 (7/18), February 12 (2/12), and October 7 (10/7), respectively. Given the following information, calculate the cumulative abnormal return (CAR) for these stocks as a group. Graph the result and provide an explanation. All of the stocks have a beta of 1, and no other announcements are made.
+
+```{r problem 1: cumulative abnormal returns, echo=F}
+delta.date <- c("7/12", "7/13", "7/16", "7/17", "7/18", "7/19", "7/20", "7/23", "7/24")
+delta.market.return <- c(-.3, .0, .5, -.5, -2.2, -.9, -1.0, .7, .2)
+delta.company.return <- c(-.5, .2, .7, -.3, 1.1, -.7, -1.1, .5, .1)
+united.date <- c("2/8", "2/9", "2/10", "2/11", "2/12", "2/15", "2/16", "2/17", "2/18")
+united.market.return <- c(-.9, -.10, .4, .6, -.3, 1.1, .5, -.3, .3)
+united.company.return <- c(-1.1, -1.1, .2, .8, -.1, 1.2, .5, -.2, .2)
+american.date <- c("10/1", "10/2", "10/3", "10/6", "10/7", "10/8", "10/9", "10/10", "10/13")
+american.market.return <- c(.5, .4, 1.1, .1, -2.2, .5, -.3, .3, 0)
+american.company.return <- c(.3, .6, 1.1, -.3, -.3, .5, -.2, .1, -.1)
+df.cols <- c("Date", "Market", "Company")
+delta.df <- data.frame(delta.date, delta.market.return, delta.company.return)
+colnames(delta.df) <- df.cols
+united.df <- data.frame(united.date, united.market.return, united.company.return)
+colnames(united.df) <- df.cols
+american.df <- data.frame(american.date, american.market.return, american.company.return)
+colnames(american.df) <- df.cols
+tbl <- list(delta.df, united.df, american.df)
+knitr::kable(tbl, caption="Problem 1")
+```
+
+```{r problem 1: cumulative abnormal returns: calculations}
+(delta.car <- round(cumsum(delta.market.return - delta.company.return),1))
+(united.car <- round(cumsum(united.market.return - united.company.return),1))
+(american.car <- round(cumsum(american.market.return - american.company.return),1))
+```
+
+---
+
+## Cumulative abnormal returns
+
+The following diagram shows the cumulative abnormal returns (CAR) for 386 oil exploration companies announcing oil discoveries between 1950 and 1980. Month 0 in the diagram is the announcement month. Assume that no other information is received and the stock market as a whole does not move. Is the diagram consistent with market efficiency? Why or why not?
+
+```{r problem 1: graph, echo=F}
+car <-    c( 0, .0125, .013, .013, .013, .05, .125, .1375, .10, .06125, .0375, .025, .0125, .013, .0125)
+months <- c(-6,    -5,   -4,   -3,   -2,  -1,    0,     1,   2,      3,     4,    5,     6,    7, 8)
+plot(months, car, type='l')
+points(months, car, pch=19)
+```
+
+---
+
+To determine whether the diagram is consistent with market efficiency, let's analyze the cumulative abnormal returns (CAR) pattern.
+
+1. __CAR gradually increases before the announcement (month 0):__ There is a noticeable rise in CAR before the discovery announcement. This suggests that some investors may have had prior knowledge of the discovery before it was publicly announced.
+
+2. __CAR surges in month 0:__ A sharp increase in CAR at the announcement month suggests that the stock prices immediately react to the new information. This is consistent with the semi-strong form of market efficiency, where publicly available information is quickly reflected in stock prices.
+
+3. __CAR declines slightly after the announcement:__ If the market were perfectly efficient, we would expect no significant drift after month 0 because prices should fully adjust to the new information immediately. However, a small decline after month 0 could indicate an initial overraction followed by a correction, which is common in real markets.
+
+This does not fully support market efficiency. The pre-annoucnement increase suggests that some investors may have had advance knowledge, which contradicts the strong-form efficiency (where all information, including insider knowledge, is already reflected in prices). The immediate jump at month 0 is consisten with semi-strong efficiency (where public information is incorporated instantly). The small decline post-announcement suggests a possible overreaction which some behavioral finance theories highlight.
+
+---
