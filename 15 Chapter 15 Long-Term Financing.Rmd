@@ -1,0 +1,964 @@
+---
+title: "Long-Term Financing"
+author: "Ross, Westerfield, Jaffe"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen=99)
+require(xts)
+```
+
+# Summary
+
+1. We emphasized that common shareholders have:
+
+> a. Residual risk and return in a corporation.
+> b. Voting rights.
+> c. Dividends are not a business expense and firms cannot be forced into bankruptcy for non payment of a dividend.
+
+2. Long-term debt involves contractual obligations set out in indentures. There are many kinds of debt, but the essential feature is that debt involves a stated amount that must be repaid. Interest payments on debt are considered a business expense and are tax deductible.
+
+3. Preferred stock has some of the features of debt and some of the feautes of common equity. Holders of preferred stock have preference in liquidation and in dividend payments compared to holders of common equity, but often hold no voting rights.
+
+4. Firms need financing for capital expenditures, working capital, and other long-term uses. Most of the financing is provided from internally generated cash flow.
+
+5. For many years, U.S. firms have been retiring large amounts of equity. These share buybacks have been financed with new debt.
+
+# Concept Questions
+
+## Bond Features
+
+What are the main features of a corporate bond that would be listed in the indenture?
+
+---
+
+A corporate bond indenture is a legal contract between the bond issuer and bondholders that outlines the key terms and conditions of the bond. The main features are:
+
+1. The basic terms of the bonds
+
+* __Principal (face value):__ The amount the issuer agrees to repay at maturity.
+* __Coupon Rate:__ The fixed or variable interest rate paid to bondholders.
+* __Maturity Date:__ The date when the principal must be repaid.
+* __Bond Type:__ Specifies if the bond is secured or unsecured (debenture).
+
+2. Security and collateral
+
+* __Secured vs. Unsecured Bonds:__ Identifies if the bond is backed by assets (secured) or general creditworthiness (unsecured).
+* __Collateral Details:__ If secured, specifies the assets backing the bond.
+
+3. Covenants (Restrictions on the issuer)
+
+* __Positive Covenants:__ Actions the issuer must take, such as maintaining financial ratios or keeping insurance on assets.
+* __Negative Covenants:__ Restrictions on the issuer, like limits on additional debt issuance, asset sales, or dividend payouts.
+
+4. Call and put provisions
+
+* __Call provisions:__ Allows the issuer to repurchase bonds before maturity, often at a premium.
+* __Put provisions:__ Gives bondholders the right to sell the bond back to the issuer under specific conditions.
+
+5. Sinking fund provision and repayment arrangements.
+
+* A requirement for the issuer to set aside funds periodically to repay bonds at maturity or through scheduled buybacks.
+
+6. Convertibility and exchangeability
+
+* __Convertible bonds:__ Bonds that can be converted into company stock at a predetermined price.
+* __Exchangeable bonds:__ Bonds that can be exchanged for shares of a different company.
+
+7. Events of default
+
+* Specifies conditions under which the issuer is considered in default, such as missed interest payments, failure to maintain covenants, or bankruptcy.
+
+8. Trustee responsibilities
+
+* Details the role of the trustee, typically a financial institution, which enforces the terms of the indenture and represents bondholders' interests.
+
+---
+
+## Preferred Stock
+
+Preferred stock doesn't offer a corporate tax shield on the dividends paid. Why do we still observe some firms issuing preferred stock?
+
+---
+
+Even though preferred stock dividends are not tax-deductible (unlike interest on debt), some firms still choose to issue preferred stock for several strategic reasons:
+
+### Avoiding additional debt and maintaining credit ratings
+
+Issuing preferred stock allows a company to raise capital without increasing its debt load, which could harm its credit rating. Companies with already high levels of debt may prefer issuing preferred stock to maintain financial flexibility.
+
+### No obligation to pay dividends
+
+Unlike debt, where interest payments are mandatory, preferred dividends can be suspended if the company faces financial difficulties. This flexibility is valuable in uncertain economic conditions.
+
+### Attracting certain investors (institutional demand)
+
+Institutional investors, such as insurance companies and pension funds, often prefer preferred stock because it offers a fixed income stream with less risk than common equity. Some institutions also get favorable tax treatment on preferred dividends.
+
+### Convertible and callable features
+
+Some preferred shares are convertible into common stock, which makes them attractive to investors who want downside protection but potential upside. Callable preferred stock allows companies to redeem the shares at predetermined price, giving them control over their capital structure.
+
+### Regulatory and industry considerations
+
+Certain industries, such as banking and utilities, may issue preferred stock to meet regulatory capital requirements without taking on excessive debt.
+
+### Strategic control considerations
+
+Issuing preferred stock instead of common stock allows firms to raise capital without diluting voting control, as preferred shareholders usually do not have voting rights.
+
+### Hybrid nature for financing flexibility
+
+Preferred stock is often considered a hybrid between debt and equity, offering a balance of risk and return for both issuers and investors. This allows firms to customize financing solutions to suit their needs.
+
+---
+
+## Preferred stock and bond yields
+
+The yields on nonconvertible preferred stock are lower than the yields on corporate bonds. WHy is there a difference? Which investors are the primary holders of preferred stock? Why?
+
+---
+
+Even though nonconvertible preferres stock is riskier than corporate bonds (since preferred dividends can be suspended, unlike bond interest payments), it often has lower yields than corporate bonds. The primary reasons are:
+
+### Tax advantage for institutional investors
+
+Institutional investors, such as insurance companies and pension funds receive a dividends-received deduction (DRD), which allows them to exclude 50\% or more of preferred dividends from taxable income (in the U.S.). Since preferred dividends are more tax-efficient for these investors compared to interest income from bonds, they accept lower yields.
+
+### Flexibility in dividend payments
+
+Preferred dividends can be suspended during financial distress without forcing bankruptcy, unlike bond interest. Because companies are less likely to default on preferred stock compared to bonds, investors may accept a lower yield for the added security.
+
+### Long-term institutional demand
+
+Many institutions, such as pension funds, seek stable, long-term income and have mandates to invest in certain asset classes. These investors are less concerned with yield maximization than with stability and predictable returns.
+
+### Callable and perpetual nature
+
+Many preferred stocks are callable, meaning issuers can repurchase them at a predetermined price, limiting their potential appreciation. Preferred stock is often perpetual, meaning it does not mature like a bond, reducing its yield relative to fixed-term debt.
+
+### Lower bankruptcy risk than bonds
+
+While preferred stock is junior to bonds in capital structure, firms generally avoid suspending preferred dividends unless they are in severe distress. This perceived lower risk of outright loss makes some investors willing to accept lower yields.
+
+The main investors in preferred stock are institutional investors:
+
+1. __Insurance companies:__ They benefit from the dividend-received deduction (DRD) and seek stable income streams.
+2. __Pension funds & mutual funds:__ Man pension funds invest in preferred shares because they offer predictable returns and dividend security, even if yields are lower.
+3. __Banks & financial institutions:__  Banks sometimes hold preferred stock as part of capital adequacy requirements, especially in regulatory frameworks like Basel III.
+4. __Corporations (for strategic holdings):__ Some corporations invest in preferred shares because they also qualify for the DRD, making them a tax-efficient investment compared to bonds.
+
+---
+
+## Corporate financing
+
+What are the main differences between corporate debt and equity? Why do some firms try to issue equity in the guise of debt?
+
+---
+
+The main differences between corporate debt and equity are:
+
+1. __Ownership:__ Debt holders are creditors; equity holders are owners of the company.
+2. __Repayment obligation:__ Corporate debt must be repaid with interest by a set maturity date; there is no obligation to repay principal; dividends are discretionary.
+3. __Priority in bankruptcy:__ Higher priority is given to debt holders over equity holders during liquidation.
+4. __Tax treatment:__ Interest payments on debt are tax-deductible; dividends are not tax-deductible.
+5. __Voting rights:__ There are no voting rights for bondholders, shareholders typically do have voting rights.
+6. __Risk for investors:__ There is lower risk for debt repayment; for equity, value fluctuates so there is higher risk.
+7. __Cost of capital:__ Generally it is cheaper to issue corporate debt then to issue new equity.
+
+Some companies attemt to issue equity disguised as debt to gain the benefits of debt financing while avoiding its drawback.
+
+1. __Preserving ownership and control:__ If a firm issues equity, it dilutes ownership and control. By structuring financing as debt-like instruments (e.g., convertible bonds, preferred stock), firms can raise capital without giving up voting rights.
+
+2. __Tax benefits of debt:__ Interest payments on debt are tax-deductible, reducing taxable income. Some hybrid instruments, like perpetual bonds or structured notes, are designed to look like debt but behave like equity.
+
+3. __Avoiding financial distress risks:__ Traditioanl debt comes with fixed obligations (interest payments, principal repayment). Firms may issue convertible debt or preferred stock, which can be converted into equity in tough times, reducing default risk.
+
+4. __Improving financial ratios:__ Too much debt increases leverage and worsens debt-to-equity ratios, making the firm appear risky. Structuring financing as equity-like debt can help maintain a healthy balance sheet.
+
+5. __Market perception & credit rating considerations:__ Issuing straight equity might signal financial distress to investors. Debt-like instruments (e.g., hybrid securities) allow firms to raise funds while minimizing negative market reactions.
+
+### Examples of debt that resembles equity
+
+* __Convertible bonds:__ Debt that can convert into equity, reducing financial strain.
+* __Perpetual bonds:__ No maturity date, behaving like equity.
+* __Preferred stock:__ Pays fixed dividends like debt but is technically equity.
+* __Mezzanine financing:__ Hybrid debt-equity structures used in leveraged buyouts.
+
+---
+
+## Call provisions
+
+A company is contemplating a long-term bond issue. It is debating whether to include a call provision. What are the benefits to the company from including a call provision? What are the costs? How do these answers change for a put provision?
+
+---
+
+When issuing a long-term bond, a company must decide whether to include a call provision or a put provision. Each has a different benefits and costs for the issuing company.
+
+### Call provision
+
+A call provision allows the issuing company to repurchase (call back) the bonds before maturity at a predetermined price.
+
+The benefits to the company are:
+
+* __Refinancing opportunity:__ If interest rates decline, the company can call back the bonds and reissue new ones at a lower rate, reducing interest expenses.
+
+* __Financial flexibility:__ If the company has excess cash or strong earnings, it can retire debt early, reducing leverage.
+
+* __Strategic advantage:__ Can be used to restructure debt in mergers, acquisitions, or changes in capital strategy.
+
+The costs to the company are:
+
+* __Higher interest costs:__ Investors demand higher initial yields to compensate for the risk of athe bond being called before maturity.
+
+* __Potential negative market perception:__ If the company calls the bonds, investors may become cautious, making future debt issuance more expensive.
+
+* __Call premium:__ The company usually must pay a premium over the face value, increasing costs.
+
+### Put provision
+
+A put provision gives the bondholders the right to sell (put) the bonds back to the company at a specified price before maturity.
+
+The benefits to the company are:
+
+* __Lower interest costs:__ Investors accept a lower yield since they have protection (reducing the company's cost of borrowing).
+* __Appeals to risk-averse investors:__ Investors who prefer flexibility may be more willing to buy the bonds.
+
+The costs to the company are:
+
+* __Liquidity risk:__ If interest rates rise or the company's credit rating drops, bondholders may exercise the put option, forcing the company to repurchase bonds when it may not have cash available.
+* __Uncertain long-term funding:__ Since bondholders can force early repayment, the company loses control over the debt timeline.
+
+---
+
+## Proxy
+
+What is a proxy?
+
+---
+
+A proxy is a person or entity authorized to act on behalf of another. In finance and corporate governance, a proxy usually refers to proxy voting, where a shareholder grants another party the authority to vote on their behalf at a company's shareholder meeting.
+
+### Types of proxies in corporate finance
+
+1. __Proxy vote:__ A shareholder allows someone else (like a board member or proxy firm) to vote on their behalf at a corporate meeting.
+2. __Proxy statement:__ A document issued before shareholder meetings that provides details on agenda items (e.g., borad elections, mergers, executive compensation).
+3. __Proxy contest:__ A situation where opposing groups try to gain control of sharholder votes to influence corporate decisions (e.g., activist investors challenging management).
+
+---
+
+## Preferred stock
+
+Do you think preferred stock is more like debt or equity? Why?
+
+---
+
+Preferred stock has characteristics of both debt and equity, making it a hybrid security. However, it is generally considered more like debt than equity for several reasons.
+
+### Debt-like characteristics
+
+1. __Fixed dividends:__ Like bonds, preferred stock pays a fixed dividend, similar to interest payments on debt.
+2. __Priority in liquidation:__ Preferred shareholders have a higher claim on assets than common shareholders, just like bondholders (though they rank below debt holders).
+3. __No voting rights:__ Preferred shareholders typically don't have voting rights, similar to bondholders who have no say in corporate decisions.
+
+### Equity-like characteristics
+
+1. __No maturity date:__ Unlike debt, most preferred stock has no fixed maturity, making it a long-term capital source.
+2. __Dividends can be skipped:__ Unlike bond interest, companies can suspend preferred dividends without defaulting (though some are cumulative, meaning unpaid dividends must be made up later).
+3. __Potential convertiblity:__ Some preferred stocks can be converted into common stock, giving them an equity-like upside.
+
+Preferred stock is more like debt because of its fixed payments, priority in liquidation, and lack of voting rights. However, it is riskier than debt since dividends can be skipped, and it does not offer the same legal protections as bonds.
+
+---
+
+## Long-term financing
+
+As was mentioned in the chapter, new equity issues are generally only a small portion of all new issues. At the same time, companies continue to issue new debt. Why do companies tend to issue little new equity but continue to issue new debt?
+
+---
+
+Companies tend to issue little new equity but continue to issue new debt for several reasons.
+
+### Cost of capital considerations
+
+* __Debt is chaper than equity:__ Interest payments on debt are tax-deductible, reducing the company's taxable income and loering the overall cost of capital. Equity dividends, on the other hand, are not tax-deductible.
+* __Lower required return:__ Investors typically demand a lower return on debt than equity because debt is less risky (it has a fixed return and higher priority in liquidation).
+
+### Ownership dilution
+
+Issuing new equity dilutes existing shareholders' ownership and control, which management and current shareholders oftn want to avoid. Debt does not dilute ownership, allowing companies to raise funds without giving up control.
+
+### Market perception & signaling effect
+
+Issuing new equity can be seen as a negative signal by investors. If management believes the company is undervalued, they will avoid issuing equity because it would mean selling shares too cheaply. Conversely, issuing debt can signal confidence that the company has strong cash flows and can handle future obligations.
+
+### Financial flexibility & captial structure targeting
+
+Comapnies strive for an optimal capital structure that balances debt and equity to maximize value. Firms often use debt because it privdes leverage benefits without permanent changes to ownership. Debt issuance is also more flexible in terms of structuring maturities and covenants to suit business needs.
+
+### Market conditions & equity issuance costs
+
+* __Equity issuance involves higher transaction costs__ such as underwriting fees and regulatory requirements.
+* __Stock price volatility__ can make equity issuance riskier, as unfavorable conditions may lead to raising less capital than expected.
+
+### Conclusion
+
+Companies prefer issuing debt over equity due to its lower cost, tax advantages, avoidance of ownership dilution, and better market signaling. Equity is typically issued only when debt levels are already high, or the company needs to fund risky long-term growth projects.
+
+---
+
+## Internal versus external financing
+
+What is the difference between internal financing and external financing?
+
+---
+
+The key difference between internal financing and external financing lies in where the funds come from.
+
+### Internal financing
+
+This refers to funds generated within the company, without relying on outside investors or lenders.
+
+The sources of internal financing:
+
+* __Retained earnings:__ Profits that are reinvested in the business instead of being distributed as dividends.
+* __Depreciation & amortization:__ non-cash expenses that can free up cash for reinvestment.
+* __Asset sales:__ Selling off unused or underperforming assets (e.g., equipment, real estate).
+* __Cost savings & efficiency improvements:__ Cutting costs or increasing operational efficiency to generate free cash flow.
+
+The advantages of internal financing:
+
+* No dilution of ownership or control.
+* Avoids interest payments and debt obligations.
+* No reliance on external market conditions.
+
+The disadvantages of internal financing:
+
+* Limited by company's profitability and cash reserves.
+* May slow down growth if funds are insufficient.
+* Can lead to missed investment opportunities if internal funds are inadequate.
+
+### External financing
+
+This refers to funds raised from outside the company, either from debt or equity markets.
+
+Types of external financing:
+
+* __Debt financing:__ Borrowing money through loans, bonds, or credit lines.
+* __Equity financing:__ Selling shares to investors, which dilutes ownership.
+* __Grants & subsidies:__ Government or institutional funding for specific projects.
+
+The advantages of external financing
+
+* Allows for larger investments and expansion.
+* Can take advantage of favorable market conditions.
+* Spreads financial risk rather than relying solely on internal funds.
+
+The disadvantages of external financing:
+
+* Interest payments (in the case of debt) increase financial risk.
+* Issuing equity dilutes ownership and control.
+* Borrowing often involves covenants and restricitons.
+
+---
+
+## Internal versus external financing
+
+What factors influence a firm's choice of external versus internal equity financing?
+
+---
+
+A firm's choice between internal and external equity financing depends on several key factors, including financial health, market conditions, and strategic goals.
+
+### Availability of internal funds
+
+If a firm has strong retained earnings, it will likely prefer internal financing to avoid issuing new shares. If cash reserves are low or already allocated, the firm may need to raise external equity or take on debt.
+
+### Cost of capital
+
+Internal financing is generally cheaper because it avoids transaction costs and dilution. External equity involves underwriting fees, regulatory costs, and potential stock price discounts. If debt financing is cheaper than issuing new shares, firms may prefer to raise debt rather than external equity.
+
+### Market conditions
+
+Firms would be more likely to issue external equity in strong stock markets because prices are high and it reduces dilution.
+
+### Growth opportunities & capital needs
+
+High-growth firms may need more capital than internal financing provides makeing external equity attractive. Mature firms with stable cash flows often rely more on internal financing and debt rather than issuing new shares.
+
+### Financial leverage & debt capacity
+
+If a company is already heavily leveraged, it might avoid debt financing and turn to external equity instead. Firms with low debt levels may prefer issuing debt rather than equity to avoid ownership dilution.
+
+### Ownership control & dilution concerns
+
+Internal financing preserves ownership and control. External equity financing dilutes ownership, which founders or major shareholders may want to avoid.
+
+### Tax considerations
+
+Debt financing offers tax benefits through interest deductions, making it preferable over external equity. Equity financing does not provide tax shields but avoids interest obligations.
+
+### Investor sentiment & market timing
+
+Firms issue equity when their stock is overvalued to raise more capital with less dilution. If investors are skeptical or stock prices are low, firms may avoid external equity and rely on internal funds.
+
+### Regulatory & reporting requirements
+
+Publicly issuing new equity involves regulatory approvals, disclosures, and compliance costs. Internal financing avoids these burdens, making it the preferred choice when feasible.
+
+---
+
+## Classes of stock
+
+Several publicly traded companies have issued more than one class of stock. Why might a company issue more than one class of stock?
+
+---
+
+Companies issue multiple classes of stock for several strategic reasons, often related to control, flexibility, and financing options.
+
+### Maintaining control while raising capital
+
+Some companies issue dual-class shares where one class (e.g., Class A) has more voting rights than another (e.g., Class B). This structure allows founders or key executives to retain control even if they sell shares to the public. Meta and Alphabet both issue dual-class shares to keep control within the hands of their founders.
+
+### Attracting different types of investors
+
+Companies may issue one class of stock with higher dividends but limited voting rights to attract income-focused investors (e.g., retirees, funds). Another class with lower dividends but full voting rights can be issued for investors who want to influence the company's direction.
+
+### Raising capital more efficiently
+
+By issuing non-voting or low-voting shares, firms can raise funds without diluting decision-making power. This approach is common in family-owned businesses transitioning to public ownership while retaining internal control.
+
+### Employee & executive compensation
+
+Some companies issue restricted stock or performance-based shares for employees and executives. These stocks may convert into common shares over time or based on performance goals.
+
+### Legal & Strategic considerations
+
+Some industries (e.g., media, telecommunications) may have regulations restricting foreign ownership. Issuing special classes of shares helps firms comply with these rules while still attracting foreign investment. The New York Times has dual-class shares to ensure editorial independence.
+
+### Protection against hostile takeovers
+
+Companies can issue super-voting shares to insiders to prevent an external entity from gaining control via hostile takeover. Snap Inc. issued non-voting shares in its IPO to prevent outside investors from influencing decisions.
+
+---
+
+## Callable bonds
+
+Do you agree or disagree with the following statement: In an efficient market, callable and noncallable bonds will be priced in such a way that there will be no advantage or disadvantage to the call provision. Why?
+
+---
+
+Yes, in an efficient market, the prices of callable and noncallable bonds will reflect their respective risks. Callable bonds will be priced lower (or yield higher) than noncallable bonds to compensate investors for the risk that the bond might be called early.
+
+---
+
+## Bond prices
+
+If interest rates fall, will the price of noncallable bonds move up higher than that of callable bonds? Why or why not?
+
+---
+
+Yes, if interest rates fall, the price of noncallable bonds will increase more than the price of callable bonds. The reason is that if rates drop significantly, then the issuer is more likely to call the bond and refinance at lower rates. Investors will anticipate this risk and will not bid up the price of callable bonds as much as noncallable bonds.
+
+---
+
+## Sinking funds
+
+Sinking funds have both positive and negative characteristics for bondholders. Why?
+
+---
+
+Sinking funds can be both beneficial and detrimental to bondholders, depending on how they are structured and how the issuer exercises them.
+
+### Positive characteristics for bondholders
+
+1. __Lower default risk:__ A sinking fund requires the issuer to set aside money periodically to repay a portion of the bond principal before maturity. This reduces credit risk, making it less likely that the issuer will default when the bonds mature.
+2. __Increased liquidity & marketability:__ Since part of the principal is repaid periodically, bondholders receive cash sooner rather than waiting for full repayment at maturity. This can make the bonds more attractive to investors, potentially leading to higher bond prices.
+3. __Potential for price stability:__ With a structured repayment plan, the price of the bond may be less volatile because investors have greater confidence in repayment.
+
+### Negative characteristics for bondholders
+
+1. __Callabel feature risk:__ Many sinking fund provisions allow the issuer to repurchase bonds at preset price (often at par or slightly above). If interest rates decline, the issuer can buy back the bonds cheaply instead of paying higher coupon rates, limiting bondholders' upside potential.
+2. __Reinvestment risk:__ When bonds are retired early through a sinking fund, bondholders must reinvest their funds, potentially at lower rates if interest rates have fallen. This is similar to the reinvestment risk faced with callable bonds.
+3. __Possible liquidity concerns:__ If a bond is randomly selected for sinking fund redemption, an ivestor may be forced to sell before they intended, disrupting their portfolio strategy.
+
+---
+
+## Corporate voting
+
+The shareholders of the Stackhouse Company need to elect seven new directors. There are 850,000 shares outstanding currently trading at \$43 per share. You would like to serve on the board of directors; unfortunately no one else will be voting for you. How much will it cost you to be certain that you can be elected if the company uses straight voting? How much will it cost you if the company uses cumulative voting?
+
+---
+
+For straight voting, you need 50\% plus one shares to guarantee to serve on the board of directors:
+
+$$
+\begin{aligned}
+\frac{850,000}{2} + 1 &= `r (shares <- 850000/2+1)`\ \text{ shares}\\
+\text{Cost} &= `r shares * 43`
+\end{aligned}
+$$
+
+So the cost of straight voting is \$18,275,043.
+
+For cumulative voting, we can use r to get the number of votes:
+
+```{r problem 1: corporate voting}
+f <- function(x) (850000 - x) / 7 - x
+uniroot(f, lower=50000, upper=800000, tol=1)$root
+```
+
+It takes 106,250 shares which costs $106,250 \times 43 = `r 106250 * 43`$.
+
+---
+
+## Cumulative voting
+
+An election is being held to fill three seats on the board of directors of a firm in which you hold stock. The company has 7,600 shares outstanding. If the election is conducted under cumulative voting and you own 300 shares, how many more shares must you buy to be assured of earning a seat on the board?
+
+---
+
+$$
+\begin{aligned}
+\frac{\text{Total shares} \times \text{Number of seats wanted}}{\text{Total seats available}+1} - 300
+  &= \frac{7,600 \times 1}{4} - 300\\
+  &= `r 7600/4 - 300`
+\end{aligned}
+$$
+
+---
+
+## Cumulative voting
+
+The shareholders of Motive Power Corp. need to elect three new directors to the board. There are 13,000,000 shares of common stock outstanding, and the current share price is \$10.50. If the company uses cumulative voting procedures, how much will it cost to guarantee yourself one seat on the board of directors?
+
+---
+
+$$
+\begin{aligned}
+\frac{\text{Total shares} \times \text{Number of seats wanted}}{\text{Total seats available} + 1}
+  &= \frac{13,000,000 \times 1}{4}\\
+  &= `r (shares <- 13000000/4)`\\\\
+\text{Cost} &= `r shares * 10.50`
+\end{aligned}
+$$
+
+It will cost \$34,125,000.
+
+---
+
+## Corporate voting
+
+Candle box Inc. is going to elect six board members next month. Betty Brown owns 17.4 percent of the total shares outstanding. How confident can she be of having one of her candidate friends elected under the cumulative voting rule? Will her friend be elected for certain if the voting procedure is changed to the staggering rule, under which shareholders vote on two borad members at a time?
+
+---
+
+To determine Betty Brown's ability to elect a board member under cumulative voting, we use the formula:
+
+$$
+\begin{aligned}
+\frac{S \times N}{D + 1}\\\\
+\text{where:}\\
+S &= \text{Total shares outstanding (assumed 100\%)}\\
+N &= \text{Number of seats desired (1)}\\
+D &= \text{Total seats up for election (6)}\\\\
+\frac{100 \times 1}{6 + 1} &= \frac{100}{7}\\
+  &\approx 14.29\%
+\end{aligned}
+$$
+
+Since Betty owns 17.4\%, which is greater than 14.29\%, she can guarantee that at least one of her candidates is elected under cumulative voting.
+
+Under staggered elections, only two board members are elected then:
+
+$$
+\begin{aligned}
+\frac{100 \times 1}{2 + 1} &= \frac{100}{3}\\
+  &\approx 33.33\%
+\end{aligned}
+$$
+
+Under these rules, since betty only owns 17.4\%, she cannot guarantee a board seat.
+
+---
+
+## Valuing callable bonds
+
+KIC, Inc., plans to issue \$5 million of bonds with a coupon rate of 8 percent and 30 years to maturity. The current market interest rates on these bonds are 7 percent. In one year, the interest rate on the bonds will be either 10 percent or 6 percent with equal probability. Assume investors are risk-neutral.
+
+a. If the bonds are noncallable, what is the price of the bonds today?
+b. If the bonds are callable one year from today at \$1,080, will their price be greater or less than the price you computed in (a)? Why?
+
+---
+
+The bond value formula:
+
+$$
+\begin{aligned}
+\text{Bond value} &= C \times \frac{1 - (1 + r)^{-T}}{r} + \frac{F}{(1 + r)^T}
+\end{aligned}
+$$
+
+The current discount rate is 7 percent. The current value of the bond is:
+
+$$
+\begin{aligned}
+B &= 80 \times \frac{1 - (1.07)^{-30}}{.07} + \frac{1,000}{(1.07)^{30}}
+  &= 1,124.09
+\end{aligned}
+$$
+
+In one year the discount rate could be 10 percent or 6 percent with equal probability.
+
+$$
+\begin{aligned}
+B_{\text{6}} &= 80 \times \frac{1 - (1.06)^{-29}}{.06} + \frac{1,000}{(1.06)^{29}} \\
+  &= 1,271.81\\\\
+B_{\text{10}} &= 80 \times \frac{1 - (1.10)^{-29}}{.10} + \frac{1,000}{(1.10)^{29}} \\
+  &= 812.61\\\\
+B_{\text{one year}} &= .5 \times 1271.81 + .5 \times 812.61\\
+  &= 1042.21
+\end{aligned}
+$$
+
+The bond price will be \$1,042.21 one year from now. If the bonds are callable one year from today at \$1,080 and if the interest rates fall to 6\%, then the bond holders will likely receive \$1,080 instead of the larger \$1,271.81. If interest rate rice to 10\% then the bonds are worth less than its noncallable price and the bonds will probably not be called.
+
+The new calculation would be:
+
+$$
+\begin{aligned}
+B_{\text{6}} &= 1,080\\
+B_{\text{10}} &= 80 \times \frac{1 - (1.10)^{-29}}{.10} + \frac{1,000}{(1.10)^{29}} \\
+  &= 812.61\\\\
+B_{\text{one year}} &= .5 \times 1,080 + .5 \times 812.61\\
+  &= 946.31
+\end{aligned}
+$$
+
+The bonds are worth less than in (a).
+
+---
+
+## Valuing callable bonds
+
+New Business Ventures, Inc., has an outstanding perpetual bond with a 10 percent coupon rate that can be called in one year. The bond makes annual coupon payments. The call premium is set at \$150 over par value. There is a 60 percent chance that the interest rate in one year will be 12 percent, and a 40 percent chance that the interest rate will be 7 percent. If the current interest rate is 10 percent, what is the current market price of the bond?
+
+---
+
+The bond value formula (perpetual bond):
+
+$$
+\begin{aligned}
+\text{Bond value} &= \frac{C}{r}\\
+\end{aligned}
+$$
+
+The par value is computed:
+
+$$
+\begin{aligned}
+\text{BV}_{\text{par}} &= \frac{100}{.1}\\
+  &= 1,000
+\end{aligned}
+$$
+
+The call premium is:
+
+$$
+\begin{aligned}
+\text{BV}_{\text{premium}} &= 1,000 + 150\\
+  &= 1,150
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{BV}_{12} &= \frac{100}{.12}\\
+  &= 833.33\\\\
+\text{BV}_{7} &= \frac{100}{.07}\\
+  &= 1,428.57
+\end{aligned}
+$$
+
+But because the bond is likely to be called if interest rates fall to 7\%:
+
+$$
+\begin{aligned}
+\text{BV}_{\text{called}} &= 1,150\\
+E(\text{BV}) &= .6 \times 833.33 + .4 \times 1,150\\
+  &= 960.00
+\end{aligned}
+$$
+
+We discount this value back to the present value (1 year):
+
+$$
+\begin{aligned}
+\text{PV} &= \frac{V + \text{Coupon Payment}}{(1 + r)^{T}}\\
+  &= \frac{960.00 + 100}{(1.10)}\\
+  &= 963.64
+\end{aligned}
+$$
+
+---
+
+## Valuing callable bonds
+
+Bowdeen manufacturing intends to issue callable, perpetual bonds with annual coupon payments. The bonds are callable at \$1,175. One-year interest rates are 9 percent. There is a 60 percent probability that long-term interest rates one year from today will be 10 percent, and a 40 percent probability that they will be 8 percent. Assume that if interest rates fall the bonds will be called. What coupon rate should the bonds have in order to sell at par value?
+
+---
+
+$$
+\begin{aligned}
+\text{Par value} = 1,000 &= \frac{C + .6 \times \frac{C}{.10} + .4 \times 1,175}{1.09}\\
+\end{aligned}
+$$
+
+Solving for C equals 88.57. The coupon rate is 8.86\%.
+
+---
+
+## Valuing callable bonds
+
+Illinois Industries has decided to borrow money by issuing perpetual bonds with a coupon rate of 7 percent, paybale annualy. The one-year interest rate is 7 percent. Next year, there is a 35 percent probability that interest rates will increase to 9 percent, and there is a 65 percent probability that they will fall to 6 percent.
+
+a. What will the market value of these bonds be if they are noncallable?
+b. If the company decides instead to make the bonds callable in one year, what coupon will be demanded by the bondholders for the bonds to sell at par? Assume that the bonds will be called if interest rates falls and that the call premium is equal to the annual coupon.
+c. What will be the value of the call provision to the company?
+
+---
+
+a. If the bonds are not callable:
+
+$$
+\begin{aligned}
+\text{Coupon} &= .07 \times 1,000\\
+  &= 70\\\\
+\text{Bond value} &= \frac{70}{1.07} + \frac{.35 \cdot \frac{70}{.09}
+  + .65 \cdot \frac{70}{.06}}{1.07}\\
+  &= 1,028.55
+\end{aligned}
+$$
+
+b. If the bonds are callable the bondholders should demand a coupon of:
+
+To sell at par, the expected price in one year should be equal to the discounted par value:
+
+$$
+\begin{aligned}
+1,000 &= \frac{.35 \times \frac{C}{.09} + .65 \times (1,000 + C)}{1.07}\\
+1,070 &= 3.89 C + 650 + .65C\\
+420 &= 4.54 C\\
+C &= 92.5
+\end{aligned}
+$$
+
+The coupon rate should be 9.25\% for the bonds to sell at par.
+
+---
+
+## Bond refunding
+
+An outstanding issue of Public Express Airlines debentures has a call provision attached. The total principal value of the bonds is \$250 million, and the bonds have an annual coupon rate of 9 percent. The company is considering refunding the bond issue. Refunding means that the company would issue new bonds and use the proceeds from the new bond issuance to repurchase the outstanding bonds. The total cost of refunding would be 10 percent of the principal amount raised. The appropriate tax rate for the company is 35 percent. How low does the borrowing cost need to drop to justify refunding with a new bond issue?
+
+---
+
+To determine the break-even borrowing cost that justifies refunding, we compare the after-tax cost of debt for the new bond issue with the efficetive cost savings from the refunding.
+
+The current bond issue has:
+
+* __Principal:__ \$250 million
+* __Coupon rate:__ 9\%
+* __Annual coupon payment:__ $250,000,000 \times 0.09 = 22,500,00$
+* __After-tax coupon payment:__ $22,500,000 \times (1 - 0.35) = 14,625,000$
+
+The new bond issue has:
+
+* __Principal raised:__ Since ther eis a 10\% refunding cost, the company needs to raise:
+
+$$
+250,000,000 \times 1.10 = 275,000,000
+$$
+
+* __Annual interest payment for new bonds:__ Let $r$ be the new bond's coupon rate. Then the annual interest expense is:
+
+$$
+275,000,000 \times r
+$$
+
+* __After-tax interest expense:__
+
+$$
+(275,000,000 \times r) \times (1 - 0.35)
+$$
+
+For the refunding to be justified, the new after-tax interest expense must be less than the current after-tax coupon payment:
+
+$$
+(275,000,000 \times r) \times 0.65 < 14,625,000
+$$
+
+Solve for $r$:
+
+$$
+\begin{aligned}
+275,000,000 \times r \times 0.65 &= 14,625,000\\
+275,000,000 \times r &= \frac{14,625,000}{0.65}\\
+275,000,000 \times r &= 22,500,000\\
+r &= \frac{22,500,000}{275,000,000}\\
+  &= 8.18\%
+\end{aligned}
+$$
+
+For the refunding to be justified, the new bond issuance must have an annual coupon rate below 8.18\%. If the company can secure financing at a rate lower than this, the interest savings will exceed the funding costs, making the move financially beneficial.
+
+---
+
+## Bond refunding
+
+Charles River Associates is considering whether to call either of the two perpetual bond issues the company currently has outstanding. If the bond is called, it will be refunded, that is, a new bond issue will be made with a lower coupon rate. The proceeds from the new bond issue will be used to repurchase one of the existing bond issues. The information about the two currently outstanding bond issues is:
+
+|.|Bond A|Bond B|
+|:---|---:|---:|
+|Coupon rate|7.00\%|8.00\%|
+|Value outstanding|\$125,000,000|\$132,000,000|
+|Call premium|7.50\%|8.50\%|
+|Transaction cost of refunding|\$11,500,000|\$13,000,000|
+|Current YTM|6.25\%|7.10\%|
+
+The corporate tax rate is 35 percent. What is the NPV of the refunding for each bond? Which, if either, bond should the company refinance? Assume the call premium is tax deductbile.
+
+---
+
+To determine whether Charles River Associates should refund either bond, we need to calculate the Net present value (NPV) of refunding for each bond. The NPV is given by:
+
+$$
+\text{NPV} = \text{Present Value of Interest Savings} - \text{Cost of Refunding}
+$$
+
+### Compute the annual after-tax interest savings
+
+Since the bonds are perpetual, the present value of the interest savings is calculated using:
+
+$$
+\text{PV}_{\text{savings}} = \frac{\text{After-tax interest savings per year}}{\text{New YTM}}
+$$
+
+Bond A:
+
+* Current interest payment:
+
+$$
+125,000,000 \times 0.07 = 8,750,000
+$$
+
+* New interest payment:
+
+$$
+125,000,000 \times 0.0625 = 7,812,500
+$$
+
+* After-tax savings per year:
+
+$$
+(8,750,000 - 7.812,500) \times (1 - 0.35) = 937,500 \times 0.65 = 609,375
+$$
+
+* Present value of savings:
+
+$$
+\frac{609,375}{0.0625} = 9,750,000
+$$
+
+Bond B:
+
+* Current interest payment:
+
+$$
+132,000,000 \times 0.08 = 10,560,000
+$$
+
+* New interest payment:
+
+$$
+132,000,000 \times 0.071 = 9,372,000
+$$
+
+* After-tax savings per year:
+
+$$
+(10,560,000 - 9,372,000) \times (1 - 0.35) = 1,188,000 \times 0.65 = 771,200
+$$
+
+* PV of savings:
+
+$$
+\frac{771,200}{0.071} = 10,862,000
+$$
+
+### Compute the cost of refunding
+
+$$
+\text{Cost of refunding} = \text{call premium (after-tax)} + \text{transaction cost}
+$$
+
+where:
+
+$$
+\text{Call premium (after-tax)} = \text{call premium} \times \text{outstanding value} \times (1 - 0.35)
+$$
+
+Bond A:
+
+* Call premium (after-tax):
+
+$$
+0.075 \times 125,000,000 \times 0.65 = 6.093,750
+$$
+
+* Total cost of refunding:
+
+$$
+6,093,750 + 11,500,000 = 17,593,750
+$$
+
+Bond B:
+
+* Call premium (after-tax):
+
+$$
+0.085 \times 132,000,000 \times 0.65 = 7,293,000
+$$
+
+* Total cost of refunding:
+
+$$
+7,293,000 + 13,000,000 = 20,293,000
+$$
+
+### Compute the NPV
+
+$$
+\text{NPV} = \text{PV}_{\text{savings}} - \text{total cost of refunding}
+$$
+
+Bond A:
+
+$$
+\text{NPV}_A = 9,750,000 - 17,593,750 = -7,843,750
+$$
+
+Bond B:
+
+$$
+\text{NPV}_B = 10,862,000 - 20,293,000 = -9,431,000
+$$
+
+Since both NPVs are negative, neither bond should be refunded, as the costs of refunding exceed the present value of savings.
+
+---
