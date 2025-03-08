@@ -1,0 +1,1579 @@
+---
+title: "Capital structure: Basic concepts"
+author: "Ross, Westerfield, Jaffe"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen=99)
+require(xts)
+```
+
+# Summary
+
+1. We began our discussion of the capital structure decision by arguing that the particular capital structure that maximizes the value of the firm is also the one that provides the most benefit to the stockholders.
+
+2. In a world of no taxes, the famous Proposition I of Modigliani and Miller proves that the value of the firm is unaffected by the debt-equity ratio. In other words, a firm's capital structure is a matter of indifference in that world. The authors obtain their results by showing that either a high or a low corporate ratio of debt to equity can be offset by homemade leverage. The result hinges on the asusmption that individuals can borrow at the same rate as corporations, an assumption we believe to be quite plausible.
+
+3. MM's Proposition II in a world without taxes states that:
+
+$$
+R_S = R_0 + \frac{B}{S}(R_0 - R_B)
+$$
+
+> This implies that the expected rate of return on equity (also called the _cost of equity_ or the _required return on equity_) is positively related to the firm's leverage. This makes intuititve sense because the risk of equity rises with leverage, a point illustrated by Figure 16.2.
+
+4. Although the above work of MM is quite elegant, it does not explain the empirical findings on capital structure very well. MM imply that the capital structure decision is a matter of indifference, whereas the decision appears to be a weighty one in the real world. To achieve real-world applicability, we next considered corporate taxes.
+
+5. In a world with corporate taxes but no bankruptcy costs, firm value is an increasing function of leverate. The formula for the value of the firm is:
+
+$$
+V_L = V_U + t_C B
+$$
+
+> Expected return on levered equity can be expressed as:
+
+$$
+R_S = R_0 + (1 - t_C) \times (R_0 - R_B) \times \frac{B}{S}
+$$
+
+> Here, value is positiviely related to leverage. This result implies that firms should have a capital structure almost entirely composed of debt. Because real-world firms select more moderate levels of debt, the next chapter considers modifications to the results of this chapter.
+
+# Concept Questions
+
+## MM Assumptions
+
+List the three assumptions that lie behind the Modigliani-Miller theory in a world without taxes. Are thes assumptions reasonable in the real world?
+
+---
+
+The assumptions behind the Modigliani-Miller theory in a world without taxes are:
+
+1. __No taxes:__ This is not a reasonable assumption.
+
+2. __No transaction costs:__ A firm wishing to sell stock to finance a new factory, for example, can do so without paying commissions to an intermediary, such as an investment bank. In real life, a firm does have to pay fees and commissions when issuing stocks, bonds and other financial instruments.
+
+3. __Equal borrowing costs:__ Both the firm and investors in the firm should have the same borrowing costs. This can be plausible.
+
+---
+
+## MM Propositions
+
+In a world with no taxes, no transaction costs, and no costs of financial distress, is the following statement true, false, or uncertain? Moderate borrowing will not increase the required return on a firm's equity. Explain.
+
+---
+
+The statement is false according to the Modigliani-Miller (MM) theorem in a world with no taxes, no transaction costs, and no costs of financial distress.
+
+Under the MM Proposition II (without taxes), the required return on a firm's equity (cost of equity, $r_e$) increases as the firm takes on more debt. This happens because equity holders face greater financial risk when a firm is leveraged. The relationship is expressed as:
+
+$$
+\begin{aligned}
+r_e &= r_u + \frac{D}{E}(r_u - r_d)\\\\
+\text{Where:}\\
+r_e &=\ \ \text{cost of equity}\\
+r_u &=\ \ \text{cost of capital for an all-equity (unlevered firm)}\\
+r_d &=\ \ \text{cost of debt}\\
+\frac{D}{E} &=\ \ \text{debt-to-equity ratio}
+\end{aligned}
+$$
+
+Since debt increases the firm's leverage, equity holders demand a higher return to compensate for the additional risk. This means that even moderate borrowing will increase the required return on equity, making the statement false.
+
+---
+
+## MM Propositions
+
+What is the quirk in the tax code that makes a levered firm more valuable than an otherwise identical unlevered firm?
+
+---
+
+The quirk in the tax code is that interest payments are tax deductible. However, dividend payments are not. This creates a tax shield for firms that use debt financing, as the tax savings from deducting interest payments effectively lower the firm's overall cost of capital.
+
+---
+
+## Business risk versus financial risk
+
+Explain what is meant by business and financial risk. Suppose Firm A has greater business risk than Firm B. Is it true that Firm A also has a higher cost of equity capital? Explain
+
+---
+
+Buisness risk refers to the inherent risk associated with a firm's operations and industry. It arises due to factors like deman fluctuations, input costs, competition, regulatory changes, and economic conditions. Business risk affects the volatility of a firm's operating income (EBIT) and is present regardless of capital structure.
+
+Financial risk comes from the firm's financing decisions, specifically the use of debt. As a firm increases its leverage (debt-to-equity ratio), it takes on more fixed interest obligations, which amplifies the risk to equity holders. Higher leverage increases the volatility of net income and returns to shareholders.
+
+---
+
+Yes, greater business risk does mean a higher cost of equity. Firm A is likely to have a higher cost of equity than firm B if it has greater business risk, even if both firms have the same financial leverage.
+
+Here's why:
+
+According to the Capital Asset Pricing Model (CAPM):
+
+$$
+\begin{aligned}
+R_e &= R_f + \beta (R_m - R_f)\\
+\text{Where:}\\
+R_e &= \text{cost of equity}\\
+R_f &= \text{risk-free rate}\\
+\beta &= \text{equity beta (measures systematic risk)}\\
+R_m - R_f &= \text{market risk premium}
+\end{aligned}
+$$
+
+Business risk affects beta $\beta$. Firms with higher business risk experience greater fluctuations in earnings and cash flows, which typically increases their equity beta ($\beta$). A higher beta leads to a higher required return on equity.
+
+Even without leverage, Firm A's equity is riskier. If two firms have identical capital structures but Firm A has more business risk, its equity will still be riskier because its earnings are more volatile. Investors demand a higher return to compensate for the additional risk.
+
+If Firm A has more business risk than Firm B, it likely has a higher cost of equity, even if both firms have the same financial structure. However, financial risk (leverage) can further amplify the effect, making the cost of equity rise even more.
+
+---
+
+## MM Propositions
+
+How would you answer the following debate?
+
+> _Q:_ Isn't it true that the riskiness of a firm's equity will rise if the firm increases its use of debt financing?  
+> _A:_ Yes, that's the essence of MM Proposition II.  
+> _Q:_ And isn't it true that, as a firm increases its use of borrowing, the likelihood of default increases, thereby increasing the risk of the firm's debt?  
+> _A:_ Yes.  
+> _Q:_ In other words, increased borrowing increases the risk of the equity and the debt?  
+> _A:_ That's right.  
+> _Q:_ Well, given that the firm uses only debt and equity financing, and given that the risks of both are increased by increased borrowing, does it not follow that increasing debt increases the overall risk of the firm and therefore decreases the value of the firm?  
+> _A:_ ?  
+
+---
+
+> _A:_ Not necessarily. While increasing debt raises the risk of both equity and debt, it does not automatically decrease firm value. According to Modigliani-Miller Proposition I (without taxes), in a world with no taxes, bankruptcy costs, or agency costs, the firm's total value remains unchanged regardless of its capital structure. Investors adjust their required returns based on risk, but the overall value of the firm stays the same because the total cash flows generated by the firm's assets do not change.
+
+### Risk allocation vs. firm value
+
+Increased leverage does increase the risk of both debt and equity, but this simply redistributes risk among investors. Equity holders demand a higher return to compensate for increased financial risk, and debt holders may charge a higher interest rate as default risk rises. However, in an MM no-tax, no-bankruptcy world, this does not change the firm's total free cash flows, so the firm's total value remains unchanged.
+
+### What about the real world?
+
+In reality, as debt increases, financial distress and agency costs can arise, potentially reducing firm value. However, in the presence of taxes, debt creates a tax shield, making the firm more valuable. The optimal capital structure balances the benefits of the tax shield against the costs of financial distress.
+
+
+Increasing debt does not inherently decrease firm value---it depends on the trade-off between tax advantages and financial distress costs. In an idealized MM world (no taxes, bankruptcy, or agency costs), the value remains unchanged. In the real world moderate debt can actually increase value due to tax shields, but excessive debt can reduce it due to financial distress.
+
+---
+
+## Optimal capital structure
+
+Is there an easily identifiable debt-equity ratio that will maximize the value of a firm? Why or why not?
+
+---
+
+No there is no universally optimal debt-equity ratio that maximizes firm value for all firms. The ideal capital structure depends on various firm-specific and market factors.
+
+### Modigliani-Miller theorem (without taxes)
+
+In a world with no taxes, no bankruptcy costs, and no agency costs, the debt-equity ratio is irrelevant to firm value. The firm's total value is determined by its underlying assets and operations, not its financing mix.
+
+### With taxes: The benefit of debt
+
+When corporate taxes exist, debt financing creates a tax shield (since interest is tax-deductible), increasing firm value. This suggests that more debt is better, pushing the optimal debt-equity ratio higher.
+
+### With financial distress costs
+
+Excessive debt increases the risk of bankruptcy and financial distress, which come with legal costs, operational disruptions, and lost business opportunities. At some point, these costs outweigh the tax benefits of debt, limiting the optimal debt level.
+
+### Agency costs and market conditions
+
+Debt can discipline managers (reducing wasteful spending), but excessive debt can also lead to conflicts between debt and equity holders (e.g., risk-shifting or underinvestment). Different industries have different risk levels, asset types, and cash flow stability, meaning the ideal leverage ratio varies across firms and sectors.
+
+There is no one-size-fits-all debt-equity ratio taht maximizes firm value. Instead, firms must find a balance between the tax benefits of debt and the costs of financial distress and agency problems. The optimal ratio varies by industry, business model, economic conditions, and firm-specific risk factors.
+
+---
+
+## Financial leverage
+
+Why is the use of debt financing referred to as financial "leverage"?
+
+---
+
+The use of debt financing is referred to as financial leverage because it amplifies the potential returns (or losses) to equity holders. Just like a physical lever magnifies force, financial leverage magnifies the effects of changes in operationg income on a firm's net income and return on equity (ROE).
+
+### How financial leverage works
+
+When a firm takes on debt, it borrows moeny instead of issuing more equity to finance its operations. If the firm's return on assets (ROA) exceeds the cost of debt (interest rate), then leverage increases the return on equity (ROE). However, if the firm's earnings decline, fixed interest payments remain, leading to greater losses for equity holders.
+
+### Example of financial leverage in action
+
+Suppose a firm has $1M in assets, financed in two different ways:
+
+|Scenario|Debt|Equity|Operating Income|Interest Expense|Net Income|ROE|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|Unlevered Firm|\$0|\$1M|\$200K|\$0|\$200K|20\%|
+|Levered Firm|\$500K|\$500K|\$200K|\$25K (5\% interest)|\$175K|35\%|
+
+* The levered firm has a higher ROE (35\% vs. 20\%) because it uses less equity and benefits from cheaper debt financing.
+* If earnings drop, the levered firm will also experience a greater decline in ROE, demonstrating the risk-amplifying nature of leverage.
+
+### Key Takeaways:
+
+Leverage increases returns when business performance is strong but magnifies losses when performance declines. It reduces reliance on equity financing, potentially lowering the firm's weighted average cost of capital (WACC). Excessive leverage increases financial risk, raising the chance of default and bankruptcy.
+
+Thus, financial leverage is a powerful but double-edge tool that firms must manage carefully to maximize value while controlling risk.
+
+---
+
+## Homemade leverage
+
+What is homemade leverage
+
+---
+
+Homemade leverage refers to the idea that individual incestors can replicate a firm's capital structure decisions on their own, thereby making corporate financial leverage irrelevant under certain conditions. This concept is central to the Modigliani-Miller (MM) theorem in a world without taxes, transaction costs, or bankruptcy costs.
+
+### How homemade leverage works
+
+If a firm is unlevered but an investor prefers leverage, they can borrow on their own (e.g., through margin trading) to create the same risk-return profile as if the firm had used debt. Conversely, if a firm is levered but an investor prefers no leverage, the can "undo" the firm's leverage by investing in both the firm's equity and risk-free assets (like bonds).
+
+### Example of homemade leverage
+
+Suppose there are two firms:
+
+* Firm U (Unlevered): Financed entirely with equity.
+* Firm L (Levered): Financed with both equity and debt.
+
+An investor prefers Firm L's levered returns but only Firm U is available. They can:
+
+1. Borrow money at the same rate as the firm and use it to buy more shares of Firm U.
+2. This mimics the higher-risk, higher-return profile of investing in Firm L.
+
+Alternatively, if the investor holds stock in Firm L but prefers lower risk, they can:
+
+1. Sell some of their stock in Firm L and invest in risk-free bonds to offset the firm's leverage.
+
+### Key takeaway
+
+Homemade leverage supports MM Proposition I: Capital structure is irrelevant in a perfect market because investors can adjust their own leverage to achieve their desired risk-return profile, making a firm's choice of debt vs. equity unimportant.
+
+---
+
+## Capital structure goal
+
+What is the basic goal of financial management with regard to capital structure?
+
+---
+
+The basic goal of financial management with regard to capital structure is to maximize the value of the firm while minimizing the cost of capital and financial risk. This is achieved by determining the optimal mix of debt and equity financing that balances risk and return.
+
+### Key objectives of capital strucutre management
+
+1. __Maximize firm value:__ The chosen capital structure should increase shareholder wealth by maximizing the firm's total market value. In a world with taxes, this often means using some debt to benefit from the tax shield on interest payments.
+
+2. __Minimize the cost of capital (WACC):__ The firm should aim for the lowest possible weighted average cost of capital (WACC) to enhance profitability. Since debt is usually cheaper than equity (due to tax benefits and lower required returns), a balanced mix can reduce WACC.
+
+3. __Manage financial risk:__ While debt financing can boost returns, excessive debt increases financial distress costs and default risk. The goal is to avoid overleveraging, which could lead to bankruptcy or reduced flexibility.
+
+4. __Ensure financial flexibility:__ The firm must maintain the ability to raise funds for future growth opportunities without excessive constraints from prior debt commitments. A good capital structure adapts to changing market conditions and business needs.
+
+5. __Align with business strategy & industry norms:__ Different industries have different capital structure norms (e.g., tech firms rely more on equity, while utilities use more debt). The firm should align its financing strategy with its growth plans, cash flow stability, and risk tolerance.
+
+### Conclusion
+
+The ultimate goal of financial management in capital structure decisions is to strike the right balance between debt and equity---leveraging the benefits of debt (like tax shileds) while avoiding excessive financial risk. This balance maximizes firm value and shareholder returns.
+
+---
+
+# Questions and problems
+
+## EBIT and leverage
+
+Money, Inc., has no debt outstanding and a total market value of \$275,000. Earnings before interest and taxes, EBIT, are projected to be \$21,000 if economic conditions are normal. If there is strong expansion in the economy, then EBIT will be 25 percent higher. If there is a recession, then EBIT will be 40 percent lower. Money is considering a \$99,000 debt issue with an interest rate of 8 percent. The proceeds will be used to repurchase shares of stock. There are currentl 5,000 shares outstanding. Ignore taxes for this problem.
+
+a. Calculate earnings per share, EPS, under each of the three economic senarios before any debt is issued. Also calculate the percentage changes in EPS when the economy expands or enters a recession.
+
+b. Repeat part (a) assuming that Money goes through with recapitalization. What do you observe?
+
+---
+
+* __Total market value:__ \$275,000
+* __Projected EBIT:__ \$21,000
+* __If recession:__ $21,000 \times (1 - .40) = 12,600$
+* __If expansion:__ $21,000 \times 1.25 = 26,250$
+* __Shares outstanding:__ 5,000
+
+|.|Recession|Expected|Expansion|
+|:---:|:---:|:---:|:---:|
+|EBIT|\$12,600|\$21,000|\$26,250|
+|EPS|2.52|4.20|5.25|
+|percent change in EPS|-40\%|0\%|25\%|
+
+If Money, Inc. went through with the recapitalization:
+
+* __Debt:__ \$99,000
+* __Interest:__ 8\%
+* __Interest payment:__ $99,000 \times .08 = 7,920$
+* __Price per share:__ $275,000/5,000 = 55.00$
+* __Stock repurchased:__ $99,000/55 = 1,800$ shares
+* __Shares outstanding:__ $5,000 - 1,800 = 3,200$ shares
+
+|.|Recession|Expected|Expansion|
+|:---:|:---:|:---:|:---:|
+|EBIT|\$12,600|\$21,000|\$26,250|
+|Interest payments|-7,920|-7,920|-7,920|
+|EBT|4,680|13,080|18,330|
+|EPS|1.46|4.09|5.73|
+|percent change in EPS|-64.30\%|0\%|40.10\%|
+
+The stock repurchase does increase value during an economic expansion, but the expected and recession values decrease. I would recommend not doing the stock repurchase.
+
+---
+
+## EBIT, taxes, and leverage
+
+Repeat parts (a) and (b) in the previous problem assuming Money has a tax rate of 35 percent.
+
+---
+
+* __Taxes:__ 35\%
+
+|.|Recession|Expected|Expansion|
+|:---:|:---:|:---:|:---:|
+|EBIT|\$12,600|\$21,000|\$26,250|
+|Taxes|4,410|7,350|9,187.50|
+|Earnings|8,190|13,650|17,062.50|
+|EPS|1.64|2.73|3.41|
+|percent change in EPS|-40\%|0\%|25\%|
+
+Recapitalization:
+
+|.|Recession|Expected|Expansion|
+|:---:|:---:|:---:|:---:|
+|EBIT|\$12,600|\$21,000|\$26,250|
+|Interest payments|-7,920|-7,920|-7,920|
+|EBT|4,680|13,080|18,330|
+|Taxes|1,638|4,578|6,415.50|
+|Earnings|3,042|8,502|11,914.50|
+|EPS|0.95|2.66|3.72|
+|percent change in EPS|-64.29\%|0\%|39.85\%|
+
+Including taxes doesn't improve the situation. With the EPS for both recession and the expected economic condition, I will suggest not doing the stock repurchase.
+
+---
+
+## ROE and leverage
+
+Suppose the company in the previous problem has a market-to-book ratio of 1.0.
+
+a. Calculate return on equity, ROE, under each of the three economic scenarios before any debt is issued. Also calculate the percentage changes in ROE for economic expansion and recession, assuming no taxes.
+
+b. Repeat part (a) assuming the firm goes through with the proposed recapitalization.
+
+c. Repeat parts (a) and (b) of this problem assuming the firm has a tax rate of 35 percent.
+
+---
+
+a. The return on equity for a market-to-book ratio of 1.0:
+
+$$
+\begin{aligned}
+\text{ROE} &= \text{Earnings} / \text{Equity}
+\end{aligned}
+$$
+
+Before debt is issued:
+
+$$
+\begin{aligned}
+\text{ROE}_{\text{recession}} &= \frac{12,600}{275,000}\\
+  &= .0458 = 4.58\%\\\\
+\text{ROE}_{\text{expected}} &= \frac{21,000}{275,000}\\
+  &= .0764 = 7.64\%\\\\
+\text{ROE}_{\text{expansion}} &= \frac{26,250}{275,000}\\
+  &= .0955 = 9.55\%
+\end{aligned}
+$$
+
+The change in ROE for each is:
+
+|.|Recession|Expected|Expansion|
+|:---:|:---:|:---:|:---:|
+|Change in ROE|-40\%|0\%|25\%|
+
+b. If Money, Inc., goes through with the recapitalization:
+
+$$
+\begin{aligned}
+\text{ROE}_{\text{recession}} &= \frac{4,680}{176,000}\\
+  &= .0261 = 2.61\%\\\\
+\text{ROE}_{\text{expected}} &= \frac{13,080}{176,000}\\
+  &= .0743 = 7.43\%\\\\
+\text{ROE}_{\text{expansion}} &= \frac{18,330}{176,000}\\
+  &= .104 = 10.4\%
+\end{aligned}
+$$
+
+The change in ROE for each is:
+
+|.|Recession|Expected|Expansion|
+|:---:|:---:|:---:|:---:|
+|Change in ROE|-65\%|0\%|40\%|
+
+c. For a tax rate of 35 percent:
+
+$$
+\begin{aligned}
+\text{ROE}_{\text{recession}} &= \frac{8,190}{275,000}\\
+  &= .0298 = 2.98\%\\\\
+\text{ROE}_{\text{expected}} &= \frac{13,650}{275,000}\\
+  &= .0496 = 4.96\%\\\\
+\text{ROE}_{\text{expansion}} &= \frac{17,062.50}{275,000}\\
+  &= .0620 = 6.20\%\\\\
+\end{aligned}
+$$
+
+The change in ROE for each is:
+
+|.|Recession|Expected|Expansion|
+|:---:|:---:|:---:|:---:|
+|Change in ROE|-40\%|0\%|25\%|
+
+b. If Money, Inc., goes through with the recapitalization:
+
+$$
+\begin{aligned}
+\text{ROE}_{\text{recession}} &= \frac{3,042}{176,000}\\
+  &= .0173 = 1.73\%\\\\
+\text{ROE}_{\text{expected}} &= \frac{8,502}{176,000}\\
+  &= .0483 = 4.83\%\\\\
+\text{ROE}_{\text{expansion}} &= \frac{11,914.50}{176,000}\\
+  &= .0677 = 6.77\%\\\\
+\end{aligned}
+$$
+
+The change in ROE for each is:
+
+|.|Recession|Expected|Expansion|
+|:---:|:---:|:---:|:---:|
+|Change in ROE|-64.18\%|0\%|40.17\%|
+
+---
+
+## Break-even EBIT
+
+Rolston Corporation is comparing two different capital structures, an all-equity plan (Plan I) and a levered plan (Plan II)). Under Plan I, Rolston would have 265,000 shares of stock outstanding. Under Plan II, there would be 185,000 shares of stock outstanding and \$2.8 million in debt outstanding. The interest rate on the debt is 10 percent and there are no taxes.
+
+a. If EBIT is \$750,000, which plan will result in the higher EPS?
+b. If EBIT is \$1,500,000, which plan will result in the higher EPS?
+c. What is the break-even EBIT?
+
+---
+
+$$
+\begin{aligned}
+\text{Plan I:}\\
+\text{Shares: }&\ \ 265,000\\
+\text{Debt: }&\ \ \$0\\\\
+\text{Plan II:}\\
+\text{Shares: }&\ \ 185,000\\
+\text{Debt: }&\ \ \$2.8\ \text{million}\\
+\text{Interest: }&\ \ 10\%
+\end{aligned}
+$$
+
+a. EBIT = \$750,000
+
+$$
+\begin{aligned}
+\text{Plan I:}\\
+\text{EBIT: }&\ \ \$750,000\\
+\text{EPS: }&\ \ \frac{750,000}{265,000} = 2.83\\\\
+\text{Plan II:}\\
+\text{EBIT: }&\ \ \$750,000\\
+\text{Interest: }&\ \ \$280,000\\
+\text{EBT: }&\ \ \$470,000\\
+\text{EPS: }&\ \ \frac{470,000}{185,000} = 2.54
+\end{aligned}
+$$
+
+b. EBIT = \$1,500,000
+
+$$
+\begin{aligned}
+\text{Plan I:}\\
+\text{EBIT: }&\ \ \$1,500,000\\
+\text{EPS: }&\ \ \frac{1,500,000}{265,000} = 5.66\\\\
+\text{Plan II:}\\
+\text{EBIT: }&\ \ \$1,500,000\\
+\text{Interest: }&\ \ \$280,000\\
+\text{EBT: }&\ \ \$1,220,000\\
+\text{EPS: }&\ \ \frac{1,220,000}{185,000} = 6.59
+\end{aligned}
+$$
+
+
+c. Break even EBIT
+
+The break even EBIT is where the EPS is the same for both plans:
+
+$$
+\begin{aligned}
+\frac{\text{EBIT}}{265,000} &= \frac{\text{EBIT} - 280,000}{185,000}\\
+\text{EBIT} \times 185,000 &= (\text{EBIT} - 280,000) \times 265,000\\
+185,000 \cdot \text{EBIT} &= 265,000 \cdot \text{EBIT} - 74,200,000,000\\\\
+\text{EBIT} &= \frac{74,200,000}{80,000}\\
+ &= \$927,000 
+\end{aligned}
+$$
+
+We can also use `R` programming:
+
+```{r problem 4}
+shares.unlevered <- 265000
+shares.levered <- 185000
+interest <- 2800000 * .10
+f <- function(x) x / shares.unlevered - ( x - interest ) / shares.levered
+uniroot(f, upper=1000000, lower=100000)$root
+```
+
+$$
+\begin{aligned}
+\text{Breakeven:}\\
+\text{Plan I:}\\
+\text{EBIT: }&\ \ \$927,500\\
+\text{EPS: }&\ \ \frac{927,500}{265,000} = 3.5\\\\
+\text{Plan II:}\\
+\text{EBIT: }&\ \ \$927,500\\
+\text{Interest: }&\ \ \$280,000\\
+\text{EBT: }&\ \ \$647,500\\
+\text{EPS: }&\ \ \frac{647,000}{185,000} = 3.5
+\end{aligned}
+$$
+
+---
+
+## MM and Stock Value
+
+In problem 4, use MM Proposition I to find the price per share of equity under each of the two proposed plans. What is the value of the firm?
+
+---
+
+MM Proposition I states that a firm cannot change the total value of its outstanding securities by changing the proportions of its capital structure. The value of the firm is always the same under different capital structures.
+
+To recap:
+
+$$
+\begin{aligned}
+\text{Plan I:}\\
+\text{Shares: }&\ \ 265,000\\
+\text{Debt: }&\ \ \$0\\
+\text{EBIT: }&\ \ \$750,000\\\\
+\text{Plan II:}\\
+\text{Shares: }&\ \ 185,000\\
+\text{Debt: }&\ \ \$2,800,000\\
+\text{Interest: }&\ \ \$280,000\\
+\text{EBIT: }&\ \ \$1,500,000\\
+\end{aligned}
+$$
+
+Since capital structure doesn't affect the value of the firm in absence of taxes, the firm's value under both plans should be the same.
+
+We will assume that the firm trades at a P/E ratio of 1. Therefore, the Price per share is the same as the EPS.
+
+$$
+\begin{aligned}
+\text{Firm value} &= \text{Shares outstanding} \times \text{Price per share}\\\\\
+\end{aligned}
+$$
+
+To recap:
+
+$$
+\begin{aligned}
+\text{EBIT} = 750,000\text{:}\\
+\text{EPS}_{\text{unlevered}} &= 2.83\\
+\text{EPS}_{\text{levered}} &= 2.54\\\\
+\text{EBIT} = 1,500,000\text{:}\\
+\text{EPS}_{\text{unlevered}} &= 5.66\\
+\text{EPS}_{\text{levered}} &= 6.59\\\\
+\end{aligned}
+$$
+
+Therefore, the firm value is the same for both the levered and unlevered firm. If we use P/E = 1, then the firm value is the value of EBIT.
+
+---
+
+## Break-even EBIT and leverage
+
+Kolby Corp. is comparing two different capital structures. Plan I would result in 900 shares of stock and \$65,700 in debt. Plan II would result in 1,900 shares of stock and \$29,200 in debt. The interest rate on the debt is 10 percent.
+
+a. Ignoring taxes, compare both of these plans to an all-equity plan assuming that EBIT will be \$8,500. The all-equity plan would result in 2,700 shares of stock outstanding. Which of the three plans has the highest EPS? The lowest?
+
+b. In part (a) what are the break-even levels of EBIT for each plan as compared to that for an all-equity plan? Is one higher than the other? Why?
+
+c. Ignoring taxes, when will EPS be identical for Plans I and II?
+
+d. Repeat parts (a), (b), and (c) assuming that the corporate tax rate is 40 percent. Are the break-even levels of EBIT different from before? Why or why not?
+
+---
+
+$$
+\begin{aligned}
+\text{Plan I:}\\
+\text{Shares:}&\ \ 900\\
+\text{Debt:}&\ \ \$65,700\\\\
+\text{Plan II:}\\
+\text{Shares:}&\ \ 1,900\\
+\text{Debt:}&\ \ \$29,200\\\\
+\text{Interest:}&\ \ 10\%
+\end{aligned}
+$$
+
+### EBIT = \$8,500
+
+$$
+\begin{aligned}
+\text{All equity:}\\
+\text{Shares:}&\ \ 2,700
+\end{aligned}
+$$
+
+a. Calculating the EPS:
+
+$$
+\begin{aligned}
+\text{All equity:}\\
+\text{EPS} &= \frac{8,500}{2,700}\\
+  &= 3.15\\\\
+\text{Plan I:}\\
+\text{Interest} &= 65,700 \times .1\\
+  &= 6,570\\
+\text{EBT} &= 8,500 - 6,570\\
+  &= 1,930\\
+\text{EPS} &= \frac{1,930}{900}\\
+  &= 2.14\\\\
+\text{Plan II:}\\
+\text{Interest} &= 29,200\\
+  &= 2,920\\
+\text{EBT} &= 8,500 - 2,920\\
+  &= 5,580\\
+\text{EPS} &= \frac{5,580}{1,900}\\
+  &= 2.94
+\end{aligned}
+$$
+
+The all equity capital structure has the highest EPS. The lowest is plan II.
+
+
+b. Break even
+
+To calculate the break even:
+
+$$
+\begin{aligned}
+\text{Plan I:}\\
+\frac{\text{EBIT}}{2,700} &= \frac{\text{EBIT} - 6,570}{900}\\
+900 \cdot \text{EBIT} &= 2,700 \cdot \text{EBIT} - 2,700 \cdot 6,570\\
+17,739,000 &= 1,800 \cdot \text{EBIT}\\
+\text{EBIT} &= 9,855\\\\
+\text{Plan II:}\\
+\frac{\text{EBIT}}{2,700} &= \frac{\text{EBIT} - 2,920}{1,900}\\
+1,900 \cdot \text{EBIT} &= 2,700 \cdot \text{EBIT} - 2,700 \cdot 2,920\\
+7,884,000 &= 800 \cdot \text{EBIT}\\
+\text{EBIT} &= 9,855 
+\end{aligned}
+$$
+
+They are the same and they should be because cost structure should not matter.
+
+c. EPS is identical at the break even point.
+
+d. For tax rate of 40 percent.
+
+EPS:
+
+$$
+\begin{aligned}
+\text{All equity:}\\
+\text{EBIT} &= 8,500\\
+\text{Taxes} &= -3,400\\
+\text{Earnings} &= 5,100\\
+\text{EPS} &= \frac{5,100}{2,700}\\
+  &= 1.89\\\\
+\text{Plan I:}\\
+\text{Interest} &= 65,700 \times .1\\
+  &= 6,570\\
+\text{EBT} &= 8,500 - 6,570\\
+  &= 1,930\\
+\text{Taxes} &= 772\\
+\text{Earnings} &= 1,158\\
+\text{EPS} &= \frac{1,158}{900}\\
+  &= 1.29\\\\
+\text{Plan II:}\\
+\text{Interest} &= 29,200\\
+  &= 2,920\\
+\text{EBT} &= 8,500 - 2,920\\
+  &= 5,580\\
+\text{Taxes} &= -2,232\\
+\text{Earnings} &= 3,348\\
+\text{EPS} &= \frac{3,348}{1,900}\\
+  &= 1.76
+\end{aligned}
+$$
+
+The break even levels of EBIT will be identical because EBIT is calculated before taxes.
+
+---
+
+## Leverage and stock value
+
+Ignoring taxes in the previous problem, what is the price per share of equity under Plan I? Plan II? What principle is illustrated by your answers?
+
+---
+
+Modigliani-Miller proposition I tells us that in a no-tax world, the total value of the firm remains the same regardless of its capital structure. The value of the firm is determined by its earnings and the market's required return. We can use the market value of equity directly since we do not have this return.
+
+The value of the firm is
+
+$$
+\text{Firm value (V)} = \text{Shares outstanding} \times \text{Price per share (all equity)}
+$$
+
+Recap the previous problem:
+
+$$
+\begin{aligned}
+\text{All equity:}\\
+\text{Shares} &= 2,700\\
+\text{EPS} &= \$3.15\\\\
+\text{Plan I:}\\
+\text{Shares} &= 900\\
+\text{Debt} &= \$65,700\\
+\text{EPS} &= 2.14\\\\
+\text{Plan II:}\\
+\text{Shares} &= 1,900\\
+\text{Debt} &= \$29,200\\
+\text{EPS} &= 2.94
+\end{aligned}
+$$
+
+We can calculate the all equity firm value (using EPS as the share price):
+
+$$
+V = 2,700 \times 3.15 = 8,505
+$$
+
+For plan I:
+
+$$
+\begin{aligned}
+\text{Assets} \equiv \text{Liablilities} + \text{Stockholders' equity}\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\end{aligned}
+$$
+
+---
+
+## Homemade leverage
+
+Star, Inc., a prominent consumer products firm, is debating whether or not to convert its all-equity capital structure to one that is 35 percent debt. Currently there are 6,000 shares outstanding and the price per share is \$58. EBIT is expected to remain at \$33,000 per year forever. The interest rate on new debt is 8 percent, and there are no taxes.
+
+a. Ms. Brown, a shareholder of the firm, owns 100 shares of stock. What is her cash flow under the current capital structure, assuming the firm has a dividend payout rate of 100 percent?
+
+b. What will Ms. Brown's cash flow be under the proposed capital structure of the firm? Assume that she keeps all 100 of her shares.
+
+c. Suppose Star does convert, but Ms. Brown prefers the current all-equity capital structure. Show how she could unlever her shares of stock to recreate the original capital structure.
+
+d. Using your answer to part (c), explain why Star's choice of capital structure is irrelevant.
+
+---
+
+a. Cash flows under current capital structure:
+
+$$
+\begin{aligned}
+\text{Shares outstanding} &= 6,000\\
+\text{Brown's shares} &= 100\\
+\text{EBIT} &= 33,000\\\\
+\text{Brown's CF} &= \frac{100}{6,000} \cdot 33,000\\
+  &= 550
+\end{aligned}
+$$
+
+b. Cash flows under new capital structure:
+
+$$
+\begin{aligned}
+\text{Share price} &= 58\\
+\text{Firm value} &= \text{Stock value} + \text{Bond value}\\
+  &= 6,000 \cdot \$58 + 0\\
+  &= \$348,000\\\\
+\text{New debt} &= .35 \cdot 348,000\\
+  &= \$121,800\\
+\text{Shares outstanding} &= 6,000 - \frac{121,800}{58}\\
+  &= 3,900\\
+\text{Firm value} &= 3,900 \cdot \$58 + \$121,800\\
+  &= \$348,000\\
+\text{Interest payments on debt} &= 121,800 \times .08\\
+  &= \$9,744\\
+\text{EBT} &= 33,000 - 9,744\\
+  &= \$23256\\
+\text{Brown's CF} &= \frac{100}{3,900} \cdot \$23,256\\
+  &= \$596.31
+\end{aligned}
+$$
+
+c. If Ms. Brown prefers the original all-equity structure, she can unlever her position by using homemade leverage. She can sell some of her shares and use the proceeds to lend out at 8\% interest.
+
+$$
+\begin{aligned}
+\text{Ms. Browns new shares} &= 100 \times (1 - .35)\\
+  &= 65\\
+\text{Ms. Browns dividends} &= \frac{65}{3900} \times \$23,256\\
+  &= \$387.60\\
+\text{Proceeds from lending at 8\%} &= 35 \times \$58 \times .08\\
+  &= \$162.40\\
+\text{post-leverage cash flow} &= \$387.60 + 162.40\\
+  &= \$550
+\end{aligned}
+$$
+
+d. To undo the effect of Star's choice of capital structure, Ms. Brown can sell part of her stock holdings and lend out the proceeds at the same interest rate that the company has borrowed at.
+
+---
+
+## Homemade leverage and WACC
+
+ABC Co. and XYZ Co. are identical firms in all respects except for their capital structure. ABC is all equity financed with \$750,000 in stock. XYZ uses both stock and perpetual debt; its stock is worth \$375,000 and the interest rate on its debt is 8 percent. Both firms expect EBIT to be \$86,000. Ignore taxes.
+
+a. Richard owns \$30,000 worth of XYZ's stock. What rate of return is he expecting?
+
+b. Show how Richard could generate exactly the same cash flows and rate of return by investing in ABC and using homemade leverage.
+
+c. What is the cost of equity for ABC? What is it for XYZ?
+
+d. What is the WACC for ABC? For XYZ? What principle have you illustrated?
+
+---
+
+a. Richard rate of return
+
+$$
+\begin{aligned}
+\text{XYZ Capital structure:}\\
+\text{Firm value} &= \text{Stock value} + \text{Bond value}\\
+\text{Bond value} &= \text{Firm value} - \text{Stock value}\\
+  &= \$750,000 - \$375,000\\
+  &= \$375,000\\\\
+\text{Interest on debt} &= 375,000 \times .08 = 30,000\\
+\text{Earnings to equity holders} &= 86,000 - 30,000\\
+  &= 56,000\\
+\text{ROE} &= \frac{56,000}{375,000} = 0.1493\\
+\text{Richard's return} &= 30,000 \times 0.1493\\
+  &= 4,479
+\end{aligned}
+$$
+
+Richard's return is 14.93\%.
+
+b. Richard's homemade leverage of ABC
+
+Richard would buy \$30,000 worth of ABC shares using his own money, and would also buy \$15,000 shares from borrowed money at 8\% interest.
+
+His total investment would be \$45,000. The cash flow from ABC's total value is \$750,000, and it generates \$86,000 of EBIT. Since ABC has no debt, all of this goes to shareholders.
+
+Richard owns:
+
+$$
+\frac{45,000}{750,000} = 0.06
+$$
+
+His share of EBIT: $86,000 \times 0.06 = 5,160$.
+
+The interest on the borrowed money: $15,000 \times 0.08 = 1,200$.
+
+Therefore, Richards net cashflow is: $5,160 - 1,200 = 3,960$.
+
+His rate of return would be
+
+$$
+\frac{3,960}{30,000} = 0.1493
+$$
+
+Therefore Richard has replicated XYZ's return by leveraging his personal portfolio.
+
+c. Cost of Equity
+
+The cost of equity for ABC is (100\% equity financed):
+
+$$
+r^{\text{ABC}}_E = \frac{86,000}{750,000} = 0.1147
+$$
+
+The cost of equity for XYZ is
+
+$$
+\begin{aligned}
+r^{\text{XYZ}}_{E} = r_A + \frac{D}{E}(r_A - r_D)\\
+  &= 0.1147 + (1)(0.1147 - 0.08)\\
+  &= 0.1147 + 0.0347 = 0.1494
+\end{aligned}
+$$
+
+The cost of equity is higher for XYZ due to financial leverage.
+
+---
+
+## MM
+
+Nina Corp. uses no debt. The weighted average cost of capital is 9 percent. If the current market value of the equity is \$37 million and there are no taxes, what is EBIT?
+
+$$
+\begin{aligned}
+R_{\text{WACC}} &= \frac{S}{V} R_S + \frac{B}{V} R_B\\
+\text{For no debt:}\\
+B &= 0\\
+R_S = R_{\text{WACC}} &= 0.09\\
+\text{Because:}\\
+S = V &= \$37,000,000\\
+\text{Therefore:}\\
+\text{EBIT} &= R_{\text{WACC}} \cdot S\\
+  &= 0.09 \times 37,000,000\\
+  &= 3,330,000
+\end{aligned}
+$$
+
+---
+
+## MM and Taxes
+
+In the previous question, suppose the corporate tax rate is 35 percent. What is EBIT in this case? What is the WACC? Explain.
+
+$$
+\begin{aligned}
+R_{\text{WACC}} &= R_S\\
+  &= 0.09\\
+R_{\text{WACC}} &= \frac{\text{EBIT} \times (1 - t_C)}{E}\\
+\text{EBIT} &= \frac{R_{\text{WACC}} \times E}{(1 - t_C)}\\
+\text{EBIT} &= \frac{0.09 \times 37,000,000}{.65}\\
+  &= 5,123,077
+\end{aligned}
+$$
+
+Because the firm uses only equity financing, taxes doesn't affect $R_{\text{WACC}}$ because there is no interest to deduct. However, EBIT must be higher to deliver the same after-tax cash flow to equity holders, as 35\% of EBIT is lost to taxes.
+
+---
+
+## Calculating WACC
+
+Weston Industries has a debt-equity ratio of 1.5. Its WACC is 11 percent, and its cost of debt is 7 percent. The corporate tax rate is 35 percent.
+
+a. What is Weston's cost of equity capital?
+
+b. What is Weston's unlevered cost of equity capital?
+
+c. What would the cost of equity be if the debt-equity ratio were 2? What if it were 1.0? What if it were zero?
+
+---
+
+$$
+\begin{aligned}
+\text{D-E ratio} = \frac{B}{S} &= 1.5\\
+B &= 1.5 S\\
+V &= B + S\\
+  &= 1.5 S + S\\
+  &= 2.5 S\\
+R_{\text{WACC}} &= .11\\
+R_B &= .07\\
+t_C &= .35\\
+\text{A: Weston's cost of equity capital}&\\
+R_{\text{WACC}} &= \frac{S}{V} R_S + \frac{B}{V} R_B \times (1 - t_C)\\
+.11 &= 0.4 R_S + \frac{1.5}{2.5} .07 \times .65\\
+.11 &= 0.4 R_S + .0273\\
+R_S &= \frac{.0827}{0.4}\\
+  &= .2068\\\\
+\text{B: Weston's unlevered cost of equity capital}&\\
+R_S &= R_0 + (R_0 - R_B)(D/E)(1 - t_C)\\
+.2068 &= R_0 + (R_0 - .07)(.07)(.65)\\
+.2068 &= R_0 + (R_0 - .07)(.975)\\
+.2068 &= R_0 + .975 R_0 - .06825\\
+.2068 &= 1.975 R_0 - .06825\\
+R_0 &= \frac{.27505}{1.975}\\
+  &= .1393
+\text{C: cost of equity if D-E = 2, 1, or 0}\\
+\text{D-E ratio} = \frac{B}{S} &= 2\\
+R_S &= .1393 + 2 \times (.1393 - .07) \times .65\\
+  &= .2294\\\\
+\text{D-E ratio} = \frac{B}{S} &= 1\\
+R_S &= .1393 + 1 \times (.1393 - .07) \times .65\\
+  &= .1843\\\\
+\text{D-E ratio} = \frac{B}{S} &= 0\\
+R_S = R_0 &= .1393
+\end{aligned}
+$$
+
+---
+
+## Calculating WACC
+
+Shadow Corp. has no debt but can borrow at 8 percent. The firm's WACC is currently 11 percent, and the tax rate is 35 percent.
+
+a. What is Shadow's cost of equity?
+
+b. If the firm converts to 25 percent debt, what will its cost of equity be?
+
+c. If the firm converts to 50 percent debt, what will its cost of equity be?
+
+d. What is Shadow's WACC in part (b)? In part (c)?
+
+---
+
+$$
+\begin{aligned}
+R_S &= R_0 + \frac{B}{S}(R_0 - R_B)(1 - t_C)\\
+\text{A: Cost of equity}\\
+R_S = R_0 = \text{WACC} &= .11\\\\
+\text{B: 25 percent debt}\\
+R_S &= .11 + \frac{.25}{.75} (.11 - .08)(.65)\\
+  &= .1165\\\\
+\text{C: 50 percent debt}\\
+R_S &= .11 + .03 \times .65\\
+  &= .1295\\\\
+\text{D: WACC}\\
+\text{WACC} &= .75 \times .1165 + .25 \times .08 \times .65\\
+  &= .1038
+\text{WACC} &= .5 \times .1295 + .5 \times .08 \times .65\\
+  &= .0908
+\end{aligned}
+$$
+
+---
+
+## MM and taxes
+
+Bruce & Co. expects its EBIT to be \$185,000 every year forever. The firm can borrow at 9 percent. Bruce currently has no debt, and its costs of equity is 16 percent. If the tax rate is 35 percent, what is the value of the firm? What will the value be if Bruce borrows \$135,000 and uses the proceeds to repurchase shares?
+
+---
+
+$$
+\begin{aligned}
+\text{EBIT} &= 185,000\\
+\text{WACC} = R_S = R_0 &= .16\\
+V_U &= \frac{\text{EBIT} \times (1 - t_C)}{R_0}\\
+  &= \frac{185,000 \times .65}{.16}\\
+  &= 751,562.50\\\\
+\text{If the firm borrows \$135,000 at 9 percent:}\\
+V_L &= \frac{\text{EBIT} \times (1 - t_C)}{R_0}
+  + \frac{t_C R_B B}{R_B}\\
+  &= V_U + t_C B\\
+  &= 751,562.50 + .35 \times 135,000\\
+  &= 798,812.50
+\end{aligned}
+$$
+
+---
+
+## MM and taxes
+
+In the previous problem, what is the cost of equity after recapitalization? What is the WACC? What are the implications for the firm's capital structure decision?
+
+---
+
+$$
+\begin{aligned}
+V &= 798,812.50\\
+B &= 135,000\\
+S &= 798,812.50 - 135,000\\
+  &= 663,812.50\\
+R_0 &= .16\\
+R_B &= .09\\\\
+R_S &= R_0 + \frac{B}{S} \times (1 - t_C) \times (R_0 - R_B)\\
+  &= .16 + \frac{135,000}{663,812.50} \times .65 \times .07\\
+  &= .1693\\\\
+\text{WACC} &= \frac{S}{V} R_S + \frac{B}{V} R_B (1 - t_C)\\
+  &= \frac{663,812.50}{798,812.50} \times .1693 + \frac{135,000}{798,812.50} \times .09 \times .65\\
+  &= .1506
+\end{aligned}
+$$
+
+---
+
+## MM proposition I
+
+Levered, Inc., and Unlevered, Inc., are identical in every way except their capital structures. Each company expects to earn \$29 million before interest per year in perpetuity, with each company distributing all its earnings as dividends. Levered's perpetual debt has a market value of \$91 million and costs 8 percent per year. Levered has 2.3 million shares outstanding, currently worth \$105 per share. Unlevered has no debt and 4.5 million shares outstanding, currently worth \$80 per share. Neither firm pays taxes. Is Levered's stock a better buy than Unlevered's stock?
+
+---
+
+$$
+\begin{aligned}
+\text{Levered, Inc}\\
+\text{Debt} &= \$91,000,000\\
+\text{Interest} &= .08\\
+\text{Shares} &= 2,300,000\\
+\text{Price per share} &= \$105\\
+\text{EBIT} &= \$29,000,000\\
+\text{Interest} &= 7,280,000\\
+\text{EBT} &= 21,720,000\\
+\text{EPS} &= \frac{21,720,000}{2,300,000}\\
+  &= 9.44\\
+\text{Shareholder return} &= \frac{9.44}{105}\\
+  &= 0.0899\\\\
+\text{UnLevered, Inc}\\
+\text{Shares} &= 4,500,000\\
+\text{Price per share} &= \$80\\\\
+\text{EBIT} &= \$29,000,000\\
+\text{EPS} &= \frac{29,000,000}{4,500,000}\\
+  &= 6.44
+\text{P-E ratio} &= \frac{6.44}{80}\\
+  &= 0.0805
+\end{aligned}
+$$
+
+Levered's stock offers the higher return, therefore it is a better buy.
+
+---
+
+## MM
+
+Tool Manufacturing has an expected EBIT of \$57,000 in perpetuity and a tax rate of 35 percent. The firm has \$90,000 in outstanding debt at an interest rate of 8 percent, and its unlevered cost of capital is 15 percent. What is the value of the firm according to MM Proposition I with taxes? Should Tool change its debt-equity ratio if the goal is to maximize the value of the firm? Explain.
+
+---
+
+$$
+\begin{aligned}
+V &= S + B\\
+\text{EBIT} &= \$57,000\\
+B &= \$90,000\\
+\text{Interest rate} &= 0.08\\
+\text{Unlevered cost of capital} &= .15\\
+\text{Interest} &= 90,000 \times .08\\
+  &= 7,200\\
+V_U &= \frac{\text{EBIT} \times (1 - t_C)}{R_0}\\
+  &= \frac{57,000 \times .65}{.15}\\
+  &= \$247,000\\
+V_L &= V_U + t_C B\\
+  &= \$247,000 + .35 \times 90,000\\
+  &= 278,500
+\end{aligned}
+$$
+
+The firm's value increases with more debt because of the tax shield. According to MM Proposition I with taxes, to maximize firm value, the firm should increase its debt as much as possible--as long as bankruptcy costs and financial distress don't outweigh the tax benefits.
+
+In practice:
+
+* If there are no distress costs, the firm can keep adding debt to maximize value.
+
+* If distress costs rise with leverage, Tool should balance the tax shield against potiential costs of bankruptcy or higher interest rates.
+
+---
+
+## Firm value
+
+Cavo Corporation expects an EBIT of \$19,750 every year forever. The company currently has no debt, and its costs of equity is 15 percent.
+
+a. What is the current value of the company?
+b. Suppose the company can borrow at 10 percent. If the corporate tax rate is 35 percent, what will the value of the firm be if the company takes on debt equal to 50 percent of its unlevered value? What if it takes on debt equal to 100 percent of its unlevered value?
+c. What will the value of the firm be if the company takes on debt equal to 50 percent of its levered value? What if the company takes on debt equal to 100 percent of its levered value?
+
+---
+
+$$
+\begin{aligned}
+\text{EBIT} &= 19,750\\
+R_S &= .15\\\\
+\text{A: Company value}\\
+V_U &= \frac{\text{EBIT}}{R_0}\\
+  &= \frac{19,750}{.15}\\
+  &= 131,666.70\\\\
+\text{B: Company value: debt and taxes}\\
+R_B &= .10\\
+t_C &= .35\\
+B &= .5 \times V_U\\
+  &= 65,833.33\\
+\text{B: For debt 50 percent of unlevered value:}\\
+V_L &= V_U + t_C B\\
+  &= 131,666.70 + .35 \times 65,833.33\\
+  &= 154708.3
+\text{B: For debt 100 percent of unlevered value:}\\
+V_L &= V_U + t_C B\\
+  &= 131,666.70 + .35 \times 131,666.70\\
+  &= 177,750\\\\
+\text{C: Value with debt as a percentage of levered value}\\
+\text{For debt 50 percent of levered value:}\\
+V_L &= V_U + t_C B\\
+V_L &= V_U + t_C \times .50 \times V_L\\
+V_L - t_C \times .50 \times V_L &= V_U\\
+V_L \times (1 - t_C \times .5) &= V_U\\
+V_L &= \frac{V_U}{(1 - t_C \times .5)}\\
+  &= \frac{131,666.70}{1 - .175}\\
+  &= 159,596
+\end{aligned}
+$$
+
+---
+
+## MM proposition I with taxes
+
+The Maxwell Company is financed entirely with equity. The company is considering a loan of \$1.8 million. The loan will be repaid in equal installments over the next two years, and it has an interest rate of 8 percent. The company's tax rate is 35 percent. According to MM proposition I with taxes what would be the increase in the value of the company after the loan?
+
+---
+
+Since Maxwell is financed entirely with equity and is now taking out the loan the change in company value is:
+
+$$
+\begin{aligned}
+\Delta V_L &= t_C \Delta B\\
+  &= .35 \cdot 1,800,000\\
+  &= 630,000
+\end{aligned}
+$$
+
+---
+
+## MM proposition I  without taxes
+
+Alpha Corporation and Beta Corporation are identical in every way except their capital structures. Alpha Corporation, an all-equity firm, has 15,000 shares of stock outstanding, currently worth \$30 per share. Beta Corporation uses leverage in its capital structure. The market value of Beta's debt is \$65,000, and its cost of debt is 9 percent. Each firm is expected to have earnings before interest of \$75,000 in perpetuity. Neither firm pays taxes. Assume that every investor can borrow at 9 percent per year.
+
+a. What is the value of Alpha Corporation?
+b. What is the value of Beta Corporation?
+c. What is the market value of Beta Corporation's equity?
+d. How much will it cost to purchase 20 percent of each firm's equity?
+e. Assuming each firm meets its earnings estimates, what will be the dollar return to each position in part (d) over the next year?
+f. Construct an investment strategy in which an investor purchases 20 percent of Alpha's equity and replicates both the cost and dollar return of purchasing 20 percent of Beta's equity.
+g. Is Alpha's equity more or less risky than Beta's equity? Explain.
+
+---
+
+Alpha Corporation:
+
+$$
+\begin{aligned}
+V_{\text{Alpha}} &= \text{Shares outstanding} \times \text{Price per share}\\
+  &= 15,000 \times 30\\
+  &= 450,000
+\end{aligned}
+$$
+
+Beta Corporation:
+
+The value of Beta Corporation should be the same as Alpha Corporation (MM proposition I).
+
+Beta Corporation equity value:
+
+$$
+\begin{aligned}
+V_{\text{Beta}} &= B + S\\
+S &= V_{\text{Beta}} - B\\
+  &= 450,000 - 65,000\\
+  &= 385,000
+\end{aligned}
+$$
+
+Purchase 20 percent of each firm's equity:
+
+$$
+\begin{aligned}
+S_{\text{20\% Alpha}} &= .20 \times 450,000\\
+  &= 90,000\\\\
+S_{\text{20\% Beta}} &= .20 \times 385,000\\
+  &= 77,000
+\end{aligned}
+$$
+
+Dollar return of earnings:
+
+$$
+\begin{aligned}
+\text{EBIT} &= 75,000\\
+\text{Alpha}\\
+\text{Return} &= 75,000 \times .2\\
+  &= 15,000\\\\
+\text{Beta}\\
+\text{Interest} &= 65,000 \times .09\\
+  &= 5,850\\
+\text{EBT} &= 69,150\\
+\text{Return} &= 69,150 \times .2\\
+  &= 13,830
+\end{aligned}
+$$
+
+Investment strategy for investing in Alpha and replicate Beta cost and return:
+
+$$
+\begin{aligned}
+\text{Beta return} &= 13,830\\
+\text{Beta-Alpha return difference} &= 15,000 - 13,830\\
+  &= 1,170\\
+\text{This is the interest for the homemade leverage}\\
+1,170 &= B_{\text{homemade}} \times .09\\
+B &= \frac{1,170}{.09}\\
+  &= 13,000
+\text{Investment in Alpha} &= 90,000 + 13,000\\
+  &= 103,000
+\end{aligned}
+$$
+
+Beta's equity is riskier because of financial leverage. The use of debt amplifies returns but also increases risk, meaning BGeta's shareholders are more exposed to changes in EBIT than Alpha's shareholders.
+
+---
+
+## Cost of capital
+
+Acetate, Inc., has equity with a market value of \$23 million and debt with a market value of \$7 million. Treasury bills that mature in one year yield 5 percent per year, and the expected return on the market portfolio is 12 percent. The beta of Acetate's equity is 1.15. The firm pays no taxes.
+
+a. What is Acetate's debt-equity ratio?
+b. What is the firm's weighted average cost of capital?
+c. What is the cost of capital for an otherwise identical all-equity firm?
+
+---
+
+
+$$
+\begin{aligned}
+\text{D-E ratio} &= \frac{B}{S}\\
+  &= \frac{7}{23}\\
+  &= .3043\\
+R_S &= R_F + \beta \times (R_M - R_F)\\
+  &= .05 + 1.15 \times (.12 - .05)\\
+  &= .1305\\
+\text{WACC} &= \frac{S}{V} R_S + \frac{B}{V} R_B\\
+\text{We will use the Risk-free rate as teh cost of debt}\\
+\text{WACC} &= \frac{23}{30} \times .1305 + \frac{7}{30} .05\\
+  &= .1117\\
+R_0 = R_S &= .1305
+\end{aligned}
+$$
+
+---
+
+## Homemade leverage
+
+The Veblen Company and the Knight Company are identical in every respect except that Veblen is not levered. The market value of Knoight Company's 6 percent bonds is \$1.4 million. Financial information for the two firms appears here. All earnings streams are perpetuities. Neither firm pays taxes. Both firms distribute all earnings available to common stockholders immediately.
+
+```{r problem 22: home leverage: table, echo=F}
+Veblen <- c(550000, 0, 4300000,0)
+Knight <- c(550000, 84000, 3140000, 1400000)
+df <- data.frame(Veblen, Knight)
+rownames(df) <- c("Projected operation income", "Year-end interest on debt",
+                  "Market value of stock", "Market value of debt")
+knitr::kable(df)
+```
+
+a. An investor who can borrow at 6 percent per year wishes to purchase 5 percent of Knight's equity. Can he increase his dollar return by purchasing 5 percent of Veblen's equity if he borrows so that the initial net costs of the two strategies are the same?
+
+b. Given the two investment strategies in (a), which will investors choose? When will this process cease?
+
+---
+
+$$
+\begin{aligned}
+\text{Buy 5\% Knight's equity}\\
+0.05 \times 3,140,000 &= 157,000\\
+\text{Expected return from Knight}\\
+\text{EBIT} - \text{Interest} &= 550,000 - 84,000\\
+  &= 466,000\\
+\text{Investor's return}\\
+0.05 \times 466,000 &= 23,300\\\\
+\text{To match the initial cost, the investor buys \$157,000 worth of Veblen's stock}\\
+\text{Interest} &= 157,000 \times 0.06\\
+  &= 9,420\\
+\text{5\% of EBIT}\\
+0.05 \times 550,000 &= 27,500\\
+\text{Net return after interest}\\
+27,500 - 9,420 = 18,080
+\end{aligned}
+$$
+
+Thus, the investor earns \$23,300 from Knight and \$18,080 from Veblen.
+
+Investors will prefer Knight's stock because it provides a higher dollar return without the need of handling personal leverage.
+
+---
+
+## MM propositions
+
+Locomotive Corporation is planning to repurchase part of its common stock by issuing corporate debt. As a result, the firm's debt-equity ratio is expected to rise from 35 percent to 50 percent. The firm currently has \$3.6 million worth of debt outstanding. The cost of this debt is 8 percent per year. Locomotive expects to have an EBIT of \$1.35 million per year in perpetuity. Locomotive pays no taxes.
+
+a. What is the market value of Locomotive Corporation before and after the repurchase announcement?
+
+b. What is the expected return on the firm's equity before the announcment of the stock repurchase plan?
+
+c. What is the expected return on the equity of an otherwise identical all-equity firm?
+
+d. What is the expected return on the firm's equity after the announcement of the stock repurchase plan?
+
+---
+
+$$
+\begin{aligned}
+\text{Value before announcement}\\
+\frac{B}{S} &= .35\\
+S &= \frac{3,600,000}{.35}\\
+  &= 10,285,714\\
+V &= S + B\\
+  &= 10,285,714 + 3,600,000\\
+  &= 13,885,714\\
+\text{Value after the repurchase is the same.}\\
+\text{WACC} &= \frac{\text{EBIT}}{V}\\
+  &= \frac{1,350,000}{13,885,714}\\
+  &= 0.0927
+\text{Expected return on equity}
+R_S &= \frac{\text{EBIT}}{V_U}\\
+0.0927 &= \frac{1,350,000}{V_U}\\
+V_U &= \frac{1,350,000}{0.0927}\\
+  &= 14,563,107\\
+\text{Return on equity after repurchase}\\
+R_S &= R_0 + \frac{B}{V} ( R_0 - R_B)\\
+R_S &= 0.0927 + \frac{3,600,000}{14,563,107}(0.0927 - 0.08)\\
+  &= 0.09322
+\end{aligned}
+$$
+
+---
+
+## Stock value and leverage
+
+Green Manufacturing, Inc., plans to announce that it will issue \$2 million of perpetual debt and use the proceeds to repurchase common stock. The bonds will sell at par with a coupon rate of 6 percent. Green is currently an all-equity firm worth \$6.3 million with 400,000 shares of common stock outstanding. After the sale of the bonds, Green will maintain the new capital structure indefinitely. Green currently generates annual pretax earnings of \$1.5 million. This level of earnings is expected to remain constant in perpetuity. Green is subject to a corporate tax rate of 40 percent.
+
+a. What is the expected return on Green's equity before the announcement of the debt issue?
+b. Construct Green's market value balance sheet before the announcment of the debt issue. What is the price per share of the firm's  equity?
+c. Construct Green's market value balance sheet immediatiely after the announcment of the debt issue.
+d. What is Green's stock price per share immediately after the repurchase announcement?
+e. How many shares will Green repurchase as a result of the debt issue? How many shares of common stock will remain after the reuprchase?
+f. Construct the market value balance sheet after the restructuring.
+g. What is the required return on Green's equity after the restructuring?
+
+---
+
+### Expected return on equity before debt announcement
+
+$$
+\begin{aligned}
+\text{Net income} &= \text{EBIT} \times (1 - t_C)\\
+  &= 1,500,000 \times (1 - 0.4)\\
+  &= 900,000\\
+R_S &= \frac{900,000}{6,300,000}\\
+  &= .14286
+\end{aligned}
+$$
+
+### Market value balance sheet before announcement
+
+The stock price per share is:
+
+$$
+\begin{aligned}
+\text{Price per share} &= \frac{\text{Total equity value}}{\text{Shares outstanding}}\\
+  &= \frac{6,300,000}{400,000}\\
+  &= 15.75
+\end{aligned}
+$$
+
+```{r problem 24: stock value and leverage: balance sheet before announcement, echo=F}
+Assets.Value <- 6300000
+Debt.Value <- 0
+Equity.Value <- 6300000
+assets.df <- data.frame(Assets.Value)
+liabilities.equity.df <- data.frame(Debt.Value, Equity.Value)
+knitr::kable(list(assets.df, liabilities.equity.df), caption="Balance sheet before restructure")
+```
+
+### Stock price after announcement
+
+$$
+\begin{aligned}
+\text{New price per share} &= \frac{5,100,000}{400,000}\\
+  &= 12.75
+\end{aligned}
+$$
+
+### Share repurchase
+
+$$
+\begin{aligned}
+\text{Shares repurchased} &= \frac{2,000,000}{12.75}\\
+  &\approx 156,863\\
+\end{aligned}
+$$
+
+Shares remaining after repurchase:
+
+$$
+400,000 - 156,863 = 243,137
+$$
+
+```{r problem 24: stock value and leverage: balance sheet after restructuring, echo=F}
+Assets.Value <- 7100000
+Debt.Value <- 200000
+Equity.Value <- 5100000
+assets.df <- data.frame(Assets.Value)
+le.df <- data.frame(Debt.Value, Equity.Value)
+knitr::kable(list(assets.df, le.df), caption="Balance sheet after restructure")
+```
+
+### Required return on equity after restructuring
+
+$$
+\begin{aligned}
+R_S &= R_0 + \frac{B}{S} \times (R_0 - R_B) \times (1 - t_C)\\
+  &= 0.1429 + 0.392 \times (0.1429 - 0.06) \times (1 - 0.4)\\
+  &= 0.1624
+\end{aligned}
+$$
+
+---
+
+## MM with taxes
+
+Williamson, Inc., has a debt-equity ratio of 2.5. The firm's weighted average cost of capital is 10 percent, and its pretax cost of debt is 6 percent. Willimson is subject to a corporate tax rate of 35 percent.
+
+a. What is Williamson's cost of equity capital?
+b. What is Williamson's unlevered cost of equity capital?
+c. What would Williamson's weighted average cost of capital be if the firm's debt-equity ratio were .75? What if it were 1.5?
+
+---
+
+### Cost of equity capital
+
+$$
+\begin{aligned}
+B &= 2.5 S\\
+V = S + B \times (1 - t_C) &= 3.5 S\\
+\text{WACC} &= \frac{S}{V} R_S + \frac{B}{V} R_B (1 - t_C)\\
+.1 &= \frac{1}{3.5} R_S + \frac{2.5}{3.5} \times .06 \times (1 - .35)\\
+.1 &= 0.286 R_S + 0.0279\\
+R_S &= \frac{.0721}{.286}\\
+  &= .2524
+\end{aligned}
+$$
+
+### Unlevered cost of equity
+
+$$
+\begin{aligned}
+R_S &= R_0 + \frac{B}{S}(R_0 - R_B(1 - t_C))\\
+0.2524 &= R_0 + (R_0 - 0.039)(2.5)\\
+R_0 &= .10
+\end{aligned}
+$$
+
+## WACC at different debt-equity ratios
+
+$$
+\begin{aligned}
+\text{WACC} &= R_0 \times \frac{S}{V} + \frac{B}{V} R_B (1 - t_C)\\
+\text{If D/E = 0.75}\\
+\frac{S}{V} &= \frac{0.75}{1 + 0.75} = 0.4286\\
+\frac{B}{V} &= \frac{1}{1 + 0.75} = 0.5714\\
+\text{WACC} &= (0.10)(0.5714) + (0.039)(0.4286)\\
+  &= .0738\\\\
+\text{If D/E = 1.5}\\
+\frac{S}{V} &= \frac{1.5}{1 + 1.5} = 0.6\\
+\frac{B}{V} &= \frac{1}{1 + 1.5} = 0.4\\
+\text{WACC} &= (0.10)(0.4) + (0.039)(0.6)\\
+  &= .0634
+\end{aligned}
+$$
