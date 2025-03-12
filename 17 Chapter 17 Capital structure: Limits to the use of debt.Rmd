@@ -1,0 +1,619 @@
+---
+title: "Capital structure: Limits to the use of debt"
+author: "Ross, Westerfield, Jaffe"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen=99)
+require(xts)
+```
+
+# Summary and conclusions
+
+1. We mentioned in the last chapter that according to theory, firms should create all-debt capital structures under corporate taxation. Because firms generally employ moderate amounts of debt in the real world, the theory must have been missing something at that point. We stated in this chapter that costs of financial distress cause the firms to restrain their issuance of debt. These costs are of two types: Direct and indirect. Lawyers' and accountants' fees during the bankruptcy process are examples of direct costs. We mentioned four examples of indirect costs:
+
+* Impaired ability to conduct buisness.
+* Incentive to take on risky projects.
+* Incentive toward underinvestment.
+* Distribution of funds to stockholders prior to bankruptcy.
+
+2. Because financial distress costs are substantial and the stockholders ultimately bear them, firms have an incentive to reduce costs. Protective covenants and debt consolidation are two common cost reduction techniques.
+
+3. Because costs of financial distress can be reduced but not eliminated, firms will not finance entirely with debt. Figure 17.1 illustrates the relationship between firm value and debt. In the figure, firms select the debt-equity ratio at which firm value is maximized.
+
+4. Signaling theory argues that profitable firms are likely to increase their leverage because the extra interest payments will offset some of the pretax profits. Rational stockholders will infer higher firm value from a higher debt level. Thus investors view debt as a signal of firm value.
+
+5. Managers owning a small portion of a firm's equity can be expected to work less, maintain more lavish expense accounts, and accept more pet projects with negative NPVs than managers owning a large proportion of equity. Because new issues of equity dilute a manager's percentage interest in the firm, such agency costs are likely to increase when a firm's growth is financed through new equity rather than through new debt.
+
+6. The pecking-order theory impleis that managers prefer internal to external financing. If external financing is required, managers tend to choose the safest securities, such as debt. Firms may accumulate slack to avoid external equity.
+
+7. The results so far have ignored personal taxes. If distributions ot equityholders are taxed at a lower effective personal tax rate than are interest payments, the tax advantage to debt at the corporate level is partially offset.
+
+8. Debt-equity ratios vary across industries. We present three factors determining the target debt-equity ratio:
+
+> a. _Taxes:_ Firms with high taxable income should rely more on debt than firms with low taxable income.
+> b. _Types of assets:_ Firms with a high percentage of intangible assets such as research and dveleopment should have low debt. Firms with primarily tangible assets should have higher debt.
+> c. _Uncertainty of operating income:_ Firms with high uncertainty of operating income should rely mostly on equity.
+
+---
+
+# Concept questions
+
+## Bankruptcy costs
+
+What are the direct and indirect costs of bankruptcy? Briefly explain each.
+
+---
+
+### Direct costs of bankruptcy
+
+* Legal and court fees
+* Administrative costs
+* Trustee and advisory fees
+* Asset liquidation costs
+
+### Indirect costs of bankruptcy
+
+* Impaired ability to conduct buisness.
+* Incentive to take on risky projects.
+* Incentive toward underinvestment.
+* Distribution of funds to stockholders prior to bankruptcy.
+
+---
+
+## Stockholder incentives
+
+Do you agree or disagree with the following statement? A firm's stockholders will never want the firm to invest in projects with negative net present values. Why?
+
+---
+
+When a firm is in financial distress, stockholders might sometimes prefer projects with negative net present values (NPVs), even if those projects destroy overall firm value. This shift in behavior is driven by the conflict of interest between debt holders and equity holders.
+
+* __Equity holders' limited downside:__ If the firm is close to bankruptcy, shoareholders' losses are capped at their initial investment. Debt holders, on the other hand, bear the downside risk beyond that. Sockholders might gamble on risky projects---even with negative NPVs---hoping for a big win, since they don't lose more if the project fails.
+
+* __Risk-shifting (asset substitution problem):__ Shareholders might push for high-risk, high-reward projects because they benefit if the project succeeds (through higher stock value) but don't bear additional losses if it fails (creditors absorb that). Even if the project has a negative NPV, the potential upside could save the company, and stockholders would get the rewards.
+
+* __Debt overhang:__ In financial distress, firms might reject positive NPV projects if most of the value goes to creditors. But shareholders migh push for negative NPV projects that at least give them a shot at upside returns.
+
+---
+
+## Capital structure decisions
+
+Due to large losses incurred in the past several years a firm has \$2 billion in tax loss carryforwards. This means that the next \$2 billion of the firm's income will be free from corporate income taxes. Security analysts estimate that it will take many years for the firm to generate \$2 billion in earnings. The firm has a moderate amount of debt in its capital structure. The firm's CEO is deciding whether to issue debt or equity to raise the funds needed to finance an upcoming project. Which method of financing would you recommend? Why?
+
+---
+
+In this situation, issuing equity seems like the better financing option:
+
+1. __Tax shield from debt becomes irrelevant__ One of the main benefits of using debt financing is the tax shield---interest payments are tax-deductible, reducing the firm's taxable income. However, since the company already has \$2 billion in tax loss carryforwards, it won't pay taxes for a long time, so it can't use the tax shield from additional interest payments.
+
+2. __Debt increases financial distress risk__ The firm already has a moderate amount of debt. Adding more debt increases financial risk and raises the likelihood of financial distress or bankruptcy, especially if the firm's cas flows are unstable or it takes a long time to recover from past losses.
+
+3. __Equity provides flexibility__ Issuing equity may dilute existing ownership, but it avoids the fixed obligation of interest payments. This gives the firm more financial flexibilty to reinvest earnings and rebuild its profitability without the pressure of meeting debt payments.
+
+4. __Market perception & signaling__ While issuing equity might signal that management believes the stock is fairly valued or overvalued (which could negatively impact share prices in the short term), it shows that the firm is being prudent and trying to avoid unnecssary financial distress.
+
+---
+
+## Cost of debt
+
+What steps can stockholders take to reduce the costs of debt?
+
+---
+
+Stockholders can take several steps to reduce the costs of debt, both by lowering interest rate lenders demand and by minimizing the indirect costs associated with financial distress.
+
+1. __Maintain a healthy capital structure__ Keeping a balanced debt-to-equity ratio helps maintain investor and lender confidenc. If debt levels are too high, creditors demand higher interest rates to compensate for increased risk.
+
+2. __Improve transparency and communication__ Providing clear, timely financial reports and communicating strategic plans reduces uncertainty for lenders and investors, lowering preceived risk and, therefore, the cost of debt.
+
+3. __Restrictive covenants__ Agreeing to certain covenants (e.g., maintaining specific financial ratios or limits on additional debt issuance) reassures creditors that the firm is managing risk, leading to lower interest rates.
+
+4. __Collateral and asset management__ Offering collateral reduces lender risk, which can lower borrowing costs. Additionally, managing assets efficiently to preserve liquidity reassures lenders of the company's ability to meet obligations.
+
+5. __Reduce agency costs__ Stockholders can align management's incentives with debt holders' interests---for example, by linking executive compensation to long-term firm value rather than short-term stock price movements---to reduce risky behavior that could increase the cost of debt.
+
+6. __Avoid overinvestment and risky projects__ Creditors price in the risk that stockholders might push for overly risky projects (the asset substitution problem). Avoiding high-risk ventures unless they offer a compelling risk-adjusted return can help control debt costs.
+
+7. __Use insurance or hedging strategies__ Reducing operational risks (like commodity price fluctuations or currency risk) through hedging strategies lowers the firm's overall risk profile, making lenders more comfortable with lower interest rates.
+
+8. __Negotiate tax efficiency__ While not always directly affecting the interest rate, structuring debt to maximize the benefit of interest tax shields (if applicable) can enhance the value of using debt, effectively reducing its net cost.
+
+By actively managing financial policies and aligning incentives with creditors' concerns, stockholders can significantly lower both the explicit costs (like interest rates) and implicit costs (like financial distress) of debt.
+
+---
+
+## M&M and bankruptcy costs
+
+How does the existence of financial distress costs and agency costs affect Modigliani and Miller's theory in a world where corporations pay taxes?
+
+---
+
+In Modigliani and Miller's (M&M) original theory with taxes, they argued that the value of a levered firm is higher than an unlevered firm because of the interest tax shield---debt interest is tax-deductible, reducing taxable income and increasing firm value. According to this model, firms should maximize their value by taking on as much debt as possible to maximize the tax shield.
+
+However, introducing financial distress costs and agency costs complicates this picture.
+
+1. __Financial distress costs:__ As firms take on more debt, the risk of financial distress increases. These costs include both direct expenses (e.g., legal and administrative fees in bankruptcy) and indirect costs (e.g., loss of customer and supplier confidence, employee turnover, and missed growth opportunities). These distress costs reduce the net benefit of the tax shield, making excessive debt less attractive.
+
+2. __Agency costs of debt:__ Debt creates conflicts between shareholders and bondholders:
+
+> * __Asset substitutuion problem:__ Stockholders might push for riskier projects because they benefit from potential upside, while debtholders bear the downside risk.
+
+> * __Underinvestment problem:__ In highly levered firms, stockholders might avoid positive-NPV projects if the benefits mostly go to debtholders rather than themselves.
+
+> * __Monitoring and bonding costs:__ Debtholders may impose covenants and montioring requirements to protect their interests, adding costs to the firm.
+
+3. __Trade-off theory (balancing benefits and costs):__ M&M's theory evloves into the trade-off theory of capital structure: firms balance the benefits of the debt tax shield against the rising costs of financial distress and agency issues. The optimal captial structure is the point where the marginal benefit of the tax shield equals the marginal cost of financial distress and agency problems.
+
+In short, while taxes make debt attractive, financial distress and agency costs limit how much debt is optimal. Real-world firms typically seek a balance---they use enough debt to benefit from the tax shield but not so much that distress and agency costs destroy value.
+
+---
+
+## Agency costs of equity
+
+What are the sources of agency costs of equity?
+
+---
+
+Agency costs of equity arise from conflicts of interest between managers (agents) and shareholders (principals). Shareholders want managers to maximize firm value, but managers might pursue personal goals or avoid effort.
+
+1. __Montioring costs:__ Shareholders may need to monitor managers to ensure they act in the shareholders' best interests. This includes expenses like audits, board oversight, and performance evaluations.
+
+2. __Bonding costs:__ Managers might take actions (or accept contract restrictions) to reassure shareholders of their alignement, like non-compete clauses or limits on perks---but these can still impose costs on the firm.
+
+3. __Residual loss:__ Even with monitoring and bonding, some conflicts persist. For example, managers may still make suboptimal decisions, like avoiding risky but value-creating projects to protect their jobs.
+
+4. __Overconsumption of perks:__ Managers might use company resources for personal benefit---luxurious offices, private jets, or excessive travel expenses---which reduces the firm's value.
+
+5. __Empire building & growth maximization:__ Managers may pursue unnecessary expansions or acquisitions to increase their influence and prestige, even if those decisions don't add value to shareholders.
+
+6. __Effort aversion:__ Without strong incentives, managers might not work as hard or diligently as they would if they were full owners, leading to inefficiencies and underperformance.
+
+7. __Short-term focus (Myopia):__ Managers might prioritize short-term gains (like boosting quarterly earnings) to secure bonsues or impress investors, even if it harms long-term value.
+
+To mitigate these costs, firms often use strategies like performance-based compenstation (stock options, bonuses tied to shareholder returns), strong corporate governance, and activist investors who hold management accountable.
+
+---
+
+## Observed capital structures
+
+Refer to the observed capital structures given in Table below of the text. What do you notice about the types of industries with respect to their average deb-equity ratios? Are certain types of industries more likely to be highly leveraged than others? What are some possible reasons for this observed segmentation? Do the operating results and tax history of the firms play a role? How about their future earnings prospects? Explain.
+
+```{r concept question 7: Table 17.3, echo=F}
+pct.debt <- c(59.60, 45.89, 45.55, 42.31, 33.11, 10.58, 9.53, 8.93, 8.79, 8.05)
+df <- data.frame(pct.debt)
+rownames(df) <- c("Radio and television broadcasting stations",
+                  "Air transport",
+                  "Hotels and motels",
+                  "Building construction",
+                  "Natural gas distribution",
+                  "Electronic equipment",
+                  "Computers",
+                  "Educational services",
+                  "Drugs",
+                  "Biological products")
+colnames(df) <- c("Debt as a percentage of market value of equity and debt (Industry medians)")
+knitr::kable(df)
+```
+
+---
+
+The highly leveraged industries---radio and television broadcasting stations, air transport, hotels and motels, building construction and natural gas distribution---tend to have high fixed assets that can be used as collateral for loans. The stability of their cash flows, often supported by long-term contracts or steady demand, makes them more suitable for carrying debt. Additionally the interest expense on debt offers a tax shield, which is valuable for firms with consistent earnings.
+
+The lower levereaged industires---electronic equipment, computers, educational services, drugs, biological products---are characterized by rapid innovation, high growth potential, and significant uncertainty. Their earnings are often volatile, and they may prioritize flexibility over the fixed obligations of debt. Plus, these firms often rely on equity financing to avoid the financial distress that debt could trigger during downturns or failed R&D efforts.
+
+Firms with stable, predictable earnings can comfortably service debt, benefiting from tax shields. In contrast, firms with uncertain profits may avoid debt to reduce the risk of bankruptcy costs.
+
+High-growth industries (like biotech or tech) might avoid debt to reinvest cash flows into expansion, while mature industries with slower growth (like broadcasting) may leverage to enhance shareholder returns.
+
+---
+
+## Bankruptcy and corporate ethics
+
+As mentioned in the text, some firms have filed for bankruptcy because of actual or likely litigation-related losses. Is this a proper use of the bankruptcy process?
+
+---
+
+Yes, using bankrupcy to manage litigation-related losses can be a legitimate use of the process. Bankruptcy law exists to provide businesses with a structured way to handle overwhelming liabilities, including those from lawsuits.
+
+1. __Protection and reorganization (Chapter 11):__ Firms facing massive litigation losses---like product liability or environmental claims---can use bankruptcy to restructure their finances. This allows them to kep operating while negotiating settlements with creditors and plaintiffs, often leading to reduced but more manageable payouts.
+
+2. __Fairness to stakeholders:__ Bankruptcy ensures that creditors and claimants are treated equitable. Instead of a chaotic situation where aggressive litigants grab all the assets, the process centralizes claims, preventing a "race to the courthouse" taht could destroy the firm's remaining value.
+
+3. __Preserving business value:__ Filing for bankruptcy can help reserve a firm's going-concern value. If litigation wipes out assets and forces liquidation, jobs, customer relationships, and supply chains can all be lost. Bankruptcy may allow the firm to survive and eventually thrive, benefiting employees, suppliers, and even creditors in the long run.
+
+4. __Controversies and abuse:__ On the flip side, critics argue that some firms use bankruptcy strategically to avoid full accountability. For example, companies facing large-scale public harm claims might try to shield assets or delay justice through bankruptcy protections.
+
+In essence, bankruptcy is a tool designed to balance competing itnerests---providing relief to struggling firms while ensuring creditors and plaintiffs get a fair chance at recovery. Whether it's a "proper" use depends on the circumstances and the firm's intent.
+
+---
+
+## Bankruptcy and corporate ethics
+
+Firms sometimes use the threat of a bankruptcy filing to force creditors to renegotiate terms. Critics argue that in such cases the firm is using bankruptcy laws "as a sword rather than a shield." Is this an ethical tactic?
+
+---
+
+Whether using the threat of bankruptcy to force creditors to renegotiate terms is ethical depends on the context and intentions of the firm.
+
+It may be ethical if the firm is using the negotition leverage to avoid collapse, preserve jobs, pensions, and future viability. However, if the firm is using it in bad faith negotiations, then it is not an ethical tatctic.
+
+---
+
+## Bankruptcy and corporate ethics
+
+Continental Airlines once filed for bankruptcy, at least in part, as a means of reducing labor costs. Whether this move was ethical or proper was hotly debated. Give both sides of the argument.
+
+---
+
+It may be ethical if it was to preserve the company and jobs, to fairly distribute the sacrifices, and if a legal framework exists for this purpose. It my not be ethical if it was a breach of trust with the employees, was caused by mismanagement or was exploitation, and led to long-term employee harm.
+
+---
+
+# Questions and problems
+
+## Firm value
+
+Janetta Corp. has an EBIT rate of \$975,000 per year that is expected to continue in perpetuity. The unlevered cost of equity for the company is 14 percent, and the corporate tax rate is 35 percent. The company also has a perpetual bond issue outstanding with a market value of \$1.9 million.
+
+a. What is the value of the company?
+b. The CFO of the company informs the company president that the value of the company is \$4.8 million. Is the CFO correct?
+
+---
+
+This is just a simple application of MM Proposition I with corporate taxes. Specifically:
+
+$$
+\begin{aligned}
+V_L = \frac{\text{EBIT} \times (1 - t_C)}{R_0} + t_C B\\
+  &= \frac{975,000 \times .65}{.14} + .35 \cdot 1,900,000\\
+  &= 4,526,786 + 665,000\\
+  &= 5,191,786
+\end{aligned}
+$$
+
+The CFO claims the value is \$4.8 million, but by the above calculation, the value should be \$5.19 million.
+
+The CFO is not correct---he may have overlooked the tax shield benefit from the debt. The tax shield adds value to the company, which pushes the total value above \$4.8 million.
+
+---
+
+## Agency costs
+
+Tom Scott is the owner, president, and primary salesperson for Scott Manufacturing. Because of this, the company's profits are driven by the amount of work Tom does. If he works 40 hours each week, the company's EBIT will be \$550,000 per year; if he works a 50-hour week, the company's EBIT will be \$625,000 per year. The company is currently worth \$3.2 million. The company needs a cash infusion of \$1.3 million, and it can issue equity or issue debt with an interest rate of 8 percent. Assume there are no corporate taxes.
+
+a. What are the cash flows to Tom under each scenario?
+b. Under which form of financing is Tom likely to work harder?
+c. What specific new costs will occur with each form of financing?
+
+---
+
+$$
+\begin{aligned}
+\text{Equity issued}\\
+\text{Tom's ownership} &= \frac{3.2}{4.5}\\
+  &= .71\\
+\text{Cash flow}_{\text{40hr week}} &= 550,000 \times .71\\
+  &= 390,500\\\\
+\text{Cash flow}_{\text{50hr week}} &= 625,000 \times .71\\
+  &= 443.750\\
+\text{Debt issued}\\
+\text{Interest} &= 1,300,000 \times .08\\
+  &= 104,000\\
+\text{Cash flow}_{\text{40hr week}} &= 550,000 - 104,000\\
+  &= 446,000\\
+\text{Cash flow}_{\text{50hr week}} &= 625,000 - 104,000\\
+  &= 521,000
+\end{aligned}
+$$
+
+### The new costs with each form of financing
+
+#### Debt financing
+
+##### Financial distress costs
+
+Risk of bankruptcy if the company can't meet interest payments.
+
+##### Limited flexibility
+
+Ongoing interest obligations reduce financial flexibility.
+
+#### Equity financing
+
+##### Agency costs
+
+Tom might not work as hard, knowing the extra value he creates is shared with new shareholders.
+
+##### Ownership dilution
+
+Tom loses control and decision-making power over part of the company.
+
+---
+
+## Nonmarketed claims
+
+Dream, Inc., has debt outstanding with a face value of \$6 million. The value if it were entirely financed by equity would be \$17.85 million. The company also has 350,000 shares of stock outstanding that sell at a price of \$38 per share. The corporate tax rate is 35 percent. What is the decrease in the value of the company due to expected bankruptcy costs?
+
+---
+
+$$
+\begin{aligned}
+\text{Equity value} &= 350,000 \times 38\\
+  &= 13,300,000\\
+\text{Debt value} &= 6,000,000\\
+\text{Firm value} &= S + B\\
+  &= 13,300,000 + 6,000,000\\
+  &= 19,300,000\\\\
+V_L &= V_U + t_C \times B\\
+  &= 17,850,000 + .35 \times 6,000,000\\
+  &= 19,950,000\\\\
+\end{aligned}
+$$
+
+The difference between the actual market value and the calculated value is the cost of bankruptcy
+
+$$
+\begin{aligned}
+\text{Decrease in value} &= 19,950,000 - 19,300,000\\
+  &= 650,000
+\end{aligned}
+$$
+
+---
+
+## Capital structure and nonmarketed claims
+
+Suppose the president of the company in the previous problem stated that the company should increase the amount of debt in its capital structure because of the tax-advantaged status of its interest payments. His argument is that this action would increase the value of the company. How would you respond?
+
+---
+
+The president is correct that increasing debt can boost the company's value due to the tax shield on interest payments---this is the essence of Modigliani and Miller's proposition I with taxes. However, this approach isn't without risks.
+
+Interest payments are tax-deductible, reducing taxable income and effectively lowering the cost of financing. As a result, adding debt increases the value of the firm through the interest tax shield:
+
+$$
+V_L = V_U + t_C \times B
+$$
+
+Where the firm's value rises by the present value of tax savings from debt.
+
+However, increasing leverage also raises the risk of financial distress and bankruptcy costs. In the previous problem, the firm already experienced a decrease in value due to expected bankruptcy costs. Raising more debt could intensify this effect, potentially wiping out the tax benefits.
+
+These risks include:
+
+* __Direct bankruptcy costs:__ Legal fees, administrative costs.
+
+* __Indirect bankruptcy costs:__ Lost customers, damaged reputation, reduced employee morale.
+
+* __Agency costs:__ Managers might take excessive risks or pass up good projects to avoid financial strain.
+
+Moreover, higher leverage increases equity risk, leading shareholders to demand higher return on equity (ROE), which could offset the benefits of lower debt costs.
+
+The optimal capital structure balances the tax benefits of debt with the costs of financial distress. So, rather than blindly increasing debt, the firm should assess:
+
+* The volatility of its cash flows (more stable cash flows support higher debt).
+* Its ability to service the additional debt, even in downturns.
+* The point where distress costs outweigh tax benefits.
+
+In short, adding debt can create value, but over-leveraging can destroy it. The company should carefully determine its optimal debt level, not just maximize leverage for tax reasons.
+
+---
+
+## Capital structure and growth
+
+Edwards Construction currently has debt outstanding with a market value of \$85,000 and a cost of 9 percent. The company has EBIT of \$7,650 that is expected to continue in perpetuity. Assume there are no taxes.
+
+a. What is the value of the company's equity? What is the debt-to-value ratio?
+b. What are the equity value and debt-to-value ratio if the company's growth rate is 3 percent?
+c. What are the equity value and debt-to-value ratio if the company's growth rate is 7 percent?
+
+---
+
+$$
+\begin{aligned}
+V &= \frac{\text{EBIT}}{\text{WACC}}\\
+  &= S + B
+V &= \frac{7,650}{.09}\\
+  &= S + 85,000\\
+S &= 0\\
+\text{Debt-to-value ratio} &= \frac{85,000}{85,000}\\
+  &= 1
+\end{aligned}
+$$
+
+3\% Growth
+
+$$
+\begin{aligned}
+V &= \frac{7,650}{.09 - .03}\\
+  &= 127,500\\
+S &= 127,500 - 85,000\\
+  &= 42,500\\
+\text{DV ratio} &= \frac{85,000}{127,500}\\
+  &= 0.67
+\end{aligned}
+$$
+
+7\% Growth
+
+$$
+\begin{aligned}
+V &= \frac{7,650}{.09 - .07}\\
+  &= 297,500\\
+S &= 297,500 - 85,000\\
+  &= 212,500\\
+\text{DV ratio} &= \frac{85,000}{212,500}\\
+  &= .22
+\end{aligned}
+$$
+
+---
+
+## Cost of financial distress
+
+Steinberg Corporation and Dietrich Corporation are identical firms except that Dietrich is more levered. Both companies will remain in business for one more year. The companies' economists agree that the probability of the continuation of the current expansion is 80 percent for the next year, and the probability of a recession is 20 percent. If the expansion continues, each firm will generate earnings before interest and taxes (EBIT) of \$2.7 million. If a recession occurs, each firm will generate earnings before interest and taxes (EBIT) of \$1.1 million. Steinberg's debt obligation requires the firm to pay \$900,000 at the end of the year. Dietrich's debt obligation requires the firm to pay \$1.2 million at the end of the year. Neither firm pays taxes. Assume a discount rate of 13 percent.
+
+a. What is the value today of Steinberg's debt and equity? What about that for Dietrich's?
+b. Steinberg's CEO recently stated that Steinberg's value should be higher than Dietrich's because the firm has less debt and therefore less bankruptcy risk. Do you agree or disagree with this statement?
+
+---
+
+### Valuing the debt and equity for the two companies
+
+$$
+\begin{aligned}
+\text{EBIT}_{\text{Expansion}} &= 2,700,000\\
+\text{EBIT}_{\text{Recession}} &= 1,100,000\\
+\text{Debt payment}_{\text{Steinberg}} &= 900,000\\
+\text{Debt payment}_{\text{Dietrich}} &= 1,200,000\\
+R &= .13
+\end{aligned}
+$$
+
+The value of the debt is simply the one year present value of the cash flows:
+
+For Steinberg:
+
+$$
+\begin{aligned}
+V_B &= \frac{\text{Interest payment}}{1 + R}\\
+  &= \frac{900,000}{1.13}\\
+  &= 796,460\\\\
+\text{EBT}_{\text{Ex}} &= 2,700,000 - 900,000\\
+  &= 1,800,000\\
+\text{EBT}_{\text{Re}} &= 1,100,000 - 900,000\\
+  &= 200,000\\\\
+V_S &= \frac{.8 \cdot \text{EBT}_{\text{Expansion}}
+  + .2 \cdot \text{EBT}_{\text{Recession}}}{1 + R}\\
+  &= \frac{.8 \cdot 1,800,000 + .2 \cdot 200,000}{1.13}\\
+  &= 1,309,735\\\\
+V &= V_S + V_B\\
+  &= 1,309,735 + 796,460\\
+  &= 2,106,195
+\end{aligned}
+$$
+
+For Dietrich:
+
+Same EBIT scenarios, but higher debt obligation. In recession the company defaults.
+
+$$
+\begin{aligned}
+V_B &= \frac{\text{Interest payment}}{1 + R}\\
+  &= \frac{.8 \cdot 1,200,000 + .2 \cdot 1,100,000\ \text{(default)}}{1.13}\\
+  &= 1,044,248\\
+\text{EBT}_{\text{Ex}} &= 2,700,000 - 1,200,000\\
+  &= 1,500,000\\
+\text{EBT}_{\text{Re}} &= 1,100,000 - 1,200,000\\
+  &= -100,000\ \ \text{(Default)}\\\\
+V_S &= \frac{.8 \cdot \text{EBT}_{\text{Expansion}}
+  + .2 \cdot \text{EBT}_{\text{Recession}}}{1 + R}\\
+  &= \frac{.8 \cdot 1,500,000 + .2 \cdot 0}{1.13}\\
+  &= 1,061,947\\
+V &= V_S + V_B\\
+  &= 1,061,947 + 1,044,248\\
+  &= 2,106,195
+\end{aligned}
+$$
+
+The CEO claims Steinberg should be worth more due to lower bankruptcy risk. In general, less leverage reduces default risk, which can increase firm value. However, leverage also boosts equity returns in good times. The trade-off is between tax shield of debt and the costs of financial distress.
+
+Since neither firm pays taxes, the benefit ofd ebt is limited to the value creation from leverage itself. Higher debt in Dietrich increases the chance of default (recession scenario), reducing equity value due to potential distress costs---even if they're implicit, like lost opportunities or higher interest rates.
+
+Calculating the two firms values they are the same (2,106,195).
+
+---
+
+## Agency costs
+
+Fountain Corporation's economists estimate that a good business environment and a bad business environment are equally likely for the coming year. The managers of Fountain must choose between two mutually exclusive projects. Assume that the project Fountain chooses will be the firm's only activity and that the firm will close one year from today. The projects have the same systematic risk but different volatilities. Consider the following information pertaining to the two projects:
+
+```{r problem 7: agency costs: table, echo=F}
+economy <- c("Bad", "Good")
+probability <- c(.5, .5)
+low.vol.payoff <- c(3500, 3700)
+high.vol.payoff <- c(2900, 4300)
+df <- data.frame(economy, probability, low.vol.payoff, high.vol.payoff)
+colnames(df) <- c("Economy", "Probability", "Low-Volatility Project Payoff", "High-Volatility Project Payoff")
+knitr::kable(df)
+```
+
+a. What is the expected value of the firm if the low-volatility project is undertaken? What if the high-volatility project is undertaken? Which of the two strategies maximizes the expected value of the firm?
+b. What is the expected value of the firm's equity if the low-volatility project is undertaken? What is it if the high-volatility project is undertaken?
+c. Which project would Fountain's stockholders prefer? Explain.
+d. Suppose bondholders are fully aware that stockholders might choose to maximize equity value rather than total firm value and opt for the high-volatility project. To minimize this agency cost, the firm's bondholders decide to use a bond convenant to stipulate that the bondholders can demand a higher payment if Fountain chooses to take on the high-volatility project. What payment to bondholders would make stockholders indifferent between the two projects?
+
+---
+
+### Firm expected value
+
+$$
+\begin{aligned}
+V_{\text{LV}} &= .5 \times \text{Bad} + .5 \times \text{Good}\\
+  &= .5 \times 3,500 + .5 \times 3,700\\
+  &= 3,600\\
+V_{\text{HV}} &= .5 \times 2,900 + .5 \times 4,300\\
+  &= 3,600\\
+\end{aligned}
+$$
+
+Both projects result in the same expected firm value of 3,600.
+
+### Expected value of the firm's equity
+
+Here, we need to think about the downside risk---if there's debt, stockholders only get the remaining value after bondholders are paid.
+
+Let's assume the firm has some outstanding debt. If the firm closes in one year, equity holders get what's left after bondholders are paid, so volatility affects the distribution.
+
+* __Low-Volatility Project:__ Since the outcomes are more stable, the stockholders' payoff is relatively safe.
+
+* __High-Volatility Project:__ Stockholders might prefer this if bondholders still get a fixed amount because they benefit more in the "good" scenario.
+
+### Which project do the stockholders prefer?
+
+Stockholders might prefer the high-volatility project despite it having the same expected firm value. This is because they have limited liability---in bad states, their downside is capped, but in good states, they capture higher upside. So, they prefer riskier strategies!
+
+### Bond covenant to align incentives
+
+Bondholders can mitigate this agency conflict by demanding a higher payment if the high-volatility project is chosen. The goal is to make stockholders indifferent between projects.
+
+To calculate the covenant payment: The equity value in both projects should be equal after the bond adjustment.
+
+---
+
+## Financial distress
+
+Good Time Company is a regional chain department store. It will remain in business for one more year. The probability of a boom year is 60 percent and the probability of a recession is 40 percent. It is projected that the company will generate a total cash flow of \$185 million in a boom year and \$76 million in a recession. The company's required debt payment at the end of the year is \$110 million. The market value of the company's outstanding debt is \$83 million. The company pays no taxes.
+
+a. What payoff do bondholders expect to receive in the event of a recession?
+b. What is the promised return on the company's debt?
+c. What is the expected return on the company's debt?
+
+---
+
+In a recession the company will default $76 - 110 = -34$ million. Therefore, in a recession the bondholders will only get \$76 million.
+
+The promised return on the company's debt is:
+
+$$
+R_B = \frac{110 - 83}{83} \approx .3253
+$$
+
+The expected return on the debt:
+
+$$
+\begin{aligned}
+V_B &= .6 \times 110 + .4 76\\
+  &= 96.4\\
+E(R_B) &= \frac{96.4 - 83}{83}\\
+  &= .1614
+\end{aligned}
+$$
+
+---
