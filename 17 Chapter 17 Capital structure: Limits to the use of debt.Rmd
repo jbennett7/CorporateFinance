@@ -617,3 +617,22 @@ E(R_B) &= \frac{96.4 - 83}{83}\\
 $$
 
 ---
+
+# Appendix 17A Some useful formulas of Financial Structure
+
+Definitions:
+
+$$
+\begin{aligned}
+E(\text{EBIT}) &= \text{A perpetual expectation of cash operating income before interest and taxes.}\\
+V_U &= \text{Value of an unlevered firm.}\\
+V_L &= \text{Value of levered firm.}\\
+B &= \text{Present value of debt.}\\
+S &= \text{Present value of equity.}\\
+R_S &= \text{Cost of equity.}\\
+R_B &= \text{Cost of debt capital.}\\
+R_0 &= \text{Cost of capital to an all-equity firm.}
+\end{aligned}
+$$
+
+In a world of no corporate taxes, the weighted average cost of capital to a levered firm, $R_{\text{WACC}}$, is also equal to $R_0$. However, with corporate taxes, $R_0$ is above $R_{\text{WACC}}$ for a levered firm.

@@ -1,0 +1,1245 @@
+---
+title: "Capital structure: Limits to the use of debt"
+author: "Ross, Westerfield, Jaffe"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen=99)
+require(xts)
+```
+
+# Summary and conclusions
+
+Earlier chapters of this text showed how value to projects and entire firms with and without leverage. In the last three chapters we discuss how to determine the optimal amount of leverage. We pointed out that the introduciton of taxes and bankruptcy costs changes a firm's financing decisions. Most rational corporations should employ some debt in a world of this type. The present chapter has discussed three methods for valuation by levered firms: the adjusted present value (APV), flow to equity (FTE), and weighted average cost of capital (WACC) approaches.
+
+---
+
+# Concept questions
+
+## APV
+
+How is the APV of a project calculated?
+
+---
+
+The adjusted present value (APV) of a project is calculated by breaking it into two components:
+
+$$
+\begin{aligned}
+\text{APV} &= \text{NPV} + \text{NPVF}\\
+\text{Where:}\\
+\text{NPV} &= \text{value of the project to an unlevered firm.}\\
+\text{NPVF} &= \text{value of the financing side effects.}
+\end{aligned}
+$$
+
+The NPV of the base project is calculated using the cash flows of the project and its initial investment:
+
+$$
+\text{NPV}_{\text{unlevered}} = \sum {\frac{\text{cash flows}}{(1 + r_0)^t}} - \text{initial investment}
+$$
+
+There are four main side effects:
+
+1. The tax subsidy to debt.
+
+This is the tax shield from the debt:
+
+$$
+\text{Tax shield} = \frac{t_C \times \text{interest payment}}{(1 + r_B)^t}
+$$
+
+if perpetual:
+
+$$
+\begin{aligned}
+\text{PV of tax shield} &= \frac{t_C \times \text{debt} \times r_B}{r_B}\\
+  &= t_C \times \text{debt}
+\end{aligned}
+$$
+
+2. Costs of issuing new securities.
+
+3. Costs of financial distress.
+
+4. Other subsidies offered by state and local governments.
+
+If just assuming the tax subsidy to debt, the formula is:
+
+$$
+\text{APV} = \text{NPV} + t_C \times B
+$$
+
+The APV method of valuing a levered firm is useful for projects where financing significantly impacts value, when debt levels change over time, and is more flexible than WACC, which assumes a constant debt ratio.
+
+---
+
+## WACC and APV
+
+What is the main difference between the WACC and APV methods?
+
+---
+
+The APV and WACC approaches to valuation are the most similar. They both discount the unlevered cash flows. The APV approach discounts these flows at $R_0$ and the WACC method discounts the UCF at $R_{\text{WACC}}$, which is lower than $R_0$.
+
+Both approaches adjust the basic NPV formula for unlevered firms to reflect the tax benefit of leverage. The APV method makes this adjustment directly. The WACC method adjustment is more subtle.
+
+---
+
+## FTE
+
+What is the main difference between the FTE approach and the other two approaches?
+
+---
+
+The main difference between the flow-to-equity (FTE) approach and the adjusted present value (APV) and weighted average cost of capital (WACC) appraoches is what cash flows are discounted and which discount rate is used.
+
+### Flow-to-equity (FTE) approach
+
+The flow-to-equity approach focuses only on equity holders by discounting the levered free cash flows (FCF available to equity holders after debyt payments). It uses the cost of equity ($R_S$) as the discount rate.
+
+$$
+\text{Value of equity} = \sum{\frac{\text{levered FCF}}{(1 + R_S)^t}}
+$$
+
+Debt effects (such as interest payments) are incorporated directly into the cash flows rather than adjusting the discount rate.
+
+This is good for firms with a simple debt structure or when analyzing only equity returns.
+
+### Adjusted present value (APV) approach
+
+Separates the valuation into two parts: The NPV of the unlevered firm (all-equity financed), and the present value of financing effects. This approach is best used when the firms changes capital structures or has complex financing effects.
+
+### Weighted average cost of capital approach
+
+The weighted average cost of capital approach discounts the total free cash flows (FCF) to the firm using a blended cost of capital (WACC) that reflects both debt and equity financing. It assumes a constant debt-to-equity ratio over time. The formula is:
+
+$$
+R_{\text{WACC}} = \frac{S}{V}R_S + \frac{B}{V}R_B \times (1 - t_C)
+$$
+
+This approach is best used with stable captial structures.
+
+---
+
+## Capital budgeting
+
+You are determining whether your company should undertake a new project and have calculated the NPV of the project using the WACC method when the CFO, a former accountant, notices that you did not use the interest payments in calculating the cash flows of the project. What should you tell him? If he insists that you include the interest payments in calculating the cash flows, what method can you use?
+
+---
+
+You should explain to the CFO that interest payments are already incorporated in the WACC discount rate, so including them in the cash flows would be double counting the effect of debt. The WACC already accounts for the cost of debt by blending the cost of equity and after-tax cost of debt. The free cash flow (FCF) used in WACC calculations represents cash available to both debt and equity holders before interest payments. Since WACC discounts total FCF to get the enterprise value, including interest payments would distort the valuation.
+
+If the CFO insists on including the interest payments you should use the flow-to-equity method instead. How the FTE method works is: instead of discounting total FCF with WACC, you discount levered free cash flow (cash available to equity holders after interest payments). The appropriate discount rate is the cost of equity ($R_S$), not WACC.
+
+The formula for equity value is:
+
+$$
+\text{Equity value} = \sum{\frac{\text{levered FCF}}{(1 + R_S)^t}}
+$$
+
+This is best used when evaluating from the equity holders' perspective, and when debt levels are fixed and not proportional to firm value.
+
+---
+
+## Beta and leverage
+
+What are the two types of risk that are measured by a levered beta?
+
+---
+
+A levered beta (also called equity beta) measures the risk of a stock while accounting for the effects of financial leverage (debt). It reflects two types of risk:
+
+1. The busineess (systematic) risk which is measured by the firm's unlevered beta (asset beta).
+2. The financial (leverage) risk which is calculated:
+
+$$
+\beta_L = \beta_U \left( 1 + \frac{D}{E}(1 - t_C) \right)
+$$
+
+> $\beta_L$ (also called the equity beta) is always higher than $\beta_U$ (the unlevered beta), for leveraged firms.
+
+---
+
+# Questions and problems
+
+## NPV and APV
+
+Zoso is a rental car company that is trying to determine whether to add 25 cars to its fleet. The company fully deprecicates all its rental cars over five years using the straight-line method. The new cars are expected to generate \$175,000 per year in earnings before taxes and depreciation for five years. The company is entirely financed by equity and has a 35 percent tax rate. The required return on the company's unlevered equity is 13 percent, and the new fleet will not change the risk of the company.
+
+a. What is the maximum price that the company should be willing to pay for the new fleet of cars if it remains an all-equity company?
+
+b. Suppose the company can purchase the fleet of cars for \$480,000. Additionally, assume the company can issue \$390,000 of five-year, 8 percent debt to finance the project. All principal will be repaid in one balloon payment at the end of the fifth year. What is the adjusted present value (APV) of the project?
+
+---
+
+### Maximum price willing to pay (NPV using the WACC method)
+
+$$
+\begin{aligned}
+\text{Initial investment} &= P\\
+\text{Deprecation} &= D\\
+D &= \frac{P}{5}\\\\
+\text{Taxable income} &= \text{EBT}\\
+\text{EBT} &= \text{EBTD} - D\\
+  &= 175,000 - \frac{P}{5}\\\\
+\text{Taxes paid} &= t_C\\
+t_C &= .35 \times \left(175,000 - \frac{P}{5} \right)\\
+\text{Net income} &= \text{NI}\\
+\text{NI} &= (175,000 - \frac{P}{5}) \times (1 - 0.35)\\
+\text{OCF} &= \text{NI} + D\\
+  &= (175,000 - \frac{P}{5}) \times 0.65 + \frac{P}{5}\\
+  &= 113,750 - .35 \times \frac{P}{5}\\
+\text{PV}(\text{OCF}) &= \text{OCF} \times \frac{\left(1 - (1.13)^{-5} \right)}{.13}
+\end{aligned}
+$$
+
+We can solve for $P$ using `R`:
+
+```{r problem 1: npv and apv: finding the break even}
+taxes <- .35
+rate <- .13
+time.period <- 5
+cash.flows <- 175000
+
+f <- function(P) (cash.flows * (1 - taxes) + taxes * P/5) *
+    (1 - (1 + rate)^(-time.period))/rate - P
+
+round(uniroot(f, upper=600000, lower=100000)$root)
+```
+
+### Adjusted present value (APV) method with debt financing
+
+The APV method accounts for financing effects separately by calculating:
+
+1. Base NPV
+2. Tax shield benefit from debt financing
+
+#### Step 1: Base NPV
+
+The cost of the cars is \$480,000
+
+The base NPV can be calculated:
+
+$$
+\begin{aligned}
+\text{NPV} &= 113,750 + .35 \times \frac{480,000}{5}
+  \times \frac{(1 - (1.13)^{-5})}{.13} - 480,000\\
+  &= 518,264 - 480,000\\
+  &= 38,264
+\end{aligned}
+$$
+
+The benefit of the tax shield on interest:
+
+$$
+\begin{aligned}
+\text{Interest} &= 390,000 \times .08\\
+  &= 31,200\\
+\text{Annual tax shield} &= \text{interest} \times \text{tax rate}\\
+  &= 31,200 \times .35\\
+  &= 10,920
+\end{aligned}
+$$
+
+The present value of the tax shield over 5 years:
+
+$$
+\begin{aligned}
+\text{PV}_{\text{tax shield}} &= 10,920 \times \frac{(1 - (1.13)^{-5})}{.13}\\
+  &= 38,408
+\end{aligned}
+$$
+
+The company also repays the full \$390,000 loan at the end of year 5, so the pv of the debt repayment.
+
+$$
+\begin{aligned}
+\text{APV} &= \text{NPV} + \text{PV}_{\text{tax shield}} - \text{PV}_{\text{debt repayment}}\\
+  &= 38,264 + 10,920 - 38,408\\
+  &= 10,776
+\end{aligned}
+$$
+
+---
+
+## APV
+
+Gemini, Inc., an all-equity firm, is considering a \$1.7 million investment that will be depreciated according to the straight-line method over its four-year life. The project is expected to generate earnings before taxes and depreciation of \$595,000 per year for four years. The investment will not change the risk level of the firm. The company can obtain a four-year, 9.5 percent loan to finance the project from a local bank. All principal will be repaid in one balloon payment at the end of the fourth year. The bank will charge the firm \$45,000 in flotation fees, which will be amortized over the four-year life of the loan. If the company financed the project entirely with equity, the firm's cost of capital would be 13 percent. The corporate tax rate is 30 percent. Using the adjusted present value method, determine whether the company should undertake the project.
+
+---
+
+Given Information:
+
+$$
+\begin{aligned}
+\text{Investment} = I &= 1,700,000\\
+\text{period} &= 4\ \text{years}\\
+\text{EBTD} &= 595,000\\
+\text{interest rate} &= 0.95\\
+\text{flotation fees} = F &= 45,000\\
+R_0 &= .13\\
+t_C &= .30\\
+\end{aligned}
+$$
+
+Depreciation:
+
+$$
+\begin{aligned}
+D &= \frac{1,700,000}{4}\\
+  &= 425,000\\
+\end{aligned}
+$$
+
+Taxable income:
+
+$$
+\begin{aligned}
+\text{EBT} &= \text{EBTD} - D\\
+  &= 595,000 - 425,000\\
+  &= 170,000
+\end{aligned}
+$$
+
+Taxes:
+
+$$
+\begin{aligned}
+T &= \text{EBT} \times t_C\\
+  &= 170,000 \times .3\\
+  &= 51,000
+\end{aligned}
+$$
+
+Net Income:
+
+$$
+\begin{aligned}
+\text{NI} &= \text{EBT} - T\\
+  &= 170,000 - 51,000\\
+  &= 119,000
+\end{aligned}
+$$
+
+Operating cash flow:
+
+$$
+\begin{aligned}
+\text{OCF} &= \text{NI} + D\\
+  &= 119,000 + 425,000\\
+  &= 544,000
+\end{aligned}
+$$
+
+The present value of cash flows:
+
+$$
+\begin{aligned}
+\text{PV}_{OCF} &= \text{OCF} \times (1 - (1 + R_0)^{-4})\\
+  &= 544,000 \times \frac{(1 - (1.13)^{-4})}{.13}\\
+  &= 1,618,112
+\end{aligned}
+$$
+
+The net present value (NPV) is $\text{NPV} = 1,618,112 - 1,700,000 = -82,144$.
+
+Now we compute the financing effects (PV of tax shield and flotation costs)
+
+Annual interest expense of loan: $I = 1,700,000 \times .095 = 161,500$.
+
+The tax shield $161,500 \times .3 = 48,450$.
+
+The present value of the tax shield:
+
+$$
+\begin{aligned}
+\text{PV}_{\text{tax shield}} &= 48,450 \times \frac{(1 - (1.095)^{-4})}{.095}\\
+  &= 48,450 \times 3.531\\
+  &= 171,062
+\end{aligned}
+$$
+
+The present value of the flotation costs:
+
+$$
+\begin{aligned}
+\text{Annual amortization expense} &= \frac{45,000}{4}\\
+  &= 11,250\\\\
+\text{tax shield on amortization} &= 11,250 \times .3\\
+  &= 3,375\\\\
+\text{PV}_{\text{flotation shield}} &= 3,375 \times 3.531\\
+  &= 11,905\\
+\text{Net flotation effects, flotation fees are a cash outflow}\\
+\text{PV}_{\text{flotation costs}} &= -45,000 + 11,905\\
+  &= -33,095
+\end{aligned}
+$$
+
+Compute the adjusted present value:
+
+$$
+\begin{aligned}
+\text{APV} &= \text{Base NPV} + \text{PV}_{\text{tax shield}} + \text{PV}_{\text{flotation costs}}\\
+  &= -82,144 + 171,062 - 33,095\\
+  &= 55,823
+\end{aligned}
+$$
+
+__NOTE:__ Book answer is \$68,510.88 (Chapter 18, page 983)
+
+---
+
+## FTE
+
+Milano Pizza Club owns three identical restaurants popular for their specialty pizzas. Each restaurant has a debt-equity of 40 percent and makes interest payments of \$41,000 at the end of each year. The cost of the firm's levered equity is 19 percent. Each store estimates that annual sales will be \$1.3 million; annual cost of goods sold will be \$670,000; and annual general and administrative costs will be \$405,000. These cash flows are expected to remain the same forever. The corporate tax rate is 40 percent.
+
+a. Use the flow to equity approach to determine the value of the company's equity.
+b. What is the total value of the company?
+
+---
+
+Given information:
+
+$$
+\begin{aligned}
+\text{debt-equity ratio} &= .4\\
+\text{interest payments} &= 41,000\\
+R_S &= .19\\
+\text{Sales} &= 1,300,000\ \text{per store}\\
+\text{Number of stores} &= 3\\
+\text{Cost of goods sold} &= 670,000\\
+\text{Administrative costs} &= 405,000\\
+t_C &= .40
+\end{aligned}
+$$
+
+The flow ot equity approach:
+
+1. Calculate the levered cash flow (LCF) per store
+
+$$
+\begin{aligned}
+\text{Cash inflows} &= 1,300,000\\
+\text{Costs} &= -(670,000 + 405,000)\\
+  &= -1,075,000\\
+\text{Interest} &= -41,000\\
+\text{EBT} &= \text{Cash inflows} - \text{Costs} - \text{Interest}\\
+  &= 1,300,000 - 1,075,000 - 41,000\\
+  &= 184,000\\
+\text{LCF} &= \text{EBT} \times (1 - t_C)\\
+  &= 184,000 \times (1 - .4)\\
+  &= 110,400
+\end{aligned}
+$$
+
+Alternatively we can calculate the levered cash flow (LCF) from the unlevered cash flow:
+
+$$
+\text{UCF} - \text{LCF} = (1 - t_C) R_B B
+$$
+
+$$
+\begin{aligned}
+\text{Operating income} &= \text{Cash inflows} - \text{Costs}\\
+  &= 1,300,000 - 1,075,000
+  &= 225,000
+\text{UCF} &= \text{Operating income} \times (1 - t_C)\\
+  &= 225,000 \times .6\\
+  &= 135,000\\
+\text{LCF} &= \text{UCF} - (1 - t_C) R_B B\\
+  &= 135,000 - .6 \times 41,000\\
+  &= 110,400
+\end{aligned}
+$$
+
+2. Use $R_S$ to calculate the value of the company's equity
+
+per store:
+
+$$
+\begin{aligned}
+\frac{\text{LCF}}{R_S} &= \frac{110,400}{.19}\\
+  &= 581,053
+\end{aligned}
+$$
+
+The value of the company's equity is $581,053 \times 3 = 1,743,158$.
+
+---
+
+## WACC
+
+If Wild Widgets, Inc., were an all-equity company, it would have a beta of .85. The company has a target debt-equity ratio of .40. The expected return on the market portfolio is 11 percent, and Treasury bills currently yield 4 percent. The company has one bond issue outstanding that matures in 20 years and has a coupon rate of 7 percent. The bond currently sells for \$1,080. The corporate tax rate is 34 percent.
+
+a. What is the company's cost of debt?
+b. What is the company's cost of equity?
+c. What is the company's weighted average cost of capital
+
+---
+
+Given information:
+
+$$
+\begin{aligned}
+\beta_U &= .85\\
+\text{D-E} &= .4\\
+R_M &= .11\\
+R_F &= .04\\
+t_C &= .34
+\end{aligned}
+$$
+
+Company bond:
+$$
+\begin{aligned}
+\text{Mature} &= 20\ \text{years}\\
+\text{coupon} &= .07\\
+\text{market value} &= 1,080
+\end{aligned}
+$$
+
+a. The company's cost of debt
+
+$$
+\begin{aligned}
+P &= \sum^{20}_{t=1}{\frac{C}{(1 + R_B)^t}} + \frac{F}{(1 + R_B)^{20}}\\
+\text{Where:}\\
+P &= 1,080\\
+C &= 70\\
+F &= 1,000\\
+N &= 20\\
+\end{aligned}
+$$
+
+We can use `R` to find $R_B$.
+
+```{r problem 4-a: wacc: solve for r_b}
+P <- 1080
+C <- 70
+F <- 1000
+N <- 1:20
+f <- function(r) sum(C/(1 + r)^N) + F/(1 + r)^20 - P
+round(uniroot(f, lower=1E-4, upper=1)$root,4)
+```
+
+b. The company's cost of equity
+
+$$
+\begin{aligned}
+\beta_L &= \beta_U \left(1 + (1 - t_C) \times \frac{D}{E} \right)\\
+  &= .85 \times (1 + .66 \times .4)\\
+  &= 1.074\\\\
+R_S &= R_F + \beta_L(R_M - R_F)\\
+  &= .04 + 1.074 \times (.11 - .04)\\
+  &= .1152
+\end{aligned}
+$$
+
+c. The company's weighted average cost of capital
+
+$$
+\begin{aligned}
+B &= .4E\\
+E &= \frac{B}{.4}\\
+V &= S + B\\
+  &= 1.4E\\
+  &= 3.5D\\
+R_{\text{WACC}} &= R_S \frac{S}{V} + R_B \frac{B}{V} (1 - t_C)\\
+  &= .1152 \frac{1}{1.4} + .0629 \frac{1}{3.5} \times .66\\
+  &= .0941
+\end{aligned}
+$$
+
+---
+
+## Beta and leverage
+
+North Pole Fishing Equipment Corporation and South Pole Fishing Equipment Corporation would have identical equity betas of 1.10 if both were all equity financed. The market value information for each company is shown here:
+
+```{r problem 5:table, echo=F}
+north <- c(2900000, 3800000)
+south <- c(3800000, 2900000)
+df <- data.frame(north, south)
+colnames(df) <- c("North Pole", "South Pole")
+rownames(df) <- c("Debt", "Equity")
+knitr::kable(df)
+```
+
+The expected return on the market portfolio is 10.9 percent, and the risk-free rate is 3.2 percent. Both companies are subject to a corporate tax rate of 35 percent. Assume the beta of debt is zero.
+
+a. What is the equity beta of each of the two companies?
+b. What is the required rate of return on each of the two companies' equity?
+
+---
+
+a. find $\beta_{E}$
+
+$$
+\beta_E = \beta_U \times \left(1 + \frac{D}{E} \times (1 - t_C) \right)
+$$
+
+For North Pole:
+
+$$
+\begin{aligned}
+\beta_E &= 1.1 \times \left(1 + \frac{2,900,000}{3,800,000} \times .65 \right)\\
+  &= 1.65
+\end{aligned}
+$$
+
+For South Pole:
+
+$$
+\begin{aligned}
+\beta_E &= 1.1 \times \left(1 + \frac{3,800,000}{2,900,000} \times .65 \right)\\
+  &= 2.04
+\end{aligned}
+$$
+
+b. What is the required rate of return on each of the two companies' equity:
+
+We use CAPM
+
+$$
+R_S = R_F + \beta_E (R_M - R_F)
+$$
+
+For North Pole:
+
+$$
+\begin{aligned}
+R_S &= .032 + 1.65 \times (.109 - .032)\\
+  &= .159
+\end{aligned}
+$$
+
+For South Pole:
+
+$$
+\begin{aligned}
+R_S &= .032 + 2.04 \times (.109 - .032)\\
+  &= .189
+\end{aligned}
+$$
+
+---
+
+## NPV of loans
+
+Daniel Kaffe, CFO of Kendrick Enterprises, is evaluating a 10-year, 8 percent loan with gross proceeds of \$5,850,000. The interest payments on the loan will be made annually. Flotation costs are estimated to be 2.5 percent of gross proceeds and will be amortized using a straight-line schedule over the 10-year life of the loan. The company has a tax rate of 40 percent, and the loan will not increase the risk of financial distress for the company.
+
+a. Calculate the net present value of the loan excluding flotation costs.
+b. Calculate the net present value of the loan including flotation costs.
+
+---
+
+Given information
+
+$$
+\begin{aligned}
+\text{Term} &= 10\ \text{years}\\
+\text{Interest rate} &= .08\\
+\text{Gross proceeds} &= 5,850,000\\
+\text{Interest payments} &= 5,850,000 \times .08\\
+  &= 468,000\\
+\text{Tax rate} &= .4
+\end{aligned}
+$$
+
+a. Net present value of loan excluding flotation costs:
+
+The tax shield represents an annuity, so we discount it.
+
+$$
+\begin{aligned}
+\text{Tax shield} &= 468,000 \times .4\\
+  &= 187,200\\
+\text{NPV} &= 187,200 \times \frac{(1 - (1.08)^{-10})}{.08}\\
+  &= 1,256,127
+\end{aligned}
+$$
+
+b. Net present value of loan including flotation costs.
+
+$$
+\begin{aligned}
+\text{Flotation costs} &= .025\ \text{of gross proceeds}\\
+  &= 146,250\\
+\text{Amortized Flotation costs} &= \frac{146,250}{10}\\
+  &= 14,625\\
+\text{Tax shield} &= 14,625 * .4\\
+  &= 5,850\\
+\text{PV}_{\text{Flotation tax shield}} &= 5,850 \times 6.71\\
+  &= 39,253\\
+\text{NPV} &= \text{PV} - \text{Flotation costs} + \text{PV}_{\text{Flotation}}\\
+  &= 1,256,127 - 146250 + 39,253\\
+  &= 1,149,130
+\end{aligned}
+$$
+
+---
+
+## NPV for an All-Equity Company
+
+Shattered Glass, Inc., is an all-equity firm. The cost of the company's equity is currently 11 percent, and the risk-free rate is 3.5 percent. The company is currently considering a project that will cost $11.4 million and last six years. The project will generate revenues minus expenses each year in the amount of \$3.2 million. If the company has a tax rate of 40 percent, should it accept the project?
+
+---
+
+Information
+
+$$
+\begin{aligned}
+R_S &= .11
+R_F &= .035
+\text{Investment} = I &= 11,400,000
+\text{term} = T &= 6
+\text{Cash flow} = C &= 3,200,000
+\text{Tax rate} = t_C &= .4
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{PVIA} &= (1 - \frac{(1.11)^{-6})}{.11})\\
+  &= 4.230538\\
+\text{NI}_{\text{per year}} &= 3,200,000 \times (1 - .4)\\
+  &= 1,920,000\\
+\text{NPV}_{\text{Cash flows}} &= 1,920,000 \times 4.230538 - 11,400,000\\
+  &= -3,277,367\\
+\end{aligned}
+$$
+
+The NPV is negative therefore the project should not be accepted.
+
+---
+
+## WACC
+
+National Electric Company (NEC) is considering a \$45 million project in its power systems division. Tom Edison, the company's chief financial officer, has evaluated the project and determined that the project's unlevered cash flows will be \$3.1 million per year in perpetuity. Mr. Edison has devised two possibilities for raising the initial investment: Issuing 10-year bonds or issuing common stock. NEC's pretax cost of debt is 6.9 percent, and its cost of equity is 10.8 percent. The company's target debt-to-value ratio is 80 percent. The project has the same risk as NEC's existing businesses, and it will support the same amount of debt. NEC is in the 34 percent tax bracket. Should NEC accept the project?
+
+---
+
+$$
+\begin{aligned}
+\text{Investment} = I &= 45,000,000\\
+\text{Cash flows}_{\text{unlevered}} = C_u &= 3,100,000
+\text{Loan term} = T &= 10\ \text{years}\\
+R_B &= .069\\
+R_S &= .108\\
+\frac{B}{V} &= .8\\
+\text{Tax} = t_C &= .34
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\frac{B}{V} &= .8\\
+\frac{S}{V} &= .2\\
+\text{WACC} &= R_S \frac{S}{V} + R_B \frac{B}{V} \times (1 - t_C)\\
+  &= .108 \times .2 + .069 \times .8 \times .66\\
+  &= .0580\\\\
+\text{PV} &= \frac{\text{CF}}{\text{WACC}}
+  &= \frac{3,100,000}{0.058}\\
+  &= 53,448,276\\
+\text{NPV} &= \text{PV} - I\\
+  &= 53,448,276 - 45,000,000\\
+  &= 8,448,276
+\end{aligned}
+$$
+
+NEC should accept the project because it has a positive NPV.
+
+---
+
+## WACC
+
+Bolero, Inc., has complied the following information on its financing costs:
+
+```{r problem 9: wacc: table, echo=F}
+financing.type <- c("Short-term debt",
+                    "Long-term debt",
+                    "Common stock",
+                    "Total")
+book.value <- c(10000000, 3000000, 6000000)
+market.value <- c(11000000, 3000000, 26000000)
+cost <- c(.041, .072, .138)
+
+df <- data.frame(financing.type,
+                 c(book.value, sum(book.value)),
+                 c(market.value, sum(market.value)),
+                 c(cost, NA))
+colnames(df) <- c("Type of Financing",
+                  "Book Value",
+                  "Market Value",
+                  "Cost")
+knitr::kable(df)
+```
+
+The company is in the 35 percent tax bracket and has a target debt-equity ratio of 60 percent. The target short-term debt/long-term debt ratio is 20 percent.
+
+a. What is the company's weighted average cost of capital using book value weights?
+b. What is the company's weighted average cost of capital using market vlaue weights?
+c. What is the company's weighted average cost of capital using target capital structure weights?
+d. What is the difference between WACCs? Which is the correct WACC to use for project evaluation?
+
+a. WACC using book value weights
+
+$$
+\begin{aligned}
+\text{Debt-Value ratio} = \text{DV} &= \frac{10,000,000 + 3,000,000}{19,000,000}\\
+  &= .6842\\
+\text{Equity-Value ratio} = \text{EV} &= \frac{6,000,000}{19,000,000}\\
+  &= .3158\\\\
+\text{Weighted average of short and long term debt}\\
+R_B &= \frac{\text{short-term debt}}{\text{total debt}} \times R_{D\ \text{short-term}}
+  + \frac{\text{long-term debt}}{\text{total debt}} \times R_{D\ \text{long-term}}\\
+  &= \frac{10,000,000}{13,000,000} \times .041 + \frac{3,000,000}{13,000,000} \times .072\\
+  &= 0.0531\\
+\text{Cost of equity}\\
+R_S &= .138\\\\
+\text{WACC} &= R_S \frac{S}{V} + R_B \frac{B}{V} \times (1 - t_C)\\
+  &= .3158 \times .138 + .6842 \times .0531\\
+  &= 0.0799
+\end{aligned}
+$$
+
+b. WACC using market value weights
+
+$$
+\begin{aligned}
+\text{Debt-Value ratio} = \text{DV} &= \frac{11,000,000 + 3,000,000}{40,000,000}\\
+  &= .35\\
+\text{Equity-Value ratio} = \text{EV} &= \frac{26,000,000}{40,000,000}\\
+  &= .65\\
+R_B &= 0.2143 \times .041 + 0.7857 \times .072\\
+  &= 0.06536\\
+R_S &= .138\\
+\text{WACC} &= .138 \times .65 + .06536 \times .35\\
+  &= 0.1126
+\end{aligned}
+$$
+
+c. WACC using target capital structure weights
+
+$$
+\begin{aligned}
+\text{Debt-to-Value ratio} = \text{DV} &= \frac{B}{B + S}\\
+  &= \frac{.60}{1.60}\\
+  &= .375\\
+\text{Equity-to-Value ratio} = \text{EV} &= \frac{S}{B + S}\\
+  &= \frac{1}{1.60}\\
+  &= .625\\\\
+R_B &= (.1667 \times .041 + .8333 \times .072) \times .375\\
+  &= 0.0668\\
+R_S &= .138\\
+\text{WACC} &= .625 \times .138 + .375 \times .0668\\
+  &= .1113
+\end{aligned}
+$$
+
+The book value WACC is the lowest because book values often do not reflect the true values of debt and equity. This method is not ideal for project evaluation. Market value WACC is the highest, as it reflects the real cost of capital but does not align with the company's target capital structure.  The target capital structure WACC provides a more realistic approach, as it reflects the company's planned financial strategy.
+
+---
+
+## APV
+
+Triad Corporation has established a joint venture with Tobacco Road Construction, Inc., to build a toll road in North Carolina. The initial investment in paving equipment is \$80 million. The equipment will be fully depreciated using stright-line method over its economic life of five years. Earnings before interest, taxes, and depreciation collected from the toll road are projected to be \$12.1 million per annum for 20 years starting from the end of the first year. The corporate tax rate is 35 percent. The required rate of return for the project under all-equity financing is 13 percent. The pretax cost of debt for the joint partnership is 8.5 percent. To encourage investment in the country's infrastructure, the U.S. government will subsidize the project with a \$25 million, 15-year loan at an interest rate of 5 percent per year. All principal will be repaid in one balloon payment at the end of Year 15. What is the adjusted present value of this project?
+
+---
+
+### Given information
+
+$$
+\begin{aligned}
+\text{Investment} = I &= 80,000,000\ \text{depreciated over 5 years}\\
+\text{EBITDA} &= 12,100,000\ \text{over 20 years}\\
+t_C &= .35\\
+R_S &= .13\\
+R_B &= .085\\
+\text{Subsidized loan} &= 25,000,000\ \text{at 5\% for 15 years, balloon payment at the end}
+\end{aligned}
+$$
+
+### Compute after tax cash flows
+
+$$
+\begin{aligned}
+\text{EBIT} &= EBITD - \text{Depreciation}\\
+  &= 12.1 - 16\\
+  &= -3.9
+\end{aligned}
+$$
+
+Since EBIT is negative, there is no tax liability in the first 5 years, meaning after-tax cash flow is simply EBITD.
+
+Once depreciation is fully accounted for, after 5 years, EBIT becomes:
+
+$$
+\begin{aligned}
+\text{EBIT} &= 12.1 \times (1 - .35)\\
+  &= 7.865
+\end{aligned}
+$$
+
+### Compute NPV of cash flows
+
+Using discount rate $r = 13\%$
+
+* __Years 1-5:__ Cash flow = $12.1M$ (no tax since EBIT is negative
+
+$$
+\begin{aligned}
+\text{PV}_1 &= 12.1 \times \frac{1 - (1.13)^{-5}}{.13}\\
+  &= 42.5585\\
+\end{aligned}
+$$
+
+* __Years 6-20:__ Cash flow = $7.865M$
+
+$$
+\begin{aligned}
+\text{PV}_2 &= 7.865 \times \frac{1 - (1.13)^{-15}}{.13} \times 1.13^{-5}\\
+  &= 27.58665
+\end{aligned}
+$$
+
+#### The NPV is calculated
+
+$$
+\begin{aligned}
+\text{NPV} &= \text{PV}_1 + \text{PV}_2 - \text{Investment}\\
+  &= 42.5585 + 27.58665 - 80\\
+  &= -9.85485
+\end{aligned}
+$$
+
+### Compute the tax shield from the subsidized loan and the present value of the balloon payment
+
+The U.S. government provides a \$25M, 15-year loan at 5% with a balloon payment at the end of year 15.
+
+#### Compute annual interest tax shield
+
+$$
+\begin{aligned}
+\text{PV}_{\text{tax shield}} &= \text{loan} \times 
+  \text{interest rate} \times \text{tax rate} \times \frac{1 - 1.13^{-15}}{.13}\\
+  &= 25 \times .05 \times .35 \times 6.462379\\
+  &= 2.827291
+\end{aligned}
+$$
+
+#### Compute the present value of the balloon payment
+
+$$
+\begin{aligned}
+\text{PV}_{\text{balloon payment}} &= 25 \times (1.13)^{-15}\\
+  &= 3.997269\\
+\end{aligned}
+$$
+
+### Compute the adjusted present value (APV)
+
+$$
+\begin{aligned}
+\text{APV} &= \text{NPV}_{\text{unlevered}} + PV_{\text{tax shield}} - PV_{\text{balloon payment}}\\
+  &= -9.85485 + 2.827291 - 3.997269\\
+  &= -11.02483\ \text{million}
+\end{aligned}
+$$
+
+Book answer: 5,845,477
+
+---
+
+## APV
+
+For the company in the previous problem, what is the value of being able to issue subsidized debt instead of having to issue debt at the terms it would normally receive? Assume the face amount and maturity of the debt issue are the same.
+
+---
+
+To determine the value of the subsidized debt, we compare the benefit of using the subsidized loan versus issuing debt at market terms (8.5\% interest). The difference in present value of tax shields and balloon payments will show the advantage of the subsidy.
+
+### Compute the tax shield and balloon payment for market rate debt
+
+$$
+\begin{aligned}
+\text{Loan amount} &= 25\ \text{Million}\\
+\text{Subsidized interest rate} &= .05\\
+\text{Market interest rate} &= .085\\
+\text{Loan term} &= 15\ \text{years}\\
+\text{Tax rate} &= .35\\
+\text{Balloon payment} &= 25\ \text{million at the end of year 15}\\
+\end{aligned}
+$$
+
+#### Compute tax shield for market rate debt
+
+$$
+\begin{aligned}
+\text{Annual interest if borrowing at 8.5\%}\\
+\text{Interest} &= 25 \times .085\\
+  &= 2.125\\
+\text{Tax shield per year}\\
+\text{Tax shield} &= 2.125 \times .35\\
+  &= .74375\\
+\text{Present value of tax shield (market rate debt)}\\
+\text{PV}_{\text{tax shield, market}} &= \sum^{15}_{t=1}{\frac{0.74375}{(1.13)^t}}\\
+  &= 0.74375 \times 6.462379\\
+  &= 4.806394
+\end{aligned}
+$$
+
+#### Compute value of subsidized debt
+
+$$
+\begin{aligned}
+\text{Interest}_{\text{at 5\%}} &= 25 \times .05\\
+  &= 1.25\\
+\text{Tax shield} &= 1.25 \times .35\\
+  &= .4375\\
+\text{PV}_{\text{tax shield, subsidized}} &= \sum^{15}_{t=1}{\frac{.4375}{(1.13)^t}}\\
+  &= .4375 \times 6.462379\\
+  &= 2.827291
+\end{aligned}
+$$
+
+---
+
+## APV
+
+MVP, Inc., has produced rodeo supplies for over 20 years. The company currently has a debt-equity ratio of 50-percent and is in the 40 percent tax bracket. The required return on the firm's levered equity is 16 percent. MVP is planning to expand its production capacity. The equipment to be purchased is expected to generate the following unlevered cash flows:
+
+```{r problem 12: APV: table, echo=F}
+year <- c(0,1,2,3)
+cash.flow <- c(-18, 5.7, 9.5,8.8)
+df <- data.frame(year,cash.flow)
+colnames(df) <- c("Year", "Cash Flow")
+knitr::kable(df)
+```
+
+The company has arranged a \$9.3 million debt issue to partially finance the expansion. Under the loan, the company would pay interest of 9 percent at the end of each year on the outstanding balance at the beginning of the year. The company would also make year-end principal payments of \$3.1 million per year, completely retiring the issue by the end of the third year. Using the adjusted present value method, should the company proceed with the expansion?
+
+---
+
+### Compute the Base NPV (Unlevered)
+
+We discount the given unlevered cash flows at the unlevered cost of capital. However, we need to first determine the unlevered required return.
+
+$$
+\begin{aligned}
+R_S &= R_0 + (1 - t_C) \times (R_0 - R_B) \times \text{DE}
+\text{Where:}
+R_S &= .16\\
+R_B &- .09\\
+t_C &= .40\\
+\text{DE} &= .5
+\end{aligned}
+$$
+
+We will use `R` to calculate $R_0$
+
+```{r problem 12: calculate R0}
+f <- function(r) r + .6 * (r - .09) * .5 - .16
+uniroot(f, lower=1E-4, upper=1)$root
+```
+
+$R_0 = 0.1438$
+
+$$
+\begin{aligned}
+R_0 &= \frac{.16}{1 + .6 \times .5}\\
+  &= 0.123\\\\
+\text{NPV}_{\text{unlevered}} &= \sum{\frac{\text{CF}_t}{(1 + R_0)^t}}\\\\
+\text{Where}\ \text{CF}_t\ \text{are the project cash flows.}\\
+\text{NPV}_{\text{unlevered}} &= -18 + \frac{5.7}{1.1438^{-1}} + \frac{9.5}{1.1438^{-2}}
+  + \frac{8.8}{1.1438^{-3}}\\
+  &= 0.1255855
+\end{aligned}
+$$
+
+### Compute the PV of interest tax shields
+
+Interest payments:
+
+* Year 1: $9.3 \times .09 = 0.837$
+* Year 2: $6.2 \times .09 = 0.558$
+* Year 3: $3.1 \times .09 = 0.279$
+
+The tax shield:
+
+* Year 1: $0.837 \times .4 = 0.3348$
+* Year 2: $0.558 \times .4 = 0.2232$
+* Year 3: $0.279 \times .4 = 0.1116$
+
+The present value of the tax shield:
+
+$$
+\begin{aligned}
+\text{PV}_{\text{tax shield}} &= \sum{\frac{\text{tax shield}}{(1 + R_0)^t}}\\
+  &= \frac{.3348}{1.09^{-1}} + \frac{.2232}{1.09^{-2}} + \frac{.1116}{1.09^{-3}}\\
+  &= 0.5811946
+\end{aligned}
+$$
+
+### Calculate APV
+
+$$
+\begin{aligned}
+\text{APV} &= \text{NPV}_{\text{unlevered}} + \text{PV}_{\text{tax shield}}\\
+  &= 0.1255855 + 0.5811946\\
+  &= 0.7067801
+\end{aligned}
+$$
+
+---
+
+### WACC
+
+Neon Corporation's stock returns have a covariance with the market portfolio of .0415. The standard deviation of the returns on the market portfolio is 20 percent, and the expected market risk premium is 7.5 percent. The company has bonds outstanding with a total market value of \$55 million and a yield to maturity of 6.5 percent. The company also has 4.5 million shares of common stock outstanding, each selling for \$25. The company's CEO considers the firm's current debt-equity ratio optimal. The corporate tax rate is 35 percent, and Treasury bills currently yield 3.4 percent. The company is considering the purchase of additional equipment that would cost \$42 million. The expected unlevered cash flows from the equipment are \$11.8 million per year for five years. Purchasing the equpment will not change the risk level of the firm.
+
+a. Use the weighted average cost of capital approach to determine whether Neon should purchase the equipment.
+
+b. Suppose the company decides to fund the purchase of the equipment entirely with debt. What is the cost of capital for the project now? Explain.
+
+---
+
+$$
+\begin{aligned}
+\text{covariance with market} = \text{COV}_{i, m} &= .0415\\
+\sigma_M &= .2\\
+\text{risk premium} = P &= .075\\
+\text{Bonds} = B &= 55\ \text{million}\\
+\text{yield to maturity} = R_B &= .065\\
+\text{Stocks outstanding}= E &= 4.5\ \text{million}\\
+\text{Stock price} = \rho &= 25\\
+t_C &= .35\\
+R_F &= .034\\
+\text{Investment} = I &= 42\ \text{million}\\
+\text{unlevered cash flow} = \text{CF}_U &= 11.8\ \text{million for 5 years}\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{Equity} = S &= E \times \rho\\
+  &= 4.5 \times 25\\
+  &= 112.5\ \text{million}
+\text{Bonds} = B &= 55
+\text{Firm value} = V &= S + B\\
+  &= 112.5 + 55\\
+  &= 167.5\ \text{million}\\
+\beta &= \frac{\text{Cov}_{i, m}}{(\sigma_M)^2}\\
+  &= \frac{.0415}{.04}\\
+  &= 1.0375\\
+R_S &= R_F + \beta \times P\\
+  &= .034 + 1.0375 \times .075\\
+  &= .1118\\
+\text{R}_{\text{WACC}} &= R_S \frac{S}{V} + R_B \frac{B}{V} \times (1 - t_C)\\
+  &= .1118 \frac{112.5}{167.5} + .065 \frac{55}{167.5} \times .65\\
+  &= 0.08896269
+\end{aligned}
+$$
+
+The Weighted average cost of capital (WACC) method of valuation with leverage:
+
+$$
+\begin{aligned}
+\text{PV} &= \sum^{\infty}_{t=1}{\frac{\text{UCF}}{(1 + R_{\text{WACC}})^t}}\\
+ &= \text{UCF} \times \frac{(1 - (1 + R_{\text{WACC}})^{-5})}{R_{\text{WACC}}}\\
+ &= 11.8 \times 3.829844\\
+ &= 46.01722\\
+\text{NPV} &= 46.01722 - 42\\
+  &= 4.01722\ \text{million}
+\end{aligned}
+$$
+
+The net present value is positive. Yes.
+
+b. If the equipment purchase is funded entirely with debt
+
+If the project is financed entirely with debt, the relevant cost of capital is the after-tax cost of debt.
+
+$$
+\begin{aligned}
+\text{Cost of capital} &= R_B \times (1 - t_C)\\
+  &= .065 \times .65\\
+  &= .04225
+\end{aligned}
+$$
+
+---
+
+## Beta and leverage
+
+Stackhouse Industries has a new project available that requires an initial investment of \$4.5 million. The project will provide unlevered cash flows of \$675,000 per year for the next 20 years. The company will finance the project with a debt-to-value ratio of .40. The company's bonds have a YTM of 6.8 percent. The companies with operations comparable to this project have unlevered betas of 1.15, 1.08, 1.30, and 1.25. The risk-free rate is 3.8 percent, and the market risk premium is 7 percent. The company has a tax rate of 34 percent. What is the NPV of this project?
+
+---
+
+$$
+\begin{aligned}
+\text{Investment} = I &= 4.5\ \text{million}\\
+\text{UCF} &= .675\ \text{million for the next 20 years}\\
+\text{DV} &= .4\\
+R_B &= .068\\
+\beta_{\text{unlevered}} &= [ 1.15, 1.08, 1.30, 1.25 ]\\
+R_F &= .038\\
+\text{market risk premium} = P &= .07\\
+t_C &= .34
+\end{aligned}
+$$
+
+The average of the four comparable betas is:
+
+$$
+\frac{1.15 + 1.08 + 1.30 + 1.25}{4} = 1.195
+$$
+
+Find the levered $\beta_{\text{equity}}$
+
+$$
+\begin{aligned}
+\text{EV} &= .6\\
+\text{DE} &= \frac{.4}{.6}\\
+  &= .667\\
+\beta_{\text{equity}} &= (1 + (1 - t_C) \times \text{DE})\ \beta_{\text{unlevered}}\\
+  &= 1.72
+\end{aligned}
+$$
+
+The cost of equity $R_S$ is:
+
+$$
+\begin{aligned}
+R_S &= R_F + \beta_{\text{equity}} \times P\\
+  &= .038 + 1.72 \times .07\\
+  &= .1584
+\end{aligned}
+$$
+
+Now find the weighted average cost of capital ($R_{\text{WACC}}$):
+
+$$
+\begin{aligned}
+R_{\text{WACC}} &= R_S \frac{E}{V} + R_B \frac{D}{V} \times (1 - t_C)\\
+  &= .1584 \times .6 + .068 \times .4 * .66\\
+  &= .1130
+\end{aligned}
+$$
+
+Weighted average cost of capital (WACC) method of valuation with leverage:
+
+$$
+\begin{aligned}
+\text{NPV} &= \frac{\text{UCF}}{(1 + R_{\text{WACC}})^t}\\
+  &= .675 \times \frac{(1 - (1.1130)^{-20)}}{.1130} - 4.5\\
+  &= 2.175427
+\end{aligned}
+$$
+
+---
