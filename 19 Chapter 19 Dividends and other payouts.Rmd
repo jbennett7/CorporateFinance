@@ -1,0 +1,1348 @@
+---
+title: "Dividends and other payouts"
+author: "Ross, Westerfield, Jaffe"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Summary and Conclusions
+
+1. The dividend policy of a firm is irrelevant in a perfect capital market because the shareholder can effectively undo the firm's dividend strategy. If a shareholder receives a greater dividend than desired, he or she can reinvest the excess. Conversely, if the shareholder receives a smaller dividend than desired, he or she can sell off extra shares of stock. This argument is due to MM and is similar to their homemade leverage concept, discussed in a previous chapter.
+
+2. Stockholders will be indifferent between dividends and share repurchases in a perfect capital market.
+
+3. Because dividends in the United States are taxed, companies should not issue stock to pay out a dividend.
+
+4. Also because of taxes, firms have an incentive to reduce dividends. For example, they might consider increasing capital expenditures, acquiring other companies, or purchasing financial assets. However, due to financial considerations and legal constraints, rational firms with large cash flows will likely exhaust these activities with plenty of cash left over for dividends.
+
+5. In a world with personal taxes, a strong case can be made for repurchasing shares instead of paying dividends.
+
+6. Nevertheless, there are a number of justifications for dividends even in a world with personal taxes:
+   a. Investors in no-dividend stocks incur transaction costs when selling off shares for current consumption.
+   b. Behavioral finance argues that investors with limited self-control can meet current consumption needs via high-dividend stocks while adhering to a policy of "never dipping into principal."
+
+7. The stock market reacts positively to increases in dividends (or an initial payment) and negatively to decreases in dividends. This suggests that there is information content in dividend payments.
+
+8. High (low) dividend firms should arise to meet the demands of dividend-preferring (capital gains-preferring) investors. Because of these clienteles, it is not clear that a firm can create value by changing its dividend policy.
+
+# Concept question
+
+## Dividend policy irrelevance
+
+How is it possible that dividends are so important, but at the same time dividend policy is irrelevant?
+
+---
+
+1. Dividends are important because they are a key component of stock returns and provide investors with: income, a signal of financial health, and are a source of shareholder value.
+
+2. Accoding to Modigliani & Miller's dividend irrelevance theory (assuming no taxes, no transaction costs, and perfect markets), investors don't care whether they get returns through dividends or capital gains because they can sell shares to create their own "dividends." A firm that pays dividends reduces retained earnings, which means it has less internal funding for growth. If it needs more capital, it can issue new shares, leaving investors in the same overall position. What truly drives firm value is its investment policy (i.e., how well it reinvests earnings), not how profits are distributed.
+
+3. In reality, markets are not perfect, and dividend policy can mater do to taxes, information signaling, and investor clientele.
+
+---
+
+## Stock repurchases
+
+What is the impact of a stock repurchase on a company's debt ratio? Does this suggest another use for excess cash?
+
+---
+
+A stock repurchase affects a compny's debt ratio, which is typically measured as:
+
+$$
+\text{Debt ratio} = \frac{\text{total debt}}{\text{total assets}}
+$$
+
+or
+
+$$
+\text{Debt-to-equity ratio} = \frac{\text{total debt}}{\text{total equity}}
+$$
+
+### Reduction in equity
+
+When a company repurchases its own shares, equity decreases because tresury stock (repurchased shares) reduces shareholders' equity. If debt remains unchanged, the debt-to-equity ratio increases, making the company appear more leveraged.
+
+### Impact on total assets
+
+If the buyback is funded with excess cash, total assets decrease because cash is used to repurchase shares. If the buyback is financed with new debt, both debt and equity change, further increasing the debt ratio.
+
+### Does this suggest another use for excess cash?
+
+Yes, instead of repurchasing stock, companies can use excess cash for other strategic purposes:
+
+* __Pay down debt:__ Reduces leverage, improves credit rating, lowers interest costs.
+
+* __Invest in growth:__ Fund R&D, acquisitions, or capital expenditures for long-term expansion.
+
+* __Increase dividends:__ Provides consistent income to shareholders, appealing to income-focused investors.
+
+* __Hold cash reserves:__ Maintains financial flexibility for uncertain times or future opportunities.
+
+### Key takeaway
+
+Stock repurchases increase leverage by reducing equity, which may be good for tax efficiency but riskier in economic downturns. Companies must balance repurchases with other uses of excess cash based on their financial health and strategy.
+
+---
+
+## Dividend policy
+
+It is sometimes suggested that firms should follow a "residual" dividend policy. With such a policy, the main idea is that a firm should focus on meeting its investment needs and maintaining its desired debt-equity ratio. Having done so, a firm pays out any leftover, or residual, income as dividends. What do you think would be the chief drawback to a residual dividend policy?
+
+---
+
+The chief drawback of a residual dividend policy is its unpredictability for investors. Since dividends are only paid after funding investments and maintaining the desired debt-equity ratio, they can fluctuate significantly from year to year. This unpredicatbility can have several negative consequences:
+
+### Uncertainty for investors
+
+Many investors, especially income-focused ones (such as retirees and institutional investors), rely on dividends as a steady income source. If dividends vary unpredictably, the stock may become less attractive to these investors, leading to a lower stock price and higher required returns.
+
+### Negative market perception
+
+A dividend cut, even if due to reinvestment in growht, can be seen as a negative signal about the firm's future prospects. Investors often interpret declining or inconsistent dividends as a sign of financial distress, even if the firm is actually reinvesting in profitable projects.
+
+### Increased stock price volatility
+
+If dividends are highly variable, stock prices may become more volatile as investors react to fluctuations in payout levels. Investors may demand a higher risk premium, increasing the firm's cost of equity.
+
+### Potential underutilization of capital
+
+The firm might accumulate excess cash if investment opportunities are scarce, leading to inefficiencies. Alternatively, management might feel pressured to overinvest in marginal projects just to reduce the residual cash, potentially destroying shareholder value.
+
+### Conclusion
+
+While a residual dividend policy ensures that dividends don't interfere with a firm's investment and capital structure decisions, the trade-off is that it can create uncertainty and volatility for investors. Many companies, therefore, adopt a stable or gradually growing dividend policy instead, even if it means occasionally using external financing to smooth payouts.
+
+---
+
+## Dividend chronology
+
+On Tuesday, December 8, Hometown Power Co.'s board of directors declares a dividend of 75 cents per share payable on Wednesday, January 17, to shareholders of record as of Wednesday, January 3. When is the ex-dividend date? If a shareholder buys stock before that date, who gets the dividends on those shares---the buyer or the seller?
+
+---
+
+The ex-dividend date is typically one business day before the record date. Since the record date is Wednesday, January 3, the ex-dividend date would be Tuesday, January 2. If a shareholder buys the stock before the ex-dividend date (on or before Monday, January 1, assuming markets are open), they will receive the dividend. However, if they buy the stock on or after the ex-dividend date (January 2 or later), the seller keeps the right ot the dividend, even though they no longer own the stock.
+
+---
+
+## Alternative dividends
+
+Some corporations, like one British company that offers its large shareholders free crematorium use, pay dividends in kind (that is, offer their services to shareholders at below-market cost). Should mutual funds invest in stocks that pay these dividends in kind? (The fundholders do not receive these services.)
+
+---
+
+Mutual funds generally should not invest in stocks that pay dividends in kind if those dividends do not benefit the fundholders. Mutual fund investors expect returns in cash or reinvested value, not non-transferable perks like free crematorium use. If the fund cannot monetize these dividends, they offer no real benefit. In-kind dividends can be hard to value and may create uncertainty in portfolio pricing, which could complicate fund management and reporting. Funds need liquid assets to meet redemptions. If a portion of returns comes in non-cash benefits, the fund may struggle to provide liquidity for investors. Fund managers have a duty to act in the best interests of investors. Investing in companies where a portion of the return is unusable by fundholders may not align with that duty.
+
+---
+
+## Dividends and stock price
+
+If increases in dividends tend to be followed by (immediate) increases in share prices, how can it be said that dividend policy is irrelevant?
+
+---
+
+The idea that dividend policy is irrelevant comes from MOdigliani and Miller's (MM) Dividend Irrelevance Theory, which argues that in a perfect market, a company's dividend policy does not affect its overall value because investors can create their own "homemade dividends" by selling shares if they need cash.
+
+However, in reality, dividends do appear to impact stock prices, leading to the contradiction you pointed out. Here's why this happens:
+
+1. __Signaling effect:__ When a company raises dividends, investors interpret it as a signal that the company is financially strong and expects stable or growing future earnings. This increased confidence drives the stock price up.
+
+2. __Investor preferences:__ Some investors, such as retirees or income-focused funds, prefer dividedn-paying stocks. A higher dividend can increase demand, pushing stock price higher.
+
+3. __Market imperfections:__ Real-world factors like taxes, transaction costs, and investor psychology mean that dividend policy can affect stock prices, even if theoretically, it shouldn't.
+
+So while MM's theory suggests dividend policy is irrelevant in an ideal market, real-world evidence shows that dividend changes influence stock prices due to investor behavior and market imperfections.
+
+---
+
+## Dividend reinvestment plans
+
+The DRK Corporation has recently developed a dividend reinvestment plan, or DRIP. The plan allows investors to reinvest cash dividends automatically in DRK in exchange for new shares of stock. Over time, investors in DRK will be able to build their holdings by reinvesting dividends to purchase additional shares of the company.
+
+Over 1,000 companys offer dividend reinvestment plans. Most companies with DRIPs charge no brokerage fees. In fact, the shares of DRK will be purchased at a 10 percent discount from the market price.
+
+A consultant for DRK estimates that about 75 percent of DRK's shareholders will take part in this plan. This is somewhat higher than average.
+
+Evaluate DRK's dividend reinvestment plan. Will it increase shareholder wealth? Discuss the advantages and disadvantages involved here.
+
+---
+
+DRK's DRIP offers several benefits to shareholders and the company, but it also has some drawbacks.
+
+A DRIP does not directly increase shareholder wealth, but it can be beneficial in the long run. Since dividends are automatically reinvested to buy more shares--at a 10\% discount in DRK's case--investors accumulate more stock over time. This can enhance long-term value through compounding if DRK's stock price appreciates.
+
+However, since dividends are being paid in stock rather than cash, some investors who prefer cash income may not see an immediate benefit.
+
+### Advantages of DRK's DRIP
+
+1. __Discounted share purchase (10\% discount)__
+
+Investors get shares at a discount, meaning they are effectively buying stock below market price, which boosts their returns.
+
+2. __No brokerage fees__
+
+Investors can acquire additional shares without paying transaction costs, making it a cost-effective way to grow their holdings.
+
+3. __Compounding effect__
+
+Reinvesting dividends leads to more shares, which in turn generate more dividends, accelerating wealth accumulation over time.
+
+4. __Enhances shareholder loyalty__
+
+A DRIP encourages long-term investing, reducing speculative trading and stabilizing stock price fluctuations.
+
+5. __Company retains capital__
+
+Instead of paying out cash, DRK reinvests funds into the company, potentially funding growth projects without needing external financing.
+
+### Disadvantages of DRK's DRIP
+
+1. __Dilution of existing shres__
+
+Since new shares are issued at a discount, non-participating shareholders may see their ownership percentage diluted. This could be a concern if too many investors enroll.
+
+2. __Lack of cash flow for investors__
+
+Some investors rely on dividends for income. A DRIP automatically reinvests dividends, so these shareholders won't receive cash unless they opt out.
+
+3. __Stock price pressure__
+
+If DRK continuously issues discounted shares, it might put downward pressure on the stock price, especially if supply outpaces demand.
+
+4. __Tax considerations__
+
+Even though dividends are reinvested, they may still be taxable in many jurisdictions, meaning investors could owe taxes on income they never actually received in cash.
+
+### Final Assessment
+
+DRK's DRIP can be an effective wealth-building tool for long-term investors, especially with its 10\% discount and no brokerage fees. However, potential dilution and tax implicaitons could be concerns. The plan's success depends on whether DRK can generate strong growth with the retained capital while maintaining investor confidence.
+
+---
+
+## Dividend policy
+
+For initial public offerings of common stock, 2007 was a relatively slow year, with only about \$35.6 billion raised by the process. Relatively few of the 159 firms involved paid cash dividends. Why do you think that most chose not to pay cash dividends?
+
+---
+
+Most firms that go public in an initial public offering (IPO) choose not to pay cash dividends for several reasons, primarily related to their growth stage, capital needs, and investor expectations.
+
+1. __Growth companies prioritize reinvestment over dividends__
+
+Most firms going public are in their growth phase and need capital to expand their operations, develop new products, and capture market share. Instead of paying dividends, they reinvest profits to fuel future growth.
+
+2. __Retaining cash to strengthen financial position__
+
+IPO companies often face high initial costs, such as research & development (R&D), marketing, and infrastructure investments. Retaining earnings rather than paying dividends helps ensure financial stability.
+
+3. __Investor preferences for capital gains over dividends__
+
+IPO investors typically seed capital appreciation rather than income. They expect the stock price to rise as the company grows, which can provide higher returns than dividends.
+
+4. __Uncertainty and cash flow volatility__
+
+Newly public firms may have volatile earnings and cash flow, making it difficult to commit to a steady dividend policy. Instead, they conserve cash to manage unexpected challenges.
+
+5. __Market signaling and expectations__
+
+If an IPO firm were to pay dividends immediately, it could signal to investors that it has limited growth opportunities, which may negatively impact the stock's appeal.
+
+### Conclusion
+
+Most IPO firms do not pay dividends because they are focused on reinvesting for growth, maintaining financial flexibility, and catering to investors who prefer capital appreciation. As these companies mature and generate consistent profits, some may eventually introduce dividends.
+
+---
+
+## Investment and dividends
+
+The Phew Charitable Trust pays no taxes on its capital gains or on its dividend income or interest income. Would it be irrational for it to have low-dividend, high-growth stocks in its portfolio? Would it be irrational for it to have municipal bonds in its portfolio? Explain.
+
+---
+
+No, it would not be irrational for the trust to invest in low-dividend, high-growth stocks. Even though the trust does not pay taxes on dividends or captial gains, high-growth stocks can still offer benefits:
+
+* __Higher total returns:__ High-growth stocks typically appreciate more value than dividend-paying stocks, potentially leading to greater long-term gains.
+
+* __Reinvestment of earnings:__ Companies that reinvest profits rather than pay dividends often generate higher compounding returns, which can be beneficial for the trust's long-term financial goals.
+
+* __No need for dividend income:__ Since the trust does not rely on cash flow from dividends (unlike an income-focused investor), it can afford to prioritize toatl return over immediate income.
+
+Thus, investing in high-growth stocks aligns with the trust's goal of maximizing capital appreciation over time.
+
+Yes, it would be irrational for the trust to invest in municipal bonds:
+
+* __Municipal bonds offer tax-free interest:__ The main benefit of municipal bonds is their tax-exempt interest. However, since the trust already does not pay taxes, this benefit is wasted.
+
+* __Lower yields than taxable bonds:__ Municipal bonds typically offer lower yields than taxable bonds because of their tax advantages. The trust would be better off investing in corporate or government bonds with higher yields since it can collect interest without losing any to taxes.
+
+* __Missed income opportunity:__ By choosing municipal bonds over taxable bonds, the trust would earn less income without any corresponding tax benefit.
+
+---
+
+Use the following information to anser the next two questions:
+
+Historically, the U.S. tax code treated dividend payments made to shareholders as ordinary income. Thus, dividends were taxed at the investor's marginal tax rate, which was as high as 38.6 percent in 2002. Capital gains were taxed at a capital gains tax rate, which was the same for most investors and fluctuated through the years. In 2002, the capital gains tax rate stood at 20 percent. In an effort to stimulate the economy, President George W. Bush presided over a tax plan overhaul that included changes in dividend and capital gains tax rates. The new tax plan, which was implemented in 2003, called for a 15 percent tax rate on both dividends and capital gains for investors in higher tax brackets. For lower tax bracket investors the tax rate on dividends and capital gains was set at 5 percent through 2007, dropping to zero in 2008.
+
+## Ex-dividend stock prices
+
+How do you think this tax law change affects ex-dividend stock prices?
+
+---
+
+Before the 2003 tax cut, dividends were taxed at a much higher rate (up to 38.6\%) than capital gains (20\%). This created a strong incentive for investors to prefer capital gains over dividends, which led to larger drops in stock prices on the ex-dividend date---because after a dividend is paid, the stock price typically falls by the dividend amount adjusted for taxes.
+
+With the 2003 tax cut reducing the dividend rate to 15\% (or lower for some investors), dividends became more attractive. As a result:
+
+* The tax disadvantage of dividends was reduced, making dividends more valuable to investors.
+
+* Ex-dividend price drops became smaller because investors were willing to pay more for dividend-paying stocks.
+
+In essence, this tax law change made dividend income more valuable relative to before, reducing the downward adjustment in stock prices on the ex-dividend date.
+
+---
+
+## Stock repurchases
+
+How do you think this tax law change affected the relative attractiveness of stock repurchases compared to dividend payments?
+
+---
+
+Before 2003, stock repurchases were more tax-efficient than dividends because:
+
+* Repurchases led to capital gains, which were taxed at only 20\%, compared to dividends taxed at up to 38.6\%.
+
+* Investors could choose when to sell shares, allowing them to control when they paid taxes on capital gains.
+
+With the 2003 tax reform, dividends and capital gains were taxed at the same rate (15\% for most investors). This reduced the tax advantage of stock repurchases, making dividend payments more attractive relative to buybacks.
+
+Likely effects of the tax change:
+
+* Some companies that previously avoided dividends in favor of buybacks may have started paying dividends instead.
+
+* Companies still valued stock repurchases for flexibility (since dividends create long-term payout expectations), but they were now on more equal footing with dividends.
+
+---
+
+## Dividends and stock value
+
+The growing perpetuity model expresses the value of a share of stock as the present value of the expected dividends from that stock. How can you conclude that dividend policy is irrelevant when this model is valid?
+
+---
+
+The growing perpetuity model (or Gordon Growth Model) expresses the value of a stock as:
+
+$$
+\begin{aligned}
+P_0 &= \frac{D_1}{r - g}\\\\
+\text{where:}\\
+P_0 &= \text{price of the stock today}\\
+D_1 &= \text{expected dividend next year}\\
+r &= \text{required rate of return}\\
+g &= \text{constant dividend growth rate}
+\end{aligned}
+$$
+
+At first glance, this model suggests that dividends determine stock value, which might imply that dividend policy matters. However, dividend irrelevance theory (Modigliani & Miller, 1961) argues that a firm's dividend policy does not affect its stock price under ideal conditions.
+
+1. Dividends vs. capital gains: Investors are indifferent
+
+If a firm pays lower dividends, it retains more earnings, which leads to higher growth (g) and future capital gains. Conversly, if it pays higher dividends, it retains less, resulting in lower future growth.
+
+Since investors care about total return ($r =$ dividend yield $+ g$), they should be indifferent between receiving dividends or benefiting from capital gains.
+
+2. Homemade dividends
+
+If an investor prefers cash now but the company retains earnings instead of paying dividends, the investor can sell some shares to generate the needed income. Similarly, if a firm pays dividends but an investor  wants to reinvest, they can use the dividends to buy more shares.
+
+3. Stock issuance and buybacks can offset dividend policy
+
+A firm can issue new shares to fund dividends if needed or repurchase shares to return capital to investors. This means dividends are not necessary to provide returns to shareholders.
+
+### Conclusion: Dividend policy does not affect stock value
+
+The growing perpetuity model shows that stock price depends on dividends and growth, but changing dividend policy only shifts how returns are delivered---as dividends or capital gains---without affecting the overall value of the firm. This supports the idea that dividend policy is irrelevant in an ideal market.
+
+---
+
+## Bird-in-the-hand argument
+
+The bird-in-the-hand argument, which states that a dividend today is safer than the uncertain prospect of a capital gain tomorrow, is often used to justify high dividend payout ratios. Explain the fallacy behind this argument.
+
+---
+
+The bird-in-the-hand argument suggests that investors prefer dividends because they are more certain than potential future capital gains. Proponents argue that a high dividend payout ratio reduces risk and should lead to higher stock price because investors guaranteed income over uncertain appreciation.
+
+### The fallacy behind the argument
+
+1. __Total return matters, not just dividends__
+
+A stock's return consists of both dividends and capital gains:
+
+$$
+r = \text{dividend yield} + \text{capital gains yield}
+$$
+
+If a company pays more dividends, it has less retained earnings for growth, leading to lower capital gains. Conversely, if it pays lower dividends, it can reinvest profits, increasing the stock price. Either way, the total return remains the same, meaning dividend policy itself does not affect investor wealth.
+
+2. __Dividends do not reduce risk__
+
+The argument assumes that dividends make stocks safer, but in reality, a company that pays out high dividends may be reducing its financial flexibility. If a firm overpays dividends, it may struggle to fund growth opportunities or weather downturns, making the stock riskier, not safer.
+
+3. __Investors can create "homemade dividends"__
+
+If an investor prefers regular income, they can sell a portion of their shares instead of relying on dividends. The key point is that dividends are not the only way for investors to realize value from their investment.
+
+4. __Efficient markets price in dividend policy__
+
+In an efficient market, dividends and capital gains are interchangeable from a valuation perspective. If dividends truly reduced risk and increased stock prices, companies could pay infinite dividends and have infinitely valuable stocks---which is clearly not the case.
+
+### Conclusion
+
+The bird-in-the-hand argument is flawed because it ignores the fact that dividends and capital gains are just different forms of the same total return. Investors do not get more value or less risk just because a firm pays higher dividends. Instead, what matters is how well the company invests its retained earnings to generate future returns.
+
+---
+
+## Dividends and income preference
+
+The desire for current income is not a valid explanation of preference for high current dividend policy because investors can always create homemade dividends by selling a portion of their stocks. Is this statement true or false? Why?
+
+---
+
+The statement is generally true under the assumptions of Modigliani and Miller's dividend irrelevance theory, which states that investors can create "homemade dividends" by selling shares if they need cash, making a company's dividend policy irrelevant to stock value. However, in the real world, there are some practical considerations that can make a high dividend policy more attractive to certain investors.
+
+### Why the statement is generally true
+
+1. __Homemade dividends offset low dividend policies__
+
+If a company does not pay dividends, an investor who desires income can simply sell a portion of their stock holdings to genrate cash. This replicates the effecto of receiving a dividend, making high-dividend policies unnecessary.
+
+2. __Total return matters more than dividend policy__
+
+Investors should care about total return (dividends + capital gains), not just dividends. If a firm reinvests profits efficiently, it can increase stock price, giving investors more value in the long run.
+
+3. __Efficient markets price in dividend policy__
+
+In an efficient market, the company's dividend policy should not impact its fundamental valuation. Whether a firm pays dividends or retains earnings for growth, the present value of the stock remains the same.
+
+### Why the statement has some caveats in reality
+
+1. __Transaction costs__
+
+Selling shares to create homemade dividends may involve brokerage fees and price fluctuations, while receiving dividends does not require any action.
+
+2. __Taxes favor dividends for some investors__
+
+In some tax systems, capital gains and dividends are taxed differently. Some investors may prefer dividends if they are taxed at a lower rate.
+
+3. __Behavioral preferences (Mental accounting)__
+
+Many investors, especially retirees, prefer predictable income and may not like the idea of selling shares periodically to generate cash. People may see dividends as spendable income, while selling shares may feel like "depleting" their investment.
+
+4. __Legal and institutional constraints__
+
+Certain funds (e.g., pension funds, endowments) have mandates requiring income generation, making them favor dividend-paying stocks.
+
+---
+
+## Dividends and clientele
+
+Cap Henderson owns Neotech stock because its price has been steadily rising over the past few years and he expects this performance to continue. Cap is trying to convince Sarah Jones to purchase some Neotech stock, but she is reluctant because Neotech has never paid a dividend. She depends on steady dividends to provide her with income.
+
+a. What preferences are these two investors demonstrating?
+b. What argument should Cap use to convince Sarah that Neotech stock is the stock for her?
+c. Why might Cap's argument not convince Sarah?
+
+---
+
+Cap Henderson prefers capital gains over dividends. He invests in Neotech because of its steady price appreciation and expects the stock's value to continue increasing. Sarah Jones prefers dividends for income stability. She relies on regular dividend payments rather than depending on stock price apprciation.
+
+To convince Sarah that Neotech is the stock for her, Cap should emphasize that total return matters more than dividends alone. He could argue:
+
+1. __Neotech's growth translates to future wealth:__ Even though Neotech does not pay dividends, its stock price is growing. She could sell shares periodically to generate cash, effectively creating her own "homemade dividend."
+
+2. __Tax efficiency:__ Capital gains are often taxed at a lower rate than dividends, meaning she might keep more of her earnings by selling shares instead of receiving dividends.
+
+3. __Reinvestment benefits:__ Instead of paying dividends, Neotech reinvests profits into growth, which has led to its strong stock price performance. This reinvestment can result in higher long-term returns compared to dividend-paying stocks.
+
+There are several reasons why Cap's argument may not convince Sarah:
+
+1. __She prefers certainty over potential growth:__ Selling shares to generate income is not the same as receiving regular dividends---she may feel uncomfortable relying on stock price fluctuations to fund her needs. There is no guarantee that Neotech's stock will continue to rise.
+
+2. __Behavioral bias (mental accounting):__ Many investors view dividends as safe, spendable income, while selling shares may feel like "depleting" their investment.
+
+3. __Transaction costs and market risk:__ Selling shares periodically might involve brokerage fees and expose her to market volatility. If neotech's stock price drops significantly, she may be forced to sell at a loss to generate cash.
+
+### Conclusion
+
+Cap's argument is valid from an investment theory perspective, but Sarah's preference for steady, predictable income means she may still prefer dividend-paying stocks. If she values stability over growth, Neotech may not be the right investment for her.
+
+---
+
+## Dividends and taxes
+
+Your aunt is in a high tax bracket and would like to minimize the tax burden of her investment portfolio. She is willing to buy and sell to maximize her aftertax returns, and she has asked for your advice. What would you suggest she do?
+
+---
+
+Since your aunt is in a high tax bracket, her goal should be to reduce taxable income and maximize after-tax returns. Here are some key tax-efficient investment strategies:
+
+1. __Focus on tax-advantaged investments__
+
+* __Municipal bonds ("Munis"):__ Interest earned is tax-free at the federal level and often at the state/local level if she buys bonds from her home state.
+
+* __Tax-deferred accounts (401(k), IRA, HSA):__ These accounts allow her to delay paying taxes on investment gains and reduce taxable income.
+
+* __Roth IRA (if eligible):__ Contributions are after-tax, but withdrawals (including gains) are tax-free in retirement.
+
+2. __Prioritize capital gains over ordinary income__
+
+* __Invest in low-dividend or no-dividend growth stocks:__ Instead of receiving taxable dividens, she should prefer companies that reinvest earnings for growth.
+
+* __Long-term capital gains strategy:__ Stocks and assets held for more than a year are taxed at a lower rate than short-term capital gains.
+
+3. __Use tax-loss harvesting__
+
+* If she has stocks with unrealized losses, she can sell them to offset taxable gains on other investments.
+
+* She can reinvest in similar (but not identical) securities to maintain market exposure (avoiding the wash sale rule).
+
+4. __Hold high-tax investments in tax-advantaged accounts__
+
+* __Bonds, REITs, and high-dividend stocks:__ These generate ordinary income, so she should hold them in IRAs or 401(k)s to defer taxes.
+
+* __Growth stocks & ETFs:__ These are better suited for taxable brokerage accounts, as they rely on capital appreciation rather than taxable income.
+
+5. __Consider index funds & ETFs over actively managed funds__
+
+* __Index funds & ETFs:__ are more tax-efficient than mutual funds because they have lower turnover, reducing capital gains distributions.
+
+* Actively managed funds tend to have frequent buying/selling, triggering higher tax liabilities.
+
+6. __Use charitable donations to reduce taxes__
+
+* If she donates appreciated stocks to charity instead of selling them, she can avoid capital gains tax and claim a charitable deduction.
+
+* A donor-advised fund (DAF) allows her to donate now and distribute funds over time, maximizing tax benefits.
+
+---
+
+## Dividends versus capital gains
+
+If the market places the same value on \$1 of dividends as on \$1 of capital gains, then firms with different payout ratios will appeal to different clienteles of investors. One clientele is as good as another; therefore, a firm cannot increase its value by changing its dividend policy. Yet empirical investigations reveal a strong correlation between dividend payout ratios and other firm characteristics. For example, small, rapidly growing firms that have recently gone public almost always have payout ratios that are zero; all earnings are reinvested into the business. Explain this phenomenon if dividend policy is irrelevant.
+
+---
+
+The dividend irrelevance theory (proposed by Modigliani & Miller) suggests that dividend policy does not affect a firm's value because investors can create "homemade dividends" by selling shares. However, in practice, we observe a strong correlation between dividend payout ratios and firm characteristics. Specifically:
+
+* Small, rapidly growing firms (especially those newly public) tend to have low or zero dividend payout ratios.
+
+* Mature, established firms tend to have higher payout ratios.
+
+If dividend policy is irrelevant, why do we see this pattern?
+
+1. __Growth firms need cash for expansion__
+
+* High-growth firms have profitable investment opportunities with high returns.
+
+* Instead of paying dividends, they retain earnings to reinvest in the business, fueling faster growth.
+
+* Investors in these firms expect to earn returns through capital gains, not dividends.
+
+2. __Mature firms have fewer growth opportunities__
+
+* Established firms generate stable cash flows but may have limited high-return reinvestment opportunities.
+
+* Instead of holding excess cash, they return money to shareholders via dividends or stock buybacks.
+
+* Investors in these firms often prefer income stability, making dividends an attractive feature.
+
+3. __Investor clienteles & "Dividend clientele effect"__
+
+* Different investors prefer different types of stocks based on their financial needs: retirees & income-focused investors prefer high-dividend stocks. Younger, growth-oriented investors prefer low- or no-dividend stocks.
+
+* Firms naturally attract a clientele that aligns with their dividend policy, reinforcing the correlation.
+
+4. __Signaling effect of dividends__
+
+* While dividend policy may be irrelevant in a perfect market, real-world factors like asymmetric information matter.
+
+* Firms that start paying dividends signal that they are profitable and stable, whereas firms that cut dividends may signal financial trouble.
+
+---
+
+## Dividend irrelevancy
+
+In spite of the theoretical argument that dividend policy should be irrelevant, the fact remains that many investors like high dividends. If this preference exists, a firm can boost its share price by increasing its dividend payout ratio. Explain the fallacy in this argument.
+
+---
+
+The argument suggests that if investors prefer high dividends, a firm can increase its share price simply by raising its dividend payout ratio. However, this reasoning is flawed because it ignores the trade-offs involved in dividend policy.
+
+1. __Dividend payments reduce retained earnings (Lower growth potential)__
+
+* When a firm increases dividends, it uses cash that could have been reinvested into the business.
+
+* If a company pays more in dividends, it has less capital for expansion, reducing future earnings growth.
+
+* Investors care about total return (dividends + capital gains), so if future growth is sacrificed for dividends, stock price appreciation may slow down or decline.
+
+__Fallacy:__ A higher dividend payout does not create new value; it just reallocates earnings between dividends and reinvestment.
+
+2. __Dividends and stock price adjustments__
+
+* When a firm pays out dividends, its stock price typically drops by the dividend amount on the ex-dividend date because that value is transferred to shareholders.
+
+* Investors are not getting "free money"---they receive dividends at the cost of a lower stock price.
+
+__Fallacy:__ Investors do not become wealthier simply because a company increases its dividend payout.
+
+3. __Homemade dividends: Investors can sell shares instead__
+
+* Investors who prefer cash can sell a portion of their shares to create "homemade dividends".
+
+* If a firm keeps more earnings for growth, stock prices should rise, allowing investors to generate cash when needed by selling shares.
+
+__Fallacy:__ If dividends were truly needed, investors could replicate them by selling shares, making dividend policy irrelevant.
+
+4. __Tax considerations: Dividends can be less efficient__
+
+* In many tax systems, dividends are taxed at higher rates than long-term capital gains.
+
+* Investors in high tax brackets may prefer low-dividend, high-growth stocks to minimize tax liabilities.
+
+__Fallacy:__ Higher dividends increase immediate tax burdens, which can reduce after-tax returns for certain investors.
+
+---
+
+## Dividends and stock price
+
+Empirical research has found that there have been significant increases in stock price on the day an initial dividend (i.e., the first time a firm pays a cash dividend) is announced. What does this finding imply about the information content of initial dividends?
+
+---
+
+The empirical finding that stock prices significantly rise when a firm announces its first-ever dividend suggests that initial dividends carry important information for investors. This phenomenon is best explained by the information content of dividends hypothesis, which states that dividends act as a signal about a firm's future prospects.
+
+### Why do initial dividends increase stock prices?
+
+1. __Signal of financial strength & stability__
+
+* When a firm initiates a dividend, it signals confidence in its future profitability and cash flow stability.
+
+* Firms are unlikely to start paying dividends unless they believe they can sustain them, as cutting dividends later can send a negative signal.
+
+Investor interpret the announcement as a sign that the company has matured and is generating stable earnings.
+
+2. __Reduction of uncertainty__
+
+* Young or fast-growing firms often reinvest all earnings instead of paying dividends, leading to higher uncertainty aobut long-term profitability.
+
+* An initial dividend payment reduces uncertainty, as it confirms that the firm has positive cash flow and consistent earnigns.
+
+Investors respond by bidding up the stock price.
+
+3. __Managerial confidence & commitment__
+
+* Managers have better information about the firm's future than outside investors.
+
+* A dividend initiation suggests that managers believe the firm's earnings will remain strong, making the stock more attractive.
+
+This reduces concerns about potiential overvaluation or financial instability.
+
+4. __Attracting a new investor base (dividend clientele effect)__
+
+* Some investors, such as retirees or income-focused funds, prefer dividend-paying stocks.
+
+* Initiating a dividend can make the stock more appealing to income-seeking investors, increasing demand and boosting stock price.
+
+A larger investor base can lead to higher valuation multiples.
+
+---
+
+# Questions and problems
+
+## Dividends and taxes
+
+Lee Ann, Inc., has declared a \$9.50 per-share dividend. Suppose capital gains are not taxed, but dividends are taxed at 15 percent. New IRS regulations require that taxes be withheld when the dividend is paid. Lee Ann sells for \$115 per share, and the stock is about to go exdividend. What do you think the ex-dividend price will be?
+
+---
+
+To determine the ex-dividend price of Lee Ann, Inc.'s stock, we use the following formula:
+
+$$
+P_{\text{ex-dividend}} = P_{\text{before dividend}} - D \times (1 - T)
+$$
+
+Since dividends are taxed, investors only receive after-tax dividends, which are:
+
+$$
+D_{\text{after-tax}} = D \times (1 - T) = 9.50 \times (1 - 0.15) = 9.50 \times 0.85 = 8.08
+$$
+
+The stock price is 115, thus the ex-dividend price is:
+
+$$
+P_{\text{ex-dividend}} = 115 - 8.08 = 106.92
+$$
+
+---
+
+## Stock dividends
+
+The owners' equity accounts for Hexagon International are shown here:
+
+```{r problem 2: table, echo=F}
+tmp <- c(30000, 185000, 627500)
+values <- c(tmp, sum(tmp))
+m <- matrix(nrow=4, ncol=1, values)
+rownames(m) <- c("Common stock ($1 par value)", "Capital surplus", "Retained earnings", "Total owners' equity")
+knitr::kable(m)
+```
+
+a. If Hexagon stock currently sells for \$37 per share and a 10 percent stock dividend is declared, how many new shares will be distributed? Show how the equity accounts would change.
+
+b. If Hexagon declared a 25 percent stock dividend, how would the accounts change?
+
+---
+
+a. With a 10 percent stock dividend:
+
+* Shares: $30,000 + 3,000 = \$33,000$
+* Capital surplus: $\$37 \times 33,000 = \$1,221,000$
+* Retained earnings: $627,500 - 111,000 = 516,500$
+
+b. With a 25 percent stock dividend:
+
+* Shares: $30,000 + 7,500 = \$37,500$
+* Capital surplus: $\$37 \times 37,500 = 1,387,500$
+* Retained earnings: $627,500 - 277,500 = 350,000$
+
+---
+
+## Stock splits
+
+For the previous company, show how the equity accounts will change if:
+
+a. Hexagon declares a four-for-one stock split. How many shares are outstanding now? What is the new par value per share?
+
+b. Hexagon declares a one-for-five stock split. How many shares outstanding now? What is the new par value per share?
+
+---
+
+Using the previous information:
+
+* Shares (\$1 par value): \$ 30,000
+
+a. A four-for-one stock split would have the par value at \$.25 and the total outstanding shares would be 120,000.
+
+b. A one-for-five stock split (or reverse split) would make the par value \$5.00 and total outstanding shares would be 6,000.
+
+---
+
+## Stock splits and stock dividends
+
+Roll Corporation (RC) currently has 330,000 shares of stock outstanding that sell for \$64 per share. Assuming no market imperfections or tax effects exist, what will the share price be after:
+
+a. RC has a five-for-three stock split?
+b. RC has a 15 percent stock dividend?
+c. RC has a 42.5 percent stock dividend?
+d. RC has a four-for-seven reverse stock split?
+
+---
+
+The firm value is $330,000 \times 64 = 21,120,000$
+
+a. A five-for-three stock split would have the stock price be $\frac{3}{5}64 = \$38.4$
+
+This can also be found by finding the new shares outstanding:
+
+$$
+330,000 \times \frac{5}{3} = 550,000
+$$
+
+Then the share price is:
+
+$$
+\frac{21,120,000}{550,000} = 38.40
+$$
+
+b. A 15 percent stock dividend
+
+new shares: $330,000 \times 1.15 = 379,500$
+share price: $21,120,000/379,500 = 55.64$
+
+c. 42.5 percent stock dividend?
+
+new shares: $330,000 \times 1.425 = 470,250$
+share price: $21,120,000/470,250 = 44.91$
+
+d. four-for-seven reverse stock split
+
+shares: $4/7 \times 330,000 = 188,571$
+share price: $21,120,000/188,571 = 112$
+
+---
+
+## Regular dividends
+
+The balance sheet for Levy Corp. is shown here in market value terms. There are 12,000 shares outstanding.
+
+```{r problem 5: regular dividends, echo=F}
+tmp <- c(55000, 410000)
+left <- c(tmp, sum(tmp))
+right <- c(465000, 465000)
+
+l <- matrix(nrow=3,ncol=1,left)
+r <- matrix(nrow=2,ncol=1,right)
+rownames(l) <- c("Cash", "Fixed assets", "Total")
+rownames(r) <- c("Equity", "Total")
+
+knitr::kable(list(l,r), caption="Regular dividends: Market value balance sheet")
+```
+
+The company has declared a dividend of \$1.90 per share. The stock goes ex dividend tomorrow. Ignoring any tax effects, what is the stock selling for today? What will it sell for tomorrow? What will the balance sheet look like after the dividends are paid?
+
+---
+
+Given information:
+
+* Shares: 12,000
+* Dividend: \$1.90 per share
+* Equity: 465,000
+
+
+* The cash dividend will be $12,000 \times 1.90 = \$22,800$.
+* The company is worth \$465,000 today, with a stock price:
+
+$$
+S = \frac{E}{\text{Shares}} = \frac{465,000}{12,000} = \$38.75
+$$
+
+* The company will be worth $465,000 - 22,800 = 442,000$ tomorrow. With a stock price:
+
+$$
+S = \frac{E}{\text{Shares}} = \frac{442,000}{12,000} = \$36.85
+$$
+
+```{r problem 5: regular dividends, modified balance sheet, echo=F}
+tmp <- c(55000-22800, 410000)
+left <- c(tmp, sum(tmp))
+right <- c(465000, 465000)-rep(22800,2)
+
+l <- matrix(nrow=3,ncol=1,left)
+r <- matrix(nrow=2,ncol=1,right)
+rownames(l) <- c("Cash", "Fixed assets", "Total")
+rownames(r) <- c("Equity", "Total")
+
+knitr::kable(list(l,r), caption="Regular dividends: Market value modified balance sheet")
+```
+
+---
+
+## Share repurchase
+
+In the previous problem, suppose Levy has announced it is going to repurchase \$22,800 worth of stock. What effect will this transaction have on the equity of the firm? How many shares will be outstanding? What will the price per share be after the repurchase? Ignoring tax effects, show how the share repurchase is effectively the same as a cash dividend.
+
+---
+
+If, instead of a cash dividend, the Levy Corp. decided to repurchase stock:
+
+* Equity: $465,000 - 22,800 = 442,200$. The same result as in the previous solution.
+
+* Shares to repurchase:
+
+$$
+S = \frac{22,800}{38.75} = 588
+$$
+
+* New shares outstanding: $12,000 - 588$ = 11,412$
+
+* New stock price:
+
+$$
+S = \frac{442,200}{11,412} = 38.75
+$$
+
+In the dividend case, each shareholder receives cash (\$1.90 per share), but the stock price drops to \$36.85. In the repurchase case, shareholders who sell get cash at \$38.75 per share, while remaining shareholders own a larger proportion of the firm. The stock price remains unchanged.
+
+Either way, the firm distributes \$22,800 in value in both cases. The remaining shareholders still own \$442,200 of equity in either scenario.
+
+Effectively, a share repurchase is the same as a dividend because it returns cash to investors without affecting total shareholder wealth.
+
+---
+
+## Stock dividends
+
+The market value balance sheet for Outbox Manufacturing is shown here. Outbox has declared a stock dividend of 25 percent. The stock goes exdividend tomorrow (the chronology for a stock dividend is similar to that for a cash dividend). There are 20,000 shares of stock outstanding. What will the ex-dividend price be?
+
+```{r problem 7: stock dividends: balance sheet, echo=F}
+tmp.l <- c(295000, 40000)
+left <- c(tmp, sum(tmp))
+tmp.r <- c(180000, 655000)
+right <- c(tmp, sum(tmp))
+l <- matrix(nrow=3, left)
+r <- matrix(nrow=3, right)
+rownames(l) <- c("Cash", "Fixed assets", "Total")
+rownames(r) <- c("Debt", "Equity", "Total")
+knitr::kable(list(l, r), caption="Problem 7: Outbox balance sheet")
+```
+
+---
+
+OUtbox's stock dividend of 25 percent means that there will be $20,000 \times 1.25 = 25,000$ shares outstanding.
+
+$$
+\begin{aligned}
+\text{Ex-dividend price} &= \frac{\text{total market value}}{\text{new number of shares}}\\
+  &= \frac{P_{\text{before}} \times 20,000}{25,000}\\
+  &= P_{\text{before}} \times \frac{20,000}{25,000}\\
+  &= P_{\text{before}} \times 0.80
+\end{aligned}
+$$
+
+The ex-dividend price will be 80\% of today's stock price.
+
+$$
+\begin{aligned}
+P_{\text{before}} &= \frac{\text{total equity}}{\text{shares outstanding}}\\
+  &= \frac{655,000}{20,000}\\
+  &= \$32.75\\\\
+P_{\text{after}} &= 32.75 \times .8\\
+  &= \$26.20
+\end{aligned}
+$$
+
+---
+
+## Stock dividends
+
+The company with the common equity accounts shown here has declared a stock dividend of 15 percent when the market value of its stock is \$45 per share. What effects on the equity accounts will the distribution of the stock dividend have?
+
+```{r problem 8: stock dividends: table, echo=F}
+tmp <- c(410000, 2150000, 5320000)
+m <- matrix(nrow=4, c(tmp, sum(tmp)))
+rownames(m) <- c("common stock ($1 par value)", "Capital surplus", "Retained earnings", "Total owners' equity")
+knitr::kable(m, caption="Problem 8")
+```
+
+---
+
+* Total market value of equity: $410,000 \times 45 = 18,450,000$.
+* A 15 percent stock dividend will mean there is an additional $410,000 \times .15 = 61,500$ shares.
+* A total number of outstanding shares after stock dividend will be 471,500.
+* The current stock price \$45 per share is \$44 per share above par, an excess of
+  $44 \times 61,500 = 2,706,000$.
+* The increase in capital surplus: $2,150,000 + 2,706,000 = 4,856,000$
+* The retained earnings: $5,320,000 - 2,767,500 = 2,552,500$
+
+---
+
+## Stock splits
+
+In the previous problem, suppose the company instead decides on a five-for-one stock split. The firm's 45 cent per share cash dividend on the new (postsplit) shares represents an increase of 10 percent over last year's dividend on the presplit stock. What effect does this have on the equity accounts? What was last year's dividend per share?
+
+---
+
+* Total shares outstanding pre-split: 410,000
+* Total shares outstanding post-split: $410,000 \times 5 = 2,050,000$. The new par value is \$0.20.
+
+The rest of the table is the same.
+
+Last years dividend is:
+
+$$
+\begin{aligned}
+D_{\text{last year}} &= \frac{D_{\text{this year}} \times 5}{1.1}\\
+  &= \frac{.45 \times 5}{1.1}\\
+  &= 2.05
+\end{aligned}
+$$
+
+---
+
+## Dividends and stock price
+
+The Mann Company belongs to a risk class for which the appropriate discount rate is 10 percent. Mann currently has 220,000 outstanding shares selling at \$110 each. The firm is contemplating the declaration of a \$4 dividend at the end of the fiscal year that just began. Assume there are no taxes on dividends. Answer the following questions based on the Miller and Modigliani model, which is discussed in the text.
+
+a. What will be the price of the stock on the ex-dividend date if the dividend is declared?
+
+b. What will be the price of the stock at the end of the year if the dividend  is not declared?
+
+c. If Mann makes \$4.5 million of new investments at the beginning of the period, earns net income of \$1.9 million, and pays the dividend at the end of the year, how many shares of new stock must the firm issue to meet its funding needs?
+
+d. Is it realistic to use the MM model in the real world to value stock? Why or why not?
+
+---
+
+* Value of the Mann Company: $220,000 \times 110 = 24,200,000$
+* Cash dividend: $220,000 \times 4 = 880,000$
+
+a. If the dividend is declared:
+
+The price of the stock will fall:
+
+$$
+\begin{aligned}
+\text{Firm value}_{\text{ex-dividend}} &= 24,200,000 - 880,000\\
+  &= 23,320,000\\
+\text{Stock price} &= \frac{23,320,000}{220,000}\\
+  &= 106
+\end{aligned}
+$$
+
+b. If the dividend is not declared then the stock price will increase
+$P_{\text{end of year}} \times (1.10) = 110 \times 1.10 = 121$
+
+c. Net investments
+
+* New investment: 4,500,000
+* Discount rate: .10
+* Net income: 1,900,000
+
+$$
+\begin{aligned}
+\text{Retained earnings} &= \text{Net income} - \text{dividend}\\
+  &= 1,900,000 - 880,000\\
+  &= 1,020,000\\\\
+\text{Needed funds} &= 4,500,000 - 1,020,000\\
+  &= 3,480,000
+\text{New shares} &= \frac{3,480,000}{106}\\
+  &= 32,830
+\end{aligned}
+$$
+
+d. Is the MM model realistic in the real world?
+
+The Miller and Modigliani (MM) dividend irrelevance theory holds in an ideal world:
+
+* no taxes
+* no transaction fees
+* perfect capital markets
+* no information asymmetry
+
+However, the real world has none of those.
+
+---
+
+## Homemade dividends
+
+You own 1,000 shares of stock in Avondale Corporation. You will receive a dividend of \$1.10 per share in one year. In two years, Avondale will pay a liquidating dividend of \$56 per share. The required return on Avondale stock is 14 percent. What is the current share price of your stock (ignoring taxes)? If you would rather have equal dividends in each of the next two years, show how you can accomplish this by creating homemade dividends. (_Hint:_ Dividends will be in the form of an annuity.)
+
+---
+
+Shares: 1,000
+Dividend: 1.10 year 1. 56 year 2
+Return: .14
+
+$$
+\begin{aligned}
+\text{Share price} &= \frac{1.10}{1.14} + \frac{56}{(1.14)^2}\\
+  &= 44.06\\
+\end{aligned}
+$$
+
+Homemade dividends:
+
+$$
+\begin{aligned}
+44.06 &= \frac{x}{1.14} + \frac{x}{(1.14)^2}\\
+  &= x \times \frac{(1 - (1.14)^{-2})}{.14}\\\\
+x &= \frac{44.06}{1.646661}\\
+  &= 26.76
+\end{aligned}
+$$
+
+For 1,000 shares, the equal annual homemade dividend is: $26.75 \times 1,000 = 26,750$.
+
+Year 1 you receive \$1.10 per share from Avondale, but you need \$26.75 per share.
+
+Sell shares to generate the difference $26,75 - 1.10 = 25.65$.
+
+At \$44.05 per share, you should sell:
+
+$$
+\begin{aligned}
+\frac{25.65}{44.05} &= 0.5823\\\\
+\end{aligned}
+$$
+
+Year 2 you receive \$56 per share liquidating dividend:
+
+$$
+417.7 \times 56 = 26,750
+$$
+
+---
+
+## Homemade dividends
+
+In the previous problem, suppose you want only \$500 total in dividends the first year. What will your homemade dividend be in two years?
+
+---
+
+The dividend in year 1 pays out: $1.10 \times 1,000 = 1,100$. We need only \$500 so we reinvest the \$600 by buying more shares.
+
+Year 2:
+
+$$
+\begin{aligned}
+44.06 &= \frac{x}{(1.14)^2}\\\\
+x &= 44.06 \times (1.14)^2 - 500 \times 1.14\\
+x &= 56,723.38
+\end{aligned}
+$$
+
+---
+
+## Stock repurchase
+
+Flychucker Corporation is evaluating an extra dividend versus a share repurchase. In either case \$4,000 would be spent. Current earnings are \$2.10 per share, and the stock currently sells for \$46 per share. There are 800 shares outstanding. Ignore taxes and other imperfections in answering parts (a) and (b).
+
+a. Evaluate the two alternatives in terms of the effect on the price per share of the stock and shareholder wealth.
+
+b. What will be the effect on Flychucker's EPS and PE ratio under the two different scenarios?
+
+c. In the real world, which of these actions would you recommend? Why?
+
+---
+
+Given information:
+
+* Total spent: \$4,000
+* EPS: \$2.10
+* Stock price: \$46
+* Shares: 800
+
+
+### Extra dividend
+
+Dividends:
+
+$$
+\frac{4,000}{800} = 5.00\ \text{per share}
+$$
+
+Share price drops by the dividend amount on ex-dividend date:
+
+$$
+46 - 5 = 41
+$$
+
+There is no change in total wealth.
+
+### Share repurchase
+
+$$
+\frac{4,000}{46} \approx 87
+$$
+
+* Shares outstanding: $800 - 87 = 713$
+
+Share price and shareholder's total wealth remains the same.
+
+### Effects on EPS and P/E ratio
+
+For cash dividends the earnings per share and the P/E ratio remain the same:
+
+For stock repurchase the P/E ratio remains the same, but the EPS changes:
+
+$$
+\begin{aligned}
+\text{Total earnings} &= 2.10 \times 800\\
+  &= 1,680\\\\
+\text{EPS} &= \frac{1,680}{713}\\
+  &= 2.36\\
+\end{aligned}
+$$
+
+## Real-world recommendation
+
+The best choice depends on the investor preference:
+
+* If investors prefer income then pay the extra dividend.
+* If investors prefer capital gains (deferring taxes): Repurchase shares.
+
+Also, can depend on management view of stock price:
+
+* If management believes the stock is undervalued: Repurchase shares, as it signals confidence in the company's value. If the company wants to keep financial flexiblity: Repurchase shares, because dividends create expectations for regular payouts.
+
+Stock repurchases are usually preferable because it increases EPS, can signal undervaluation, and avoids immediate taxation for shareholders.
+
+---
+
+## Dividends and firm value
+
+The net income of Novis Corporation is \$85,000. The company has 25,000 outstanding shares and a 100 percent payout policy. The expected value of the firm one year from now is \$1,725,000. The appropriate discount rate for Novis is 12 percent, and the dividend tax rate is zero.
+
+a. What is the current value of the firm assuming the current dividend has not yet been paid?
+
+b. What is the ex-dividend price of Novis's stock if the board follows its current policy?
+
+c. At the dividend declaration meeting, several board memebers claimed that the dividend is too meager and is probably depressing Novis's price. They proposed that Novis sell enough new shares to finance a \$4.60 dividend.
+> i. Comment on the claim that the low dividend is depressing the stock price. Support your argument with calculations.
+> ii. If the proposal is adopted, at what price will the new shares sell? How many will be sold?
+
+---
+
+Given information:
+
+* Net income: \$85,000
+* Outstanding shares: 25,000
+* 100 percent payout policy
+* Expected firm value (one year from now): \$1,725,000
+* Discount rate: .12
+* No taxes on dividends
+
+### Current value of firm
+
+$$
+\begin{aligned}
+\text{PV}_{\text{Firm value one year}} &= \frac{1,725,000}{(1.12)}\\
+  &= 1,540,179\\
+\text{Firm value}_{\text{total}} &= 1,540,179 + 85,000\\
+  &= 1,625,179
+\end{aligned}
+$$
+
+### Ex-dividend stock price
+
+$$
+\begin{aligned}
+P_0 &= \frac{V_{\text{total}}}{\text{shares outstanding}}\\
+  &= \frac{1,625,179}{25,000}\\
+  &= 65.01
+\text{Current dividend}_{\text{per share}} &= D_1\\
+  &= \frac{\text{net income}}{\text{shares outstanding}}\\
+  &= \frac{85,000}{25,000}\\
+  &= 3.40\\\\
+P_0 &= 65.01 - 3.40 = 61.61
+\end{aligned}
+$$
+
+### Board proposal for \$4.60 dividend
+
+A low dividend does not necessarily depress the stock price. According to Miller and Modigliani's dividend irrelevance theory, investors should be indifferent between dividends and capital gains in a world with no taxes or transaction costs.
+
+To illustrate, let's compare the firm's valuation under a \$4.60 dividend:
+
+1. New dividend amount
+
+If Novis increases its dividend to \$4.60 per share, the total dividend paid would be:
+
+$$
+25,000 \times 4.60 = 115,000
+$$
+
+Since the company only earns \$85,000, it must raise \$30,000 by issuing new shares.
+
+2. Firm's value should not change
+
+The firm's total value remains \$1,625,179 because issuing stock does not create value, it merely redistributes ownership.
+
+Thus, increasing the dividend will not necessarily increase the stock price. Instead, it could dilute current ownership and may not be beneficial.
+
+The new stock price before dividend issuance remains \$65,01. The firm will need ot raise \$30,000 by issuing new shares. Shares will be sold at the ex-dividend price (\$61.61), since new investors will not receive the dividend.
+
+$$
+\text{Shares issued} = \frac{30,000}{61.61} = 487
+$$
+
+Thus 487 new shares will be sold at \$61.61 per share.
+
+---
+
+## Dividend policy
+
+Gibson Co. has current period cash flow of \$1.1 million and pays no dividends. The present value of the company's future cash flows is \$15 million. The company is entirely financed with equity and has 600,000 shares outstanding. Assume the dividend tax rate is zero.
+
+a. What is the share price of the Gibson stock?
+
+b. Suppose the board of directors of Gibson Co. announces its plan to pay out 50 percent of its current cash flow as cash dividends to its shareholders. How can Jeff Miller, who owns 1,000 shares of Gibson stock, achieve a zero payout policy on his own?
+
+---
+
+Given information:
+
+* Cash flow: \$1,100,000
+* Present value of future cash flows: \$15,000,000
+* Shares outstanding: 600,000
+
+a. Share price
+
+$$
+\begin{aligned}
+\text{Firm value} &= 15,000,000 + 1,100,000\\
+  &= 16,100,000\\
+\text{Share price} &= \frac{16,100,000}{600,000}\\
+  &= 26.83
+\end{aligned}
+$$
+
+b. Homemade dividends
+
+$$
+\begin{aligned}
+\text{total dividend} &= \frac{1,100,000}{2}\\
+  &= 550,000\\\\
+\text{dividend per share} &= \frac{550,000}{600,000}\\
+  &= 0.92\\
+\text{Share price} &= 26.83 - .92\\
+  &= 25.91\\
+\text{Jeff's dividend} &= 1,000 \times .92\\
+  &= 920\\
+\text{Buy back} &= \frac{920}{25.91}\\
+  &= 35.51\ \text{shares}
+\end{aligned}
+$$
+
+---
+
+## Dividend smoothing
+
+The Sharpe Co. just paid a dividend of \$1.80 per share of stock. Its target payout ratio is 40 percent. The company expects to have an earnings per share of \$4.95 one year from now.
+
+a. If the adjustment rate is .3 as defined in the Lintner model, what is the dividend one year from now?
+
+b. If the adjustment rate is .6 instead, what is the dividend one year from now?
+
+c. Which adjustment rate is more conservative? Why?
+
+---
+
+a. .3 adjustment rate
+
+$$
+\begin{aligned}
+\text{Dividend change} &\equiv D_1 - D_0\\
+  &= s \cdot (t \text{EPS}_1 - D_0)\\\\
+D_1 &= s \cdot (t \text{EPS}_1 - D_0) + D_0\\
+  &=  .3 \cdot (.4 \times 4.95 - 1.80) + 1.80\\
+  &= 1.85
+\end{aligned}
+$$
+
+b. .6 adjustment rate
+
+$$
+\begin{aligned}
+D_1 &= .6 \cdot (.4 \times 4.95 - 1.80) + 1.80\\
+  &= 1.91
+\end{aligned}
+$$
+
+The .3 adjustment rate is more conservative because it raises the dividend by a modest amount compared to the .6 adjustment rate.
+
+A lower adjustment rate (0.3) is more conservative because:
+
+* It results in a smaller increase in dividends, allowing the company to be cautious.
+* A firm with a low adjustment rate avoids drastic changes in dividends, reducing the risk of future dividend cuts if earnings fluctuate.
+* It helps maintain a stable payout policy rather than responding aggressively to short-term earnings changes.
+
+Thus, 0.3 is more conservative adjustment rate because it reflects a gradual approach to adjusting dividends.
+
+---
