@@ -1,0 +1,1254 @@
+---
+title: "Raising Capital"
+author: "Ross, Westerfield, Jaffe"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Summary and Conclusions
+
+1. Venture capital is a common source of financing in start-up and privately held firms. Venture capital is particularly important in financing high-tech enterprises. Venture capital financing was at its peak during the Internet bubble around the turn of the century.
+
+2. A company's first public equity issue is called an IPO for initial public offering. IPOs are generally underpriced. That is, the stock price in the aftermarket is normally above the issue price.
+
+3. A seasoned equity offering (SEO) refers to a new issue when the company's securities have already been publicly traded. On average, the stock price of the issuing company falls upon the announcement of an SEO.
+
+4. The underwriter bears risk with a firm commitment because it buys the entire issue. Conversely, the investment banker avoids this risk under a best-efforts offering because it does not purchase the shares. Firm commitment underwriting is far more prevalent for large issues than is best-efforts underwriting. For an offering of a given size, the direct expenses of best-efforts underwriting and firm commitment underwriting are of the same order of magnitude.
+
+5. Rights offerings are cheaper than general cash offers and eliminate the problem of underpricing. Yet most new equity issues in the U.S. are underwritten general cash offers.
+
+6. While dilution in stock price hurts stockholders, dilution of proportionate interest, book value per share, and EPS---by themselves---do not.
+
+7. Self registration is new method of issuing new debt and equity. The direct costs of self issues seem to be substantially lower than those of traditional issues.
+
+# Concept Questions
+
+## Debt versus equity offering size
+
+In the aggregate, debt offerings are much more common than equity offerings and typically much larger as well. Why?
+
+---
+
+Debt offerings are more common and typically larger than equity offerings for several key reasons:
+
+1. __Cost of capital considerations__
+
+* Debt is cheaper than equity. Interest payments on debt are tax-deductible, reducing the effective cost of debt financing (the tax shield effect). Equity, on the other hand, has no such tax advantage.
+
+* Lower required return. Investors typically require a lower return on debt compared to equity because debt is less risky (debtholders get paid before shareholders in case of liquidation).
+
+2. __Ownership and control__
+
+* Avoiding ownership dilution. Issuing new equity means selling ownership stakes in the company, which dilutes existing shareholders' control and earnings per share.
+
+* Debt allows firms to retain control. Unlike issuing stock, taking on debt does not give creditors voting rights or influence over company decisions (unless covenants are breached).
+
+3. __Market conditions and investor preferences__
+
+* Debt markets are larger and more active. The bond market is generally deeper and more liquid than the stock market, making it easier for firms to raise large amounts of capital through debt.
+
+* Investors prefer predictable returns. Many institutional investors (e.g., pension funds, insurance companies) prefer fixed-income securities over volatile stocks.
+
+4. __Timing and flexibility__
+
+* Faster and less scrutinized. Debt offerings are typically faster to execute than equity offerings, which often require extensive regulatory approval and investor scrutiny.
+
+* Flexibility in repayment. Companies can structure debt with different maturities and interest payment schedules to match their cash flow needs.
+
+5. __Signal to market__
+
+* Issuing equity can be seen as a negative signal. Investors may interpret an equity offering as a sign that the company believes its stock is overvalued, which could cause the stock price to drop.
+
+* Debt issuance is often seen as normal business. Since debt is a regular part of corporate finance, issuing bonds or taking loans is usually not perceived negatively.
+
+---
+
+## Debt versus equity flotation costs
+
+Why are the costs of selling equity so much larger than the costs of selling debt?
+
+---
+
+### Unerwriting fees & investment banking costs
+
+Equity issuance is riskier for underwriters. Investment banks charge higher underwriting fees (typically 3-7\% of the amount raised) because they take on greater risk in pricing and selling stock.
+
+Debt underwriting is more standardized. Bond offerings often involve lower fees typically 1-2\%) because they are easier to price and distribute, especially for firms with solid credit ratings.
+
+### Regulatory and compliance costs
+
+Equity issuance involves more disclosure requirements. Companies must provide extensive financial statements, risk disclosures, and future business outlooks in an IPO or seasoned equity offering (SEO).
+
+Debt issuance has fewer regulatory hurdles. Bond offerings require less disclosure, especially if a company has an existing credit rating and established investor relationships.
+
+### Market uncertainty and pricing challenges
+
+Stock prices are volatile. Pricing new shares is more challenging due to market fluctuations, which may lead to discounts that increase the cost of equity issuance.
+
+Debt pricing is more predictable. Bonds have defined interest rates and maturities, making pricing more straightforward.
+
+### Legal and administrative expenses
+
+Equity issuance requires extensive legal documentation. Public offerings require a prospectus, SEC filings, and corporate governance reviews, increasing legal costs.
+
+Debt issuance is often a standardized process. Many debt offerings (especially for investment-grade firms) follow well-established legal frameworks with lower costs.
+
+### Selling & marketing costs
+
+Equity offerings require roadshows and investor relations efforts. To attract institutional and retail investors, companies spend money on marketing campaigns and roadshows.
+
+Debt sales are primarily institutional. Bonds are sold directly to institutional investors like pension funds and insurance companies, reducing marketing expenses.
+
+### Risk of dilution & market perception
+
+Equity issuance can negatively affect stock prices. Selling new shares dilutes existing shareholders, often leading to a drop in stock price. This risk may force companies to sell shares at a discount, increasing the effective cost.
+
+Debt does not dilute ownership. Since bonds do not impact voting rights or control, they are often a more attractive financing option for firms.
+
+### Conclusion
+
+Equity stales are more expensive because they require higher underwriting fees, greater regulatory compliance, more marketing efforts, and involve market risks. Debt, on the other hand, is generally cheaper, faster, and more predictable to issue.
+
+---
+
+## Bond ratings and flotation costs
+
+Why do noninvestment-grade bonds have much higher direct costs than investment-grade issues?
+
+---
+
+Noninvestment-grade bonds (also known as junk bonds or high-yield bonds) have much higher direct issuance costs compared to investment-grade bonds due to several factors:
+
+### Higher underwriting fees
+
+Increased risk for underwriters. Investment banks charge higher fees (often 2-5\% of the total bond issuance) to compensate for the greater difficulty in selling noninvestment-grade bonds.
+
+More extensive marketing required. Underwriters must work harder to convince investors to buy riskier bonds, increasing costs.
+
+### Higher interest rates & risk premiums
+
+Higher default risk. Companies with lower credit ratings must offer higher yields to attract investors, making the bond issuance more expensive.
+
+More complex pricing. The lack of strong credit ratings means investors demand more due diligence and risk analysis, increasing issuance costs.
+
+### Stricter legal and regulatory requirements
+
+More complex bond covenants. To reassure investors, issuers often include additional protective covenants, requiring extra legal documentation and legal fees.
+
+SEC and compliance costs. Riskier bonds face greater scrutiny from regulators, increasing administrative expenses.
+
+### Limited market demand & liquidity issues
+
+Fewer buyers. Institutional investors like pension funds and insurance companies often avoid junk bonds, making it harder to sell large amounts without offering discounts.
+
+Higher trasaction costs. Lower deman leads to wider bid-ask spreads, making trading more expensive.
+
+### Need for credit ratings & due diligence
+
+Costly credit rating assessments. Lower-rated firms may need multiple credit rating agency reviews, which can be expensive.
+
+More investor scrutiny. Rating agencies and investors demand detailed financial disclosures, increasing audit and advisory costs.
+
+### Conclusion
+
+Noninvestment-grade bonds have higher issuance costs due to underwriting risk, higher required yields, stricter legal requirements, and a smaller investor base. These factors make it more expensive for companies with poor credit ratings to raise capital through debt.
+
+---
+
+## Underpricing in debt offerings
+
+Why is underpricing not a great concern with bond offerings?
+
+---
+
+Underpricing is a major concern in equity offerings but not as significant for bond offerings:
+
+### Bonds have more predictable pricing
+
+Fixed-income securities. Unlike stocks, which have uncertain future cash flows, bonds have fixed interest payments and a set maturity date, making them easier to value accurately.
+
+Market benchmarks. Bond prices are often tied to risk-free rates (like U.S. Treasury yields) and credit spreads, reducing the likelihood of significant mispricing.
+
+### Demand is more stable for bonds
+
+Institutional buyers dominate. Pension funds, insurance companies, and mutual funds frequently invest in bonds, creating a stable, predictable demand that reduces underpricing risk.
+
+Less speculative trading. Unlike stocks, bonds are less subject to speculative price swings, reducing volatility and mispricing concerns.
+
+### Bonds are issued through book building or private placements
+
+Negotiated pricing. Most bond offerings go through a book-building process, where investment banks and institutional investors collaborate to set a fair price based on demand.
+
+Private placements. Many bonds are sold directly to institutional investors, avoiding public market fluctuations and underpricing risks.
+
+### Lower first-day "pop" in price
+
+No need for hype. In IPOs, underpricing is often used to generate excitement and ensure a strong firstday performance. Bonds, being debt instruments, do not rely on short-term market hype, making underpricing less relevant.
+
+Less price volatility. Bonds typically trade within a narrow price range, unlike stocks, which can experience large price jumps post-IPO.
+
+### Investment banks have less incentive to underprice bonds
+
+Lower fees vs. equity. Banks make a larger percentage in fees on IPOs (often 6-7\%) than on bond issuances (often 1\% or lower), reducing the incentive to underprice and attract excess demand.
+
+Focus on long-term relationships. For bonds, investment banks prioritize repeat business from institutional investors over short-term gains from underpricing.
+
+### Conclusion
+
+Since bonds are more predictable, have stable demand, and undergo negotiated pricing, underpricing is not a major concern. Unlike equity IPOs, where firms want to generate excitement and liquidity, bond issuers focus on accurate pricing and securing the lowest possible borrowing costs.
+
+---
+
+Use the following information to answer the next three questions. Zipcar, the car sharing company, went public in April 2011. Assisted by the investment bank Goldman, Sachs & Co., Zipcar sold 9.68 million shares at \$18 each, thereby raising a total of \$174.24 million. By the end of the first day of trading, the stock had zipped to \$28 per share, down from a high of \$31.50. Based on the end-of-day numbers, Zipcar shares were apparently underpriced by about \$10 each, meaing that the company missed out on an additional \$96.8 million.
+
+## IPO Pricing
+
+The Zipcar IPO was underpriced by about 56 percent. Should Zipcar be upset at Goldman over the underpricing?
+
+---
+
+While it may seem that Zipcar "left money on the table" due to underpricing, the situation is more nuanced.
+
+### Reasons Zipcar might be upset
+
+1. Lost capital -- If Zipcar's shares were truly worth \$28 at the open, they could have raised an additional \$9.6 million by pricing the IPO higher.
+
+2. High underpricing (56\%) - A 56\% jump is quite large compared to the historical average IPO underpricing of 15-20\%, making it seem like Zipcar sold itself short.
+
+3. Goldman's incentives - Investment banks might underprice IPOs to ensure their institutional clientss get an easy profit, rather than maximizing proceeds for the company.
+
+4. Potential mispricing - If Zipcar's demand was stronger than Goldman anticipated, they may set the offer price too low.
+
+### Reasons underpricing may have been intentional
+
+1. Market buzz & investor interest - A strong first-day pop can generate positive media coverage, brand visibility, and investor enthusiasm, benefiting Zipcar in the long run.
+
+2. Building long-term relationships - institutional investors who bought in at the IPO price would likely support Zipcar in future capital raises.
+
+3. Stock stability - A small, steady climb is preferable to overpricing, which could lead to a crash if investor expectations aren't met.
+
+4. Risk of overpricing - If Zipcar had priced at \$28 and the stock had fallen below that price, it would have damaged investor confidence and made future fundraising harder.
+
+### Conclusion
+
+If their goal was to maximize capital raised immediately, then yes, they should be upset because they could have gotten much more money with a higher IPO price. However, if their goal was long-term stock performance and visibility, then no, the underpricing may have helped by creating excitement and securing institutional investor interest.
+
+---
+
+## IPO Pricing
+
+In the previous question, how would it affect your thinking to know that the company was incorporated about 10 years earlier, had only \$186 million in revenues in 2010, and had never earned a profit? Additionally, the viability of the company's business model was still unproven.
+
+---
+
+Knowing that Zipcar was a relatively young company (10 years old), had only \$186 million in revenue, had never turned a profit, and had an unproven business model significantly justifies the underpricing.
+
+### High uncertainty means higher risk for investors
+
+No profits yet. Investors had no historical earnings to gauge future profitability. This increases risk, making a lower IPO price necessary to attract buyers.
+
+Unproven business model. The concept of car-sharing was still in its early days, and there was uncertainty about scalability and long-term profitability.
+
+### Market sentiment & IPO success
+
+Underpricing creates demand. Since Zipcar was a  speculative investment, a large first-day jump signaled strong investor enthusiasm, potentially leading to sustained stock performance.
+
+Avoiding a failed IPO. If Goldman had priced the IPO too high and shares dropped immediately, it could have damaged Zipcar's credibility and ability to raise capital later.
+
+### Industry comparisons
+
+Tech and high-growth companies often go public at a discount due to their high-risk, high-reward nature.
+
+Similar companies in emerging industries (like ride-sharing later on) also saw high IPO underpricing to compensate for uncertainty.
+
+---
+
+## IPO Pricing
+
+In the previous two questions, how would it affect your thinking to know that in addition to the 9.68 million shares offered in the IPO, Zipcar had an additional 30 million shares outstanding? Of those 30 million shares, 14.1 million shares were owned by four venture capital firms, and 15.5 million shares were owned by the 12 directors and executive officers.
+
+---
+
+knowing that Zipcar had an additional 30 million shares outstanding, with significant portion (14.1M shares held by venture capital firms and 15.5M shares held by executives and directors), adds an important layer to the discussion.
+
+### Underpricing as a benefit to existing shareholders
+
+While Zipcar missed out on extra capital (\$96.8M) due to underpricing, the real winners were existing shareholders (VC firms and insiders).
+
+Their 30 million shares gained a substantial \$10 per share "bonus" from the first-day price jump.
+
+* Total paper gain: $\$10 \times 30\text{M} = \$300$ million increase in value.
+* This more than offsets the \$96.8M lost from underpricing.
+
+### Venture capital (VC) and insider interests
+
+VC firms and executives typically favor underpricing because:
+
+* It creates positive momentum for the stock, making it easier to sell their shares later at a higher price.
+* A strong first-day performance builds credibility for future funding rounds or acquisitions.
+
+Goldman Sachs was likely balancing Zipcar's interests with those of the VCs and insiders who were its key clients for future deals.
+
+### Limited immediate selling pressure (Lock-up periods)
+
+VC firms and insiders were likely restricted from selling their shares immediately due to lock-up agreements (typically 90-180 days).
+
+This meant that the initial IPO investors had fewer shares to buy, driving up demand and contributing to the price spike.
+
+### Was Zipcar truly harmed by underpricing?
+
+If Zipcar had priced its shares at \$28 instead of \$18, it could have raised more capital but at the risk of a less successful IPO (or even a price drop).
+
+Since the company was not yet profitable, it might need to raise more money later---and well-performing stock makes that easier.
+
+---
+
+## Cash offer versus rights offer
+
+Ren-Stimpy International is planning to raise fresh equity capital by selling a large new issue of common stock. Ren-Stimpy is currently a publicly  traded corporation, and it is trying to choose between an underwritten cash offer and a rights offering (not underwritten) to current shareholders. Ren-Stimpy managment is interested in minimizing the selling costs and has asked you for advice on the choice of issue methods. What is your recommendation and why?
+
+---
+
+To minimize selling costs, Ren-Stimpy International should strongly consider a rights offering instead of an underwritten cash offer.
+
+### Lower selling costs
+
+Rights offering (not underwritten), avoids underwriter fees, which can be significant (3\%-7%) in a cash offer. Typically cheaper since existing shareholders directly buy the new shares.
+
+An underwritten cash offer involves investment banks underwriting the offer, leading to higher costs. Additional fees include legal, administrative, and marketing expenses.
+
+### Favorable pricing for existing shareholders
+
+In a rights offering, shareholders get to buy new shares at a discount, helping prevent dilution. A cash offer might dilute current shareholders if new investors purchase shares below market value.
+
+### Market conditions and demand considerations
+
+Rights offering works best if current shareholders are willing and able to participate. Underwritten offer provides a guaranteed sale of shares, which might be preferable if the company is unsure about demand.
+
+Since Ren-Stimpy wants to minimize selling costs, a rights offering (not underwritten) is the better choice. It avoids underwriter fees and keeps ownership within existing shareholders. However, if the company needs guaranteed funding or if existing shareholders are unlikely to participate, an underwritten cash offer may be necessary.
+
+---
+
+## IPO underpricing
+
+In 1980, a certain assistant professor of finance bought 12 initial public offerings of common stock. He held each of these for approximately one month and then sold them. The investment rule he followed was to submit a purchase order for every firm commitment initial public offering of oil and gas exploration companies. There were 22 of these offerings, and he submitted a purchase order for approximately \$1,000 in stock for each of the companies. With 10 of these, no shares were allocated to this assistant professor. With 5 of the 12 offerings that were purchased, fewer than the requested number of shares were allocated.
+
+The year 1980 was very good for oil and gas exploration company owners: On average, for the 22 companies that went public, the stocks were selling for 80 percent above the offering price a month after the initial offering date. The assistant professor looked at his performance record and found that the \$8,400 invested in the 12 companies had grown to \$10,000, representing a return of only about 20 percent (commissions were negligible). Did he have bad luck, or should he have expected to do worse thatn the average initial public offering investor? Explain.
+
+---
+
+The assistant professor should have expected to do worse than the average IPO investor due to a phenomenon known as adverse selection in IPO allocations (also known as winner's curse).
+
+### Favorable allocation bias
+
+The professor attempted to buy all oil and gas IPOs but was only allocated shares in some of them. When demand for an IPO is high, underwriters often favor institutional investors and large clients. Retail investors (like the professor) are allocated fewer or no shares in the best-performing IPOs. When demand is low, retail investors tend to receive more shares---but these tend to be the weaker-performing IPOs.
+
+### Selection bias in allocations
+
+Since he did not receive any shares in 10 of the 22 IPOs, and received fewer than requested in 5 others, it suggests that he was systematically excluded from the strongest IPOs that performed the best. The IPOs he was allocated were likely the less desirable ones, leading to below-average returns.
+
+### Market-wide returns vs. individual investor returns
+
+The 80\% average return applies to all IPOs in the sector, not to any specific investor's portfolio. Since high-return IPOs were oversubscribed, he couldn't get enough of those shares, while low-return IPOs had excess supply, meaning he got stuck with the weaker ones. His actual return of 20\% suggests that he was allocated shares in underperforming IPOs relative to the average.
+
+### Conclusion: Not bad luck, but structural disadvantage
+
+The professor didn't necessarily have bad luck---his returns were expected to be lower due to allocation bias in IPOs. This winner's curse is common for individual investors who participate in IPOs, as they tend to receive more shares of less in-demand stocks and fewer of the best-performing ones.
+
+---
+
+## IPO pricing
+
+The following material represents the cover page and summary of the prospectus for the initial public offering of the Pest Investigation Control Corporation (PICC), which is going public tomorrow with a firm commitment initial public offering managed by the investment banking firm of Erlanger and Ritter.
+
+Answer the following questions:
+
+a. Assume that you know nothing about PICC other than the information contained in the prospectus. Based on your knowledge of finance, what is your prediction of the price of PICC tomorrow? Provide a short explanation of why you think this will occur.
+
+b. Assume that you have several thousand dollars to invest. When you get home from class tonight, you find that your stockbroker, whom you have not talked to for weeks, has called. She has left a message that PICC is going public tomorrow and that she can get you several hundred shares at the offering price if you call her back first thing in the morning. Discuss the merits of this opportunity.
+
+---
+
+### Prediction of PICC's stock price on IPO day
+
+Given the information provided in the prospectus, there is a strong likelihood that PICC's stock price will rise above the offering price of \$11.00 per share on the first trading day.
+
+1. Typical underpricing in IPOs - Many IPOs exerience underpricing, meaning the stock is initially priced below what investors are willing to pay in the open market. This is often done to ensure demand and reward initial investors.
+
+2. Positive revenue and earnings growth - The company has demonstrated significant revenue growth over the past three years.
+
+3. Small offering size & limited float - With only 200,000 new shares issued, the supply of available shares will be relatively low, potentially driving up demand and pushing the price higher.
+
+4. Nasdaq listing & market speculation - If PICC successfully gets listed on Nasdaq, retail investors and institutional traders might speculate on its growth, futher boosting demand.
+
+### Expected outcome
+
+If underpricing is significant, the stock could open 20-50\% higher than \$11, potentially reaching \$13-\$17 in early trading. However, since this is a small, niche company, long-term price sustainability will depend on continued revenue and profit growth.
+
+### Should you buy shares at the IPO price
+
+If your stockbroker is offering you shares at \$11.00 per share, this could be a great opportunity for short-term gains.
+
+1. Likelihood of first-day price jump - given historical IPO trends, the stock may trade well above the initial offer price when the market opens, allowing for a quick profit.
+
+2. Access to an IPO is rare for small investors - Typically, investment banks reserve IPO allocations for large clients or institutional investors. If you're being offered IPO shares, it could indicate: (1) The demand for shares is not as high as expected, or (2) your broker believes this is a great deal and wants to include you.
+
+3. Risk factors to consider - (1) Limited track record: while PICC has growing revenues, its earnings per share (EPS) is still low at \$0.09. (2) Speculative business model: selling toads and frogs as insect control is a niche market, and the company's long-term viability is uncertain. (3) Small market capitalization:  after the IPO, PICC will only have 600,000 shares outstanding. If demand fades, liquidity could be an issue, making it harder to sell shares quickly.
+
+### Recommendation
+
+If you are a short-term trader, buying at \$11.00 and selling after the first-day pop could yield quick gains. If you are a long-term investor, evaluate the company's business model and growth potential before committing.
+
+---
+
+## Competitive and negotiated offers
+
+What are the comparative advantages of a competitive offer and a negotiated offer, respectively?
+
+---
+
+The choice between a competitive offer and anegotiated offer in the issuance of securities depends on the circumstances of the issuing company, market conditions, and the desired trade-offs between cost, speed, and certainty. Here's a breakdown of their comparative advantages:
+
+### Competitive offer (auction process)
+
+In a competitive offering, underwriters submit bids to purchase the securities, and the issuer selects the best bid (usually the one offering the highest price or lowest cost of capital).
+
+#### Advantages:
+
+* Lower costs - since multiple investment banks compete, fees and underwriting spreads tend to be lower.
+* Fair market pricing - competitive bidding can result in a more transparent and fair market price for the securities.
+* Issuer control - The issuing company retains more control over the process and can select the most attractive terms.
+* Objective selection process - reduces the risk of favoritism or underpricing, as the issuer chooses based on bids rather than relationships.
+
+#### Disadvantages:
+
+* Less flexibility - the company has limited ability to negotiate customized terms.
+* Risk of poor bidding outcome - if there is low interest, the issuer may receive unfavorable pricing.
+* Not suitable for complex offerings - works best for well-known, high-credit worthy issuers where valuation is straightforward.
+
+### Negotiated offer (Firm commitment or best effort)
+
+In a negotiated offering, the issuing company works directly with a selected investment bank (or a group of banks( to determine the offering price and terms.
+
+#### Advantages:
+
+* Greater flexibility - issuers can structure the deal to meet their specific needs, including timing, marketing, and investor targeting.
+* Better execution & market support - the underwriter provides guidance, conducts roadshows, and helps generate investor interest.
+* More suitable for complex or risky offerings - works well for companies with uncertain valuation, such as IPOs, new industries, or firms with limited financial history.
+* Stronger relationship with underwriter - A long-term banking relationship can lead to better pricing and ongoing financial advisory support.
+
+#### Disadvantages:
+
+* Potentially higher costs - with less competition, underwriting fees and discounts may be higher.
+* Risk of underpricing - if the underwriter undervalues the securities, the issuer may raise less capital than it could have.
+* Possible conflicts of interest - since the deal is negotiated, there is a risk that the underwriter may prioritize its own interest over the issuer's.
+
+### Which to choose?
+
+Large, well-established companies with strong credit ratings (e.g., blue-chip firms or government bonds) may prefer a competitive offer to get the best price through market-driven competition. Smaller firms, IPOs, or complex securities typically opt for a negotiated offer, benefiting from the underwriter's expertise in pricing, marketing, and distribution.
+
+---
+
+## Seasoned equity offers
+
+What are the possible reasons why the stock price typically drops on the announcement of a seasoned new equity issue?
+
+---
+
+When a company announces a seasoned equity offering (SEO)---a new issue of stock after its initial public offering (IPO)---its stock price typically drops due to several key reasons:
+
+### Signaling effect (negative signal to market)
+
+Investors may interpret the new stock issuance as a signal that management believes the stock is overvalued. If management thought the stock was undervalued, they might have chosen alternative financing options like debt or retained earnings instead. This concern is based on asymmetric information, where insiders (management) have more information about the firm's prospects than the public.
+
+### Dilution of existing shareholders' value
+
+Issuing new shares increases the total number of outstanding shares, which can reduce the value of existing shares if earnings and cash flows remain constant. Earnings per share (EPS) may decrease, making the stock less attractive to investors.
+
+### Market supply and demand mechanics
+
+The announcement of an SEO means a large influx of shares is coming into the market, which can increase supply and drive the stock price down unless there is equally strong demand.
+
+### Concerns about the use of proceeds
+
+If the company is issuing new stock to cover operating losses, repay debt, or finance risky investments, investors may worry about financial distress or inefficient capital allocation. If the reason for raising funds isn't clearly beneficial (e.g., financing a high-growth opportunity), investors may react negatively.
+
+### Costs of issuance and underpricing
+
+Underwriters often discount the new shares to attract buyers, which can contribute to a price drop. The issuing company also incurs high fees and administrative costs, reducing net proceeds.
+
+### Alternative financing choices
+
+Companies that are financially strong usually prefer debt financing because interest payments are tax-deductible and don't dilute ownership. Choosing equity over debt may suggest that the company is unable to take on more debt, leading to concerns about its financial health.
+
+### Empirical evidence
+
+Studies have shown that stock prices typically decline by 2-3\% on the announcement of an SEO. This price drop reflects the combined effects of signaling, dilution, and market reactions.
+
+---
+
+## Raising capital
+
+Megabucks Industries is planning to raise fresh equity capital by selling a large new issue of common stock. Megabucks, a publicly traded corporation, is trying to choose between an underwritten cash offer and a rights offering (not underwritten) to current shareholders. Megabucks' management is interested in maximizing the wealth of current shareholders and has asked you for advice on the choice of issue methods. What is your recommendation? Why?
+
+---
+
+Megabucks Industries has two primary options for raising equity capital:
+
+1. Underwritten cash offer
+2. Rights offering (Not underwritten) to current shareholders
+
+### Comparison of the two methods
+
+|Factor|Underwritten Cash Offer|Rights Offering (Not Underwritten)|
+|:---:|:---:|:---:|
+|Cost|Higher due to underwriting fees|Lower since no underwriter fees involved|
+|Shareholder wealth|Possible dilution if new investors buy shares at a discount|Existing shareholders can maintain their ownership|
+|Market price impact|Can lead to a price drop due to signaling concerns|Less price impact since shares are offered to exisitng shareholders|
+|Speed and certainty|Faster and more certain as the underwriter guarantees the sale|Less certain, as shareholders must choose to participate|
+|Participation|Open to the general public|Limited to existing shareholders|
+|Signaling to market|negative signal|Neutral to positive signal|
+
+### Recommendation
+
+If Megabucks wants to maximize the wealth of current shareholders, a rights offering is generally preferable. HOwever, if speed and certainty of funding are more important, an underwritten cash offer may be the better choice, despite higher costs and potential dilution.
+
+---
+
+## Shelf registration
+
+Explain why shelf registration has been used by many firms instead of syndication.
+
+---
+
+Shelf registration (under SEC Rule 415) allows a company to register a large amount of securities in advance and then issue them gradually over time when market conditions are favorable. This approach differs from syndicated offerings, where investment banks (a syndicate) underwrite and sell the entire issuance at once.
+
+### Advantages of shelf registration over syndication
+
+1. Flexibility in timing
+
+Firms can issue securities whenever market conditions are optimal, avoiding sudden price drops that often come with large equity or debt offerings. In a syndicated offering, all securities are sold at once, which may not be ideal if market conditions are weak.
+
+2. Lower issuance costs
+
+Shelf registration avoids underwriting fees that come with syndication, where banks charge a premium for their services. The company sells securities directly to investors in smaller increments, reducing reliance on intermediaries.
+
+3. Reduced market impact
+
+Large syndicated offerings can create a negative price reaction, as investors may see it as a sign the company is overvalued or in need of capital. Shelf registration allows firms to spread issuance over time, preventing sudden dilution or downward pressure on stock prices.
+
+4. Administrative efficiency
+
+A single shelf registration covers multiple offerings over a period (usually up to three years), reducing paperwork and regulatory filings. Syndicated offerings require separate registration and underwriting agreements for each issuance.
+
+5. Better control over pricing
+
+With shelf registration, firms can wait for the best market price before issuing securities. In contrast, syndicated offerings often require negotiating a fixed price with underwriters, which may not always be favorable.
+
+6. Broader investor access
+
+Companies can issue securities in different amounts to different types of investors over time. A syndicated offering often caters to institutional investors, limiting participation from retail investors.
+
+### When syndication might still be preferred
+
+* If a company needs capital immediately, a syndicated offering provides a lump sum quickly.
+* If the company lacks a strong investor base, investment banks can help find buyers through syndication.
+* In some cases, a syndicate can offer better pricing support and credibility, especially for smaller or riskier companies.
+
+### Conclusion
+
+For large, financially stable firms, shelf registration is often preferred because it offers flexibilty, cost savings, and better control over market timing. However, for firms that need immediate capital or market support, syndication may still be useful.
+
+---
+
+## IPOs
+
+Every IPO is unique, but what are the basic empirical regularities in IPOs?
+
+---
+
+While everiy initial public offering (IPO) is unique, reserachers and market analysts have observed several consistent patterns across IPOs. These regularities help explain common trends and anomalies in IPO markets.
+
+### Short-term underpricing (IPO pop)
+
+IPOs tend to be underpriced, meaning the initial offering price is lower than the price at which the stock trades on the first day. This leads to a first-day return (IPO pop) where investors who buy at the offering price can sell at a higher price. On average, IPOs experience 10-20\% first-day gains, though some sectors (e.g., tech) see much higher spikes.
+
+The reasons for underpricing include:
+
+* Investment banks want to reward institutional investors (who are their regular clients).
+* Underpricing reduces litigation risk (if the stock drops after the IPO).
+* It helps generate positive publicity and ensure a successful offering.
+
+### Long-term underperformance
+
+Over the first 3-5 years, IPO stocks tend to underperform compared to similar publicly traded companies. Possible reasons include:
+
+* Initial hype fades, and the stock price adjusts to fundamental value.
+* Early investors (venture capitalists, insiders) start selling their shares after lock-up periods expire.
+* Some IPOs are timed to take advantage of market optimism, leading to later corrections.
+
+### Hot and cold IPO markets (cyclicality)
+
+IPO activity follwos market cycles, with periods of high issuance ("hot markets") and low issuance ("cold markets"). More companies go public when stock prices are high and investor sentiment is strong. Fewer IPOs occur when economic uncertainty or bear markets reduce demand.
+
+### High costs of going public
+
+The total cost of an IPO is typically 7-10\% of the funds raised. Costs include underwriting fees, legal/accounting expenses, and regulatory compliance. Smaller IPOs tend to have higher proportional costs due to fixed expenses.
+
+### Wealth transfer from firms to early investors
+
+Underpricing benefits early investors (who get IPO allocations) at the expense of the company. If a stock jumps 50\% on day one, the company has effectively "left money on the table." However, companies often accept this tradeoff to ensure a smooth public debut.
+
+### Information asymmetry and winner's curse
+
+Institutional investors typically receive the best IPO allocations, while retail investors get fewer shares or lower-quality deals. Retail investors may suffer from the winner's curse---if they can easily buy IPO shares, it might mean demand was weak. This explains why most IPO gains go to institutional investors rather than average traders.
+
+### Conclusion
+
+IPO markets show persistent patterns like short-term underpricing, long-term underperformance, and cyclical issuance trends. While companies raise capital through IPOs, the process often benefits early investors more than long-term shareholders. Understanding these regularities helps investors make better decisions when participating in IPOs.
+
+---
+
+# Questions and problems
+
+## Rights offerings
+
+Again, Inc., is proposing a rights offering. Presently, there are 550,000 shares outstanding at \$87 each. There will be 85,000 new shares offered at \$81 each.
+
+a. What is the new market value of the company?
+b. How many rights are associated with one of the new shares?
+c. What is the ex-rights price?
+d. What is the value of a right?
+e. Why might a company have a rights offering rather than a general cash offer?
+
+---
+
+* Current Value of firm: \$47,850,000
+* Value of new shares: $85,000 \times 81 = \$6,885,000$
+* New market value of firm: \$54,735,000
+
+* Current number of shares: 550,000
+* New shares being issued: 85,000
+* Number of rights per new share: $\frac{550,000}{85,000} = 6.47 rights$
+
+* The total number of shares on ex-right: $550,000 + 85,000 = 635,000$
+* The ex-rights price is: $\frac{54,735,000}{635,000} = 86.20$
+
+* The value of a right is $\frac{87 - 86.20}{6.47} = \$0.12$
+
+A rights offering gives the current stockholders a chance to maintain their ownership position in the company.
+
+Enumerated reasons:
+
+1. Protects existing shareholders from dilution.
+2. Lower Costs - A rights offering avoids the high underwriting fees associated with general cash offers.
+3. Faster and easier process - Since it is offered directly to existing shareholders, there is less regulatory burden compared with a public offering.
+4. More favorable to shareholders - If existing shareholders take up their rights, they can buy shares at a discount, potentially increasing their wealth.
+5. Indicates financial strength - A rights offering can signal that the company believes its stock is undervalued and wants to raise funds without affecting ownership structure significantly.
+
+---
+
+## Rights offering
+
+The Clifford Corporation has announced a rights offer to raise \$28 million for a new journal, the _Journal of Financial Excess_. This journal will review potential articles after the author pays a nonrefundable reviewing fee of \$5,000 per page. The stock currently sells for \$27 per share, and there are 2.9 million shares outstanding.
+
+a. What is the maximum possible subscription price? What is the minimum?
+b. If the subscription price is set at \$25 per share, how many shares must be sold?
+c. What is the ex-rights price? What is the value of a right?
+d. Show how a share holder with 1,000 shares before the offering and no desire (or money) to buy additional shares is not harmed by the rights offer.
+
+---
+
+### The maximum and minimum possible subscription price
+
+The maximum subscription price that can be set is the current stock price. The minimum is theoretically zero, however the company will want to set the subscription price to be as close to the current stock price but still incentivize current stockholders to buy shares.
+
+### Subscription price of \$25
+
+$$
+\begin{aligned}
+\text{Shares} &= \frac{\text{Funds to raise}}{\text{Subscription price}}\\
+  &= \frac{28,000,000}{25}\\
+  &= 1,120,000\ \text{shares}
+\end{aligned}
+$$
+
+### Ex-rights price and the value of rights
+
+$$
+\begin{aligned}
+\text{Rights per share} &= \frac{\text{old shares}}{\text{new shares}}\\
+  &= \frac{2,900,000}{1,120,000}\\
+  &= 2.5893\ \text{rights}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{price per share} &= \frac{(2,900,000 \times 27) + (1,120,000 \times 25)}{2,900,000 + 1,120,000}\\
+  &= \frac{78,300,000 + 28,000,000}{4,020,000}\\
+  &= 26.44\\\\
+\text{value of one right} &= 27 - 26.44\\
+  &= .56
+\end{aligned}
+$$
+
+### Effects on shareholders
+
+The shareholder can sell their rights instead of buying new shares. A person with 1,000 shares:
+
+If the shareholder exercised their rights:
+
+$$
+\begin{aligned}
+\text{current position} &= 1,000 \times \$27\\
+  &= \$27,000\\
+\text{number of rights} &= 1,000 \times 2.5893\\
+  &= 2,589.3\\
+\text{value of the rights} &= 2,589.3 \times .1552\\
+  &= 1,450\\
+\text{value of shares after offering} &= 1,000 \times 26.44\\
+  &= 26,440\\
+\end{aligned}
+$$
+
+---
+
+## Rights
+
+Stone Shoe Co. has concluded that additional equity financing will be needed to expand operations and that the needed funds will be best obtained through a rights offering. It has correctly determined that as a result of the rights offering, the share price will fall from \$65 to \$63.18 (\$65 is the "rights-on" price; \$63.18 is the ex-rights price, also known as the _when-issued_ price). The company is seeking \$15 million in additional funds with a per-share subscription price equal to \$50. How many shares are there currently, before the offering? (Assume that the increment to the market value of the equity equals the gross proceeds from the offering.)
+
+---
+
+* Current price: \$65
+* Ex-rights price: \$63.18
+* Seeking \$15,000,000
+* Subscription price: \$50
+
+$$
+\begin{aligned}
+\text{new shares} &= \frac{15,000,000}{50}\\
+  &= 300,000\\\\
+\text{value of a right} &= \text{current price} - \text{ex-rights price}\\
+  &= 65 - 63.18\\
+  &= 1.82\\\\
+\text{value of a right} &= \frac{\text{current price} - \text{subscription price}}{\text{rights per share} + 1}\\
+1.82 &= \frac{65 - 50}{R + 1}\\
+R &= \frac{15}{1.82} - 1\\
+  &= 7.2418\\\\
+\text{number of existing shares} &= \text{value of a right} \times \text{new shares}\\
+  &= 7.2418 \times 300,000\\
+  &= 2,172,527\ \text{shares}
+\end{aligned}
+$$
+
+---
+
+## IPO Underpricing
+
+The Woods Co. and the Garcia Co. have both announced IPOs at \$40 per share. One of these is undervalued by \$9, and the other is overvalued by \$4, but you have no way of knowing which is which. You plan on buying 1,000 shares of each issue. If an issue is underpriced, it will be rationed, and only half your order will be filled. If you _could_ get 1,000 shares in Woods and 1,000 shares in Garcia, what would your profit be? What profit do you actually expect? What principle have you illustrated?
+
+---
+
+$$
+\begin{aligned}
+\text{profit} &= 9,000 - 4,000\\
+  &= 5,000\\\\
+\end{aligned}
+$$
+
+However, expect that the underpriced shares will be rationed (you only get 500 shares), while you will get all of the overpriced shares.
+
+$$
+\begin{aligned}
+\text{profit} &= 9 \times 500 - 4 \times 1,000\\
+  &= 4,500 - 4,000\\
+  &= 500
+\end{aligned}
+$$
+
+---
+
+## Calculating flotation costs
+
+The St. Anger Corporation needs to raise \$45 million to finance its expansion into new markets. The company will sell shares of equity via a general cash offering to raise the needed funds. If the offer price is \$31 per share and the company's underwriters charge a spread of 7 percent, how many shares need to be sold?
+
+---
+
+1. Determine the amount received per share.
+
+Since the underwriters charge a spread of 7\%, the company only receives 100\% - 7\% = 93\% of the offer price per share.
+
+$$
+\text{Net proceeds per share} = 31 \times 0.93 = 28.83
+$$
+
+2. Calculate the number of shares required.
+
+The company needs to raise \$45 million, so the number of shares required is:
+
+$$
+\begin{aligned}
+\text{Number of shares} &= \frac{\text{Total funds needed}}{\text{Net proceeds per share}}\\
+  &= \frac{45,000,000}{28.83}
+  &= 1,560,874\ \text{shares}
+\end{aligned}
+$$
+
+---
+
+## Calculating flotation costs
+
+In the previous problem, if the SEC filing fee and associated administrative expenses of the offering are \$1,900,000, how many shares need to be sold?
+
+---
+
+$$
+\begin{aligned}
+\text{Total proceeds needed to be raised} &= \frac{46,900,000}{28.83}\\
+  &= 1,626,778\ \text{shares}
+\end{aligned}
+$$
+
+---
+
+## Price dilution
+
+Raggio, Inc., has 135,000 shares of stock outstanding. Each share is worth \$75, so the company's market value of equity is \$10,125,000. Suppose the firm issues 30,000 new shares at the following prices: \$75, \$70, and \$65. What will the effect be of each of these alternative offering prices on the existing price per share?
+
+---
+
+* Current price: \$75
+* Current equity value: \$10,125,000
+* New issue: 30,000
+* Prices: \$75, \$70, \$65
+
+For \$75 the price is unchanged. For all the others:
+
+$$
+\begin{aligned}
+\text{Value}_{\text{\$70}} &= 70 \times 30,000\\
+  &= 2,100,000\\
+\text{Firm value} &= 12,225,000
+\text{Shares outstanding} &= 165,000\\
+\text{Share price} &= \frac{\text{Firm value}}{\text{Shares outstanding}}\\
+  &= \frac{12,225,000}{165,000}\\
+  &= \$74.09\\\\
+\text{Value}_{\text{\$65}} &= 65 \times 30,000\\
+  &= 1,950,000\\
+\text{Firm value} &= 12,075,000
+\text{Shares outstanding} &= 165,000\\
+\text{Share price} &= \frac{\text{Firm value}}{\text{Shares outstanding}}\\
+  &= \frac{12,075,000}{165,000}\\
+  &= \$73.18
+\end{aligned}
+$$
+
+---
+
+## Stock offerings
+
+The Newton Company has 50,000 shares of stock that each sell for \$40. Suppose the company issues 9,000 shares of new stock at the following prices: \$40, \$20, \$10. What is the effect of each of the alternative offering prices on the existing price per share?
+
+---
+
+* Current price: \$40
+* Current equity value: $\$40 \times 50,000 = \$2,000,000$
+* New issue: 9,000
+* Prices: \$40, \$20, \$10
+
+For \$40 the price is unchanged.
+
+$$
+\begin{aligned}
+\text{Value}_{\text{\$20}} &= 20 \times 9,000\\
+  &= \$180,000\\
+\text{Firm value} &= \$2,180,000
+\text{Shares outstanding} &= 59,000\\
+\text{Share price} &= \frac{\text{Firm value}}{\text{Shares outstanding}}\\
+  &= \frac{2,180,000}{59,000}\\
+  &= \$36.95\\
+\text{Value}_{\text{\$10}} &= 10 \times 9,000\\
+  &= \$90,000\\
+\text{Firm value} &= 2,090,000\\
+\text{Shares outstanding} &= 59,000\\
+\text{Share price} &= \frac{\text{Firm value}}{\text{Shares outstanding}}\\
+  &= \frac{2,090,000}{59,000}\\
+  &= \$35.42
+\end{aligned}
+$$
+
+---
+
+## Dilution
+
+Teardrop, Inc., wishes to expand its facilities. The company currently has 7 million shares outstanding and no debt. The stock sells for \$65 per share, but the book value per share is \$20. Net income from Teardrop is currently \$11.5 million. The new facility will cost \$30 million, and it will increase net income by \$675,000. The par value of the stock is \$1 per share.
+
+a. Assuming a constant price-earnings ratio, what will the effect be of issuing new equity to finance the investment? To answer, calculate the new book value per share, the new total earnings, the new EPS, the new stock price, and the new market-to-book ratio. What is going on here?
+
+b. What would the new net income for Teardrop have to be for the stock price to remain unchanged?
+
+---
+
+* Shares outstanding: 7,000,000
+* Stock price: \$65
+* Book value: \$20
+* Net income: \$11,500,000
+* New facility cost: \$30,000,000
+* net income increase: \$675,000
+* Par value of stock: \$1 per share
+
+$$
+\begin{aligned}
+\text{Number of new shares} &= \frac{\$30,000,000}{\$65}\\
+  &= 461,538\ \text{shares}\\\\
+\text{New total number of shares outstanding} &= 7,461,538\ \text{shares}\\\\
+\text{New total earnings} &= \$11,500,000 + \$675,000\\
+  &= \$12,175,000\\\\
+\text{Current EPS} &= \frac{\text{current net income}}{\text{current shares}}\\
+  &= \frac{11,500,000}{7,000,000}\\
+  &= \$1.64\\\\
+\text{P/E ratio} &= \frac{\$65}{\$1.64}\\
+  &= 39.63\\\\
+\text{New EPS} &= \frac{12,175,000}{7,461,538}\\
+  &= \$1.63\\\\
+\text{New stock price} &= \text{New EPS} \times \text{P/E ratio}\\
+  &= \$1.63 \times 39.63\\
+  &= \$64.60\\\\
+\text{Current book value} &= \$20 \times 7,000,000\\
+  &= \$140,000,000\\\\
+\text{Book value of new shares} &= \$20 \times 461,538\\
+  &= \$9,230,760\\\\
+\text{Total new book value} &= \$140,000,000 + \$9,230,760\\
+  &= 149,230,760\\\\
+\text{New book value per share} &= \frac{149,230,760}{7,461,538}\\
+  &= \$20\\\\
+\text{current market-to-book ratio} &= \frac{65}{20}\\
+  &= 3.25\\\\
+\text{new market-to-book ratio} &= \frac{64.60}{20}\\
+  &= 3.23
+\end{aligned}
+$$
+
+### What is happening?
+
+The new facility is not adding enough value to the firm. Even though net income increases, the EPS decreases, and thus the stock price decreases. The market-to-book ratio decreases slightly. The project is diluting shareholder value.
+
+### What would the new net income have to be for the stock price to remain unchanged
+
+$$
+\begin{aligned}
+\text{New EPS} &= \frac{\text{Current stock price}}{\text{Current PE ratio}}\\
+  &= \frac{65}{39.56}\\
+  &= \$1.64\\\\
+\text{New total earnings} &= \text{New EPS} \times \text{Total shares}\\
+  &= \$1.64 \times 7,461,538\\
+  &= \$12,236,922\\\\
+\text{Net Income increase needed} &= \text{New total earnings} - \text{Current net income}\\
+  &= \$12,236,922 - \$11,500,000\\
+  &= \$736,922
+\end{aligned}
+$$
+
+---
+
+## Dilution
+
+In the previous problem, what would the ROE on the investment have to be if we wanted the price after the offering to be \$75 per share? (Assume the PE ratio remains constant.) What is the NPV of this investment? Does any dilution take place?
+
+---
+
+Given information from the previous problem:
+
+* Current shares outstanding: 7,000,000
+* Current stock price: \$65 per share
+* Current book value per share: \$20
+* Current net income: \$11,500,000
+* Net facility cost: \$30,000,000
+* Par value: \$1 per share
+* Shares issued: 461,538
+* Total shares after offering: 7,461,538
+* Current P/E ratio: 39.63
+
+$$
+\begin{aligned}
+\text{New EPS} &= \frac{\text{Desired stock price}}{\text{Current P/E ratio}}\\
+  &= \frac{75}{39.56}\\
+  &= \$1.90\\
+\text{New total earnings} &= \text{New EPS} \times \text{Total shares after offering}\\
+  &= \$1.90 \times 7,461,538\\
+  &= \$14,176,922\\
+\text{Net income increase} &= \text{New total earnings} - \text{Current net income}\\
+  &= \$14,176,922 - \$11,500,000\\
+  &= \$2,676,922\\
+\text{Required ROE} &= \frac{\text{increase in net income}}{\text{investment cost}}\\
+  &= \frac{\$2,676,922}{\$30,000,000}\\
+  &= .0892\\
+\text{NPV} &= \left(\frac{\text{increase in net income}}{\text{current EPS}} \right) \times
+    \text{Current stock price} - \text{investment cost}\\
+  &= \left(\frac{\$2,676,922}{\$1.64} \right) \times \$65 - \$30,000,000\\
+  &= \$76,097,518
+\end{aligned}
+$$
+
+Dilution does take place. Even though the stock price rises to 75, this is only possible if the ROE of the project is 8.92\%. This is a higher ROE than the current ROE of the company. The new share holders were able to buy shares at 65 dollars, which is less than the 75 dollar final price. This creates dilution for the original shares holders.
+
+---
+
+## Rights
+
+A company's stock currently sells for \$68 per share. Last week the firm issued rights to raise new equity. To purchase a new share, a stockholder must remit \$11 and three rights.
+
+a. What is the ex-rights stock price?
+b. What is the price of one right?
+c. When will the price drop occur? Why will it occur then?
+
+---
+
+* Stock price: \$68
+* To purchase a new share: \$11 and three rights.
+* Subscription price: \$11
+
+$$
+\begin{aligned}
+\text{ex-rights price} &= \frac{\text{number of rights} \times \text{stock price} + \text{subscription price}}
+  {\text{number of rights} + 1}\\
+  &= \frac{215}{4}\\
+  &= \$53.75
+\text{value of a right} &= 68 - 53.75\\
+  &= 14.75
+\end{aligned}
+$$
+
+The price drop will occur on the ex-rights date.
+
+---
+
+## Rights
+
+Summit Corp.'s stock is currently selling at \$32 per share. There are 1 million shares outstanding. The firm is planning to raise \$2 million to finance a new project. What are the ex-rights stock price, the value of a right, and the appropriate subscription prices under the following scenarios?
+
+a. Two shares of outstanding stock are entitled to purchase one additional share of the new issue.
+b. Four shares of outstanding stock are entitled to purchase one additional share of the new issue.
+c. How does the stockholders' wealth change from part (a) to part (b)?
+
+---
+
+* Stock price: \$32
+* Shares outstanding: 1,000,000
+* New money: \$2,000,000
+
+Find:
+
+* Ex-rights stock price
+* Value of a right
+* Subscription price
+
+a. Two shares can buy one new share
+
+$$
+\begin{aligned}
+\text{New shares} &= \frac{\text{old shares}}{rights}\\
+  &= \frac{1,000,000}{2}\\
+  &= 500,000\ \text{shares}
+\text{Subscription price} &= \frac{\text{Funds to raise}}{\text{number of shares}}\\
+  &= \frac{2,000,000}{500,000}\\
+  &= \$4.00\\
+\text{ex-rights price} &= \frac{2 \times \text{stock price} + 1 \times \text{subscription price}}{3}\\
+  &= \frac{\$68}{3} = \$22.67\\
+\text{value of a right} = \frac{\text{stock price} - \text{ex-rights price}}{3}\\
+  &= \frac{28}{3}\\
+  &= \$9.33
+\end{aligned}
+$$
+
+b. Four shares can buy one share
+
+$$
+\begin{aligned}
+\text{New shares} &= \frac{\text{old shares}}{rights}\\
+  &= \frac{1,000,000}{4}\\
+  &= 250,000\ \text{shares}
+\text{Subscription price} &= \frac{\text{Funds to raise}}{\text{number of shares}}\\
+  &= \frac{2,000,000}{250,000}\\
+  &= \$8.00\\
+\text{ex-rights price} &= \frac{4 \times \text{stock price} + 1 \times \text{subscription price}}{3}\\
+  &= \frac{\$128}{5} = \$25.60\\
+\text{value of a right} = \frac{\text{stock price} - \text{ex-rights price}}{3}\\
+  &= \frac{24}{5}\\
+  &= \$4.80
+\end{aligned}
+$$
+
+c. Change in shareholders' wealth
+
+If someone owns 4 shares, the new shares for each scenario will be worth:
+
+$$
+\begin{aligned}
+\text{Scenario A} &= 6 \times \$22.67\\
+  &= \$136\\
+\text{Scenario B} &= 5 \times \$27.20\\
+  &= \$136
+\end{aligned}
+$$
+
+---
+
+## Rights
+
+Hoobastink Mfg. is considering a rights offer. The company has determined that the ex-rights price will be \$61. The current price is \$68 per share, and there are 10 million shares outstanding. The rights offer would raise a total of \$60 million. What is the subscription price?
+
+---
+
+* Stock price ($P_o$): \$68
+* Ex-rights price ($P_e$): \$61
+* Shares outstanding ($N_o$): 10,000,000
+* Funds to raise ($F$): \$60,000,000
+* Value of a right ($P_r$): $P_o - P_e = \$7.00$
+
+$$
+\begin{aligned}
+P_r &= P_o - P_e\\
+  &= \$68 - \$61\\
+  &= \$7.00\\\\
+\text{New shares} &= N_n\\
+  &= \frac{F}{P_s}\\
+\text{The number of rights needed to buy a share}\\
+N_r &= \frac{N_o}{N_n}\\
+  &= \frac{P_s}{F} N_o\\\\
+P_r &= \frac{P_e - P_s}{N_r}\\
+P_e - P_s &= P_r N_r\\
+\text{substituting}\ N_r = (P_s/F)N_o\ \text{and refactoring for clarity}\\
+P_e - P_s &= P_s \left(\frac{P_r}{F}\right) N_o\\
+P_e &= P_s \left( 1 + \frac{P_r}{F} N_0\right)\\
+P_s &= P_e \times \left(1 + \frac{P_r}{F} N_o\right)^{-1}\\\\
+P_s &= 61 \times \left(1 + \frac{7.00}{60,000,000} 10,000,000 \right)^{-1}\\
+  &= \frac{61}{2.1667}\\
+  &\approx \$28.15
+\end{aligned}
+$$
+
+---
+
+## Value of a right
+
+Show that the value of a right can be written as:
+
+$$
+\text{Value of a right} = P_{RO} - P_X = (P_{RO} - P_S)/(N + 1)
+$$
+
+where $P_{RO}$, $P_S$, and $P_X$ stand for the "rights-on" price, the subscription price, and the ex-rights price, respectively, and $N$ is the number of rights needed to buy one new share at the subscription price.
+
+---
+
+$$
+\begin{aligned}
+P_r = P_{RO} - P_X &= \frac{P_X - P_S}{N}\\\\
+P_X &= \frac{N \cdot P_{RO} + P_S}{N + 1}\\
+\text{Subtract }\ P_X\ \text{from}\ P_{RO}\text{:}\\
+P_{RO} - P_X &= P_{RO} - \frac{N \cdot P_{RO} + P_S}{N + 1}\\
+\text{Use a common denominator:}\\
+P_{RO} - P_X &= \frac{(N + 1) \cdot P_{RO} - (N \cdot P_{RO} + P_S)}{N + 1}\\
+\text{Simplify numberator and you get:}\\
+P_{RO} - P_X &= \frac{P_{RO} - P_S}{N + 1}
+\end{aligned}
+$$
+
+This equation tells us that the value of one right is the difference between the pre-offering price and post-offering price, which is equal to the discount spread divided among all the rights needed to subscribe to one new share.
+
+---
+
+## Selling rights
+
+Wuttke Corp. want to raise \$5,375,000 via a rights offering. The company currently has 950,000 shares of common stock outstanding that sell for \$55 per share. Its underwriter has set a subscription price of \$30 per share and will charge Wuttke a 6 percent spread. If you currently own 6,000 shares of stock in the company and decide not to participate in the rights offering, how much money can you get by selling your rights?
+
+---
+
+* F: \$5,375,000
+* N_o: 950,000
+* P_o: \$55
+* P_s: \$30
+* Charge: .06
+* Own: 6,000 shares
+
+### Adjust for underwriter spread (net proceeds to firm)
+
+The net price per share that the company receives is:
+
+$$
+P_{net} = P_S \times (1 - spread) = 30 \times (1 - .06) = 30 \times .04 = 28.20
+$$
+
+Now, calculate the number of new shares to be issued:
+
+$$
+\text{New shares} = \frac{\text{Total net proceeds}}{P_{net}} = \frac{5,375,000}{28.20} \approx 190,426
+$$
+
+### Rights required per new share
+
+To determine how many rights are needed to buy 1 new share:
+
+$$
+\text{Rights} = \frac{\text{Existing shares}}{\text{New shares}} = \frac{950,000}{190,426} \approx 5
+$$
+
+5 rights buys 1 share.
+
+### Calculate the value of one right
+
+$$
+\text{Value of a right} = \frac{P_{RO} - P_S}{N + 1} = \frac{55 - 30}{5 + 1} \approx 4.17
+$$
+
+### Determine the value of your rights
+
+You own 6,000 shares so you receive 6,000 rights. You can sell those rights at \$4.17:
+
+$$
+\text{Total value} = 6,000 \times 4.17 \approx 25,020
+$$
+
+---
+
+## Valuing a right
+
+Mitsi Inventory Systems, Inc., has announced a rights offer. The company has announced that it will take four rights to buy a new share in the offering at a subscription price of \$30. At the close of business the day before the ex-rights day, the company's stock sells for \$60 per share. The next morning you notice that the stock sells for \$54 per share and the rights sell for \$5 each. Are the stock and/or the rights correctly priced on the ex-rights day? Describe a transaction in which you could use these prices to create an immediate profit.
+
+---
+
+* N_r: 4 rights to buy a new share
+* P_S: \$30
+* P_O: \$60
+* P_X: \$54 (possible but may be incorrect)
+* P_r: \$5 (possible but may be incorrect)
+
+$$
+\begin{aligned}
+\text{ex-rights price} &= \frac{\text{rights per share} \times \text{old price} + \text{subscription price}}
+  {\text{rights per share} + 1}\\
+  &= \frac{4 \times 60 + 30}{5}\\
+  &= \$54\\
+\text{The ex-rights price is right}\\\\
+\text{value of a right} &= \frac{\text{old price} - \text{subscription price}}{\text{rights per share} + 1}\\
+  &= \frac{60 - 30}{5}\\
+  &= \$6\\
+\text{The rights are selling for \$5.}
+\end{aligned}
+$$
+
+### Arbitrage opportunity
+
+1. Buy 4 rights at \$5 for a total cost of \$20.
+2. Use them to subscribe to 1 new share at \$30 which is a total cost of \$30 + \$20 = \$50.
+3. Sell the share at market price of \$54, which is a profit of \$4.
+
+---
