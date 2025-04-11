@@ -1,0 +1,827 @@
+---
+title: "Options and Corporate Finance"
+author: "Ross, Westerfield, Jaffe"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Summary and Conclusions
+A large fraction of America's equipment is leased rather than purchased. This
+chapter both described the institutional arrangements surrounding leases and
+showed how to evaluate leases financially.
+
+1. Leases can be separated into two polar types. Though operating leases allow
+   the lessee to use the euipment, ownership remains with the lessor. Although
+   the lessor in a financial lease legally owns the equipment, the lessee
+   maintains effective ownership because financial leases are fully amortized.
+
+2. When a firm purchases an asset with debt, both the asset and the liability
+   appear on the firm's balance sheet. If a lease meets at least one of a number
+   of criteria, it must be capitalized. This means that the present value of the
+   lease appears as both an asset and a liability. A lease escapes
+   capitalization if it does not meet any of these criteria. Leases not meeting
+   the criteria are called _operating leases_, though the accountant's
+   definition differs somewhat from the practitioner's definition. Operating
+   leases do not appear on the balance sheet. For cosmetic reasons, many firms
+   prefer that a lease be called _operating_.
+
+3. Firms generally lease for tax purposes. To protect its interest, the IRS
+   allows financial arrangements to be classified as leases only if a number of
+   criteria are met.
+
+4. We showed that risk-free cash flows should be discounted at the aftertax
+   risk-free rate. Because both lease payments and depreciation tax shields are
+   nearly riskless.
+
+5. Though this method is simple, it lacks certain intuitive appeal. We presented
+   an alternative method in the hopes of increasing the reader's intuition.
+   Relative to a lease, a purchase generates debt capacity. This increase in
+   debt capacity can be calculated by discounting the difference between the
+   cash flows of the purchase and the cash flows of the lease by the aftertax
+   interest rate. The increase in debt capacity from a purchase is compared to
+   the extra outflow at Year 0 from a purchase.
+
+6. If the lessor is in the same tax bracket as the lessee, the cash flows to the
+   lessor are exactly the opposite of the cash flows to the lessee. Thus, the
+   sum of the value of the lease to the lessee plus the value of the lease to
+   the lessor must be zero. Although this suggests that leases can never fly,
+   there are actually at least three good reasons for leasing:
+
+   a. Differences in tax brackets betweent he lessor and lessee.
+   b. Shift of risk bearing to the lessor.
+   c. Minimization of transaction costs.
+
+   We also document a number of bad reasons for leasing.
+
+# Concept Questions
+
+## Leasing vs. borrowing
+
+What are the key differences between leasing and borrowing? Are they perfect
+substitutes?
+
+---
+
+### Key differences between leasing and borrowing:
+
+* __Ownership:__ Lessee does not own the equipment. The borrower owns the asset.
+* __Balance Sheet:__ Leasing equipment may be off-balance sheet (operating
+  lease) or on it (finance lease). The borrower has both the asset and the loan
+  on the balance sheet.
+* __Upfront Cost:__ Leasing usually has a lower upfront cost (no down payment).
+  Borrowing may require a down payment.
+* __Maintenance:__ Usually handled by the lessor, but the responsiblity for
+  maintenance falls on the borrower/owner.
+* __Duration:__ Leasing is often short term. Borrowing is usually longer-term
+  financing.
+* __Tax treatment:__ Lease payments may be fully deductible as operating
+  expenses. For borrowing, deprecation and interest are separately deductible.
+* __Flexibility:__ More flexible---you can walk away at the end of a lease.
+  Borrowing is less flexible---you own the asset and must sell/dispose.
+* __Risk of obsolescence:__ Lessor bears more risk of obsolescence. Borrower
+  bears the risk of declining asset value.
+
+No, leasing and borrowing are not perfect substitutes. They differ in several
+areas.
+
+---
+
+## Leasing and taxes
+
+Taxes are an important consideration in the leasing decision. Which is more
+likely to lease: A profitable corporation in a high tax bracket or a less
+profitable one in a low tax bracket? Why?
+
+---
+
+A less profitable corporation in a low tax bracket is more likely to lease. Tax
+benefits from ownership---like deprecation deductions and interest expense
+deductions---are only valuable if the company is actually paying significant
+taxes.
+
+---
+
+## Leasing and IRR
+
+What are some of the potential problems with looking at IRRs when evaluating a
+leasing decision?
+
+---
+
+1. __IRR ignores the cost of capital:__ IRR tells you the return in isolation.
+   But in leasing, you're comparing cash flows to an alternative (like borrowing
+   and buying). What really matters is how the lease compars to your cost of
+   capital, not the absolute IRR of the lease.
+
+2. __Multiple IRRs:__ A leasing cash flow stream might have alternating signs
+   (e.g., upfront costs, residual value at the end). This can lead to multiple
+   IRRs, making interpretation confusing or meaningless.
+
+3. __Reinvestment rate assumption:__ IRR assumes that intermediate cash flows
+   are reinvested at the IRR itself, which may be unrealistic---especially for
+   leasing cash flows that may not be reinvested at the same rate.
+
+4. __Doesn't account for taxes clearly:__ Leasing decisions are very
+   tax-sensitive. IRR doesn't easily separate pre-tax vs. after-tax cash flows,
+   which can distort comparisons if taxes aren't modeled correctly.
+
+5. __IRR doesn't reflect scale:__ A high IRR on a small lease deal might look
+   attractive but deliver much less value than a lower IRR on a larger
+   transaction. Leasing is often a strategic financing choice, not just an
+   investment.
+
+IRR can mislead in leasing decisions due to multiple rates, tax complexity, and
+poor comparison to financing alternatives.
+
+### Alternatives:
+
+1. __NPV (Net present value):__ with after-tax cash flows and appropriate
+   discount rates.
+2. __Equivalent loan analysis:__ Comparing lease payments to debt financing
+3. __Lease-vs-buy analysis:__ side-by-side cash flow modeling
+
+---
+
+## Leasing
+
+Comment on the following remarks:
+
+a. Leasing reduces risk and can reduce a firm's cost of capital.
+b. Leasing provides 100 percent financing.
+c. If the tax advantages of leasing were eliminated, leasing would disappear.
+
+---
+
+### Leasing reduces risk and can reduce a firm's cost of capital
+
+This is partially true, but not always.
+
+Leasing can reduce risk. It provides flexibilty---especially with shorter-term
+or cancelable leases. It may shift obsolescence risk (e.g., with technology or
+equipment) to the lessor. It can also avoid large upfron costs and preserve cash
+for operations.
+
+However, it doesn't automatically lower cost of capital. Leasing is still a form
+of financing---and the lessor prices in their own required return. If the firm
+could borrow at a cheaper rate than the implied lease rate, leasing could be
+more expensive. Rating agencies and investors often treat leases as debt-like,
+especially capital/finance leases.
+
+### Leasing provides 100 percent financing
+
+This is mostly true.
+
+In many leases, especially operating leases, the lessee gets use of the asset
+without a down payment---effectively 100\% financing. It allows firms to avoid
+upfront cash outflows and preserve working capital.
+
+However, there might be initial fees, security deposits, or advance payments.
+For long-term leases, the present value of lease obligations is economically
+similar to taking on debt---so it's financing, just in a different wrapper.
+
+### If the tax advantages of leasing were eliminated, leasing would disappear
+
+Probably true.
+
+Tax benefits are a big driver (like depreciaction being used by the lessor and
+shared via lower payments), leasing also offers:
+
+* Flexibility---easier to return/upgrade assets
+* Convenience---simple than securing a loan
+* Risk transfer---obsolescence, maintenance
+* Off-balance-sheet financing---less so now, but strategically useful
+
+---
+
+## Accounting for leases
+
+Discuss the accounting criteria for determining whether a lease must be reported
+on the balance sheet. In each case give a rationale for the criterion.
+
+---
+
+Accounting treatment of leases has evolved significantly, especially with the
+adoption of ASC 842 (U.S. GAAP) and IFRS 16 internationally. These standards
+were created to increase transparency, since leases often represent significant
+liabilities.
+
+Under current U.S. GAAP (ASC 842), all leases longer than 12 months must be
+reported on the balance sheet. They're classified as either: (1) Operating
+lease, or (2) finance lease (formerly "capital lease"). For both, companies must
+recognize a right-of-use (ROU) asset and a lease liability.
+
+A lease is classified as a finance lease (similar to a purchase) if any one of
+these 5 criteria is met:
+
+1. __Transfer of ownership:__ The lease transfers ownership of the asset to the
+   lessee by the end of the lease term. The lessee essentially buys the asset,
+   so it should be treated as an acquisition.
+2. __Bargain purchase option:__ The lease contains a bargain purchase option---a
+   right to buy the asset at a price well below fair value. The lessee is very
+   likely to exercise the option, making it economically equivalent to a
+   purchase.
+3. __Lease term is a major part of economic life:__ The lease term covers a
+   major part (generally 75% or more) of the asset's useful life. The lessee
+   essentially uses up the asset, implying control over its economic value.
+4. __Present value of lease payments $\approx$ fair value:__ The present value
+   of lease payments amounts to substantially all (typically ~90\%) of the
+   asset's fair value. If you're paying nearly the full value of the asset, it's
+   like a financed purchase.
+5. __Specialized asset:__ The asset is so specialized that it has no alternative
+   use to the lessor at lease-end. Only the lessee can use it, implying they
+   have economic control.
+6. __Operating lease (also on balance sheet):__ Doesn't meet any of the 5
+   finance lease criteria. Still recognized as a right-of-use asset and lease
+   liability, but expense is recorded straight-line over the lease term (rather
+   than as amortization + interest).
+7. __Rationale for on-balance-sheet recognition (ASC 842 & IFRS 16):__ Old rules
+   let many leases by off-balance sheet, which masked financial obligations. New
+   standards require lessees to show all significant leases to improve
+   transparency for investors and creditors.
+
+---
+
+## IRS criteria
+
+Discuss the IRS criteria for determining whether a lease is tax deductible. In
+each case give a rationale for the criterion.
+
+---
+
+The IRS criteria for determining whether a lease is tax-deductible focus on
+ensuring that the lease is a true rental arrangement, rather than a disguised
+purchase of financing deal. These guidelines help determine whether lease
+payments can be fully deducted as an operating expense or if the transaction
+must be treated as a capital lease for tax purposes.
+
+### No transfer of ownership
+
+The lease must not automatically transfer ownership of the asset to the lessee
+at the end of the lease term.
+
+If ownership transfers, it's essentially a sale, and the asset must be
+capitalized and depreciated. In a true lease, the lessee only pays for the right
+to use the asset, not to own it.
+
+### No bargain purchase option
+
+The lease should not offer a bargain purchase option, meaning the lessee
+shouldn't be able to buy the asset at the end for significantly less than fair
+market value.
+
+A bargain option signals that the lessee is effectively buying the asset, with
+lease payments acting like installment payments toward ownership.
+
+### Lease term must not be too long
+
+The lease term should not cover the majority of the asset's useful life (often
+interpreted as less than 75\%).
+
+If the lessee uses the asset for nearly all its useful life, they've gained the
+primary economic value, just like an owner would.
+
+### Present value of lease payments must not approximate asset's value
+
+The present value of lease payments should not be substantially equal to the
+asset's fair market value (often interpreted as less than 90%).
+
+If the lessee is paying almost the entire value of the asset over time, it's
+financially equivalent to buying the asset.
+
+### No creation of equity or ownership benefits
+
+The lease must not give the lessee any ownership-like benefits, such as profits
+from resale or value appreciation.
+
+Leasing is about using the asset, not profiting from ownership. Ownershiplike
+benefits blur the line between lease and purchase.
+
+### Lessor must bear meaningful ownership risk
+
+The lessor must retain significant risk of ownership (e.g., risk of
+obsolescence, residual value changes, or major repairs).
+
+If the lessee assumes all the risks, they're acting as an owner, and the IRS may
+treat the arrangement as a financing agreement rather than a true lease.
+
+### Fair market value for renewals or extensions
+
+Any renewal or extension option must be at fair market rent, not a discoutned or
+"bargain" rate.
+
+Bargain renewal  terms give the lessee continued control at reduced cost,
+implying ownership-like control.
+
+---
+
+## Off-balance sheet financing
+
+What is meant by the term _off-balance sheet financing_? When do leases provide
+such financing, and what are the accounting and economic consequences of such
+activity?
+
+---
+
+Off-balance sheet financing refers to any method a company uses to acquire
+assets or fund operations without reporting the associated liabilities or assets
+directly on its balance sheet. The goal is often to make the company appear less
+leveraged (i.e., less in debt) and financially healthier than it actually
+is---at least from a superficial view.
+
+Off-balance sheet financing examples are: operating leases (under old accounting
+rules), joint ventures, partnerships, and special purpose entities (SPEs). The
+costs and risks are real, but don't show up in the traditional balance sheet
+presentation.
+
+Historically, operating leases (under older accounting standards like ASC 840 in
+the U.S.) allowed companies to: use an asset (like a building or equipment), pay
+periodic lease payments, and avoid recording the asset and corresponding
+liability on the balance sheet.
+
+From an economic standpoint, whether a company buys or leases an asset
+long-term, it still controls the asset, bears most of the economic benefits and
+risks, and has an obligation to make payments.
+
+To increase transparency, accounting standards like ASC 842 (U.S. GAAP) and IFRS
+16 (international) now require most leases (including operating leases longer
+than 12 months) to be recorded on the balance sheet, with a right-of-use asset,
+and a lease liability.
+
+---
+
+## Sale and leaseback
+
+Why might a firm choose to engage in a sale and leaseback transaction? Give two
+reasons.
+
+---
+
+A firm might choose to engage in a sale and lease back transaction for a couple
+of strategic and financial reasons.
+
+### To free up cash and improve liquidity
+
+In a sale and leaseback, the company sells an owned asset (like real estate,
+equipment, etc...) to another party and immediately leases it back to continue
+using it.
+
+The sale generates an immediate cash inflow, which the firm can use to: pay down
+debt, invest in new projects, and fund working capital. This can improve the
+company's liquidity and flexibility without disrupting operations.
+
+### To improve financial ratios and offload ownership risks
+
+Even though modern accounting standards now put most leases on the balance
+sheet, sale and leaseback can still: reduce asset intensity (by removing the
+asset from the books), potentially improve return on assets (ROA) and asset
+turnover, and shift the risks of ownership (like maintenance, obsolescence, or
+value decline) to the new owner/lessor.
+
+---
+
+## Leasing cost
+
+Explain why the after tax borrowing rate is the appropriate discount rate to use
+in lease evaluation.
+
+---
+
+The after-tax borrowing rate is the appropriate discount rate to use in lease
+evaluation because it accurately reflects the true cost of financing for the
+firm after considering the tax implications.
+
+### Leasing and borrowing are financing alternatives
+
+When a firm leases an asset, it's essentially choosing not to borrow money to
+buy the asset. So, the lease must be compared to the cost of using debt
+financing, which is the firm's borrowing rate.
+
+### Interest on debt is tax-deductible
+
+Jus like lease payments may be partially or fully tax-deductible, interest on
+debt is typically tax-deductible. To make an apples-to-apples comparison, we
+must adjust the borrowing rate for taxes:
+
+$$
+\text{After-tax borrowing rate} = \text{Pre-tax rate}
+  \times (1 - \text{Tax rate})
+$$
+
+This reflects the true economic cost of borrowing funds when taxes are
+considered.
+
+### Lease cash flows are evaluated after taxes
+
+When evaluating a lease, the cash flows (like lease payments and tax shields)
+are considered on an after-tax basis. Therefore, to discount these after-tax
+cash flows appropriately, we need to use an after-tax discount rate---i.e., the
+after-tax borrowing rate.
+
+---
+
+Refer to the following example for the next three questions. In May 2011, Air
+Lease COrporation (ALC) announced that it had signed lease agreements for 29
+aircraft with Asia-region airlines. The customers included China Eastern, China
+Southern, Air China, Asiana, Garuda, MIAT Mongolian, and Orient Thai Airlines.
+In the largest lease agreement, China Eastern Airlines and ALC entered into
+long-term lease agreements for 10 new Airbus A320-200s and five new Boeing
+B737-800s, with delivery scheduled in 2012 and 2013.
+
+## Leasing vs. purchase
+
+Why wouldn't China Eastern Airlines purchase the planes if they were obviously
+needed for the company's operations?
+
+---
+
+### Preserve capital / liquidity
+
+Aircraft are expensive---each one can cost tens of millions of dollars. By
+leasing, China Eastern avoids large upfront capital outlays, freeing cash for
+other investments or working capital needs.
+
+### Fleet flexibility
+
+Leasing offers flexibility to return, upgrade, or change aircraft as market
+demands shift. This is especially important in an industry affected by fuel
+prices, regulation, and shifting demand.
+
+### Reduce balance sheet debt
+
+Buying planes would increase debt and leverage ratios, possibly hurting credit
+ratings. Leasing can improve financial ratios and keep liabilities lower,
+depending on accounting treatment.
+
+### Tax or regulatory considerations
+
+Some leases offer tax benefits or avoid regulatory complexities tied to
+international aircraft ownership.
+
+---
+
+## Reasons to lease
+
+Why would ALC be willing to buy planes from Boeing and Airbus and then lease the
+planes to China Eastern Airlines? How is this different from just lending money
+to China Eastern Airlines to buy the planes?
+
+---
+
+ALC acts as a specialized financial intermediary---think of it as the real
+estate landlord of aviation.
+
+### Earn steady cash flow
+
+ALC receives long-term, predictable lease payments from airlines---a stable
+income stream.
+
+### Specialized asset management
+
+ALC has deep expertise in aircraft valuation, maintenance, and resale. It can
+re-market planes across different regions and carriers, reducing downtime and
+risk.
+
+### Control the asset
+
+Unlike a simple loan, ALC owns the aircraft. This gives ALC security---if China
+Eastern defaults, ALC can reclaim and re-lease or sell the plane.
+
+---
+
+## Leasing
+
+What do you suppose happens to the plane at the end of the lease period?
+
+---
+
+### Return the aircraft
+
+The plane goes back to ALC, who may re-lease it to another airline or sell it on
+the secondary market.
+
+### Lease renewal / extension
+
+China Eastern might extend the lease if the plane still fits their needs.
+
+### Purchase option
+
+Some leases offer a purchase option at the end for fair market value or a
+preagreed price.
+
+---
+
+# Questions and problems
+
+Use the following information to work the following 6 problems. You work for a
+nuclear research laboratory that is contemplating leasing a diagnostic scanner
+(leasing is a common practice with expensive, high-tech equipment). The scanner
+costs \$5,200,000, and it would be depreciated straight-line to zero over four
+years. Because of radiation contamination, it will actually be completely
+valueless in four years. You can lease it for \$1,525,000 per year for four
+years.
+
+## Lease or buy
+
+Assume that the tax rate is 35 percent. You can borrow at 8 percent before
+taxes. Should you lease or buy?
+
+---
+
+* Cost of scnner: \$5,200,000
+* Lease payment: \$1,525,000 per year for 4 years
+* Depreciation: straight-line to 0 over 4  years \$1,300,000 per year
+* Tax rate: .35
+* Pre-tax borrowing rate: .08
+* After-tax borrowing rate: $.08 \times (1 - .35) = .052$
+
+### Calculate the net cost of leasing
+
+$$
+\begin{aligned}
+\text{After-tax lease payment} &= 1,525,000 \times (1 - .35) = 991,250
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{PV of lease} &= 991,250
+  \times \left(\frac{1 - (1 + 0.052)^{-4}}{0.052}\right)\\
+  \approx 991,250 \times 3.54595\\
+  \approx 3,516,253
+\end{aligned}
+$$
+
+### Calculate the net cost of buying
+
+We assume the scanner is bought outright, financed at 8\%, and the value
+depreciates to zero in 4 years.
+
+$$
+\begin{aligned}
+\text{Annual depreciation} &= \frac{5,200,000}{4}\\
+  &= 1,300,000\\\\
+\text{Annual tax shield} &= 1,300,000 \times 0.35\\
+  &= 455,000
+\end{aligned}
+$$
+
+Discount the tax shields at the after-tax borrowing rate (5.2\%):
+
+$$
+\begin{aligned}
+\text{PV of tax shields} &= 455,000 \times 3.54595\\
+  &\approx 1,614,110
+\end{aligned}
+$$
+
+Since the full \$5.2 million is paid upfront (or equivalently borrowed), the PV
+of outflow = \$5,200,000. Subtract the PV of the tax shield.
+
+$$
+\begin{aligned}
+\text{Net cost of buying} &= 5,200,000 - 1,614,110\\
+  &= 3,585,890
+\end{aligned}
+$$
+
+* Lease: \$3,516,253
+* Buy: \$3,585,890
+
+Conclusion: Leasing is slightly cheaper by \$69,637 in present value terms. So,
+you should lease the diagnostic scanner.
+
+---
+
+## Leasing cash flows
+
+What are the cash flows from the lease from the lessor's viewpoint? Assume a 35
+percent tax bracket.
+
+---
+
+* Lease payment: \$1,525,000 per year for 4 years
+* Cost of scanner: \$5,200,000 lessor buys it
+* Depreciation method: Straight-line to zero over 4 years
+* Depreciation per year: \$1,300,000
+* Tax rate: .35
+* After tax borrow rate: 0.05
+
+### Calculate annual taxable income for the lessor
+
+Each year, the lessor recieves lease income of \$1,525,000 but also gets a tax
+deduction for depreciation of \$1,300,000.
+
+$$
+\begin{aligned}
+\text{Taxable income} &= \text{Lease payment} - \text{Depreciation}\\
+  &= 1,525,000 - 1,300,000\\
+  &= 225,000\\\\
+\text{taxes paid} &= 225,000 \times 0.35\\
+  &= 78,750
+\end{aligned}
+$$
+
+### Calculate after-tax cash flow per year
+
+The cash inflow is the full lease payment. The tax outflow is based on taxable
+income:
+
+$$
+\begin{aligned}
+\text{After-tax lease cash flow} &= \text{Lease payment} - \text{Taxes}\\
+  &= 1,525,000 - 78,750\\
+  &= 1,446,250
+\end{aligned}
+$$
+
+### NPV of cash flow stream
+
+$$
+\begin{aligned}
+\text{Cash flow stream} &= (-5,200,000 + 1,446,250 + 1,446,250 + 1,446,250 + 1,446,250)\\
+\text{NPV} &= -5,200,000 + 1,446,250 \times \frac{1 - (1 + .05)^{-4}}{.05}\\
+  &= -71,669
+\end{aligned}
+$$
+
+Book: -\$95,405.20
+
+---
+
+## Finding the break-even payment
+
+What would the lease payment have to be for both the lessor and the lessee to be
+indifferent about the lease?
+
+---
+
+Given:
+
+* Asset cost: \$5,200,000
+* Depreciation: \$1,300,000 per year
+* Tax rate: .35
+* Lessor discount rate: .052 (same as lessee's after-tax borrowing rate)
+* Asset has zero residual value after 4 years
+
+The after-tax cost of owning:
+
+$$
+\begin{aligned}
+\text{Net cost of buying} &= 5,200,000 - \text{PV of tax shields}\\
+  &= 5,200,000 - 1,614,110\\
+  &= 3,585,890
+\end{aligned}
+$$
+
+So the present value of after-tax lease payments must equal this:
+
+$$
+L \times \text{PVIFA}_{5.2\%,4} = 3,585,890
+$$
+
+Where:
+
+$$
+\text{PVIFA}_{5.2\%,4} = \frac{1 - (1 + .052)^{-4}}{.052} \approx 3.54595
+$$
+
+Solving for L:
+
+$$
+\begin{aligned}
+L = \frac{3,585,890}{3.54595} \approx 1,010,677
+\end{aligned}
+$$
+
+To get the pre-tax lease payment, divide by (1 - tax rate):
+
+$$
+\text{Lease payment} = \frac{1,010,677}{1 - 0.35} \approx 1,555,657
+$$
+
+From the lessor's point of view:
+
+* Each year, revenue = \$1,555,657
+* Depreciation = \$1,300,000 $\leftarrow$ Taxable income = \$255,657
+* Taxes = 35\% \times \$255,657 = \$89,480
+* After-tax cash flow = \$1,555,657 - \$89,480 = \$1,466,177
+
+$$
+\begin{aligned}
+\text{PV} = 1,466,177 \times 3.54595 \approx 5,200,000
+\end{aligned}
+$$
+
+so NPV = 0.
+
+Final answer: \$1,555,657
+
+---
+
+## Taxes and leasing cash flows
+
+Assume that your company does not contemplate paying taxes for the next several
+years. What are the cash flows from leasing in this case?
+
+---
+
+If your company does not expect to pay taxes in the near future, then some key
+tax-related benefits of ownership vanish. This has a big impact on the cash
+flows from leasing, and it changes the leas-versus-buy decision.
+
+### What changes when you're not paying taxes?
+
+1. No tax shield on depreciation
+2. No tax shield on lease payments
+3. Your cash flows become purely pre-tax for both lease and buy decisions
+
+Therefore the cash outflows are just the lease payments.
+
+$$
+\begin{aligned}
+\text{Cash outflows} &= (-L, -L, -L, -L)\\
+  &= -\$1,525,000 \times (1 - (1.08)^{-4}/.08\\
+  &= -\$5,050,993
+\end{aligned}
+$$
+
+If you bought then you pay a one time \$5,200,000 upfront. Therefore, it would
+be good to lease.
+
+---
+
+## Setting the lease payment
+
+In the previous question, over what range of lease payments will the lease be
+profitable for both parties?
+
+---
+
+We are looking for the range of lease payments that:
+
+* Make the lessee better off leasing than buying (i.e., lessee's NPV > 0), and
+* Make the lessor bettor off leasing than not leasing (i.e., lessor's NPV > 0).
+
+The break-even lease payment for both is \$1,555,657.
+
+This is the exact lease payment that makes both indiffereint---the present value
+of lease cash flows equals the cost of buying (after adjusting for taxes and
+depreciation).
+
+### For the lessee
+
+The lessee prefers leasing when the present value of lease payments is less than
+the present value of buying, which we previously found was:
+
+$$
+\text{After-tax cost of owning} = \$3,585,890
+$$
+
+So, for the lessee, we solve:
+
+$$
+L_{\text{after-tax} < \frac{3,585,890}{3,54595} \approx 1,010,677
+$$
+
+COnverting to pre-tax lease payments:
+
+$$
+L < \frac{1,010,677}{0.65} = \$1,555,657
+$$
+
+So lesse wants lease payments to be below \$1,555,657
+
+### For the lessor
+
+The lessor prefers leasing when the present value of after-tax cash flows from
+leasing is greater than \$5.2 million (initial investment):
+
+We already saw that with:
+
+* Pre-tax lease payment = \$1,555,657, the lessor breaks even (NPV = 0)
+
+Therefore, the lessor only benefits when:
+
+$$
+L > \$1,555,657
+$$
+
+### Final answer
+
+There's no overlap in lease payment ranges where both parties strictly
+profit---the break-even lease payment is:
+
+$$
+L = \$1,555,657
+$$
+
+This means the only lease payment where both parties are indifferent (NPV = 0)
+is exactly \$1,555,657.
+
+---
