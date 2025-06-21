@@ -1,6 +1,10 @@
+# Growth of a vector
+## v <- c(4, 3, 2, 1)
+gv <- function(v) rev(diff(rev(v))/rev(v[-1]))
+
 # Short-Term Solvency, or Liquidity Ratios
 
-current.ratio <- fucntion(assets, liabilities) { assets / liabilities }
+current.ratio <- function(assets, liabilities) { assets / liabilities }
 
 quick.ratio <- function(assets, inventory, liabilities) {
   return((assets - inventory) / liabilities)
@@ -69,7 +73,7 @@ return.on.assets <- function(net.income, assets) {
   net.income / assets
 }
 
-return.on.equity <- funciton(net.income, equity) {
+return.on.equity <- function(net.income, equity) {
   net.income / equity
 }
 

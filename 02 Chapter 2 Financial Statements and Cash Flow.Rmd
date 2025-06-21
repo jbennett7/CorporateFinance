@@ -1,13 +1,21 @@
 ---
 title: "Financial Statements and Cash Flow"
 author: "Ross, Westerfield, Jaffe"
-#date: "`r format(Sys.time(), '%d %b %Y')`"
+header-includes:
+  - \usepackage{booktabs}
 output: 
   pdf_document:
    latex_engine: xelatex
-#  number_sections: true
    toc: true 
 ---
+
+```{r setup, include=FALSE}
+require(kableExtra)
+require(dplyr)
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 999)
+pretty <- function(x) format(x, big.mark=",")
+```
 
 # Chapter introduction
 
@@ -30,7 +38,7 @@ substance known as cash flow.
 
 # List of topics
 
-1. Financial statements and cash flow
+1. The balance sheet
 
    * Liquidity
    * Debt versus equity
@@ -110,7 +118,7 @@ _Fixed assets_ are the least liquid kind of assets.
 ### Debt versus equity
 
 _Liabilities_ are obligations of the firm that require a payout of cash within a
-stipulated period. Liabilities are debts and are frequently associated witn
+stipulated period. Liabilities are debts and are frequently associated with
 nominally fixed cash burdens, called _debt service_, that put the firm in
 default of a contract if they are not paid. _Stockholders' equity_ is a claim
 against the firm's assets that is residual and not fixed. In general terms, when
@@ -163,7 +171,7 @@ Income statement sections:
    principal operations. Earnings before interest and taxes (EBIT) is very
    important. It summarizes earnings before taxes and financing costs.
 2. The nonoperating section of the income statement includes all financing
-   acosts, such as interest expense.
+   costs, such as interest expense.
 3. Taxes levied on income.
 4. The last section of the income statement is the bottom line the __net
    income__. Net income is frequently expressed per share of common stock---that
@@ -179,7 +187,7 @@ Income statement sections:
 
 * The matching principle of GAAP dictates that revenues be matched with
   expenses. Thus, income is reported when it is earned, or accrued, even though
-  nocash flow has necessarily occurred.
+  no cash flow has necessarily occurred.
 
 ### Noncash items
 
@@ -191,11 +199,11 @@ There are several noncash items that appear on the income statement.
 * __Deferred taxes__ result from differences between accounting income and true
   taxable income (such as when accounting income uses accelerated depreciation
   expense procedures for tax purposes, but use straight-line depreciation for
-  reporting purposes). The current tax is what is taxes paied. Deferred taxes is
-  not. However, in theory, if taxable income is less than accounting income in
-  the current year, it will be more than accounting income later on. Therefore,
-  the taxes will have to be paid later on. The balance sheet will show deferred
-  taxes as a liability.
+  reporting purposes). The current tax portion is the actual tax paid. Deferred
+  taxes is not. However, in theory, if taxable income is less than accounting
+  income in the current year, it will be more than accounting income later on.
+  Therefore, the taxes will have to be paid later on. The balance sheet will
+  show deferred taxes as a liability.
 
 ### Time and costs
 
@@ -216,13 +224,13 @@ There are several noncash items that appear on the income statement.
 * __Product costs__ are the total production costs incurred during a
   period---raw materials, direct labor, and manufacturing overhead---and are
   reported on the income statement as costs of goods sold. Both variable and
-  fixed costs are reproted in product costs.
+  fixed costs are reported in product costs.
 
-* __Period costs__ are costs are costs that are allocated to a time period; they
+* __Period costs__ are costs that are allocated to a time period; they
   are called _selling_, _general_, and _administrative expenses_. An example of
   a period cost is the company president's salary.
 
-### Taxes
+## Taxes
 
 Taxes can be one of the largest cash outflows a firm experiences. Taxes can be
 viewed through two lenses: The average tax rate and the marginal tax rate. The
@@ -237,25 +245,21 @@ The marginal tax rate is the tax rate on the next dollar earned.
 
 The following table is an example of a corporate tax schedule:
 
-
-```{r table 2.3: corporate tax rate, echo=F}
-income <- c("&nbsp;18,333,335+          ", "15,000,001-18,333,333", "10,000,001-15,000,000",
-            "    335,001-10,000,000", "    100,001-   335,000",
-            "     75,001-   100,000", "     50,001-    75,000",
-            "$         0-    50,000")
-rate <- c("15%", "25 ", "34 ", "39 ", "34 ", "35 ", "38 ", "35 ")
-
-df <- data.frame(rev(income), rate)
-colnames(df) <- c("Taxable Income", "Tax Rate")
-knitr::kable(df,
-             align=c("r", "c"),
-             caption="Corporate tax rates \\label{table:taxrates}")
+\label{table:taxrates}
+```{r corporate tax table, echo=F}
+corporate.tax.rate.table <- data.frame(
+  c(0, 50001, 75001, 100001, 335001, 10000001, 15000001, 18333334),
+  c(50000, 75000, 100000, 335000, 10000000, 15000000, 18333333, Inf),
+  c(.15, .25, .34, .39, .34, .35, .38, .35)
+)
+colnames(corporate.tax.rate.table) <- c("Lower", "Upper", "Tax.Rate")
+knitr::kable(pretty(corporate.tax.rate.table), booktabs=T)
 ```
 
 An example analysis of taxes can be found in
 [__Deep in the heart of taxes__](#deep-in-the-heart-of-taxes)
 
-### Net working capital
+## Net working capital
 
 __NOTE:__ The change in net working capital is usually positive in a growing
 firm.
@@ -272,14 +276,14 @@ $$
   paid out.
 
 * In addition to investing in fixed assets (i.e., capital spending), a firm can
-  invest in net working capital. This is called the __cahnge in net working
+  invest in net working capital. This is called the __change in net working
   capital__. The change in net working capital is usually positive in a growing
   firm.
 
 ## Financial cash flow
 
 * The most important item that can be extracted from financial statements is the
-  actual cash flow fo the firm.
+  actual cash flow of the firm.
 
 * The _statement of cash flows_ is an accounting statement that helps explain
   the change in accounting cash and equivalents.
@@ -299,7 +303,13 @@ $$
   $\text{CF}(S)$.
 
 $$
-\text{CF}(A) \equiv \text{CF}(B) + \text{CF}(S)
+\begin{aligned}
+\text{CF}(A) &\equiv \text{CF}(B) + \text{CF}(S)\\\\
+\text{CF}(A) &= \text{Operating cash flow} - \text{Capital spending}
+  - \text{Increase in net working capital}\\
+\text{CF}(B) &= \text{Interest} + \text{Debt retirement} - \text{New debt}\\
+\text{CF}(S) &= \text{Dividends} + \text{Equity repurchase} - \text{New equity}
+\end{aligned}
 $$
 
 ### Cash flow from operations
@@ -309,7 +319,11 @@ $$
   payments, but not financing, capital spending, or changes in net working
   capital.
 
-```{r operating cash flow, echo=F}
+$$
+\text{Operating cash flow} = \text{EBIT} + \text{Depreciation} - \text{Taxes}
+$$
+
+```{r calculating operating cash flow, echo=F}
 m <- c(219, 90, -71)
 df <- data.frame(c(m, sum(m)))
 colnames(df) <- c("$ in millions")
@@ -322,7 +336,12 @@ knitr::kable(df, caption="Operating cash flow")
 
 * Changes in fixed assets are the result of capital spending
 
-```{r changes in fixed assets, echo=F}
+$$
+\text{Capital spending} = \text{Acquisition of fixed assets}
+  - \text{Sale of fixed assets}
+$$
+
+```{r calculating changes in fixed assets, echo=F}
 m <- c(198, -25)
 df <- data.frame(c(m, sum(m)))
 colnames(df) <- c("$ in millions")
@@ -336,14 +355,23 @@ knitr::kable(df, caption="Capital spending")
 
 $$
 \text{Capital spending} = \text{Ending net fixed assets}
- - \text{Beginning net fixed assets}
+ - \text{Beginning net fixed assets} + \text{Depreciation}
 $$
 
 * Cash flows are also used to make investments in net working capital.
 
+```{r calculating additions to net working capital, echo=F}
+m <- c(23)
+df <- data.frame(m)
+rownames(df) <- c("Additions to net working capital")
+knitr::kable(df,
+             caption="Additions to net woring capital",
+             col.names=c("$ in millions"))
+```
+
 * Total cash flows generated by the firm's assets are then equal to:
 
-```{r total cash flow of the firm, echo=F}
+```{r calculating total cash flow of the firm, echo=F}
 m <- c(238, -173, -23)
 df <- data.frame(c(m, sum(m)))
 colnames(df) <- c("$ in millions")
@@ -361,7 +389,7 @@ knitr::kable(df, caption="Cash flow of the firm")
   service is interest payments plus repayments of principal (that is, retirement
   of debt). An important source of cash flow is the sale of new debt.
 
-```{r cash flow paid to creditors, echo=F}
+```{r calculating cash flow paid to creditors, echo=F}
 m <- c(49, 73)
 m.1 <- c(m, sum(m))
 m.2 <- c(m.1, -86)
@@ -385,7 +413,7 @@ $$
 * Cash flow of the firm is also paid to the stockholders in the form of
   dividends and stock repurchases.
 
-```{r cash flow paid to stockholders, echo=F}
+```{r calculating cash flow paid to stockholders, echo=F}
 m <- c(43, 6)
 m.1 <- c(m, sum(m))
 m.2 <- c(m.1, -43)
@@ -450,7 +478,7 @@ liabilities (other than cash and notes payable). The result is cash flow from
 operating activities. Notes payable will be included in the financing activities
 section.
 
-```{r cash flow from operating activities, echo=F}
+```{r calculating cash flow from operating activities, echo=F}
 net.income <- c(86, 90, 13)
 changes.in.assets.and.liabilities <- c(-24, 11, 16, 18, -8)
 cash.flow.from.operating.activities <- sum(net.income,
@@ -477,7 +505,6 @@ rownames(cffoa.df) <- c("Cash flow from operating activities")
 knitr::kable(ni.df, caption="Net Income")
 knitr::kable(ciaal.df, caption="Change in assets and liabilities")
 knitr::kable(cffoa.df, caption="Cash Flow from Operating Acitivites")
-
 ```
 
 ## Cash flow from investing activities
@@ -486,7 +513,7 @@ Cash flow from investing activities involves changes in capital assets:
 acquisition of fixed assets and sales fo fixed assets (i.e., net capital
 expenditures).
 
-```{r cash flow from investing activities, echo=F}
+```{r calculating cash flow from investing activities, echo=F}
 m <- c(-198, 25)
 cffia.df <- data.frame(c(m, sum(m)))
 colnames(cffia.df) <- "$ in millions"
@@ -498,7 +525,7 @@ knitr::kable(df, caption="Cash Flow from Investing Activities")
 
 ## Cash flow from financing activities
 
-```{r cash flow from financing activities, echo=F}
+```{r calculating cash flow from financing activities, echo=F}
 m <- c(-73, 86, -3, -43, -6, 43)
 cfffa.df <- data.frame(c(m, sum(m)))
 colnames(cfffa.df) <- "$ in millions"
@@ -564,7 +591,7 @@ important precisely because book vlaues can be so different from market values.
 Algeron, Inc., has a taxable income of \$85,00. What is its tax bill? What is
 its average tax rate? Its marginal tax rate?
 
-From Table \ref{table:taxrates}, we see taht the tax rate appled to the first \$50,000
+From the [Tax Rate Table](#table:taxrates), we see taht the tax rate appled to the first \$50,000
 is 15 percent; the rate applied to the next \$25,000 is 25 percent; and the rate
 applied after that up to \$100,000 is 34 percent. So Algernon must pay
 $.15 \times \$50,000 + .25 \times 25,000 + .34 \times (85,000 - 75,000)$
@@ -594,76 +621,58 @@ of a typical company.
 
 # Concepts questions
 
-## Liquidity
+## 1. Liquidity
 
 True or false: All assets are liquid at some price. Explain.
 
 ---
 
-__True__. All assets are liquid at some price. However, the degree of liquidity
-and the ability to sell an asset varies. Assets are usually classified based on
-its liquidity. _Highly liquid assets_ are assets that can be converted to cash
-very quickly and with minimal loss to value. _Less liquid assets_ cannot be
-easily converted to cash without significant loss to value.
+__False__. Some assets cannot be sold. For example, some intangible assets, such
+as goodwill, are not liquid.
+
+Page 21
 
 ---
 
-## Accounting and cash flows
+## 2. Accounting and cash flows
 
 Why might the revenue and cost figures shown on a standard income statement not
 represent the actual cash inflows and outflows that occurred during a period?
 
 ---
 
-There are several reasons why a standard income statement does not represent the
-actual inflows and outflows that occur during the accounting period.
+The revenue and cost figures shown on a standard income statement may not
+represent the actual cash inflows and outflows that occurred during a period for
+a company because the income statement is prepared using the accrual accounting
+system. Accrual accounting records revenues when they are earned and expenses
+when they are incurred, regardless of when cash changes hands.
 
-### Accrual accounting---U.S. GAAP accounting
-
-Income statements are typically prepared using the _accrual basis of
-accounting_, which recognizes revenue when it is earned and expenses when they
-are incurred, regardless of when cash is actually received or paid.
-
-### Non-cash expenses
-
-Income statements include non-cash expenses such as _deprecation_, _deferred
-taxes_ and _amortization_. These items reduce reported profits but do not
-include any cash outflows.
-
-### Financing activities excluded
-
-Cash flows related to financing activities, such as borrowing money, issuing
-stock, or repaying debt, do not appear on the income statement but do impact
-actual cash flow.
-
-### Capital expenditures omitted
-
-The purchase of long-term assets, called _capital expenditures_, represents
-significant cash outflows but is not recorded as an expense on the income
-statement. Instead, the cost is allocated over time through depreciation.
-
-### Changes in working capital
-
-Changes in current assets and liabilities, such as accounts receivable, accounts
-payable, and inventory, affect cash flows but are not directly captured on the
-income statement.
-
-### Summary
-
-The income statement provides a measure of profitability based on accounting
-principles, but actual cash inflows and outflows are better captured in the
-_cash flow statement_, which reconciles net income with cash changes by
-adjusting for non-cash items, timing differences, and financing/capital
-activities.
+page 24
 
 ---
 
-## Accounting Statement of Cash Flows
+## 3. Accounting statement of cash flows
 
 Looking at the accounting statement of cash flows, what does the bottom line
 number mean? How useful is this number for analyzing a company?
 
 ---
+
+The bottom line number on the accounting statement of cash flows is the _Change
+in cash_. This represents the net change, on the balance sheet, of accounting
+cash from the previous period. This is a very useful number in understanding
+financial cash flow because they show the differences between the three
+components of the statement of cash flows:
+
+* cash flow from operating activities
+* cash flow from investing activities
+* cash flow from financing activities
+
+Pages 26 - 34
+
+--- 
+
+From ChatGPT
 
 The _bottom line number_ on the accounting statement of cash flows represents
 the _net change in cash_ during the reporting period. It is the difference
@@ -715,14 +724,14 @@ sustainability.
 
 ---
 
-## Cash Flows
+## 4. Cash flows
 
 How do financial cash flows and the accounting statement of cash flows differ?
 Which is more useful for analyzing a company?
 
 ---
 
-### Financial Cash Flows
+### Financial cash flows
 
 Focus on the cash available to investors (shareholders and creditors).
 
@@ -746,7 +755,7 @@ Financial cash flows strip out non-cash items and accounting adjustments and
 provides a clear view of how much cash is available for debt service and
 shareholder returns.
 
-### Account Statement of Cash Flows
+### Account statement of cash flows
 
 Summarizing actual cash inflows and outflows from three activities:
 _operating_, _investing_, and _financing_.
@@ -764,15 +773,15 @@ from and going to.
 
 Accounting statement of cash flows offer a comprehensive and detailed breakdown
 of cash movements and useful for identifying specific sources of cash flow
-issues (e.g., excessive capital spending, operaitonal inefficiencies).
+issues (e.g., excessive capital spending, operational inefficiencies).
 
-## Which is more useful for analyzing a company?
+### Which is more useful for analyzing a company?
 
 Financial cash flows are more useful for investors assessing the company's
 capacity to return cash and determining the sustainability of growth and
 profitability. The account statement of cash flows is more useful for assessing
 liquidity and operational health, and for understanding cash management
-practicies of the firm.
+practices of the firm.
 
 ### Summary
 
@@ -783,15 +792,26 @@ investors. Both are valuable tools, and their usefulness depends on the
 specific analysis being performed. Ideally, they should be used together for a
 well-rounded assessment.
 
+Pages 29 - 34
+
 ---
 
-## Book Values versus Market Values
+## 5. Book values versus market values
 
 Under standard accounting rules, it is possible for a company's liabilities to
 exceed its assets. When this occurs, the owners' equity is negative. Can this
 happen with market values? Why or why not?
 
 ---
+
+Standard accounting rules do allow for a company's liabilities to exceed its
+assets, resulting in negative shareholders' equity. However, this is not the
+case with market values because shareholders have limited liability and are not
+responsible for debt beyond their initial investment.
+
+---
+
+Answer from chatGPT:
 
 Under standard accounting rules, liabilities can exceed assets, leading to
 negative owners' equity. However, this is unlikely to occur with market values.
@@ -824,7 +844,7 @@ Therefore, there are three reasons why market values of firms do not go
 negative:
 
 1. __Limited Liability:__ Shareholders cannot owe more than the value of their
-   equity investment. The worst-case scenario is that equity becomes worhtless.
+   equity investment. The worst-case scenario is that equity becomes worthless.
 2. __Future Expectations:__ The market often values a company based on its
    potential future cash flows, even if it is currently in financial distress.
    This "hope value" can keep the equity market value above zero.
@@ -834,12 +854,26 @@ negative:
 
 ---
 
-## Cash Flow from Assets
+## 6. Cash flow from assets
 
 Why is it not necessarily bad for the cash flow from assets to be negative for
 a particular period?
 
 ---
+
+Cash flow from assets is defined:
+
+$$
+\text{CF}(A) = \text{Operating cash flow} + \text{Depreciation} - \text{Taxes}
+$$
+
+Here
+
+Page 29
+
+---
+
+From ChatGPT
 
 There are several reasons why cash flows from assets may be negative for a
 particular period and they do not indicate any real cause for concern:
@@ -874,7 +908,7 @@ When assessing the implication of negative CFFA, consider:
 
 ---
 
-## Operating Cash Flow
+## 7. Operating cash flow
 
 Why is it not necessarily bad for the operating cash flow to be negative for a
 particular period?
@@ -897,7 +931,7 @@ distress then there is a reason to be concerned.
 
 ---
 
-## Net Working Capital and Capital Spending
+## 8. Net working capital and capital spending
 
 Could a company's change in net working capital be negative in a given year?
 (_Hint:_ Yes.) Explain how this might come about. What about net capital
@@ -905,7 +939,9 @@ spending?
 
 ---
 
-### Net Working Capital
+From chatGPT
+
+### Net working capital
 
 Net working capital is calculated as:
 
@@ -914,32 +950,32 @@ $$
   - \text{Current Liabilities}
 $$
 
-A negative net working capital means that the current liabilities have
+A negative change in net working capital means that the current liabilities have
 increased more than the current assets (or its current assets decreased more
 than its current liabilities). This can occur because:
 
-#### Decreasing Current Assets
+#### Decreasing current assets
 
-- By company collecting accounts receivable faster, reducing outstanding
+- The company is collecting accounts receivable faster, reducing outstanding
   balances.
 - Inventory levels are reduced, due to efficient inventory management or lower
   production.  The company uses cash reserves to pay off liabilities or fund
   operations.
 
-#### Increasing Current Liabilities
+#### Increasing current liabilities
 
 - The company delays paying accounts payable to suppliers, increasing its
   short-term obligations.
 - The company takes on more short-term debt, such as notes payable or credit
   line, to finance operations or growth.
 
-#### Operations Strategy
+#### Operations strategy
 
 - A company might deliberately reduce NWC to free up cash for investments or
   other uses. For example, by managing receivables or extending payables, the
   company improves cash flow.
 
-### Net Capital Spending
+### Net capital spending
 
 Net capital spending can be calculated as:
 
@@ -961,17 +997,19 @@ Negative net capital spending might occur when:
 ### Summary
 
 Negative NWC change is often due to increased liabilities or decreased current
-assets, which can be strategic to improve cash flow. Negative Net capital
+assets, which can be strategic to improve cash flow. Negative net capital
 spending is often selling off more fixed assets than it is investing in, which
 may be part of a restructuring or a cash-raising efforts.
 
 ---
 
-## Cash Flow to Stockholders and Creditors
+## 9. Cash flow to stockholders and creditors
 
 Could a company's cash flow to stockholders be negative in a given year?
 (_Hint:_ Yes.) Explain how this might come about. What about cash flow to
 creditors?
+
+---
 
 ### Cash flow to stockholders (CFS)
 
@@ -987,7 +1025,7 @@ Negative cash flow to stockholders can occur because:
 1. Issuance of new equity for growth
 2. Reduction in dividends
 
-## Cash flow to creditors (CFC)
+### Cash flow to creditors (CFC)
 
 Cash flow to creditors is calculated as:
 
@@ -1019,7 +1057,7 @@ Negative cash flow to creditors:
 
 ---
 
-## Firm values
+## 10. Firm values
 
 Referring back to the Bank of America example at the beginning of the chapter,
 note that we suggested that Bank of America's stockholders probably didn't
@@ -1040,7 +1078,7 @@ A _write-off_ is essentially an accounting adjustment that reduces the book
 value of an asset, typically when it is deemed uncollectible or impaired (e.g.,
 bad loans or the declining value of assets). However, _write-offs_ are
 _non-cash_ transactions. They don't represent an actual outflow of cash. In the
-case of Bank of America's \$34 billion write-off for bad loands, the company
+case of Bank of America's \$34 billion write-off for bad loans, the company
 wasn't actually paying out that \$34 billion in cash. Instead, they were
 acknowledging that the value of certain assets (loans) had declined.
 
@@ -1056,7 +1094,7 @@ statements more transparent, which could actually increase investor confidence.
 
 Large write-offs, especially during economic downturns, can be viewed as a
 _prudent_ measure by management to prepare for future losses. This reflects
-that the company is taking aciton to acknowledge and deal with problems early.
+that the company is taking action to acknowledge and deal with problems early.
 Investors might view this as _responsible management_ rather than something to
 fear.
 
@@ -1087,9 +1125,9 @@ net, further cushioning stockholder losses.
 
 ---
 
-# Basic Questions
+# Questions and problems
 
-## Building a balance sheet
+## 1. Building a balance sheet
 
 Bishop, Inc., has current assets of \$5,700, net fixed assets of \$27,000,
 current liabilities of \$4,400, and long-term debt of \$12,900. What is the
@@ -1098,7 +1136,17 @@ working capital?
 
 ---
 
-### Solution
+```{r problem 1; work, echo=F}
+p1 <- new.env()
+p1$current.assets <- 5700
+p1$net.fixed.assets <- 27000
+p1$current.liabilities <- 4400
+p1$long.term.debt <- 12900
+p1$assets <- p1$current.assets + p1$net.fixed.assets
+p1$liabilities <- p1$current.liabilities + p1$long.term.debt
+p1$shareholders.equity <- p1$assets - p1$liabilities
+p1$net.working.capital <- p1$current.assets - p1$current.liabilities
+```
 
 Here you use the _accounting definition_ of the balance sheet:
 
@@ -1110,9 +1158,9 @@ Calculate assets by combining _current assets_ and _fixed assets_:
 
 $$
 \begin{aligned}
-\mathbf{Assets} &= \text{Current Assets} + \text{Fixed Assets} \\
-  &= 5,700 + 27,000\\
-  &= 32,700
+\mathbf{Assets} &= \text{Current Assets} + \text{Fixed Assets}\\
+  &= `r pretty(p1$current.assets)`  + `r pretty(p1$net.fixed.assets)`\\
+  &= `r pretty(p1$assets)`
 \end{aligned}
 $$
 
@@ -1121,9 +1169,10 @@ liabilities_:
 
 $$
 \begin{aligned}
-\mathbf{Liabilities} &= \text{Current Liabilities} - \text{Long-term liabilities} \\
-  &= 4,400 + 12,900\\
-  &= 17,300
+\mathbf{Liabilities} &= \text{Current Liabilities}
+  - \text{Long-term liabilities}\\
+  &= `r pretty(p1$current.liabilities)` + `r pretty(p1$long.term.debt)`\\
+  &= `r pretty(p1$liabilities)`
 \end{aligned}
 $$
 
@@ -1131,61 +1180,84 @@ Reorder the equation to find the _shareholders equity_
 
 $$
 \begin{aligned}
-\mathbf{Shareholders\ equity} &= \text{Assets} - \text{Liabilities} \\
-  &= 32,700 - 16,900\\
-  &= 15,400
+\mathbf{Shareholders\ equity} &= \text{Assets} - \text{Liabilities}\\
+  &= `r pretty(p1$assets)` - `r pretty(p1$liabilities)`\\
+  &= `r pretty(p1$shareholders.equity)`
+\end{aligned}
+$$
+
+Net working capital is current assets minus current liabilities:
+
+$$
+\begin{aligned}
+\mathbf{Net\ working\ capital} &= \text{current assets}
+  - \text{current liabilities}\\
+  &= `r pretty(p1$current.assets)` - `r pretty(p1$current.liabilities)`\\
+  &= `r pretty(p1$net.working.capital)`
 \end{aligned}
 $$
 
 ---
 
-## Building an income statement
+## 2. Building an income statement
 
-Travis, Inc., has sales of \$387,000, costs of \$175,000, deprecation expense of \$40,000, interest expense of \$21,000, and a tax rate of 35%. What is the net income for the firm? Suppose the company paid out \$30,000 in cash dividends. What is the addition to retained earnings?
+Travis, Inc., has sales of \$387,000, costs of \$175,000, deprecation expense of
+\$40,000, interest expense of \$21,000, and a tax rate of 35%. What is the net
+income for the firm? Suppose the company paid out \$30,000 in cash dividends.
+What is the addition to retained earnings?
 
 ---
 
-### Solution
-
-Given:
-
-  * Sales: \$387,000
-  * Costs: \$175,000
-  * Depreciation: \$40,000
-  * Interest: \$21,000
-  * Tax rate: 0.35
-  * Dividends: \$30,000
+```{r problem 2; work, echo=F}
+p2 <- new.env()
+p2$sales <- 387000
+p2$costs <- 175000
+p2$depreciation <- 40000
+p2$interest <- 21000
+p2$tax.rate <- .35
+p2$dividends <- 30000
+p2$income <- p2$sales - p2$costs
+p2$ebit <- p2$income - p2$depreciation
+p2$pretax.income <- p2$ebit - p2$interest
+p2$taxes <- p2$pretax.income * p2$tax.rate
+p2$net.income <- p2$pretax.income - p2$taxes
+p2$retained.earnings <- p2$net.income - p2$dividends
+```
 
 Building the _income statement_ we need to find the following:
 
 $$
 \begin{aligned}
-\mathbf{Gross\ income} &= \text{sales} - \text{costs} \\ 
-  &= 387,000 - 175,000 \\
-  &= 212,000 \\ \\
-\mathbf{EBIT} &= \text{Gross Income} - \text{Deprecation Expense} \\
-  &= 387,000 - 175,000 - 40,000 \\
-  &= 172,000 \\ \\
-\mathbf{EBT} &= \text{EBIT} - \text{Interest Expense} \\
-  &= 172,000 - 21,000 \\
-  &= 151,000 \\ \\
-\mathbf{Taxes\ owed} &= \text{EBT} \times \text{Tax Rate} \\
-  &= 151,000 \times .35 \\
-  &= 52,850 \\ \\
-\mathbf{Net\ income} &= \text{EBT} - \text{Taxes Owed} \\
-  &= 151,000 - 52,850 \\
-  &= 98,150 \\ \\
-\mathbf{Retained\ earnings} &= \text{Net Income} - \text{Dividends} \\
-  &= 98,150 - 30,000 \\
-  &= 68,150
+\mathbf{Income} &= \text{sales} - \text{costs}\\ 
+  &= `r pretty(p2$sales)` - `r pretty(p2$costs)`\\
+  &= `r pretty(p2$income)`\\\\
+\mathbf{EBIT} &= \text{Income} - \text{Deprecation Expense}\\
+  &= `r pretty(p2$income)` - `r pretty(p2$depreciation)`\\
+  &= `r pretty(p2$ebit)`\\\\
+\mathbf{Pretax\ income} &= \text{EBIT} - \text{Interest Expense}\\
+  &= `r pretty(p2$ebit)` - `r pretty(p2$interest)`\\
+  &= `r pretty(p2$pretax.income)`\\\\
+\mathbf{Taxes} &= \text{Pretax income} \times \text{Tax Rate}\\
+  &= `r pretty(p2$pretax.income)` \times `r p2$tax.rate`\\
+  &= `r pretty(p2$taxes)`\\\\
+\mathbf{Net\ income} &= \text{Pretax income} - \text{Taxes}\\
+  &= `r pretty(p2$pretax.income)` - `r pretty(p2$taxes)`\\
+  &= `r pretty(p2$net.income)`\\\\
+\mathbf{Retained\ earnings} &= \text{Net Income} - \text{Dividends}\\
+  &= `r pretty(p2$net.income)` - `r pretty(p2$dividends)`\\
+  &= `r pretty(p2$retained.earnings)`
 \end{aligned}
 $$
 
-Book: \$98,150; \$68,150
+### Conclusion
+
+* Net income: \$`r pretty(p2$net.income)`
+* Retained earnings: \$`r pretty(p2$retained.earnings)`
 
 ---
 
-## Market values and book values
+## 3. Market values and book values
+
 
 Klingon Cruisers, Inc., purchased new cloaking machinery three years ago for
 \$9.5 million. The machinery can be sold to the Romulans today for \$6.5
@@ -1197,117 +1269,128 @@ today? What is the market value?
 
 ---
 
-### Solution
-
 Klingon Cruisers, Inc. purchase of the cloaking machinery was three years ago
 so its deprecated value is already represented in the net fix assets of the
 current balance sheet. Calculating the book value of Klingon's assets and
 comparing it to the market value of those assets can be done by:
 
-#### Step 1:
+```{r problem 3; work, echo=F}
+p3 <- new.env()
+p3$mv.cloaking <- 6.5E6
+p3$net.fixed.assets <- 5.2E6
+p3$current.liabilities <- 2.4E6
+p3$net.working.capital <- 8E5
+p3$mv.current.assets <- 2.6E6
+p3$current.assets <- p3$net.working.capital + p3$current.liabilities
+p3$assets <- p3$current.assets + p3$net.fixed.assets
+p3$mv.assets <- p3$mv.cloaking + p3$mv.current.assets
+```
 
-Calculate the current assets of Klingon Cruisers Inc:
+### Step 1: Calculate the current assets of Klingon Cruisers Inc:
 
 $$
 \begin{aligned}
 \mathbf{Current\ assets} &= \text{net working capital}
   + \text{current liabilities}\\
-  &= 800,000 + 2,400,000\\
-  &= 3,200,000\\
+  &= `r pretty(p3$net.working.capital)` + `r pretty(p3$current.liabilities)`\\
+  &= `r pretty(p3$current.assets)`
 \end{aligned}
 $$
 
-#### Step 2:
-
-Now calculate the book value of all assets:
+### Step 2: Now calculate the book value of all assets:
 
 $$
 \begin{aligned}
 \mathbf{Book\ value\ of\ assets} &= \text{current assets}
   + \text{net fixed assets}\\
-  &= 3,200,000 + 5,200,000\\
-  &= 8,400,000
+  &= `r pretty(p3$current.assets)` + `r pretty(p3$net.fixed.assets)`\\
+  &= `r pretty(p3$assets)`
 \end{aligned}
 $$
 
-#### Step 3:
-
-Calculate the market value of all assets.
+### Step 3: Calculate the market value of all assets.
 
 $$
 \begin{aligned}
 \mathbf{Market\ value\ of\ assets} &= \text{market value of cloaking machine}
   + \text{market value of all current assets}\\
-  &= 6,500,000 + 2,600,000\\
-  &= 9,100,000
+  &= `r pretty(p3$mv.cloaking)` + `r pretty(p3$mv.current.assets)`\\
+  &= `r pretty(p3$mv.assets)`
 \end{aligned}
 $$
 
 ---
 
-## Calculating Taxes
+## 4. Calculating Taxes =REFACTOR=
 
 The Locker Co. has \$273 thousand in taxable income. Using the rates from the
-following Table, calculate the company's income taxes. What is the average tax
-rate? What is the marginal tax rate?
-
-```{r problem 4: calculating taxes: corporate tax table, echo=F}
-options(scipen=9999999)
-table.tax.rates <- data.frame(
-  c(0, 50001, 75001, 100001, 335001, 10000001, 15000001, 18333334),
-  c(50000, 75000, 100000, 335000, 10000000, 15000000, 18333333, 1E20),
-  c(.15, .25, .34, .39, .34, .35, .38, .35)
-)
-colnames(table.tax.rates) <- c("Lower", "Upper", "Tax.Rate")
-knitr::kable(table.tax.rates, caption="Corporate Tax Rates")
-```
+[tax table](#table:taxrates) in the notes, calculate the company's income taxes. What is the
+average tax rate? What is the marginal tax rate?
 
 ---
 
-### Solution
+```{r problem 4; work, echo=F}
+p4 <- new.env()
+p4$taxable.income <- 273000
+p4$brackets <- c(
+  round(50000 * .15),
+  round((75000 - 50000) * .25),
+  round((100000 - 75000) * .34),
+  round((273000 - 100000) * .39))
+p4$taxes <- sum(p4$brackets)
+p4$avg.tax.rate <- round(p4$taxes / p4$taxable.income, 2)
+p4$marginal.tax.rate <- .39
+```
 
 We use the table to sum up all the marginal tax rates:
 
 $$
 \begin{aligned}
-50,000 \times 15\% &= \ 7,500 \\
-75,000 - 50,000 \times 25\% &= \ 6,250 \\
-100,000 - 75,000 \times 34\% &= \ 8,500 \\
-273,000 - 100,000 \times 39\% &= \ 67,470 \\ \\
-\text{Taxes owed} &= 7,500 + 6,250 + 8,500 + 67,470\\
-  &= 89,720\\ \\
-\text{Average Tax rate} &= \frac{89,720}{273,000}\\
-  &= 0.33\\ \\
-\text{Marginal Tax rate} &= .039
+50,000 \times 15\% &= `r pretty(p4$brackets[1])`\\
+75,000 - 50,000 \times 25\% &= `r pretty(p4$brackets[2])`\\
+100,000 - 75,000 \times 34\% &= `r pretty(p4$brackets[3])`\\
+273,000 - 100,000 \times 39\% &= `r pretty(p4$brackets[4])`
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{Taxes} &= `r pretty(p4$brackets)`\\
+  &= `r pretty(sum(p4$brackets))`\\\\
+\text{Average Tax rate} &= `r p4$avg.tax.rate`\\
+\text{Marginal Tax rate} &= `r p4$marginal.tax.rate`
 \end{aligned}
 $$
 
 #### We can calcualte the solution in `R`
 
-The following functions will use the tax brackets from the tax rates table to calculate income taxes and find the marginal tax rate.
+The following functions will use the tax brackets from the tax rates table to
+calculate income taxes and find the marginal tax rate.
 
 ```{r income tax function}
-income.tax <- function(income, brackets=table.tax.rates$Upper,
-                       rate=table.tax.rates$Tax.Rate){
+p4$income.tax <- function(income, brackets=corporate.tax.rate.table$Upper,
+                       rate=corporate.tax.rate.table$Tax.Rate){
   sum(diff(c(0, pmin(income, brackets))) * rate)
 }
 
-marginal.tax.rate <- function(income, brackets=table.tax.rates$Upper,
-                              rate=table.tax.rates$Tax.Rate){
+marginal.tax.rate <- function(income, brackets=corporate.tax.rate.table$Upper,
+                              rate=corporate.tax.rate.table$Tax.Rate){
   rate[income < brackets][1]*100
 }
 ```
 
-Using these functions we can calculate the income tax, the average tax rate and the marginal tax rate.
+Using these functions we can calculate the income tax, the average tax rate and
+the marginal tax rate.
 
 ```{r problem 4: income taxes}
 taxable.income <- 273000
-income_tax <- income.tax(taxable.income)
+income_tax <- p4$income.tax(taxable.income)
 avg.rate <- round(income_tax/taxable.income*100)
 marginal <- marginal.tax.rate(taxable.income)
 ```
 
 ```{r problem 4: table, echo=F}
+cat("Taxes paid:", income_tax)
 table.p4 <- matrix(c(avg.rate, marginal), ncol=1)
 rownames(table.p4) <- c("Average Tax Rate", "Marginal Tax Rate")
 knitr::kable(table.p4, caption="Average and marginal tax rates (percents)")
@@ -1315,7 +1398,7 @@ knitr::kable(table.p4, caption="Average and marginal tax rates (percents)")
 
 ---
 
-## Calculating OCF
+## 5. Calculating OCF
 
 Ranney, Inc., has sales of \$18,700, costs of \$10,300, depreciation expense of
 \$1,900, and interest expense of \$1,250. If the tax rate is 40 percent, what
@@ -1323,45 +1406,51 @@ is the operating cash flow, or OCF?
 
 ---
 
-### Solution
+```{r problem 5; work, echo=F}
+p5 <- new.env()
+p5$sales <- 18700
+p5$costs <- 10300
+p5$depreciation <- 1900
+p5$interest <- 1250
+p5$tax.rate <- .4
+p5$income <- p5$sales - p5$costs
+p5$ebit <- p5$income - p5$depreciation
+p5$pretax.income <- p5$ebit - p5$interest
+p5$taxes <- p5$pretax.income * p5$tax.rate
+p5$net.income <- p5$pretax.income - p5$taxes
+p5$operating.cash.flow <- p5$ebit + p5$depreciation - p5$taxes
+```
 
-Given:
-
-  * Sales: \$18,700
-  * Costs: \$10,300
-  * Depreciation: \$1,900
-  * interest: \$1,250
-  * Tax rate: 0.40
-
-Operating Cash Flow:
+### Calculating operating Cash Flow:
 
 $$
 \begin{aligned}
-\mathbf{Gross\ income} &= \text{sales} - \text{cost} \\
-  &= 18,700 - 10,300 \\
-  &= 8,400 \\ \\
-\mathbf{EBIT} &= \text{gross income} - \text{deprecation} \\
-  &= 8,400 - 1,900 \\
-  &= 6,500 \\ \\
-\mathbf{EBT} &= \text{EBIT} - \text{interest} \\
-  &= 6,500 - 1,250 \\
-  &= 5,250 \\ \\
-\mathbf{Taxes} &= \text{EBT} \times \text{tax rate} \\
-  &= 5,250 \times .40 \\
-  &= 2,100 \\ \\
-\mathbf{Net\ Income} &= \text{EBT} - \text{taxes} \\
-  &= 5,250 - 2,100 \\
-  &= 3,150 \\ \\
-\mathbf{Operating\ cash\ flow} &= \text{net income} + \text{deprecation}
-  + \text{interest} \\
-  &= 3,150 + 1,900 + 1,250 \\
-  &= 6,300
+\mathbf{Income} &= \text{sales} - \text{cost}\\
+  &= `r pretty(p5$sales)` - `r pretty(p5$costs)`\\
+  &= `r pretty(p5$income)`\\\\
+\mathbf{EBIT} &= \text{income} - \text{deprecation}\\
+  &= `r pretty(p5$income)` - `r pretty(p5$depreciation)`\\
+  &= `r pretty(p5$ebit)`\\\\
+\mathbf{Income} &= \text{EBIT} - \text{interest}\\
+  &= `r pretty(p5$ebit)` - `r pretty(p5$interest)`\\
+  &= `r pretty(p5$income)`\\\\
+\mathbf{Taxes} &= \text{income} \times \text{tax rate}\\
+  &= `r pretty(p5$income)` \times `r p5$tax.rate`\\
+  &= `r pretty(p5$taxes)`\\\\
+\mathbf{Net\ Income} &= \text{income} - \text{taxes}\\
+  &= `r pretty(p5$income)` - `r pretty(p5$taxes)`\\
+  &= `r pretty(p5$net.income)`\\\\
+\mathbf{Operating\ cash\ flow} &= \text{EBIT} + \text{depreciation}
+  - \text{taxes}\\
+  &= `r pretty(p5$ebit)` + `r pretty(p5$depreciation)` -
+     `r pretty(p5$taxes)`\\
+  &= `r pretty(p5$operating.cash.flow)`
 \end{aligned}
 $$
 
 ---
 
-## Calculate Net Capital Spending
+## 6. Calculate Net Capital Spending
 
 Gordon Driving School's 2011 balance sheet showed net fixed assets of \$1.42
 million, and the 2012 balance sheet showed net fixed assets of \$1.69 million.
@@ -1370,47 +1459,41 @@ What was Gordon's net capital spending for 2012?
 
 ---
 
-### Solution
-
-Given:
-
-  * Net fixed assets: (2011) \$1,420,000, (2012) \$1,690,000
-  * Depreciation: (2012) \$145,000
+```{r problem 6; work, echo=F}
+p6 <- new.env()
+p6$net.fixed.assets <- c(1.42E6, 1.69E6)
+p6$depreciation <- 145000
+p6$net.capital.spending <- diff(p6$net.fixed.assets) + p6$depreciation
+```
 
 Net capital spending is is also called _changes in fixed assets_. The net change
 in fixed assets equals the acquisition of fixed assets minus the sales of fixed
-assets. However, net capital spending can also be calculated.
+assets. However, net capital spending can also be calculated as such:
 
 $$
 \begin{aligned}
 \mathbf{Capital\ spending} &= \text{ending net fixed assets}
-  - \text{beginning net fixed assets} + \text{deprecation} \\
-  &= 1,690,000 - 1,420,000 + 145,000 \\
-  &= 415,000
+  - \text{beginning net fixed assets} + \text{depreciation} \\
+  &= `r pretty(p6$net.fixed.assets[2])`
+  - `r pretty(p6$net.fixed.assets[1])` + `r pretty(p6$depreciation)`\\
+  &= `r pretty(p6$net.capital.spending)`
 \end{aligned}
 $$
 
-Book: \$415,000
-
 ---
 
-## Building a Balance Sheet
+## 7. Building a Balance Sheet
 
 The following table presents the long-term liabilities and stockholders' equity
 of Information Control Corp. one year ago:
 
-```{r echo=F}
-long.term.debt <- 65
-preferred.stock <- 4
-common.stock.1.par.value <- 15
-accumulated.retained.earnings <- 135
-capital.surplus <- 45
-tb <- matrix(c(long.term.debt, preferred.stock, common.stock.1.par.value,
-               accumulated.retained.earnings, capital.surplus), ncol=1)
-rownames(tb) <- c("Long-term debt", "Preferred stock", "Common stock ($1 par value)",
+```{r problem 7; table, echo=F}
+p7 <- new.env()
+p7$bs <- matrix(c(65E6, 4E6, 15E6, 135E6, 45E6), ncol=1)
+rownames(p7$bs) <- c("Long-term debt", "Preferred stock", "Common stock ($1 par value)",
                 "Accumulated retained earnings", "Capital Surplus")
-colnames(tb) <- c("")
-knitr::kable(tb, caption="In millions of dollars")
+colnames(p7$bs) <- c("")
+knitr::kable(pretty(p7$bs))
 ```
 
 During the past year, Information Control issued 10 million shares of new stock
@@ -1421,28 +1504,62 @@ occurred at Information Control Corp. during the year.
 
 ---
 
-### Solution
+```{r problem 7; work, echo=F}
+p7$issued.equity.par.value.total <- 10E6
+p7$issued.equity.price <- 58E6
+p7$issued.lt.debt <- 35E6
+p7$net.income <- 9E6
+p7$dividends <- 2E6
+p7$updated.bs <- matrix(c(
+    p7$bs["Long-term debt",] + p7$issued.lt.debt,
+    p7$bs["Preferred stock",],
+    p7$bs["Common stock ($1 par value)",] + p7$issued.equity.par.value.total,
+    p7$bs["Accumulated retained earnings",] + p7$net.income - p7$dividends,
+    p7$bs["Capital Surplus",] + p7$issued.equity.price
+    - p7$issued.equity.par.value.total), ncol=1)
+rownames(p7$updated.bs) <- rownames(p7$bs)
+```
 
 Updating the balance sheet:
 
 $$
 \begin{aligned}
-\mathbf{Long\ term\ debt} &= 65,000,000 + 35,000,000 \\
-  &= 100,000,000 \\ \\
-\mathbf{Preferred\ stock}\ \text{(no change)} &= 4,000,000 \\ \\
-\mathbf{Common\ stock (1\ par\ value)} &= 15,000,000 + 10,000,000 \\
-  &= 25,000,000\\ \\
-\mathbf{Accumulated\ retained\ earnings} &= 135,000,000 + 9,000,000
-  - 2,000,000 \\
-  &= 142,000,000 \\ \\
-\mathbf{Capital\ surplus} &= 45,000,000 + (58,000,000 - 10,000,000) \\
-  &= 93,000,000
+\mathbf{Long\ term\ debt} &= \text{New LT Debt} + \text{Previous LT Debt}\\
+  &= `r pretty(p7$bs["Long-term debt",])` + `r pretty(p7$issued.lt.debt)`\\
+  &= `r pretty(p7$updated.bs["Long-term debt",])`\\\\
+\mathbf{Preferred\ stock}\ \text{(no change)}
+  &= `r pretty(p7$updated.bs["Preferred stock",])`\\\\
+\mathbf{Common\ stock (\$1\ par\ value)} &= \text{Previous common stock}
+  + \text{Newly issued stock (par value)}\\
+  &= `r pretty(p7$bs["Common stock ($1 par value)",])`
+  +  `r pretty(p7$updated.bs["Common stock ($1 par value)",])`\\
+  &= `r pretty(p7$updated.bs["Common stock ($1 par value)",])`\\\\
+\mathbf{Accumulated\ retained\ earnings} &=
+  \text{Previous accumulated retained earnings} + \text{net income}\\
+  &\ \ \ - \text{dividends paid}\\
+  &= `r pretty(p7$bs["Accumulated retained earnings",])` +
+     `r pretty(p7$net.income)` - `r pretty(p7$dividends)`\\
+  &= `r pretty(p7$updated.bs["Accumulated retained earnings",])`\\\\
+\mathbf{Capital\ surplus} &= \text{Previous capital surplus}
+  + \text{Value of shares sold above par value}\\
+  &= `r pretty(p7$bs["Capital Surplus",])`
+  +  (`r pretty(p7$issued.equity.price)`
+  - `r pretty(p7$issued.equity.par.value.total)`)\\
+  &= `r pretty(p7$updated.bs["Capital Surplus",])`
 \end{aligned}
 $$
 
+Note that capital surplus, also called additional paid-in capital (APIC),
+represents the amount investors paid above the par value of the stock when it
+was issued.
+
+```{r problem 7; updated balance sheet, echo=F}
+knitr::kable(pretty(p7$updated.bs), caption="Updated balance sheet")
+```
+
 ---
 
-## Cash Flow to Creditors
+## 8. Cash Flow to Creditors
 
 The 2011 balance sheet of Anna's Tennis Shop, Inc., showed long-term debt of
 \$1.45 million, and the 2012 balance sheet showed long-term debt of \$1.52
@@ -1451,155 +1568,152 @@ What was the firm's cash flow to creditors during 2012?
 
 ---
 
-### Solution
+```{r problem 8; work, echo=F}
+p8 <- new.env()
+p8$long.term.debt <- c(1.45E6, 1.52E6)
+p8$interest.expense <- 1.27E5
+p8$cf.creditors <- p8$interest.expense - diff(p8$long.term.debt)
+```
 
 $$
 \begin{aligned}
 \mathbf{Cash\ Flow\ to\ Creditors\ (CFC)} &= \text{interest expense}
-  - (\text{ending long-term debt} - \text{beginning long-term debt}) \\
-  &= 127,000 - (1,520,000 - 1,450,000) \\
-  &= 57,000
+  - (\text{ending long-term debt} - \text{beginning long-term debt})\\
+  &= `r pretty(p8$interest.expense)` - (`r pretty(p8$long.term.debt[2])`
+  - `r pretty(p8$long.term.debt[1])`)\\
+  &= `r pretty(p8$cf.creditors)`
 \end{aligned}
 $$
 
-#### Solution
+---
 
-in `R`
+## 9. Cash Flow to Stockholders
 
-```{r problem 8}
-long.term.debt.2011 <- 1.45
-long.term.debt.2012 <- 1.52
-interest.payment <- .127
-cf.creditors <- interest.payment - (long.term.debt.2012 - long.term.debt.2011)
+The 2011 balance sheet of Anna's Tennis Shop, Inc., showed \$490,000 in the
+common stock account and \$3.4 million in the additional paid-in surplus
+account. The 2012 balance sheet showed \$525,000 and \$3.7 million in the same
+two accounts, respectively. If the company paid out \$275,000 in cash dividends
+during 2012, what was the cash flow to stockholders for the year?
+
+---
+
+```{r problem 9; given, echo=F}
+p9 <- new.env()
+p9$bs <- matrix(
+  c(4.9E5, 3.4E6, 5.25E5, 3.7E6), ncol=2)
+rownames(p9$bs) <- c("Common Stock", "Additional Paid-in Surplus")
+colnames(p9$bs) <- c(2011, 2012)
+p9$dividends <- 2.75E5
+p9$cf.stockholders <- p9$dividends - (sum(p9$bs[,2]) - sum(p9$bs[,1]))
 ```
-
-```{r problem 8 output, echo=F}
-output <- matrix(cf.creditors, ncol=1)
-rownames(output) <- "Cash flow to creditors"
-knitr::kable(output*1000, caption="In thousands of dollars")
-```
-
-## Cash Flow to Stockholders
-
-The 2011 balance sheet of Anna's Tennis Shop, Inc., showed \$490,000 in the common stock account and \$3.4 million in the additional paid-in surplus account. The 2012 balance sheet showed \$525,000 and \$3.7 million in the same two accounts, respectively. If the company paid out \$275,000 in cash dividends during 2012, what was the cash flow to stockholders for the year?
-
-### Solution
 
 $$
 \begin{aligned}
 \mathbf{Cash\ Flow\ to\ Stockholders\ (CFS)} &= \text{dividends}
     - (\text{Ending Equity} - \text{Beginning Equity}) \\
-  &= 275,000 - \left[(3,700,000 + 275,000)
-    - (3,400,000 + 490,000)\right] \\
-  &= - 60,000
+  &= `r pretty(p9$dividends)`
+  - \left[(`r pretty(p9$bs[1,2])` + `r pretty(p9$bs[2,2])`)
+    - (`r pretty(p9$bs[1,1])` + `r pretty(p9$bs[2,1])`)\right] \\
+  &= `r pretty(p9$cf.stockholders)`
 \end{aligned}
 $$
 
-#### Solution
+---
 
-in `R`
+## 10. Calculating Cash Flows
 
-```{r problem 9}
-common.stock.2011 <- .490
-surplus.2011 <- 3.4
-common.stock.2012 <- .525
-surplus.2012 <- 3.7
-dividends.2012 <- .275
-cf.stockholders <- dividends.2012 -
-    (common.stock.2012 + surplus.2012 - common.stock.2011 - surplus.2011)
+Given the information for Anna's Tennis Shop, Inc., in the previous two
+problems, suppose you also know that the firm's net capital spending for 2012
+was \$945,000 and that the firm reduced its net working capital investment by
+\$87,000. What was the firm's 2012 operating cash flow, or OCF?
+
+---
+
+```{r problem 10; given, echo=F}
+p10 <- new.env()
+p10$net.capital.spending <- 945000
+p10$delta.nwc <- -87000
+p10$cffa <- p8$cf.creditors + p9$cf.stockholders
+p10$ocf <- p10$cffa + p10$net.capital.spending + p10$delta.nwc
 ```
-
-```{r problem 9 output, echo=F}
-table.p9 <- matrix(cf.stockholders*1000, ncol=1)
-rownames(table.p9) <- ("Cash flow to stockholders")
-knitr::kable(table.p9, caption="In thousands of dollars")
-```
-
-## Calculating Cash Flows
-
-Given the information for Anna's Tennis Shop, Inc., in the previous two problems, suppose you also know that the firm's net capital spending for 2012 was \$945,000 and that the firm reduced its net working capital investment by \$87,000. What was the firm's 2012 operating cash flow, or OCF?
-
-### Solution
 
 $$
 \begin{aligned}
-\mathbf{CFFA} &= \text{CFC} + \text{CFS} \\
-  &= 57,000 + (- 60,000) \\
-  &= -3,000 \\ \\
-\mathbf{OCF} &= \text{CFFA} - \text{NCS} - \text{CNWC} \\
- &= (- 3,000) - 945,000 - (- 87,000) \\
- &= 855,000
+\mathbf{CFFA} &= \text{OCF} - \text{NCS} - \Delta \text{NWC} \\
+  &= \text{CFC} + \text{CFS}\\
+  &= `r pretty(p8$cf.creditors)` + `r pretty(p9$cf.stockholders)`\\
+  &= `r pretty(p10$cffa)`\\\\
+\mathbf{OCF} &= \text{CFFA} + \text{NCS} + \Delta \text{NWC}\\
+ &= `r pretty(p10$cffa)` + `r pretty(p10$net.capital.spending)`
+ + `r pretty(p10$delta.nwc)`\\
+ &= `r pretty(p10$ocf)`
 \end{aligned}
 $$
 
-#### Solution
+---
 
-in `R`
+## 11. Cash Flows =REFACTOR=
 
-```{r problem 10}
-ncs <- .945
-nwci <- -.087
-cfc <- cf.creditors
-cfs <- cf.stockholders
-cffa <- cfc + cfs
-ocf <- cffa + ncs + nwci
-```
-
-```{r problem 10 output, echo=F}
-table.p10 <- matrix(ocf, ncol=1)
-rownames(table.p10) <- c("Operating Cash Flow")
-knitr::kable(table.p10)
-```
-
-<!--
-
-**********************  Intermediate Questions  *************************
-
--->
-
-# Intermediate Questions
-
-## Cash Flows
-
-Ritter Corporation's accountants prepared the following financial statements for year-end 2012:
+Ritter Corporation's accountants prepared the following financial statements for
+year-end 2012:
 
   a. Explain the change in cash during 2012.
   b. Determine the change in net working capital in 2012.
   c. Determine the cash flow generated by the firm's assets during 2012.
   
 ```{r problem 11, echo=F}
-income.statement <- matrix(c(750,565,90,95,75),ncol=1)
-rownames(income.statement) <- c("Revenue", "Expenses", "Deprecation", "Net income", "Dividends")
-balance.sheets <- matrix(c(65, 170, 390, 625, 125, 145, 355, 625, 55, 165, 370, 590, 115, 140, 335, 590), ncol=2)
-rownames(balance.sheets) <- c("Cash", "Other current assets", "Net fixed assets",
-                              "Total assets", "Accounts payable", "Long-term debt",
-                              "Stockholders equity", "Total liabilities and equity")
-colnames(balance.sheets) <- c("2012", "2011")
-knitr::kable(income.statement, caption="Income Statement 2012")
-knitr::kable(balance.sheets, caption="Balance Sheets December 31")
+p11 <- new.env()
+p11$is <- matrix(c(750,565,90,95,75),ncol=1)
+rownames(p11$is) <- c("Revenue", "Expenses", "Deprecation",
+                                    "Net income", "Dividends")
+p11$bs <- matrix(c(65, 170, 390, 625, 125, 145, 355, 625, 55, 165,
+                           370, 590, 115, 140, 335, 590), ncol=2)
+rownames(p11$bs) <- c("Cash", "Other current assets",
+                              "Net fixed assets",
+                              "Total assets", "Accounts payable",
+                              "Long-term debt", "Stockholders equity",
+                              "Total liabilities and equity")
+colnames(p11$bs) <- c("2012", "2011")
+p11$delta.cash <- diff(rev(p11$bs["Cash",]))
+p11$current.assets <- c(sum(p11$bs[1:2,2]), sum(p11$bs[1:2,1]))
+p11$current.liabilities <- c(p11$bs[5,2], p11$bs[5,1])
+p11$nwc <- c(p11$current.assets - p11$current.liabilities)
+p11$delta.nwc <- diff(p11$nwc)
+knitr::kable(p11$is, caption="Income Statement 2012")
+knitr::kable(p11$bs, caption="Balance Sheets December 31")
 ```
 
+---
 
-## Solution
+### a. Change in cash 2012
 
-a. The cash balance has increased from \$55 in 2011 to \$65. This increase in cash could result from a combination of operating, investing, and financing activities, including cash generated from operations (net income), changes in working capital, and any new financing or debt payments.
+The cash balance has increased from \$55 in 2011 to \$65. This increase in cash
+could result from a combination of operating, investing, and financing
+activities, including cash generated from operations (net income), changes in
+working capital, and any new financing or debt payments.
 
 $$
-\mathbf{Change\ in\ Cash} = 65 - 55 = 10
+\mathbf{Change\ in\ Cash} = `r pretty(p11$bs["Cash", 1])`
+  - `r pretty(p11$bs["Cash", 2])`
+  = `r pretty(p11$delta.cash)` 
 $$
 
-b. The change in net working capital is current assets - current liabilities. For 2012
+### b. Change in net working capital 2012
+
+Net working capital = current assets - current liabilities.
+
+Current assets are cash and other current assets, current liabilities is
+accounts payable.
 
 $$
 \begin{aligned}
-\mathbf{NWC} = \text{(cash + other current assets)} - \text{accounts payable} \\
-\mathbf{NWC_{2012}} = (65 + 170) - 125 = 235 - 125 = 110 \\
-\mathbf{NWC_{2011}} = (55 + 165) - 115 = 220 - 115 = 105 \\
-\mathbf{Change in NWC} = \text{NWC}_{2012} - \text{NWC}_{2011} =  110 - 105 = 5
+\mathbf{Change\ in\ NWC} &= \text{NWC}_{2012} - \text{NWC}_{2011}\\
+  &=  `r p11$nwc[2]` - `r p11$nwc[1]`\\
+  &= `r (p11$delta.nwc)`
 \end{aligned}
 $$
 
-c. The cash flow from assets:
+### c. The cash flow from assets:
 
 $$
 \begin{aligned}
@@ -1613,8 +1727,8 @@ Calculate the Operating Cash Flow
 $$
 \begin{aligned}
 \mathbf{OCF} &= \text{New Income} + \text{Deprecation} \\
-  &= 95 + 90 \\
-  &= 185
+  &= `r p11$is[4,]` + `r p11$is[5,]`\\
+  &= `r (p11$ocf <- p11$is[4,] + p11$is[3,])`\\
 \end{aligned}
 $$
 
@@ -1624,8 +1738,10 @@ $$
 \begin{aligned}
 \mathbf{NCS} &= \text{Net Fixed Assets 2012} - \text{Net Fixed Assets 2011}
   + \text{Deprecation} \\
-  &= 390 - 370 + 90 \\
-  &= 110
+  &= `r p11$bs[3,1]` - `r p11$bs[3,2]` +
+     `r p11$is[3,1]`\\
+  &= `r (p11$ncs <- p11$bs[3,1] - p11$bs[3,2] +
+      p11$is[3,1])`
 \end{aligned}
 $$
 
@@ -1635,421 +1751,715 @@ The Cash flow from assets
 $$
 \begin{aligned}
 \mathbf{CFFA} &= \text{OCF} - \text{NCS} - \text{Change in NWC} \\
-  &= 185 - 110 - 5 \\
-  &= 70
+  &= `r p11$ocf` - `r p11$ncs` - `r p11$delta.nwc`\\
+  &= `r p11$ocf - p11$ncs - p11$delta.nwc`
 \end{aligned}
 $$
 
-## Financial Cash Flows
+---
+
+## 12. Financial Cash Flows
 
 The Stancil Corporation provided the following current information:
 
-```{r problem 12, echo=F}
-tb <- matrix(c(17000,4000,21000,1900,14500), ncol=1)
-rownames(tb) <- c("Proceeds from long-term borrowing",
-                  "Proceeds from the sale of common stock",
-                  "Purchases of fixed assets",
-                  "Purchases of inventories",
-                  "Payment of dividends")
-knitr::kable(tb)
+```{r problem 12; work, echo=F}
+p12 <- new.env()
+p12$tb <- matrix(c(17000,4000,21000,1900,14500), ncol=1)
+rownames(p12$tb) <- c("Proceeds from long-term borrowing",
+                      "Proceeds from the sale of common stock",
+                      "Purchases of fixed assets",
+                      "Purchases of inventories",
+                      "Payment of dividends")
+knitr::kable(pretty(p12$tb))
+
+## Purchases of fixed assets and inventories
+p12$cf.firm <- sum(p12$tb[3:4,1])
+
+## Proceeds from sale of common stock and payment of dividends
+p12$cf.investors <- p12$tb[5,1] - p12$tb[2,1]
 ```
 
-Determine the cash flows from the firm and the cash flows to investors of the firm.
+Determine the cash flows from the firm and the cash flows to investors of the
+firm.
 
-### Solution
+---
 
 ### Cash Flows from the firm
 
 $$
 \begin{aligned}
 \mathbf{Cash\ flows\ from\ the\ firm} &= \text{Purchases of fixed assets}
-  + \text{Purchases of invinetories} \\
-  &= 21,000 + 1,900 \\
-  &= 22,900
+  + \text{Purchases of inventories} \\
+  &= `r pretty(p12$tb[3,1])` + `r pretty(p12$tb[4,1])`\\
+  &= `r pretty(p12$cf.firm)`
 \end{aligned}
 $$
 
 ### Cash Flows to investors
 
-We consider creditors as investors.
+We only consider investors, not creditors.
 
 $$
 \begin{aligned}
 \mathbf{Cash\ flows\ to\ investors}
-  &= \text{Payment of dividends} \\
-  &\ \ \ \ \ - \text{Proceeds from long term borrowing}  \\
-  &\ \ \ \ \ - \text{Proceeds from the sale of common stock} \\
-  &= 14,500 - 17000 - 4000 \\
-  &= - 6,500
+  &= \text{Payment of dividends}
+  - \text{Proceeds from the sale of common stock} \\
+  &= `r pretty(p12$tb[5,1])` - `r pretty(p12$tb[2,1])`\\
+  &= `r pretty(p12$cf.investors)`
 \end{aligned}
 $$
 
-## Building an Income Statement
+---
 
-During the year, the Senbet Discount Tire Company has gross sales of \$1.06 million. The firm's cost of goods sold and selling expenses were \$525,000 and \$215,000, respectively. Senbet also has notes payable of \$800,000. These notes carried an interest rate of 7 percent. Deprecation was \$130,000. Senbet's tax rate was 35 percent.
+## 13. Building an Income Statement
+
+During the year, the Senbet Discount Tire Company has gross sales of \$1.06
+million. The firm's cost of goods sold and selling expenses were \$525,000 and
+\$215,000, respectively. Senbet also has notes payable of \$800,000. These notes
+carried an interest rate of 7 percent. Deprecation was \$130,000. Senbet's tax
+rate was 35 percent.
 
 a. What was Senbet's net income?
 b. What was Senbet's operating cash flow?
 
-### Solution
+---
 
-a. Net Income
+```{r problem 13; work, echo=F}
+p13 <- new.env()
+p13$sales <- 1.06E6
+p13$costs <- 525000
+p13$selling.expenses <- 215000
+p13$notes.payable <- 800000
+p13$interest.rate <- .07
+p13$depreciation <- 130000
+p13$tax.rate <- .35
+p13$income <- p13$sales - p13$costs - p13$selling.expenses
+p13$ebit <- p13$income - p13$depreciation
+p13$interest <- p13$notes.payable * p13$interest.rate
+p13$pretax.income <- p13$ebit - p13$interest
+p13$taxes <- p13$pretax.income * p13$tax.rate
+p13$net.income <- p13$pretax.income - p13$taxes
+p13$ocf <- p13$ebit + p13$depreciation - p13$taxes
+```
 
-$$
-\begin{aligned}
-\mathbf{Gross\ income} &= \text{gross sales} - \text{cost of goods sold}
-  - \text{selling expenses} \\
-  &= 1,060,000 - 525,000 - 215,000 \\
-  &= 320,000 \\ \\
-\mathbf{EBIT} &= \text{gross income} - \text{deprecation} \\
-  &= 320,000 - 130,000 \\
-  &= 190,000 \\ \\
-\mathbf{Interest\ payments} &= \text{notes payable} \times \text{interest rate} \\
-  &= 800,000 \times .07 \\
-  &= 56,000 \\ \\
-\mathbf{EBT} &= \text{EBIT} - \text{interest payments} \\
-  &= 190,000 - 56,000 \\
-  &= 134,000 \\ \\
-\mathbf{Taxes} &= \text{EBT} \times \text{tax rate} \\
-  &= 134000 \times .35 \\
-  &= 46,900 \\ \\
-\mathbf{Net\ income} &= \text{EBT} - \text{taxes} \\
-  &= 134,000 - 46,900 \\
-  &= 87,100 \\ \\
-\end{aligned}
-$$
-
-b. Operating Cash Flow
+### a. Net Income
 
 $$
 \begin{aligned}
-\mathbf{OCF} &= \text{EBIT} + \text{deprecation} - \text{taxes} \\
-  &= 190,000 + 130,000 - 46,900 \\
-  &= 273,100
+\mathbf{Income} &= \text{gross sales} - \text{cost of goods sold}
+  - \text{selling expenses}\\
+  &= `r pretty(p13$sales)` - `r pretty(p13$costs)` -
+  `r pretty(p13$selling.expenses)`\\
+  &= `r pretty(p13$income)`\\\\
+\mathbf{EBIT} &= \text{gross income} - \text{deprecation}\\
+  &= `r pretty(p13$income)` - `r pretty(p13$depreciation)`\\
+  &= `r pretty(p13$ebit)`\\\\
+\mathbf{Interest\ payments} &= \text{notes payable}
+  \times \text{interest rate}\\
+  &= `r pretty(p13$notes.payable)` \times `r p13$interest.rate`\\
+  &= `r pretty(p13$interest)`\\\\
+\mathbf{Pretax\ income} &= \text{EBIT} - \text{interest payments}\\
+  &= `r pretty(p13$ebit)` - `r pretty(p13$interest)`\\
+  &= `r pretty(p13$pretax.income)`\\\\
+\mathbf{Taxes} &= \text{pretax income} \times \text{tax rate}\\
+  &= `r pretty(p13$pretax.income)` \times `r p13$tax.rate`\\
+  &= `r pretty(p13$taxes)`\\\\
+\mathbf{Net\ income} &= \text{pretax income} - \text{taxes}\\
+  &= `r pretty(p13$pretax.income)` - `r pretty(p13$taxes)`\\
+  &= `r pretty(p13$net.income)`
 \end{aligned}
 $$
 
-## Calculating Total Cash Flows
+### b. Operating Cash Flow
 
-Schwert Corp. shows the following information on its 2012 income statement: sales = \$185,000; costs = \$98,000; other expenses = \$6,700; deprecation expense = \$16,500; interest expense = \$9,000; taxes = \$19,180; dividends = \$9,500. In addition, you're told that the firm issued \$7,550 in new equity during 2012 and redeemed \$7,100 in outstanding long-term debt.
+$$
+\begin{aligned}
+\mathbf{OCF} &= \text{EBIT} + \text{depreciation} - \text{taxes} \\
+  &= `r pretty(p13$ebit)` + `r pretty(p13$depreciation)` -
+     `r pretty(p13$taxes)`\\
+  &= `r pretty(p13$ocf)`
+\end{aligned}
+$$
+
+---
+
+## 14. Calculating Total Cash Flows
+
+Schwert Corp. shows the following information on its 2012 income statement:
+sales = \$185,000; costs = \$98,000; other expenses = \$6,700; deprecation
+expense = \$16,500; interest expense = \$9,000; taxes = \$19,180; dividends =
+\$9,500. In addition, you're told that the firm issued \$7,550 in new equity
+during 2012 and redeemed \$7,100 in outstanding long-term debt.
 
 a. What is the 2012 operating cash flow?
+
 b. What is the 2012 cash flow to creditors?
+
 c. What is the 2012 cash flow to stockholders?
-d. If net fixed assets increased by \$26,100 during the year, what was the addition to net working capital (NWC)?
 
-### Solution
+d. If net fixed assets increased by \$26,100 during the year, what was the
+   addition to net working capital (NWC)?
 
-a. Operating cash flow for 2012
+---
+
+```{r problem 14; work, echo=F}
+p14 <- new.env()
+p14$sales <- 185000
+p14$costs <- 98000
+p14$other.expenses <- 6700
+p14$depreciation <- 16500
+p14$interest <- 9000
+p14$taxes <- 19180
+p14$dividends <- 9500
+p14$new.equity <- 7550
+p14$redeemed.lt.debt <- 7100
+p14$delta.net.fixed.assets <- 26100
+p14$income <- p14$sales - p14$costs - p14$other.expenses
+p14$ebit <- p14$income - p14$depreciation
+p14$pretax.income <- p14$ebit - p14$interest
+p14$net.income <- p14$pretax.income - p14$taxes
+p14$ocf <- p14$ebit + p14$depreciation - p14$taxes
+p14$cfc <- p14$interest + p14$redeemed.lt.debt
+p14$cfs <- p14$dividends - p14$new.equity
+p14$cffa <- p14$cfc + p14$cfs
+p14$capital.spending <- p14$delta.net.fixed.assets + p14$depreciation
+p14$delta.net.working.capital <- p14$ocf - p14$capital.spending - p14$cffa
+```
+
+### a. Operating cash flow for 2012
 
 $$
 \begin{aligned}
-\mathbf{Gross\ income} &= \text{sales} - \text{costs} - \text{other expenses} \\
-  &= 185,000 - 98,000 - 6,700 \\
-  &= 80,300 \\ \\
-\mathbf{OCF} &= \text{gross income} - \text{taxes} \\
-  &= 80,300 - 19,180 \\
-  &= 61,120
+\mathbf{Gross\ income} &= \text{sales} - \text{costs} - \text{other expenses}\\
+  &= `r pretty(p14$sales)` - `r pretty(p14$costs)` -
+     `r pretty(p14$other.expenses)`\\
+  &= `r pretty(p14$gross.income <-
+     p14$sales - p14$costs - p14$other.expenses)`\\
+\mathbf{OCF} &= \text{gross income} - \text{taxes}\\
+  &= `r pretty(p14$gross.income)` - `r pretty(p14$taxes)`\\
+  &= `r pretty(p14$ocf <- p14$gross.income - p14$taxes)`\\\\
 \end{aligned}
 $$
 
-b. Cash flow to creditors (CFC)
+### b. Cash flow to creditors (CFC)
 
 $$
 \begin{aligned}
-\mathbf{CFC} &= \text{interest expense} - \text{new net borrowing} \\
-  &= 9,000 - (-7,100) \\
-  &= 16,100 \\ \\
+\mathbf{CFC} &= \text{interest expense} - \text{new net borrowing}\\
+  &= `r pretty(p14$interest)` - (-`r pretty(p14$redeemed.lt.debt)`)\\
+  &= `r pretty(p14$cfc <- p14$interest - (-p14$redeemed.lt.debt))`
 \end{aligned}
 $$
 
-c. Cash flow to stockholders (CFS)
+### c. Cash flow to stockholders (CFS)
 
 $$
 \begin{aligned}
-\mathbf{CFS} &= \text{dividends} - \text{net new equity raised} \\
- &= 9,500 - 7,550 \\
- &= 1,950
- \end{aligned}
+\mathbf{CFS} &= \text{dividends} - \text{net new equity raised}\\
+ &= `r pretty(p14$dividends)` - `r pretty(p14$new.equity)`\\
+ &= `r pretty(p14$cfs <- p14$dividends - p14$new.equity)`
+\end{aligned}
 $$
 
-d. With net fixed assets increased to \$26,100 during the year, the addition to net working capital is:
+### d. Net working capital (NWC)
+
+With net fixed assets increased to \$`r pretty(p14$delta.net.fixed.assets <- 26100)`
+during the year, the addition to net working capital is:
  
 $$
 \begin{aligned}
-\mathbf{CFFA} &= \text{CFC} + \text{CFS} \\
-  &= 16,100 + 1,950 \\
-  &= 18,050 \\ \\
+\mathbf{CFFA} &= \text{CFC} + \text{CFS}\\
+  &= `r pretty(p14$cfc)` + `r pretty(p14$cfs)`\\
+  &= `r pretty(p14$cffa)`\\\\
 \mathbf{Net\ capital\ spending} &= \text{increase in net fixed assets}
-  + \text{deprecation} \\
-  &= 26,100 + 16,500 \\
-  &= 42,600 \\ \\
+  + \text{depreciation}\\
+  &= `r pretty(p14$delta.net.fixed.assets)` + `r pretty(p14$depreciation)`\\
+  &= `r pretty(p14$capital.spending)`\\\\
 \mathbf{Change\ in\ NWC} &= \text{OCF} - \text{Net Capital Spending}
-  - \text{CFFA} \\
-  &= 61,120 - 42,600 - 18,050 \\
-  &= 470
+  - \text{CFFA}\\
+  &= `r pretty(p14$ocf)` - `r pretty(p14$capital.spending)` - `r pretty(p14$cffa)`\\
+  &= `r pretty(p14$delta.net.working.capital)`
 \end{aligned}
 $$
 
-## Using Income Statements
+---
 
-Given the following information for O'Hare Marine Co., calculate the depreciation expense: sales = \$41,000; costs = \$26,400; addition to retained earnings = \$4,900; dividends paid = \$1,570; interest expense = \$1,840; tax rate = 35 percent.
+## 15. Using Income Statements
 
-### Solution
+Given the following information for O'Hare Marine Co., calculate the
+depreciation expense: sales = \$41,000; costs = \$26,400; addition to retained
+earnings = \$4,900; dividends paid = \$1,570; interest expense = \$1,840; tax
+rate = 35 percent.
+
+---
+
+```{r problem 15; given, echo=F}
+p15 <- new.env()
+p15$sales <- 41000
+p15$costs <- 26400
+p15$retained.earnings <- 4900
+p15$dividends <- 1570
+p15$interest <- 1840
+p15$tax.rate <- .35
+p15$net.income <- p15$retained.earnings + p15$dividends
+p15$pretax.income <- round(p15$net.income / (1 - p15$tax.rate))
+p15$ebit <- p15$pretax.income + p15$interest
+p15$income <- p15$sales - p15$costs
+p15$depreciation <- p15$income - p15$ebit
+```
+
+We need to work backwards
+
+1. Find net income from retained earnings and dividends.
+2. Find pretax income by dividing the net income by (1 - tax rate).
+3. Find EBIT by adding interest to pretax income.
+4. Find income from the difference between sales and costs
+5. Find depreciation by subtracting EBIT from income
 
 $$
 \begin{aligned}
 \mathbf{Net\ Income} &= \text{addition to retained earnings}
-  + \text{dividends paid} \\
-  &= 4,900 + 1,570 \\
-  &= 6,470 \\ \\
-\mathbf{EBT} &= \frac{\text{net income}}{(1 - \text{tax rate})} \\
-  &= \frac{6,470}{(1 - .35)} \\
-  &= 9,954 \\ \\
-\mathbf{EBIT} &= \text{EBT} + \text{interest paid} \\
-  &= 9,954 + 1,840 \\
-  &= 11,794 \\ \\
-\mathbf{Gross\ income} &= \text{sales} - \text{costs} \\
-  &= 41,000 - 26,400 \\
-  &= 14,600 \\ \\
-\mathbf{Deprecation} &=  \text{gross income} - \text{EBIT} \\
-  &= 14,600 - 11,794 = 2,806
+  + \text{dividends paid}\\
+  &= `r pretty(p15$retained.earnings)` + `r pretty(p15$dividends)`\\
+  &= `r pretty(p15$net.income)`\\\\
+\mathbf{Pretax\ Income\ (rounded)} &= \frac{\text{net income}}
+  {(1 - \text{tax rate})}\\
+  &= \frac{`r pretty(p15$net.income)`}{(1 - `r p15$tax.rate`)}\\
+  &\approx `r pretty(p15$pretax.income)`\\\\
+\mathbf{EBIT} &= \text{Pretax income} + \text{interest paid}\\
+  &= `r pretty(p15$pretax.income)` + `r pretty(p15$interest)`\\
+  &= `r pretty(p15$ebit)`\\\\
+\mathbf{Income} &= \text{sales} - \text{costs}\\
+  &= `r pretty(p15$sales)` - `r pretty(p15$costs)`\\
+  &= `r pretty(p15$income)`\\\\
+\mathbf{Deprecation} &=  \text{income} - \text{EBIT}\\
+  &= `r pretty(p15$income)` - `r pretty(p15$ebit)`\\
+  &= `r pretty(p15$depreciation)`
 \end{aligned}
 $$
 
-## Residual Claims
+Depreciation expense is calculated as: \$`r pretty(p15$depreciation)`
+
+---
+
+## 16. Residual Claims
 
 Huang, Inc., is obligated to pay its creditors \$10,900 very soon.
 
-a. What is the market value of the shareholders' equity if assets have a market value of \$12,400?
+a. What is the market value of the shareholders' equity if assets have a market
+   value of \$12,400?
+
 b. What if assets equal \$9,600?
 
-### Solution
+---
 
-a. 
+```{r problem 16; given, echo=F}
+p16 <- new.env()
+p16$creditor.obligation <- 10900
+p16$mv.assets <- c(12400, 9600)
+p16$shareholders.equity <- p16$mv.assets - p16$creditor.obligation
+```
 
-$$
-\begin{aligned}
-\mathbf{Shareholders'\ equity} &= \text{assets market value}
-  - \text{credit obligations} \\
-  &= 12,400 - 10,900 \\
-  &= 1,500
-\end{aligned}
-$$
+### a. Market value of shareholders' equity
 
-b.
+Shareholders' equity: \$`r pretty(p16$mv.assets[1])`
 
 $$
 \begin{aligned}
 \mathbf{Shareholders'\ equity} &= \text{assets market value}
-  - \text{credit obligations} \\
-  &= 9,600 - 10,900 \\
-  &= - 1,300
+  - \text{creditor obligations} \\
+  &= `r pretty(p16$mv.assets[1])` - `r pretty(p16$creditor.obligation)`\\
+  &= `r pretty(p16$shareholders.equity[1])`
 \end{aligned}
 $$
 
-## Marginal versus Average Tax Rates
+### b. Market value of shareholders' equity
 
-(Refer to the corporate tax rates table from problem 4) Corporation Growth \$86,000 in taxable income, and Corporation Income has \$8,600,000 in taxable income.
+Assets: \$`r pretty(p16$mv.assets[2])`
+
+$$
+\begin{aligned}
+\mathbf{Shareholders'\ equity} &= \text{assets market value}
+  - \text{creditor obligations} \\
+  &= `r pretty(p16$mv.assets[2])` - `r pretty(p16$creditor.obligation)`\\
+  &= `r pretty(p16$shareholders.equity[2])`
+\end{aligned}
+$$
+
+---
+
+## 17. Marginal versus Average Tax Rates
+
+(Refer to the corporate tax rates table) Corporation Growth \$86,000 in taxable
+income, and Corporation Income has \$8,600,000 in taxable income.
 
 a. What is the tax bill for each firm?
-b. Suppose both firms have identified a new project that will increase taxable income by \$10,000. How much in additional taxes will each firm pay? Why is this amount the same?
 
-### Solution
+b. Suppose both firms have identified a new project that will increase taxable
+   income by \$10,000. How much in additional taxes will each firm pay? Why is
+   this amount the same?
 
-To calculate the taxes you sum up the values of all the marginal tax brackets to the bracket the taxable income falls into. We will use the same function we created for problem 4.
+---
 
-a.
+To calculate the taxes you sum up the values of all the marginal tax brackets to
+the bracket the taxable income falls into. We will use the same function we
+created for problem 4.
 
-```{r problem 17a}
-corp.growth <- income.tax(86000)
-corp.income <- income.tax(8600000)
+```{r problem 17; work, echo=F}
+p17 <- new.env()
+p17$corp.growth.taxable.income <- 86000
+p17$corp.income.taxable.income <- 8600000
+knitr::kable(corporate.tax.rate.table)
+p17$corp.growth.taxes <- p4$income.tax(p17$corp.growth.taxable.income)
+p17$corp.income.taxes <- p4$income.tax(p17$corp.income.taxable.income)
 ```
 
-```{r problem 17a output, echo=F}
-table.17a <- matrix(c(corp.growth, corp.income), ncol=1)
-rownames(table.17a) <- c("Corporation Growth", "Corporation Income")
-knitr::kable(table.17a)
-```
+### a. Tax bill
 
-b.
+We will use the `income.tax` function defined in problem 4.
 
-To find the marginal tax bracket we define a new function:
+The tax bill for Corporation growth is \$`r pretty(p17$corp.growth.taxes)`
+
+The tax bill for Corporation income is \$`r pretty(p17$corp.income.taxes)`
+
+### b. Marginal tax rates
+
+To find the marginal tax bracket we define a new function. This function takes
+an income and searches the brackets for which one the stated income is less than
+or equal to the upper limit of the bracket returning the tax rate.
 
 ```{r problem 17b income.tax.bracket function}
-income.tax.bracket <- function(income, brackets=table.tax.rates$Upper, rate=table.tax.rates$Tax.Rate){
+income.tax.bracket <- function(income,
+                               brackets=corporate.tax.rate.table$Upper){
   return(which(income <= brackets)[1])
 }
 ```
 
-We use the function to find the marginal tax bracket for both corporations with the next \$10,000 and the tax rate for each.
+We use the function to find the marginal tax bracket for both corporations with
+the next \$10,000 and the tax rate for each.
 
 ```{r problem17b calculation}
-corp.growth.b <- income.tax.bracket(96000)
-corp.income.b <- income.tax.bracket(8610000)
-corp.growth.t <- table.tax.rates[corp.growth.b, c("Tax.Rate")]
-corp.income.t <- table.tax.rates[corp.income.b, c("Tax.Rate")]
+p17$addition <- 10000
+p17$corp.growth.b <- income.tax.bracket(p17$corp.growth.taxable.income +
+                                        p17$addition)
+p17$corp.income.b <- income.tax.bracket(p17$corp.income.taxable.income +
+                                        p17$addition)
+p17$corp.growth.t <- corporate.tax.rate.table[p17$corp.growth.b, c("Tax.Rate")]
+p17$corp.income.t <- corporate.tax.rate.table[p17$corp.income.b, c("Tax.Rate")]
 ```
 
 ```{r problem17b output, echo=F}
-table.p17 <- matrix(c(corp.growth.t, corp.income.t, corp.growth.b, corp.income.b), ncol=2)
-rownames(table.p17) <- c("Corporation Growth", "Corporation Income")
-colnames(table.p17) <- c("Tax Rate", "Tax Bracket")
-knitr::kable(table.p17, caption="Marginal Tax Rates")
+p17$table <- matrix(c(p17$corp.growth.t, p17$corp.income.t,
+                      p17$corp.growth.b, p17$corp.income.b), ncol=2)
+rownames(p17$table) <- c("Corporation Growth", "Corporation Income")
+colnames(p17$table) <- c("Tax Rate", "Tax Bracket")
+knitr::kable(p17$table, caption="Marginal Tax Rates")
 ```
 
 The third and fifth tax brackets tax the next \$10,000 at the same rate 34\%.
 
-## Net Income and OCF
+---
 
-During 2012, Raines Umbrella Corp. had sales of \$630,000. Costs of goods sold, administrative and selling expenses, and deprecation expenses were \$470,000, \$95,000, and \$140,000, respectively. In addition, the company had an interest expense of \$70,000 and a tax rae of 35 percent. (ignore any tax loss carryback or carry forward provisions.)
+## 18. Net Income and OCF
+
+During 2012, Raines Umbrella Corp. had sales of \$630,000. Costs of goods sold,
+administrative and selling expenses, and depreciation expenses were \$470,000,
+\$95,000, and \$140,000, respectively. In addition, the company had an interest
+expense of \$70,000 and a tax rate of 35 percent. (ignore any tax loss carryback
+or carry forward provisions.)
 
 a. What is Raines's net income for 2012?
 b. What is its operating cash flow?
 c. Explain your results in (a) and (b).
 
-### Solution
+---
 
-a. EBT is negative so no taxes are owed. The net income is negative.
+```{r problem 18; given, echo=F}
+p18 <- new.env()
+p18$sales <- 630000
+p18$cogs <- 470000
+p18$admin.selling.expenses <- 95000
+p18$depreciation <- 140000
+p18$interest <- 70000
+p18$tax.rate <- .35
+p18$income <- p18$sales - p18$cogs - p18$admin.selling.expenses
+p18$ebit <- p18$income - p18$depreciation
+p18$pretax.income <- p18$ebit - p18$interest
+## if pretax.income is negative then we pay no taxes.
+p18$taxes <- round(max(p18$pretax.income, 0) * p18$tax.rate)
+p18$net.income <- p18$pretax.income - p18$taxes
+p18$ocf <- p18$ebit + p18$depreciation - p18$taxes
+```
 
-$$
-\begin{aligned}
-\mathbf{EBIT} &= \text{sales} - \text{costs of goods sold} - \text{deprecation} \\
-  &= 630,000 - 470,000 - 95,000 - 140,000 = - 75,000 \\ \\
-\mathbf{EBT} &= \text{EBIT} - \text{interest expense} \\
-  &= - 75,000 - 70,000 = - 145,000 \\ \\
-\mathbf{Taxes} &= 0 \\ \\
-\mathbf{Net\ income} = - 145,000
-\end{aligned}
-$$
+### a. Raines's net income for 2012
 
-b. Deprecation is added back to EBIT
-
-$$
-\begin{aligned}
-\mathbf{OCF} &= \text{EBIT} + \text{deprecation} - \text{taxes} \\
-  &= - 75,000 + 140,000 - 0 \\
-  &= 65,000
-\end{aligned}
-$$
-
-c. Net income is negative (-\$145,000), which means the company was not profitable for the period. However, operating cash flow was positive (\$65,000). This is because deprecation is a non-cash expense. The company is potentially having problems raising enough cash to cover the cost of buying new fixted assets.
-
-## Accounting values versus cash flows
-
-In problem 18, suppose Raines Umbrella Corp. paid out \$34,000 in cash dividends. Is this possible? If spending on net fixed assets and net working capital was zero, and if no new stock was issued during the year, what was the change in the firm's long-term debt account?
-
-### Solution
-
-Yes, Raines Umbrella Corp. can pay out \$34,000 in cash dividends because operating cash flow is positive \$65,000. Since spending on net fixed assets, net working capital was zero, and no new stock was issued, the only other use of the operating cash flow is in long-term debt.
 
 $$
 \begin{aligned}
-\mathbf{CFFA} &= \text{OCF} - \text{net capital spending} - \text{change in net working capital} \\
-  &= 65,000 - 0 - 0 \\
-  &= 65,000 \\ \\
-\mathbf{CFC} &= \text{CFFA} + \text{CFS} \\
-  &= 65,000 + (- 34,000) \\
-  &= 36,000
+\mathbf{gross\ income} &= \text{sales} - \text{costs of goods sold}
+  - \text{administrative and selling expenses} \\
+  &= `r pretty(p18$sales)` - `r pretty(p18$cogs)` -
+     `r pretty(p18$admin.selling.expenses)`\\
+  &= `r pretty(p18$income)`\\\\
+\mathbf{EBIT} &= \text{income} - \text{depreciation} \\
+  &= `r pretty(p18$income)` - `r pretty(p18$depreciation)`\\
+  &= `r pretty(p18$ebit)`\\\\
+\mathbf{Pretax\ income} &= \text{EBIT} - \text{interest}\\
+  &= `r pretty(p18$ebit)` - `r pretty(p18$interest)`\\
+  &= `r pretty(p18$pretax.income)`
 \end{aligned}
 $$
 
-So, \$36,000 was used to pay off long-term debt.
+Since pretax income is negative, Raines pays no taxes.
 
-## Calculating cash flows
+### b. Deprecation is added back to EBIT to get the OCF
 
-Cusic Industries had the following operating results for 2012: sales = \$19,900; cost of goods sold = \$14,200; deprecation expense = \$2,700; interest expense = \$670; dividends paid = \$650. At the beginning of the year, net fixed assets were \$15,340, current assets were \$4,420, and current liabilities were \$2,470. At the end of the year, net fixed assets were \$16,770, current assets were \$5,135, and current liabilities were \$2,535. The tax rate for 2012 was 40 percent.
+$$
+\begin{aligned}
+\mathbf{OCF} &= \text{EBIT} + \text{depreciation}\\
+  &= `r pretty(p18$ebit)` + `r pretty(p18$depreciation)`\\
+  &= `r pretty(p18$ocf)`
+\end{aligned}
+$$
+
+### c. What do the results in (a) and (b) mean?
+
+Net income is negative due to high costs, depreciation, and interest expense
+leading to a pre-tax loss. However, because depreciation is a non-cash expense,
+and despite the accounting loss, the business still generated \$65,000 in cash
+from operations.
+
+---
+
+## 19. Accounting values versus cash flows
+
+```{r problem 19; setup, echo=F}
+p19 <- new.env()
+```
+
+In problem 18, suppose Raines Umbrella Corp. paid out \$34,000 in cash
+dividends. Is this possible? If spending on net fixed assets and net working
+capital was zero, and if no new stock was issued during the year, what was the
+change in the firm's long-term debt account?
+
+---
+
+```{r problem 19; given, echo=F}
+p19$ocf <- p18$ocf
+p19$interest <- p18$interest
+p19$delta.ncs <- 0
+p19$delta.nwc <- 0
+p19$dividends <- 34000
+p19$cfs <- p19$dividends
+p19$cffa <- p19$ocf - p19$delta.ncs - p19$delta.nwc
+p19$cfc <- p19$cffa - p19$cfs
+p19$delta.lt.debt <- p19$cfc - p19$interest
+```
+
+Yes, since Raines Umbrella Corp. has positive operating cash flow, the company
+can pay out a cash dividend of \$34,000.
+
+We need to find the change in long-term debt.
+
+### Approach
+
+$$
+\text{CFFA} = \text{CFC} + \text{CFS}
+$$
+
+### Step 1: Compute free cash flow (CFFA)
+
+$$
+\begin{aligned}
+\mathbf{CFFA} &= \text{OCF} - \text{net capital spending}
+  - \text{change in net working capital}\\
+  &= `r pretty(p19$ocf)` - `r p19$delta.ncs` - `r p19$delta.nwc`\\
+  &= `r pretty(p19$cffa)`
+\end{aligned}
+$$
+
+### Step 2: Solve for cash flow to creditors (CFC)
+
+$$
+\begin{aligned}
+\mathbf{CFC} &= \text{CFFA} - \text{CFS}\\
+  &= `r pretty(p19$cffa)` - (`r p19$cfs`)\\
+  &= `r pretty(p19$cfc)`
+\end{aligned}
+$$
+
+The change in long-term debt can be found:
+
+$$
+\begin{aligned}
+\mathbf{CFC} &= \text{interest paid} - \text{change in Long-term debt}\\
+\text{change in Long-term debt} &= \text{CFC} - \text{interest paid}\\
+  &= `r pretty(p19$cfc)` - `r pretty(p19$interest)`\\
+  &= `r pretty(p19$delta.lt.debt)`
+\end{aligned}
+$$
+
+---
+
+## 20. Calculating cash flows
+
+Cusic Industries had the following operating results for 2012: sales = \$19,900;
+cost of goods sold = \$14,200; deprecation expense = \$2,700; interest expense =
+\$670; dividends paid = \$650. At the beginning of the year, net fixed assets
+were \$15,340, current assets were \$4,420, and current liabilities were
+\$2,470. At the end of the year, net fixed assets were \$16,770, current assets
+were \$5,135, and current liabilities were \$2,535. The tax rate for 2012 was 40
+percent.
 
 a. What is net income for 2012?
+
 b. What is the operating cash flow for 2012?
+
 c. What is the cash flow from assets from 2012? Is this possible? Explain.
-d. If no new debt was issued during the year, what is the cash flow to creditors? What is the cash flow to stockholders? Explain and interpret the positive and negative signs of your answers in (a) through (d).
 
-a. Calculating net income
+d. If no new debt was issued during the year, what is the cash flow to
+creditors? What is the cash flow to stockholders? Explain and interpret the
+positive and negative signs of your answers in (a) through (d).
+
+---
+
+```{r problem 20; given, echo=F}
+p20 <- new.env()
+p20$sales <- 19900
+p20$cogs <- 14200
+p20$depreciation <- 2700
+p20$interest <- 670
+p20$dividends <- 650
+p20$net.fixed.assets <- c(15340, 16770)
+p20$current.assets <- c(4420, 5135)
+p20$current.liabilities <- c(2470, 2535)
+# c(current.assets, current.liabilities)
+p20$current.beginning <- c(4420, 2470)
+p20$current.ending <- c(5135, 2535)
+p20$tax.rate <- .4
+p20$income <- p20$sales - p20$cogs
+p20$ebit <- p20$income - p20$depreciation
+p20$pretax.income <- p20$ebit - p20$interest
+p20$taxes <- round(p20$pretax.income * p20$tax.rate, 2)
+p20$net.income <- p20$pretax.income - p20$taxes
+p20$ocf <- p20$ebit + p20$depreciation - p20$taxes
+p20$delta.ncs <- diff(p20$net.fixed.assets)
+p20$delta.nwc <- diff(rev(p20$current.ending)) - diff(rev(p20$current.beginning))
+p20$cffa <- p20$ocf - p20$delta.ncs - p20$delta.nwc
+p20$cfc <- p20$interest
+p20$cfs <- p20$cffa - p20$cfc
+```
+
+### a. Calculating net income
 
 $$
 \begin{aligned}
-\mathbf{EBT} &= \text{sales} - \text{costs} - \text{deprecation}
-  - \text{interest} \\
-  &= 19,000 - 14,200 - 2,700 - 670 \\
-  &= 2,330 \\ \\
-\mathbf{Taxes} &= \text{EBIT} \times \text{tax rate} \\
-  &= 2,100 \times .4 = 932 \\ \\
-\mathbf{Net\ Income} &= \text{EBIT} \times (1 - \text{tax rate}) \\
-  &= 2,330 \times .6 \\
-  &= 1,398
+\mathbf{Income} &= \text{sales} - \text{cost of goods sold}\\
+  &= `r pretty(p20$sales)` - `r pretty(p20$cogs)`\\
+  &= `r pretty(p20$income)`\\\\
+\mathbf{EBIT} &=  \text{Income} - \text{depreciation}\\
+  &= `r pretty(p20$income)` - `r pretty(p20$depreciation)`\\
+  &= `r pretty(p20$ebit)`\\\\
+\mathbf{Pretax\ income} &= \text{EBIT} - \text{interest}\\
+  &= `r pretty(p20$ebit)` - `r pretty(p20$interest)`\\
+  &= `r pretty(p20$pretax.income)`\\\\
+\mathbf{Taxes} &= \text{Pretax income} \times \text{tax rate}\\
+  &= `r pretty(p20$pretax.income)` \times `r p20$tax.rate`\\
+  &= `r pretty(p20$taxes)`\\\\
+\mathbf{Net\ Income} &= \text{Pretax income} - \text{Taxes}\\
+  &= `r pretty(p20$pretax.income)` - `r pretty(p20$taxes)`\\
+  &= `r pretty(p20$net.income)`
 \end{aligned}
 $$
 
-b. The operating cash flow
+### b. The operating cash flow
 
 $$
 \begin{aligned}
-\mathbf{EBIT} &= \text{sales} - \text{costs} - \text{deprecation} \\
-  &= 19,900 - 14,200 - 2,700 \\
-  &= 3,000 \\ \\
-\mathbf{OCF} &= \text{EBIT} + \text{deprecation} - \text{taxes} \\
-  &= 3,000 + 2,700 - 932 \\
-  &= 4,768
+\mathbf{OCF} &= \text{EBIT} + \text{depreciation} - \text{taxes}\\
+  &= `r pretty(p20$ebit)` + `r pretty(p20$depreciation)`
+     - `r pretty(p20$taxes)`\\
+  &= `r pretty(p20$ocf)`
 \end{aligned}
 $$
 
-c. The cash flow from assets (CFFA)
+### c. The cash flow from assets (CFFA)
 
 $$
 \begin{aligned}
-\mathbf{CFFA} &= \text{OCF} + \text{net capital spending} + \text{change in net working capital}
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
-\mathbf{Net\ capital\ spending} &= \text{net fixed assets beginning of year}
- - \text{net fixed assets end of year} \\
- &\ \ \ \ + \text{deprecation} \\
-   &= 16,770 - 15,340 + 2,700 \\
-   &= 4,130
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
-\mathbf{Net\ working\ capital} &= \text{current assets} - \text{current liabilities} \\ \\
-\mathbf{Change\ in\ net\ working\ capital} &= \text{net working capital beginning of year}
-  - \text{net working capital end of year} \\
-  &= (5,135 - 2,535) - (4,420 - 2,470) \\
-  &= 650
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
-\mathbf{CFFA} &= 3,960 - 1,430 - 650 \\
-  &= - 12
-\end{aligned}
-$$
-
-A negative CFFA indicates that the company invested more in fixed assets and working capital than generated in cash from operations. This is possible and can occur when the firm is in a growth phase, using cash for investments that could lead to future growth.
-
-d. Cash flow to creditors and stockholders
-
-$$
-\begin{aligned}
-\mathbf{CFC} &= \text{interest paid} - \text{net new borrowing} \\
-  &= 670 - 0 \\
-  &= 670
+\mathbf{CFFA} &= \text{OCF} - \text{change in capital spending}
+  - \text{change in net working capital}
 \end{aligned}
 $$
 
 $$
 \begin{aligned}
-\mathbf{CFS} &= \text{dividends paid} - \text{net new equity raised} \\
-  &= 650 - 0 \\
-  &= 650
+\mathbf{Change\ in\ capital\ spending} &= \text{net fixed assets end of year}
+ - \text{net fixed assets beginning of year}\\
+   &= `r pretty(p20$net.fixed.assets[2])` -
+      `r pretty(p20$net.fixed.assets[1])`\\
+   &= `r pretty(p20$delta.ncs)`
 \end{aligned}
 $$
 
-## Calculating cash flows
+$$
+\begin{aligned}
+\mathbf{Change\ in\ net\ working\ capital} &=
+    \text{net working capital end of year}
+  - \text{net working capital beginning of year}\\
+  &= (`r pretty(p20$current.ending[1])` - `r pretty(p20$current.ending[2])`)
+   - (`r pretty(p20$current.beginning[1])` - `r pretty(p20$current.beginning[2])`)\\
+  &= `r pretty(p20$delta.nwc)`
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\mathbf{CFFA} &= \text{OCF} - \text{net capital spending}
+  + \text{change in net working capital}\\
+  &= `r pretty(p20$ocf)` - `r pretty(p20$delta.ncs)` - `r pretty(p20$delta.nwc)`\\
+  &= `r pretty(p20$cffa)`
+\end{aligned}
+$$
+
+Yes, this positive CFFA is possible--it indicates the firm generated more cash
+from its operations than it invested in assets and working capital.
+
+### d. Cash flow to creditors and stockholders
+
+$$
+\begin{aligned}
+\mathbf{CFC} &= \text{interest paid} - \text{net new borrowing}\\
+  &= `r pretty(p20$interest)` - 0\\
+  &= `r pretty(p20$cfc)`
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\mathbf{CFS} &= \text{CFFA} - \text{dividends paid}
+  + \text{net new equity raised}\\
+  &= `r pretty(p20$cffa)` - `r pretty(p20$cfc)`\\
+  &= `r pretty(p20$cfs)`
+\end{aligned}
+$$
+
+Alternatively
+
+$$
+\begin{aligned}
+\mathbf{CFS} &= \text{dividends paid} - \text{net new equity}
+\end{aligned}
+$$
+
+However, we are not told what the net new equity is. We can assume that
+the \$`r pretty(p20$cfs)` cash flow to stockholders includes
+\$`r pretty(p20$dividends)` dividends and
+\$`r pretty(p20$cfs - p20$dividends)` of stock repurchases.
+
+---
+
+## 21. Calculating cash flows
 
 Consider the following abbreviated financial statements for Weston Enterprises:
 
@@ -2058,257 +2468,355 @@ b. What is the change in net working capital for 2012?
 c. In 2012, Weston Enterprises purchased \$2,160 in new fixed assets. How much in fixed assets did Weston Enterprises sell? What is the cash flow from assets for the year? (The tax rate is 40 percent.)
 d. During 2012, Weston Enterprises raised \$432 in new long-term debt. How much long-term debt must Weston Enterprises have paid off during the year? What is the cash flow to creditors?
 
-```{r problem 21 balance sheet, echo=F}
- #Assets for balance sheet
-table.p21.partial.assets <- matrix(c(936,4176,1015,4896), ncol=2)
-rownames(table.p21.partial.assets) <- c("Current assets", "Net fixed assets")
-colnames(table.p21.partial.assets) <- c("2011", "2012")
- #Liabilities for balance sheet
-table.p21.partial.liabilities <- matrix(c(382,2160,416,2477), ncol=2)
-rownames(table.p21.partial.liabilities) <- c("Current liabilities",
-                                             "Long-term debt")
-colnames(table.p21.partial.liabilities) <- c("2011", "2012")
-table.p21.partial.balance.sheet <- list(
-  table.p21.partial.assets,
-  table.p21.partial.liabilities
-)
-knitr::kable(table.p21.partial.balance.sheet,
-             caption="Weston Enterprises 2011 and 2012 parital balance sheet")
- #Income Statement 2012
-table.p21.income.statement.2012 <- matrix(c(12380, 5776, 1150, 314), ncol=1)
-rownames(table.p21.income.statement.2012) <- c("Sales", "Costs", "Deprecation",
-                                               "Interest paid")
-knitr::kable(table.p21.income.statement.2012,
-             caption="Weston Enterprises 2012 Income Statement")
+```{r problem 21; balance sheet, echo=F}
+p21 <- new.env()
+## Assets for balance sheet
+p21$bs.assets <- matrix(c(936,4176,1015,4896), ncol=2)
+rownames(p21$bs.assets) <- c("Current assets", "Net fixed assets")
+colnames(p21$bs.assets) <- c("2011", "2012")
+## Liabilities for balance sheet
+p21$bs.liabilities <- matrix(c(382,2160,416,2477), ncol=2)
+rownames(p21$bs.liabilities) <- c("Current liabilities", "Long-term debt")
+colnames(p21$bs.liabilities) <- c("2011", "2012")
+## Balance sheet
+p21$balance.sheet <- list( pretty(p21$bs.assets), pretty(p21$bs.liabilities))
+knitr::kable(p21$balance.sheet,
+  caption="Weston Enterprises 2011 and 2012 parital balance sheet") %>%
+  kable_styling(latex_options = "striped") %>%
+  kable_styling(latex_options = "HOLD_position")
 ```
 
-### Solution
+```{r problem 21; income statement, echo=F}
+## Income Statement 2012
+p21$income.statement.2012 <- matrix(c(12380, 5776, 1150, 314), ncol=1)
+rownames(p21$income.statement.2012) <- c("Sales", "Costs", "Deprecation",
+                                         "Interest paid")
+knitr::kable(pretty(p21$income.statement.2012),
+  caption="Weston Enterprises 2012 Income Statement") %>%
+  kable_styling(latex_options = "striped") %>%
+  kable_styling(latex_options = "HOLD_position")
 
-a. Calculating the owners' equity for 2011 and 2012.
-
-```{r problem 21 a}
-total.assets.2011 <- sum(table.p21.partial.assets[,1])
-total.liabilities.2011 <- sum(table.p21.partial.liabilities[,1])
-total.assets.2012 <- sum(table.p21.partial.assets[,2])
-total.liabilities.2012 <- sum(table.p21.partial.liabilities[,2])
-share.holders.equity.2011 <- total.assets.2011 - total.liabilities.2011
-share.holders.equity.2012 <- total.assets.2012 - total.liabilities.2012
-share.holders.equity <- matrix(c(share.holders.equity.2011,
-                                 share.holders.equity.2012),ncol=2)
-colnames(share.holders.equity) <- c("2011", "2012")
-knitr::kable(share.holders.equity, caption="Shareholders' equity")
+## c(2011, 2012)
+p21$assets <- c(sum(p21$bs.assets[,1]), sum(p21$bs.assets[,2]))
+p21$liabilities <- c(sum(p21$bs.liabilities[,1]), sum(p21$bs.liabilities[,2]))
+p21$shareholders.equity <- c(p21$bs.assets[1] - p21$bs.liabilities[1],
+                             p21$bs.assets[2] - p21$bs.liabilities[2])
+p21$nwc <- c(p21$bs.assets[1,1] - p21$bs.liabilities[1,1],
+             p21$bs.assets[1,2] - p21$bs.liabilities[1,2])
+p21$delta.nwc <- diff(p21$nwc)
+p21$new.fixed.assets <- 2160
+p21$tax.rate <- .4
+p21$depreciation <- as.numeric(p21$income.statement.2012[3,1])
+p21$interest <- as.numeric(p21$income.statement.2012[4,1])
+p21$delta.net.fixed.assets <- as.numeric(diff(p21$bs.assets[2,]))
+p21$sold.fixed.assets <- p21$new.fixed.assets - p21$delta.net.fixed.assets -
+  p21$depreciation
+p21$income <- as.numeric(diff(rev(p21$income.statement.2012[1:2,1])))
+p21$ebit <- p21$income - p21$depreciation
+p21$pretax.income <- p21$ebit - p21$interest
+p21$taxes <- p21$pretax.income * p21$tax.rate
+p21$net.income <- p21$pretax.income - p21$taxes
+p21$ocf <- p21$ebit + p21$depreciation - p21$taxes
+p21$cffa <- p21$ocf - p21$delta.net.fixed.assets - p21$delta.nwc
+p21$lt.debt <- c(2160, 2477)
+p21$new.lt.debt <- 432
+p21$delta.lt.debt <- as.numeric(diff(p21$bs.liabilities[2,1:2]))
+p21$retired.lt.debt <- p21$new.lt.debt - p21$delta.lt.debt
+p21$cfc <- p21$interest + p21$retired.lt.debt
 ```
 
-b. Change in net working capital for 2012
+---
 
-```{r problem 21 b}
-current.assets <- diff(table.p21.partial.assets[1,])
-current.liabilities <- diff(table.p21.partial.liabilities[1,])
-change.nwc <- as.numeric(diff(c(current.liabilities, current.assets)))
-```
+### a. Calculating the owners' equity for 2011 and 2012.
 
-c. Fixed assets
+Shareholders' Equity = Assets - Liabilities
 
-```{r problem 21 c}
-new.fixed.assets.2012 <- 2160
-fixed.assets.2011 <- 4176
-fixed.assets.2012 <- 4896
-sold.fixed.assets.2012 <- new.fixed.assets.2012 + fixed.assets.2011 -
-  fixed.assets.2012
+$$
+\begin{aligned}
+\text{2011 Assets} &= `r pretty(p21$assets[1])`\\
+\text{2012 Assets} &= `r pretty(p21$assets[2])`\\
+\text{2011 Liabilities} &= `r pretty(p21$liabilities[1])`\\
+\text{2012 Liabilities} &= `r pretty(p21$liabilities[2])`\\
+\text{2011 Shareholders' equity} &= `r pretty(p21$shareholders.equity[1])`\\
+\text{2012 Shareholders' equity} &= `r pretty(p21$shareholders.equity[2])`\\
+\end{aligned}
+$$
 
-gross.2012 <- 12380 - 5776
-ebit.2012 <- gross.2012 - 1150
-taxes.2012 <- ebit.2012 * .4
-cffa.2012 <- 100
-knitr::kable(cffa.2012, col.names = "CFFA")
-```
+### b. Change in net working capital for 2012
 
-## Financial Statements
+net working capital = current assets - current liabilities
+
+$$
+\begin{aligned}
+\text{2011 net working capital} &= `r pretty(p21$nwc[1])`\\
+\text{2012 net working capital} &= `r pretty(p21$nwc[2])`\\
+\text{2012 change in NWC} &= `r pretty(p21$delta.nwc)`
+\end{aligned}
+$$
+
+### c. Fixed assets and Cash flow from assets (CFFA)
+
+$$
+\begin{aligned}
+\text{Sold fixed assets} &= \text{Bought fixed assets}
+  - \text{Change in fixed assets} - \text{Depreciation}\\
+  &= `r pretty(p21$new.fixed.assets)`
+  - `r pretty(p21$delta.net.fixed.assets)`
+  - `r pretty(p21$income.statement.2012[3,1])`\\
+  &= `r pretty(p21$sold.fixed.assets)`\\
+\end{aligned}
+$$
+
+$$
+\text{CFFA} = \text{OCF} - \text{NCS} - \Delta \text{NWC}
+$$
+
+$$
+\begin{aligned}
+\text{Income} &= \text{sales} - \text{costs}\\
+  &= `r pretty(as.numeric(p21$income.statement.2012[1,1]))`
+  -  `r pretty(as.numeric(p21$income.statement.2012[2,1]))`\\
+  &= `r pretty(p21$income)`\\\\
+\text{EBIT} &= \text{income} - \text{depreciation}\\
+  &= `r pretty(p21$income)` - `r pretty(p21$depreciation)`\\
+  &= `r pretty(p21$ebit)`\\\\
+\text{Pretax income} &= \text{EBIT} - \text{interest}\\
+  &= `r pretty(p21$ebit)` - `r pretty(p21$interest)`\\
+  &= `r pretty(p21$pretax.income)`\\\\
+\text{Taxes} &= \text{pretax income} \times \text{tax rate (40\%)}\\
+  &= `r pretty(p21$pretax.income)` \times `r p21$tax.rate`\\
+  &= `r pretty(p21$taxes)`\\\\
+\text{Net income} &= \text{pretax income} - \text{taxes}\\
+  &= `r pretty(p21$pretax.income)` - `r pretty(p21$taxes)`\\
+  &= `r pretty(p21$net.income)`\\\\
+\text{OCF} &= \text{EBIT} + \text{depreciation} - \text{taxes}\\
+  &= `r pretty(p21$ebit)` + `r pretty(p21$depreciation)`
+  -  `r pretty(p21$taxes)`\\
+  &= `r pretty(p21$ocf)`\\\\
+\text{CFFA} &= \text{OCF} - \text{NCS} - \Delta \text{NWC}\\
+  &= `r pretty(p21$ocf)` - `r pretty(p21$delta.net.fixed.assets)`
+  -  `r pretty(p21$delta.nwc)`\\
+  &= `r pretty(p21$cffa <- p21$ocf - p21$delta.net.fixed.assets -
+               p21$delta.nwc)`
+\end{aligned}
+$$
+
+### d. Changes in Long-term debt and cash flow to creditors
+
+$$
+\begin{aligned}
+\text{2012 New long-term debt} &= `r pretty(p21$new.lt.debt <- 432)`\\
+\text{2012 LT Debt} &= `r pretty(p21$lt.debt[2])`\\
+\text{2011 LT Debt} &= `r pretty(p21$lt.debt[1])`\\
+\text{2012 Paid off debt} &= `r pretty(p21$retired.lt.debt)`\\\\
+\text{CFC} &= \text{Interest} + \text{Retired debt}\\
+  &= `r pretty(p21$interest)` + `r pretty(p21$retired.lt.debt)`\\
+  &= `r pretty(p21$cfc)`
+\end{aligned}
+$$
+
+---
+
+## Information for problems 22 and 23
 
 ```{r Ingersoll problems 22 and 23, echo=F}
-table.ingersoll <- matrix( c(
-  7835, 1125, 2696, 639, 525, 4109, 5439, 794, 13460, 34455, 4316, 9670, 956,
-  8409, 1126, 3060, 534, 603, 5203, 6127, 746, 16050, 35277, 4185, 9938, 1051
-), ncol=2)
-colnames(table.ingersoll) <- c("2011", "2012")
-rownames(table.ingersoll) <- c("Sales", "Deprecation", "Cost of goods sold",
+p22 <- new.env()
+p22$y2011 <- c(7835, 1125, 2696, 639, 525, 4109, 5439,
+               794, 13460, 34455, 4316, 9670, 956)
+p22$y2012 <- c(8409, 1126, 3060, 534, 603, 5203, 6127,
+               746, 16050, 35277, 4185, 9938, 1051)
+p22$ingersoll <- matrix( c(p22$y2011, p22$y2012), ncol=2)
+colnames(p22$ingersoll) <- c("2011", "2012")
+rownames(p22$ingersoll) <- c("Sales", "Depreciation", "Cost of goods sold",
                                "Other expenses", "Interest", "Cash",
-                               "Account receivable", "Short-term notes payable",
+                               "Accounts receivable", "Short-term notes payable",
                                "Long-term debt", "Net fixed assets",
                                "Accounts payable", "Inventory", "Dividends")
-knitr::kable(table.ingersoll)
+knitr::kable(p22$ingersoll)
+p22$tax.rate <- .34
 ```
+
+---
+
+## 22. Financial Statements
 
 Draw up an income statement and balance sheet for the company for 2011 and 2012.
 
+---
+
+### Income statement
+
 ```{r problem 22 income statement, echo=F}
-income.statement.headings <- c(
+p22$income.statement.headings <- c(
   "Sales",
   "Cost of goods sold",
   "Other expenses",
-  "Deprecation",
+  "Depreciation",
   "EBIT",
   "Interest expense",
   "Pretax income",
   "Taxes",
   "Net income",
-  "Retained earnings",
+  "Addition to retained earnings",
   "Dividends"
 )
- 2011
-ingersoll.ebit.2011 <- sum(7835, -2696, -639, -1125)
-ingersoll.pretax.income.2011 <- sum(ingersoll.ebit.2011, -525)
-ingersoll.taxes.2011 <- income.tax(ingersoll.pretax.income.2011)
-ingersoll.net.income.2011 <- sum(ingersoll.pretax.income.2011, -ingersoll.taxes.2011)
-ingersoll.retained.earnings.2011 <- sum(ingersoll.net.income.2011, -956)
- 2012
-ingersoll.ebit.2012 <- sum(8409, -3060, -534, -1126)
-ingersoll.pretax.income.2012 <- sum(ingersoll.ebit.2012, -603)
-ingersoll.taxes.2012 <- income.tax(ingersoll.pretax.income.2012)
-ingersoll.net.income.2012 <- sum(ingersoll.pretax.income.2012, -ingersoll.taxes.2012)
-ingersoll.retained.earnings.2012 <- sum(ingersoll.net.income.2012, -1051)
-ingersoll.income.statement <- matrix(
-  c(
-   # 2011
-   7835,
-   2696,
-   639,
-   1125,
-   ingersoll.ebit.2011,
-   525,
-   ingersoll.pretax.income.2011,
-   ingersoll.taxes.2011,
-   ingersoll.net.income.2011,
-   ingersoll.retained.earnings.2011,
-   956,
-   # 2012
-   8409,
-   3060,
-   534,
-   1126,
-   ingersoll.ebit.2012,
-   603,
-   ingersoll.pretax.income.2012,
-   ingersoll.taxes.2012,
-   ingersoll.net.income.2012,
-   ingersoll.retained.earnings.2012,
-   1051
-  ),
-ncol=2)
-rownames(ingersoll.income.statement) <- income.statement.headings
-colnames(ingersoll.income.statement) <- c("2011", "2012")
-knitr::kable(ingersoll.income.statement,
-             caption="Ingersoll, Inc. Income Statement")
+# 2011
+# EBIT = sales - cogs - other - depreciation
+p22$sales <- as.numeric(p22$ingersoll["Sales",])
+p22$cogs <- as.numeric(p22$ingersoll["Cost of goods sold",])
+p22$other.expenses <- as.numeric(p22$ingersoll["Other expenses",])
+p22$income <- p22$sales - p22$cogs - p22$other.expenses
+p22$depreciation <- as.numeric(p22$ingersoll["Depreciation",])
+p22$ebit <- p22$income - p22$depreciation
+p22$interest <- as.numeric(p22$ingersoll["Interest",])
+p22$pretax.income <- p22$ebit - p22$interest
+p22$taxes <- p22$pretax.income * p22$tax.rate
+p22$net.income <- p22$pretax.income - p22$taxes
+p22$dividends <- as.numeric(p22$ingersoll["Dividends",])
+p22$addition.to.retained.earnings <- p22$net.income - p22$dividends
+p22$income.statement <- matrix(c(p22$sales[2], p22$cogs[2],
+  p22$other.expenses[2], p22$depreciation[2], p22$ebit[2], p22$interest[2],
+  p22$pretax.income[2], p22$taxes[2], p22$net.income[2],
+  p22$addition.to.retained.earnings[1], p22$dividends[1], p22$sales[1],
+  p22$cogs[1], p22$other.expenses[1], p22$depreciation[1], p22$ebit[1],
+  p22$interest[1], p22$pretax.income[1], p22$taxes[1], p22$net.income[1],
+  p22$addition.to.retained.earnings[1], p22$dividends[1]), ncol=2)
+rownames(p22$income.statement) <- p22$income.statement.headings
+colnames(p22$income.statement) <- c("2012", "2011")
+knitr::kable(pretty(p22$income.statement),
+    caption="Ingersoll, Inc. Income Statement") %>%
+  kable_styling(latex_options = "striped") %>%
+  kable_styling(latex_options = "HOLD_position")
 ```
 
-```{r problem 22 balance sheet, echo=F}
-assets.headers <- c("Cash", "Accounts Receivable", "Inventory",
-                    "Net Fixed Assets")
-ingersoll.assets <- matrix(
-  c(
-    #2011
-    4109,
-    5439,
-    9670,
-    34455,
-    # 2012
-    5203,
-    6127,
-    9938,
-    35277
-  ),
-  ncol = 2
-)
-rownames(ingersoll.assets) <- assets.headers
-colnames(ingersoll.assets) <- c("2011", "2012")
+### Balance Sheet
 
-liabilities.headers <- c("Short-term notes payable", "Accounts payable",
-                         "Long-term debt")
-ingersoll.liabilities <- matrix(
-  c(
-    # 2011
-    794,
-    4316,
-    13460,
-    # 2012
-    746,
-    4185,
-    16050
-  ),
-  ncol=2
-)
-rownames(ingersoll.liabilities) <- liabilities.headers
-colnames(ingersoll.liabilities) <- c("2011", "2012")
-ingersoll.total.assets <- matrix(colSums(ingersoll.assets),ncol=2)
-colnames(ingersoll.total.assets) <- c("2011", "2012")
-rownames(ingersoll.total.assets) <- c("Total Assets")
-knitr::kable(rbind(ingersoll.assets, ingersoll.total.assets),
-             caption="Balance Sheet: Assets")
-ingersoll.total.liabilities <- matrix(colSums(ingersoll.liabilities),ncol=2)
-rownames(ingersoll.total.liabilities) <- c("Total Liabilities")
-colnames(ingersoll.total.liabilities) <- c("2011", "2012")
-knitr::kable(rbind(ingersoll.liabilities, ingersoll.total.liabilities),
-             caption="Balance Sheet: Liabilities")
-knitr::kable(sum(ingersoll.assets[,1], -ingersoll.liabilities[,1]),
-             caption="Shareholders' equity", col.names="2011")
-knitr::kable(sum(ingersoll.assets[,2], -ingersoll.liabilities[,2]),
-             caption="Shareholders' equity", col.names="2012")
+```{r problem 22, echo=F}
+p22$bs.columns <- c("2012", "2011")
+p22$current.assets <-
+    p22$ingersoll[c("Cash", "Accounts receivable", "Inventory"),]
+p22$ca.rownames <- rownames(p22$current.assets)
+p22$current.assets <- rbind(p22$current.assets, colSums(p22$current.assets))
+rownames(p22$current.assets) <-
+    c(p22$ca.rownames, "Total current assets")
+p22$fixed.assets <- p22$ingersoll[c("Net fixed assets"),,drop=F]
+p22$total.assets <-
+    as.numeric(p22$current.assets["Total current assets",] + p22$fixed.assets)
+p22$bs.assets <- rbind(p22$current.assets, p22$fixed.assets, p22$total.assets)
+rownames(p22$bs.assets) <-
+    c(rownames(p22$current.assets), rownames(p22$fixed.assets), "Total assets")
+
+p22$current.liabilities <-
+    p22$ingersoll[c("Short-term notes payable", "Accounts payable"),]
+p22$cl.rownames <- rownames(p22$current.liabilities)
+p22$current.liabilities <-
+    rbind(p22$current.liabilities, colSums(p22$current.liabilities))
+rownames(p22$current.liabilities) <-
+    c(p22$cl.rownames, "Total current liabilities")
+p22$lt.liabilities <- p22$ingersoll[c("Long-term debt"),,drop=F]
+p22$total.liabilities <-
+    as.numeric(p22$current.liabilities["Total current liabilities",] +
+               p22$lt.liabilities)
+p22$shareholders.equity <- p22$total.assets - p22$total.liabilities
+p22$bs.liabilities.she <-
+    rbind(p22$current.liabilities, p22$lt.liabilities,
+          p22$total.liabilities, p22$shareholders.equity,
+          p22$shareholders.equity + p22$total.liabilities)
+rownames(p22$bs.liabilities.she) <-
+    c(rownames(p22$current.liabilities), rownames(p22$lt.liabilities),
+      "Total liabilities", "Shareholders' equity",
+      "Total liabilities and Shareholders' equity")
+p22$bs.display <- list(pretty(p22$bs.assets[,p22$bs.columns]),
+                       pretty(p22$bs.liabilities.she[,p22$bs.columns]))
+knitr::kable(p22$bs.display,
+             caption="Ingersoll Inc., Balance Sheet") %>%
+  kable_styling(latex_options = "striped") %>%
+  kable_styling(latex_options = "HOLD_position")
 ```
 
-## Calculating Cash Flow
+---
+
+## 23. Calculating Cash Flow
 
 For 2012, calculate the cash flow from assets, cash flow to creditors, and cash flow to stockholders.
 
+---
+
 ```{r problem 23, echo=F}
-(ocf <- 3375 + 1125 - 427.5)
-change.current.assets <- diff(c(sum(ingersoll.assets[1:3,1]), sum(ingersoll.assets[1:3,2])))
-change.current.liabilities <- diff(c(sum(ingersoll.liabilities[1:2,1]), sum(ingersoll.liabilities[1:2,2])))
-(change.nwc <- sum(change.current.assets, change.current.liabilities))
-(ncs <- diff(c(34455, 35277)) + 1126)
-cat("CFFA:", (cffa <- ocf - ncs - change.nwc), "\n")
-net.new.borrowing <- diff(c(13460, 16050))
-net.new.equity <- diff(c(35103, 35564))
-cat("CFC:", (cfc <- 603 - net.new.borrowing), "\n")
-cat("CFS:", (cfs <-956))
+p22$y2012 <- p22$income.statement[,"2012"]
+p22$ocf <- p22$y2012["EBIT"] + p22$y2012["Depreciation"] - p22$y2012["Taxes"]
+p22$net.capital.spending <- diff(p22$bs.assets["Net fixed assets",]) +
+    p22$y2012["Depreciation"]
+p22$delta.nwc <- diff(as.numeric(p22$bs.assets["Total current assets",] -
+                      p22$bs.liabilities.she["Total current liabilities",]))
+p22$cffa <- p22$ocf - p22$net.capital.spending - p22$delta.nwc
+p22$cfc <- as.numeric(p22$y2012["Interest expense"]) -
+    diff(as.numeric(p22$bs.liabilities.she["Long-term debt",]))
+p22$cfs <- p22$cffa - p22$cfc
 ```
 
+$$
+\begin{aligned}
+\text{OCF} &= \text{EBIT} + \text{Depreciation} - \text{Taxes}\\
+  &= `r pretty(p22$y2012["EBIT"])` + `r pretty(p22$y2012["Depreciation"])` -
+     `r pretty(p22$y2012["Taxes"])`\\
+  &= `r pretty(p22$ocf)`\\\\
+\text{NCS} &= \text{Change in fixed assets} + \text{Depreciation}\\
+  &= `r pretty(p22$bs.assets["Net fixed assets","2012"])`
+  -  `r pretty(p22$bs.assets["Net fixed assets","2011"])`
+  +  `r pretty(p22$y2012["Depreciation"])`\\
+  &= `r pretty(p22$net.capital.spending)`\\\\
+\Delta \text{NWC} &= \text{Change in net working capital}\\
+  &= (`r pretty(p22$bs.assets["Total current assets", "2012"])` 
+  -   `r pretty(p22$bs.liabilities.she["Total current liabilities", "2012"])`)
+  -  (`r pretty(p22$bs.assets["Total current assets", "2011"])` 
+  -   `r pretty(p22$bs.liabilities.she["Total current liabilities", "2011"])`)\\
+  &= `r pretty(p22$delta.nwc)`\\\\
+\text{CFFA} &= \text{OCF} - \text{NCS} - \Delta \text{NWC}\\
+  &= `r pretty(p22$ocf)` - `r pretty(p22$net.capital.spending)`
+  -  `r pretty(p22$delta.nwc)`\\
+  &= `r pretty(p22$cffa)`\\\\
+\text{CFC} &= \text{Interest} - \text{change in long term debt}\\
+  &= `r pretty(p22$y2012["Interest expense"])` -
+      (`r pretty(p22$bs.liabilities.she["Long-term debt", "2012"])` -
+       `r pretty(p22$bs.liabilities.she["Long-term debt", "2011"])`)\\
+  &= `r pretty(p22$cfc)`\\\\
+\text{CFS} &= \text{CFFA} - \text{CFC}\\
+  &= `r pretty(p22$cffa)` - (`r pretty(p22$cfc)`)\\
+  &= `r pretty(p22$cfs)`
+\end{aligned}
+$$
 
+---
 
+## 24. Cash Flows
 
+You are researching Time Manufacturing and have found the following accounting
+statement of cash flows for the most recent year. You also know that the company
+paid \$98 million in current taxes and had an interest expense of \$48 million.
+Use the accounting statement of cash flows to construct the financial statement
+of cash flows.
 
-<!--
-
-**********************  Challenge Questions  *************************
-
--->
-
-# Challenge
-
-## Cash Flows
-
-You are researching Time Manufacturing and have found the following accounting statement of cash flows for the most recent year. You also know that the company paid \$98 million in current taxes and had an interest expense of \$48 million. Use the accounting statement of cash flows to construct the financial statement of cash flows.
-
-```{r problem 24 time manufacturing statement of cash flows, echo=F, message=F}
-require(kableExtra)
-require(dplyr)
- # net income, deprecation, deferred taxes
-operations <- c(173, 94, 19)
- # changes in assets and liabilities: accounts receivable, inventories,
- ## accounts payable, accrued expenses, other
-changes.in.assets.and.liabilities <- c(-18, 22, 17, -9, 3)
- # acquisition of fixed assets, sale of fixed assets
-investing.activities <- c(-215, 23)
- # retirement of long-term debt, proceeds from long-term debt sales,
- ## changes in notes payable, dividends, repurchase of stock,
- ## proceeds from new stock issue
-financing.activities <- c(-162, 116, 6, -86, -13, 44)
-statement.of.cash.flows <- matrix(c(
-  operations,
-  changes.in.assets.and.liabilities,
-  investing.activities,
-  financing.activities), ncol=1)
-rownames(statement.of.cash.flows) <- c(
-  "Net income", "Deprecation", "Deferred taxes", "Changes in Accounts receivable",
+```{r problem 24 time manufacturing statement of cash flows, echo=F}
+p24 <- new.env()
+ ## net income, deprecation, deferred taxes
+p24$operations <- c(173, 94, 19)
+ ## changes in assets and liabilities: accounts receivable, inventories,
+ ### accounts payable, accrued expenses, other
+p24$changes.in.assets.and.liabilities <- c(-18, 22, 17, -9, 3)
+ ## acquisition of fixed assets, sale of fixed assets
+p24$investing.activities <- c(-215, 23)
+ ## retirement of long-term debt, proceeds from long-term debt sales,
+ ### changes in notes payable, dividends, repurchase of stock,
+ ### proceeds from new stock issue
+p24$financing.activities <- c(-162, 116, 6, -86, -13, 44)
+p24$statement.of.cash.flows <- matrix(c(
+  p24$operations,
+  p24$changes.in.assets.and.liabilities,
+  p24$investing.activities,
+  p24$financing.activities), ncol=1)
+rownames(p24$statement.of.cash.flows) <- c(
+  "Net income", "Depreciation", "Deferred taxes", "Changes in Accounts receivable",
   "Changes in Inventories", "Changes in Accounts payable",
   "Changes in Accrued expenses", "Changes in Other expenses",
   "Acquisition of fixed assets", "Sale of fixed assets",
@@ -2316,7 +2824,7 @@ rownames(statement.of.cash.flows) <- c(
   "Change in notes payable", "Dividends", "Repurchase of stock",
   "Proceeds from new stock issue"
 )
-knitr::kable(statement.of.cash.flows,
+knitr::kable(p24$statement.of.cash.flows,
              booktabs=T,
              caption="Time Manufacturing Inc.: Statement of Cash Flows") %>%
   pack_rows( index=c(
@@ -2327,62 +2835,100 @@ knitr::kable(statement.of.cash.flows,
   kable_styling(latex_options = "striped")
 ```
 
-### Solution
+---
 
-1. Calculate Operating Cash Flow.
+```{r problem 24; work, echo=F}
+p24$current.taxes <- 98
+p24$deferred.taxes <- 19
+p24$taxes <- sum(p24$current.taxes, p24$deferred.taxes)
+p24$interest <- 48
+p24$socf <- p24$statement.of.cash.flows
+p24$ebit <- p24$socf["Net income",] + p24$interest + p24$taxes
+p24$ocf <- as.numeric(p24$ebit + p24$socf["Depreciation",] + p24$current.taxes)
+p24$net.capital.spending <-
+    -as.numeric(p24$socf["Acquisition of fixed assets",]) -
+     as.numeric(p24$socf["Sale of fixed assets",])
+p24$delta.nwc <-
+    sum(as.numeric(p24$socf[c("Changes in Accounts receivable",
+                              "Changes in Inventories"),])) -
+    sum(as.numeric(p24$socf[c("Changes in Accounts payable",
+                              "Changes in Accrued expenses",
+                              "Changes in Other expenses",
+                              "Change in notes payable"),]))
+p24$cffa <- p24$ocf - p24$net.capital.spending - p24$delta.nwc
+p24$cfc <- p24$interest -
+    as.numeric(p24$socf["Proceeds from long-term debt sales",]) +
+    as.numeric(- p24$socf["Retirement of long-term debt",])
+p24$cfs <- -as.numeric(p24$socf["Dividends",]) -
+    as.numeric(p24$socf["Proceeds from new stock issue",]) -
+    as.numeric(p24$socf["Repurchase of stock",])
+```
 
 knowing net income (\$173), taxes (\$117), and interest (\$48), we observe:
 
 $$
 \begin{aligned}
-\mathbf{EBIT} &= \text{net income} + \text{taxes} + \text{interest} \\
-  &= 173 + (98 + 19) + 48 \\
-  &= 338 \\ \\
-\mathbf{OCF} &= \text{EBIT} + \text{deprecation} - \text{current taxes} \\
-  &= 338 + 94 - 98 \\
-  &= 334 \\ \\
-\end{aligned}
-$$
-
-2. Calculate the Net capital spending and the net working capital.
-
-$$
-\begin{aligned}
-\mathbf{Net\ capital\ spending} &= \text{sale of fixed assets} - \text{acquisition of fixed assets} \\
-  &= 23 - 215 \\
-  &= 192 \\ \\
-\mathbf{Change\ in\ net\ working\ capital} &=
-  \text{Changes in assets and liabilities} \\
-  &= (-18) + 22 + 17 + (-9) + 3 \\
-  &= 15 \\ \\
-\end{aligned}
-$$
-
-3. Finally calculate the cash flow from assets, cash flow to creditors, and cash flow to stockholders.
-
-$$
-\begin{aligned}
+\mathbf{EBIT} &= \text{net income} + \text{interest} + \text{taxes}\\
+  &= `r pretty(p24$socf["Net income"])` + `r pretty(p24$interest)`
+  +  `r pretty(p24$taxes)`\\
+  &= `r pretty(p24$ebit)`\\\\
+\mathbf{OCF} &= \text{EBIT} + \text{depreciation} - \text{current taxes}\\
+  &= `r pretty(p24$ebit)` + `r pretty(p24$socf["Depreciation",])`
+  -  `r pretty(p24$current.taxes)`\\
+  &= `r pretty(p24$ocf)`\\\\
+\mathbf{Capital\ spending} &= \text{sale of fixed assets}
+  - \text{acquisition of fixed assets}\\
+  &= `r pretty(-p24$investing.activities[1])`
+  -  `r pretty(p24$investing.activities[2])`\\
+  &= `r pretty(p24$ncs <- -p24$investing.activities[1] -
+      p24$investing.activities[2])`\\\\
+\Delta \mathbf{NWC} &=
+  \text{Changes in assets and liabilities}\\
+  &= `r pretty(p24$delta.nwc)`\\\\
 \mathbf{CFFA} &= \text{OCF} - \text{net capital spending}
-    - \text{change in net working capital} \\
-  &= 334 - 192 - 15 \\
-  &= 127 \\ \\
-\mathbf{CFC} &= \text{interest expense} - \text{net new borrowing} \\
-  &= 48 - (116 - 162) \\
-  &= 94 \\ \\
-\mathbf{CFS} &= \text{dividends paid} - \text{net new equity} \\
-  &= 86 - (44 - 13) \\
-  &= 28
+  -  \Delta \text{NWC}\\
+  &= `r pretty(p24$ocf)` - `r pretty(p24$ncs)` - (`r pretty(p24$delta.nwc)`)\\
+  &= `r pretty(p24$cffa)`\\\\
+\mathbf{CFC} &= \text{interest expense}
+  - \text{Proceeds from long-term debt sales}
+  + \text{Retirement of long-term debt}\\
+  &= `r pretty(p24$interest)` - 
+     `r pretty(p24$socf["Proceeds from long-term debt sales",])` +
+     `r pretty(- p24$socf["Retirement of long-term debt",])`\\
+  &= `r pretty(p24$cfc)`\\\\
+\mathbf{CFS} &= \text{dividends paid}
+  -  \text{Proceeds from new stock issue}
+  +  \text{Repurchase of stock}\\
+  &= `r pretty(- p24$socf["Dividends",])`
+   - `r pretty(p24$socf["Proceeds from new stock issue",])`
+   + `r pretty(- p24$socf["Repurchase of stock",])`\\
+  &= `r pretty(p24$cfs)`
 \end{aligned}
 $$
 
-## Net Fixed Assets and Deprecation
+---
 
-On the balance sheet, the net fixed assets (NFA) account is equal to the gross fixed assets (FA) account, which records the acquisition cost of fixed assets, minus the accumulated deprecation (AD) account, which records the total deprecation taken by the firm against its fixed assets. Using the fact that NFA = FA - AD, show that the expression given in the chapter for net capital spending,
-$\text{NFA}_{\text{end}} - \text{NFA}_{\text{beg}} + D$ (where D is the depreciation expense during the year), is equivalent to $\text{FA}_{\text{end}} - \text{FA}_{\text{beg}}$.
+## 25. Net Fixed Assets and Deprecation
 
-### Solution
+On the balance sheet, the net fixed assets (NFA) account is equal to the gross
+fixed assets (FA) account, which records the acquisition cost of fixed assets,
+minus the accumulated deprecation (AD) account, which records the total
+deprecation taken by the firm against its fixed assets. Using the fact that NFA
+= FA - AD, show that the expression given in the chapter for net capital
+spending, $\text{NFA}_{\text{end}} - \text{NFA}_{\text{beg}} + D$ (where D is
+the depreciation expense during the year), is equivalent to
+$\text{FA}_{\text{end}} - \text{FA}_{\text{beg}}$.
 
-Given:
+---
+
+### Terms:
+
+* NFA - Net Fixed Assets
+* FA - Gross Fixed Assets
+* AD - Accumulated Depreciation
+* D - Depreciation
+
+### Given:
 
 $$
 \begin{aligned}
@@ -2408,14 +2954,16 @@ Therefore:
 
 $$
 \begin{aligned}
-\text{NFA}_{\text{end}} - \text{NAF}_{\text{beg}} + D &= 
+\text{NFA}_{\text{end}} - \text{NFA}_{\text{beg}} + D &= 
     \text{FA}_{\text{end}} - \text{FA}_{\text{beg}} \\
 \Delta \text{NFA} + D &= \Delta \text{FA} \\ \\
 \text{NFA} + D &= \text{FA}
 \end{aligned}
 $$
 
-## Tax Rates
+---
+
+## 26. Tax Rates
 
 Refer to the corporate marginal tax rate information in Table 2.3.
 
@@ -2425,17 +2973,4 @@ b. Compute the average tax rate for a corporation with exactly \$335,001 in taxa
 
 c. The 39 percent and 38 percent tax rates both represent what is called a tax "bubble." Suppose the government wanted to lower the upper threshold of the 39 percent marginal tax bracket from \$335,000 to \$200,000. What would the new 39 percent bubble rate have to be?
 
-### Solution
-
-
-
-
-
-
-
-
-
-
-
-
-
+---
