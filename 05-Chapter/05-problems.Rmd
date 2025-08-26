@@ -1,5 +1,6 @@
 ---
 title: "Net Present Value and Other Investment Rules"
+subtitle: "Problems"
 author: "Ross, Westerfield, Jaffe"
 date: "`r Sys.Date()`"
 output:
@@ -7,11 +8,13 @@ output:
     toc: true
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=F}
+require(tidyverse)
 knitr::opts_chunk$set(echo = TRUE)
+pretty <- function(x, y=0) format(round(x, y), big.mark=",")
 ```
 
-```{r Internal Rate of Return function}
+```{r Internal Rate of Return function, echo=F}
 # I must be a negative initial investment.
 # C must be positive cash flows.
 irr <- function(I, C) {
@@ -20,48 +23,77 @@ irr <- function(I, C) {
 }
 ```
 
-```{r Net present value}
+```{r Net present value, echo=F}
 npv <- function(I, C, r) I + sum(C/(1 + r)^(1:length(C)))
 ```
 
 # Summary and conclusions
 
-1. In this chapter, we covered different investment decision rules. We evaluated the most popular alternatives to the NPV: The payback period, the discounted payback period, the internal rate of return, and the profitability index. In doing so we learned more about the NPV.
+1. In this chapter, we covered different investment decision rules. We evaluated
+   the most popular alternatives to the NPV: The payback period, the discounted
+   payback period, the internal rate of return, and the profitability index. In
+   doing so we learned more about the NPV.
 
-2. While we found that the alternatives have some redeeming qualities, when all is said and done, they are not the NPV rule; for those of us in finance, that makes them decidedly second-rate.
+2. While we found that the alternatives have some redeeming qualities, when all
+   is said and done, they are not the NPV rule; for those of us in finance, that
+   makes them decidedly second-rate.
 
-3. Of the competitors to NPV, IRR must be ranked above payback. In fact, IRR always reaches the same decision as NPV in the normal case where the initial outflows of an independent investment project are followed only by a series of inflows.
+3. Of the competitors to NPV, IRR must be ranked above payback. In fact, IRR
+   always reaches the same decision as NPV in the normal case where the initial
+   outflows of an independent investment project are followed only by a series
+   of inflows.
 
-4. We classified the flaws of IRR into two types. First, we considered the general case applying to both independent and mutually exclusive projects. There appeared to be two problems here:
+4. We classified the flaws of IRR into two types. First, we considered the
+   general case applying to both independent and mutually exclusive projects.
+   There appeared to be two problems here:
 
 > a. Some projects have cash inflows follwoed by one or more outflows. The IRR rule is inverted here: One should accept the IRR is _below_ the discount rate.
 > b. Some projects have a number of changes of sign in their cash flows. Here, there are likely to be multiple internal rates of return. The practitioner must use either NPV or modified internal rate of return here.
 
-5. Next, we considered the specific problems with the NPV for mutually exclusive projects. We showed that, due to differences in either size or timing, the project with the highest IRR need not have the highest NPV. Hence, the IRR rule should not be applied. (Of course, NPV can still be applied.)
+5. Next, we considered the specific problems with the NPV for mutually exclusive
+   projects. We showed that, due to differences in either size or timing, the
+   project with the highest IRR need not have the highest NPV. Hence, the IRR
+   rule should not be applied. (Of course, NPV can still be applied.)
 
-6. We described capital rationing as the case where funds are limited to a fixed dollar amount. With capital rationing the profitability index is a useful method of adjusting the NPV.
+6. We described capital rationing as the case where funds are limited to a fixed
+   dollar amount. With capital rationing the profitability index is a useful
+   method of adjusting the NPV.
 
 # Concept Questions
 
-## Payback period and net present value
+## 1. Payback period and net present value
 
-If a project with conventional cash flows has a payback period less than the project's life, can you definitively state the algebraic sign of the NPV? Why or why not? If you know that the discounted payback period is less than the project's life, what can you say about the NPV? Explain.
+If a project with conventional cash flows has a payback period less than the
+project's life, can you definitively state the algebraic sign of the NPV? Why or
+why not? If you know that the discounted payback period is less than the
+project's life, what can you say about the NPV? Explain.
 
-A project's payback period is not enough to tell if the NPV will be positive (profitable project). This is because the payback period does not take into account the interest rate. However, if the discounted payback period is less than the project's life, then we can say that the NPV will be positive.
-
----
-
-## Net present value
-
-Suppose a project has conventional cash flows and a positive NPV. What do you know about its payback? Its discounted payback? Its profitability index? Its IRR? Explain.
-
-If the project has conventional (positive) cash flows and a positive NPV, then we know the payback period will be less than the life of the project, its discounted payback will be less than the life of the project, its profitability index will be greater than 1, and its IRR will be greater than the discount rate. All of this means that the project should be accepted.
+A project's payback period is not enough to tell if the NPV will be positive
+(profitable project). This is because the payback period does not take into
+account the interest rate. However, if the discounted payback period is less
+than the project's life, then we can say that the NPV will be positive.
 
 ---
 
-## Comparing investment criteria
+## 2. Net present value
 
-Define each of the following investment rules and discuss any potential shortcomings of each. In your definition, state the criterion for accepting or rejecting independent projects under each rule.
+Suppose a project has conventional cash flows and a positive NPV. What do you
+know about its payback? Its discounted payback? Its profitability index? Its
+IRR? Explain.
+
+If the project has conventional (positive) cash flows and a positive NPV, then
+we know the payback period will be less than the life of the project, its
+discounted payback will be less than the life of the project, its profitability
+index will be greater than 1, and its IRR will be greater than the discount
+rate. All of this means that the project should be accepted.
+
+---
+
+## 3. Comparing investment criteria
+
+Define each of the following investment rules and discuss any potential
+shortcomings of each. In your definition, state the criterion for accepting or
+rejecting independent projects under each rule.
 
 a. Payback period.
 b. Internal rate of return.
@@ -70,35 +102,71 @@ d. Net present value.
 
 ### Payback period
 
-The payback period defines how an investment should be viewed based on how long it takes for the investment to pay for itself. The issue with the payback period is that it does not take into account the time value of money as well as the cash flows after the payback period has lapsed. This makes it difficult to use when comparing multiple investment options because it doesn't take into account cash flows after the payback period.
+The payback period defines how an investment should be viewed based on how long
+it takes for the investment to pay for itself. The issue with the payback period
+is that it does not take into account the time value of money as well as the
+cash flows after the payback period has lapsed. This makes it difficult to use
+when comparing multiple investment options because it doesn't take into account
+cash flows after the payback period.
 
-A modified version of the payback period is the discounted payback period which does take into account the time value of money. However, it still does not take into account the cash flows after the payback period. The NPV method is better.
+A modified version of the payback period is the discounted payback period which
+does take into account the time value of money. However, it still does not take
+into account the cash flows after the payback period. The NPV method is better.
 
 ### Internal rate of return
 
-The internal rate of return is a better method of evaluating an investment than the payback period. It calculates the investments interal rate, which can be used to compare with the discount rate. If the internal rate is greater than the discount rate the investment should be made. However, there are problems with the internal rate of return:
+The internal rate of return is a better method of evaluating an investment than
+the payback period. It calculates the investments interal rate, which can be
+used to compare with the discount rate. If the internal rate is greater than the
+discount rate the investment should be made. However, there are problems with
+the internal rate of return:
 
-1. Some investments are inverted. Meaning that the investment has an initial inflow, followed by a sequence of outflows. In this case the IRR rule should be inverted: You should make the investment if the internal rate is less than the discount rate.
+1. Some investments are inverted. Meaning that the investment has an initial
+   inflow, followed by a sequence of outflows. In this case the IRR rule should
+   be inverted: You should make the investment if the internal rate is less than
+   the discount rate.
 
-2. Sometimes there are a number of sign changes in the cash flows (i.e. there are additional investments that need to be made beside the initial investment). If this is the case there will be multiple internal rates of return. To compensate for this problem you can use the Modified IRR, which addresses the sign change issue by combining cash flows until only one sign change remains. The alternative is to use NPV.
+2. Sometimes there are a number of sign changes in the cash flows (i.e. there
+   are additional investments that need to be made beside the initial
+   investment). If this is the case there will be multiple internal rates of
+   return. To compensate for this problem you can use the Modified IRR, which
+   addresses the sign change issue by combining cash flows until only one sign
+   change remains. The alternative is to use NPV.
 
-The IRR also has an issue when trying to compare mutually exclusive investments due to scale and timing. The IRR does not take into account the scale of the investments; meaning that larger investments may generate larger cash flows even though the IRR may be lower. This can be compensated using Incremental IRR which uses the difference between the two investments when comparing. Timing of the cash flows can also affect the validity of the IRR. If larger cash flows occur later in the life of the investment, depending on the discount rate, the IRR may give the wrong decision.
+The IRR also has an issue when trying to compare mutually exclusive investments
+due to scale and timing. The IRR does not take into account the scale of the
+investments; meaning that larger investments may generate larger cash flows even
+though the IRR may be lower. This can be compensated using Incremental IRR which
+uses the difference between the two investments when comparing. Timing of the
+cash flows can also affect the validity of the IRR. If larger cash flows occur
+later in the life of the investment, depending on the discount rate, the IRR may
+give the wrong decision.
 
 ### Profitability index
 
-The profitability index is a useful way of comparing investments, however it does suffer from the same problems as the internal rate of return in terms of scaling. It can be compensated using incremental analysis.
+The profitability index is a useful way of comparing investments, however it
+does suffer from the same problems as the internal rate of return in terms of
+scaling. It can be compensated using incremental analysis.
 
 ### Net present value
 
-The net present value is the most superior method in evaluating an investment. In all cases it will yield the right result. The net present value takes into account the time value of money of all cash flows including the initial investment. If the NPV is positive the investment will pay off. If the NPV is negative it will not.
+The net present value is the most superior method in evaluating an investment.
+In all cases it will yield the right result. The net present value takes into
+account the time value of money of all cash flows including the initial
+investment. If the NPV is positive the investment will pay off. If the NPV is
+negative it will not.
 
 ---
 
-## Payback and internal rate of return
+## 4. Payback and internal rate of return
 
-A project has perpetual cash flows of $C$ per period, a cost of $I$, and a required return of $R$. What is the relationship between the project's payback and its IRR? What implications does your answer have for long-lived projects with relatively constant cash flows?
+A project has perpetual cash flows of $C$ per period, a cost of $I$, and a
+required return of $R$. What is the relationship between the project's payback
+and its IRR? What implications does your answer have for long-lived projects
+with relatively constant cash flows?
 
-The payback period takes into account the initial investment and the cash flows to determine how long it will take to pay back the investment.
+The payback period takes into account the initial investment and the cash flows
+to determine how long it will take to pay back the investment.
 
 $$
 \begin{aligned}
@@ -118,12 +186,13 @@ Setting $\mathbf{PV} = I$, the IRR can be calculated:
 
 $$
 \begin{aligned}
-I &= \frac{C}{r} \\ \\
+I &= \frac{C}{r}\\\\
 r &= \frac{C}{I}
 \end{aligned}
 $$
 
-Comparing the payback period and the IRR, we can see there is an inverse relationship between the two:
+Comparing the payback period and the IRR, we can see there is an inverse
+relationship between the two:
 
 $$
 \begin{aligned}
@@ -132,105 +201,174 @@ $$
 \end{aligned}
 $$
 
-What this means is that a short payback period implies a high IRR because cash flows quickly recover the initial investment and continue generating value. Conversely, a long payback period implies a low IRR because the initial investment takes more time to be recovered.
+What this means is that a short payback period implies a high IRR because cash
+flows quickly recover the initial investment and continue generating value.
+Conversely, a long payback period implies a low IRR because the initial
+investment takes more time to be recovered.
 
 ---
 
-## International investment projects
+## 5. International investment projects
 
-In October 2010, BMW announced plans to spend \$1 billion to expand production at its plant in South Carolina. The plant produced the second generation BMW X3 as well as the company's X5 and X6 models. BMW apparently felt it would be better able to compete and create value with a U.S.-based facility. In fact, BMW actually expected to export 70 percent of the X3s produced in South Carolina. About the same time, Samsung Electronics announced plans to build a \$3.6 billion plant in Taxes, and Novartis announced plans to open a \$1 billion-plus plant in North Carolina. What are some of the reasons that foreign manufacturers of products as diverse as automobiles, electronics, and pharmaceuticals might arrive at the same conclusion to build plants in the U.S.?
+In October 2010, BMW announced plans to spend \$1 billion to expand production
+at its plant in South Carolina. The plant produced the second generation BMW X3
+as well as the company's X5 and X6 models. BMW apparently felt it would be
+better able to compete and create value with a U.S.-based facility. In fact, BMW
+actually expected to export 70 percent of the X3s produced in South Carolina.
+About the same time, Samsung Electronics announced plans to build a \$3.6
+billion plant in Taxes, and Novartis announced plans to open a \$1 billion-plus
+plant in North Carolina. What are some of the reasons that foreign manufacturers
+of products as diverse as automobiles, electronics, and pharmaceuticals might
+arrive at the same conclusion to build plants in the U.S.?
 
-There are many reasons why foreign manufacturers would want to build plants in the U.S.:
+There are many reasons why foreign manufacturers would want to build plants in
+the U.S.:
 
-1. The U.S. is one of the largest consumer markets in the world. To have a manufacturing plant in the U.S. gives them direct access to this market.
-2. Producing goods in the U.S. may offer the manufacturer export opportunity benefits they wouldn't have in their host country.
-3. Producing goods in the U.S. allows the manufacturer to avoid tariffs and trade barriers.
-4. The U.S. has one of the most skilled and educated workforce in the world. Building a plant in the U.S. gives them access to this workforce.
+1. The U.S. is one of the largest consumer markets in the world. To have a
+   manufacturing plant in the U.S. gives them direct access to this market.
 
-This is by no means an exhaustive list but are some examples as to why foreign manufacturers would build plants in the U.S. to produce their products.
+2. Producing goods in the U.S. may offer the manufacturer export opportunity
+   benefits they wouldn't have in their host country.
+
+3. Producing goods in the U.S. allows the manufacturer to avoid tariffs and
+   trade barriers.
+
+4. The U.S. has one of the most skilled and educated workforce in the world.
+   Building a plant in the U.S. gives them access to this workforce.
+
+This is by no means an exhaustive list but are some examples as to why foreign
+manufacturers would build plants in the U.S. to produce their products.
 
 --
 
-## Capital budgeting problems
+## 6. Capital budgeting problems
 
-What are some of the difficulties that might come up in actual applications of the various criteria we discussed in this chapter? Which would be the easiest to implement in actual applications? The most difficult?
+What are some of the difficulties that might come up in actual applications of
+the various criteria we discussed in this chapter? Which would be the easiest to
+implement in actual applications? The most difficult?
 
 ### Difficulties
 
 #### Payback period
 
 1. Ignores the time value of money.
+
 2. Has an arbitrary cutoff period.
+
 3. Ignores cash flows beyond the cutoff period.
+
 4. Not a measure of profitability.
 
 #### Discounted payback period
 
-1. Because we now discount the relevant cash flows, discounted payback period is more complex than the original payback period.
+1. Because we now discount the relevant cash flows, discounted payback period is
+   more complex than the original payback period.
+
 2. Still ignores cash flows beyond the cutoff period.
+
 3. Still has an arbitrary cutoff period.
 
 #### Internal rate of return (IRR)
 
-1. For projects with non-conventional cash flows, such as multiple outflows, there could be multiple IRRs or no IRR at all.
-2. IRR assumes that interim cash flows are reinvested at the IRR, which may be unrealistic. NPV, by contrast, assumes reinvestment at the cost of capital.
-3. IRR may give incorrect rankings when comparing mutually exclusive projects when the scale of the projects, or the timing of cash flows differ.
-4. Because it is a ratio, IRR does not take into account the scale of the project.
+1. For projects with non-conventional cash flows, such as multiple outflows,
+   there could be multiple IRRs or no IRR at all.
+
+2. IRR assumes that interim cash flows are reinvested at the IRR, which may be
+   unrealistic. NPV, by contrast, assumes reinvestment at the cost of capital.
+
+3. IRR may give incorrect rankings when comparing mutually exclusive projects
+   when the scale of the projects, or the timing of cash flows differ.
+
+4. Because it is a ratio, IRR does not take into account the scale of the
+   project.
 
 #### Profitability index (PI)
 
-1. Because the PI is a ratio as well, it too does not take into account the scale of the project.
+1. Because the PI is a ratio as well, it too does not take into account the
+   scale of the project.
 
 #### Net present value (NPV)
 
 1. Requires accurate estimates to be effective.
-2. The net present value method is highly complex, and difficult to explain its conclusions.
-3. The net present value method has a bias toward larger projects because it deals with absolute, rather than relative cash flows. Using this method may miss smaller projects with better rates of return.
+
+2. The net present value method is highly complex, and difficult to explain its
+   conclusions.
+
+3. The net present value method has a bias toward larger projects because it
+   deals with absolute, rather than relative cash flows. Using this method may
+   miss smaller projects with better rates of return.
 
 #### General difficulty issues when using capital budgeting tools
 
-1. Capital budgeting tools require accurate estimates of future cash flows, discount rates, and project life. All of these are difficult to forecast.
-2. When trying to compare mutually exclusive projects, it is important to take note of the size of the projects because the ratio based capital budgeting tools do not take into account the scale of the projects. The net present value method, however, does overcome this issue.
-3. Because of the issue described in (2), comparing projects in general is difficult.
-4. Capital budgeting tools only focus on financial metrics. Although financial metrics should be the main focus, other factors, such as strategic alignment, environmental impact, or regulatory considerations may be overlooked.
+1. Capital budgeting tools require accurate estimates of future cash flows,
+   discount rates, and project life. All of these are difficult to forecast.
+
+2. When trying to compare mutually exclusive projects, it is important to take
+   note of the size of the projects because the ratio based capital budgeting
+   tools do not take into account the scale of the projects. The net present
+   value method, however, does overcome this issue.
+
+3. Because of the issue described in (2), comparing projects in general is
+   difficult.
+
+4. Capital budgeting tools only focus on financial metrics. Although financial
+   metrics should be the main focus, other factors, such as strategic alignment,
+   environmental impact, or regulatory considerations may be overlooked.
 
 The advantages of each of the capital budgeting tools discussed:
 
 #### Payback period
 
-This method is good for quick assessments, or for projects with high risk where a fast payback is important to reduce uncertainty.
+This method is good for quick assessments, or for projects with high risk where
+a fast payback is important to reduce uncertainty.
 
 #### Discounted payback period
 
-Similar to the payback period, but for projects that need to take into account the time value of money this method should be used.
+Similar to the payback period, but for projects that need to take into account
+the time value of money this method should be used.
 
 #### Net present value
 
-This is the most accurate method and always leads to the correct decision if the estimates are accurate. Net present value is very useful for long and complex projects with predictable cash flows and where maximizing value is important. Net present value is also useful when comparing mutually exclusive projects.
+This is the most accurate method and always leads to the correct decision if the
+estimates are accurate. Net present value is very useful for long and complex
+projects with predictable cash flows and where maximizing value is important.
+Net present value is also useful when comparing mutually exclusive projects.
 
 #### Internal rate of return (IRR)
 
-Very useful when comparing projects where the relative rate of return is important because it returns this rate as an easily communicable percentage.
+Very useful when comparing projects where the relative rate of return is
+important because it returns this rate as an easily communicable percentage.
 
 #### Profitability index (PI)
 
-An excellent choice when comparing mutually exclusive projects of similar scale to determine the most efficient use of resources.
+An excellent choice when comparing mutually exclusive projects of similar scale
+to determine the most efficient use of resources.
 
 ---
 
-## Capital budgeting in not-for-profit entities
+## 7. Capital budgeting in not-for-profit entities
 
-Are the capital budgeting criteria discussed applicable to not-for-profit corporations? How should such entities make capital budgeting decisions? What about the U.S. government? Should it evaluate spending proposals using these techniques?
+Are the capital budgeting criteria discussed applicable to not-for-profit
+corporations? How should such entities make capital budgeting decisions? What
+about the U.S. government? Should it evaluate spending proposals using these
+techniques?
 
-Although not-for-profit corporations, or government organizations like the U.S. government, have different goals than for-profit corporations, they still need to determine the most efficient use of limited resources. Capital budgeting techniques such as the profitability index (PI), the internal rate of return (IRR), and the net present value (NPV) are excellent choices for these tasks.
+Although not-for-profit corporations, or government organizations like the U.S.
+government, have different goals than for-profit corporations, they still need
+to determine the most efficient use of limited resources. Capital budgeting
+techniques such as the profitability index (PI), the internal rate of return
+(IRR), and the net present value (NPV) are excellent choices for these tasks.
 
 ---
 
-## Net present value
+## 8. Net present value
 
-The investment in project A is \$1 million, and the investment in project B is \$2 million. Both projects have unique internal rate of return of 20 percent. Is the following statement true or false?
+The investment in project A is \$1 million, and the investment in project B is
+\$2 million. Both projects have unique internal rate of return of 20 percent. Is
+the following statement true or false?
 
-> For any discount rate from 0 percent to 20 percent, project B has an NPV twice as great as that of project A.
+> For any discount rate from 0 percent to 20 percent, project B has an NPV twice
+> as great as that of project A.
 
 This statement is true.
 
@@ -246,13 +384,17 @@ where:
 * $r =$ the discount rate.
 * $I =$ the initial investment.
 
-Since both have the same IRR, their cash flow structure are proportional to their respective initial investments. Since the cash flows are proportional to the investments, then the cash inflows of project B are twice the cash inflows of project A.
+Since both have the same IRR, their cash flow structure are proportional to
+their respective initial investments. Since the cash flows are proportional to
+the investments, then the cash inflows of project B are twice the cash inflows
+of project A.
 
 ---
 
-## Net present value versus profitability index
+## 9. Net present value versus profitability index
 
-Consider the following two mutually exclusive projects available to Global Investments, Inc.:
+Consider the following two mutually exclusive projects available to Global
+Investments, Inc.:
 
 ```{r Table for concepts 9, echo=F}
 profitability.index <- function(C, r) {
@@ -268,23 +410,34 @@ npv <- function(C, r){
 }
 A <- c(-1000, 1000, 500)
 B <- c(-500, 500, 400)
-c9.tb <- as.data.frame(matrix(c(A, round(profitability.index(A, .1), 2), round(npv(A, .1)),
-                                B, round(profitability.index(B, .1), 2), round(npv(B, .1))),
-                              nrow=2, byrow=T))
+c9.tb <- as.data.frame(
+  matrix(c(A, round(profitability.index(A, .1), 2), round(npv(A, .1)),
+           B, round(profitability.index(B, .1), 2), round(npv(B, .1))),
+         nrow=2, byrow=T))
 rownames(c9.tb) <- c("A", "B")
 colnames(c9.tb) <- c("C0", "C1", "C2", "PI", "NPV")
 knitr::kable(c9.tb)
 ```
 
-The appropriate rate for the projects is 10 percent. Global Investments chose to undertake Project A. At a luncheon for shareholders, the manager of a pension fund that owns a substantial amount of the firm's stock asks you why the firm chose Project A instead of Project B when Project B has a higher profitability index.
+The appropriate rate for the projects is 10 percent. Global Investments chose to
+undertake Project A. At a luncheon for shareholders, the manager of a pension
+fund that owns a substantial amount of the firm's stock asks you why the firm
+chose Project A instead of Project B when Project B has a higher profitability
+index.
 
-How would you, the CFO, justify your firm's action? Are there any circumstances under which Global Investments should choose Project B?
+How would you, the CFO, justify your firm's action? Are there any circumstances
+under which Global Investments should choose Project B?
 
-Although project B has a higher profitability index rating, Project A has a higher net present value. Net present value evaluates the absolute value of the projects where as the profitability index evaluates the financial efficiency of a project (how much "bang" for your buck). The profitability index is not useful when comparing two projects of different scale because it doesn't take into account the absolute values of the projects value.
+Although project B has a higher profitability index rating, Project A has a
+higher net present value. Net present value evaluates the absolute value of the
+projects where as the profitability index evaluates the financial efficiency of
+a project (how much "bang" for your buck). The profitability index is not useful
+when comparing two projects of different scale because it doesn't take into
+account the absolute values of the projects value.
 
 ---
 
-## Internal rate of return
+## 10. Internal rate of return
 
 Projects $A$ and $B$ have the following cash flows:
 
@@ -297,8 +450,11 @@ colnames(c10.df) <- c("Year", "Project A", "Project B")
 knitr::kable(c10.df)
 ```
 
-a. If the cash flows from the projects are identical, which of the two projects would have a higher IRR? Why?
-b. If C1B = 2C1A, C2B = 2C2A, and C3B = 2C3A, then is $\text{IRR}_A = \text{IRR}_B$?
+a. If the cash flows from the projects are identical, which of the two projects
+   would have a higher IRR? Why?
+
+b. If C1B = 2C1A, C2B = 2C2A, and C3B = 2C3A, then is
+   $\text{IRR}_A = \text{IRR}_B$?
 
 IRR analysis:
 
@@ -308,61 +464,100 @@ $$
 \end{aligned}
 $$
 
-To find the internal rate of return we choose an arbitrary rate and solve for $\text{NPV}$. If the value is $>0$ than we choose a new lower rate. If the rate is $<0$ then we choose a higher rate until we get $\text{NPV}=0$.
+To find the internal rate of return we choose an arbitrary rate and solve for
+$\text{NPV}$. If the value is $>0$ than we choose a new lower rate. If the rate
+is $<0$ then we choose a higher rate until we get $\text{NPV}=0$.
 
 This process can be done via `R` using the `uniroot` function.
 
 
-a. If the two projects have identical cash flows, then project A has the higher IRR because it has a lower initial investment.
+a. If the two projects have identical cash flows, then project A has the higher
+IRR because it has a lower initial investment.
 
-b. If the cash flows for project B are twice the cash flows of project A, then the two projects would have the same IRR.
+b. If the cash flows for project B are twice the cash flows of project A, then
+the two projects would have the same IRR.
 
-The reason for this result is because the IRR is a percentage that is compared to the discount rate. If the value of IRR is greater than the discount rate than we choose the project. However, the IRR is a percentage and not an aboslute value. Therefore, comparing two projects as such would most likely give us an incorrect result and we need to compare these projects using NPV.
-
----
-
-## Net present value
-
-You are evaluating Project A and Project B. Project A has a short period of future cash flows, while project B has relatively long future cash flows. Which project will be more sensitive to changes in the required return? Why?
-
-Project B would be more sensitive to changes in the required return because its cash flows extend for a longer time period and the time value of money effects are heavier on cash flows further out into the future.
+The reason for this result is because the IRR is a percentage that is compared
+to the discount rate. If the value of IRR is greater than the discount rate than
+we choose the project. However, the IRR is a percentage and not an aboslute
+value. Therefore, comparing two projects as such would most likely give us an
+incorrect result and we need to compare these projects using NPV.
 
 ---
 
-## Modified internal rate of return
+## 11. Net present value
 
-One of the less flattering interpretations of the acronym MIRR is "meaningless internal rate of return." Why do you think this term is applied to MIRR?
+You are evaluating Project A and Project B. Project A has a short period of
+future cash flows, while project B has relatively long future cash flows. Which
+project will be more sensitive to changes in the required return? Why?
 
-1. Loss of original IRR intuition - The MIRR adjusts cash flows based on reinvestment and financing assumptions (reinvestment at a predefined borrowing costs). While these adjustments address some of the shortcomings, they result in a metric that no longer has the same intuitive connection connection to the project's cash flows.
+Project B would be more sensitive to changes in the required return because its
+cash flows extend for a longer time period and the time value of money effects
+are heavier on cash flows further out into the future.
 
-2. Assumptions about the reinvestment rate - The MIRR assumes that all positive cash flows are reinvested at a specified reinvestment rate (the discount rate). However, this may not be the case.
+---
 
-3. MIRR is not a pure rate of return - The MIRR is not purely derived from the project's cash flows since it uses a discount rate.
+## 12. Modified internal rate of return
+
+One of the less flattering interpretations of the acronym MIRR is "meaningless
+internal rate of return." Why do you think this term is applied to MIRR?
+
+1. Loss of original IRR intuition - The MIRR adjusts cash flows based on
+   reinvestment and financing assumptions (reinvestment at a predefined
+   borrowing costs). While these adjustments address some of the shortcomings,
+   they result in a metric that no longer has the same intuitive connection
+   connection to the project's cash flows.
+
+2. Assumptions about the reinvestment rate - The MIRR assumes that all positive
+   cash flows are reinvested at a specified reinvestment rate (the discount
+   rate). However, this may not be the case.
+
+3. MIRR is not a pure rate of return - The MIRR is not purely derived from the
+   project's cash flows since it uses a discount rate.
 
 * Lacks the intuitive appeal of IRR as a breakeven return.
+
 * Relies heavily on assumptions about reinvestment and financing rates.
+
 * Deviates from representing the project's intrinsic profitability.
 
 ---
 
-## Net present value
+## 13. Net present value
 
-It is sometimes stated that "the net present value approach assumes reinvestment of the intermediate cash flows at the required return." Is this claim correct? To answer, suppose you calculate the NPV of a project in the usual way. Next, suppose you do the following:
+It is sometimes stated that "the net present value approach assumes reinvestment
+of the intermediate cash flows at the required return." Is this claim correct?
+To answer, suppose you calculate the NPV of a project in the usual way. Next,
+suppose you do the following:
 
-a. Calculate the future value (as of the end of the project) of all the cash flows other than the initial outlay assuming they are reinvested at the required return, producing a single future value figure for the project.
-b. Calculate the NPV of the project using the single future value calculated in the previous step and the initial outlay. It is easy to verify that you will get the same NPV as in your original calculation only if you use the required return as the reinvestment rate in the previous step.
+a. Calculate the future value (as of the end of the project) of all the cash
+flows other than the initial outlay assuming they are reinvested at the required
+return, producing a single future value figure for the project.
 
-The statement that the "net present value (NPV) approach assumes reinvestment of intermediate cash flows at the required return" is not entirely accurate. The NPV method does not explicitly assume any reinvestment rate for intermediate cash flows. Instead, it discounts all cash flows back to the present at the required return (discount rate) and evaluates the net value created.
+b. Calculate the NPV of the project using the single future value calculated in
+the previous step and the initial outlay. It is easy to verify that you will get
+the same NPV as in your original calculation only if you use the required return
+as the reinvestment rate in the previous step.
+
+The statement that the "net present value (NPV) approach assumes reinvestment of
+intermediate cash flows at the required return" is not entirely accurate. The
+NPV method does not explicitly assume any reinvestment rate for intermediate
+cash flows. Instead, it discounts all cash flows back to the present at the
+required return (discount rate) and evaluates the net value created.
 
 ### Calculate the future value of intermediate cash flows
 
-Suppose the project's cash flows are $C_0, C_1, C_2, \ldots, C_n$, where $C_0$ is the initial outlay (negative cash flow), and $C_1, C_2, \ldots, C_n$ are positive cash inflows.
+Suppose the project's cash flows are $C_0, C_1, C_2, \ldots, C_n$, where $C_0$
+is the initial outlay (negative cash flow), and $C_1, C_2, \ldots, C_n$ are
+positive cash inflows.
 
-1. To calculate the future value (FV) of all cash flows other than the initial outlay:
+1. To calculate the future value (FV) of all cash flows other than the initial
+   outlay:
 
-> * Assume each intermediate cash flow($C_t$) is reinvested at a specific rate $r$ until the end of the project.
+   * Assume each intermediate cash flow($C_t$) is reinvested at a specific rate
+     $r$ until the end of the project.
 
-> * The future value at time $n$ is:
+   * The future value at time $n$ is:
 
 $$
 \begin{aligned}
@@ -370,7 +565,8 @@ $$
 \end{aligned}
 $$
 
-2. For this calculation to match the original NPV calculated using the standard formula:
+2. For this calculation to match the original NPV calculated using the standard
+   formula:
 
 $$
 \begin{aligned}
@@ -378,39 +574,62 @@ $$
 \end{aligned}
 $$
 
-the reinvestment rate $r$ in Step(a) must equal the required return $R$.
+> the reinvestment rate $r$ in Step(a) must equal the required return $R$.
 
 ### Key Insights
 
-* The NPV method does not explicitly assume a reinvestment rate for intermediate cash flows. It merely discounts cash flows to the present using the required return $R$.
+* The NPV method does not explicitly assume a reinvestment rate for intermediate
+  cash flows. It merely discounts cash flows to the present using the required
+  return $R$.
 
-* The equivalence between the two approaches described in the question arises only if the reinvestment rate $r$ used in Step (a) equals the required areturn $R$. This is a mathematical coincidence rather than an inherent assumption of the NPV method.
+* The equivalence between the two approaches described in the question arises
+  only if the reinvestment rate $r$ used in Step (a) equals the required areturn
+  $R$. This is a mathematical coincidence rather than an inherent assumption of
+  the NPV method.
 
 ### Conclusion
 
-The claim that the NPV approach assumes reinvestment of intermediate cash flows at the required return is misleading. The NPV method:
+The claim that the NPV approach assumes reinvestment of intermediate cash flows
+at the required return is misleading. The NPV method:
 
 1. Focuses on discounting all cash flows to the present at the required return.
 
 2. Does not explicitly account for the reinvestment of intermediate cash flows.
 
-The equivalence described in the question arises only when the reinvestment rate matches the required return, but this is not an assumption of the NPV approach itself. Instead, the NPV method evaluates the project's value based on its cash flows and the required return, without considering reinvestment explicitly.
+The equivalence described in the question arises only when the reinvestment rate
+matches the required return, but this is not an assumption of the NPV approach
+itself. Instead, the NPV method evaluates the project's value based on its cash
+flows and the required return, without considering reinvestment explicitly.
 
 ---
 
-## Internal rate of return
+## 14. Internal rate of return
 
-It is sometimes stated that "the internal rate of return approach assumes reinvestment of the intermediate cash flows at the internal rate of return." Is this claim correct? To answer, suppose you calculate the IRR of a project in the usual way. Next, suppose you do the following:
+It is sometimes stated that "the internal rate of return approach assumes
+reinvestment of the intermediate cash flows at the internal rate of return." Is
+this claim correct? To answer, suppose you calculate the IRR of a project in the
+usual way. Next, suppose you do the following:
 
-a. Calculate the future value (as of the end of the project) of all the cash flows other than the initial outlay assuming they are reinvested at the IRR, producing a single future value figure for the project.
+a. Calculate the future value (as of the end of the project) of all the cash
+flows other than the initial outlay assuming they are reinvested at the IRR,
+producing a single future value figure for the project.
 
-b. Calculate the IRR of the project using the single future value calculated in the previous step and the initial outlay. It is easy to verify that you will get the same IRR as in your original calculation only if you use the IRR as the reinvestment rate in the previous step.
+b. Calculate the IRR of the project using the single future value calculated in
+the previous step and the initial outlay. It is easy to verify that you will get
+the same IRR as in your original calculation only if you use the IRR as the
+reinvestment rate in the previous step.
 
-The statement that the "internal rate of return (IRR) approach assumes reinvestment of the intermediate cash flows at the internal rate of return" is correct in a practical sense. The IRR implicitly assumes that intermediate cash flows are reinvested at the IRR itself. This is a key limitation of the IRR method and one of the reasons it is often criticized.
+The statement that the "internal rate of return (IRR) approach assumes
+reinvestment of the intermediate cash flows at the internal rate of return" is
+correct in a practical sense. The IRR implicitly assumes that intermediate cash
+flows are reinvested at the IRR itself. This is a key limitation of the IRR
+method and one of the reasons it is often criticized.
 
 ### Step a: Calculate the future value of intermediate cash flows
 
-Suppose a project has cash flows $C_0, C_1, C_2, \ldots, C_n,$ where $C_0$ is the initial outlay (negative cash flow), and $C_1, C_2, \ldots, C_n$ are positive inflows. The IRR, denoted as $r$, satisfies:
+Suppose a project has cash flows $C_0, C_1, C_2, \ldots, C_n,$ where $C_0$ is
+the initial outlay (negative cash flow), and $C_1, C_2, \ldots, C_n$ are
+positive inflows. The IRR, denoted as $r$, satisfies:
 
 $$
 \begin{aligned}
@@ -418,7 +637,8 @@ $$
 \end{aligned}
 $$
 
-1. Assume each intermediate cash flow ($C_t$) is reinvested at the IRR $r$ until the end of the project. The future value(FV) at time $n$ is:
+1. Assume each intermediate cash flow ($C_t$) is reinvested at the IRR $r$ until
+   the end of the project. The future value(FV) at time $n$ is:
 
 $$
 \begin{aligned}
@@ -426,39 +646,56 @@ $$
 \end{aligned}
 $$
 
-2. This future value represents the total value of the cash flows at the end of the project, assuming reinvestment at the IRR.
+2. This future value represents the total value of the cash flows at the end of
+   the project, assuming reinvestment at the IRR.
 
 ### Step b: Calculate the IRR using the future value
 
-1. Use the future value $\text{FV}$ calculated in Step (a) and determine the IRR $r$ by solving:
+1. Use the future value $\text{FV}$ calculated in Step (a) and determine the IRR
+   $r$ by solving:
 
 $$
 C_0 (1 + r)^{n} = \text{FV}
 $$
 
-2. This equation is equivalent to solving for $r$ in the original IRR calculation:
+2. This equation is equivalent to solving for $r$ in the original IRR
+   calculation:
 
 $$
 0 = - C_0 + \sum^{n}_{t=1}{\frac{C_t}{(1 + r)^{t}}}
 $$
 
-3. The two IRR values will be identical only if the reinvestment rate used in Step (a) equals the IRR itself.
+3. The two IRR values will be identical only if the reinvestment rate used in
+   Step (a) equals the IRR itself.
 
 ### Key Insights
 
-* The IRR implicitly assumes that all intermediate cash flows are reinvested at the IRR. This is why the future value described in Step (a) aligns with the IRR calculation only when the reinvestment rate is the IRR.
+* The IRR implicitly assumes that all intermediate cash flows are reinvested at
+  the IRR. This is why the future value described in Step (a) aligns with the
+  IRR calculation only when the reinvestment rate is the IRR.
 
-* If the reinvestment rate differes from the IRR, the results of the two calculations will diverge.
+* If the reinvestment rate differes from the IRR, the results of the two
+  calculations will diverge.
 
 ### Limitations of the IRR assumption
 
-1. Unrealistic reinvestment rate - In practice, it is unlikely that intermediate cash flows can consistently be reinvested at the project's IRR, especially if the IRR is high. This makes the IRR's implicit assumption unrealistic in many cases.
+1. Unrealistic reinvestment rate - In practice, it is unlikely that intermediate
+   cash flows can consistently be reinvested at the project's IRR, especially if
+   the IRR is high. This makes the IRR's implicit assumption unrealistic in many
+   cases.
 
-2. Alternative methods - The modified internal rate of return (MIRR) addresses this limitation by allowing for a more realistic reinvestment rate, such as the cost of capital.
+2. Alternative methods - The modified internal rate of return (MIRR) addresses
+   this limitation by allowing for a more realistic reinvestment rate, such as
+   the cost of capital.
 
 ### Conclusion
 
-The claim that the IRR approach assumes reinvestment of intermediate cash flows at the IRR is correct. The equivalence in the steps provided confirms this assumption. However, this assumption is a major limitation of the IRR method, as it may not reflect reinvestment opportunities. For this reason, decision-makers often rely on NPV or MIRR to provide a more accurate assessment of a project's value.
+The claim that the IRR approach assumes reinvestment of intermediate cash flows
+at the IRR is correct. The equivalence in the steps provided confirms this
+assumption. However, this assumption is a major limitation of the IRR method, as
+it may not reflect reinvestment opportunities. For this reason, decision-makers
+often rely on NPV or MIRR to provide a more accurate assessment of a project's
+value.
 
 ---
 

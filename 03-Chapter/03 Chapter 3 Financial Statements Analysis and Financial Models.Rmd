@@ -674,7 +674,6 @@ notes payable. This would leave \$565 - 225 = \$340 coming from long-term
 borrowing. Below is the updated pro forma balance sheet.
 
 ```{r financial models; rosengarten corp; scenario, echo=F}
-# remove the efn row
 tmp <- matrix(rosengarten$bs.proforma[-nrow(rosengarten$bs.proforma),1], ncol=1)
 rownames(tmp) <- rownames(rosengarten$bs.proforma)[-15]
 rosengarten$bs.scenario <- round(tmp)
@@ -1057,10 +1056,8 @@ ex3.4$ebitda <- round(ex3.4$tbl["EBIT",] + ex3.4$tbl["Depreciation",],1)
 ex3.4$ev.multiple <- round(ex3.4$enterprise.value / ex3.4$ebitda,1)
 ```
 
-#### 1.
-
-Determine the profit margin, ROE, market capitalization, enterprise value, PE
-multiple, and EV multiple for both Lowe's and Home Depot.
+__1.__ Determine the profit margin, ROE, market capitalization, enterprise
+   value, PE multiple, and EV multiple for both Lowe's and Home Depot.
 
 $$
 \begin{aligned}
@@ -1106,10 +1103,8 @@ $$
 \end{aligned}
 $$
 
-#### 2.
-
-How would you describe these two companies from a financial point of view?
-Overall, they are similarly situated. In 2010, Home Depot had a higher ROE
+__2.__ How would you describe these two companies from a financial point of
+view? Overall, they are similarly situated. In 2010, Home Depot had a higher ROE
 (partially because of a higher total asset turnover and a higher profit margin),
 but Lowe's had slightly lower PE and EV multiples. Both companies' PE multiples
 were somewhat above the general market, indicating possible future growth
@@ -2411,7 +2406,6 @@ c. Construct the firm's pro forma balance sheet for the next fiscal year and
 options(digits=5)
 p9 <- new.env()
 
-# Given
 p9$projected.sales <- 420
 p9$sales.growth <- .1
 p9$current.assets.pct.of.sales <- .2
@@ -3484,7 +3478,8 @@ p21$is.proforma["Taxes",] <- p21$taxes
 p21$is.proforma["Net income",] <- p21$net.income
 p21$is.proforma["Dividends",] <- p21$dividends
 p21$is.proforma["Addition to retained earnings",] <- p21$atre
-knitr::kable(pretty(p21$is.proforma), caption="Pro Forma Income Statement") %>%
+knitr::kable(pretty(p21$is.proforma),
+             caption="Pro Forma Income Statement") %>%
     add_indent(c(9, 10)) %>%
     kable_styling(latex_options = "HOLD_position")
 ```
@@ -3511,7 +3506,10 @@ p21$bs.proforma["Total equity",] <-
 p21$bs.proforma["Total liabilities and owners' equity",] <-
     p21$bs.proforma["Total liabilities",] + p21$bs.proforma["Total equity",]
 
-knitr::kable(pretty(p21$bs.proforma),
+p21$bs.diff <- p21$bs.proforma - p21$bs
+p21$bs.pf.knitr <- cbind(p21$bs.proforma, p21$bs.diff)
+knitr::kable(pretty(p21$bs.pf.knitr),
+             col.names=c("Next year", "Change from current year"),
              caption="Pro Forma Balance Sheet") %>%
     pack_rows("Assets", 1, 5) %>%
     pack_rows("Liabilities", 7, 11) %>%

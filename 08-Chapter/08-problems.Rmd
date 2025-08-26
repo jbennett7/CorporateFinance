@@ -28,71 +28,166 @@ require(ggplot2)
 
 Is it true that a U.S. Treasury security is risk-free?
 
-No U.S. Treasuries are not risk free. They have no default risk, but there is an interest rate risk. If the interest rates increase then the value of the bond decreases.
+Technically, yes. U.S. Treasury securities (bills, notes and bonds) are backed
+by the "full faith and credit" of the U.S. government. The U.S. can tax and, in
+extremis, print money to meet its obligations, so the likelihood of default is
+effectively treated as zero.
+
+However, U.S. Treasury securities do have other types of risk such as interest
+rate risk, where rising rates means the price of outstanding bonds fall, and
+inflation risk, where inflation dilutes the coupon payments in real terms.
 
 ---
 
 ## Interest rate risk
 
-Which has greater interest rate risk, a 30-year Treasury bond or a 30-year BB corporate bond?
+Which has greater interest rate risk, a 30-year Treasury bond or a 30-year BB
+corporate bond?
 
-Interest rate sensitivity is increased the longer the time to maturity and the smaller the coupon rate. These bonds have the same time to maturity. However, a treasury bond should have a lower coupon rate than the BB corporate bond. Therefore, the 30-year Treasury bond has higher interest rate risks.
+Interest rate risk is the sensitivity of a bond's price to changes in market
+yields. For two bonds with the same maturity, the one with the lower coupon (or
+lower yield to maturity, YTM) usually has the greater duration, and therefore
+greater interest rate risk.
+
+Therefore, in terms of just interest rate risk, the 30-year Treasury has a
+greater risk because of its lower coupon. However, the 30-year BB corporate bond
+is considered junk grade and is a significant credit risk.
 
 ---
 
 ## Treasury pricing
 
-With regard to bid and ask prices on a Treasury bond, is it possible for the bid price to be higher? Why or why not?
+With regard to bid and ask prices on a Treasury bond, is it possible for the bid
+price to be higher? Why or why not?
 
-The bid price is the price a person is willing to pay for the bond, the ask price is the price a person is willing to sell the bond for. In very special circumstances yes, the bid price can be higher than the ask price. If there are technical glitches, or market inefficiencies, the bid price can be higher than the ask price. However, these are very extrodinary circumstances and very rare. They are situations that would be considered errors or glitches.
+The bid price is the price a person is willing to pay for the bond, the ask
+price is the price a person is willing to sell the bond for. By definition, the
+bid price is less than the ask price. This differenceis the bid-ask spread and
+is the dealer / market makers compensation. Only in very special circumstances
+will the bid price be higher than the ask price such as: market stress, error in
+data or quotes. This is very rare and should be considered nil.
 
 ---
 
 ## Yield to maturity
 
-Treasury bid and ask quotes are sometimes given in terms of yields, so there would be a bid yield and an ask yield. Which do you think would be larger? Explain.
+Treasury bid and ask quotes are sometimes given in terms of yields, so there
+would be a bid yield and an ask yield. Which do you think would be larger?
+Explain.
 
-When Treasury bid and ask quotes are expressed in terms of yields, then the relationship between the bid-ask is reversed. The bid yield > ask yield. This is because there is an inverse relationship between price and yield for bonds.
+When Treasury bid and ask quotes are expressed in terms of yields, then the
+relationship between the bid-ask is reversed. The bid yield > ask yield. This is
+because there is an inverse relationship between price and yield for bonds.
 
 ---
 
 ## Coupon rate
 
-How does a bond issuer decide on the appropriate coupon rate to set on its bonds? Explain the difference between the coupon rate and the required return on a bond.
+How does a bond issuer decide on the appropriate coupon rate to set on its
+bonds? Explain the difference between the coupon rate and the required return on
+a bond.
 
-A bond issuer decides on the appropriate coupon rate based on several factors to ensure the bonds are attractive to investors while meeting the issuer's financial goals. The factors include:
+A bond issuer decides on the appropriate coupon rate based on several factors to
+ensure the bonds are attractive to investors while meeting the issuer's
+financial goals. The factors include:
 
-1. Prevailing market interest rates - The issuer considers current interest rates for similar bonds in the market. The coupon rate must be competitive with the yields on bonds of comparable credit quality and maturity.
+1. Prevailing market interest rates - The issuer considers current interest
+   rates for similar bonds in the market. The coupon rate must be competitive
+   with the yields on bonds of comparable credit quality and maturity.
 
-2. Issuer's creditworthiness - Highly rated issuers can offer lower coupon rates because investors perceive less risk. Lower-rated issuers must offer higher coupon rates to attract investors.
+2. Issuer's creditworthiness - Highly rated issuers can offer lower coupon rates
+   because investors perceive less risk. Lower-rated issuers must offer higher
+   coupon rates to attract investors.
 
-3. Bond maturity - Longer-term bonds typically require higher coupon rates to compensate for investors for the greater risk of holding a bond over an extended period.
+3. Bond maturity - Longer-term bonds typically require higher coupon rates to
+   compensate for investors for the greater risk of holding a bond over an
+   extended period.
 
-4. Market conditions - Economic conditions, investor sentiment, and demand for bonds in the market influence the coupon rate.
+4. Market conditions - Economic conditions, investor sentiment, and demand for
+   bonds in the market influence the coupon rate.
 
-5. Special features - Bonds with special features, such as callable or convertible provisions, often have higher or lower coupon rates to reflect the value or risk of those features.
+5. Special features - Bonds with special features, such as callable or
+   convertible provisions, often have higher or lower coupon rates to reflect
+   the value or risk of those features.
 
-The difference between the coupon rate and the required return rate or yield to maturity.
+The difference between the coupon rate and the required return rate or yield to
+maturity.
 
-* The coupon rate is the fixed annual interest rate stated on the bond at issuance. It determines the periodic interest payments (coupon payments) made to bondholders.
+* The coupon rate is the fixed annual interest rate stated on the bond at
+  issuance. It determines the periodic interest payments (coupon payments) made
+  to bondholders.
 
-* The required return, or yield to maturity (YTM), is the rate of return investors demand based on the bond's p rice, credit risk, and time to maturity. Unlike the coupon rate, the required return fluctuates with market conditions. It reflects the bond's attractiveness relative to other investments and the risk premium investors require.
+* The required return, or yield to maturity (YTM), is the rate of return
+  investors demand based on the bond's p rice, credit risk, and time to
+  maturity. Unlike the coupon rate, the required return fluctuates with market
+  conditions. It reflects the bond's attractiveness relative to other
+  investments and the risk premium investors require.
 
 ---
 
 ## Real and nominal returns
 
-Are there circumstances under which an investor might be more concerned about the nominal return on an investment than the real return?
+Are there circumstances under which an investor might be more concerned about
+the nominal return on an investment than the real return?
+
+Yes. While real return (adjusted for inflation) is the better measure of how
+much an investor's purchasing power grows, there are several circumstances where
+an investor might focus more on the nominal return (the raw dollar return before
+adjusting for inflation).
+
+### Situations where nominal returns matter more
+
+#### Meeting fixed nominal obligations
+
+If an investor has to make payments in fixed dollar terms (e.g., debt service,
+tuition, rent(, then what matters is whether the investment generates enough
+nominal cash to cover those obligations, regardless of inflation.
+
+#### Short-term investments
+
+Over short horizons, inflation doesn't erode purchasing power as much. A 6-month
+CD or 1-year Treasury bill investor often only cares about the nominal yield.
+
+#### Accounting and performance reporting
+
+Portfolios are often measured and benchmarked in nominal terms. Managers are
+judged against nominal returns of an index or peers, not always adjusted for
+inflation.
+
+#### Regulatory or contractual requirements
+
+Some institutions (pension funds, insurance companies) have return targets,
+coverage ratios, or payout promises defined in nominal terms, so they must focus
+on nominal performance.
+
+#### Psychological / behavioral reasons
+
+Many individual investors anchor on the "sticker" number (e.g., "I earned 5%
+this year") without thinking about inflation. This is sometimes called money
+illusion: people feel richer with higher nominal returns even if real returns
+are low or negative.
+
+#### Taxation context
+
+Taxes are levied on nominal income, not real income. An investor might care
+about nominal return to estimate their tax liablity, even if real return is the
+better measure of wealth change.
 
 ---
 
 ## Bond ratings
 
-Companies pay rating agencies such as Moody's and S&P to rate their bonds, and the costs can be substantial. However, companies are not required to have their bonds rated in the first place; doing so is strictly voluntary. Why do you think they do it?
+Companies pay rating agencies such as Moody's and S&P to rate their bonds, and
+the costs can be substantial. However, companies are not required to have their
+bonds rated in the first place; doing so is strictly voluntary. Why do you think
+they do it?
 
-Companies would pay for such services because it helps them when they go to market with their bonds. Having a AAA rating is a highly sought after rating and allows companies to offer more favorable and sought after bonds.
+Companies would pay for such services because it helps them when they go to
+market with their bonds. Having a AAA rating is a highly sought after rating and
+allows companies to offer more favorable and sought after bonds.
 
-However, some companies may not want a rating if their bonds are considered to be risky.
+However, some companies may not want a rating if their bonds are considered to
+be risky.
 
 ---
 
@@ -100,7 +195,9 @@ However, some companies may not want a rating if their bonds are considered to b
 
 U.S. Treasury bonds are not rated. Why? Often, junk bonds are not rated. Why?
 
-U.S. Treasury bonds are not rated because they are considered to be zero risk of default. They don't need the rating. Junk bonds are not rated because their bonds are considered too risky and their ratings would be considered low.
+U.S. Treasury bonds are not rated because they are considered to be zero risk of
+default. They don't need the rating. Junk bonds are not rated because their
+bonds are considered too risky and their ratings would be considered low.
 
 ---
 
@@ -120,25 +217,146 @@ Another way of thinking of the two is that the term structure of interest rates 
 
 ## Crossover bonds
 
-Looking back at the crossover bonds we discussed in the chapter, why do you think split ratings such as these occur?
+Looking back at the crossover bonds we discussed in the chapter, why do you
+think split ratings such as these occur?
 
-split ratings occur when different credit rating agencies assign different credit ratings to the same bond or issuer. This can occur because different credit rating agencies use different methodologies to assess credit risk. Also timing of the reviews may affect the rating as well as the emphasis on different risks. Overall, assessing the credit risk of bonds is subjective.
+### Different rating methodologies
+
+* Each agency has its own model and weightings.
+
+* For example, Moody's may emphasize expected loss (probability $\times$
+  severity), while S&P emphasizes default probability and recovery differently.
+
+* Small differences in assumptions can push a bond just above or below an
+  investment-grade threshold.
+
+### Different views on qualitative factors
+
+* Agencies also assess management quality, business strategy, industry risk, and
+  legal structures (like covenants).
+
+* These are subjective judgments, so analysts can disagree.
+
+### Timing of updates
+
+* Agencies may not update ratings simultaneously.
+
+* Once agency might have downgraded after new information, while another hasn't
+  acted yet.
+
+### Outlook vs. current rating
+
+* Simetimes one agency has a bond on negative watch but hasn't moved it down
+  yet, while another already downgraded.
+
+### Issuer engagement
+
+* Ratings are often requested (and paid for) by issuers. Not every issuer seeks
+  ratings from all agencies. Some may provide more detailed information to one
+  agency than another, leading to differences.
 
 ---
 
 ## Municipal bonds
 
-Why is it that municipal bonds are not taxed at the federal level, but are taxable across state lines? Why is it that U.S. Treasury bonds are not taxed at the state level?
+Why is it that municipal bonds are not taxed at the federal level, but are
+taxable across state lines? Why is it that U.S. Treasury bonds are not taxed at
+the state level?
 
-The tax treatment of municipal bonds and U.S. Treasury bonds reflects policy decisions designed to encourage investment in specific types of government debt and to respect jurisdictional boundaries of taxation.
+### Municipal bonds (Munis)
+
+#### Federal tax exemption
+
+Interest on municipal bonds is exempt from federal income tax. The reason is
+that the federal government historically granted this exemption to support state
+and local governments' ability to borrow cheaply for public projects (schools,
+roads, hospitals). This also reflects a principle of intergovernmental tax
+immunity: the federal government doesn't tax the borrowing power of states.
+
+#### State taxation
+
+States man (and usually do) tax interest from municipal bonds issued by other
+states. A state doesn't want to give tax breaks to other states' bonds because
+that would subsidize out-of-state projects at the expense of its own revenue.
+However, many states exempt their own municipal bonds from state taxes to
+encourage residents to invest locally.
+
+### U.S. Treasury bonds
+
+#### State tex exemption
+
+Interst on U.S. Treasury securities is exempt from state and local income taxes.
+The federal government does not allow states to tax its borrowing costs, because
+that would interfere with federal financing power (again, intergovernmental tax
+immunity, but in the other direction). This ensures the federal government can
+borrow at lower rates.
+
+#### Federal taxation
+
+Treasury interest is subject to federal income tax, since the federal government
+obviously taxes its own payments.
 
 ---
 
 ## Bond market
 
-What are the implications for bond investors of the lack of transparency in the bond market?
+What are the implications for bond investors of the lack of transparency in the
+bond market?
 
-Some of the implications of the lack of transparency in the bond market include: difficulty in determining fair pricing, high transaction costs, less liquidity, access to information, etc...
+While stocks trade on exchanges with publicly visible bid/ask quotes and trade
+sizes, most bonds trade over-the-counter (OTC) through dealers. That lack of
+transparency has several important implications for investors:
+
+### Implications of low transparency
+
+#### Wider bid--ask spreads (higher costs)
+
+Investors often can't see the "true" market price. Dealers can quote different
+prices to different clients, leading to higher transaction costs, especially for
+small or less sophisticated investors.
+
+#### Information asymmetry
+
+Institutional investors and dealers (who see more of the market) have an
+advantage over retail investors. Retail buyers/sellers may consistently get
+worse execution because they don't know the going market price.
+
+#### Illiquidity risk
+
+Since bond trading data is less visible, it's harder to know how easily a bond
+can be sold. Investors may be surprised by price gaps if they try to exit in
+stressed markets.
+
+#### Difficulty in valuation
+
+Without transparent trading data, pricing bonds fairly requires relying on
+dealer quotes, matrix pricing, or pricing services---which may not reflect
+actual trade levels. This creates uncertainty for portfolio valuation,
+especially for mutual funds/ETFs holding less-traded bonds.
+
+#### Market segmentation
+
+Different investor groups (e.g., retail vs. institutional) may face different
+effective prices for the same bond, creating inefficiencies.
+
+#### Potential for conflicts of interest
+
+Dealers, as market makers, may profit from the lack of transparency at the
+expense of investors, particularly in less liquid sectors (like corporates or
+municipals).
+
+### Efforts to improve transparency
+
+#### FINRA TRACE (Trade reporting and compliance engine)
+
+Since 2002, corporate bond trades must be reported and published (with delays
+for large trades). This improved transparency somewhat, but not to equity-level
+standards.
+
+#### Municipal market (EMMA)
+
+The MSRB's EMMA system publishes muni trade data, but liquidity and transparency
+remain lower than equities.
 
 ---
 

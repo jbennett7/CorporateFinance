@@ -1,0 +1,289 @@
+---
+title: "Interest rates and bond valuations"
+author: "Ross, Westerfield, Jaffe"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(tidyverse)
+pretty <- function(x, y=2) format(round(x, y), big.mark=',')
+```
+
+# 8.1 Bond and bond valuation
+
+* __coupons__ Interest payments of bonds.
+
+* __level coupon bond__ A bond that pays a constant coupon.
+
+* __face value__ also called _par value_ The amount repaid at the end of the
+  loan.
+
+* __coupon rate__ The coupon payment divided by the face value of the bond.
+
+* __yield to maturity (YTM)__ Also called the bond's IRR. This rate is sometimes
+  just called the _yield_ for short. It is the market interest rate for the bond
+  with similar features.
+
+#### Example Calculating the value of a bond
+
+Suppose we have a bond issued with 10 years to maturity. The annual coupon is
+\$80. The face value of the bond is \$1,000. This means that the coupon rate is
+$80/1,000 = 8\%$. Assuming that similar bonds have a yield of 8 percent, what
+will this bond sell for?
+
+A bond's value has two components:
+
+1. The present value of the cash payment at the end of the period.
+
+2. The present value of the annuity coupon payments.
+
+For our \$1,000 face value, 8\% coupon rate 10-year bond:
+
+$$
+\text{Present Value} = \$1,000 / (1.08)^{10} = \$463.19
+$$
+
+$$
+\text{Annuity present value} = \$80 \times (1 - 1/(1.08)^{10}) / .08 = \$536.81
+$$
+
+The total bond value is $\$463.19 + 536.81 = \$1,000$.
+
+The bond sells for face value, which makes sense. However, what happens when
+interest rates change. Suppose one year from now the going rate for a similar
+bond has risen to 10 percent. What is the value of the bond now?
+
+$$
+\text{Present Value} = \$1,000 / (1.10)^{9} = \$424.10
+$$
+
+$$
+\text{Annuity present value} = \$80 \times (1 - 1/(1.10)^{9}) / .10 = \$460.72
+$$
+
+The bond's value is now $\$424.10 + 460.72 = \$884.82$. The bond now sells for a
+discount. In the vernacular, we say that this bond, with its 8 percent coupon,
+is priced to yield 10 percent at \$885.
+
+What happens if the interest rate falls to 6 percent instead?
+
+$$
+\text{Present Value} = \$1,000 / (1.06)^{9} = \$`r pretty(pv <- 1000/1.06^9, 2)`
+$$
+
+$$
+\text{Annuity present value} = \$80 \times (1 - 1/(1.06)^{9}) / .06
+  = \$`r pretty(apv <- 80 * (1 - (1.06)^(-9)) / .06)`
+$$
+
+The bond's value is now
+$\$`r pretty(pv)` + `r pretty(apv)` = `r pretty(y <- pv + apv)`$. The bond now sells
+for a preimum. We say this bond, with its 8 percent coupon, is priced to yield 6
+percent at \$`r pretty(y)`.
+
+### Interest rate risk
+
+Interest rate risk is the risk bond owners have from fluctuating interest rates.
+All things being equal, the longer the time to maturity, or the lower the coupon
+rate, the greater the interest rate risk is.
+
+Consider a 1-year versus 10-year bond having the same 10 percent coupon rate:
+
+```{r figure 8.2; interest rate risk and time to maturity, echo=F}
+f8.2 <- new.env()
+
+f8.2$df <- tibble(
+  Interest.Rate = c(.05, .1, .15, .2),
+  Bond.10yr = 1000*(1 + Interest.Rate)^(-10) + 100 *
+    (1 - (1 + Interest.Rate)^(-10)) / Interest.Rate,
+  Bond.1yr = 1000*(1 + Interest.Rate)^(-1) + 100 *
+    (1 - (1 + Interest.Rate)^(-1)) / Interest.Rate,
+) %>% pivot_longer(
+  cols = c(Bond.10yr, Bond.1yr),
+  names_to = "Bond",
+  values_to = "Values"
+)
+
+ggplot(data=f8.2$df, aes(x = Interest.Rate, y = Values, colour = Bond)) +
+  geom_line()
+```
+
+As shown, the 10-year bond has a steeper slope than the 1-year bond.
+
+### Zero coupon bonds
+
+A bond that pays no coupons at all must be offered at a price much lower than
+its face value. This is a zero coupon bond.
+
+#### Example: Yield to maturity on a zero under annual compounding
+
+$$
+\frac{\$1,000}{(1 + y)^8} = \$627
+$$
+
+The YTM = `r round(uniroot(function(y) 1000*(1 + y)^-8 - 627, c(0,2))$root,4)`.
+
+Zero bond calculations use a semiannual period in practice to be consistent with
+the calculations of coupon bearing bonds.
+
+# 8.2 Government and corporate bonds
+
+Treasury bills are exempt from state and local taxes. Municipal bonds are exempt
+from Federal taxes.
+
+Corporate bonds and municipal bonds are not considered default-free. There is a
+posibility of a default and this generates a wedge between the _promised yield_
+and the _expected return_ on the bond.
+
+#### Example
+
+Consider a 1-year corporate bond with a par value of \$1,000 and an annual
+coupon of \$80. Assume that fixed-income analysis believe that this bond has a
+10 percent chance of default and, in the event of default, each bondholder will
+receive \$800. Since there is a 90 percent probability that the bond will pay in
+full and a 10 percent probability that the bond will default, the expected
+payoff from the bond at maturity is:
+
+$$
+.90 \times \$1,080 + .10 \times \$800 = \$1,052
+$$
+
+Assuming that the discount rate on risky bonds such as this one is 9 percent,
+the bond's value becomes:
+
+$$
+\frac{\$1,052}{1.09} = \$965.14
+$$
+
+What is the expected return on the bond? The expected return is 9 percent, the
+discount rate.
+
+To find the promised yield:
+
+$$
+\$965.24 = \frac{\$1,080}{1 + y}
+$$
+
+When solved, y = 11.9 percent. The promised yield assumes that the bondholder
+_will_ receive the full \$1,080 amount. This is why the promised yield is above
+the expected return which takes into account the possiblity of default.
+
+### Bond ratings
+
+Firms frequently pay to have their debt rated. The two leading bond-rating firms
+are Moody's and Standard & Poort's (S&P).
+
+# 8.3 Bond markets
+
+## How bonds are bought and sold
+
+Most trading of bonds occur OTC. There are no particular exchanges where buying
+and selling occur.
+
+The bond market is larger than the stock market. The trading volume in bonds on
+a typical day is many, many times larger than the trading volume in stocks.
+
+## Bond price reporting
+
+Under 2002 regulations, corporate bond dealers are now required to report trade
+information trhough what is known as the Trade Reporting and Compliance Engine
+(TRACE).
+
+# 8.4 Inflation and interest rates
+
+## Real versus nominal rates
+
+#### Example
+
+Suppose the one-year interest rate is 15.5 percent, so that anyone depositing
+\$100 in a bank today will end up with \$115.50 next year. Further imagine a
+pizza cost \$5 today, implying that \$100 can buy 20 pizzas. Finally, assume
+that the inflation rate is 5 percent, leading to the price of pizza being \$5.25
+next year. How many pizzas can you buy next year if you deposit \$100 today/
+Clearly, you can buy \$115.50 / \$5.25 = 22 pizzas. This is up from 20 pizzas,
+implying a 10 percent increase in purchsing power. Economists say that, while
+_nominal_ rate of interest is 15.5 percent, the _real_ reate of interest is only
+10 percent.
+
+The nominal rate on an investment is the percentage change in the number of
+dollars you have. The real rate on an investment is the percentage change in how
+much you can buy with your dollars. In other words, the real rate is the
+percentage change in your buying power.
+
+The relation between nominal rates ($R$), real rates ($r$) and inflation ($h$):
+
+$$
+1 + R = (1 + r) \times (1 + h)
+$$
+
+If we rearrange things we can break down the nominal rate to three components:
+
+$$
+R = r + h + r \times h
+$$
+
+The first component $r$ is the real rate on the investment. Next, there is the
+compensation for the decrease in the value of the money originally invested
+because of inflation, $h$. The third component represents compensation for the
+fact that the dollars earned on the investment are also worth less because of
+inflation. This third term is usually dropped so we get:
+
+$$
+R \approx r + h
+$$
+
+#### Example 8.10
+
+##### Nominal vs. Real Rates
+
+If investors require a 10 percent real rate of return, and the inflation rate is
+8 percent, what must be the approximate nominal rate? The exact nominal rate?
+
+First of all, the nominal rate is approximately equal to the sum of the real
+rate and the inflation rate: 10 percent + 8 percent = 18 percent.
+
+$$
+\begin{aligned}
+1 + R &= (1 + r) \times (1 + h)\\
+ &= 1.10 \times 1.08\\
+ &= 1.1880
+\end{aligned}
+$$
+
+Therefore, the nominal rate will actually be closer to 19 percent.
+
+---
+
+It is important to note that financial rates, such as interest rates, discount
+rates, and rates of return, are almost always quoted in nominal terms. To remind
+you of this, we will henceforth use the symbol $R$ instead of $r$ in most of our
+discussions about such rates.
+
+## Inflation risk and inflation-linked bonds
+
+Even though Treasury bills are risk-free from default, they are not totally
+risk-free. The uncertainty of the inflation rate brings a risk to bonds which is
+called __inflation risk__.
+
+* __nominal value__ The value of a bond based on its face value + the interest
+  it pays.
+
+* __real value__ The real value measures the purchasing power of the bond
+  payments and takes into account the inflation rate.
+
+The U.S. government, and other governments, issue Treasury inflation-protected
+securities (TIPS).
+
+## The Fisher effect
+
+A rise in the rate of inflation causes the nominal rate to rise just enough so
+that the real rate of interest is unaffected. In other words, the real rate is
+invariant to the rate of inflation.
+
+# 8.5 Determinants of bond yields
+
+## The term structure of interest rates

@@ -2,7 +2,10 @@
 .Rhistory
 .RData
 .Ruserdata
+R/
 *.pdf
 edgar_*/
+Schwab/
 Data/
 *.swp
+EAR.rmd
