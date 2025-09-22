@@ -1,0 +1,356 @@
+---
+title: "Introduction to Corporate Finance"
+subtitle: "Text"
+author: "Ross, Westerfield, Jaffe"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Chapter introduction
+
+Compensation of corporate executives in the United States continues to be a hot
+button issue. It is widely viewed that CEO pay has grown to exorbitant levels
+(at least in some cases). In July 2010, the Dodd-Frank _Wall Street Reform and
+Consumer Protection Act_ became law. The "say on pay" portion of the bill
+requires that, beginning in January 2011, corporations with a market value over
+\$75 million must allow a nonbinding shareholder vote on executive pay. (Note
+that because the bill applies to corporations, it does not give voters a "say on
+pay" for U.S. representatives and senators.)
+
+Sepecifically, the measure allows shareholders to approve or disapprove a
+company's executive compensation plan. Because the bill is nonbinding, it does
+not permit shareholders to veto a compensation package and does not place limits
+on executive pay. In February 2011, the shareholders of Beazer Homes USA and
+Jocobs Engineering Group became the first shareholders to vote against executive
+compensation under the new law. One analyst expected that these two companies
+would not be alone. He predicted that at least 50 companies would receive
+negative shareholder votes during 2011.
+
+Understanding how a corporation sets executive pay, and the role of shareholders
+in that process, takes us into issues involving the corporate form of
+organiztion, corporate goals, and corporate control, all of which we cover in
+this chapter.
+
+---
+
+# List of topics
+
+1. What is corporate finance?
+
+   * The balance sheet model of the firm
+   * The financial manager
+
+2. The corporate firm
+
+   * The sole proprietorship
+   * The partnership
+   * The corporation
+   * A corporation by another name...
+
+3. The importance of cash flows
+
+4. The goal of financial management
+
+   * Possible goals
+   * The goal of financial management
+   * A more general goal
+
+5. The agency problem and control of the corporation
+
+   * Agency relationships
+   * Management goals
+   * Do managers act in the stockholders' interests?
+   * Stakeholders
+
+6. Regulation
+
+   * The securities act of 1933 and the securities
+   * Exchange act of 1934
+   * Sarbanes-Oxley
+
+---
+
+# Notes
+
+## What is corporate finance?
+
+* The purpose of the firm is to create value for you, the owner.
+* This value is reflected in the framework of the simple balance sheet model of
+  the firm.
+
+### The balance sheet model of the firm
+
+* The balance sheet is a point-in-time snapshot of the firm and its activities.
+* _Fixed assets_ are those that will last a long time, such as buildings. Some
+  fixed assets are tangible, such as machinery and equipment. Other fixed assets
+  are intangible, such as patents and trademarks.
+* _Current assets_, are short lived assets such as inventory.
+* A firm will issue (sell) pieces of paper called _debt_ (loan agreements) or
+  _equity shares_ (stock certificates) to finance assets.
+* Liabilities are also classified as long term and short term. Short term
+  liabilities are classified as _current liabilities_ and long term debt is
+  classified as _long term debt_. Long term debt is debt that doesn't have to be
+  paid back within a year.
+* Shareholders' equity represents the difference between the value of assets and
+  the debt of the firm. It is the residual claim on the firm's assets.
+
+Finance is the study of the following three questions:
+
+1. In what long-lived assets should the firm invest? This question concerns the
+   left side of the balance sheet. Of course the types and proportions of assets
+   the firm needs tend to be set by the nature of the business. We use the term
+   __capital budgeting__ to describe the process of making and managing
+   expenditures on long-lived assets.
+
+2. How can the firm raise cash for required capital expenditures? This question
+   concerns the right side of the balance sheet. The answer to this question
+   involves the firm's __capital structure__, which represents the proportions
+   of the firm's financing from current and long-term debt and equity.
+
+3. How should short-term operating cash flows be managed? This question concerns
+   the upper portion of the balance sheet. There is often a mismatch between the
+   timing of cash inflows and cash outflows during operating activities.
+   Furthermore, the amount and timing of operating cash flows are not known with
+   certainty. Financial managers must attempt to manage the gaps in cash flow.
+   From a balance sheet perspective, short-term management of cash flow is
+   associated with a firm's net working capital. Net working capital is defined
+   as current assets minus current liabilities. From a financial perspective,
+   short-term cash flow problems come from the mismatching of cash inflows and
+   outflows.
+
+### The financial manager
+
+The chief financial officer is responsible for the finance activity of the firm.
+
+## The corporate firm
+
+* The firm is a way of organizing the economic activity of many individuals.
+
+### The sole proprietorship
+
+Business owned by one person. Some things to consider:
+
+1. The sole proprietorship is the cheapest business form. No formal charter is
+   required, and few government regulations must be satisifed for most
+   industries.
+
+2. A sole propietorship pays no corporate income taxes. All profits of the
+   business are taxed as individual income.
+
+3. The sole proprietorship has unlimited liability for business debts and
+   obligations. No distinction is made between personal and business assets.
+
+4. The life of the sole proprietorship is limited by the life of the sole
+   proprietor.
+
+5. Because the only money invested in the firm is the proprietor's, the equity
+   money that can be raised by the sole proprietor is limited to the
+   proprietor's personal wealth.
+
+### The partnership
+
+Two or more people form a parternship. Things to consider:
+
+1. Partnerships are usually inexpensive and easy to form. Written documents are
+   required in complicated arrangements. Business licenses and filing fees may
+   be necessary.
+
+2. General partners have unlimited liability for all debts. The liability of
+   limited partners is usually limited to the contribution each has made to the
+   partnership. If one general partner is unable to meet his or her
+   commimtement, the shortfall must be made up by the other general partners.
+
+3. The general partnership is terminated when a general parnter dies or
+   withdraws (but this is not so for a limited partner). It is difficult for a
+   partnership to transfer ownership without dissolving. Usually all general
+   partners must agree. However, limited partners may sell their interest in a
+   business.
+
+4. It is difficult for a partnership to raise large amounts of cash. Equity
+   contributions ar usually limited to a partner's ability and desire to
+   contribue to the partnership. Many companies, such as Apple, Inc., start life
+   as a proprietorship or partnership, but at some point they choose to convert
+   to corporate form.
+
+5. Income from a partnership is taxed as personal income to the partners.
+
+6. Management control resides with the general partners. Usually a majority vote
+   is required on important matters, such as the amount of profit to be retained
+   in the business.
+
+### The corporation
+
+A corporation is a disticnt legal entity. Corporations have a name and enjoy
+many of the legal powers of natural persons. Corporations can acquire and
+exchange property. Corporations can enter contracts and may sue and be sued. For
+jurisdictional purposes the corporation is a citizen of its state of
+incorporation.
+
+Corporations must prepare articles of incorporation and a set of bylaws. The
+articles of incorporation must include the following:
+
+1. Name of the corporation.
+2. Intended life of the corporation (it may be forever).
+3. Business purpose.
+4. Number of shares of stock that the corporation is authorized ot issue, with a
+   statement of limitations and rights of different classes of shares.
+5. Nature of the rights granted to shareholders.
+6. Number of members of the initial board of directors.
+
+* The byloaws are the rules to be used by the corporaiton to regulate its own
+  existence.
+
+## The importance of cash flows
+
+### Identificatio of cash flows
+
+* Much of the information needed to determine cash flows comes in the form of
+  accounting statements, and much of the work of financial analysis is to
+  extrach cash flow information from accounting statements. The example,
+  [__Accounting profit versus cash flows__](#accounting-profit-versus-cash-flows),
+  illustrates how to extract cash flow information from the income statement.
+
+### Timing of cash flows
+
+* One of the most important principles of finance is that individuals prefer to
+  receive cash flows earlier rather than later. One dollar received today is
+  worth more than one dollar received next year. The example
+  [__Cash flow timing__](#cash-flow-timing), demonstrates this principle.
+
+### Risk of cash flows
+
+The firm must consider risk. The amount and timing of cash flows are not usually
+known with certainty. Most investors have an aversion to risk. The concept of
+risk is demonstrated in the example [__Risk__](#risk)
+
+## The goal of financial managment
+
+* The goal of financial management is to maximize the current value per share of
+  the existing stock.
+* Specifically, maximize the _current_ stock value.
+* Stockholders are residual owners, which means they are entitled to what is
+  left after everyone else are paid (creditors, employees, suppliers, etc...).
+* We can define _corporate finance_ as the study of the relationship between
+  business decisions, cash flows, and the value of the stock in the business.
+* A more general way of saying _maximizing the current stock value_, is to
+  maximize the value of the owners' equity.
+
+## The agency problem and control of the corporation
+
+* "Investor Protection and Corporate Valuation," by Rafael La Porta, Florencio
+  Lopez-De-Silanes, Andrei Shleifer, and Robert Vishny, _Journal of Finance 57
+  (2002)_, pp. 1147-1170
+
+---
+
+# Chapter examples
+
+## Accounting profit versus cash flows
+
+The Midland Company refines and trades gold. At the end of theyear, it sold
+2,500 ounces of gold for \$1 million. The company had acquired the gold for
+\$900,000 at the beginning of the year. The company paid cash for the gold when
+it was purchased. Unfortunately it has yet to collect from the customer to whom
+the gold was sold. The following is a standard accounting of Midland's financial
+circumstances at year-end:
+
+*The Midland Company accounting view income statement year end December 31*
+
+|.|.|
+|:---|---:|
+| Sales | \$1,000,000 |
+| -Costs | -900,000 |
+| --- --- --- | --- --- --- |
+| Profit | \$\ 100,000 |
+
+By generally accepted accounting principles (GAAP), the sale is recorded even
+though the customer has yet to pay. It is assumed that the customer will pay
+soon. From the accounting perspective, Midland seems to be profitable. However,
+the perspective of corporate finance is different. If focuses on cash flows:
+
+*The Midland Company accounting view income statement year end December 31*
+
+|.|.|
+|:---|---:|
+| Cash inflow | \$\ \ \ \ \ \ \ 0|
+| Cash outflow | -900,000 |
+| --- --- --- | --- --- --- |
+| Profit | \$\ 100,000 |
+
+The perspective of corporate finance is interested in whether cash flows are
+being created by the gold trading operations of Midland. Value creation depends
+on cash flows. For Midland, value creation depends on whether and when it
+actually receives \$1 million.
+
+---
+
+## Cash flow timing
+
+The Midland Company is attempting to choose between two proposals for new
+products. Both proposals will provide additional cash flows over a four-year
+period and will initially cost \$10,000. The cash flows from the proposals are
+as follows:
+
+| Year | New Product A | New Product B |
+|:---:|---:|---:|
+| 1 | \$\ \ \ \ \ \ \ \ 0 | \$\ \ 4,000 |
+| 2 | \ \ \ \ \ \ 0 | \ \ 4,000 |
+| 3 | \ \ \ \ \ \ 0 | \ \ 4,000 |
+| 4 | 20,000 | \ \ 4,000 |
+| | --- --- | --- --- |
+| Total | \$20,000 | \$16,000 |
+
+At first it appears that new product A would be best. However, the cash flows
+from proposal B come earlier than those of A. Without more information, we
+cannot decide which set of cash flows would create the most value for the
+bondholders and shareholders. It depends on whether the value of getting cash
+from B up front outweighs the extra total cash from A. Bond and stock prices
+reflect this preference for earlier cash, and we will see how to use them to
+decide between A and B.
+
+## Risk
+
+The Midland Company is considering expanding operations overseas. It is
+evaluating Europe and Japan as possible sites. Europe is considered to be
+relatively safe, whereas operating in Japan is seen as very risky. In both cases
+the company would close down operations after one year.
+
+After doing a complete financial analysis, Midland has come up with the
+following cash flows of the alternative plans for expansion usner three
+scenarios---pessimistic, most likely, and optimistic:
+
+| . | Pessimistic | Most likely | Optimisitc |
+|:---|---:|---:|---:|
+| Europe | \$75,000 | \$100,000 | \$125,000 |
+| Japan | \ \ \ \ \ \ 0 | \ 150,000 | \ 200,000 |
+
+If we ignore the pessimistic scenario, perhaps Japan is the best alternative.
+When we take the pessimistic scenario into account, the choice is unclear. Japan
+appears to be riskier, but it also offers a higher expected level of cash flow.
+What is risk and how can it be defined? We must try to answer this important
+question. Corporate finance cannot avoid coping with risky alternatives, and
+much of our book is devoted to developing method for evaluating risky
+opportunities.
+
+---
+
+# Summary and Conclusions
+
+1. Corporate finance has three main areas of concern:
+
+  a. _Capital budgeting_: What long-term investmens should the firm take?
+  b. _Capital structure_: Where will the firm get the long-term financing to pay for its investments? Also, what mixture of debt and equity should it use to fund operations?
+  c. _Working capital management_: How should the firm manage its everyday financial activities?
+
+2. The goal of financial management in a for-profit business is to make decisions that increase the value of the stock, or, more generally, increase the market value of the equity.
+
+3.  The corporate form of organization is superior to other forms when it comes to raising money and transferring ownership interests, but it has the significant disadvantage of double taxation.
+
+4. There is the possibility of conflicts between stockholders and management in a large corporation. We called these conflicts _agency problems_ and discussed how they might be controlled and reduced.
+
+5. The advantages of the corporate form are enhanced by the existence of financial markets.

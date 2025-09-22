@@ -1,0 +1,22 @@
+---
+title: "Introduction to Corporate Finance"
+subtitle: "Concept Questions"
+author: "Ross, Westerfield, Jaffe"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. __Agency Problems__ Who owns a corporation? Describe the process whereby the owners control the firm's management. What is the main reason that an agency relationship exists in the corporate form of organization? In this context, what kinds of problems can arise?
+
+2. __Not-for-Profit Firm Goals__ Suppose you were the financial manager of a not-for-profit business (a not-for-profit hospital, perhaps). What kinds of goals do you think would be appropriate?
+
+3. __Goal of the Firm__ Evaluate the following statement: Managers should not focus on the current stock value because doing so will lead to an overemphasis on short-term profits at the expense of long-term profits.
+
+4. __Ethics and Firm Goals__ Can the goal of maximizing the value of the stock conflict with other goals, such as avoiding unethical or illegal behavior? In particular, do you think subjects like customer and employee safety, the environment, and the general good of society fit in this framework, or are they essentially ignored? Think of some specific scenarios to illustrate your answer.
+
+5. __International Firm Goal__
