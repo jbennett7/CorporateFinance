@@ -1,0 +1,1721 @@
+--- 
+title: "Financial Statements Analysis and Financial Models"
+author: "Ross, Westerfield, Jaffe"
+header-includes:
+  - \usepackage{booktabs}
+toc: true 
+output: pdf_document
+pdf_engine: xelatex
+---
+
+```{r setup, echo=FALSE, includes=FALSE, message=FALSE}
+require(kableExtra)
+require(dplyr)
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 999)
+pretty <- function(x) format(x, big.mark=",")
+```
+
+# 1. DuPont identity
+
+If Jares, Inc., has an equity multiplier of 1.55, total asset turnover of 1.75,
+and a profit margin of 4.3 percent, what is its ROE?
+
+---
+
+```{r problem 1, echo=F}
+p1 <- new.env()
+p1$equity.multiplier <- 1.55
+p1$total.asset.turnover <- 1.75
+p1$profit.margin <- .043
+p1$roe <- p1$profit.margin * p1$total.asset.turnover * p1$equity.multiplier
+```
+
+$$
+\begin{aligned}
+\mathbf{ROE} &= \text{profit margin} \times \text{total asset turnover}
+  \times \text{equity multiplier} \\
+  &= `r p1$profit.margin` \times `r p1$total.asset.turnover`
+  \times `r p1$equity.multiplier`\\
+  &= `r round(p1$roe, 4)`
+\end{aligned}
+$$
+
+---
+
+# 2. Equity multiplier and return on equity
+
+Nuber Company has a debt-equity ratio of .80. Return on assets is 9.7 percent,
+and total equity is \$735,000. What is the equity multiplier? Return on equity?
+Net income?
+
+```{r problem 2, echo=F}
+p2 <- new.env()
+p2$de.ratio <- .8
+p2$roa <- .097
+p2$total.equity <- 735000
+p2$equity.multiplier <- 1 + p2$de.ratio
+p2$roe <- p2$roa * p2$equity.multiplier
+p2$net.income <- p2$roe * p2$total.equity
+```
+
+$$
+\begin{aligned}
+\mathbf{Equity\ multiplier} &= 1 + \text{debt-equity ratio}\\
+  &= 1 + `r p2$de.ratio`\\
+  &= `r p2$equity.multiplier`\\\\
+\mathbf{ROE} &= \text{ROA} \times \text{equity multiplier}\\
+  &= `r p2$roa` \times `r p2$equity.multiplier`\\
+  &= `r p2$roe`\\\\
+\mathbf{Net\ income} &= \text{ROE} \times \text{total equity}\\
+  &= `r p2$roe` \times `r p2$total.equity`\\
+  &= `r pretty(p2$net.income)`\\\\
+\end{aligned}
+$$
+
+---
+
+# 3. Using the DuPont Identity
+
+Y3K, Inc., has sales of \$2,700, total assets of \$1,310, and a debt-equity ratio
+of 1.20. If its return on equity is 15 percent, what is its net income?
+
+---
+
+```{r problem 3, echo=F} 
+p3 <- new.env()
+p3$assets <- 1310
+p3$de.ratio <- 1.2
+p3$roe <- .15
+p3$net.income <- (p3$roe * p3$assets)/(1 + p3$de.ratio)
+```
+
+Using the DuPont Identity we know:
+
+$$
+\text{ROE} = \frac{\text{net income}}{\text{assets}}
+  \times (1 + \text{debt-equity ratio})
+$$
+
+Therefore, we can find `net income`:
+
+$$
+\begin{aligned}
+\text{net income} &= \frac{\text{ROE} \times \text{assets}}
+  {(1 + \text{debt-equity ratio})}\\
+  &= \frac{`r p3$roe` \times `r pretty(p3$assets)`}
+  {(1 + `r p3$de.ratio`)}\\
+  &= `r round(p3$net.income, 2)`
+\end{aligned}
+$$
+
+---
+
+# 4. EFN
+
+The most recent financial statements for Martin, Inc., are shown here:
+
+```{r problem 4 financial statements, echo=F}
+p4 <- new.env()
+
+p4$is <- data.frame(
+    Category = c("Sales", "Costs", "taxable income",
+                 "Taxes (34%)", "Net income"),
+    Amount = c(37300, 25800, 11500, 3910, 7590)
+)
+
+p4$bs <- data.frame(
+    Category =  c("Assets", "Debt", "Equity"),
+    Amount = c(127000, 30500, 96500)
+)
+
+knitr::kable(p4$is, caption="Income Statement")
+knitr::kable(p4$bs, caption="Balance Sheet")
+
+p4$dividend <- 2500
+p4$projected.sales <- 42300
+p4$payout.ratio <- p4$dividend / p4$is$Amount[5]
+p4$growth.rate <- (p4$projected.sales - p4$is$Amount[1]) / p4$is$Amount[1]
+p4$projected.assets <- p4$bs$Amount[1] * (1 + p4$growth.rate)
+p4$projected.net.income <- p4$is$Amount[5] * (1 + p4$growth.rate)
+p4$addition.to.retained.earnings <- p4$projected.net.income *
+                                     (1 - p4$payout.ratio)
+p4$projected.equity <- p4$bs$Amount[3] + p4$addition.to.retained.earnings
+p4$efn <- p4$projected.assets - (p4$bs$Amount[2] + p4$projected.equity)
+```
+
+Assets and costs are proportional to sales. Debt and equity are not. A dividend
+of \$2,500 was paid, and Martin wishes to maintain a constant payout ratio. Next
+year's sales are projected to be \$42,300. What external financing is needed?
+
+---
+
+Since Assets and costs are proportional to projected sales (\$42,300) for the
+income statement we get:
+
+$$
+\begin{aligned}
+\mathbf{Payout\ ratio} &= \frac{\text{dividends}}{\text{net income}}\\
+  &= \frac{`r pretty(p4$dividend)`}
+          {`r pretty(p4$is$Amount[5])`}\\
+  &\approx `r pretty(round(p4$payout.ratio, 4))`\\\\
+\mathbf{Growth\ rate} &= \frac{\text{projected sales} - \text{current sales}}
+  {\text{current sales}}\\
+  &= \frac{`r pretty(p4$projected.sales)` - `r pretty(p4$is$Amount[1])`}
+          {`r pretty(p4$is$Amount[1])`}\\
+  &= `r round(p4$growth.rate, 4)`\\\\
+\mathbf{Projected\ assets} &= \text{current assets}
+  \times (1 + \text{growth rate})\\
+  &= `r pretty(p4$bs$Amount[1])` \times `r 1 + p4$growth.rate`\\
+  &= `r pretty(p4$projected.assets)`\\\\
+\mathbf{Projected\ net\ income} &= \text{current net income}
+  \times (1 + \text{growth rate})\\
+  &= `r pretty(p4$is$Amount[5])` \times `r 1 + round(p4$growth.rate, 4)`\\
+  &= `r pretty(round(p4$projected.net.income, 2))`\\\\
+\mathbf{Addition\ to\ retained\ earnings} &= \text{net income}
+  \times \text{retention raio}\\
+  &= `r pretty(round(p4$projected.net.income, 2))`
+  \times (1 - `r round(p4$payout.ratio, 4)`)\\
+  &= `r pretty(round(p4$addition.to.retained.earnings, 2))`\\\\
+\mathbf{Projected\ equity} &= \text{current equity}
+  + \text{addition to retained earnings}\\
+  &= `r pretty(p4$bs$Amount[3])` +
+     `r pretty(round(p4$addition.to.retained.earnings))`\\
+  &= `r pretty(round(p4$projected.equity, 2))`\\\\
+\mathbf{EFN} &= \text{projected assets} - (\text{current debt}
+  + \text{projected equity})\\
+  &= `r pretty(p4$projected.assets)` - (`r pretty(p4$bs$Amount[2])`
+  + `r pretty(p4$projected.equity)`)\\
+  &= `r pretty(p4$efn)`
+\end{aligned}
+$$
+
+```{r solution 4, echo=F}
+pct.inc.sales <- 42300/37300
+payout.ratio <- 2500/7590
+assets.proforma <- 127000 * pct.inc.sales
+netincome.proforma <- 7590 * pct.inc.sales
+retained.earnings.proforma <- netincome.proforma*(1-payout.ratio)
+equity.proforma <- 96500 + retained.earnings.proforma
+efn <- assets.proforma - (30500 + equity.proforma)
+```
+
+---
+
+# 5. Sales and growth
+
+The most recent financial statements for Fontenot Co. are shown here:
+
+```{r problem 5, echo=F}
+p5 <- new.env()
+p5$is <- matrix(c(54000, 39300, 14700, 4998, 9702), ncol=1)
+row.names(p5$is) <- c("Sales", "Costs", "Taxable income",
+                      "Taxes (34%)", "Net income")
+p5$bs <- matrix(c(31000, 118000, 149000, 68000, 81000, 149000), ncol = 1)
+row.names(p5$bs) <- c("Current assets", "Fixed assets", "Total Assets",
+                      "Long-term debt", "Equity", "Debt and Equity")
+knitr::kable(p5$is, caption="Income Statement")
+knitr::kable(p5$bs, caption="Balance Sheet")
+```
+
+Assets and costs are proportional to sales. The company maintains a constant 30
+percent dividend payout ratio and a constant debt-equity ratio. What is the
+maximum increase in sales that can be sustained assuming no new equity is
+issued?
+
+---
+
+```{r problem 5; work, echo=F}
+p5$payout.ratio <- .3
+p5$de.ratio <- as.numeric(p5$bs["Long-term debt",]) /
+               as.numeric(p5$bs["Equity",])
+p5$roe <- as.numeric(p5$is["Net income",]) /
+          as.numeric(p5$bs["Equity",])
+p5$plow.back <- 1 - p5$payout.ratio
+p5$sgr <- (p5$roe * p5$plow.back) / (1 - p5$roe * p5$plow.back)
+```
+
+$$
+\begin{aligned}
+\mathbf{Retention\ ratio} &= 1 - \text{dividend payout ratio}\\
+  &= 1 - \\
+  &= 0.70\\\\
+\mathbf{DER} &= \frac{\text{Long-term Debt}}{\text{Equity}} \\
+  &= \frac{68,000}{81,000} \\
+  &= 0.8395 \\ \\
+\mathbf{ROE} &= \frac{\text{net income}}{\text{equity}} \\
+  &= \frac{9,702}{81,000} \\
+  &= 0.1198 \\ \\
+\mathbf{SGR} &= \text{ROE} \times \text{retention ratio} \\
+  &= 0.1198 \times 0.70 \\
+  &= 0.0839 \\ \\
+\mathbf{Maximum\ increase\ in\ sales} &= \text{current sales} \times \text{SGR} \\
+  &= 54,000 \times 0.0839 \\
+  &= 4,531 \\ \\
+\mathbf{Projected\ sales} &= \text{current sales} + \text{maximum increase in sales} \\
+  &= 54,000 + 4,531 \\
+  &= 58,531
+\end{aligned}
+$$
+
+\$4,531 is the largest sales growth Fontenot Co. can sustain without issuing new
+equity while maintaining its current policies. The total projected sales is
+\$58,531.
+
+```{r solution 5}
+p5$retention.ratio <- 0.70
+p5$debt.to.equity.ratio <- 68000/81000
+p5$roe <- 9702/81000
+p5$sgr <- p5$roe * p5$retention.ratio
+cat("Maximum increase in sales:", p5$max.inc.sales <- 54000 * p5$sgr)
+cat("Projected Total Sales:", p5$projected.sales <- 54000 + p5$max.inc.sales)
+```
+
+---
+
+# 6. Sustainable growth
+
+If the Layla Corp. has a 13 percent ROE and a 20 percent payout ratio, what is
+its sustainable growth rate.
+
+---
+
+```{r problem 6, echo=F}
+p6 <- new.env()
+p6$roe <- .13
+p6$payout.ratio <- .2
+p6$sgr <- (p6$roe * (1 - p6$payout.ratio)) /
+          (1 - p6$roe * (1 - p6$payout.ratio))
+```
+
+$$
+\begin{aligned}
+\mathbf{SGR} &= \frac{\text{ROE} \times \text{retention ratio}}
+     {1 - \text{ROE} \times \text{retention ratio}}\\
+  &= \frac{`r p6$roe` \times (1 - `r p6$payout.ratio`)}
+          {1 - `r p6$roe` \times (1 - `r p6$payout.ratio`)}\\
+  &= `r round(p6$sgr, 4)`
+\end{aligned}
+$$
+
+---
+
+# 7. Sustainable growth
+
+Assuming the following ratios are constant, what is the sustainable growth rate?
+
+* Total asset turnover = 2.20
+* Profit margin = 7.4%
+* Equity multiplier = 1.40
+* Payout ratio = 40%
+
+---
+
+```{r problem 7, echo=F}
+p7 <- new.env()
+p7$total.asset.turnover <- 2.2
+p7$profit.margin <- .074
+p7$equity.multiplier <- 1.4
+p7$payout.ratio <- .4
+p7$roa <- p7$profit.margin * p7$total.asset.turnover
+p7$roe <- p7$roa * p7$equity.multiplier
+p7$sgr <- p7$roe * (1 - p7$payout.ratio)
+```
+
+$$
+\begin{aligned}
+\mathbf{ROA} &= \text{profit margin} \times \text{total asset turnover} \\
+  &= `r p7$profit.margin` \times `r p7$total.asset.turnover`\\
+  &= `r p7$roa`\\\\
+\mathbf{ROE} &= \text{ROA} \times \text{equity multiplier} \\
+  &= `r p7$roa` \times `r p7$equity.multiplier`\\
+  &= `r round(p7$roe, 4)`\\\\
+\mathbf{Sustainable\ Growth\ Rate} &= \text{ROE} \times \text{retention ratio}\\
+  &= \text{ROE} + (1 - \text{payout ratio}) \\
+  &= `r p7$roe` + (1 - `r p7$payout.ratio`)\\
+  &= `r round(p7$sgr, 4)`\\\\
+\end{aligned}
+$$
+
+---
+
+# 8. Calculating EFN
+
+The most recent financial statements for Bradley, Inc., are shown here (assuming no income taxes):
+
+```{r problem 8, echo=F}
+p8 <- new.env()
+p8$is <- matrix(c(6500, 5320, 1180), ncol=1)
+row.names(p8$is) <- c("Sales", "Costs", "Net income")
+p8$bs <- matrix(c(17400, 17400, 8400, 9000, 17400), ncol=1)
+row.names(p8$bs) <- c("Assets", "Total Assets", "Debt", "Equity", "Debt and Equity")
+knitr::kable(p8$is, caption="Income Statement")
+knitr::kable(p8$bs, caption="Balance Sheet")
+```
+
+Assets and costs are proportional to sales. Debt and equity are not. No dividends are paid. Next year's sales are projected to be \$7,280. What is the external financing needed?
+
+---
+
+```{r problem 8; work, echo=F}
+p8$projected.sales <- 7280
+p8$growth <- p8$projected.sales / as.numeric(p8$is["Sales",])
+p8$projected.assets <- as.numeric(p8$bs["Assets",]) * p8$growth
+p8$projected.net.income <- as.numeric(p8$is["Net income",]) * p8$growth
+p8$projected.equity <- as.numeric(p8$bs["Equity",]) + p8$projected.net.income
+p8$efn <- p8$projected.assets - (as.numeric(p8$bs["Debt",])
+                              + p8$projected.equity)
+```
+
+$$
+\begin{aligned}
+\mathbf{Growth\ rate} &= \frac{\text{projected sales} - \text{sales}}
+  {\text{sales}}\\
+  &= \frac{`r pretty(p8$projected.sales)`
+  - `r pretty(as.numeric(p8$is["Sales",]))`}
+          {`r pretty(as.numeric(p8$is["Sales",]))`}\\
+  &= `r p8$growth - 1`\\
+\mathbf{Projected\ assets} &= \text{assets} \times (1 + \text{growth rate})\\
+  &= `r pretty(as.numeric(p8$bs["Assets",]))` \times `r p8$growth`\\
+  &= `r pretty(p8$projected.assets)`\\\\
+\mathbf{Projected\ net\ income} &= \text{net income}
+  \times (1 + \text{growth rate})\\
+  &= `r pretty(as.numeric(p8$is["Net income",]))` \times `r p8$growth`\\
+  &= `r pretty(p8$projected.net.income)`\\\\
+\mathbf{Projected\ equity} &= \text{equity} + \text{projected net income}\\
+  &= `r pretty(as.numeric(p8$bs["Equity",]))` +
+     `r pretty(as.numeric(p8$projected.net.income))`\\
+  &= `r pretty(p8$projected.equity)`\\\\
+\mathbf{EFN} &= \text{projected assets} - (\text{debt} + \text{projected equity})\\
+  &= `r pretty(p8$projected.assets)` - (`r pretty(as.numeric(p8$bs["Debt",]))`
+  +  `r pretty(p8$projected.equity)`)\\
+  &= `r pretty(p8$efn)`
+\end{aligned}
+$$
+
+---
+
+# 9. External funds needed
+
+Cheryl Colby, CFO of Charming Florist Ltd., has created the firm's pro forma
+balance sheet for the next fiscal year. Sales are projected to grow by 10
+percent to \$420 million. Current assets, fixed assets, and short-term debt are
+20 percent, 75 percent, and 15 percent of sales, respectively. Charming Florist
+pays out 30 percent of its net income in dividends. The company currently has
+\$120 million of long-term debt and \$48 million in common stock par value. The
+profit margin is 9 percent.
+
+a. Construct the current balance sheet for the firm using the projected sales
+   figure.
+
+b. Based on Ms. Colby's sales growth forecast, how much does Charming Florist
+   need in external funds for the upcoming fiscal year?
+
+c. Construct the firm's pro forma balance sheet for the next fiscal year and
+   confirm the external funds needed that you calculated in part (b).
+
+---
+
+```{r problem 9, echo=F}
+options(digits=5)
+p9 <- new.env()
+
+p9$projected.sales <- 420
+p9$sales.growth <- .1
+p9$current.assets.pct.of.sales <- .2
+p9$fixed.assets.pct.of.sales <- .75
+p9$short.term.debt.pct.of.sales <- .15
+p9$long.term.debt <- 120
+p9$dividend.payout <- .3
+p9$equity.par.value <- 48
+p9$profit.margin <- .09
+
+p9$sales <- p9$projected.sales / (1 + p9$sales.growth)
+
+# Current variables
+p9$current <- matrix(p9$sales * c(
+    p9$current.assets.pct.of.sales,
+    p9$fixed.assets.pct.of.sales,
+    p9$short.term.debt.pct.of.sales), ncol=1)
+rownames(p9$current) <- c(
+    "Current assets",
+    "Fixed assets",
+    "Short-term debt")
+p9$current.total.assets <- sum(p9$current[1:2,])
+p9$current.total.liabilities <- as.numeric(p9$current[3,]) + p9$long.term.debt
+p9$current.net.income <- p9$profit.margin * p9$sales
+p9$current.retained.earnings <- p9$current.net.income *
+  (1 - p9$dividend.payout)
+p9$current.equity <- p9$current.total.assets - p9$current.total.liabilities
+
+# Projected variables
+p9$projected <- matrix(p9$projected.sales * c(
+    p9$current.assets.pct.of.sales,
+    p9$fixed.assets.pct.of.sales,
+    p9$short.term.debt.pct.of.sales), ncol=1)
+rownames(p9$projected) <- c(
+    "Current assets",
+    "Fixed assets",
+    "Short-term debt")
+p9$projected.total.assets <- sum(p9$projected[1:2,])
+p9$projected.total.liabilities <- p9$projected[3,] + p9$long.term.debt
+p9$projected.net.income <- p9$profit.margin * p9$projected.sales
+p9$projected.retained.earnings <- p9$projected.net.income *
+  (1 - p9$dividend.payout)
+p9$projected.equity <- p9$current.equity + p9$projected.retained.earnings
+
+p9$total.available.financing <- p9$projected["Short-term debt",] +
+    p9$long.term.debt + p9$projected.equity
+
+p9$efn <- p9$projected.total.assets - p9$total.available.financing
+```
+
+## A. Constructing the current balance sheet based on current sales.
+
+### NOTE:
+
+All values are in millions.
+
+$$
+\begin{aligned}
+\text{Current sales} &= \frac{\text{Projected sales}}{1 + \text{sales growth}}\\
+  &= \frac{`r pretty(p9$projected.sales)`}{`r 1 + p9$sales.growth`}\\
+  &= `r pretty(p9$sales)`\\\\
+\mathbf{Assets}\\
+\text{Current assets} &= \text{current sales}
+  \times \text{current assets as percent of sales}\\
+  &= `r pretty(p9$sales)` \times `r p9$current.assets.pct.of.sales`\\
+  &= `r pretty(p9$current["Current assets",])`\\\\
+\text{Fixed assets} &= \text{current sales}
+  \times \text{fixed assets as percent of sales}\\
+  &= `r pretty(p9$sales)` \times `r p9$fixed.assets.pct.of.sales`\\
+  &= `r pretty(p9$current["Fixed assets",])`\\\\
+\text{Total assets} &= \text{current assets} + \text{fixed assets}\\
+  &= `r pretty(p9$current["Current assets",])`
+  + `r pretty(p9$current["Fixed assets",])`\\
+  &= `r pretty(p9$current.total.assets)`\\\\
+\mathbf{Liabilities}\\
+\text{Short-term debt} &= \text{current sales}
+  \times \text{short-term assets as percent of sales}\\
+  &= `r pretty(p9$sales)` \times `r pretty(p9$short.term.debt.pct.of.sales)`\\
+  &= `r pretty(p9$current["Short-term debt",])`\\\\
+\text{Long-term debt} &= `r pretty(p9$long.term.debt)`\\\\
+\text{Total debt} &= \text{short-term debt} + \text{long-term debt}\\
+  &= `r pretty(p9$current["Short-term debt",])` + `r pretty(p9$long.term.debt)`\\
+  &= `r pretty(p9$current.total.liabilities)`\\\\
+\mathbf{Equity}\\
+\text{Equity} &= \text{Total assets} - \text{Total liabilities}\\
+  &= `r pretty(p9$current.total.assets)`
+  - `r pretty(p9$current.total.liabilities)`\\
+  &= `r pretty(p9$current.equity)`
+\end{aligned}
+$$
+
+## B. External financing is needed
+
+### Step 1: Projected sales = \$`r pretty(p9$projected.sales)`
+
+$$
+\begin{aligned}
+\text{Projected net income} &= \text{profit margin}
+  \times \text{projected sales}\\
+  &= `r p9$profit.margin` \times `r p9$projected.sales`\\
+  &= `r p9$projected.net.income`\\\\
+\text{Projected retained earnings} &= \text{retention ratio}
+  \times \text{projected net income}\\
+  &= `r (1 - p9$dividend.payout)` \times `r p9$projected.net.income`\\
+  &= `r p9$projected.retained.earnings`
+\end{aligned}
+$$
+
+### Step 2: Project assets
+
+$$
+\begin{aligned}
+\text{Projected current assets} &= \text{current assets percent of sales}
+  \times \text{projected sales}\\
+  &= `r p9$current.assets.pct.of.sales` \times `r p9$projected.sales`\\
+  &= `r p9$projected["Current assets",]`\\\\
+\text{Projected fixed assets} &= \text{fixed assets percent of sales}
+  \times \text{projected sales}\\
+  &= `r p9$fixed.assets.pct.of.sales` \times `r p9$projected.sales`\\
+  &= `r p9$projected["Fixed assets",]`\\\\
+\text{Projected total Assets} &= \text{projected current assets}
+  + \text{projected fixed assets}\\
+  &= `r p9$projected["Current assets",]`
+  + `r p9$projected["Fixed assets",]`\\
+  &= `r p9$projected.total.assets`
+\end{aligned}
+$$
+
+### Step 3: Project spontaneous liabilities
+
+$$
+\begin{aligned}
+\text{Projected short-term debt} &= \text{short-term debt percent of sales}
+  \times \text{projected sales}\\
+  &= `r p9$short.term.debt.pct.of.sales` \times `r p9$projected.sales`\\
+  &= `r p9$projected["Short-term debt",]`
+\end{aligned}
+$$
+
+### Step 4: Add existing long-term debt and equity
+
+$$
+\begin{aligned}
+\text{Long-term debt} &= `r p9$long.term.debt`\\\\
+\text{Projected equity} &= \text{equity from current balance sheet}
+  + \text{projected retained earnings}\\
+  &= `r p9$current.equity` + `r p9$projected.retained.earnings`\\
+  &= `r p9$projected.equity`
+\end{aligned}
+$$
+
+### Step 5: Total available financing
+
+$$
+\begin{aligned}
+\text{Projected liabilties} + \text{projected equity} &=
+  \text{projected short-term debt}\\
+  &\ \ \ \ + \text{long-term debt}\\
+  &\ \ \ \ + \text{projected equity}\\
+  &= `r p9$projected["Short-term debt",]`+ `r p9$long.term.debt`
+  +  `r p9$projected.equity`\\
+  &= `r p9$total.available.financing`
+\end{aligned}
+$$
+
+### Step 6: EFN = Total assets - Total financing
+
+$$
+\begin{aligned}
+\text{EFN} &= \text{projected total assets} - \text{total financing}\\
+  &= `r p9$projected.total.assets` - `r p9$total.available.financing`\\
+  &= `r p9$efn`
+\end{aligned}
+$$
+
+## C. Pro forma balance sheet
+
+$$
+\begin{aligned}
+\mathbf{Assets}\\
+\text{Current assets} &= \text{current sales}
+  \times \text{current assets as percent of sales}\\
+  &= `r pretty(p9$projected.sales)` \times `r p9$current.assets.pct.of.sales`\\
+  &= `r pretty(p9$projected["Current assets",])`\\\\
+\text{Fixed assets} &= \text{current sales}
+  \times \text{fixed assets as percent of sales}\\
+  &= `r pretty(p9$projected.sales)` \times `r p9$fixed.assets.pct.of.sales`\\
+  &= `r pretty(p9$projected["Fixed assets",])`\\\\
+\text{Total assets} &= \text{current assets} + \text{fixed assets}\\
+  &= `r pretty(p9$projected["Current assets",])`
+  + `r pretty(p9$projected["Fixed assets",])`\\
+  &= `r pretty(p9$projected.total.assets)`\\\\
+\mathbf{Liabilities}\\
+\text{Short-term debt} &= \text{current sales}
+  \times \text{short-term assets as percent of sales}\\
+  &= `r pretty(p9$projected.sales)`
+  \times `r pretty(p9$short.term.debt.pct.of.sales)`\\
+  &= `r pretty(p9$projected["Short-term debt",])`\\\\
+\text{Long-term debt} &= `r pretty(p9$long.term.debt)`\\\\
+\text{Total debt} &= \text{short-term debt} + \text{long-term debt}\\
+  &= `r pretty(p9$projected["Short-term debt",])`
+  + `r pretty(p9$long.term.debt)`\\
+  &= `r pretty(p9$projected.total.liabilities)`\\\\
+\mathbf{Equity}\\
+\text{Equity} &= \text{Current equity}
+  - \text{Projected retained earnings}\\
+  &= `r pretty(p9$current.equity)`
+  + `r pretty(p9$projected.retained.earnings)`\\
+  &= `r pretty(p9$projected.equity)`
+\end{aligned}
+$$
+
+---
+
+# 10. Sustainable growth rate
+
+The Steiben company has an ROE of 13.1 percent and a payout ratio of 40 percent.
+
+a. What is the company's sustainable growth rate?
+
+b. Can the company's actual growth rate be different from its sustainable growth
+   rate? Why or why not?
+
+c. How can the company increase its sustainable growth rate?
+
+---
+
+```{r problem 10; sustainable growth rate, echo=F}
+p10 <- new.env()
+p10$roe <- .131
+p10$payout.ratio <- .4
+p10$sgr <- (p10$roe * (1 - p10$payout.ratio)) /
+           (1 - p10$roe * (1 - p10$payout.ratio))
+```
+
+$$
+\begin{aligned}
+\mathbf{SGR} &= \frac{\text{ROE} \times (1 - \text{payout ratio})}
+     {1 - \text{ROE} \times (1 - \text{payout ratio})}\\
+  &= \frac{`r p10$roe` \times (1 - `r p10$payout.ratio`)}
+     {1 - `r p10$roe` \times (1 - `r p10$payout.ratio`)}\\
+  &= `r p10$sgr`
+\end{aligned}
+$$
+
+b. Yes, a company growth rate can be different from its sustainable growth rate.
+If it is below the SGR, then the company is operating at less than full
+capacity. If the growth rate is above the sustainable growth rate, it would need
+external funds to sustain the growth rate.
+
+c. The sustainable growth rate is determined by the following factors based on
+   the ROE and the payout ratio.
+
+$$
+\text{ROE} = \text{profit margin} \times \text{total asset turnover}
+  \times \text{equity multiplier}
+$$
+
+The following four factors affect the sustainable growth rate:
+
+### Profit margin
+
+An increase in profit margin will increase the firm's ability to generate funds
+internally and thereby increase its sustainable growth.
+
+### Dividend policy
+
+A decrease in the payout ratio will increase the retention ratio. This increases
+internally generated equity and thus increases sustainable growth.
+
+### Financial policy
+
+An increase in the debt-equity ratio increases the firm's financial leverage.
+Because this makes additional debt financing available, it increases the
+sustainable growth rate.
+
+### Total asset turnover
+
+An increase in the firm's total asset turnover increases the sales generated for
+each dollar in assets. This decreases the firm's need for new assets as sales
+grow and thereby increases the sustainable growth rate. Notice that increasing
+total asset turnover is the same thing as decreasing capital intensity.
+
+---
+
+# 11. Return on equity
+
+Firm A and Firm B have debt-total asset ratios of 35 percent and 55 percent and
+returns on total assets of 9 percent and 7 percent, respectively. Which firm has
+a greater return on equity?
+
+---
+
+```{r problem 11; return on equity, echo=F}
+p11 <- new.env()
+p11$total.debt.ratio <- c(.35, .55)
+p11$roa <- c(.09, .07)
+p11$de.ratio <- (1 - p11$total.debt.ratio)
+p11$equity.multiplier <- 1 + p11$de.ratio
+p11$roe <- p11$roa * p11$equity.multiplier
+```
+
+The debt-total asset ratio is also called the total debt ratio.
+
+$$
+\begin{aligned}
+\mathbf{Total\ debt\ ratio}\\
+\text{Firm A} &= `r p11$total.debt.ratio[1]`\\
+\text{Firm B} &= `r p11$total.debt.ratio[2]`\\\\
+\mathbf{ROA}\\
+\text{Firm A} &= `r p11$roa[1]`\\
+\text{Firm B} &= `r p11$roa[2]`\\\\
+\mathbf{DE\ ratio} &= (1 - \text{Total debt ratio})\\
+\text{Firm A} &= `r p11$de.ratio[1]`\\
+\text{Firm B} &= `r p11$de.ratio[2]`\\\\
+\mathbf{Equity\ multiplier} &= 1 + \text{DE ratio}\\
+\text{Firm A} &= `r p11$equity.multiplier[1]`\\
+\text{Firm B} &= `r p11$equity.multiplier[2]`\\\\
+\mathbf{ROE} &= \text{ROA} \times \text{Equity multiplier}\\
+\text{Firm A} &= `r p11$roe[1]`\\
+\text{Firm B} &= `r p11$roe[2]`
+\end{aligned}
+$$
+
+## Conclusion
+
+Although firm B has lower ROA, it has a greater return on equity because it uses more leverage (higher debt-total asset ratio).
+
+---
+
+# 12. Ratios and Foreign Companies
+
+Prince Albert Canning PLC had a net loss of 37,543 pounds on sales of 345,182
+pounds. What was the company's profit margin? Does the fact that these figures
+are quoted in a foreign currency make any difference? Why? In dollars, sales
+were \$559,725. What was the net loss in dollars?
+
+---
+
+```{r problem 12; ratios and foreign companies, echo=F}
+p12 <- new.env()
+p12$net.loss.pd <- 37543
+p12$sales.pd <- 345182
+p12$sales.us <- 559725
+p12$profit.margin <- - p12$net.loss.pd / p12$sales.pd
+p12$pd.us <- p12$sales.us / p12$sales.pd
+p12$net.loss.us <- p12$net.loss.pd * p12$pd.us
+```
+
+$$
+\begin{aligned}
+\mathbf{Profit\ margin} &= \frac{\text{net income}}{\text{sales}}\\
+  &= \frac{`r pretty(p12$net.loss.pd)`}{`r pretty(p12$sales.pd)`}\\
+  &= `r round(p12$profit.margin, 4)`
+\end{aligned}
+$$
+
+The profit margin would be the same in any currency because it is a ratio.
+
+If sales were 559,725 in dollars. Then the exchange rate between dollars and
+pounds is
+
+$$
+\begin{aligned}
+\text{exchange rate} &= \frac{\text{sales USD}}{\text{sales PD}}\\
+  &= \frac{`r pretty(p12$sales.us)`}{`r pretty(p12$sales.pd)`}\\
+  &= `r round(p12$pd.us, 2)`
+\end{aligned}
+$$
+
+The net loss in dollars is
+
+$$
+\begin{aligned}
+\text{Net loss USD} &= \text{net loss PD} \times \text{exchange rate}\\
+  &= `r pretty(p12$net.loss.pd)` \times `r p12$pd.us`\\
+  &= `r pretty(p12$net.loss.us)`
+\end{aligned}
+$$
+
+---
+
+# 13. External Funds Needed
+
+The Optical Scam Company has forecast a 15 percent sales growth rate for next
+year. The current financial statements are shown here:
+
+```{r problem 13; income statement, echo=F}
+p13 <- new.env()
+p13$is <- matrix(c(30400000, 26720000, 3680000, 1288000,
+                   2392000, 956800, 1435200),
+                 ncol=1)
+row.names(p13$is) <- c("Sales", "Costs", "Taxable income", "Taxes",
+                       "Net income", "Dividends",
+                       "Addition to retained earnings")
+
+knitr::kable(pretty(p13$is), caption="Income Statement") %>%
+    kable_styling(latex_options = "HOLD_position")
+```
+
+```{r problem 13; balance sheet, echo=F}
+p13$bs.assets <- c(7200000, 17600000)
+p13$bs.liabilities.and.equity <- c(6400000, 4800000, 3200000, 10400000)
+p13$bs.total.assets <- sum(p13$bs.assets)
+p13$bs.total.liabilities <- sum(p13$bs.liabilities.and.equity[1:2])
+p13$bs.total.equity <- sum(p13$bs.liabilities.and.equity[3:4])
+p13$bs.total.liabilities.and.equity <- sum(p13$bs.liabilities.and.equity)
+p13$bs <- matrix(c(p13$bs.assets, p13$bs.total.assets,
+                   p13$bs.liabilities.and.equity, p13$bs.total.equity,
+                   p13$bs.total.liabilities.and.equity), ncol=1)
+rownames(p13$bs) <- c("Current assets", "Fixed assets", "Total assets",
+                      "Short-term debt", "Long-term debt", "Common stock",
+                      "Accumulated retained earnings", "Total equity",
+                      "Total liabilities and equity")
+knitr::kable(pretty(p13$bs), caption="Balance Sheet") %>%
+    pack_rows("Assets", 1, 2) %>%
+    pack_rows("Liabilities", 4, 5) %>%
+    pack_rows("Stockholders' equity", 6, 8) %>%
+    add_indent(8) %>%
+    row_spec(c(2, 3, 7, 8),
+             extra_latex_after = "\\addlinespace") %>%
+    kable_styling(latex_options = "HOLD_position")
+```
+
+a. Using the equation, calculate the external funds needed for next year.
+
+b. Construct the firm's pro forma balance sheet for next year and confirm the
+   external funds needed that you calculated in part (a).
+
+c. Calculate the sustainable growth rate for the company.
+
+d. Can Optical Scam eliminate the need for external funds by changing its
+   dividend policy? What other options are available to the company to met its
+   growth objectives?
+
+---
+
+## A. The equation for EFN
+
+```{r solution 13a sales incease, echo=F}
+p13$pct.sales.inc <- .15
+p13$sales <- as.numeric(p13$is["Sales",])
+p13$delta.sales <- p13$sales * p13$pct.sales.inc
+p13$projected.sales <- p13$sales + p13$delta.sales
+p13$short.term.debt <- as.numeric(p13$bs["Short-term debt",])
+p13$capital.intensity.ratio <- as.numeric(p13$bs.total.assets) / p13$sales
+p13$profit.margin <- as.numeric(p13$is["Net income",]) / p13$sales
+p13$dividend.payout.ratio <- as.numeric(p13$is["Dividends",]) /
+                              as.numeric(p13$is["Net income",])
+p13$retention.ratio <- 1 - p13$dividend.payout.ratio
+p13$efn  <- p13$capital.intensity.ratio * p13$delta.sales -
+            p13$short.term.debt / p13$sales * p13$delta.sales -
+            p13$profit.margin * p13$projected.sales * p13$retention.ratio
+```
+
+$$
+\begin{aligned}
+\Delta \text{Sales} &= \text{Sales}
+  \times \text{precent increase in projected sales}\\
+  &= `r pretty(p13$sales)` \times `r p13$pct.sales.inc`\\
+  &= `r pretty(p13$delta.sales)`\\\\
+\text{Capital intensity ratio} &= \frac{\text{total assets}}{\text{sales}}\\
+  &= \frac{`r pretty(p13$bs.total.assets)`}{`r pretty(p13$sales)`}\\
+  &= `r p13$capital.intensity.ratio`\\\\
+\text{Profit margin} &= \frac{\text{net income}}{\text{sales}}\\
+  &= \frac{`r pretty(p13$is["Net income",])`}{`r pretty(p13$sales)`}\\
+  &= `r p13$profit.margin`\\\\
+\text{Projected Sales} &= \text{Sales} + \Delta \text{Sales}\\
+  &= `r pretty(p13$sales)` + `r pretty(p13$delta.sales)`\\
+  &= `r pretty(p13$projected.sales)`\\\\
+\text{Retention ratio} &= 1 - `r p13$dividend.payout.ratio`\\
+  &= `r p13$retention.ratio`\\\\
+\text{EFN} &= \text{capital intensity ratio} \times \Delta \text{sales}\\
+  &\ \ \ \ - \frac{\text{spontaneous liabilities}}{\text{sales}}
+  \times \Delta \text{sales}\\
+  &\ \ \ \ - \text{profit margin} \times \text{projected sales}
+  \times \text{retention ratio}\\
+  &= `r p13$capital.intensity.ratio` \times `r p13$delta.sales`\\
+  &\ \ \ \ - \frac{`r p13$short.term.debt`}{`r p13$sales`}
+  \times `r p13$delta.sales`\\
+  &\ \ \ \ - `r p13$profit.margin` \times `r p13$projected.sales`
+  \times `r p13$retention.ratio`\\
+  &= `r pretty(p13$efn)`
+\end{aligned}
+$$
+
+## B. The Pro forma balance sheet
+
+```{r solution 13b, echo=F}
+p13$bs.assets.pro.forma <- p13$bs.assets * 1.15
+p13$bs.total.assets.pro.forma <- sum(p13$bs.assets.pro.forma)
+p13$bs.short.term.debt.pro.forma <- as.numeric(p13$bs["Short-term debt",]) * 1.15
+p13$bs.total.liabilities.pro.forma <- p13$bs.short.term.debt.pro.forma +
+                                       as.numeric(p13$bs["Long-term debt",])
+p13$bs.accumulated.retained.earnings.pro.forma <-
+    as.numeric(p13$bs["Accumulated retained earnings",]) +
+    as.numeric(p13$is["Addition to retained earnings",]) * 1.15
+p13$bs.total.equity.pro.forma <- as.numeric(p13$bs["Common stock",]) +
+                              p13$bs.accumulated.retained.earnings.pro.forma
+p13$bs.total.liabilities.and.equity.pro.forma <-
+    p13$bs.total.liabilities.pro.forma +
+    p13$bs.total.equity.pro.forma
+p13$bs.pro.forma <- matrix(c(p13$bs.assets.pro.forma,
+                             p13$bs.total.assets.pro.forma,
+                             p13$bs.short.term.debt.pro.forma,
+                             p13$bs["Long-term debt",],
+                             p13$bs["Common stock",],
+                             p13$bs.accumulated.retained.earnings.pro.forma,
+                             p13$bs.total.equity.pro.forma,
+                             p13$bs.total.liabilities.and.equity.pro.forma,
+                             p13$efn),
+                           ncol=1)
+rownames(p13$bs.pro.forma) <- c("Current assets", "Fixed assets",
+                                "Total assets", "Short-term debt",
+                                "Long-term debt", "Common stock",
+                                "Accumulated retained earnings", "Total equity",
+                                "Total liabilities and equity",
+                                "External financing needed")
+knitr::kable(pretty(p13$bs.pro.forma),
+             caption="Pro Forma Balance Sheet") %>%
+    pack_rows("Assets", 1, 2) %>%
+    pack_rows("Liabilities", 4, 5) %>%
+    pack_rows("Stockholders' equity", 6, 8) %>%
+    add_indent(8) %>%
+    row_spec(c(2, 3, 7, 8),
+             extra_latex_after = "\\addlinespace") %>%
+    kable_styling(latex_options = "HOLD_position")
+```
+
+## C. Sustainable growth
+
+```{r problem 13c, echo=F}
+p13$roe <- as.numeric(p13$is["Net income",]/p13$bs["Total equity",])
+p13$sustainable.growth.rate <- (p13$roe * p13$retention.ratio) /
+                                (1 - p13$roe * p13$retention.ratio)
+```
+
+$$
+\begin{aligned}
+\text{ROE} &= \frac{\text{net income}}{\text{total equity}}\\
+  &= \frac{`r pretty(p13$is["Net income",])`}
+          {`r pretty(p13$bs["Total assets",])`}\\
+  &= `r round(p13$roe, 3)`\\\\
+\text{Sustainable growth rate} &= \frac{\text{ROE} \times b}
+                                       {1 - \text{ROE} \times b}\\
+  &= \frac{`r p13$roe` \times `r p13$retention.ratio`}
+          {1 - `r p13$roe` \times `r p13$retention.ratio`}\\
+  &= `r p13$sustainable.growth.rate`
+\end{aligned}
+$$
+
+## D. Options to external funds needed
+
+* Reducing the payout ratio would increase retained earnings, reducing EFN.
+* Increasing profit margin to generate more internal funds.
+* Reduce asset growth (e.g., improve efficiency or delay capital expenditures).
+* Increase spontaneous liabilities (e.g., negotiate better payment terms with suppliers).
+* Issue new equity or take on additional long-term debt.
+
+---
+
+# 14. Days' sales in receivables
+
+A company has net income of \$265,000, a profit margin of 9.3 percent, and an accounts receivable balance of \$145,300. Assuming 80 percent of sales are on credit, what is the company's days' sales in receivables?
+
+---
+
+```{r problem 14; days sales in receivables, echo=F}
+p14 <- new.env()
+p14$net.income <- 265000
+p14$profit.margin <- .093
+p14$accounts.receivable <- 145300
+p14$pct.sales.on.credit <- .8
+p14$sales <- p14$net.income / p14$profit.margin
+p14$sales.on.credit <- p14$sales * p14$pct.sales.on.credit
+p14$receivables.turnover <- round(p14$sales.on.credit /
+                                  p14$accounts.receivable, 1)
+p14$days.sales.in.receivables <- round(365 / p14$receivables.turnover, 1)
+```
+
+$$
+\begin{aligned}
+\text{Sales} &= \frac{\text{net income}}{\text{profit margin}}\\
+  &= \frac{`r pretty(p14$net.income)`}{`r p14$profit.margin`}\\
+  &= `r pretty(p14$sales)`\\\\
+\text{Sales on credit} &= \text{sales}
+  \times \text{percent of sales on credit}\\
+  &= `r pretty(p14$sales)` \times `r p14$pct.sales.on.credit`\\
+  &= `r pretty(p14$sales.on.credit)`\\\\
+\text{Receivables turnover} &= \frac{\text{sales on credit}}
+                                    {\text{accounts receivable}}\\
+  &= \frac{`r pretty(p14$sales.on.credit)`}
+          {`r pretty(p14$accounts.receivable)`}\\
+  &= `r p14$receivables.turnover`\\
+\text{Days' sales in receivables} &= \frac{365\ \text{days}}
+                                          {\text{receivables turnover}}\\
+  &= \frac{365}{`r round(p14$receivables.turnover, 1)`}\\
+  &= `r p14$days.sales.in.receivables`\\\\
+\end{aligned}
+$$
+
+# 15. Ratios and fixed assets
+
+The Le Bleu Company has a ratio of long-term debt to total assets of .35 and a
+current ratio of 1.25. Current liabilities are \$950, sales are \$5,780, profit
+margin is 9.4 percent, and ROE is 18.2 percent. What is the amount of the firm's
+net fixed assets?
+
+---
+
+```{r problem 15 ratios and fixed assets, echo=F}
+p15 <- new.env()
+p15$lt.debt.asset.ratio <- .35
+p15$current.ratio <- 1.25
+p15$current.liabilities <- 950
+p15$sales <- 5780
+p15$profit.margin <- .094
+p15$roe <- .182
+p15$current.assets <- p15$current.ratio * p15$current.liabilities
+p15$net.income <- p15$profit.margin * p15$sales
+p15$equity <- round(p15$net.income / p15$roe, 2)
+p15$total.assets <- round((p15$current.liabilities + p15$equity) /
+                          (1 - p15$lt.debt.asset.ratio), 2)
+p15$fixed.assets <- p15$total.assets - p15$current.assets
+p15$fixed.assets2 <- p15$current.liabilities / (1 - p15$lt.debt.asset.ratio) +
+                     p15$equity / (1 - p15$lt.debt.asset.ratio) -
+                     p15$current.assets
+```
+
+$$
+\begin{aligned}
+\text{current assets} &= \text{current ratio}
+  \times \text{current liabilities}\\
+  &= `r p15$current.ratio` \times `r p15$current.liabilities`\\
+  &= `r pretty(p15$current.assets)`\\\\
+\text{Net income} &= \text{profit margin} \times \text{sales}\\
+  &= `r p15$profit.margin` \times `r p15$sales`\\
+  &= `r p15$net.income`\\\\
+\text{Equity} &= \frac{\text{net income}}{\text{ROE}}\\
+  &= \frac{`r p15$net.income`}{`r p15$roe`}\\
+  &= `r pretty(p15$equity)`\\\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{Assets} &= \text{liabilities} + \text{Equity}\\
+  &= \frac{\text{long-term debt}}{\text{assets}} \times \text{assets} +
+  \text{current liabilities} + \text{equity} \\ \\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{assets}
+  \times \left(1 - \frac{\text{long-term debt}}{\text{assets}} \right) &=
+  \text{current liabilities} + \text{equity}\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{assets} &= \frac{\text{current liabilities}
+  + \text{equity}}{(1 - \frac{\text{long-term debt}}{\text{assets}})}\\
+\text{assets} &= \frac{`r p15$current.liabilities` + `r pretty(p15$equity)`}
+  {`r 1 - p15$lt.debt.asset.ratio`}\\
+  &= `r pretty(p15$total.assets)`\\\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{Fixed\ assets} &= \text{assets} - \text{current assets}\\
+  &= `r pretty(p15$total.assets)` - `r pretty(p15$current.assets)`\\
+  &= `r pretty(p15$fixed.assets)`
+\end{aligned}
+$$
+
+---
+
+# 16. Calculating the cash coverage ratio
+
+Titan Inc.'s net income for the most recent year was \$8,320. The tax rate was
+34 percent. The firm paid \$1,940 in total interest expense and deducted \$2,730
+in depreciation expense. What was Titan's cash coverage ratio for the year?
+
+---
+
+```{r problem 16; calculating the cash coverage ratio, echo=F}
+p16 <- new.env()
+p16$net.income <- 8320
+p16$tax.rate <- .34
+p16$interest <- 1940
+p16$depreciation <- 2730
+p16$taxable.income <- round(p16$net.income / (1 - p16$tax.rate), 2)
+p16$ebitda <- p16$taxable.income + p16$interest + p16$depreciation
+p16$cash.coverage.ratio <- round(p16$ebitda / p16$interest, 2)
+```
+
+$$
+\begin{aligned}
+\text{Taxable income} &= \frac{\text{net income}}{(1 - \text{tax rate})}\\
+  &= \frac{`r pretty(p16$net.income)`}{(1 - `r p16$tax.rate`)}\\
+  &= `r pretty(p16$taxable.income)`\\\\
+\text{EBITDA} &= \text{taxable income} + \text{interest} + \text{depreciation}\\
+  &= `r pretty(p16$taxable.income)` + `r pretty(p16$interest)`
+  +  `r pretty(p16$depreciation)`\\
+  &= `r pretty(p16$ebitda)`\\\\
+\text{Cash coverage ratio} &= \frac{\text{EBITDA}}{\text{interest}}\\
+  &= \frac{`r pretty(p16$ebitda)`}{`r pretty(p16$interest)`}\\
+  &= `r p16$cash.coverage.ratio`
+\end{aligned}
+$$
+
+---
+
+# 17. DuPont identity
+
+The DuPont identity presented in the chapter is commonly referred to as the
+three-factor DuPont identity. Another common way that the DuPont identity is
+expressed is the five-factor model, which is:
+
+$$
+\text{ROE} = \frac{\text{net income}}{\text{EBT}} \times \frac{\text{EBT}}{\text{EBIT}}
+  \times \frac{\text{EBIT}}{\text{sales}} \times \frac{\text{sales}}{\text{total assets}}
+  \times \frac{\text{total assets}}{\text{equity}}
+$$
+
+Derive the five-factor DuPont identity (EBT is earnings before tax, but after interest). What does each term measure?
+
+---
+
+Deriving the five-factor DuPont identity from the three-factor DuPont identity:
+
+$$
+\begin{aligned}
+\text{ROE} &= \frac{\text{net income}}{\text{sales}}
+  \cdot \frac{\text{sales}}{\text{total assets}}
+  \cdot \frac{\text{total assets}}{\text{equity}}\\\\
+\text{ROE} &= \frac{\text{net income}}{\text{EBIT}}
+  \cdot \frac{\text{EBIT}}{\text{sales}}
+  \cdot \frac{\text{sales}}{\text{total assets}}
+  \cdot \frac{\text{total assets}}{\text{equity}}\\\\
+\text{ROE} &= \frac{\text{net income}}{\text{EBT}}
+  \cdot \frac{\text{EBT}}{\text{EBIT}}
+  \cdot \frac{\text{EBIT}}{\text{sales}}
+  \cdot \frac{\text{sales}}{\text{total assets}}
+  \cdot \frac{\text{total assets}}{\text{equity}}\\\\
+\end{aligned}
+$$
+
+The five-factor DuPont identity breaks out the profit margin into three different factors.
+
+$$
+\begin{aligned}
+\mathbf{Tax\ burden} &= \frac{\text{net income}}{\text{EBT}}\\\\
+\mathbf{Interest\ burden} &= \frac{\text{EBT}}{\text{EBIT}}\\\\
+\mathbf{Operating\ profit\ margin} &= \frac{\text{EBIT}}{\text{sales}}\\\\
+\end{aligned}
+$$
+
+The last two factors are the same as in the three factor DuPont identity: Total
+asset turnover and equity multiplier.
+
+$$
+\begin{aligned}
+\mathbf{Total\ asset\ turnover} &= \frac{\text{sales}}{\text{total assets}}\\\\
+\mathbf{Equity\ multiplier} &= \frac{\text{total assets}}{\text{equity}}
+\end{aligned}
+$$
+
+---
+
+# 18. Common-size and common-base year financial statements
+
+In addition to common-size financial statements, common-base year financial
+statements are often used. Common-based year financial statements are
+constructed by dividing the current year account value by the base year account
+value. Thus, the result shows the growth rate in the account. Using the
+following financial statements, construct the common-size balance sheet and
+common-base year balance sheet for the company. Use 2011 as the base year.
+
+```{r problem 18 balance sheet, echo=F}
+p18 <- new.env()
+p18$bs.assets <- matrix(c(8014, 20453, 36822, 65289, 215370, 280659,
+                          9954, 22937, 41797, 74688, 243340, 318028), ncol=2)
+
+p18$account.names <- c("Cash", "Accounts receivable", "Inventory",
+                       "Total current assets", "Net plant and equipment",
+                       "Total assets", "Accounts payable", "Notes payable",
+                       "Total current liabilities", "Long-term debt",
+                       "Common stock and paid-in surplus", "Retained earnings",
+                       "Total owners' equity",
+                       "Total liabilities and owners' equity")
+p18$years <- c("2011", "2012")
+
+p18$bs.liabilities.equity <- matrix(c(40898, 17464, 58362, 24000, 38000, 160297,
+                                      198297, 280659, 45884, 17035, 62919, 31000,
+                                      39200, 184909, 224109, 318028), ncol=2)
+p18$bs <- rbind(p18$bs.assets, p18$bs.liabilities.equity)
+colnames(p18$bs) <- p18$years
+rownames(p18$bs) <- p18$account.names
+knitr::kable(p18$bs,
+             caption="Jarrow Corporation 2011 and 2012 Balance Sheets") %>%
+    pack_rows("Assets", 1, 6) %>%
+    pack_rows("Current assets", 1, 4) %>%
+    pack_rows("Fixed assets", 5, 5) %>%
+    pack_rows("Liabilities and Owners' Equity", 7, 14) %>%
+    pack_rows("Current liabilities", 7, 9) %>%
+    pack_rows("Owners' equity", 11, 13) %>%
+    row_spec(c(3, 4, 5, 6, 8, 9, 11, 12, 13, 14),
+             extra_latex_after = "\\addlinespace") %>%
+    add_indent(c(4, 9, 13)) %>%
+    kable_styling(latex_options = "HOLD_position")
+```
+
+---
+
+To construct the common-base year balance sheet you simply divide each of
+the comparison years by the base year:
+
+```{r problem 18; common-base balance sheet, echo=F}
+p18$tmp <- round(p18$bs / p18$bs[,1], 2)
+p18$bs.common.base <- matrix(p18$tmp[,2], ncol=1)
+rownames(p18$bs.common.base) <- p18$account.names
+colnames(p18$bs.common.base) <- "2011 -> 2012 Change"
+p18$caption="Jarrow Corporation Common-base balance sheet base year 2011"
+knitr::kable(p18$bs.common.base, caption=p18$caption) %>%
+    pack_rows("Assets", 1, 6) %>%
+    pack_rows("Current assets", 1, 4) %>%
+    pack_rows("Fixed assets", 5, 5) %>%
+    pack_rows("Liabilities and Owners' Equity", 7, 14) %>%
+    pack_rows("Current liabilities", 7, 9) %>%
+    pack_rows("Owners' equity", 11, 13) %>%
+    row_spec(c(3, 4, 5, 6, 8, 9, 11, 12, 13, 14),
+             extra_latex_after = "\\addlinespace") %>%
+    add_indent(c(4, 9, 13)) %>%
+    kable_styling(latex_options = "HOLD_position")
+```
+
+To construct the common-size year balance sheet we will use percentage of total
+assets:
+
+```{r problem 18; common-size balance sheet, echo=F}
+p18$bs.common.size <- p18$bs / as.numeric(p18$bs["Total assets",])
+p18$pct.change <- as.numeric(p18$bs.common.size[,2] -
+                             p18$bs.common.size[,1])
+p18$bs.common.size <- cbind(p18$bs.common.size, p18$pct.change)
+rownames(p18$bs.common.size) <- p18$account.names
+colnames(p18$bs.common.size) <- c(p18$years, "Change %")
+p18$caption="Jarrow Corporation Common-size balance sheet base year 2011"
+knitr::kable(p18$bs.common.size, caption=p18$caption) %>%
+    pack_rows("Assets", 1, 6) %>%
+    pack_rows("Current assets", 1, 4) %>%
+    pack_rows("Fixed assets", 5, 5) %>%
+    pack_rows("Liabilities and Owners' Equity", 7, 14) %>%
+    pack_rows("Current liabilities", 7, 9) %>%
+    pack_rows("Owners' equity", 11, 13) %>%
+    row_spec(c(3, 4, 5, 6, 8, 9, 11, 12, 13, 14),
+             extra_latex_after = "\\addlinespace") %>%
+    add_indent(c(4, 9, 13)) %>%
+    kable_styling(latex_options = "HOLD_position")
+```
+
+---
+
+Use the following information for Problems 19, 20, and 22:
+
+The discussion of EFN in the chapter implicitly assumed that the company was
+operating at full capacity. Often, this is not the case. For example, assume
+that Rosengarten was operating at 90 percent capacity. Full-capacity sales would
+be \$1,000/.90 = \$1,111. The balance sheet shows \$1,800 in fixed assets. The
+capital intensity ratio for the company is
+
+$$
+\begin{aligned}
+\mathbf{Capital\ intensity\ ratio} &= \frac{\text{fixed assets}}
+  {\text{full-capacity sales}}\\
+  &= \frac{1,800}{1,111}\\
+  &= 1.62
+\end{aligned}
+$$
+
+This means that Rosengarten needs \$1.62 in fixed assets for every dollar in
+sales when it reaches full capacity. At the projected sales level of \$1,250, it
+needs $\$1,250 \times 1.62 = \$2,025$ in fixed assets, which is \$225 lower than
+our projection of \$2,250 in fixed assets. So, EFN is only \$565 - 225 = \$340.
+
+# 19. Full-capacity sales
+
+Thorpe Mfg., Inc., is currently operating at only 90 percent of fixed asset
+capacity. Current sales are \$725,000. How much can sales increase before any
+new fixed assets are needed?
+
+---
+
+```{r problem 19; full-capacity sales, echo=F}
+p19 <- new.env()
+p19$current.sales <- 725000
+p19$operating.capacity <- .9
+p19$sales.full.capacity <- p19$current.sales / p19$operating.capacity
+p19$sales.increase <- p19$sales.full.capacity - p19$current.sales
+```
+
+$$
+\begin{aligned}
+\text{Full-capacity sales} &= \frac{\text{Current sales}}{\text{pct sales}}\\
+  &= \frac{`r pretty(p19$current.sales)`}{`r p19$operating.capacity`}\\
+  &= `r pretty(p19$sales.increase)`
+\end{aligned}
+$$
+
+Thorpe's full capacity sales is \$`r pretty(p19$sales.full.capacity)`. Therefore
+with current sales as \$`r pretty(p19$current.sales)`, Thrope can increase sales
+by \$`r pretty(p19$sales.increase)` before it would need new fixed assets.
+
+---
+
+# 20. Fixed assets and capacity usage
+
+For the company in the previous problem, suppose fixed assets are \$690,000 and
+sales are projected to grow to \$830,000. How much in new fixed assets are
+required to support this growth in sales?
+
+---
+
+```{r problem 20; fixed assets and capacity usage, echo=F}
+p20 <- new.env()
+p20$fixed.assets <- 690000
+p20$projected.sales <- 830000
+p20$capital.intensity.ratio <-
+    round(p20$fixed.assets / p19$sales.full.capacity, 3)
+p20$projected.fixed.assets <- p20$projected.sales * p20$capital.intensity.ratio
+p20$new.fixed.assets <- p20$projected.fixed.assets - p20$fixed.assets
+```
+
+The Thorpe's capital intensity ratio is:
+
+$$
+\begin{aligned}
+\text{CIR} &= \frac{\text{fixed assets}}{\text{full-capacity sales}}\\
+  &= \frac{`r pretty(p20$fixed.assets)`}{`r pretty(p19$sales.full.capacity)`}\\
+  &= `r p20$capital.intensity.ratio`
+\end{aligned}
+$$
+
+With a  projected sales growth of \$830,000, Thrope will need:
+
+$$
+\begin{aligned}
+\text{New fixed assets} &= ( \text{projected sales} \times \text{CIR} )
+  - \text{fixed assets}\\
+  &= `r pretty(p20$projected.sales)`
+  \times `r pretty(p20$capital.intensity.ratio)`
+  - `r pretty(p20$fixed.assets)`\\
+  &= `r pretty(p20$new.fixed.assets)`
+\end{aligned}
+$$
+
+---
+
+# 21. Calculating EFN
+
+The most recent financial statements for Moose Tours, Inc., appear below. Sales
+for 2012 are projected to grow by 20 percent. Interest expense will remain
+constant; the tax rate and the dividend payout rate will also remain constant.
+Costs, other expenses, current assets, fixed assets, and accounts payable
+increase spontaneously with sales. If the firm is operating at full capacity and
+no new debt or equity is issued, what external financing is needed to support
+the 20 percent growth rate in sales?
+
+```{r problem 21; income statement, echo=F}
+p21 <- new.env()
+
+p21$growth.rate <- .2
+p21$is <- matrix(c(
+    p21$sales <- 836100,
+    p21$costs <- 650700,
+    p21$other.expenses <- 17100,
+    p21$ebit <- 168300,
+    p21$interest <- 12600,
+    p21$taxable.income <- 155700,
+    p21$taxes <- 54495,
+    p21$net.income <- p21$taxable.income - p21$taxes,
+    p21$dividends <- 30300,
+    p21$atre <- 70905), ncol=1)
+row.names(p21$is) <- c("Sales", "Costs", "Other expenses",
+    "Earnings before interest and taxes", "Interest expense", "Taxable income",
+    "Taxes", "Net income", "Dividends", "Addition to retained earnings")
+
+knitr::kable(pretty(p21$is), caption="Income Statement") %>%
+    add_indent(c(9, 10)) %>%
+    kable_styling(latex_options = "HOLD_position")
+```
+
+```{r problem 21; balance sheet, echo=F}
+p21$bs.assets <- matrix(c(
+    p21$cash <- 24035,
+    p21$accounts.receivable <- 38665,
+    p21$inventory <- 82555,
+    p21$total.current.assets<- p21$cash + p21$accounts.receivable +
+        p21$inventory,
+    p21$fixed.assets <- 392350,
+    p21$total.assets <- p21$total.current.assets + p21$fixed.assets), ncol=1)
+row.names(p21$bs.assets) <- c("Cash", "Accounts receivable", "Inventory",
+                              "Total current assets", "Fixed assets",
+                              "Total assets")
+
+p21$bs.liabilities <- matrix(c(
+    p21$accounts.payable <- 64600,
+    p21$notes.payable <- 16150,
+    p21$total.current.liabilities <- p21$accounts.payable + p21$notes.payable,
+    p21$long.term.debt <- 150000,
+    p21$total.liabilities <- p21$total.current.liabilities +
+                             p21$long.term.debt), ncol=1)
+row.names(p21$bs.liabilities) <- c("Accounts payable", "Notes payable",
+    "Total current liabilities", "Long-term debt", "Total liabilities")
+
+p21$bs.equity <- matrix(c(
+    p21$common.stock <- 130000,
+    p21$retained.earnings <- 176855,
+    p21$total.equity <- p21$common.stock + p21$retained.earnings), ncol=1)
+row.names(p21$bs.equity) <- c("Common stock and paid-in surplus",
+                              "Retained earnings", "Total equity")
+
+p21$bs.total.liabilities.and.equity <- matrix(c(
+    p21$total.liabilities + p21$total.equity), ncol=1)
+row.names(p21$bs.total.liabilities.and.equity) <-
+    c("Total liabilities and owners' equity")
+
+p21$bs <- rbind(p21$bs.assets, p21$bs.liabilities,
+                p21$bs.equity, p21$bs.total.liabilities.and.equity)
+
+knitr::kable(pretty(p21$bs),
+             caption="Balance Sheet") %>%
+    pack_rows("Assets", 1, 5) %>%
+    pack_rows("Liabilities", 7, 11) %>%
+    pack_rows("Owners' equity", 12, 14) %>%
+    add_indent(c(4, 9, 11, 14)) %>%
+    row_spec(c(4, 11, 14),
+             extra_latex_after = "\\addlinespace") %>%
+    kable_styling(latex_options = "HOLD_position")
+```
+
+## Building pro forma income statement
+
+With a projected sales growth of 20\%, the pro forma income statement is:
+
+```{r problem 21; pro forma income statement, echo=F}
+p21$dividend.payout.ratio <- as.numeric(p21$is["Dividends",] /
+                                        p21$is["Net income",])
+p21$tax.rate <- as.numeric(p21$is["Taxes",] / p21$is["Taxable income",])
+
+p21$is.proforma <- p21$is
+p21$is.proforma[c("Sales", "Costs", "Other expenses",
+                  "Earnings before interest and taxes"),] <- p21$is[c(
+                  "Sales", "Costs", "Other expenses",
+                  "Earnings before interest and taxes"),] *
+                  (1 + p21$growth.rate)
+
+p21$taxable.income <- p21$is.proforma["Earnings before interest and taxes",] -
+    p21$is.proforma["Interest expense",]
+
+p21$taxes <- p21$taxable.income * p21$tax.rate
+p21$net.income <- p21$taxable.income - p21$taxes
+p21$dividends <- p21$net.income * p21$dividend.payout.ratio
+p21$atre <- p21$net.income * (1 - p21$dividend.payout.ratio)
+p21$is.proforma["Taxable income",] <- p21$taxable.income
+p21$is.proforma["Taxes",] <- p21$taxes
+p21$is.proforma["Net income",] <- p21$net.income
+p21$is.proforma["Dividends",] <- p21$dividends
+p21$is.proforma["Addition to retained earnings",] <- p21$atre
+knitr::kable(pretty(p21$is.proforma),
+             caption="Pro Forma Income Statement") %>%
+    add_indent(c(9, 10)) %>%
+    kable_styling(latex_options = "HOLD_position")
+```
+
+## Building pro forma balance sheet
+
+```{r problem 21; pro forma balance sheet, echo=F}
+p21$bs.proforma <- p21$bs
+p21$bs.proforma[1:7,] <- p21$bs.proforma[1:7,] * (1 + p21$growth.rate)
+
+p21$bs.proforma["Total current liabilities",] <-
+    p21$bs.proforma["Accounts payable",] + p21$bs.proforma["Notes payable",]
+
+p21$bs.proforma["Total liabilities",] <- p21$bs.proforma["Long-term debt",] +
+    p21$bs.proforma["Total current liabilities",]
+
+p21$bs.proforma["Retained earnings",] <- p21$bs["Retained earnings",] +
+    p21$is.proforma["Addition to retained earnings",]
+
+p21$bs.proforma["Total equity",] <-
+    p21$bs.proforma["Common stock and paid-in surplus",] +
+    p21$bs.proforma["Retained earnings",]
+
+p21$bs.proforma["Total liabilities and owners' equity",] <-
+    p21$bs.proforma["Total liabilities",] + p21$bs.proforma["Total equity",]
+
+p21$bs.diff <- p21$bs.proforma - p21$bs
+p21$bs.pf.knitr <- cbind(p21$bs.proforma, p21$bs.diff)
+knitr::kable(pretty(p21$bs.pf.knitr),
+             col.names=c("Next year", "Change from current year"),
+             caption="Pro Forma Balance Sheet") %>%
+    pack_rows("Assets", 1, 5) %>%
+    pack_rows("Liabilities", 7, 11) %>%
+    pack_rows("Owners' equity", 12, 14) %>%
+    add_indent(c(4, 9, 11, 14)) %>%
+    row_spec(c(4, 11, 14),
+             extra_latex_after = "\\addlinespace") %>%
+    kable_styling(latex_options = "HOLD_position")
+
+p21$test <- as.numeric(p21$bs.proforma["Total assets",] -
+    p21$bs.proforma["Total liabilities and owners' equity",])
+```
+
+```{r problem 21; efn, echo=F}
+p21$delta.sales <- as.numeric(p21$is["Sales",] * p21$growth.rate) 
+p21$cir <- p21$bs["Total assets",] / p21$is["Sales",]
+p21$sls <- p21$bs["Accounts payable",] / p21$is["Sales",]
+p21$profit.margin <- p21$is["Net income",] / p21$is["Sales",]
+p21$retention.ratio <- 1 - p21$dividend.payout.ratio
+p21$efn <- as.numeric(p21$cir * p21$delta.sales - p21$sls * p21$delta.sales -
+    p21$profit.margin * p21$is.proforma["Sales",] * p21$retention.ratio)
+```
+
+Finding the external financing needed to support 20\% growth:
+
+$$
+\begin{aligned}
+\Delta \text{sales} &= \text{current sales} \times \text{growth rate}\\
+  &= `r pretty(p21$is["Sales",])` \times `r p21$growth.rate`\\
+  &= `r pretty(p21$delta.sales)`\\\\
+\text{Projected sales} &= \text{Current sales} + \text{Change in sales}\\
+  &= `r pretty(p21$is["Sales",])` + `r pretty(p21$delta.sales)`\\
+  &= `r pretty(p21$is.proforma["Sales",])`\\\\
+\text{Capital intensity ratio} &= \frac{\text{total assets}}{\text{sales}}\\
+  &= \frac{`r pretty(p21$bs["Total assets",])`}
+          {`r pretty(p21$is["Sales",])`}\\
+  &= `r p21$cir`\\\\
+\text{Spontaneous liabilities to sales} &= \frac{\text{accounts payable}}
+  {\text{sales}}\\
+  &= \frac{`r pretty(p21$bs["Accounts payable",])`}
+  {`r pretty(p21$is["Sales",])`}\\
+  &= `r pretty(p21$sls)`\\\\
+\text{Dividend payout ratio} &= \frac{\text{dividends}}{\text{net income}}\\
+  &= \frac{`r pretty(p21$is["Dividends",])`}{`r pretty(p21$is["Net income",])`}\\
+  &= `r pretty(p21$dividend.payout.ratio)`\\\\
+\text{Retention ratio} &= 1 - \text{dividend payout ratio}\\
+  &= 1 - `r p21$dividend.payout.ratio`\\
+  &= `r p21$retention.ratio`\\\\
+\text{Profit margin} &= \frac{\text{net income}}{\text{sales}}\\
+  &= \frac{`r pretty(p21$is["Net income",])`}{`r pretty(p21$is["Sales",])`}\\
+  &= `r p21$profit.margin`\\\\
+\text{EFN} &= \text{capital intensity ratio} \times \text{change in sales}\\
+  &\ \ \ - \text{spontaneous liabilities to sales} \times \text{change in sales}\\
+  &\ \ \ - \text{profit margin} \times \text{projected sales}
+  \times \text{retention ratio}\\
+  &= `r p21$cir` \times `r pretty(p21$delta.sales)`\\
+  &\ \ \ - `r p21$sls` \times `r pretty(p21$delta.sales)`\\
+  &\ \ \ - `r p21$profit.margin` \times `r pretty(p21$is.proforma["Sales",])`
+  \times `r p21$retention.ratio`\\
+  &= `r pretty(p21$efn)`
+\end{aligned}
+$$
+
+---
+
+# 22. Capacity usage and growth
+
+In the previous problem, suppose the firm was operating at only 80 percent capacity in 2011. What is EFN now?
+
+---
+
+If Moose Tours, Inc. was operating at only 80\% of capacity in 2011, then the
+firm has excess capacity in its fixed assets and does not need to invest in new
+fixed assets until it reaches full capacity.
+
+```{r problem 22; capacity usage and growth, echo=F}
+p22 <- new.env()
+p22$capacity.usage <- .8
+p22$sales.full.capacity <- as.numeric(p21$is["Sales",]) / .8
+p22$cir <- as.numeric(p21$bs.assets["Fixed assets",] /
+                       p22$sales.full.capacity)
+p22$projected.fixed.assets <- as.numeric(p21$is.proforma["Sales",] * p22$cir)
+p22$previous.fixed.assets <- as.numeric(p21$bs.assets["Fixed assets",] *
+                              (1 + p21$growth.rate))
+p22$diff <- p22$previous.fixed.assets - p22$projected.fixed.assets
+p22$efn <- p21$efn - p22$diff
+```
+
+Key information from the previous problem:
+
+* Sales: \$`r pretty(p21$is["Sales",])`
+* Fixed Assets: \$`r pretty(p21$bs["Fixed assets",])`
+* Capacity usage: 80\%
+* Projected Sales: \$`r pretty(p21$is.proforma["Sales",])`
+  (`r p21$growth.rate*100`\% growth)
+* Addition to retained earnings:
+  \$`r pretty(p21$is["Addition to retained earnings",])`
+* Increase in A/P (spontaneous liabilities):
+  \$`r pretty(p21$bs["Accounts payable",])`
+* Cash, A/R, Inventory scale with sales.
+
+Full capacity sales:
+
+$$
+\begin{aligned}
+\text{Full capacity sales} &= \frac{`r pretty(p21$is["Sales",])`}
+  {`r p22$capacity.usage`}
+  &= `r pretty(p22$sales.full.capacity)`
+\end{aligned}
+$$
+
+From the balance sheet, our fixed assets are
+\$`r pretty(p21$bs["Fixed assets",])`. The capital intensity ratio:
+
+$$
+\begin{aligned}
+\text{Capital intensity ratio} &= \text{fixed assets}
+  / \text{full-capacity sales}\\
+  &= `r pretty(p21$bs["Fixed assets",])` / `r pretty(p22$sales.full.capacity)`\\
+  &= `r pretty(p22$cir)`
+\end{aligned}
+$$
+
+This means that, for every dollar in sales when full capacity is reached,
+`r p22$cir` of fixed assets will be needed. At projected sales level of
+\$`r pretty(p21$is.proforma["Sales",])`, Moose Tours will needs
+\$`r pretty(p22$projected.fixed.assets)` in fixed assets,
+which is \$`r pretty(p22$diff)` lower then the previous projection. Therefore we
+need \$`r pretty(p22$efn)` in external funding.
+
+---
+
+# 23. Calculating EFN
+
+In problem 21, suppose the firm wishes to  keep its debt-equity ratio constant. What is the EFN now?
+
+---
+
+```{r problem 23; pro forma income statement, echo=F}
+p23 <- new.env()
+p23$is.proforma <- p21$is
+p23$is.proforma[1:4,] <- p21$is.proforma[1:4,] * (1 + p21$growth.rate)
+p23$is.proforma["Taxable income",] <-
+    p23$is.proforma["Earnings before interest and taxes",] -
+    p23$is.proforma["Interest expense",]
+p23$is.proforma["Taxes",] <- p23$is.proforma["Taxable income",] *
+    p21$tax.rate
+p23$is.proforma["Net income",] <- p23$is.proforma["Taxable income",] -
+    p23$is.proforma["Taxes",]
+p23$is.proforma["Dividends",] <- p23$is.proforma["Net income",] *
+    p21$dividend.payout.ratio
+p23$is.proforma["Addition to retained earnings",] <-
+    p23$is.proforma["Net income",] * (1 - p21$dividend.payout.ratio)
+knitr::kable(pretty(p23$is.proforma), caption="Pro Forma Income Statement") %>%
+    add_indent(c(9, 10)) %>%
+    kable_styling(latex_options = "HOLD_position")
+```
+
+```{r problem 23; pro forma balance sheet, echo=F}
+p23$bs.proforma <- p21$bs
+p23$bs.proforma[1:6,] <- p23$bs.proforma[1:6,] * (1 + p21$growth.rate)
+p23$bs.proforma["Accounts payable",] * (1 + p21$growth.rate)
+p23$bs.proforma["Notes payable",] <-
+    p23$bs.proforma["Notes payable",] +
+    19669
+p23$bs.proforma["Total current liabilities",] <-
+    p23$bs.proforma["Accounts payable",] +
+    p23$bs.proforma["Notes payable",]
+p23$bs.proforma["Long-term debt",] <-
+    p23$bs.proforma["Long-term debt",] +
+    59008
+p23$bs.proforma["Total liabilities",] <-
+    p23$bs.proforma["Total current liabilities",] +
+    p23$bs.proforma["Long-term debt",]
+p23$bs.proforma["Retained earnings",] <-
+    p23$bs.proforma["Retained earnings",] +
+    p23$is.proforma["Addition to retained earnings",]
+p23$bs.proforma["Total equity",] <-
+    p23$bs.proforma["Total equity",] +
+    p23$is.proforma["Addition to retained earnings",]
+p23$bs.proforma["Total liabilities and owners' equity",] <-
+    p23$bs.proforma["Total liabilities",] +
+    p23$bs.proforma["Total equity",]
+pretty(p23$bs.proforma)
+p23$bs.proforma["Total liabilities",] / p23$bs.proforma["Total equity",]
+p21$bs["Total liabilities",] / p21$bs["Total equity",]
+pretty(p23$bs.proforma["Total assets",] -
+       p23$bs.proforma["Total liabilities and owners' equity",])
+```
+
+---
+
+```{r}
+ls()
+```

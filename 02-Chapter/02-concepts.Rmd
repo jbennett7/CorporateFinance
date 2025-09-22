@@ -1,0 +1,532 @@
+---
+title: "Financial Statements and Cash Flow"
+subtitle: "Concept Questions"
+author: "Ross, Westerfield, Jaffe"
+header-includes:
+  - \usepackage{booktabs}
+output: 
+  pdf_document:
+   latex_engine: xelatex
+   toc: true 
+---
+
+```{r setup, include=FALSE}
+require(kableExtra)
+require(dplyr)
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 999)
+pretty <- function(x) format(x, big.mark=",")
+```
+
+# 1. Liquidity
+
+True or false: All assets are liquid at some price. Explain.
+
+---
+
+__False__. Some assets cannot be sold. For example, some intangible assets, such
+as goodwill, are not liquid.
+
+Liquidity (in finance) is how quickly and easily an asset can be converted into
+cash at or near face value.
+
+Goodwill is an accounting construct that arises when a company acquires another
+and pays more than fair value of net assets.
+
+Other intangible assets that are not liquid are brand recognition, patents, or
+customer lists. These items may be valuable, but there isn't necessarily a
+liquid market for them.
+
+page 21
+
+---
+
+# 2. Accounting and cash flows
+
+Why might the revenue and cost figures shown on a standard income statement not
+represent the actual cash inflows and outflows that occurred during a period?
+
+---
+
+The revenue and cost figures shown on a standard income statement may not
+represent the actual cash inflows and outflows that occurred during a period for
+a company because the income statement is prepared using the accrual accounting
+system. Accrual accounting records revenues when they are earned and expenses
+when they are incurred, regardless of when cash changes hands.
+
+page 24
+
+---
+
+# 3. Accounting statement of cash flows
+
+Looking at the accounting statement of cash flows, what does the bottom line
+number mean? How useful is this number for analyzing a company?
+
+---
+
+The bottom line number on the accounting statement of cash flows is the _Change
+in cash_. This represents the net change, on the balance sheet, of accounting
+cash from the previous period. This is a very useful number in understanding
+financial cash flow because they show the differences between the three
+components of the statement of cash flows:
+
+* cash flow from operating activities
+* cash flow from investing activities
+* cash flow from financing activities
+
+Pages 26 - 34
+
+--- 
+
+From ChatGPT
+
+The _bottom line number_ on the accounting statement of cash flows represents
+the _net change in cash_ during the reporting period. It is the difference
+between the company's beginning and ending cash balances and is derived by
+summing the cash flows from the three main activities:
+
+1. __Operating Activities__: Cash generated or used in the company's core
+   business operations.
+2. __Investing Activities__: Cash spent on or received from the acquisition or
+   disposal of long-term assets.
+3. __Financing Activities__: Cash inflows and outflows from transactions with
+   shareholders and creditors, such as issuing stock, borrowing, or repaying
+   debt.
+
+A positive net change in cash indicates that the company has increased its cash
+reserves during the period, while a negative net change in cash shows that the
+company has used more cash than it generated during the period.
+
+The bottom line number has several advantages:
+
+1. __Liquidity Insight__: It provides a snapshot of whether the company is
+   generating or consuming cash, which is crucial for meeting short-term
+   obligations.
+2. __Cash Management__: Helps assess the company's ability to maintain
+   sufficient cash reserves for operations, investments, and debt payments.
+3. __Trend Analysis__: By comparing changes in cash over time, you can observe
+   trends in cash generation and usage.
+
+However, the bottom line number has some limitations:
+
+1. __Not a measure of profitability__: The bottom line only shows cash movement,
+   not profitability. A profitable company might have negative cash flows if
+   it's investing heavily. On the opposite end, a low profitable company may
+   have a high positive cash flow due to a one-time event, such as the sale of
+   an asset.
+2. __Lacks Detailed Insight__: A positive or negative number doesn't explain the
+   cause. To understand it fully, you must analyze the cash flow from
+   _operating_, _investing_, and _financing activities_ individually.
+3. __Doesn't Address Sustainability__: A company could increase cash through
+   unsustainable methods (e.g, excessive borrowing or asset sales).
+
+## Summary
+
+The bottom line number on the statement of cash flows is a valuable indicator
+of a company's liquidity and financial flexibility, but it must be analyzed
+alongside other financial metrics and details from the cash flow statement to
+provide meaningful insights into the company's financial health and
+sustainability.
+
+---
+
+# 4. Cash flows
+
+How do financial cash flows and the accounting statement of cash flows differ?
+Which is more useful for analyzing a company?
+
+---
+
+## Financial cash flows
+
+Focus on the cash available to investors (shareholders and creditors).
+
+$$
+\begin{aligned}
+\mathbf{Financial\ cash\ flow} &= \text{cash flow from assets} \\
+  &= \text{operating cash flow} - \text{net capital spending}
+  - \text{change in net working capital}
+\end{aligned}
+$$
+
+- Cash generated from the company's operations (OCF).
+- Reinvestment in long-term assets (capital spending).
+- Changes in working capital requirements.
+- Net cash flows available to distribute to creditors and shareholders.
+
+The purpose of financial cash flows is to help assess the company's ability to
+generate cash to meet obligations and provide returns to investors.
+
+Financial cash flows strip out non-cash items and accounting adjustments and
+provides a clear view of how much cash is available for debt service and
+shareholder returns.
+
+## Account statement of cash flows
+
+Summarizing actual cash inflows and outflows from three activities:
+_operating_, _investing_, and _financing_.
+
+1. __Operating Activities__: Cash from day-to-day business operations.
+2. __Investing Activities__: Cash from buying/selling assets.
+3. __Financing Activities__: Cash from debt and equity transactions.
+
+- Tracks the company's cash position and liquidity.
+- Matches the accounting framework (GAAP or IFRS).
+
+The purpose of the accounting statement of cash flows is to ensure transparency
+in financial reporting and provides detailed insights into where cash is coming
+from and going to.
+
+Accounting statement of cash flows offer a comprehensive and detailed breakdown
+of cash movements and useful for identifying specific sources of cash flow
+issues (e.g., excessive capital spending, operational inefficiencies).
+
+## Which is more useful for analyzing a company?
+
+Financial cash flows are more useful for investors assessing the company's
+capacity to return cash and determining the sustainability of growth and
+profitability. The account statement of cash flows is more useful for assessing
+liquidity and operational health, and for understanding cash management
+practices of the firm.
+
+## Summary
+
+The accounting statement of cash flows is more comprehensive for understanding
+short-term liquidity and detailed cash movements. However, financial cash flows
+provide a clearer picture of the company's ability to generate value for
+investors. Both are valuable tools, and their usefulness depends on the
+specific analysis being performed. Ideally, they should be used together for a
+well-rounded assessment.
+
+Pages 29 - 34
+
+---
+
+# 5. Book values versus market values
+
+Under standard accounting rules, it is possible for a company's liabilities to
+exceed its assets. When this occurs, the owners' equity is negative. Can this
+happen with market values? Why or why not?
+
+---
+
+Standard accounting rules do allow for a company's liabilities to exceed its
+assets, resulting in negative shareholders' equity. However, this is not the
+case with market values because shareholders have limited liability and are not
+responsible for debt beyond their initial investment.
+
+---
+
+Answer from chatGPT:
+
+Under standard accounting rules, liabilities can exceed assets, leading to
+negative owners' equity. However, this is unlikely to occur with market values.
+
+## Accounting perspective
+
+Accounting values for assets are recorded at historical cost minus deprecation,
+which may not reflect their current market value. If liabilities exceed the
+book value of assets, equity becomes negative.
+
+## Market value perspective
+
+Market value reflects investors' perception of the company's value based on
+future earnings potential, assets' current market value, and overall market
+sentiment.
+
+The market value of equity is derived as:
+
+$$
+\mathbf{Market\ Value\ of\ Equity} = \text{Market Value of Assets}
+  - \text{Market Value of Liabilities}
+$$
+
+Investors rarely assign a negative market value to equity because shareholders
+have limited liability; they are not personally responsible for debt beyond
+their initial investment. If liabilities exceed assets, the market value of
+equity may approach zero, but not go negative.
+
+Therefore, there are three reasons why market values of firms do not go
+negative:
+
+1. __Limited Liability:__ Shareholders cannot owe more than the value of their
+   equity investment. The worst-case scenario is that equity becomes worthless.
+2. __Future Expectations:__ The market often values a company based on its
+   potential future cash flows, even if it is currently in financial distress.
+   This "hope value" can keep the equity market value above zero.
+3. __Liquidation Value of Assets:__ Even in bankruptcy, the company's assets
+   may retain some liquidation value, reducing the gap between liabilities and
+   assets.
+
+---
+
+# 6. Cash flow from assets
+
+Why is it not necessarily bad for the cash flow from assets to be negative for
+a particular period?
+
+---
+
+Cash flow from assets is defined:
+
+$$
+\text{CF}(A) = \text{Operating cash flow} + \text{Depreciation} - \text{Taxes}
+$$
+
+Here
+
+Page 29
+
+---
+
+From ChatGPT
+
+There are several reasons why cash flows from assets may be negative for a
+particular period and they do not indicate any real cause for concern:
+
+1. A company may be heavily investing in capital expenditures (e.g., purchasing
+   new equipment, expanding facilities, or acquiring assets) to support future
+   growth.
+2. Increasing net working capital can cause negative CFFA, such as when a
+   retailer builds up inventory ahead of a major sale season.
+3. One time costs can cause negative CFFA. These could be restructuring costs
+   or costs of acquisitions.
+
+Negative CFFA can be a problem:
+
+1. If negative CFFA occurs consistently without accompanying growth in revenue
+   or profitability could indicate operational inefficiencies or excessive
+   spending.
+2. If the firm has weak cash reserves, leading to liquidity issues and
+   distress.
+3. If the firm made poor investment decisions that did not generate sufficient
+   returns.
+
+When assessing the implication of negative CFFA, consider:
+
+1. The stage of the company. Is it a startup in a high growth environment. Then
+   the negative CFFA could be because it is heavily reinvesting. Just make sure
+   there are no liquidity issues.
+2. A company may finance negative CFFA through equity or debt issuance is
+   leveraging future cash flows. This can be sustainable if the returns on
+   investment exceed the cost of capital.
+3. Negative CFFA is acceptable if it leads to future cash flows.
+
+---
+
+# 7. Operating cash flow
+
+Why is it not necessarily bad for the operating cash flow to be negative for a
+particular period?
+
+---
+
+There are several reasons why negative operating cash flow (OCF) may not be
+concerning:
+
+1. Investment for growth
+2. Seasonal fluctuations of the business cycles may produce expected negative
+   operating cash flows.
+3. Strategic investments, such as in inventory or prepaying expenses may lead
+   to temporary negative operating cash flow.
+4. Broader economic or industry specific events, such as a recession, can lead
+   to short-term negative operating cash flow.
+
+If negative cash flows are consistent or if the company is in financial
+distress then there is a reason to be concerned.
+
+---
+
+# 8. Net working capital and capital spending
+
+Could a company's change in net working capital be negative in a given year?
+(_Hint:_ Yes.) Explain how this might come about. What about net capital
+spending?
+
+---
+
+From chatGPT
+
+## Net working capital
+
+Net working capital is calculated as:
+
+$$
+\mathbf{Net\ Working\ Capital} = \text{Current Assets}
+  - \text{Current Liabilities}
+$$
+
+A negative change in net working capital means that the current liabilities have
+increased more than the current assets (or its current assets decreased more
+than its current liabilities). This can occur because:
+
+#### Decreasing current assets
+
+- The company is collecting accounts receivable faster, reducing outstanding
+  balances.
+- Inventory levels are reduced, due to efficient inventory management or lower
+  production.  The company uses cash reserves to pay off liabilities or fund
+  operations.
+
+#### Increasing current liabilities
+
+- The company delays paying accounts payable to suppliers, increasing its
+  short-term obligations.
+- The company takes on more short-term debt, such as notes payable or credit
+  line, to finance operations or growth.
+
+#### Operations strategy
+
+- A company might deliberately reduce NWC to free up cash for investments or
+  other uses. For example, by managing receivables or extending payables, the
+  company improves cash flow.
+
+## Net capital spending
+
+Net capital spending can be calculated as:
+
+$$
+\mathbf{Net\ Capital\ Spending} = \text{Ending Net Fixed Assets}
+  - \text{Beginning Net Fixed Assets} + \text{Deprecation}
+$$
+
+Negative net capital spending might occur when:
+
+1. The company sells fixed assets (e.g., property, equipment) to generate cash,
+   often during restructuring or downsizing.
+2. The company chooses not to purchase significant new fixed assets, possibly
+   due to a focus on efficiency, reduced growth plans, or financial
+   constraints.
+3. Fixed asset purchases are smaller than the deprecation expense for the
+   period, resulting in a net reduction in the value of fixed assets.
+
+## Summary
+
+Negative NWC change is often due to increased liabilities or decreased current
+assets, which can be strategic to improve cash flow. Negative net capital
+spending is often selling off more fixed assets than it is investing in, which
+may be part of a restructuring or a cash-raising efforts.
+
+---
+
+# 9. Cash flow to stockholders and creditors
+
+Could a company's cash flow to stockholders be negative in a given year?
+(_Hint:_ Yes.) Explain how this might come about. What about cash flow to
+creditors?
+
+---
+
+## Cash flow to stockholders (CFS)
+
+Cash flow to stockholders is calculated as:
+
+$$
+\mathbf{Cash\ flow\ to\ stockholders} = \text{dividends paid}
+  - \text{net new equity raised}
+$$
+
+Negative cash flow to stockholders can occur because:
+
+1. Issuance of new equity for growth
+2. Reduction in dividends
+
+## Cash flow to creditors (CFC)
+
+Cash flow to creditors is calculated as:
+
+$$
+\mathbf{Cash\ flow\ to\ creditors} = \text{interest paid}
+  - \text{net new borrowing}
+$$
+
+Negative cash flow to creditors could occur because:
+
+1. Issuance of new debt to finance growth
+2. refinancing or restructuring debt with new terms resulting in net borrowing
+   that exceeds interest payments (replacing short-term debt with long-term
+   bonds to reduce interest costs over time).
+3. The firm has a low interest burden relative to the new debt that it takes
+   on, especially during periods of low-interest rates.
+
+## Key considerations
+
+Negative cash flow to stockholders:
+
+- May signal growth or strategic equity financing.
+- Can also indicate reduced shareholder returns in the short term.
+
+Negative cash flow to creditors:
+
+- often reflects the company leveraging debt for investment or expansion.
+- However, excessive borrowing migh indicate rising financial risk.
+
+---
+
+# 10. Firm values
+
+Referring back to the Bank of America example at the beginning of the chapter,
+note that we suggested that Bank of America's stockholders probably didn't
+suffer as a result of the reported loss. What do you think was the basis for
+our conclusion?
+
+---
+
+The basis for the conclusion that _Bank of America's stockholders probably
+didn't suffer as a result of the reported write-offs_ is rooted in the
+distinction between _accounting losses_ (such as write-offs) and _actual cash
+loses_. Here are the key points that explain why stockholders likely didn't
+experience significant losses:
+
+## Write-offs are non-cash expenses
+
+A _write-off_ is essentially an accounting adjustment that reduces the book
+value of an asset, typically when it is deemed uncollectible or impaired (e.g.,
+bad loans or the declining value of assets). However, _write-offs_ are
+_non-cash_ transactions. They don't represent an actual outflow of cash. In the
+case of Bank of America's \$34 billion write-off for bad loans, the company
+wasn't actually paying out that \$34 billion in cash. Instead, they were
+acknowledging that the value of certain assets (loans) had declined.
+
+## Write-offs clean up the balance sheet
+
+While write-offs reduce the company's reported _net income_ and asset values,
+they also _clean up the balance sheet_ by removing impaired assets. This allows
+the company to more accurately reflect its true financial position going
+forward. As a result, these write-offs can make the company's financial
+statements more transparent, which could actually increase investor confidence.
+
+## Write-offs can reflect conservative financial management
+
+Large write-offs, especially during economic downturns, can be viewed as a
+_prudent_ measure by management to prepare for future losses. This reflects
+that the company is taking action to acknowledge and deal with problems early.
+Investors might view this as _responsible management_ rather than something to
+fear.
+
+## Future earnings and cash flow are unaffected
+
+__Cash flow__---which is the actual movement of money in and out of the
+company---is unaffected by write-offs. Even though write-offs might lead to
+reported losses, they do not impact the company's ability to generate cash in
+the future. If the bank continues to make loans and earn interest income, or if
+it finds new profitable opportunities, stockholders could still benefit in the
+long term.
+
+## Market reaction may be more about the future
+
+Investors typically care more about _future earnings potential_ than about past
+write-offs. The stock price of a company like Bank of America would likely
+reflect investors' expectations for future performance, rather than simply
+reacting to the past losses reported in the income statement.
+
+## Broader economic and regulatory context
+
+During period of economic stress, like the 2008--2009 financial crisis, large
+financial institutions often face widespread asset impairments. These
+write-offs, while large in nominal terms, are somewhat expected by investors
+who understand the risks in the banking industry. Additionally, government
+interventions (such as bailouts or stimulus packages) often provide a safety
+net, further cushioning stockholder losses.
+

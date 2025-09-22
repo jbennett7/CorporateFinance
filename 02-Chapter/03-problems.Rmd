@@ -15,1119 +15,10 @@ require(dplyr)
 knitr::opts_chunk$set(echo = TRUE)
 options(scipen = 999)
 pretty <- function(x) format(x, big.mark=",")
+corporate.tax.rate.table <- read.csv('../Data/table_2_3.csv')
 ```
 
-# Chapter introduction
-
-A write-off by a company frequently means that the value of the company's assets
-has declined. For example, in 2010, Bank of America announced a total of \$34
-billion in write-offs for bad loans. In addition, the company announced a \$10.5
-billion write-off because recent legislation has reduced the value of its credit
-card business. The write-offs made by Bank of America during 2010 followed
-write-offs of \$33.7 billion in 2009 and \$16.2 billion in 2008. Of course, Bank
-of America was not alone. Moody's Investor Services estimated that banks had
-written off \$476 billion during 2009 and 2010, and it expected bank write-offs
-of \$286 billion during 2011.
-
-So did stockholders in these banks lose hundreds of billions of dollars (or
-more) because of the write-offs? The answer is probably not. Understanding why
-ultimately leads us to the main subject of this chapter: that all-important
-substance known as cash flow.
-
----
-
-# List of topics
-
-1. The balance sheet
-
-   * Liquidity
-   * Debt versus equity
-   * Value versus cost
-
-2. The income statement
-
-   * Generally Accepted Accounting Principles
-   * Noncash items
-   * Time and costs
-
-3. Taxes
-
-   * Corporate tax rates
-   * Average versus marginal tax rates
-
-4. New working capital
-
-5. Financial cash flow
-
-6. The accounting statement of cash flows
-
-   * Cash flow from operating activities
-   * Cash flow from investing activities
-   * Cash flow from financing activities
-
-7. Cash flow managment
-
----
-
-# Notes
-
-## The balance sheet
-
-The accounting definition of the balance sheet:
-
-$$
-\text{Assets} \equiv \text{liabilities} + \text{Stockholders' equity}
-$$
-
-The balance sheet has two sides: On the left are the _assets_ and on the right
-are the _liabilities_ and _stockholders' equity_. The stockholders' equity is
-_defined_ to be the difference between the assets and the liabilities of the
-firm.
-
-In principle, equity is what the stockholders would have remaining after the
-firm discharged its obligations.
-
-Assets in the balance sheet are listed in order by the length of time it
-normally would take an ongoing firm to convert them into cash.
-
-The liabilities and stockholders' equity side reflects the types and proportions
-of financing, which depend on management's choice of capital structure, as
-between debt and equity and between current debt and long-term debt.
-
-There are three concerns of a balance sheet:
-
-1. Liquidity
-2. Debt versus equity
-3. Value versus cost
-
-### Liquidity
-
-_Liquidity_ refers to the ease and quickness with which assets can be converted
-to cash (without significant loss in value). _Current assets_ are the most
-liquid and include cash and assets that will be turned into cash within a year
-from the date of the balance sheet.
-
-_Accounts receivable_ are amounts not yet collected from customers for goods or
-services sold to them (after adjustment for potential bad debts).
-
-_Inventory_ is composed of raw materials to be used in production, work in
-process, and finished goods.
-
-_Fixed assets_ are the least liquid kind of assets.
-
-### Debt versus equity
-
-_Liabilities_ are obligations of the firm that require a payout of cash within a
-stipulated period. Liabilities are debts and are frequently associated with
-nominally fixed cash burdens, called _debt service_, that put the firm in
-default of a contract if they are not paid. _Stockholders' equity_ is a claim
-against the firm's assets that is residual and not fixed. In general terms, when
-the firm borrows, it gives the bondholders first claim on the firm's cash flow.
-
-$$
-\text{Assets} - \text{Liabilities} \equiv \text{Stockholders' equity}
-$$
-
-The accounting value of stockholders' equity increases when retained earnings
-are added. This occurs when the firm retains part of its earnings instead of
-paying them out as dividends.
-
-### Value versus cost
-
-The accounting value of a firm's assets is frequently referred to as the
-_carrying value_ or the _book value_ of the assets.
-
-Under __generally accepted accounting principles (GAAP)__, audited financial
-statements of firms in the United States carry the assets at cost.
-
-_Market value_ is the price at which willing buyers and sellers would trade the
-assets. It would be only a coincidence if accounting value and market value were
-the same.
-
-With the increasing globalization of business, there has been a growing need to
-make accounting standards more comparable across countries. In recent years,
-U.S. accounting standards have become more closely tied to International
-Financial Reporting Standards (IFRS). In particular, the Financial Accounting
-Standards Board, which is in charge of GAAP policies, and the International
-Accounting Standards Board, in charge if IFRS polices, have been working towards
-convergence of policies by June 2011. A decision about full adoption of IFRS by
-U.S.-based companies is expected to follow afterwards.
-
-See [__Market value versus book value__](#market-value-versus-book-value) for an
-example of the difference between market value and book value of a corporation.
-
-## The income statement
-
-The income statement measures performance over a specific period---say a year.
-The accounting definition of income is:
-
-$$
-\text{Revenue} - \text{Expenses} \equiv \text{Income}
-$$
-
-Income statement sections:
-
-1. The operations section reports the firm's revenues and expenses from
-   principal operations. Earnings before interest and taxes (EBIT) is very
-   important. It summarizes earnings before taxes and financing costs.
-2. The nonoperating section of the income statement includes all financing
-   costs, such as interest expense.
-3. Taxes levied on income.
-4. The last section of the income statement is the bottom line the __net
-   income__. Net income is frequently expressed per share of common stock---that
-   is earnings per share.
-
-### Generally Accepted Accounting Principles
-
-*  Income is recognized when an exchange of goods occur, but not necessarily
-  when income is received.
-
-*  The unrealized appreciation from owning property will not be recognized as
-  income.
-
-* The matching principle of GAAP dictates that revenues be matched with
-  expenses. Thus, income is reported when it is earned, or accrued, even though
-  no cash flow has necessarily occurred.
-
-### Noncash items
-
-There are several noncash items that appear on the income statement.
-
-* __Depreciation__ reflects the accountant's estimate of the cost of equipment
-  used up in the production process.
-
-* __Deferred taxes__ result from differences between accounting income and true
-  taxable income (such as when accounting income uses accelerated depreciation
-  expense procedures for tax purposes, but use straight-line depreciation for
-  reporting purposes). The current tax portion is the actual tax paid. Deferred
-  taxes is not. However, in theory, if taxable income is less than accounting
-  income in the current year, it will be more than accounting income later on.
-  Therefore, the taxes will have to be paid later on. The balance sheet will
-  show deferred taxes as a liability.
-
-### Time and costs
-
-* There are two distinct time frames: long run and short run.
-
-* The _short run_ is the period in which certain equipment, resources, and
-  commitments of a firm are fixed; but the time is long enough for the firm to
-  vary its output by using more labor and raw materials. Therefore, in the short
-  run some costs are fixed and some costs (such as labor and materials) are
-  variable.
-
-* In the _long run_, all costs are variable.
-
-* Financial accountants do not distinguish between variable costs and fixed
-  costs. Instead, accounting costs usually fit into a classification that
-  distinguishes product costs from period costs.
-
-* __Product costs__ are the total production costs incurred during a
-  period---raw materials, direct labor, and manufacturing overhead---and are
-  reported on the income statement as costs of goods sold. Both variable and
-  fixed costs are reported in product costs.
-
-* __Period costs__ are costs that are allocated to a time period; they
-  are called _selling_, _general_, and _administrative expenses_. An example of
-  a period cost is the company president's salary.
-
-## Taxes
-
-Taxes can be one of the largest cash outflows a firm experiences. Taxes can be
-viewed through two lenses: The average tax rate and the marginal tax rate. The
-tax schedule is broken down into different income categories. As a firm moves up
-the income schedule, the income in that bracket is taxed differently than the
-income in the previous brackets (the tax rate does not necessarily increase as
-you go up the tax schedule).
-
-The average tax rate is the summation of income times the rate for each bracket.
-
-The marginal tax rate is the tax rate on the next dollar earned.
-
-The following table is an example of a corporate tax schedule:
-
-\label{table:taxrates}
-```{r corporate tax table, echo=F}
-corporate.tax.rate.table <- data.frame(
-  c(0, 50001, 75001, 100001, 335001, 10000001, 15000001, 18333334),
-  c(50000, 75000, 100000, 335000, 10000000, 15000000, 18333333, Inf),
-  c(.15, .25, .34, .39, .34, .35, .38, .35)
-)
-colnames(corporate.tax.rate.table) <- c("Lower", "Upper", "Tax.Rate")
-knitr::kable(pretty(corporate.tax.rate.table), booktabs=T)
-```
-
-An example analysis of taxes can be found in
-[__Deep in the heart of taxes__](#deep-in-the-heart-of-taxes)
-
-## Net working capital
-
-__NOTE:__ The change in net working capital is usually positive in a growing
-firm.
-
-Net working capital is current assets minus current liabilities:
-
-$$
-\text{Net working capital} = \text{Current assets}
-  - \text{Current liabilities}
-$$
-
-* When net working capital is positive it means that the cash that will become
-  available in the next 12 months will be greater that the cash that must be
-  paid out.
-
-* In addition to investing in fixed assets (i.e., capital spending), a firm can
-  invest in net working capital. This is called the __change in net working
-  capital__. The change in net working capital is usually positive in a growing
-  firm.
-
-## Financial cash flow
-
-* The most important item that can be extracted from financial statements is the
-  actual cash flow of the firm.
-
-* The _statement of cash flows_ is an accounting statement that helps explain
-  the change in accounting cash and equivalents.
-
-* In finance, the value of a firm is its ability to generate financial cash
-  flow.
-
-* Cash flow is not the same as net working capital. Increasing inventory
-  requires using cash. Because both inventories and cash are current assets,
-  this does not affect net working capital. In this case, an increase in
-  inventory is associated with decreasing cash flow.
-
-* Just as the value of a firm's assets is always equal to the combined value of
-  the liabilities and the value of the equity, the cash flows received from the
-  firm's assets (that is, its operating activities), $\text{CF}(A)$ must equal
-  the cash flows to the firm's creditors $\text{CF}(B)$, and equity investors
-  $\text{CF}(S)$.
-
-$$
-\begin{aligned}
-\text{CF}(A) &\equiv \text{CF}(B) + \text{CF}(S)\\\\
-\text{CF}(A) &= \text{Operating cash flow} - \text{Capital spending}
-  - \text{Increase in net working capital}\\
-\text{CF}(B) &= \text{Interest} + \text{Debt retirement} - \text{New debt}\\
-\text{CF}(S) &= \text{Dividends} + \text{Equity repurchase} - \text{New equity}
-\end{aligned}
-$$
-
-### Cash flow from operations
-
-* Operating cash flow is the cash flow generated by business activities,
-  including sales of goods and services. Operating cash flow reflex tax
-  payments, but not financing, capital spending, or changes in net working
-  capital.
-
-$$
-\text{Operating cash flow} = \text{EBIT} + \text{Depreciation} - \text{Taxes}
-$$
-
-```{r calculating operating cash flow, echo=F}
-m <- c(219, 90, -71)
-df <- data.frame(c(m, sum(m)))
-colnames(df) <- c("$ in millions")
-rownames(df) <- c("Earnings before interest and taxes",
-                  "Depreciation",
-                  "Current taxes",
-                  "Operating cash flow")
-knitr::kable(df, caption="Operating cash flow")
-```
-
-* Changes in fixed assets are the result of capital spending
-
-$$
-\text{Capital spending} = \text{Acquisition of fixed assets}
-  - \text{Sale of fixed assets}
-$$
-
-```{r calculating changes in fixed assets, echo=F}
-m <- c(198, -25)
-df <- data.frame(c(m, sum(m)))
-colnames(df) <- c("$ in millions")
-rownames(df) <- c("Acquisition of fixed assets",
-                  "Sales of fixed assets",
-                  "Capital spending")
-knitr::kable(df, caption="Capital spending")
-```
-
-* Capital spending can also be calculated as:
-
-$$
-\text{Capital spending} = \text{Ending net fixed assets}
- - \text{Beginning net fixed assets} + \text{Depreciation}
-$$
-
-* Cash flows are also used to make investments in net working capital.
-
-```{r calculating additions to net working capital, echo=F}
-m <- c(23)
-df <- data.frame(m)
-rownames(df) <- c("Additions to net working capital")
-knitr::kable(df,
-             caption="Additions to net woring capital",
-             col.names=c("$ in millions"))
-```
-
-* Total cash flows generated by the firm's assets are then equal to:
-
-```{r calculating total cash flow of the firm, echo=F}
-m <- c(238, -173, -23)
-df <- data.frame(c(m, sum(m)))
-colnames(df) <- c("$ in millions")
-rownames(df) <- c("Operating cash flow",
-                  "Capital spending",
-                  "Additions to net working capital",
-                  "Total cash flow of the firm")
-knitr::kable(df, caption="Cash flow of the firm")
-```
-
-* The total outgoing cash flow of the firm can be separated into cash flow paid
-  to creditors and cash flow paid to stockholders.
-
-* Creditors are paid an amount generally referred to as a _debt service_. Debt
-  service is interest payments plus repayments of principal (that is, retirement
-  of debt). An important source of cash flow is the sale of new debt.
-
-```{r calculating cash flow paid to creditors, echo=F}
-m <- c(49, 73)
-m.1 <- c(m, sum(m))
-m.2 <- c(m.1, -86)
-df <- data.frame(c(m.2, sum(m.2)))
-colnames(df) <- c("$ in millions")
-rownames(df) <- c("Interest",
-                  "Retirement of debt",
-                  "Debt service",
-                  "Proceeds from long-term debt sales",
-                  "Total")
-knitr::kable(df, caption="Cash flow paid to creditors")
-```
-
-* Cash flow paid to creditors can also be calculated:
-
-$$
-\text{Cash flow paid to creditors} = \text{interest paid}
-  - \text{net borrowing}
-$$
-
-* Cash flow of the firm is also paid to the stockholders in the form of
-  dividends and stock repurchases.
-
-```{r calculating cash flow paid to stockholders, echo=F}
-m <- c(43, 6)
-m.1 <- c(m, sum(m))
-m.2 <- c(m.1, -43)
-df <- data.frame(c(m.2, sum(m.2)))
-colnames(df) <- c("$ in millions")
-rownames(df) <- c("Dividends",
-                  "Repurchase of stock",
-                  "Cash to stockholders",
-                  "Proceeds from new stock issue",
-                  "Total")
-knitr::kable(df, caption="Cash flow to stockholders")
-```
-
-* In general, cash flow to stockholders is determined:
-
-$$
-\text{Cash flow to stockholders} = \text{Dividends paid}
-  - \text{Net new equity raised}
-$$
-
-### Observatations of cash flows
-
-From our discussion of cash flows several important observations can be drawn:
-
-#### Operating cash flow
-
-defined as earnings before interest plus depreciation minus taxes, measures the
-cash generated from operations not counting capital spending or working capital
-requirements. It is usually positive; a firm is in trouble if operating cash
-flow is negative for a long time because the firm is not generating enough cash
-to pay operating costs.
-
-#### Total cash flow of the firm
-
-includes adjustments for capital spending and additions to net working capital.
-It will frequently be negative. When a firm is growing rapidly, spending on
-inventory and fixed assets can be higher than operating cash flow.
-
-#### Net income is not cash flow.
-
-When determining the economic and financial condition of a firm, cash flow is
-more revealing.
-
-## The accounting statement of cash flows
-
-The _statement of cash flows_ is an accounting statement that is useful in
-understanding financial cash flow.
-
-The first step in determining the change in cash is to figure out cash flow from
-operating activities. This is the cash flow that results from the firm's normal
-activities in producing and selling goods and services. The second step is to
-make an adjustment for cash flow from investing activities. The final step is to
-make an adjustment for cash flow from financing activities. Financing activiites
-are the net payments to creditors and owners (excluding interest expense) made
-during the year.
-
-### Cash flow from operating activities
-
-To calculate the cash flow from operating activities we start with net income
-and add back all noncash expenses and adjust for changes in current assets and
-liabilities (other than cash and notes payable). The result is cash flow from
-operating activities. Notes payable will be included in the financing activities
-section.
-
-```{r calculating cash flow from operating activities, echo=F}
-net.income <- c(86, 90, 13)
-changes.in.assets.and.liabilities <- c(-24, 11, 16, 18, -8)
-cash.flow.from.operating.activities <- sum(net.income,
-                                           changes.in.assets.and.liabilities)
-cols <- c("$ in millions")
-ni.rows <- c("Net income",
-             "Depreciation",
-             "Deferred taxes")
-ciaal.rows <- c("Accounts receivable",
-                "Inventories",
-                "Accounts payable",
-                "Accrued expense",
-                "Other")
-ni.df <- data.frame(net.income)
-colnames(ni.df) <- cols
-rownames(ni.df) <- ni.rows
-ciaal.df <- data.frame(changes.in.assets.and.liabilities)
-colnames(ciaal.df) <- cols
-rownames(ciaal.df) <- ciaal.rows
-cffoa.df <- data.frame(cash.flow.from.operating.activities)
-colnames(cffoa.df) <- cols
-rownames(cffoa.df) <- c("Cash flow from operating activities")
-
-knitr::kable(ni.df, caption="Net Income")
-knitr::kable(ciaal.df, caption="Change in assets and liabilities")
-knitr::kable(cffoa.df, caption="Cash Flow from Operating Acitivites")
-```
-
-## Cash flow from investing activities
-
-Cash flow from investing activities involves changes in capital assets:
-acquisition of fixed assets and sales fo fixed assets (i.e., net capital
-expenditures).
-
-```{r calculating cash flow from investing activities, echo=F}
-m <- c(-198, 25)
-cffia.df <- data.frame(c(m, sum(m)))
-colnames(cffia.df) <- "$ in millions"
-rownames(cffia.df) <- c("Acquisition of fixed assets",
-                        "Sales of fixed assets",
-                        "Cash flow from investing activities")
-knitr::kable(df, caption="Cash Flow from Investing Activities")
-```
-
-## Cash flow from financing activities
-
-```{r calculating cash flow from financing activities, echo=F}
-m <- c(-73, 86, -3, -43, -6, 43)
-cfffa.df <- data.frame(c(m, sum(m)))
-colnames(cfffa.df) <- "$ in millions"
-rownames(cfffa.df) <- c("Retirement of long-term debt",
-                        "Proceeds from long-term debt sales",
-                        "Change in notes payable",
-                        "Dividends",
-                        "Repurchase of stock",
-                        "Proceeds from new stock issue",
-                        "Cash flow from financing activities")
-knitr::kable(cfffa.df, caption="Cash flow from financing activities")
-```
-
-The statement of cash flows is the addition of cash flows from operations, cash
-flows from investing activities, and cash flows from financing activities.
-
-```{r statement of cash flows, echo=F}
-cic.df <- data.frame(c(33))
-colnames(cic.df) <- "$ in millions"
-rownames(cic.df) <- "Change in cash (on the balance sheet"
-socf.df <- rbind(cffoa.df, cffia.df, cfffa.df, cic.df)
-knitr::kable(socf.df, caption="Statement of Cash Flows")
-```
-
----
-
-# Chapter examples
-
-## Market value versus book value
-
-The Cooney Corporation has fixed assets with a book value of \$700 and an
-appraised market value of about \$1,000. Net working capital is \$400 on the
-books, but approximately \$600 would be realized if all the current accounts
-were liquidated. Cooney has \$500 in long-term debt, both book value and market
-value. What is the book value of the equity? What is the market value?
-
-We can construct two simplified balance sheets, one in accounting (book value)
-terms and one in economic (market value) terms:
-
-*Cooney Corporation Balance Sheets---Market value versus book value*
-
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
-Assets
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
-Liabilities and Shareholders' equity
-
-| . | Book | Market | . | Book | Market |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| Net working capital | \$\ 400 | \$\ 600 | Long-term debt | \$\ 500 | \$\ 500 |
-| Net fixed assets | \ \ 700 | \ 1,000 | Shareholders' equity | \ \ 600 | \ 1,100 |
-| . | --- --- | --- --- | . | --- --- | --- --- |
-| . | \$1,100 | \$1,600 | . | \$1,100 | \$1,600 |
-
-In this example, shareholders' equity is actually worth almost twice as much as
-what is shown on the books. The distinction between book and market values is
-important precisely because book vlaues can be so different from market values.
-
----
-
-## Deep in the heart of taxes
-
-Algeron, Inc., has a taxable income of \$85,00. What is its tax bill? What is
-its average tax rate? Its marginal tax rate?
-
-From the [Tax Rate Table](#table:taxrates), we see taht the tax rate appled to the first \$50,000
-is 15 percent; the rate applied to the next \$25,000 is 25 percent; and the rate
-applied after that up to \$100,000 is 34 percent. So Algernon must pay
-$.15 \times \$50,000 + .25 \times 25,000 + .34 \times (85,000 - 75,000)$
-$= \$17,150$. The average tax rate is thus $\$17,150/85,000 = 20.18\%$. The
-marginal rate is 34 percent because Algernon's taxes would rise by 34 cents if
-it had another dollar in taxable income.
-
----
-
-# Summary and conclusions
-
-Besides introducing you to corporate accounting, the purpose of this chapter
-has been to teach you how to determine cash flow from the accounting statements
-of a typical company.
-
-1. Cash flow is generated by the firm and paid to creditors and shareholders.
-   It can be classified as:
-
->  a. Cash flow from operations.
->  b. Cash flow from changes in fixed assets.
->  c. Cash flow from changes in working capital.
-
-2. Calculations of cash flow are not difficult, but they require care and
-   particular attention to detail in properly accounting for non-cash expenses
-   such as deprecation and deferred taxes. It is especially important that you
-   do not confuse cash flow with changes in net working capital and net income.
-
-# Concepts questions
-
-## 1. Liquidity
-
-True or false: All assets are liquid at some price. Explain.
-
----
-
-__False__. Some assets cannot be sold. For example, some intangible assets, such
-as goodwill, are not liquid.
-
-Page 21
-
----
-
-## 2. Accounting and cash flows
-
-Why might the revenue and cost figures shown on a standard income statement not
-represent the actual cash inflows and outflows that occurred during a period?
-
----
-
-The revenue and cost figures shown on a standard income statement may not
-represent the actual cash inflows and outflows that occurred during a period for
-a company because the income statement is prepared using the accrual accounting
-system. Accrual accounting records revenues when they are earned and expenses
-when they are incurred, regardless of when cash changes hands.
-
-page 24
-
----
-
-## 3. Accounting statement of cash flows
-
-Looking at the accounting statement of cash flows, what does the bottom line
-number mean? How useful is this number for analyzing a company?
-
----
-
-The bottom line number on the accounting statement of cash flows is the _Change
-in cash_. This represents the net change, on the balance sheet, of accounting
-cash from the previous period. This is a very useful number in understanding
-financial cash flow because they show the differences between the three
-components of the statement of cash flows:
-
-* cash flow from operating activities
-* cash flow from investing activities
-* cash flow from financing activities
-
-Pages 26 - 34
-
---- 
-
-From ChatGPT
-
-The _bottom line number_ on the accounting statement of cash flows represents
-the _net change in cash_ during the reporting period. It is the difference
-between the company's beginning and ending cash balances and is derived by
-summing the cash flows from the three main activities:
-
-1. __Operating Activities__: Cash generated or used in the company's core
-   business operations.
-2. __Investing Activities__: Cash spent on or received from the acquisition or
-   disposal of long-term assets.
-3. __Financing Activities__: Cash inflows and outflows from transactions with
-   shareholders and creditors, such as issuing stock, borrowing, or repaying
-   debt.
-
-A positive net change in cash indicates that the company has increased its cash
-reserves during the period, while a negative net change in cash shows that the
-company has used more cash than it generated during the period.
-
-The bottom line number has several advantages:
-
-1. __Liquidity Insight__: It provides a snapshot of whether the company is
-   generating or consuming cash, which is crucial for meeting short-term
-   obligations.
-2. __Cash Management__: Helps assess the company's ability to maintain
-   sufficient cash reserves for operations, investments, and debt payments.
-3. __Trend Analysis__: By comparing changes in cash over time, you can observe
-   trends in cash generation and usage.
-
-However, the bottom line number has some limitations:
-
-1. __Not a measure of profitability__: The bottom line only shows cash movement,
-   not profitability. A profitable company might have negative cash flows if
-   it's investing heavily. On the opposite end, a low profitable company may
-   have a high positive cash flow due to a one-time event, such as the sale of
-   an asset.
-2. __Lacks Detailed Insight__: A positive or negative number doesn't explain the
-   cause. To understand it fully, you must analyze the cash flow from
-   _operating_, _investing_, and _financing activities_ individually.
-3. __Doesn't Address Sustainability__: A company could increase cash through
-   unsustainable methods (e.g, excessive borrowing or asset sales).
-
-### Summary
-
-The bottom line number on the statement of cash flows is a valuable indicator
-of a company's liquidity and financial flexibility, but it must be analyzed
-alongside other financial metrics and details from the cash flow statement to
-provide meaningful insights into the company's financial health and
-sustainability.
-
----
-
-## 4. Cash flows
-
-How do financial cash flows and the accounting statement of cash flows differ?
-Which is more useful for analyzing a company?
-
----
-
-### Financial cash flows
-
-Focus on the cash available to investors (shareholders and creditors).
-
-$$
-\begin{aligned}
-\mathbf{Financial\ cash\ flow} &= \text{cash flow from assets} \\
-  &= \text{operating cash flow} - \text{net capital spending}
-  - \text{change in net working capital}
-\end{aligned}
-$$
-
-- Cash generated from the company's operations (OCF).
-- Reinvestment in long-term assets (capital spending).
-- Changes in working capital requirements.
-- Net cash flows available to distribute to creditors and shareholders.
-
-The purpose of financial cash flows is to help assess the company's ability to
-generate cash to meet obligations and provide returns to investors.
-
-Financial cash flows strip out non-cash items and accounting adjustments and
-provides a clear view of how much cash is available for debt service and
-shareholder returns.
-
-### Account statement of cash flows
-
-Summarizing actual cash inflows and outflows from three activities:
-_operating_, _investing_, and _financing_.
-
-1. __Operating Activities__: Cash from day-to-day business operations.
-2. __Investing Activities__: Cash from buying/selling assets.
-3. __Financing Activities__: Cash from debt and equity transactions.
-
-- Tracks the company's cash position and liquidity.
-- Matches the accounting framework (GAAP or IFRS).
-
-The purpose of the accounting statement of cash flows is to ensure transparency
-in financial reporting and provides detailed insights into where cash is coming
-from and going to.
-
-Accounting statement of cash flows offer a comprehensive and detailed breakdown
-of cash movements and useful for identifying specific sources of cash flow
-issues (e.g., excessive capital spending, operational inefficiencies).
-
-### Which is more useful for analyzing a company?
-
-Financial cash flows are more useful for investors assessing the company's
-capacity to return cash and determining the sustainability of growth and
-profitability. The account statement of cash flows is more useful for assessing
-liquidity and operational health, and for understanding cash management
-practices of the firm.
-
-### Summary
-
-The accounting statement of cash flows is more comprehensive for understanding
-short-term liquidity and detailed cash movements. However, financial cash flows
-provide a clearer picture of the company's ability to generate value for
-investors. Both are valuable tools, and their usefulness depends on the
-specific analysis being performed. Ideally, they should be used together for a
-well-rounded assessment.
-
-Pages 29 - 34
-
----
-
-## 5. Book values versus market values
-
-Under standard accounting rules, it is possible for a company's liabilities to
-exceed its assets. When this occurs, the owners' equity is negative. Can this
-happen with market values? Why or why not?
-
----
-
-Standard accounting rules do allow for a company's liabilities to exceed its
-assets, resulting in negative shareholders' equity. However, this is not the
-case with market values because shareholders have limited liability and are not
-responsible for debt beyond their initial investment.
-
----
-
-Answer from chatGPT:
-
-Under standard accounting rules, liabilities can exceed assets, leading to
-negative owners' equity. However, this is unlikely to occur with market values.
-
-### Accounting perspective
-
-Accounting values for assets are recorded at historical cost minus deprecation,
-which may not reflect their current market value. If liabilities exceed the
-book value of assets, equity becomes negative.
-
-### Market value perspective
-
-Market value reflects investors' perception of the company's value based on
-future earnings potential, assets' current market value, and overall market
-sentiment.
-
-The market value of equity is derived as:
-
-$$
-\mathbf{Market\ Value\ of\ Equity} = \text{Market Value of Assets}
-  - \text{Market Value of Liabilities}
-$$
-
-Investors rarely assign a negative market value to equity because shareholders
-have limited liability; they are not personally responsible for debt beyond
-their initial investment. If liabilities exceed assets, the market value of
-equity may approach zero, but not go negative.
-
-Therefore, there are three reasons why market values of firms do not go
-negative:
-
-1. __Limited Liability:__ Shareholders cannot owe more than the value of their
-   equity investment. The worst-case scenario is that equity becomes worthless.
-2. __Future Expectations:__ The market often values a company based on its
-   potential future cash flows, even if it is currently in financial distress.
-   This "hope value" can keep the equity market value above zero.
-3. __Liquidation Value of Assets:__ Even in bankruptcy, the company's assets
-   may retain some liquidation value, reducing the gap between liabilities and
-   assets.
-
----
-
-## 6. Cash flow from assets
-
-Why is it not necessarily bad for the cash flow from assets to be negative for
-a particular period?
-
----
-
-Cash flow from assets is defined:
-
-$$
-\text{CF}(A) = \text{Operating cash flow} + \text{Depreciation} - \text{Taxes}
-$$
-
-Here
-
-Page 29
-
----
-
-From ChatGPT
-
-There are several reasons why cash flows from assets may be negative for a
-particular period and they do not indicate any real cause for concern:
-
-1. A company may be heavily investing in capital expenditures (e.g., purchasing
-   new equipment, expanding facilities, or acquiring assets) to support future
-   growth.
-2. Increasing net working capital can cause negative CFFA, such as when a
-   retailer builds up inventory ahead of a major sale season.
-3. One time costs can cause negative CFFA. These could be restructuring costs
-   or costs of acquisitions.
-
-Negative CFFA can be a problem:
-
-1. If negative CFFA occurs consistently without accompanying growth in revenue
-   or profitability could indicate operational inefficiencies or excessive
-   spending.
-2. If the firm has weak cash reserves, leading to liquidity issues and
-   distress.
-3. If the firm made poor investment decisions that did not generate sufficient
-   returns.
-
-When assessing the implication of negative CFFA, consider:
-
-1. The stage of the company. Is it a startup in a high growth environment. Then
-   the negative CFFA could be because it is heavily reinvesting. Just make sure
-   there are no liquidity issues.
-2. A company may finance negative CFFA through equity or debt issuance is
-   leveraging future cash flows. This can be sustainable if the returns on
-   investment exceed the cost of capital.
-3. Negative CFFA is acceptable if it leads to future cash flows.
-
----
-
-## 7. Operating cash flow
-
-Why is it not necessarily bad for the operating cash flow to be negative for a
-particular period?
-
----
-
-There are several reasons why negative operating cash flow (OCF) may not be
-concerning:
-
-1. Investment for growth
-2. Seasonal fluctuations of the business cycles may produce expected negative
-   operating cash flows.
-3. Strategic investments, such as in inventory or prepaying expenses may lead
-   to temporary negative operating cash flow.
-4. Broader economic or industry specific events, such as a recession, can lead
-   to short-term negative operating cash flow.
-
-If negative cash flows are consistent or if the company is in financial
-distress then there is a reason to be concerned.
-
----
-
-## 8. Net working capital and capital spending
-
-Could a company's change in net working capital be negative in a given year?
-(_Hint:_ Yes.) Explain how this might come about. What about net capital
-spending?
-
----
-
-From chatGPT
-
-### Net working capital
-
-Net working capital is calculated as:
-
-$$
-\mathbf{Net\ Working\ Capital} = \text{Current Assets}
-  - \text{Current Liabilities}
-$$
-
-A negative change in net working capital means that the current liabilities have
-increased more than the current assets (or its current assets decreased more
-than its current liabilities). This can occur because:
-
-#### Decreasing current assets
-
-- The company is collecting accounts receivable faster, reducing outstanding
-  balances.
-- Inventory levels are reduced, due to efficient inventory management or lower
-  production.  The company uses cash reserves to pay off liabilities or fund
-  operations.
-
-#### Increasing current liabilities
-
-- The company delays paying accounts payable to suppliers, increasing its
-  short-term obligations.
-- The company takes on more short-term debt, such as notes payable or credit
-  line, to finance operations or growth.
-
-#### Operations strategy
-
-- A company might deliberately reduce NWC to free up cash for investments or
-  other uses. For example, by managing receivables or extending payables, the
-  company improves cash flow.
-
-### Net capital spending
-
-Net capital spending can be calculated as:
-
-$$
-\mathbf{Net\ Capital\ Spending} = \text{Ending Net Fixed Assets}
-  - \text{Beginning Net Fixed Assets} + \text{Deprecation}
-$$
-
-Negative net capital spending might occur when:
-
-1. The company sells fixed assets (e.g., property, equipment) to generate cash,
-   often during restructuring or downsizing.
-2. The company chooses not to purchase significant new fixed assets, possibly
-   due to a focus on efficiency, reduced growth plans, or financial
-   constraints.
-3. Fixed asset purchases are smaller than the deprecation expense for the
-   period, resulting in a net reduction in the value of fixed assets.
-
-### Summary
-
-Negative NWC change is often due to increased liabilities or decreased current
-assets, which can be strategic to improve cash flow. Negative net capital
-spending is often selling off more fixed assets than it is investing in, which
-may be part of a restructuring or a cash-raising efforts.
-
----
-
-## 9. Cash flow to stockholders and creditors
-
-Could a company's cash flow to stockholders be negative in a given year?
-(_Hint:_ Yes.) Explain how this might come about. What about cash flow to
-creditors?
-
----
-
-### Cash flow to stockholders (CFS)
-
-Cash flow to stockholders is calculated as:
-
-$$
-\mathbf{Cash\ flow\ to\ stockholders} = \text{dividends paid}
-  - \text{net new equity raised}
-$$
-
-Negative cash flow to stockholders can occur because:
-
-1. Issuance of new equity for growth
-2. Reduction in dividends
-
-### Cash flow to creditors (CFC)
-
-Cash flow to creditors is calculated as:
-
-$$
-\mathbf{Cash\ flow\ to\ creditors} = \text{interest paid}
-  - \text{net new borrowing}
-$$
-
-Negative cash flow to creditors could occur because:
-
-1. Issuance of new debt to finance growth
-2. refinancing or restructuring debt with new terms resulting in net borrowing
-   that exceeds interest payments (replacing short-term debt with long-term
-   bonds to reduce interest costs over time).
-3. The firm has a low interest burden relative to the new debt that it takes
-   on, especially during periods of low-interest rates.
-
-### Key considerations
-
-Negative cash flow to stockholders:
-
-- May signal growth or strategic equity financing.
-- Can also indicate reduced shareholder returns in the short term.
-
-Negative cash flow to creditors:
-
-- often reflects the company leveraging debt for investment or expansion.
-- However, excessive borrowing migh indicate rising financial risk.
-
----
-
-## 10. Firm values
-
-Referring back to the Bank of America example at the beginning of the chapter,
-note that we suggested that Bank of America's stockholders probably didn't
-suffer as a result of the reported loss. What do you think was the basis for
-our conclusion?
-
----
-
-The basis for the conclusion that _Bank of America's stockholders probably
-didn't suffer as a result of the reported write-offs_ is rooted in the
-distinction between _accounting losses_ (such as write-offs) and _actual cash
-loses_. Here are the key points that explain why stockholders likely didn't
-experience significant losses:
-
-### Write-offs are non-cash expenses
-
-A _write-off_ is essentially an accounting adjustment that reduces the book
-value of an asset, typically when it is deemed uncollectible or impaired (e.g.,
-bad loans or the declining value of assets). However, _write-offs_ are
-_non-cash_ transactions. They don't represent an actual outflow of cash. In the
-case of Bank of America's \$34 billion write-off for bad loans, the company
-wasn't actually paying out that \$34 billion in cash. Instead, they were
-acknowledging that the value of certain assets (loans) had declined.
-
-### Write-offs clean up the balance sheet
-
-While write-offs reduce the company's reported _net income_ and asset values,
-they also _clean up the balance sheet_ by removing impaired assets. This allows
-the company to more accurately reflect its true financial position going
-forward. As a result, these write-offs can make the company's financial
-statements more transparent, which could actually increase investor confidence.
-
-### Write-offs can reflect conservative financial management
-
-Large write-offs, especially during economic downturns, can be viewed as a
-_prudent_ measure by management to prepare for future losses. This reflects
-that the company is taking action to acknowledge and deal with problems early.
-Investors might view this as _responsible management_ rather than something to
-fear.
-
-### Future earnings and cash flow are unaffected
-
-__Cash flow__---which is the actual movement of money in and out of the
-company---is unaffected by write-offs. Even though write-offs might lead to
-reported losses, they do not impact the company's ability to generate cash in
-the future. If the bank continues to make loans and earn interest income, or if
-it finds new profitable opportunities, stockholders could still benefit in the
-long term.
-
-### Market reaction may be more about the future
-
-Investors typically care more about _future earnings potential_ than about past
-write-offs. The stock price of a company like Bank of America would likely
-reflect investors' expectations for future performance, rather than simply
-reacting to the past losses reported in the income statement.
-
-### Broader economic and regulatory context
-
-During period of economic stress, like the 2008--2009 financial crisis, large
-financial institutions often face widespread asset impairments. These
-write-offs, while large in nominal terms, are somewhat expected by investors
-who understand the risks in the banking industry. Additionally, government
-interventions (such as bailouts or stimulus packages) often provide a safety
-net, further cushioning stockholder losses.
-
----
-
-# Questions and problems
-
-## 1. Building a balance sheet
+# 1. Building a balance sheet
 
 Bishop, Inc., has current assets of \$5,700, net fixed assets of \$27,000,
 current liabilities of \$4,400, and long-term debt of \$12,900. What is the
@@ -1199,7 +90,7 @@ $$
 
 ---
 
-## 2. Building an income statement
+# 2. Building an income statement
 
 Travis, Inc., has sales of \$387,000, costs of \$175,000, deprecation expense of
 \$40,000, interest expense of \$21,000, and a tax rate of 35%. What is the net
@@ -1249,14 +140,14 @@ $$
 \end{aligned}
 $$
 
-### Conclusion
+## Conclusion
 
 * Net income: \$`r pretty(p2$net.income)`
 * Retained earnings: \$`r pretty(p2$retained.earnings)`
 
 ---
 
-## 3. Market values and book values
+# 3. Market values and book values
 
 
 Klingon Cruisers, Inc., purchased new cloaking machinery three years ago for
@@ -1286,7 +177,7 @@ p3$assets <- p3$current.assets + p3$net.fixed.assets
 p3$mv.assets <- p3$mv.cloaking + p3$mv.current.assets
 ```
 
-### Step 1: Calculate the current assets of Klingon Cruisers Inc:
+## Step 1: Calculate the current assets of Klingon Cruisers Inc:
 
 $$
 \begin{aligned}
@@ -1297,7 +188,7 @@ $$
 \end{aligned}
 $$
 
-### Step 2: Now calculate the book value of all assets:
+## Step 2: Now calculate the book value of all assets:
 
 $$
 \begin{aligned}
@@ -1308,7 +199,7 @@ $$
 \end{aligned}
 $$
 
-### Step 3: Calculate the market value of all assets.
+## Step 3: Calculate the market value of all assets.
 
 $$
 \begin{aligned}
@@ -1321,7 +212,7 @@ $$
 
 ---
 
-## 4. Calculating Taxes =REFACTOR=
+# 4. Calculating Taxes =REFACTOR=
 
 The Locker Co. has \$273 thousand in taxable income. Using the rates from the
 [tax table](#table:taxrates) in the notes, calculate the company's income taxes. What is the
@@ -1362,7 +253,7 @@ $$
 \end{aligned}
 $$
 
-#### We can calcualte the solution in `R`
+### We can calcualte the solution in `R`
 
 The following functions will use the tax brackets from the tax rates table to
 calculate income taxes and find the marginal tax rate.
@@ -1398,7 +289,7 @@ knitr::kable(table.p4, caption="Average and marginal tax rates (percents)")
 
 ---
 
-## 5. Calculating OCF
+# 5. Calculating OCF
 
 Ranney, Inc., has sales of \$18,700, costs of \$10,300, depreciation expense of
 \$1,900, and interest expense of \$1,250. If the tax rate is 40 percent, what
@@ -1421,7 +312,7 @@ p5$net.income <- p5$pretax.income - p5$taxes
 p5$operating.cash.flow <- p5$ebit + p5$depreciation - p5$taxes
 ```
 
-### Calculating operating Cash Flow:
+## Calculating operating Cash Flow:
 
 $$
 \begin{aligned}
@@ -1450,7 +341,7 @@ $$
 
 ---
 
-## 6. Calculate Net Capital Spending
+# 6. Calculate Net Capital Spending
 
 Gordon Driving School's 2011 balance sheet showed net fixed assets of \$1.42
 million, and the 2012 balance sheet showed net fixed assets of \$1.69 million.
@@ -1482,7 +373,7 @@ $$
 
 ---
 
-## 7. Building a Balance Sheet
+# 7. Building a Balance Sheet
 
 The following table presents the long-term liabilities and stockholders' equity
 of Information Control Corp. one year ago:
@@ -1559,7 +450,7 @@ knitr::kable(pretty(p7$updated.bs), caption="Updated balance sheet")
 
 ---
 
-## 8. Cash Flow to Creditors
+# 8. Cash Flow to Creditors
 
 The 2011 balance sheet of Anna's Tennis Shop, Inc., showed long-term debt of
 \$1.45 million, and the 2012 balance sheet showed long-term debt of \$1.52
@@ -1587,7 +478,7 @@ $$
 
 ---
 
-## 9. Cash Flow to Stockholders
+# 9. Cash Flow to Stockholders
 
 The 2011 balance sheet of Anna's Tennis Shop, Inc., showed \$490,000 in the
 common stock account and \$3.4 million in the additional paid-in surplus
@@ -1620,7 +511,7 @@ $$
 
 ---
 
-## 10. Calculating Cash Flows
+# 10. Calculating Cash Flows
 
 Given the information for Anna's Tennis Shop, Inc., in the previous two
 problems, suppose you also know that the firm's net capital spending for 2012
@@ -1652,7 +543,7 @@ $$
 
 ---
 
-## 11. Cash Flows =REFACTOR=
+# 11. Cash Flows =REFACTOR=
 
 Ritter Corporation's accountants prepared the following financial statements for
 year-end 2012:
@@ -1685,7 +576,7 @@ knitr::kable(p11$bs, caption="Balance Sheets December 31")
 
 ---
 
-### a. Change in cash 2012
+## a. Change in cash 2012
 
 The cash balance has increased from \$55 in 2011 to \$65. This increase in cash
 could result from a combination of operating, investing, and financing
@@ -1698,7 +589,7 @@ $$
   = `r pretty(p11$delta.cash)` 
 $$
 
-### b. Change in net working capital 2012
+## b. Change in net working capital 2012
 
 Net working capital = current assets - current liabilities.
 
@@ -1713,7 +604,7 @@ $$
 \end{aligned}
 $$
 
-### c. The cash flow from assets:
+## c. The cash flow from assets:
 
 $$
 \begin{aligned}
@@ -1758,7 +649,7 @@ $$
 
 ---
 
-## 12. Financial Cash Flows
+# 12. Financial Cash Flows
 
 The Stancil Corporation provided the following current information:
 
@@ -1772,10 +663,10 @@ rownames(p12$tb) <- c("Proceeds from long-term borrowing",
                       "Payment of dividends")
 knitr::kable(pretty(p12$tb))
 
-## Purchases of fixed assets and inventories
+# Purchases of fixed assets and inventories
 p12$cf.firm <- sum(p12$tb[3:4,1])
 
-## Proceeds from sale of common stock and payment of dividends
+# Proceeds from sale of common stock and payment of dividends
 p12$cf.investors <- p12$tb[5,1] - p12$tb[2,1]
 ```
 
@@ -1784,7 +675,7 @@ firm.
 
 ---
 
-### Cash Flows from the firm
+## Cash Flows from the firm
 
 $$
 \begin{aligned}
@@ -1795,7 +686,7 @@ $$
 \end{aligned}
 $$
 
-### Cash Flows to investors
+## Cash Flows to investors
 
 We only consider investors, not creditors.
 
@@ -1811,7 +702,7 @@ $$
 
 ---
 
-## 13. Building an Income Statement
+# 13. Building an Income Statement
 
 During the year, the Senbet Discount Tire Company has gross sales of \$1.06
 million. The firm's cost of goods sold and selling expenses were \$525,000 and
@@ -1842,7 +733,7 @@ p13$net.income <- p13$pretax.income - p13$taxes
 p13$ocf <- p13$ebit + p13$depreciation - p13$taxes
 ```
 
-### a. Net Income
+## a. Net Income
 
 $$
 \begin{aligned}
@@ -1870,7 +761,7 @@ $$
 \end{aligned}
 $$
 
-### b. Operating Cash Flow
+## b. Operating Cash Flow
 
 $$
 \begin{aligned}
@@ -1883,7 +774,7 @@ $$
 
 ---
 
-## 14. Calculating Total Cash Flows
+# 14. Calculating Total Cash Flows
 
 Schwert Corp. shows the following information on its 2012 income statement:
 sales = \$185,000; costs = \$98,000; other expenses = \$6,700; deprecation
@@ -1926,7 +817,7 @@ p14$capital.spending <- p14$delta.net.fixed.assets + p14$depreciation
 p14$delta.net.working.capital <- p14$ocf - p14$capital.spending - p14$cffa
 ```
 
-### a. Operating cash flow for 2012
+## a. Operating cash flow for 2012
 
 $$
 \begin{aligned}
@@ -1941,7 +832,7 @@ $$
 \end{aligned}
 $$
 
-### b. Cash flow to creditors (CFC)
+## b. Cash flow to creditors (CFC)
 
 $$
 \begin{aligned}
@@ -1951,7 +842,7 @@ $$
 \end{aligned}
 $$
 
-### c. Cash flow to stockholders (CFS)
+## c. Cash flow to stockholders (CFS)
 
 $$
 \begin{aligned}
@@ -1961,7 +852,7 @@ $$
 \end{aligned}
 $$
 
-### d. Net working capital (NWC)
+## d. Net working capital (NWC)
 
 With net fixed assets increased to \$`r pretty(p14$delta.net.fixed.assets <- 26100)`
 during the year, the addition to net working capital is:
@@ -1984,7 +875,7 @@ $$
 
 ---
 
-## 15. Using Income Statements
+# 15. Using Income Statements
 
 Given the following information for O'Hare Marine Co., calculate the
 depreciation expense: sales = \$41,000; costs = \$26,400; addition to retained
@@ -2042,7 +933,7 @@ Depreciation expense is calculated as: \$`r pretty(p15$depreciation)`
 
 ---
 
-## 16. Residual Claims
+# 16. Residual Claims
 
 Huang, Inc., is obligated to pay its creditors \$10,900 very soon.
 
@@ -2060,7 +951,7 @@ p16$mv.assets <- c(12400, 9600)
 p16$shareholders.equity <- p16$mv.assets - p16$creditor.obligation
 ```
 
-### a. Market value of shareholders' equity
+## a. Market value of shareholders' equity
 
 Shareholders' equity: \$`r pretty(p16$mv.assets[1])`
 
@@ -2073,7 +964,7 @@ $$
 \end{aligned}
 $$
 
-### b. Market value of shareholders' equity
+## b. Market value of shareholders' equity
 
 Assets: \$`r pretty(p16$mv.assets[2])`
 
@@ -2088,7 +979,7 @@ $$
 
 ---
 
-## 17. Marginal versus Average Tax Rates
+# 17. Marginal versus Average Tax Rates
 
 (Refer to the corporate tax rates table) Corporation Growth \$86,000 in taxable
 income, and Corporation Income has \$8,600,000 in taxable income.
@@ -2114,7 +1005,7 @@ p17$corp.growth.taxes <- p4$income.tax(p17$corp.growth.taxable.income)
 p17$corp.income.taxes <- p4$income.tax(p17$corp.income.taxable.income)
 ```
 
-### a. Tax bill
+## a. Tax bill
 
 We will use the `income.tax` function defined in problem 4.
 
@@ -2122,7 +1013,7 @@ The tax bill for Corporation growth is \$`r pretty(p17$corp.growth.taxes)`
 
 The tax bill for Corporation income is \$`r pretty(p17$corp.income.taxes)`
 
-### b. Marginal tax rates
+## b. Marginal tax rates
 
 To find the marginal tax bracket we define a new function. This function takes
 an income and searches the brackets for which one the stated income is less than
@@ -2160,7 +1051,7 @@ The third and fifth tax brackets tax the next \$10,000 at the same rate 34\%.
 
 ---
 
-## 18. Net Income and OCF
+# 18. Net Income and OCF
 
 During 2012, Raines Umbrella Corp. had sales of \$630,000. Costs of goods sold,
 administrative and selling expenses, and depreciation expenses were \$470,000,
@@ -2185,13 +1076,13 @@ p18$tax.rate <- .35
 p18$income <- p18$sales - p18$cogs - p18$admin.selling.expenses
 p18$ebit <- p18$income - p18$depreciation
 p18$pretax.income <- p18$ebit - p18$interest
-## if pretax.income is negative then we pay no taxes.
+# if pretax.income is negative then we pay no taxes.
 p18$taxes <- round(max(p18$pretax.income, 0) * p18$tax.rate)
 p18$net.income <- p18$pretax.income - p18$taxes
 p18$ocf <- p18$ebit + p18$depreciation - p18$taxes
 ```
 
-### a. Raines's net income for 2012
+## a. Raines's net income for 2012
 
 
 $$
@@ -2212,7 +1103,7 @@ $$
 
 Since pretax income is negative, Raines pays no taxes.
 
-### b. Deprecation is added back to EBIT to get the OCF
+## b. Deprecation is added back to EBIT to get the OCF
 
 $$
 \begin{aligned}
@@ -2222,7 +1113,7 @@ $$
 \end{aligned}
 $$
 
-### c. What do the results in (a) and (b) mean?
+## c. What do the results in (a) and (b) mean?
 
 Net income is negative due to high costs, depreciation, and interest expense
 leading to a pre-tax loss. However, because depreciation is a non-cash expense,
@@ -2231,7 +1122,7 @@ from operations.
 
 ---
 
-## 19. Accounting values versus cash flows
+# 19. Accounting values versus cash flows
 
 ```{r problem 19; setup, echo=F}
 p19 <- new.env()
@@ -2261,13 +1152,13 @@ can pay out a cash dividend of \$34,000.
 
 We need to find the change in long-term debt.
 
-### Approach
+## Approach
 
 $$
 \text{CFFA} = \text{CFC} + \text{CFS}
 $$
 
-### Step 1: Compute free cash flow (CFFA)
+## Step 1: Compute free cash flow (CFFA)
 
 $$
 \begin{aligned}
@@ -2278,7 +1169,7 @@ $$
 \end{aligned}
 $$
 
-### Step 2: Solve for cash flow to creditors (CFC)
+## Step 2: Solve for cash flow to creditors (CFC)
 
 $$
 \begin{aligned}
@@ -2301,7 +1192,7 @@ $$
 
 ---
 
-## 20. Calculating cash flows
+# 20. Calculating cash flows
 
 Cusic Industries had the following operating results for 2012: sales = \$19,900;
 cost of goods sold = \$14,200; deprecation expense = \$2,700; interest expense =
@@ -2350,7 +1241,7 @@ p20$cfc <- p20$interest
 p20$cfs <- p20$cffa - p20$cfc
 ```
 
-### a. Calculating net income
+## a. Calculating net income
 
 $$
 \begin{aligned}
@@ -2372,7 +1263,7 @@ $$
 \end{aligned}
 $$
 
-### b. The operating cash flow
+## b. The operating cash flow
 
 $$
 \begin{aligned}
@@ -2383,7 +1274,7 @@ $$
 \end{aligned}
 $$
 
-### c. The cash flow from assets (CFFA)
+## c. The cash flow from assets (CFFA)
 
 $$
 \begin{aligned}
@@ -2425,7 +1316,7 @@ $$
 Yes, this positive CFFA is possible--it indicates the firm generated more cash
 from its operations than it invested in assets and working capital.
 
-### d. Cash flow to creditors and stockholders
+## d. Cash flow to creditors and stockholders
 
 $$
 \begin{aligned}
@@ -2459,7 +1350,7 @@ the \$`r pretty(p20$cfs)` cash flow to stockholders includes
 
 ---
 
-## 21. Calculating cash flows
+# 21. Calculating cash flows
 
 Consider the following abbreviated financial statements for Weston Enterprises:
 
@@ -2470,15 +1361,15 @@ d. During 2012, Weston Enterprises raised \$432 in new long-term debt. How much 
 
 ```{r problem 21; balance sheet, echo=F}
 p21 <- new.env()
-## Assets for balance sheet
+# Assets for balance sheet
 p21$bs.assets <- matrix(c(936,4176,1015,4896), ncol=2)
 rownames(p21$bs.assets) <- c("Current assets", "Net fixed assets")
 colnames(p21$bs.assets) <- c("2011", "2012")
-## Liabilities for balance sheet
+# Liabilities for balance sheet
 p21$bs.liabilities <- matrix(c(382,2160,416,2477), ncol=2)
 rownames(p21$bs.liabilities) <- c("Current liabilities", "Long-term debt")
 colnames(p21$bs.liabilities) <- c("2011", "2012")
-## Balance sheet
+# Balance sheet
 p21$balance.sheet <- list( pretty(p21$bs.assets), pretty(p21$bs.liabilities))
 knitr::kable(p21$balance.sheet,
   caption="Weston Enterprises 2011 and 2012 parital balance sheet") %>%
@@ -2487,7 +1378,7 @@ knitr::kable(p21$balance.sheet,
 ```
 
 ```{r problem 21; income statement, echo=F}
-## Income Statement 2012
+# Income Statement 2012
 p21$income.statement.2012 <- matrix(c(12380, 5776, 1150, 314), ncol=1)
 rownames(p21$income.statement.2012) <- c("Sales", "Costs", "Deprecation",
                                          "Interest paid")
@@ -2496,7 +1387,7 @@ knitr::kable(pretty(p21$income.statement.2012),
   kable_styling(latex_options = "striped") %>%
   kable_styling(latex_options = "HOLD_position")
 
-## c(2011, 2012)
+# c(2011, 2012)
 p21$assets <- c(sum(p21$bs.assets[,1]), sum(p21$bs.assets[,2]))
 p21$liabilities <- c(sum(p21$bs.liabilities[,1]), sum(p21$bs.liabilities[,2]))
 p21$shareholders.equity <- c(p21$bs.assets[1] - p21$bs.liabilities[1],
@@ -2527,7 +1418,7 @@ p21$cfc <- p21$interest + p21$retired.lt.debt
 
 ---
 
-### a. Calculating the owners' equity for 2011 and 2012.
+## a. Calculating the owners' equity for 2011 and 2012.
 
 Shareholders' Equity = Assets - Liabilities
 
@@ -2542,7 +1433,7 @@ $$
 \end{aligned}
 $$
 
-### b. Change in net working capital for 2012
+## b. Change in net working capital for 2012
 
 net working capital = current assets - current liabilities
 
@@ -2554,7 +1445,7 @@ $$
 \end{aligned}
 $$
 
-### c. Fixed assets and Cash flow from assets (CFFA)
+## c. Fixed assets and Cash flow from assets (CFFA)
 
 $$
 \begin{aligned}
@@ -2601,7 +1492,7 @@ $$
 \end{aligned}
 $$
 
-### d. Changes in Long-term debt and cash flow to creditors
+## d. Changes in Long-term debt and cash flow to creditors
 
 $$
 \begin{aligned}
@@ -2617,7 +1508,7 @@ $$
 
 ---
 
-## Information for problems 22 and 23
+# Information for problems 22 and 23
 
 ```{r Ingersoll problems 22 and 23, echo=F}
 p22 <- new.env()
@@ -2638,13 +1529,13 @@ p22$tax.rate <- .34
 
 ---
 
-## 22. Financial Statements
+# 22. Financial Statements
 
 Draw up an income statement and balance sheet for the company for 2011 and 2012.
 
 ---
 
-### Income statement
+## Income statement
 
 ```{r problem 22 income statement, echo=F}
 p22$income.statement.headings <- c(
@@ -2689,7 +1580,7 @@ knitr::kable(pretty(p22$income.statement),
   kable_styling(latex_options = "HOLD_position")
 ```
 
-### Balance Sheet
+## Balance Sheet
 
 ```{r problem 22, echo=F}
 p22$bs.columns <- c("2012", "2011")
@@ -2736,7 +1627,7 @@ knitr::kable(p22$bs.display,
 
 ---
 
-## 23. Calculating Cash Flow
+# 23. Calculating Cash Flow
 
 For 2012, calculate the cash flow from assets, cash flow to creditors, and cash flow to stockholders.
 
@@ -2789,7 +1680,7 @@ $$
 
 ---
 
-## 24. Cash Flows
+# 24. Cash Flows
 
 You are researching Time Manufacturing and have found the following accounting
 statement of cash flows for the most recent year. You also know that the company
@@ -2908,7 +1799,7 @@ $$
 
 ---
 
-## 25. Net Fixed Assets and Deprecation
+# 25. Net Fixed Assets and Deprecation
 
 On the balance sheet, the net fixed assets (NFA) account is equal to the gross
 fixed assets (FA) account, which records the acquisition cost of fixed assets,
@@ -2921,14 +1812,14 @@ $\text{FA}_{\text{end}} - \text{FA}_{\text{beg}}$.
 
 ---
 
-### Terms:
+## Terms:
 
 * NFA - Net Fixed Assets
 * FA - Gross Fixed Assets
 * AD - Accumulated Depreciation
 * D - Depreciation
 
-### Given:
+## Given:
 
 $$
 \begin{aligned}
@@ -2963,7 +1854,7 @@ $$
 
 ---
 
-## 26. Tax Rates
+# 26. Tax Rates
 
 Refer to the corporate marginal tax rate information in Table 2.3.
 

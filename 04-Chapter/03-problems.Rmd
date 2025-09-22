@@ -1,7 +1,7 @@
 ---
 title: "Discounted Cash Flow Valuation"
+subtitle: "Questions and Problems"
 author: "Ross, Westerfield, Jaffe"
-date: "`r format(Sys.time(), '%d %b %Y')`"
 output: 
   pdf_document:
    toc: true 
@@ -19,1373 +19,7 @@ options(scipen = 999)
 }
 ```
 
-# Chapter introduction
-
-The signing of big-name athletes is often accompanied by great fanfare, but the
-numbers are often misleading. For example, in late 2010, catcher Victor Martinez
-reached a deal with the Detroit Tigers, signing a contract with a reported value
-of \$50 million. Not bad, especially for someone who makes a living using the
-"tools of ignorance" (jock jargon for a catcher's equipment). Another example is
-the contract signed by Jayson Werth of the Washington Nationals, which had a
-stated value of \$126 million.
-
-It looks like Victor and Jayson did pretty well, but then there was Carl
-Crawford, who signed to play in fron of Boston's Red Sox nation. Carl's contract
-has a stated value of \$142 million, but this amount was actually payable over
-several years. The contract consisted of a \$6 million signing bonus, along with
-\$14 million in the first year plus \$122 million in future salary to be paid in
-the years 2011 through 2017. Victor's and Jayson's payments were similarly
-spread over time. Because all three contracts called for payments that are made
-at future dates, we must consider the time value of money, which means none of
-these players received the quoted amounts. How much did they really get? This
-chapter gives you the "tools of knowledge" to answer this question.
-
-# List of topics
-
-1. Valuation: The one-period case
-
-2. The multiperiod case
-
-   * Future value and compounding
-   * The power of compounding: A digression
-   * Present value and discounting
-   * Finding the number of periods
-   * The algebraic formula
-
-3. Compounding periods
-
-   * Distinction between stated annual interest
-   * Rate and effective annual rate
-   * Compounding over many years
-   * Continuous compounding
-
-4. Simplifications
-
-   * Perpetuity
-   * Growing perpetuity
-   * Annuity
-   * Growing annuity
-
-5. Loan amortization
-
-6. What is a firm worth?
-
-# Notes
-
-## Valuation: The one-period case
-
-* __Future value__ or __compound value__ is the value of a sum after investing
-over one or more periods.
-
-* __Present value__, the current value of a sum that will be received in the
-future.
-
-\begin{center}
-\textbf{Present value of investment}
-\end{center}
-
-$$
-\text{PV} = \frac{C_1}{1 + r}\tag{4.1}
-$$
-
-This is called _present value analysis_ and it will show the present value of a
-cash flow ($C_1$) one period in the future. The variable $r$ is the
-_discount rate_.
-
-The net present value (NPV) is the present value of future cash flows minus the
-present value of the cost of the investment.
-
-\begin{center}
-\textbf{Net present value of investment}
-\end{center}
-
-$$
-\text{NPV} = - \text{Cost} + \text{PV}\tag{4.2}
-$$
-
-When determining the risk rate ($r$), you would choose a return that is
-available in the market on other investments of the same risk.
-
-## The multiperiod case
-
-### Future value and compounding
-
-After the first period in investing, you have a choice: (1) you can choose to
-take the profits of the investment, or (2) you can reinvest both the principle
-and interest and accumulate compounding.
-
-The compounding interest is computed for the number of periods
-
-$$
-(1 + r)^t
-$$
-
-where $t$ is the number of compounding periods.
-
-Simple interest does not take account the interest and thus is computed:
-
-$$
-r^t
-$$
-
-When cash is invested at compound interest, each interest payment is reinvested.
-With simple interest, the interest is not reinvested.
-
-The general formula for an investment over many periods can be written as:
-
-\begin{center}
-\textbf{Future value of an investment}
-\end{center}
-
-$$
-\text{FV} = C_0 \times (1 + r)^T\tag{4.3}
-$$
-
-where $C_0$ is the cash to be invested at Date 0 (i.e., today), $r$ is the
-itnerest rate per period, and $T$ is the number of periods over which the cash
-is invested.
-
-### The power of compounding: A digression
-
-The real affect of compounding can be seen at large intervals. For example if
-you invested one dollar in the U.S. stock market in 1929, it would be worth
-\$2,982.24.24 in 2010. This is 9.87 percent compounded annually for 85
-years---that is, $(1.0987)^{85} = \$2,982.24$, ignoring a small rounding error.
-
-### Present value and discounting
-
-The multiperiod equation for the present value of future cash flows is
-
-$$
-\text{PV} = \frac{C_T}{(1 + r)^T}\tag{4.4}
-$$
-
-The process of calculating the present value of a future cash flow is called
-__discounting__.
-
-### Finding the number of periods
-
-When solving for the number of periods you can use regression:
-
-$$
-\frac{\text{PV}}{\text{FV}} = (1 + r)^T
-$$
-
-### The algebraic formula
-
-$$
-\text{NPV} = - C_0 + \frac{C_1}{1 + r} + \frac{C_2}{(1 + r)^2}
-  + \cdots + \frac{C_T}{(1 + r)^T}
-  = - C_0 + \sum^{T}_{i=1}{\frac{C_i}{(1 + r)^i}}\tag{4.5}
-$$
-
-## Compounding Periods
-
-Sometime compounding occurs more frequently than just one year.
-
-Other types of compounding:
-
-* Semi-annual compounding
-
-* Quarterly compounding
-
-* Monthly compounding
-
-The general formula for the present value factor:
-
-$$
-C_0 \left( 1 + \frac{r}{m} \right)^m
-$$
-
-In this formula $r$ is the __stated annual interest rate (SAIR)__ and $m$ is the
-number of compounding periods in the year.
-
-The stated annual interest rate is the annual interest rate without
-consideration of compounding. Banks and other financial institutions may use
-other names for the stated annual interest rate. __Annual percentage rate
-(APR)__ is perhaps the most common synonym.
-
-### Distinction betwen stated annual interest rate and effective annual rate
-
-The stated annual interest rate (SAIR) is only meaningful when the compounding
-interval is given. However the effective annual rate (EAR) is meaningful without
-the compounding interval.
-
-When interest rates are large the difference between the APR and the EAR can be
-big.
-
-### Compounding over many years
-
-When applying compounding over many years the general form of the present value
-factor has the form:
-
-$$
-\left( 1 + \frac{r}{m} \right)^{mT}\tag{4.8}
-$$
-
-### Continuous compounding
-
-$$
-C_0 \times e^{rT}\tag{4.9}
-$$
-
-## Simplifications
-
-The following sections show simplifications to the basic formulas.
-
-### Perpetuity
-
-For a perpetuity the equation is:
-
-$$
-\text{PV} = \frac{C}{1 + r} + \frac{C}{(1 + r)^2}
-  + \frac{C}{(1 + r)^3} + \cdots
-$$
-
-We will state, without proof that the formula reduces to:
-
-$$
-\text{PV} = \frac{C}{r}\tag{4.10}
-$$
-
-### Growing perpetuities
-
-For a growing perpetuity the equation is
-
-$$
-\text{PV} = \frac{C}{1 + r} + \frac{C \times (1 + g)}{(1 + r)^2}
-  + \frac{C \times (1 + g)^2}{(1 + r)^3} + \cdots
-  + \frac{C \times (1 + g)^{N - 1}}{(1 + r)^N} + \cdots
-$$
-
-For the case when $r > g$, the formula reduces to:
-
-$$
-\text{PV} = \frac{C}{r - g}\tag{4.12}
-$$
-
-A few important points:
-
-1. _The numerator_: The numerator is the cash flow one period hence, not at
-   date 0.
-
-2. _The discount rate and the growth rate_: The discount rate $r$ must be
-   greater than the growth rate $g$ for the growing perpetuity formula to work.
-   Consider the case in which the growth rate approaches the interest rate in
-   magnitude. Then, the denominator in the growing perpetuity formula gets
-   infinitesimally small and the present value grows infinitely large. The
-   present value is in fact undefined when $r$ is less than $g$.
-
-3. _The timing assumption_: Cash generally flows into and out of real-world
-   firms both randomly and nearly continuously. However, the equation assumes
-   that cash flows are received and disbursed at regular and discrete points in
-   time.
-
-### Annuity
-
-You can derive the formula for an annuity from the formula of two perpetuities.
-Mainly:
-
-> For $C_1$ which starts at $t=0$ and $C_2$ which starts at $t=T$. The formula
-> for an annuity is:
-
-$$
-\text{PV}_{\text{annuity}} = \frac{C_1}{r} - \frac{C_2}{r}
-  \left[ \frac{1}{(1 + r)^T} \right]\tag{4.14}
-$$
-
-This simplifies to:
-
-\begin{center}
-\textbf{Formula for present value of annuity}
-\end{center}
-
-$$
-\text{PV}_{\text{annuity}} = C
-  \frac{\left( 1 - (1 + r)^{-T} \right)}{r}\tag{4.15}
-$$
-
-The term used to compute the present value of the stream of level payments, $C$,
-for $T$ years is called a __present value interest factor for annuitites__.
-
-### Trick 1: A delayed annuity
-
-One of the tricks in working with annuities and perpetuities is getting the
-timing right.
-
-#### Trick 2: Annuity due
-
-The annuity formula of equation 4.15 assumes that the first annuity  payment
-begins a full period hence. This type of annuity is sometimes called an
-_annuity arrears_ or _ordinary annuity_. What happens if the annuity begins
-today---in other words, at Date 0?
-
-#### Trick 3: The infrequent annuity
-
-Here the trick is to determine the interest rate over the period.
-
-#### Trick 4: Equating present value of two annuities
-
-### Growing annuity
-
-\begin{center}
-\textbf{Formula for present value of growing annuity}
-\end{center}
-
-$$
-\text{PV} = C \left[\frac{1}{r - g} - \frac{1}{r - g}
-  \times \left(\frac{1 + g}{1 + r}\right)^T\right]
-  = C \left[\frac{1 - \left(\frac{1 + g}{1 + r}\right)^T}{r - g}\right]
-  \tag{4.17}
-$$
-
----
-
-# Examples
-
----
-
-## Example 4.1: Present value
-
-Diane Badame, a financial analyst at Kaufman & Broad, a leading real estate
-firm, is thinking about recommending that Kaufman & Broad invest in a piece of
-land that costs \$85,000. She is certain that next year the land will be worth
-\$91,000, a sure \$6,000 gain. Given that the interest rate in similar
-alternative investments is 10 percent, should Kaufman & Broad undertake the
-investment in land? Diane's choice is described below with the cash flow time
-chart.
-
-A moment's thought should be all it takes to convince her that this is not an
-attractive business deal. By investing \$85,000 in the land, she will have
-\$91,000 available next year. Suppose, instead, that Kaufman & Broad puts the
-same \$85,000 into similar alternative investments. At the interest rate of 10
-percent, this \$85,000 would grow to:
-
-$$
-(1 + .10) \times \$85,000 = \$93,500
-$$
-
-next year.
-
-It would be foolish to buy the land when investing the same \$85,000 in similar
-alternative investments would produce an extra \$2,500 (that is, \$93,500 from
-the bank minus \$91,000 from the land investment). This is a future value
-calculation.
-
-Alternatively, she could calculate the present value of the sale price next year
-as:
-
-$$
-\text{Present value} = \frac{\$91,000}{1.10} = \$82,727.27
-$$
-
-Because the present value of next year's sales price is less than this year's
-purchase price of \$85,000, present value analysis also indicates that she
-should not recommend purchasing th property.
-
----
-
-## Example 4.2: Uncertainty and valuation
-
-Professional Artworks, Inc. is a firm that speculates in modern paintings. The
-manager is thinking of buying an original Picasso for \$400,000 with the
-intention of selling it at the end of one year. The manager expects that the
-painting will be worth \$480,000 in one year. The relavent cash flows are
-depicted below.
-
-<<FIGURE 4.3>>
-
-Of course, this is only an expectation---the painting could be worth more or
-less than \$480,000. Suppose the guaranteed interest rate granted by banks is 10
-percent. Should the firm purchase the piece of art?
-
-Our first thought might be to discount at the interest rate, yielding:
-
-$$
-\frac{\$480,000}{1.10} = \$436,364
-$$
-
-Because \$436,364 is greater than \$400,000, it looks at first glance as if the
-painting should be purchased. However, 10 percent is the return one can earn on
-a low risk investment. Because the painting is quite risky, a higher discount
-rate is called for: The manager chooses a rate of 25 percent to reflect this
-risk. In other words, he argues that a 25 percent expected return is fair
-compensation for an investment as risky as this painting.
-
-The present value of the painting becomes:
-
-$$
-\frac{\$480,000}{1.25} = \$384,000
-$$
-
-Thus, the manager believes that the painting is currently overpriced at
-\$400,000 and does not make the purchase.
-
----
-
-## Example 4.3: Interest on interest
-
-Suh-Pyng Ku has put \$500 in a savings account at the First National Bank of
-Kent. The account earns 7 percent, compounded annually. How much will ms. Ku
-have at the end of three years? The answer is:
-
-$$
-\$500 \times 1.07 \times 1.07 \times 1.07 = \$500 \times (1.07)^3 = \$612.52
-$$
-
----
-
-## Example 4.4: Compound growth
-
-Jay Ritter invested \$1,000 in the stock of the SDH Company. The company pays a
-current dividend of \$2, which is expected to grow by 20 percent per year for
-hte next two years. What will the dividend of the SDH Company be after two
-years? A simple calculation gives:
-
-$$
-\$2 \times (1.20)^2 = \$2.88
-$$
-
----
-
-## Example 4.5: Finding the rate
-
-Carl Voigt, who recently won \$10,000 in the lottery, wants to buy a car in five
-years. Carl estimates that the car will cost \$16,105 at that time. His cash
-flows are displayed in the figure below.
-
-What interest rate must he earn to be able to afford the car?
-
-The ratio of purchase price to initial cash is:
-
-$$
-\frac{\$16,105}{\$10,000} = 1.6105
-$$
-
-Thus, he must earn an interest rate that allows \$1 to become \$1.6105 in five
-years. Table A.3 tells us that an interest rate of 10 percent will allow him to
-purchase the car:
-
-We can express the problem algebraically as:
-
-$$
-\$10,000 \times (1 + r)^5 = \$16,105
-$$
-
-where $r$ is the interest rate needed to purchase the car. Because
-\$16,105/\$10,000 = 1.6105, we have:
-
-$$
-\begin{aligned}
-(1 + r)^5 &= 1.6105\\
-r &= 10\%
-\end{aligned}
-$$
-
-Either the table, a spreadsheet, or a hand calculator lets us solve for $r$.
-
----
-
-## Example 4.6: How much for that island?
-
-Some people have said that it was the best real estate deal in history. Peter
-Minuit, director general of New Netherlands, the Dutch West India Company's
-colony in North America, in 1626 allegedly bought Manhattan Island for 60
-guilders' worth of trinkets from native Americans. By 1667, the Dutch were
-forced by the Britsh to exchnage it for Suriname
-(perhaps the worst real estate deal ever). This sounds cheap; but did the Dutch
-really get the better end of the deal? It is reported that 60 guilders was worth
-about \$24 at the prevailing exchange rate. If the native Americans had sold the
-trinkets at a fair market value and invested the \$24 at 5 percent (tax free),
-it would now, about 385 years later, be worth more than \$3.45 billion. Today,
-Manhattan is undoutedly worth more than \$3.45 billion, so at a 5 percent rate
-of return the native Americans got th eworst of the deal. However, if invested
-at 10 percent, the amount of money they received would be worth about:
-
-$$
-\$24(1 + r)^T = 24 \times 1.1^{385} \cong \$207\ \text{quadrillion}
-$$
-
-This is a lot of money. In fact, \$207 quadrillion is more than all the real
-estate in the world is worth today. Note that no one in the history of the world
-has ever been able to find an investment yielding 10 percent every year for 385
-years.
-
----
-
-## Example 4.7: Multiperiod discounting
-
-Bernard Dumas will receive \$10,000 three years from now. Bernard can earn 8
-percent on his investments, so the appropriate discount rate is 8 percent. What
-is the present value of his future cash flow? The answer is:
-
-$$
-\begin{aligned}
-\text{PV} &= \$10,000 \times \left(\frac{1}{1.08}\right)^3\\
-  &= \$10,000 \times .7938\\
-  &= \$7,938
-\end{aligned}
-$$
-
-When his investments grow at an 8 percent rate of interest, Bernard Dumas is
-equally inclined toward receivng \$7,938 now and receiving \$10,000 in three
-years' time. After all, he could convert the \$7,938 he receives today into
-\$10,000 in three years by lending it at an interest rate of 8 percent.
-
-Bernard Dumas could have reached his present value calculation in one of several
-ways. The computation could have been done by hand, by calculator, with a
-spreadsheet, or with the help of Table A.1, which appears in the back of the
-text. This table presents the _present value of_ \$1 to be received after $T$
-periods. We use the table by locating the appropriate interest rate on the
-horizontal and the appropriate number of periods on the vertical. For example,
-Bernard Dumas would look at the following portion of Table A.1.
-
-The appropriate present value factor is .7938.
-
----
-
-### Example 4.8: Finding the rate
-
-A customer of the Chaffkin Corp. wants to buy a tugboat today. Rather than
-paying immediately, he will pay \$50,000 in three years. It will cost the
-Chaffkin Corp. \$38,610 to build the tugboat immediately. The relevant cash
-flows to Chaffkin Corp. are displayed in the figure below. What interest rate
-would the Chaffkin Corp. charge to neither gain nor lose on the sale?
-
-The ratio of construction cost (present value) to sales price (future value) is:
-
-$$
-\frac{\$38,000}{\$50,000} = .7722
-$$
-
-We must determine the interest rate that allows \$1 to be received in three
-years to have a present value of \$.7722. Table A.1 tells us that 9 percent is
-that interest rate.
-
----
-
-## Example 4.9: Waiting for Godot
-
-You've been saving up to buy the Godot Company. The total cost will be \$10
-million. You currently have about \$2.3 million. If you can earn 5 percent on
-your money, how long will you have to wait? At 16 percent, how long must you
-wait?
-
-At 5 percent, you'll have to wait a long time. From the basic present value
-equation:
-
-$$
-\begin{aligned}
-\$2.3 \text{million} &= \$10 \text{million} / 1.05^t\\
-1.05^t &= 4.35\\
-t &= 30 \text{years}
-\end{aligned}
-$$
-
-At 16 percent, things are a little better. Verify for your self that it will
-take about 10 years.
-
----
-
-## Example 4.10: Cash flow valuation
-
-Kyle Mayer has won the Kentucky State Lottery and will receive the following set
-of cash flows over the next two years:
-
-| Year | Cash flow |
-|:---:|---:|
-| 1 | \$20,000 |
-| 2 | 50,000 |
-
-Mr. Mayer can currently earn 6 percent in his money market account, so the
-appropriate discount rate is 6 percent. The present value of the cash flows is:
-
-$$
-\begin{aligned}
-\text{CF}_{\text{year 1}} &= \$20,000 \times \frac{1}{1.06}
-  = \$18,867.9\\
-\text{CF}_{\text{year 2}} &= \$50,000 \times \left( \frac{1}{1.06} \right)^2
-  = \$44,499.8\\\\
-\text{Total} &= \$18,867.9 + \$44,499.8 = \$63,367.7
-\end{aligned}
-$$
-
----
-
-## Example 4.11: NPV
-
-Finance.com has an opportunity to invest in a new high-speed computer that costs
-\$50,000. The computer will generate cash flows (from cost savings) of \$25,000
-one year from now, \$20,000 two years from now, and \$15,000 three years from
-now. The computer will be worthless after three years, and no additional cash
-flows will occur. Finance.com has determined that the appropriate discount rate
-is 7 percent for this investment. Should Finance.com make this investment in a
-new high-speed computer? What is the net present value of the investment?
-
-The cash flows and present value factors of the proposed computer are as
-follows:
-
-```{r example 4.11, echo=F}
-ex4.11 <- new.env()
-ex4.11$cf <- c(-50000, 25000, 20000, 15000)
-ex4.11$discount.rate <- .07
-ex4.11$pv.factor <- round(
-        (1 + ex4.11$discount.rate)^(-(0:(length(ex4.11$cf)-1))), 4)
-ex4.11$pv <- ex4.11$cf * ex4.11$pv.factor
-ex4.11$npv <- sum(ex4.11$pv)
-ex4.11$df.1 <- data.frame(Cash.flows=ex4.11$cf,
-        Present.Value.Factor=ex4.11$pv.factor)
-ex4.11$df.2 <- data.frame(Year=0:3, Present.Value=ex4.11$pv)
-knitr::kable(ex4.11$df.1)
-knitr::kable(ex4.11$df.2)
-knitr::kable(pretty(ex4.11$npv), col.names="Total")
-```
-
----
-
-## Example 4.12: EARs
-
-What is the end-of-year wealth if Jane Christine receives a stated annual
-interest rate of 24 percent compounded monthly on a \$1 investment?
-
-Using Equation 4.6, her wealth is:
-
-$$
-\begin{aligned}
-\$1 \left(1 + \frac{.24}{12} \right)^{12} &= \$1 \times (1.02)^{12}\\
-  &= \$1.2682\\
-\end{aligned}
-$$
-
-The annual rate of return is 26.82 percent. This annual rate of return is called
-either the __effective annual rate (EAR)__ or the
-__effective annual yield (EAY)__. Due to compounding, the effective annual
-interest rate is greater than the stated annual interest rate of 24 percent.
-Algebraically, we can rewrite the effective annual interest rate as follows:
-
-\begin{center}
-\textbf{Effective Annual Rate}
-\end{center}
-
-$$
-\left( 1 + \frac{r}{m} \right)^M - 1\tag{4.7}
-$$
-
-Students are often bothered by the subtraction of 1 in equation 4.7. Note that
-end-of-year wealth is composed of both the interest earned over the year and the
-original principal. We remove the original principal by subtracting 1 in
-equation 4.7.
-
----
-
-## Example 4.13: Compounding frequencies
-
-If the stated annual rate of interest, 8 percent, is compounded quarterly, what
-is the effective annual rate?
-
-Using equation 4.7, we have:
-
-$$
-\left( 1 + \frac{r}{m} \right)^m - 1 = \left( 1 + \frac{.08}{4} \right)^4 - 1
-    = .0824 = 8.24\%
-$$
-
-Referring back to our original example where $C_0 = \$1,000$ and $r = 10\%$, we
-can generate the following table:
-
-```{r example 4.13, echo=F}
-e4.13 <- new.env()
-e4.13$C.0 <- rep(1000, 4)
-e4.13$r <- .1
-e4.13$m <- c(1, 2, 4, 365)
-e4.13$ear <- round((1 + (e4.13$r/e4.13$m))^e4.13$m - 1, 4)
-e4.13$C.1 <- e4.13$C.0 * (1 + e4.13$ear)
-e4.13$df <- data.frame(C0=e4.13$C.0, m=e4.13$m, C1=e4.13$C.1, EAR=e4.13$ear)
-knitr::kable(pretty(e4.13$df))
-```
-
----
-
-## Example 4.14: Multiyear compounding
-
-Harry DeAngelo is investing \$5,000 at a stated annual interest rate of 12
-percent per year, compounded quarterly, for five years. What is his wealth at
-the end of five years?
-
-Using equation 4.8, his wealth is:
-
-$$
-\$5,000 \times \left(1 + \frac{.12}{4} \right)^{4 \times 5}
-  = \$5,000 \times (1.03)^{20} = \$5,000 \times 1.8061 = \$9,030.50
-$$
-
----
-
-## Example 4.15: Continuous compounding
-
-Linda DeFond invested \$1,000 at a continuously compounded rate of 10 percent
-for one year. What is the value of her wealth at the end of one year?
-
-From equation 4.9 we have:
-
-$$
-\$1,000 \times e^{.10} = \$1,000 \times 1.1052 = \$1,105.20
-$$
-
-This number can easily be read from Table A.5. We merely set $r$, the value on
-the horizontal dimension, to 10 percent and $T$, the value on the vertical
-dimension, to 1.
-
-Note that a continuously compounded rate of 10 percent is equivalent to an
-annually compounded rate of 10.52 percent. In other words, Linda DeFond would
-not care whether her bank quoted a continuously compounded rate of 10 percent or
-a 10.52 percent rate, compounded annually.
-
----
-
-## Example 4.16: Continuous compounding, continued
-
-Linda DeFond's brother, Mark, invested \$1,000 at a continuously compounded rate
-of 10 percent for two years.
-
-The appropriate formula here is:
-
-$$
-\$1,000 \times e^{.10 \times 2} = \$1,000 \times e^{.20} = \$1,221.40
-$$
-
-Using the portion of the table of continuously compounded rates shown in the
-previous example, we find the value to be 1.2214.
-
----
-
-## Example 4.17: Present value with continuously compounding
-
-The Michigan State Lottery is going to pay you \$100,000 at the end of four
-years. If the annual continuously compounded rate of interest is 8 percent, what
-is the present value of this payment?
-
-$$
-\$100,000 \times \frac{1}{e^{.08 \times 4}}
-  = \$100,000 \times \frac{1}{1.3771} = \$72,616.37
-$$
-
----
-
-## Example 4.18: Perpetuities
-
-Consider a perpetuity paying \$100 a year. If the relevant interest rate is 8
-percent, what is the value of the consol?
-
-Using equation 4.10 we have:
-
-$$
-\text{PV} = \frac{\$100}{.08} = \$1,250
-$$
-
-Now suppose that interest rates fall to 6 percent. Using Equation 4.10 the value
-of the perpetuity is:
-
-$$
-\text{PV} = \frac{\$100}{.06} = \$1,666.67
-$$
-
-Note that the value of the perpetuity rises with a drop in the interest rate.
-Conversely, the value of the perpetuity falls with a rise in the interest rate.
-
----
-
-## Example 4.19: Paying dividends
-
-Popovich Corporation is just about to pay a dividend of \$3.00 per share.
-Investors anticipate that the annual dividend will rise by 6 percent a year
-forever. The applicable discount rate is 11 percent. What is th eprice of the
-stock today?
-
-The numerator in equation 4.12 is the cash flow to be received next period.
-Since the growth rate is 6 percent, the dividend next year is \$3.18
- ($=$3.00 \times 1.06$). The price of the stock today is:
-
-$$
-\$66.60 = \$3.00 + \frac{\$3.18}{.11 - .06}
-$$
-
-The price of \$66.60 includes both the dividend to be received immediately and
-the present value of all dividends beginning a year from now. Equation 4.12
-makes it possible to calculate only the present value of all dividends beginning
-a year from now. Be sure you understand this eample; test questions on this
-subject always seem to trip up a few of our students.
-
----
-
-## Example 4.20: Lottery valuation
-
-Mark Young has just won the state lottery, paying \$50,000 a year for 20 years.
-He is to receive his first payment a year from now. THe state advertises this as
-the Million Dollar Lottery because \$1,000,000 = \$50,000 $\times$ 20. If the
-interest rate is 8 percent, what is the present value of the lottery?
-
-$$
-\begin{aligned}
-\text{PV} &= \$50,000 \times
-  \left[\frac{1 - \frac{1}{(1.08)^{20}}}{.08} \right]\\
-  &= \text{periodic payment} \times \text{annuity factor} \\
-  &= \$50,000 \times 9.8181\\
-  &= \$490,905
-\end{aligned}
-$$
-
-## Example 4.21: Retirement investing
-
-Suppose you put \$3,000 per year into a Roth IRA. The account pays 6 percent
-interest per year. How much will you have when you retire in 30 years?
-
-This question asks for the future value of an annuity of \$3,000 per year for 30
-years at 6 percent, which we can calculate as follows:
-
-$$
-\begin{aligned}
-\text{FV} &= C \left[\frac{(1 + r)^T - 1}{r}\right]\\
-  &= \$3,000 \times \left[\frac{1.06^{30} - 1}{.06}\right]\\
-  &= \$3,000 \times 79.0582\\
-  &= \$237,174.56
-\end{aligned}
-$$
-
-So, you'll have close to a quarter million dollars in the account.
-
-## Example 4.22: Delayed annuities
-
-Danielle Caravello will receive a four-year annuity of \$500 per year, beginning
-at date 6. If the interest rate is 10 percent, what is the present value of her
-annuity?
-
-1. Calculate the annuity:
-
-$$
-500 \times (1 - (1.10)^4)/.10 = 1,584.93
-$$
-
-2. Discount the present value of the annuity back 5 years (date 6 - date 1):
-
-$$
-\frac{1,584.93}{(1.10)^5} = 984.12
-$$
-
----
-
-## Example 4.23: Annuity due
-
-In a previous example, Mark Young received \$50,000 a year for 20 years from the
-state lottery. In that example, he was to receive the first payment a year from
-the winning date. Let us now assume that the first payment occurs immediately.
-The total number of payments remains 20.
-
-Under this new assumption, we have a 19-date annuity with the first payment
-occurring at Date 1---plus an extra payment at Date 0. The present value is:
-
-$$
-\begin{aligned}
-\$50,000\ \ \ \ \ \ \ &+ &\$50,000 \times \text{PVIA}(.08, 19)\\
-\text{Payment at date 0}\ &\ \ \ &\text{19-year annuity}\\
-\ &= \$50,000 + &(\$50,000 \times 9.6036)\\
-  &= \$530,180\ &\ 
-\end{aligned}
-$$
-
-\$530,180, the present value in this example, is greater than \$490,905, the
-present value in the earlier lottery example. This is to be expected because the
-annuity of the current example begins earlier. An annuity with an immediate
-initial payment is called an _annuity in advance_ or, more commonly, an _annuity
-due_. Always remember that equation 4.15 and Table A.2 in this book refer to an
-_ordinary annuity_.
-
-## Example 4.24: Infrequent annuities
-
-Ann Chen receives an annuity of \$450, payable once every two years. The annuity
-stretches out over 20 years. The first payment occurs at Date 2---that is, two
-years from today. The annual interest rate is 6 percent.
-
-The trick is to determine the interest rate over a two-year period. The interest
-rate over two years is:
-
-$$
-(1.06 \times 1.06) - 1 = 12.36\%
-$$
-
-That is, \$100 invested over two years will yield \$112.36.
-
-What we want is the present value of a \$450 annuity over 10 periods, with an
-interest rate of 12.36 percent per period:
-
-$$
-\begin{aligned}
-\text{PV} &= \$450 \left[\frac{1 - \frac{1}{(1 + .1236)^{10}}}{.1236}\right]\\
-  &= \$450 \times \text{PVIA}(.1236, 10)\\
-  &= \$2,505.57
-\end{aligned}
-$$
-
----
-
-## Example 4.25 Working with annuities
-
-Harold and Helen Nash are saving for the college education of their newborn
-daughter, Susan. The Nashes estimate that college expenses will run \$30,000 per
-year when their daughter reaches college in 18 years. The annual interest rate
-over the next few decades will be 14 percent. How much money must they deposit
-in the bank each year so that their daughter will be completely supported
-through four years of college?
-
-To simplify the calculations, we assume that Susan is born today. Her parents
-will make the first of her four annual tuition payments on her 18th birthday.
-They will make equal bank deposits on each of her first 17 birthdays, but no
-deposit at Date 0.
-
-Mr. and Ms. Nash will be making deposits to the bank over the next 17 years.
-They will be withdrawing \$30,000 per year over the following four years. We can
-be sure they will be able to withdraw fully \$30,000 per year if the present
-value of the deposits is equal to the present value of the four \$30,000
-withdrawals.
-
-This calculation requires three steps. The first two determine the present value
-fo the withdrawals. The final step determines yearly deposits that will have a
-present value equal to that of the withdrawals.
-
-1. We calculate the present value of the four years at college using the annuity
-   formula.
-
-$$
-\begin{aligned}
-\text{PV} &= \$30,000 \times \left[\frac{1 - (1.14)^{-4}}{.14}\right]\\
-  &= \$30,000 \times \text{PVIA}(.14, 4)\\
-  &= \$30,000 \times 2.9137\\
-  &= \$87,411
-\end{aligned}
-$$
-
-We assume that Susan enters college on her 18th birthday. Given our discussion
-in Trick 1, \$87,411 represents the present value at Date 17.
-
-2. We calculate the present value of the college education at Date 0 as:
-
-$$
-\begin{aligned}
-\text{PV} &= \frac{\$87,411}{(1.14)^{17}}\\
-  &= \$9,422.91
-\end{aligned}
-$$
-
-3. Assuming that Harold and Helen Nash make deposits to the bank at the end of
-   each of the 17 years, we calculate the annual deposit that will yield a
-   present value of all deposits of \$9,422.91. This is calculated as:
-
-$$
-C \times \text{PVIA}(.14, 17) = \$9,422.91
-$$
-
-Because $\text{PVIA}(.14, 17) = 6.3729$,
-
-$$
-C = \frac{\$9,422.91}{6.3729} = \$1,478.59
-$$
-
-Thus deposits of \$1,478.59 are made at the end of each of the first 17 years
-and invested at 14 percent will provide enough money to make tuition payments of
-\$30,000 over the following four years.
-
-## Example 4.26: Growing annuities
-
-Stuart Gabriel, a second-year MBA student, has just been offered a job at
-\$80,000 a year. He anticipates his salary increasing by 9 percent a year until
-his retirement in 40 years. Given an interest rate of 20  percent, what is the
-present value of his lifetime salary?
-
-We simplify by assuming he will be paid his \$80,000 salary exactly one year
-from now, and that his salary will continue to be paid in annual installments.
-The appropriate discount rate is 20 percent.
-
-$$
-\begin{aligned}
-\text{PV} &= \$80,000 \times \left[
-    \frac{1 - \left(\frac{1.09}{1.20}\right)^{40}}{.20 - .09}
-  \right]\\
-  &= \$711,730.71
-\end{aligned}
-$$
-
-Though the growing annuity formula is quite useful, it is more tedious than the
-other simplifying formulas. Whereas most sophisticated calculators have special
-programs for perpetuity, growing perpetuity, and annuity, there is no special
-program for a growing annuity. Hence, we must calculate all the terms in
-equation 4.17 directly.
-
----
-
-## Example 4.27: More growing annuities
-
-In a previous example, Helen and Harold Nash planned to make 17 identical
-payments to fund the college education of their daughter, Susan. Alternatively,
-imagine that they planned to increase their payments at 4 percent per year.What
-would their first payment be?
-
-The first two steps of the previous Nash family example showed that the present
-value of the college costs was \$9,422.91. These two steps would be the same
-here. However, the third step must be altered. Now we must ask, How much should
-their first payement be so that, if payments increase by 4 percent per year, the
-present value of all payments will be \$9,422.91?
-
-We set the growing annuity formula equal to \$9,422.91 and solve for $C$.
-
----
-
-# Summary
-
-1. Two basic concepts, _future value_ and _present value_, were introduced in
-   the beginning of this chapter. With a 10 percent interest rate, an investor
-   with \$1 today can generate a future value of \$1.10 in a year, \$1.21 [$=\$1
-   \times (1.10)^2$] in two years, and so on. Conversely, present value analysis
-   places a current value on a future cash flow. With the same 10 percent
-   interest rate, a dollar to be received in one year has a present value of
-   \$.909 ($=\$1/1.10$) in Year 0. A dollar to be received in two years has a
-   present value of \$.826 [$=\$1/(1.10)^2$].
-
-2. We commonly express an interest rate as, say, 12 percent per year. However,
-   we can speak of the interest rate as 3 percent per quarter. Although the
-   stated annual interest rate remains 12 percent ($=3 \text{ percent } \times
-   4$), the effective annual interest rate is 12.55 percent [$=(1.03)^4 - 1$].
-   In other words, the compounding process increases the future value of an
-   investment. The limiting case is continuous compounding, where funds are
-   assumed to be reinvested every infinitesimal instant.
-
-3. A basic quantitative technique for financial decision making is net present
-   value analysis. The net present value formula for an investment that
-   generates cash flows ($C_i$) in future periods is:
-
-$$
-\mathbf{NPV} = - C_0 + \frac{C_1}{(1 + r)} + \frac{C_2}{(1 + r)^2} + \cdots
-  + \frac{C_T}{(1 + r)^T} = -C_0 + \sum^T_{i=1} \frac{C_i}{(1 + r)^i}
-$$
-
-The formula assumes that the cash flow at date 0 is the initial investment (a
-cash outflow). $r$ is the appropriate interest rate reflecting time and risk.
-
-4. Frequently, the actual calculation of present value is long and tedious. The
-   computation of the present value of a long-term mortgage with monthly
-   payments is a good example of this. We presented four simplifying formulas:
-
-$$
-\begin{aligned}
-\mathbf{Perpetuity}: &\ &\ &\ & \text{PV} &= \frac{C}{r} \\ \\
-\mathbf{Growing\ perpetuity}: &\ &\ &\ & \text{PV} &= \frac{C}{r - g} \\ \\
-\mathbf{Annuity}: &\ &\ &\ & \text{PV} &= C \left[ \frac{1
-  - \frac{1}{(1 + r)^T}}{r} \right] \\ \\
-\mathbf{Growing\ annuity}: &\ &\ &\ & \text{PV} &= C \left[
-    \frac{1 - \left( \frac{1 + g}{1 + r} \right)^T}{r - g}
-  \right]
-\end{aligned}
-$$
-
-5. We stressed a few practical considerations in the application of these
-   formulas:
-
-> a. The numerator in each of the formulas, $C$, is the cash flow to be received
-> _one full period hence_.
-
-> b. Cash flows are generally irregular in practice. To avoid unwieldy problems,
-> assumptions to create more regular cash flows are made both in this textbook
-> and in the real world.
-
-> c. A number of present value problems involve annuities (or perpetuities)
-> beginning a few periods hence. Students should practice combining the annuity
-> (or perpetuity) formula with the discounting formula to solve these problems.
-
-> d. Annuities and perpetuities may have periods of every two or every $n$
-> years, rather than once a year. The annuity and perpetuity formulas can easily
-> handle such circumstances.
-
-> e. We frequently encounter problems where the present value of one annuity
-> must be equated with the present value of another annuity.
-
----
-
-# Concept Questions
-
-## 1. Compounding and period
-
-As you increase the length of time involved, what happens to future values? What
-happens to present values?
-
----
-
-Using the formulas for future value and present value of money:
-
-$$
-\begin{aligned}
-\mathbf{FV} &= \text{PV} \times (1 + r)^t\\\\
-\mathbf{PV} &=  \frac{\text{FV}}{(1 + r)^t}
-\end{aligned}
-$$
-
-Where $r$ is the rate and $t$ is the time period.
-
-As $t$ increases:
-
-* __Future value (FV)__ increases because there's more time for compounding to
-  grow the initial amount.
-
-* __Present value (PV)__ decreases because the future cash flow is discounted
-  more heavily.
-
-This holds true as long as the interest rate $r$ is positive. If $r$ is negative
-then the trends reverse.
-
----
-
-## 2. Interest rates
-
-What happens to the future value of an annuity if you increase the rate $r$?
-What happens to the present value?
-
-The future value and present value of an annuity as defined as:
-
-$$
-\begin{aligned}
-\mathbf{FV\ Annuity} &= C \times \frac{(1 + r)^t - 1}{r}\\\\
-\mathbf{PV\ Annuity} &= C \times \frac{1 - (1 + r)^{-t}}{r}
-\end{aligned}
-$$
-
-As $r$ (the interest rate) increases, $(1 + r)$ increases. The future value of
-an annuity will increase with the interest rate and the present value decreases.
-
----
-
-## 3. Present value
-
-Suppose two athletes sign 10-year contracts for \$80 million. In one case, we're
-told that the \$80 million will be paid in 10 equal installments. In the other
-case, we're told that the \$80 million will be paid in 10 installments, but the
-installments will increase by 5 percent per year. Who got the better deal?
-
----
-
-To evaluate which athlete got the better deal we need to compare the two
-annuities. The differences between the annuities are in the structure of the
-payments.
-
-### Annuity 1: Equal installments.
-
-$$
-\begin{aligned}
-\text{PV} &= C \times \frac{1 - (1 + r)^{-t}}{r}\\
-  &= \$8,000,000 \times \frac{1 - (1 + r)^{-10}}{r}
-\end{aligned}
-$$
-
-### Annuity 2: 5% Growing installments
-
-The payments will grow 5% annually to 80 million. We need to find the starting
-payment:
-
-* Total nominal sum
-
-$$
-C \times \frac{1.05^{10} - 1}{.05} = 80\ \text{million}
-$$
-
-Solving for C:
-
-$$
-C \times 12.578 = 80 \rightarrow C \approx 6.36\ \text{million}
-$$
-
-Here is a plot of differences between the two annuities for discount rates from
-.06 to 1:
-
-```{r concept 3, echo=F}
-growth.annuity <- function(c, r, g, t){
-    c * ((1 + g)^(0:(t-1))) / (1 + r)^(1:t)
-}
-cf.1 <- 8
-cf.2 <- 6.36
-
-f <- function(r){
-  ret <- c()
-  for(i in r){
-    lhs <- sum(growth.annuity(cf.1, i, .05, 10))
-    rhs <- sum(growth.annuity(cf.2, i, 0, 10))
-    ret <- c(ret, lhs - rhs)
-  }
-  return(ret)
-}
-x <- seq(.06, 1, by=.01)
-y <- f(x)
-plot(x, y, type='l', ylab='difference in millions of dollars',
-    xlab='discount rate', main='Difference between Annuity 1 and Annuity 2')
-```
-
-As the plot shows, as the discount rate increase, the difference between the two
-annuities diminishes. However, the plot also shows that the discount rate needs
-to be extremely high for the difference between the two to become neglible.
-Therefore, the growth annuity is the better deal.
-
----
-
-## 4. APR and EAR
-
-Should lending laws be changed to require lenders to report EARs instead of
-APRs? Why or why not?
-
----
-
-There are a few benefits in requiring lenders to report EARs instead of APRs.
-APRs are effectively meaningless without the compounding interval. Thus a 10
-percent APR is only meaningful if you know it will be compouned semi-annually,
-or quarterly, etc... EARs are meaningful without the compounding interval
-because it is the effective annual interest rate. This becomes especially useful
-to know when the interest rate is large because the difference between the APR
-and the EAR can be dramatic.
-
----
-
-## 5. Time value
-
-On subsidized Stafford loans, a common source of financial aid for college
-students, interest does not begin to accrue until repayment begins. Who receives
-a bigger subsidy, a freshman or a senior? Explain.
-
----
-
-A freshman receives a bigger subsidy compared to a senior because of the longer
-period before repayment begins. This period is interest-free while the student
-is attending school. A freshman has four years before repayment begins, while a
-senior only has one year of school left. The interest that is saved during this
-period, compounded over the time attending school, makes the subsidy more
-valuable to the freshman than the senior. Thus, if both the freshman and the
-senior borrow the same amount each year, the freshman accrues a greater
-cumulative benefit across the four years, while the senior only benefits for the
-final year.
-
----
-
-Use the following information to answer the next five question:
-
-Toyota Motor Credit Corporation (TMCC), a subsidiary of Toyota Motor
-Corporation, offered some securities for sale to the public on March 28, 2008.
-Under the terms of the deal, TMCC promised to repay the owner of one of these
-securities \$100,000 on March 28, 2038, but investors would receive nothing
-until then. Investors paid TMCC \$24,099 for each of these securities; so they
-gave up \$24,099 on March 28, 2008, for the promise of a \$100,000 payment 30
-years later.
-
----
-
-## 6. Time value of money
-
-Why would TMCC be willing to accept such a small amount today (\$24,099) in
-exchange for a promise to repay about four times that amount (\$100,000) in the
-future?
-
----
-
-TMCC is willing to accept a smaller amount today (\$24,099) in exchange for a
-promise to repay \$100,000 in 30 years because of the time value of money and
-the concept of discounting future cash flows.
-
-For a future value of \$100,000 and a present value of \$24,099 and a term of 30
-years, we can calculate the interest rate TMCC is expecting to pay.
-
-$$
-\begin{aligned}
-\text{FV} &= \text{PV} \times (1 + r)^{t}\\\\
-\frac{\text{FV}}{\text{PV}} &= (1 + r)^t\\\\
-\left( \frac{\text{FV}}{\text{PV}} \right)^{1/t} &= 1 + r\\\\
-r &= \left( \frac{\text{FV}}{\text{PV}} \right)^{1/t} - 1\\\\
-r &= 0.04857629 \approx 5\%
-\end{aligned}
-$$
-
-This discount rate of 5% reflects the rate investors see as the effects of
-inflation, opportunity cost, and the perceived risk of TMCC's ability to fulfill
-the obligation. The investors will find this deal attractive because they are
-effectively locking in a specific return over 30 years. The discount rate
-(yield) aligns with what they consider fair compensation for lending their money
-to TMCC for three decades. TMCC uses this willingness to raise capital cheaply
-in the present.
-
-Japans own interest rate in March 2008 was 0.5%. This indicates an extremely low
-cost of borrowing for domestic markets. However, there is reason to believe that
-TMCC wanted to gain access to a global base of investors as a funding source.
-With Japanese securities yielding only 0.5%, TMCC's securities yielding 5% look
-extremely attractive.
-
----
-
-## 7. Call provisions
-
-TMCC has the right to buy back the securities on the anniversary date at a price
-established when the securities were issued (this feature is a term of this
-particular deal). What impact does this feature have on the desirability of this
-security as an investment?
-
----
-
-This feature has a negative impact on the desirability of the security. It
-limits the upside potential of the security because if rates fall or if the
-value of the security increases (due to falling discount rates or inflation
-expectations), TMCC is likely to exercise its option to buy back the securities.
-Also, because the security is callable, the benefit of the investor to lock in
-an investment for 30 years is not guaranteed.
-
----
-
-## 8. Time value of money
-
-Would you be willing to pay \$24,099 today in exchange for \$100,000 in 30
-years? What would be the key considerations in answering yes or no? Would your
-answer depend on who is making the promise to repay?
-
----
-
-The implied rate of return for this security was calculated as about 5%. You
-would compare this with other investment options with similar risk profiles. You
-would also consider inflation which can erode the real value of the investment.
-Finally, you would need to evaluate the risk and creditworthiness of TMCC. This
-means it does matter who is making the promise to repay.
-
----
-
-## 9. Investment comparison
-
-Suppose that when TMCC offered the security for \$24,099 the U.S. Treasury had
-offered an essentially identical security. Do you think it would have had a
-higher or lower price? Why?
-
----
-
-It would have a higher price because the U.S. Treasury is less risky than the
-TMCC security. The security is also more liquid because there are more buyers
-for the security than for the TMCC security.
-
----
-
-## Length of investment
-
-The TMCC security is bought and sold on the New York Stock Exchange. If you
-looked at the price today, do you think the price would exceed the \$24,099
-original price? Why? If you looked in the year 2019, do you think the price
-would be higher or lower than today's price? Why?
-
----
-
-Yes the price of the TMCC security is likely to have increased.
-
----
-
-# Questions and problems
-
-## 1. Simple interest versus compound interest
+# 1. Simple interest versus compound interest
 
 First City Bank pays 8 percent simple interest on its savings account balances,
 whereas Second City Bank pays 8 percent interest compounded annually. If you
@@ -1434,7 +68,7 @@ $$
 
 ---
 
-## 2. Calculating future values
+# 2. Calculating future values
 
 Compute the future value of \$1,000 compounded annually for
 
@@ -1489,7 +123,7 @@ Book: (a) \$1,628.89, (b) \$2,593.74, (c) \$2,653.30
 
 ---
 
-## 3. Calculating present values
+# 3. Calculating present values
 
 For each of the following, compute the present value:
 
@@ -1537,7 +171,7 @@ table(p3$tbl)
 
 ---
 
-## 4. Calculating interest rates
+# 4. Calculating interest rates
 
 Solve for the unknown interst rate in each of the following:
 
@@ -1575,7 +209,7 @@ colnames(p4$tbl) <- c(p4$cols, 'interest.rate')
 table(p4$tbl)
 ```
 
-#### NOTE:
+### NOTE:
 
 The solution to this problem is the same as calculating the compound annual
 growth rate (CAGR):
@@ -1589,7 +223,7 @@ Book: 6.13\%, 10.27\%, 7.41\%, 12.79\%.
 
 ---
 
-## 5. Calculating the number of periods
+# 5. Calculating the number of periods
 
 Solve for the years:
 
@@ -1631,7 +265,7 @@ table(p5$tbl)
 
 ---
 
-## 6. Calculating the number of periods
+# 6. Calculating the number of periods
 
 At 8 percent interest, how long does it take to double your money? To quadruple
 it?
@@ -1640,9 +274,9 @@ it?
 
 This depends on if we want to use simple or compound interest.
 
-### Simple interest
+## Simple interest
 
-#### Double
+### Double
 
 $$
 \begin{aligned}
@@ -1655,7 +289,7 @@ $$
 
 For simple interest, it will take 12.5 periods to double.
 
-#### Quadruple
+### Quadruple
 
 $$
 t = \frac{4 - 1}{.08} = 37.5
@@ -1663,9 +297,9 @@ $$
 
 It will take 37.5 periods to quadruple.
 
-### Compound interest
+## Compound interest
 
-#### Double
+### Double
 
 $$
 \begin{aligned}
@@ -1679,7 +313,7 @@ $$
 
 With compound interest it takes about 9 periods to double.
 
-#### Quadruple
+### Quadruple
 
 $$
 t = \frac{\ln{4}}{\ln{1.08}} = 18
@@ -1689,7 +323,7 @@ It will take 18 periods to quadruple.
 
 ---
 
-## 7. Calculating present values
+# 7. Calculating present values
 
 Imprudential, Inc., has an unfunded pension liability of \$630 million that must
 be paid in 20 years. To assess the value of the firm's stock, financial analysts
@@ -1718,7 +352,7 @@ The liability is presently worth \$`r pretty(p7$present.value, 0)` million.
 
 ---
 
-## 8. Calculating rates of return
+# 8. Calculating rates of return
 
 Although appealing to more refined tastes, art as a collectible has not always
 performed so profitably. During 2010, Deutscher-Menzies sold _Arkies under the
@@ -1737,14 +371,14 @@ p8$years <- 3
 p8$ratio <- p8$beginning.value / p8$ending.value
 ```
 
-### Step 1: Calculate the ratio of present value over future value
+## Step 1: Calculate the ratio of present value over future value
 
 $$
 \frac{\text{PV}}{\text{FV}} = \frac{`r pretty(p8$beginning.value, 0)`}
   {`r pretty(p8$ending.value, 0)`} = `r p8$ratio`
 $$
 
-### Step 2: Determine the interest rate that gives this value
+## Step 2: Determine the interest rate that gives this value
 
 We can use `R`'s `uniroot` to find this value:
 
@@ -1757,7 +391,7 @@ The annual rate of return is `r percent(p8$r)`.
 
 ---
 
-## 9. Perpetuities
+# 9. Perpetuities
 
 An investor purchasing a British consol is entitled to receive annual payments
 from the British government forever. What is the price of a consol that pays
@@ -1782,7 +416,7 @@ $$
 \end{aligned}
 $$
 
-### NOTE:
+## NOTE:
 
 The value of the consol will depend on when the next payment is. For example,
 instead of the next payment being one year from now, what if the next payment
@@ -1804,7 +438,7 @@ dispursments to shareholders.
 
 ---
 
-## 10. Continuous compounding
+# 10. Continuous compounding
 
 Compute the future value of \$1,900 continuously compounded for:
 
@@ -1850,7 +484,7 @@ Book: (a) \$4,401.10, (b) \$3,132.57, (c) \$3,462.03, (d) \$3,826.13.
 
 ---
 
-## 11. Present value and multiple cash flows
+# 11. Present value and multiple cash flows
 
 Conoly Co. has identified an investment project with the following cash flows.
 If the discount rate is 10 percent, what is the present value of these cash
@@ -1923,7 +557,7 @@ We will calculate for each of the different discount rates:
 
 ---
 
-## 12. Present value and multiple cash flows
+# 12. Present value and multiple cash flows
 
 Investment X offers to pay you \$4,500 per year for nine years, whereas
 Investment Y offers to pay you \$7,000 per year for five years. Which of these
@@ -1944,7 +578,7 @@ p12$X.pv <- p12$X.cf * unlist(lapply(p12$r, p12$pvia, p12$X.n))
 p12$Y.pv <- p12$Y.cf * unlist(lapply(p12$r, p12$pvia, p12$Y.n))
 ```
 
-### Given
+## Given
 
 * Investment X cash flow: \$`r pretty(p12$X.cf, 0)`
 
@@ -1964,7 +598,7 @@ $$
 \end{aligned}
 $$
 
-### For interest rate 5\%
+## For interest rate 5\%
 
 $$
 \begin{aligned}
@@ -1980,7 +614,7 @@ $$
 For the lower interest rate, the longer timespan makes investment X more
 attractive.
 
-### For interest rate 22\%
+## For interest rate 22\%
 
 $$
 \begin{aligned}
@@ -1999,7 +633,7 @@ choice.
 
 ---
 
-## 13. Calculating annuity present value
+# 13. Calculating annuity present value
 
 An investment offers \$4,900 per year for 15 years, with the first payment
 occurring one year from now. If the required return is 8 percent, what is the
@@ -2044,7 +678,7 @@ $$
 
 ---
 
-## 14. Calculating perpetuity value
+# 14. Calculating perpetuity value
 
 The Perpetual Life Insurance Co. is trying to sell you an investment policy that
 will pay you and your heirs \$15,000 per year forever. If the required return on
@@ -2088,7 +722,7 @@ Book: \$88,461.54, 4.69\%
 
 ---
 
-## 15. Calculating EAR
+# 15. Calculating EAR
 
 Find the EAR in each of the following cases:
 
@@ -2115,7 +749,7 @@ colnames(p15$tbl) <- c(p15$cols, "ear")
 To calculate the EAR from the APR we need to know the compounding period. Then
 we can use the following two formulas:
 
-### Set period compounding (Quarterly, Monthly, Daily, etc...)
+## Set period compounding (Quarterly, Monthly, Daily, etc...)
 
 $$
 \begin{aligned}
@@ -2135,7 +769,7 @@ $$
 \end{aligned}
 $$
 
-### Infinite compounding
+## Infinite compounding
 
 $$
 \begin{aligned}
@@ -2146,7 +780,7 @@ $$
 \end{aligned}
 $$
 
-### Completed table
+## Completed table
 
 ```{r problem 15; display  table, echo=F}
 table(p15$tbl)
@@ -2154,7 +788,7 @@ table(p15$tbl)
 
 ---
 
-## 16. Calculating APR
+# 16. Calculating APR
 
 Find the APR, or stated rate, in each of the following cases:
 
@@ -2213,7 +847,7 @@ table(p16$tbl)
 
 ---
 
-## 17. Calculating EAR
+# 17. Calculating EAR
 
 First National Bank charges 11.2 percent compounded monthly on its business
 loans. First United Bank charges 11.4 percent compounded semiannually. As a
@@ -2254,7 +888,7 @@ United Bank since the EAR rate is lower.
 
 ---
 
-## 18. Interest rates
+# 18. Interest rates
 
 Well-known financial writer Andrew Tobias argues that he can earn 177 percent
 per year buying wine by the case. Specifically, he assumes that he will consume
@@ -2270,7 +904,7 @@ analysis? Do you see a problem with his numbers?
 p18 <- new.env()
 ```
 
-### Scenario Summary:
+## Scenario Summary:
 
 * Cost per bottle if paid weekly: $\$10 \times 12 = \$120$
 
@@ -2282,7 +916,7 @@ p18 <- new.env()
 
 * He drinks one bottle immediately (Week 0), then one each week until Week 11.
 
-### Financial framing
+## Financial framing
 
 The comparison is between two cash flow patterns:
 
@@ -2294,7 +928,7 @@ We can treat this like a loan: Tobias "invests" \$108 today to avoid paying
 \$10/week for 12 weeks. The IRR of this investment tells us the effective
 return.
 
-### IRR caclulation:
+## IRR caclulation:
 
 We solve for the interest rate `r` that satisfies:
 
@@ -2335,7 +969,7 @@ Book: EAR = 176.68\%
 
 ---
 
-## 19. Calculating number of periods
+# 19. Calculating number of periods
 
 One of your customers is delinquent on his accounts payable balance. You've
 mutually agreed to a repayment schedule of \$700 per month. You will charge 1.3
@@ -2356,7 +990,7 @@ p19$n <- - (log(1 - (p19$balance * p19$rate)/(p19$monthly.payment))) /
 We are asked to determine how long it will take to pay off a \$21,500 debt if
 the customer pays \$700 per month, and interest accrues at 1.3\% per month.
 
-### This is a present value of an annuity problem
+## This is a present value of an annuity problem
 
 You are solving for n, the number of months needed to pay off the loan, given:
 
@@ -2385,7 +1019,7 @@ $$
 
 ---
 
-## 20. Calculating EAR
+# 20. Calculating EAR
 
 Friendly's Quick Loans, Inc., offers you "three for four or I knock on your
 door." This means you get \$3 today and repay \$4 when you get your paycheck in
@@ -2437,7 +1071,7 @@ $$
 
 ---
 
-## 21. Future value
+# 21. Future value
 
 What is the future value in six years \$1,000 invested in an account with a
 stated annual interest rate of 9 percent,
@@ -2488,7 +1122,7 @@ compounding, as it assumes interest is added at every possible instant.
 
 ---
 
-## 22. Simple interest versus compound interest
+# 22. Simple interest versus compound interest
 
 First Simple Bank pays 5 percent simple interest on its investment accounts. If
 First Complex Bank pays interest on its accounts compounded annually, what rate
@@ -2507,7 +1141,7 @@ p22$r.complex <- (1 + p22$r.simple * p22$t)^(1 / p22$t) - 1
 We simply equate each banks interest rate structure to each other and determine
 what First Complex Bank should set their rate to.
 
-### Simple interest (First Simple Bank)
+## Simple interest (First Simple Bank)
 
 $$
 \begin{aligned}
@@ -2515,7 +1149,7 @@ $$
 \end{aligned}
 $$
 
-#### Compound interest (First Comples Bank)
+### Compound interest (First Comples Bank)
 
 $$
 \begin{aligned}
@@ -2523,7 +1157,7 @@ $$
 \end{aligned}
 $$
 
-### Equate both to each other and solve for $r_{\text{complex}}$
+## Equate both to each other and solve for $r_{\text{complex}}$
 
 $$
 \begin{aligned}
@@ -2540,7 +1174,7 @@ Book: 4.14\%
 
 ---
 
-## 23. Calculating annuities
+# 23. Calculating annuities
 
 You are planning to save for retirement over the next 30 years. To do this, you
 will invest \$800 a month in a stock account and \$350 a month in a bond
@@ -2598,7 +1232,7 @@ $$
 $$
 
 
-### Saving for retirement
+## Saving for retirement
 
 We calculate the contribution, each month, over a 30 year window. The stock
 account will return 11 percent a year, and the bond account will return 6
@@ -2624,7 +1258,7 @@ $$
 \end{aligned}
 $$
 
-### Withdrawals during retirement
+## Withdrawals during retirement
 
 We use the annuity equation and solve for the withdrawal cash flows ($W$).
 
@@ -2643,7 +1277,7 @@ $$
 
 ---
 
-## 24. Calculating rates of return
+# 24. Calculating rates of return
 
 Suppose an investment offers to quadruple your money in 12 months (don't believe
 it). What rate of return per quarter are you being offered?
@@ -2677,7 +1311,7 @@ The return rate for an investment that quadruples your money in 12 months is: `r
 ---
 
 
-## 25. Calculating rates of return
+# 25. Calculating rates of return
 
 You're trying to choose between two different investments, both of which have
 up-front costs of \$65,000. Investment G returns \$125,000 in six years.
@@ -2706,7 +1340,7 @@ r &= \left(\frac{\text{FV}}{\text{PV}}\right)^{1/n} - 1
 \end{aligned}
 $$
 
-### Investment G: return of \$125,000 in six years.
+## Investment G: return of \$125,000 in six years.
 
 $$
 \begin{aligned}
@@ -2717,7 +1351,7 @@ r_{G} &= \left(\frac{`r pretty(p25$fv[1])`}
 \end{aligned}
 $$
 
-### Investment H: return of \$185,000 in 10 years.
+## Investment H: return of \$185,000 in 10 years.
 
 $$
 \begin{aligned}
@@ -2739,7 +1373,7 @@ percent(p25$r.H <- uniroot(p25$f.H, upper=1, lower=.01, tol=1e-4)$root)
 
 ---
 
-## 26. Growing perpetuities
+# 26. Growing perpetuities
 
 Mark Weinstein has been working on an advanced technology in laser eye surgery.
 His technology will be available in the near term. He anticipates his first
@@ -2784,7 +1418,7 @@ Book: \$2,477,552
 
 ---
 
-## 27. Perpetuities
+# 27. Perpetuities
 
 A prestigious investment bank designed a new security that pays a quarterly
 dividend of \$4.50 in perpetuity. The first dividend occurs one quarter from
@@ -2811,7 +1445,7 @@ $$
 
 ---
 
-## 28. Annuity present values
+# 28. Annuity present values
 
 What is the present value of an annuity of \$6,500 per year with the first cash
 flow received three years from today and the last one received 25 years from
@@ -2859,7 +1493,7 @@ $$
 
 ---
 
-## 29. Annuity present values
+# 29. Annuity present values
 
 What is the value today of a 15-year annuity that pays \$650 a year? The
 annuity's first payment occurs six years from today. The annual interest rate is
@@ -2884,13 +1518,13 @@ p29$pv.discounted <- p29$pv.annuity / (1 + p29$r.2)^(p29$n.2)
 To find the value today of a 15 year annuity that pays \$650 per year, beginning
 6 years from today, we need to do the following:
 
-### Step 1: Understand the timing
+## Step 1: Understand the timing
 
 * Payments: \$650 per year for 15 years, starting at year 6 through year 20.
 
 * Interest rates: Years 1-5: 11\%, years 6-20: 13\%
 
-### Step 2: Calculate the present value of the annuity at year 5
+## Step 2: Calculate the present value of the annuity at year 5
 
 $$
 \begin{aligned}
@@ -2903,7 +1537,7 @@ $$
 \end{aligned}
 $$
 
-### Step 3: Discount the annuity back to year 0 (today)
+## Step 3: Discount the annuity back to year 0 (today)
 
 $$
 \begin{aligned}
@@ -2916,7 +1550,7 @@ $$
 
 ---
 
-## 30. Balloon payments
+# 30. Balloon payments
 
 Audrey Sanborn has just arranged to purchase a \$550,000 vacation home in the
 Bahamas with a 20 percent down payment. The mortgage has a 6.1 percent stated
@@ -2942,7 +1576,7 @@ p30$balloon <- p30$c * (1 - (1 + p30$apr/p30$m)^(-p30$n.balloon)) /
   (p30$apr/p30$m)
 ```
 
-### Step 1: Calculate the monthly payments
+## Step 1: Calculate the monthly payments
 
 
 $$
@@ -2955,7 +1589,7 @@ C &= \frac{`r pretty(p30$mortgage)`}
 \end{aligned}
 $$
 
-### Step 2: Calculate the balloon payment
+## Step 2: Calculate the balloon payment
 
 Now, there ia an easy and hard way to determine the balloon payment. The hard
 way is to actually amortize the loan for `r p30$m * 8` months to see what the
@@ -2978,7 +1612,7 @@ Book: \$386,994.11
 
 ---
 
-## 31. Calculating interest expense
+# 31. Calculating interest expense
 
 You receive a credit card application from Shady Banks Savings and Loan offering
 an introductory rate of 2.40 percent per year, compounded monthly for the first
@@ -3001,7 +1635,7 @@ p31$pv.after <- p31$pv.intro * (1 + p31$r / p31$m)^p31$n
 p31$interest <- p31$pv.after - p31$c
 ```
 
-### Step 1: Calculate the present value for the introductory period
+## Step 1: Calculate the present value for the introductory period
 
 $$
 \begin{aligned}
@@ -3011,7 +1645,7 @@ $$
 \end{aligned}
 $$
 
-### Step 2: Calculate the present value after the introductory period
+## Step 2: Calculate the present value after the introductory period
 
 $$
 \begin{aligned}
@@ -3021,7 +1655,7 @@ $$
 \end{aligned}
 $$
 
-### Step 3: Interest is the amount minus the principal
+## Step 3: Interest is the amount minus the principal
 
 $$
 \begin{aligned}
@@ -3032,7 +1666,7 @@ $$
 
 ---
 
-## 32. Perpetuities
+# 32. Perpetuities
 
 Barrett Pharmaceuticals is considering a drug project that costs \$2.5 million
 today and is expected to generate end-of-year annual cash flows of \$227,000,
@@ -3062,7 +1696,7 @@ $$
 
 ---
 
-## 33. Growing Annuity
+# 33. Growing Annuity
 
 Southern California Publishing Company is trying to decide whether to revise its
 popular textbook, _Financial Psychoanalysis Made Simple_. The company has
@@ -3123,7 +1757,7 @@ Publishing Company should undertake the revision.
 
 ---
 
-## 34. Growing annuity
+# 34. Growing annuity
 
 Your job pays you only once a year for all the work you did over the previous 12
 months. Today, December 31, you just received your salary of \$65,000, and you
@@ -3152,7 +1786,7 @@ __BONUS__: Derive the growing annuity formula
 We are calculating the future value of a series of growing deposits into an
 account that will earn interest of 10 percent a year.
 
-### Step 1: Derive the future value formula from the annuity formula
+## Step 1: Derive the future value formula from the annuity formula
 
 We know the present value of a series of growing payments is:
 
@@ -3179,7 +1813,7 @@ $$
 \end{aligned}
 $$
 
-### Step 2: Calculate the future value
+## Step 2: Calculate the future value
 
 The starting amount we are saving (which will grow at 4\%) is:
 
@@ -3206,7 +1840,7 @@ Error: `r percent((2279147 - p34$fv) / (2279147))`
 
 ---
 
-## 35. Present value and interest rates
+# 35. Present value and interest rates
 
 What is the relationship between the value of an annuity and the level of
 interest rates? Suppose you just bought a 15-year annuity of \$6,800 per year at
@@ -3231,7 +1865,7 @@ rates increase than the value of those payments decrease. If interest rates
 decrease than the value of those payments increase. The following will
 demonstrate this.
 
-### The present value of an annuity
+## The present value of an annuity
 
 An annuity is a series of payments over a set period of time $t$:
 
@@ -3247,7 +1881,7 @@ and begins to diminish the value of the cash flows. The interest rate $r$ also
 has an effect. The larger the interest rate $r$, the more prominent the
 denominator becomes, and the effects compound at the long end of this equation.
 
-### Demonstration
+## Demonstration
 
 Lets calculate the present value of a 15-year annuity paying \$6,800 a year at
 an interest rate of 10 percent:
@@ -3293,7 +1927,7 @@ This is a decrease of \$`r pretty(p35$pv[1] - p35$pv[3])`.
 
 ---
 
-## 36. Calculating the number of payments
+# 36. Calculating the number of payments
 
 You're prepared to make monthly payments of \$350, beginning at the end of this
 month, into an account that pays 10 percent interest compounded monthly. How
@@ -3366,7 +2000,7 @@ respectively.
 
 ---
 
-## 37. Calculating annuity present values
+# 37. Calculating annuity present values
 
 You want to borrow \$65,000 from your local bank to buy a new sailboat. You can
 afford to make monthly payments of \$1,320, but no more. Assuming monthly
@@ -3402,7 +2036,7 @@ The highest APR is `r percent(p37$apr)`.
 
 ---
 
-## 38. Calculating loan payments
+# 38. Calculating loan payments
 
 You need a 30-year, fixed-rate mortgage to buy a new home for \$250,000. Your
 mortgage bank will lend you the money at a 5.3 percent APR for this 360-month
@@ -3427,7 +2061,7 @@ p38$balloon <- p38$fv - p38$fv.payments
 We want to find out what the final balloon payment will be if we want to limit
 our payments to \$950 a month for the entire term of the loan.
 
-### Step 1: Calculate the future value of the loan
+## Step 1: Calculate the future value of the loan
 
 $$
 \begin{aligned}
@@ -3438,7 +2072,7 @@ $$
 \end{aligned}
 $$
 
-### Step 2: Calculate the future value of the loan using \$950 as payments
+## Step 2: Calculate the future value of the loan using \$950 as payments
 
 $$
 \begin{aligned}
@@ -3448,7 +2082,7 @@ $$
 \end{aligned}
 $$
 
-### Step 3: The monthly payments will be paid for 30 years
+## Step 3: The monthly payments will be paid for 30 years
 
 The amount of the loan remaining:
 
@@ -3464,7 +2098,7 @@ Book: \$385,664.73
 
 ---
 
-## 39. Present and future values
+# 39. Present and future values
 
 The present value of the following cash flow stream is \$7,300 when discounted
 at 8 percent annually. What is the value of the missing cash flow?
@@ -3510,7 +2144,7 @@ $$
 
 ---
 
-## 40. Calculating present values
+# 40. Calculating present values
 
 You just won the TVM Lottery. You will receive \$1 million today plus another 10
 annual payments that increase by \$275,000 per year. Thus, in one year you
@@ -3550,7 +2184,7 @@ The present value of the winnings is \$`r pretty(p40$pv, 0)`.
 
 ---
 
-## 41. EAR versus APR
+# 41. EAR versus APR
 
 You have just purchased a new warehouse. To finance the purchase, you've
 arranged for a 30-year mortgage for 80 percent of the \$4,500,000 purchase price.
@@ -3607,7 +2241,7 @@ $$
 
 ---
 
-## 42. Present value and break-even interest
+# 42. Present value and break-even interest
 
 Consider a firm with a contract to sell an asset for \$115,000 three years from
 now. The asset costs \$76,000 to produce today. Given a relevant discount rate
@@ -3627,7 +2261,7 @@ p42$f <- function(r) p42$fv / (1 + r)^(p42$t) - p42$pv
 p42$r.break.even <- uniroot(p42$f, upper=1, lower=1e-5, tol=1e-8)$root
 ```
 
-### Profit
+## Profit
 
 To find if the firm will make a profit, calculate the present value of \$115,000
 to find if it is greater than \$76,000.
@@ -3641,7 +2275,7 @@ $$
 
 So the firm will make a profit of \$`r pretty(p42$npv)`.
 
-### Break even
+## Break even
 
 The break even interest rate is the rate where:
 
@@ -3657,7 +2291,7 @@ Book: \$3,700.77; 14.81\%
 
 ---
 
-## 43. Present value and multiple cash flows
+# 43. Present value and multiple cash flows
 
 What is the present value of \$5,000 per year, at a discount rate of 6 percent,
 if the first payment is received 6 years from now and the last payment is
@@ -3700,7 +2334,7 @@ $$
 
 ---
 
-## 44. Variable interest rates
+# 44. Variable interest rates
 
 A 15-year annuity pays \$1,500 per month, and payments are made at the end of
 each month. If the interest rate is 12 percent compounded monthly for the first
@@ -3744,7 +2378,7 @@ $$
 \end{aligned}
 $$
 
-### Step 1: Calculate the two components of the annuity
+## Step 1: Calculate the two components of the annuity
 
 $$
 \begin{aligned}
@@ -3759,7 +2393,7 @@ $$
 \end{aligned}
 $$
 
-### Step 2: Project the second annuity back to the present day
+## Step 2: Project the second annuity back to the present day
 
 We need to use the current interest rate (not the future rate that is used in
 calculating the second component of the annuity) when projecting the value back
@@ -3784,7 +2418,7 @@ Book: \$134,455.36
 
 ---
 
-## 45. Comparing cash flow streams
+# 45. Comparing cash flow streams
 
 You have your choice of two investment accounts. Investment A is a 15-year
 annuity that features end-of-month \$1,500 payments and has an interest rate
@@ -3808,7 +2442,7 @@ p45$fv.A <- sum(p45$c.A * (1 + p45$rm[1])^((0:(p45$n.1-1))))
 p45$c.B <- p45$fv.A / exp(p45$r[2] * p45$t)
 ```
 
-### Step 1: Calculate the present value of investment A
+## Step 1: Calculate the present value of investment A
 
 $$
 \begin{aligned}
@@ -3818,7 +2452,7 @@ $$
 \end{aligned}
 $$
 
-### Step 2: Find the initial investment for B
+## Step 2: Find the initial investment for B
 
 $$
 \begin{aligned}
@@ -3831,7 +2465,7 @@ $$
 
 ---
 
-## 46. Calculating present value of a perpetuity
+# 46. Calculating present value of a perpetuity
 
 Given an interest rate of 6.1 percent per year, what is the value at Date
 $t = 7$ of a perpetual stream of \$2,500 annual payments that begins at Date
@@ -3872,7 +2506,7 @@ $$
 
 ---
 
-## 47. Calculating EAR
+# 47. Calculating EAR
 
 A local finance company quotes a 16 percent interest rate on one-year loans. So,
 if you borrow \$26,000, the interest for the year will be \$4,160. Because you
@@ -3931,7 +2565,7 @@ The __EAR__ of `r percent(p47$ear)` accounts for the full compounding effect ove
 
 ---
 
-## 48. Calculating present values
+# 48. Calculating present values
 
 A 5-year annuity of ten \$5,300 semiannual payments will begin 9 years from now,
 with the first payment coming 9.5 years from now. If the discount rate is 12
@@ -3959,7 +2593,7 @@ p48$pv.discount <- p48$pv.9y / (1 + p48$rm)^(p48$n.discount)
 This is a time value of money problem that involves a deferred annuity with
 semiannual payments and monthly compounding.
 
-### Step 1: Given data
+## Step 1: Given data
 
 * Payment: \$`r pretty(p48$c, 0)`
 
@@ -3970,7 +2604,7 @@ semiannual payments and monthly compounding.
 * Discount rate is `r percent(p48$r)` compounded monthly. The monthly rate is
   `r p48$r` / `r p48$m` = `r p48$rm` per month.
 
-### Step 2: Compute the PV of the Annuity at its starting point
+## Step 2: Compute the PV of the Annuity at its starting point
 
 $$
 \begin{aligned}
@@ -3982,7 +2616,7 @@ $$
 \end{aligned}
 $$
 
-### Step 3: Discount the annuity from 9 to 5, 3, and to the present:
+## Step 3: Discount the annuity from 9 to 5, 3, and to the present:
 
 $$
 \begin{aligned}
@@ -4000,7 +2634,7 @@ $$
 
 ---
 
-## 49. Calculating annuities due
+# 49. Calculating annuities due
 
 Suppose you are going to receive \$20,000 per year for five years. The
 appropriate interest rate is 7 percent.
@@ -4028,9 +2662,9 @@ p49$fv.b <- p49$c * sum((1 + p49$r)^(1:p49$t-1))
 p49$fv.due.b <- p49$c * sum((1 + p49$r)^(1:p49$t))
 ```
 
-### A. Present value
+## A. Present value
 
-#### Annuity in arrears
+### Annuity in arrears
 
 An ordinary annuity assumes that the first annuity payment begins a full period
 hence.
@@ -4045,7 +2679,7 @@ $$
 \end{aligned}
 $$
 
-#### Annuity due
+### Annuity due
 
 An annuity due starts at date 0. Thus:
 
@@ -4059,9 +2693,9 @@ $$
 \end{aligned}
 $$
 
-### B. Future value
+## B. Future value
 
-#### Ordinary annuity
+### Ordinary annuity
 
 $$
 \begin{aligned}
@@ -4072,7 +2706,7 @@ $$
 \end{aligned}
 $$
 
-#### Annuity due
+### Annuity due
 
 $$
 \begin{aligned}
@@ -4084,13 +2718,13 @@ $$
 \end{aligned}
 $$
 
-### C.
+## C.
 
 For both the __present value__ and the __future value__ have a higher value because of the earlier payment. In the future value it has an additional period to earn interest.
 
 ---
 
-## 50. Calculating annuities due
+# 50. Calculating annuities due
 
 You want to buy a new sports car from Muscle Motors for \$73,000. The contract
 is in the form of a 60-month annuity due at a 6.45 percent APR. What will your
@@ -4108,7 +2742,7 @@ p50$r <- p50$apr / p50$m
 p50$c <- p50$pv * (p50$r) / (1 - (1 + p50$r)^(-p50$t)) * (1 + p50$r)
 ```
 
-### Given
+## Given
 
 * Price of the car (Present value): \$73,000
 
@@ -4118,7 +2752,7 @@ p50$c <- p50$pv * (p50$r) / (1 - (1 + p50$r)^(-p50$t)) * (1 + p50$r)
 
 * Payments are made at the beginning of each month $\rightarrow$ Annuity due.
 
-### Calculate the monthly rate:
+## Calculate the monthly rate:
 
 $$
 \begin{aligned}
@@ -4128,7 +2762,7 @@ $$
 \end{aligned}
 $$
 
-### Calculate the annuity due
+## Calculate the annuity due
 
 $$
 \begin{aligned}
@@ -4140,7 +2774,7 @@ $$
 
 ---
 
-## 51. Calculating annuities due
+# 51. Calculating annuities due
 
 You want to lease a set of golf clubs from Pings Ltd. The lease contract is in
 the form of 24 equal monthly payments at a 10.4 percent stated annual interest
@@ -4161,13 +2795,13 @@ p51$c <- p51$pv * (p51$r / (p51$r + 1 - (1 + p51$r)^(-p51$t)))
 p51$r.display <- round(p51$r, 5)
 ```
 
-### Step 1: Calculate `r`
+## Step 1: Calculate `r`
 
 $$
 r = \frac{\text{APR}}{m} = \frac{`r p51$apr`}{`r p51$m`} = `r p51$r.display`
 $$
 
-### Step 2: Calculate the annuity due
+## Step 2: Calculate the annuity due
 
 $$
 \begin{aligned}
@@ -4184,7 +2818,7 @@ $$
 
 ---
 
-## 52. Annuities
+# 52. Annuities
 
 You are saving for the college education of your two children. They are two
 years apart in age; one will begin college 15 years from today and the other
@@ -4252,7 +2886,7 @@ expenses, considering:
 * You will make equal deposits each year starting one year from today, and the
   last deposit is when the first child starts college (year 15).
 
-### Step 1: Determine present value (PV) of college expenses
+## Step 1: Determine present value (PV) of college expenses
 
 We will compute the present value at time 0 of all the future college payments,
 tehn solve for the annual deposit required to reach that amount.
@@ -4270,7 +2904,7 @@ $$
 \end{aligned}
 $$
 
-#### Child 1 starts in year 15
+### Child 1 starts in year 15
 
 $$
 \begin{aligned}
@@ -4280,7 +2914,7 @@ $$
 \end{aligned}
 $$
 
-#### Child 2 starts in year 17
+### Child 2 starts in year 17
 
 $$
 \begin{aligned}
@@ -4290,7 +2924,7 @@ $$
 \end{aligned}
 $$
 
-#### Total present value of sending both children to college
+### Total present value of sending both children to college
 
 $$
 \begin{aligned}
@@ -4299,7 +2933,7 @@ $$
 \end{aligned}
 $$
 
-#### The payments, starting next year, will be
+### The payments, starting next year, will be
 
 $$
 \begin{aligned}
@@ -4318,7 +2952,7 @@ Book: \$11,571.48
 
 ---
 
-## 53. Growing Annuities
+# 53. Growing Annuities
 
 Tom Adams has received a job offer from a large investment bank as a clerk to an
 associate banker. His base salary will be \$55,000. He will receive his first
@@ -4342,7 +2976,7 @@ p53$pv <- p53$immediate.bonus + p53$bonus.modified.salary / (1 + p53$r) *
     (1 + sum(((1 + p53$g) / (1 + p53$r))^(1:(p53$n - 1))))
 ```
 
-### Given:
+## Given:
 
 * The base salary: \$`r pretty(p53$base.salary)`
 
@@ -4366,7 +3000,7 @@ $$
 
 ---
 
-## 54. Calculating Annuities
+# 54. Calculating Annuities
 
 You have recently won the super jackpot in the Washington State Lottery. On
 reading the fine print, you discover that you have the following two options:
@@ -4406,7 +3040,7 @@ p54$pv.2 <- p54$initial.2 + p54$c.2 * (1 - p54$tax.rate) *
     (sum((1 + p54$r)^(-(1:p54$n.2))))
 ```
 
-### The first option (A pure annuity due)
+## The first option (A pure annuity due)
 
 $$
 \begin{aligned}
@@ -4417,7 +3051,7 @@ $$
 \end{aligned}
 $$
 
-### The second option (Immediate bonus with an ordinary annuity)
+## The second option (Immediate bonus with an ordinary annuity)
 
 $$
 \begin{aligned}
@@ -4428,13 +3062,13 @@ $$
 \end{aligned}
 $$
 
-### Conclusion
+## Conclusion
 
 Clearly the first option is the better option.
 
 ---
 
-## 55. Calculating growing annuities
+# 55. Calculating growing annuities
 
 You have 30 years left until retirement and want to retire with \$2 million.
 Your salary is paid annually, and you will receive \$70,000 at the end of the
@@ -4470,7 +3104,7 @@ We use the future value of a growing annuity formula.
 The series formula for a growing annuity can be derived from the following
 sequence:
 
-### Deriving the formula for the future value of an annuity
+## Deriving the formula for the future value of an annuity
 
 The cash flow sequence:
 
@@ -4478,7 +3112,7 @@ $$
 C, C(1 + g), C(1 + g)^{2}, \ldots, C(1 + g)^{n-1}
 $$
 
-### Future value formula
+## Future value formula
 
 $$
 \text{FV} = C(1 + g)^{0}(1 + r)^{n-1} + C(1 + g)^{1}(1 + r)^{n-2}
@@ -4543,7 +3177,7 @@ uniroot(p55$f, upper=5, lower=.01, tol=1e-2)$root
 
 ---
 
-## 56. Balloon payments
+# 56. Balloon payments
 
 On September 1, 2009, Susan Chao bought a motorcycle for \$30,000. She paid
 \$1,000 down and financed the balance with a five-year loan at a stated annual
@@ -4569,7 +3203,7 @@ p56$balance <- p56$payments *
 p56$balloon <- p56$balance * 1.01
 ```
 
-### Determine the payments
+## Determine the payments
 
 For a 5-year loan of \$`r pretty(p56$loan,0)` at `r percent(p56$r)` APR. The
 payments can be calculated:
@@ -4583,7 +3217,7 @@ C &= \frac{`r pretty(p56$loan, 0)`}{`r p56$factor`}\\
 \end{aligned}
 $$
 
-### Amortize the loan
+## Amortize the loan
 
 When Susan decided to pay off the loan she had already paid for `r p56$n.paid`
 months.  The remaining term of the loan is `r p56$n - p56$n.paid` months. The bank
@@ -4602,7 +3236,7 @@ Book: \$18,451.74
 
 ---
 
-## 57. Calculating annuity values
+# 57. Calculating annuity values
 
 Bilbo Baggins wants to save money to meet three objectives. First, he would like
 to be able to retire 30 years from now with a retirement income of \$23,000 per
@@ -4630,7 +3264,7 @@ p57$shortfall <- p57$pv.retirement -  p57$savings.for.20yrs
 p57$payment.2 <- (p57$shortfall * p57$r.pre) / ((1 + p57$r.pre)^(20*12) - 1)
 ```
 
-### Objectives summary
+## Objectives summary
 
 * __Retirement goal__: \$23,000/month for 20 years, starting 30 years + 1 month
   from now (i.e., at $t = 361 months).
@@ -4651,7 +3285,7 @@ p57$payment.2 <- (p57$shortfall * p57$r.pre) / ((1 + p57$r.pre)^(20*12) - 1)
   
   - After retirement (Years 31-50): 8\% EAR
 
-### Step 1: Convert EARs to monthly rates.
+## Step 1: Convert EARs to monthly rates.
 
 We need monthly rates because all payments/savings are monthly.
 
@@ -4667,7 +3301,7 @@ $$
 r_{\text{post}} = (1 + 0.08)^{1/12} - 1 \approx `r p57$r.post`
 $$
 
-### Step 2: Present value at retirement of retirement income + inheritance
+## Step 2: Present value at retirement of retirement income + inheritance
 
 We want the amount needed at $t = 360$ (30 years from now to:
 
@@ -4703,7 +3337,7 @@ $$
   \text{PV}_{\text{inheritance}} \approx `r pretty(p57$pv.retirement)`
 $$
 
-### Step 3: Value of existing savings
+## Step 3: Value of existing savings
 
 This is a future value of an annuity with
 
@@ -4727,7 +3361,7 @@ $$
 \end{aligned}
 $$
 
-### Step 4: This balance grows for 20 more years (to year 30):
+## Step 4: This balance grows for 20 more years (to year 30):
 
 $$
 \text{FV}_{30} = `r pretty(p57$savings.minus.cabin)`
@@ -4735,14 +3369,14 @@ $$
   `r pretty(p57$savings.for.20yrs)`
 $$
 
-### Step 5: Remaining needed at year 30
+## Step 5: Remaining needed at year 30
 
 $$
 \text{Shortfall}_{30} = `r pretty(p57$pv.retirement)`
   - `r pretty(p57$savings.for.20yrs)` = `r pretty(p57$shortfall)`
 $$
 
-### Step 6: Compute monthly savings needed in years 11-30
+## Step 6: Compute monthly savings needed in years 11-30
 
 $$
 \begin{aligned}
@@ -4756,7 +3390,7 @@ $$
 
 ---
 
-## 58. Calculating annuity values
+# 58. Calculating annuity values
 
 After deciding to buy a new car, you can either lease the car or purchase it
 with a three-year loan. The car you wish to buy costs \$31,000. The dealer has a
@@ -4790,7 +3424,7 @@ p58$break.even <- uniroot(
     tol=10)$root
 ```
 
-### Given
+## Given
 
 * To buy the car, it will cost \$`r pretty(p58$cost,0)`. You will pay off the
   car in monthly payments for three years at an APR of 6\%. You are confident
@@ -4800,7 +3434,7 @@ p58$break.even <- uniroot(
   monthly payments of \$`r pretty(p58$lease.monthly.payments,0)` for three
   years.
 
-### Option 1: Lease
+## Option 1: Lease
 
 * Upfront: \$`r pretty(p58$lease.today, 0)`
 
@@ -4816,7 +3450,7 @@ $$
   \approx `r pretty(p58$pv.lease)`
 $$
 
-### Option 2: Buy
+## Option 2: Buy
 
 * Car price: \$31,000
 
@@ -4824,7 +3458,7 @@ $$
 
 * Resale: \$20,000
 
-#### Monthly payments
+### Monthly payments
 
 The monthly payments can be calculated:
 
@@ -4853,7 +3487,7 @@ $$
   `r pretty(p58$pv.resale, 0)` = `r pretty(p58$pv.buying, 0)`
 $$
 
-### Comparing leasing and buying:
+## Comparing leasing and buying:
 
 * Lease: `r pretty(p58$pv.lease, 0)`
 
@@ -4861,7 +3495,7 @@ $$
 
 In this demonstration, buying is cheaper than leasing.
 
-### Break even resale value
+## Break even resale value
 
 $$
 `r pretty(p58$cost, 0)` - \frac{X}{(1 + `r p58$r`)^{`r p58$t`}}
@@ -4872,7 +3506,7 @@ Solving for X we get \$`r pretty(p58$break.even, 0)`.
 
 ---
 
-## 59. Calculating annuity values
+# 59. Calculating annuity values
 
 An All-Pro defensive lineman is in contract negotiations. The team has offered
 the following salary structure:

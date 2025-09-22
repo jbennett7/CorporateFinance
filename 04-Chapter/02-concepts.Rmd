@@ -1,0 +1,291 @@
+---
+title: "Discounted Cash Flow Valuation"
+subtitle: "Concepts"
+author: "Ross, Westerfield, Jaffe"
+output: 
+  pdf_document:
+   toc: true 
+---
+
+```{r setup, echo=F, message=F}
+require(data.table)
+require(kableExtra)
+pretty <- function(x, n = 2) format(round(x, n), big.mark=",", nsmall = n)
+percent <- function(x, a = 0.01) scales::percent(x, accuracy = a)
+table <- function(df, caption=NULL) {
+  knitr::kable(df, caption=caption, format = "latex", booktabs=T) %>%
+    kable_styling(latex_options = c("HOLD_position"))
+options(scipen = 999)
+}
+```
+
+# 1. Compounding and period
+
+As you increase the length of time involved, what happens to future values? What
+happens to present values?
+
+---
+
+Using the formulas for future value and present value of money:
+
+$$
+\begin{aligned}
+\mathbf{FV} &= \text{PV} \times (1 + r)^t\\\\
+\mathbf{PV} &=  \frac{\text{FV}}{(1 + r)^t}
+\end{aligned}
+$$
+
+Where $r$ is the rate and $t$ is the time period.
+
+As $t$ increases:
+
+* __Future value (FV)__ increases because there's more time for compounding to
+  grow the initial amount.
+
+* __Present value (PV)__ decreases because the future cash flow is discounted
+  more heavily.
+
+This holds true as long as the interest rate $r$ is positive. If $r$ is negative
+then the trends reverse.
+
+---
+
+# 2. Interest rates
+
+What happens to the future value of an annuity if you increase the rate $r$?
+What happens to the present value?
+
+The future value and present value of an annuity as defined as:
+
+$$
+\begin{aligned}
+\mathbf{FV\ Annuity} &= C \times \frac{(1 + r)^t - 1}{r}\\\\
+\mathbf{PV\ Annuity} &= C \times \frac{1 - (1 + r)^{-t}}{r}
+\end{aligned}
+$$
+
+As $r$ (the interest rate) increases, $(1 + r)$ increases. The future value of
+an annuity will increase with the interest rate and the present value decreases.
+
+---
+
+# 3. Present value
+
+Suppose two athletes sign 10-year contracts for \$80 million. In one case, we're
+told that the \$80 million will be paid in 10 equal installments. In the other
+case, we're told that the \$80 million will be paid in 10 installments, but the
+installments will increase by 5 percent per year. Who got the better deal?
+
+---
+
+To evaluate which athlete got the better deal we need to compare the two
+annuities. The differences between the annuities are in the structure of the
+payments.
+
+## Annuity 1: Equal installments.
+
+$$
+\begin{aligned}
+\text{PV} &= C \times \frac{1 - (1 + r)^{-t}}{r}\\
+  &= \$8,000,000 \times \frac{1 - (1 + r)^{-10}}{r}
+\end{aligned}
+$$
+
+## Annuity 2: 5% Growing installments
+
+The payments will grow 5% annually to 80 million. We need to find the starting
+payment:
+
+* Total nominal sum
+
+$$
+C \times \frac{1.05^{10} - 1}{.05} = 80\ \text{million}
+$$
+
+Solving for C:
+
+$$
+C \times 12.578 = 80 \rightarrow C \approx 6.36\ \text{million}
+$$
+
+Here is a plot of differences between the two annuities for discount rates from
+.06 to 1:
+
+```{r concept 3, echo=F}
+growth.annuity <- function(c, r, g, t){
+    c * ((1 + g)^(0:(t-1))) / (1 + r)^(1:t)
+}
+cf.1 <- 8
+cf.2 <- 6.36
+
+f <- function(r){
+  ret <- c()
+  for(i in r){
+    lhs <- sum(growth.annuity(cf.1, i, .05, 10))
+    rhs <- sum(growth.annuity(cf.2, i, 0, 10))
+    ret <- c(ret, lhs - rhs)
+  }
+  return(ret)
+}
+x <- seq(.06, 1, by=.01)
+y <- f(x)
+plot(x, y, type='l', ylab='difference in millions of dollars',
+    xlab='discount rate', main='Difference between Annuity 1 and Annuity 2')
+```
+
+As the plot shows, as the discount rate increase, the difference between the two
+annuities diminishes. However, the plot also shows that the discount rate needs
+to be extremely high for the difference between the two to become neglible.
+Therefore, the growth annuity is the better deal.
+
+---
+
+# 4. APR and EAR
+
+Should lending laws be changed to require lenders to report EARs instead of
+APRs? Why or why not?
+
+---
+
+There are a few benefits in requiring lenders to report EARs instead of APRs.
+APRs are effectively meaningless without the compounding interval. Thus a 10
+percent APR is only meaningful if you know it will be compouned semi-annually,
+or quarterly, etc... EARs are meaningful without the compounding interval
+because it is the effective annual interest rate. This becomes especially useful
+to know when the interest rate is large because the difference between the APR
+and the EAR can be dramatic.
+
+---
+
+# 5. Time value
+
+On subsidized Stafford loans, a common source of financial aid for college
+students, interest does not begin to accrue until repayment begins. Who receives
+a bigger subsidy, a freshman or a senior? Explain.
+
+---
+
+A freshman receives a bigger subsidy compared to a senior because of the longer
+period before repayment begins. This period is interest-free while the student
+is attending school. A freshman has four years before repayment begins, while a
+senior only has one year of school left. The interest that is saved during this
+period, compounded over the time attending school, makes the subsidy more
+valuable to the freshman than the senior. Thus, if both the freshman and the
+senior borrow the same amount each year, the freshman accrues a greater
+cumulative benefit across the four years, while the senior only benefits for the
+final year.
+
+---
+
+Use the following information to answer the next five question:
+
+Toyota Motor Credit Corporation (TMCC), a subsidiary of Toyota Motor
+Corporation, offered some securities for sale to the public on March 28, 2008.
+Under the terms of the deal, TMCC promised to repay the owner of one of these
+securities \$100,000 on March 28, 2038, but investors would receive nothing
+until then. Investors paid TMCC \$24,099 for each of these securities; so they
+gave up \$24,099 on March 28, 2008, for the promise of a \$100,000 payment 30
+years later.
+
+---
+
+# 6. Time value of money
+
+Why would TMCC be willing to accept such a small amount today (\$24,099) in
+exchange for a promise to repay about four times that amount (\$100,000) in the
+future?
+
+---
+
+TMCC is willing to accept a smaller amount today (\$24,099) in exchange for a
+promise to repay \$100,000 in 30 years because of the time value of money and
+the concept of discounting future cash flows.
+
+For a future value of \$100,000 and a present value of \$24,099 and a term of 30
+years, we can calculate the interest rate TMCC is expecting to pay.
+
+$$
+\begin{aligned}
+\text{FV} &= \text{PV} \times (1 + r)^{t}\\\\
+\frac{\text{FV}}{\text{PV}} &= (1 + r)^t\\\\
+\left( \frac{\text{FV}}{\text{PV}} \right)^{1/t} &= 1 + r\\\\
+r &= \left( \frac{\text{FV}}{\text{PV}} \right)^{1/t} - 1\\\\
+r &= 0.04857629 \approx 5\%
+\end{aligned}
+$$
+
+This discount rate of 5% reflects the rate investors see as the effects of
+inflation, opportunity cost, and the perceived risk of TMCC's ability to fulfill
+the obligation. The investors will find this deal attractive because they are
+effectively locking in a specific return over 30 years. The discount rate
+(yield) aligns with what they consider fair compensation for lending their money
+to TMCC for three decades. TMCC uses this willingness to raise capital cheaply
+in the present.
+
+Japans own interest rate in March 2008 was 0.5%. This indicates an extremely low
+cost of borrowing for domestic markets. However, there is reason to believe that
+TMCC wanted to gain access to a global base of investors as a funding source.
+With Japanese securities yielding only 0.5%, TMCC's securities yielding 5% look
+extremely attractive.
+
+---
+
+# 7. Call provisions
+
+TMCC has the right to buy back the securities on the anniversary date at a price
+established when the securities were issued (this feature is a term of this
+particular deal). What impact does this feature have on the desirability of this
+security as an investment?
+
+---
+
+This feature has a negative impact on the desirability of the security. It
+limits the upside potential of the security because if rates fall or if the
+value of the security increases (due to falling discount rates or inflation
+expectations), TMCC is likely to exercise its option to buy back the securities.
+Also, because the security is callable, the benefit of the investor to lock in
+an investment for 30 years is not guaranteed.
+
+---
+
+# 8. Time value of money
+
+Would you be willing to pay \$24,099 today in exchange for \$100,000 in 30
+years? What would be the key considerations in answering yes or no? Would your
+answer depend on who is making the promise to repay?
+
+---
+
+The implied rate of return for this security was calculated as about 5%. You
+would compare this with other investment options with similar risk profiles. You
+would also consider inflation which can erode the real value of the investment.
+Finally, you would need to evaluate the risk and creditworthiness of TMCC. This
+means it does matter who is making the promise to repay.
+
+---
+
+# 9. Investment comparison
+
+Suppose that when TMCC offered the security for \$24,099 the U.S. Treasury had
+offered an essentially identical security. Do you think it would have had a
+higher or lower price? Why?
+
+---
+
+It would have a higher price because the U.S. Treasury is less risky than the
+TMCC security. The security is also more liquid because there are more buyers
+for the security than for the TMCC security.
+
+---
+
+# 10. Length of investment
+
+The TMCC security is bought and sold on the New York Stock Exchange. If you
+looked at the price today, do you think the price would exceed the \$24,099
+original price? Why? If you looked in the year 2019, do you think the price
+would be higher or lower than today's price? Why?
+
+---
+
+Yes the price of the TMCC security is likely to have increased.
+
