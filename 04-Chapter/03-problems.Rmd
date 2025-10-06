@@ -8,15 +8,17 @@ output:
 ---
 
 ```{r setup, echo=F, message=F}
-require(data.table)
+require(tidyverse)
 require(kableExtra)
 pretty <- function(x, n = 2) format(round(x, n), big.mark=",", nsmall = n)
+  # Does not work inside TeX mathematical formulas (needs to be escaped.)
+currency <- function(x, n = 2) paste0('$', pretty(x, n))
 percent <- function(x, a = 0.01) scales::percent(x, accuracy = a)
-table <- function(df, caption=NULL) {
+ktable <- function(df, caption=NULL) {
   knitr::kable(df, caption=caption, format = "latex", booktabs=T) %>%
     kable_styling(latex_options = c("HOLD_position"))
-options(scipen = 999)
 }
+options(scipen = 999)
 ```
 
 # 1. Simple interest versus compound interest
@@ -127,26 +129,26 @@ Book: (a) \$1,628.89, (b) \$2,593.74, (c) \$2,653.30
 
 For each of the following, compute the present value:
 
-```{r problem 3, echo=F}
+```{r problem 3; setup, echo=F}
 p3 <- new.env()
 p3$years <- c(6, 9, 18, 23)
 p3$interest.rate <- c(.07, .15, .11, .18)
 p3$future.value <- c(13827, 43852, 725380, 590710)
 p3$present.value <- rep('-', 4)
 
-p3$tbl <- data.frame(
+p3$tbl <- tibble(
+  present.value=p3$present.value,
   years=p3$years,
   interest.rate=percent(p3$interest.rate, 1),
-  future.value=pretty(p3$future.value, 0),
-  present.value=p3$present.value
+  future.value=currency(p3$future.value, 0),
 )
-table(p3$tbl)
+ktable(p3$tbl)
 ```
 
 ```{r problem 3; solution, echo=F}
 p3$pv <- round(p3$future.value /
   (1 + p3$interest.rate)^(p3$years))
-p3$tbl$present.value <- pretty(p3$pv, 0)
+p3$tbl$present.value <- currency(p3$pv, 0)
 ```
 
 The formula for calculating the present value from the future value is:
@@ -165,8 +167,8 @@ $$
 \end{aligned}
 $$
 
-```{r problem 3; solution , echo=F}
-table(p3$tbl)
+```{r problem 3; table, echo=F}
+ktable(p3$tbl)
 ```
 
 ---
@@ -180,17 +182,18 @@ p4 <- new.env()
 p4$years = c(4, 8, 16, 27)
 p4$present.value = c(242, 410, 51700, 18750)
 p4$future.value = c(307, 896, 162181, 483500)
-p4$tbl <- data.frame(
+p4$tbl <- tibble(
+  present.value=currency(p4$present.value, 0),
   years=p4$years,
-  present.value=pretty(p4$present.value, 0),
-  future.value=pretty(p4$future.value, 0)
+  interest.rate=rep('-', length(years)),
+  future.value=currency(p4$future.value, 0)
 )
-table(p4$tbl)
+ktable(p4$tbl)
 ```
 
 ---
 
-To calculate the interest rate we solve for $r$:
+To calculate the interest rate, we solve for $r$:
 
 $$
 \begin{aligned}
@@ -206,7 +209,7 @@ p4$interest.rate <- (p4$future.value / p4$present.value)^(1/(p4$years)) - 1
 p4$cols <- colnames(p4$tbl)
 p4$tbl <- cbind(p4$tbl, percent(p4$interest.rate, 0.01))
 colnames(p4$tbl) <- c(p4$cols, 'interest.rate')
-table(p4$tbl)
+ktable(p4$tbl)
 ```
 
 ### NOTE:
@@ -232,15 +235,14 @@ p5 <- new.env()
 p5$present.value = c(625, 810, 18400, 21500)
 p5$interest.rate = c(.09, .11, .17, .08)
 p5$future.value = c(1284, 4341, 402662, 173439)
-p5$years = rep('-', 4)
 
-p5$tbl <- data.table(
-  present.value = pretty(p5$present.value, 0),
+p5$tbl <- tibble(
+  present.value = currency(p5$present.value, 0),
   interest.rate = percent(p5$interest.rate, 1),
-  future.value  = pretty(p5$future.value, 0),
-  years         = p5$years
+  future.value  = currency(p5$future.value, 0),
+  years         = rep('-', length(present.value)),
 )
-table(p5$tbl)
+ktable(p5$tbl)
 ```
 
 ---
@@ -249,7 +251,7 @@ We solve for the period:
 
 $$
 \begin{aligned}
-\mathbf{FV} &= \text{PV} \times (1 + r)^t\\\\
+\text{FV} &= \text{PV} \times (1 + r)^t\\\\
 \frac{\text{FV}}{\text{PV}} &= (1 + r)^t\\\\
 \ln{\left(\frac{\text{FV}}{\text{PV}} \right)} &= t \ln{(1 + r)}\\\\
 t &= \frac{\ln{\left(\frac{\text{FV}}{\text{PV}} \right)}}{\ln{(1 + r)}}
@@ -260,7 +262,7 @@ $$
 p5$years <- log(p5$future.value/p5$present.value) /
             log(1 + p5$interest.rate)
 p5$tbl$years <- round(p5$years, 2)
-table(p5$tbl)
+ktable(p5$tbl)
 ```
 
 ---
@@ -274,14 +276,14 @@ it?
 
 This depends on if we want to use simple or compound interest.
 
-## Simple interest
+### Simple interest
 
-### Double
+#### Double
 
 $$
 \begin{aligned}
-2X &= X \times (1 + t * .08)\\
-2 &= 1 + t \times .08\\
+2X &= X (1 + t \cdot .08)\\
+2 &= 1 + t \cdot .08\\
 \frac{1}{.08} &= t\\
 t &= 12.5
 \end{aligned}
@@ -289,7 +291,7 @@ $$
 
 For simple interest, it will take 12.5 periods to double.
 
-### Quadruple
+#### Quadruple
 
 $$
 t = \frac{4 - 1}{.08} = 37.5
@@ -297,9 +299,9 @@ $$
 
 It will take 37.5 periods to quadruple.
 
-## Compound interest
+### Compound interest
 
-### Double
+#### Double
 
 $$
 \begin{aligned}
@@ -348,7 +350,7 @@ $$
 \end{aligned}
 $$
 
-The liability is presently worth \$`r pretty(p7$present.value, 0)` million.
+The liability is presently worth `r currency(p7$present.value, 0)` million.
 
 ---
 
@@ -365,25 +367,39 @@ rate of return on this painting?
 
 ```{r problem 8; setup, echo=F}
 p8 <- new.env()
-p8$ending.value <- 1.1e6
-p8$beginning.value <- 1.68e6
-p8$years <- 3
-p8$ratio <- p8$beginning.value / p8$ending.value
+p8$ending.value = 1.1e6
+p8$beginning.value = 1.68e6
+p8$years = 3
+p8$ratio = p8$ending.value / p8$beginning.value
+p8$rate = p8$ratio^(1/p8$years) - 1
 ```
 
-## Step 1: Calculate the ratio of present value over future value
+To calculate the annual rate of return we use the following formula:
 
 $$
-\frac{\text{PV}}{\text{FV}} = \frac{`r pretty(p8$beginning.value, 0)`}
-  {`r pretty(p8$ending.value, 0)`} = `r p8$ratio`
+r = \left(\frac{\text{FV}}{\text{PV}}\right)^{1/t} - 1
 $$
 
-## Step 2: Determine the interest rate that gives this value
+$$
+\begin{aligned}
+r &= \left(\frac{\$`r pretty(p8$ending.value, 0)`}
+  {\$`r pretty(p8$beginning.value, 0)`}\right)^{(1/3)} - 1\\
+  &= `r percent(p8$rate)`
+\end{aligned}
+$$
 
-We can use `R`'s `uniroot` to find this value:
+Alternatively we could have used `R`'s `uniroot` function. Using the future
+value formula and setting the left side to zero.
 
-```{r problem8; uniroot solution, echo=T}
-p8$f <- function(r) (1 + r)^(-p8$years) - p8$ratio
+$$
+\begin{aligned}
+\text{FV} &= \text{PV} \times (1 + r)^{t}
+0 &= \text{PV} \times (1 + r)^{t} - \text{FV}
+\end{aligned}
+$$
+
+```{r problem 8; uniroot solution, echo=T}
+p8$f <- function(r) p8$beginning.value * (1 + r)^p8$years - p8$ending.value
 percent(p8$r <- uniroot(p8$f, upper=1, lower=-1, tol=1e-4)$root)
 ```
 
@@ -416,7 +432,7 @@ $$
 \end{aligned}
 $$
 
-## NOTE:
+__NOTE:__
 
 The value of the consol will depend on when the next payment is. For example,
 instead of the next payment being one year from now, what if the next payment
@@ -431,10 +447,9 @@ $$
 \end{aligned}
 $$
 
-You can see this dynamic play out in the stock market as well with stocks that
-pay dividends. Just after the ex-dividend date, the stock price will drop
-according to the value of the present value of the stock's dividend (its cash
-dispursments to shareholders.
+You can see this dynamic play out in the stock market with stocks that pay
+dividends. Just after the ex-dividend date, the stock price will drop according
+to the value the stock's dividend (its cash dispursments to shareholders).
 
 ---
 
@@ -465,18 +480,18 @@ $$
 
 $$
 \begin{aligned}
-\mathbf{A}:\ &\ `r pretty(p10$pv, 0)`
+\mathbf{A}:\ &\ \$`r pretty(p10$pv, 0)`
   \times e^{`r p10$r[1]` \times `r p10$n[1]`}\\
-  &= `r pretty(p10$fv[1])`\\\\
-\mathbf{B}:\ &\ `r pretty(p10$pv, 0)`
+  &= \$`r pretty(p10$fv[1])`\\\\
+\mathbf{B}:\ &\ \$`r pretty(p10$pv, 0)`
   \times e^{`r p10$r[2]` \times `r p10$n[2]`}\\
-  &= `r pretty(p10$fv[2])`\\\\
-\mathbf{C}:\ &\ `r pretty(p10$pv, 0)`
+  &= \$`r pretty(p10$fv[2])`\\\\
+\mathbf{C}:\ &\ \$`r pretty(p10$pv, 0)`
   \times e^{`r p10$r[3]` \times `r p10$n[3]`}\\
-  &= `r pretty(p10$fv[3])`\\\\
-\mathbf{D}:\ &\ `r pretty(p10$pv, 0)`
+  &= \$`r pretty(p10$fv[3])`\\\\
+\mathbf{D}:\ &\ \$`r pretty(p10$pv, 0)`
   \times e^{`r p10$r[4]` \times `r p10$n[4]`}\\
-  &= `r pretty(p10$fv[4])`\\\\
+  &= \$`r pretty(p10$fv[4])`\\\\
 \end{aligned}
 $$
 
@@ -496,12 +511,12 @@ p11$year <- c(1, 2, 3, 4)
 p11$cf <- c(960, 840, 935, 1350)
 p11$r <- c(.1, .18, .24)
 
-p11$tbl <- data.frame(
+p11$tbl <- tibble(
   year = p11$year,
-  cash.flow = p11$cf
+  cash.flow = currency(p11$cf),
 )
 
-table(p11$tbl)
+ktable(p11$tbl)
 p11$pv.f <- function(r) sum(p11$cf / (1 + r)^(p11$year))
 p11$pv <- unlist(lapply(p11$r, p11$pv.f))
 ```
@@ -511,8 +526,13 @@ p11$pv <- unlist(lapply(p11$r, p11$pv.f))
 The formula for present value:
 
 $$
-\text{PV} = \sum{\frac{\text{FV}}{(1 + r)^t}}
+\text{PV} = \sum^I_{i=1}{\frac{\text{FV}_{i}}{(1 + r)^{t_{i}}}}
 $$
+
+Where:
+
+* $\text{FV}_{i}$ is the future values of each cash flow.
+* $t_i$ is the number of years til the cash flow is realized.
 
 For a rate of 10 percent the cash flows are:
 
@@ -598,7 +618,7 @@ $$
 \end{aligned}
 $$
 
-## For interest rate 5\%
+### For discount rate 5\%
 
 $$
 \begin{aligned}
@@ -611,10 +631,10 @@ $$
 \end{aligned}
 $$
 
-For the lower interest rate, the longer timespan makes investment X more
+For the lower discount rate, the longer timespan makes investment X more
 attractive.
 
-## For interest rate 22\%
+### For discount rate 22\%
 
 $$
 \begin{aligned}
@@ -627,7 +647,7 @@ $$
 \end{aligned}
 $$
 
-However, for higher interest rates, the longer timeframe reduces the
+However, for higher discount rates, the longer timeframe reduces the
 contribution of the cash flows further out. Thus, investment Y is a better
 choice.
 
@@ -647,7 +667,9 @@ p13 <- new.env()
 p13$cf <- 4900
 p13$rate <- .08
 p13$n <- c(15, 40, 75)
-p13$pv <- unlist(lapply(p13$n, function(n) sum(p13$cf/((1 + p13$rate)^(1:n)))))
+#p13$pv <- unlist(lapply(p13$n, function(n) sum(p13$cf/((1 + p13$rate)^(1:n)))))
+p13$pv.f <- function(c, r, t) c * (1 - (1 + r)^-t) / r
+p13$pv <- p13$pv.f(p13$cf, p13$rate, p13$n)
 p13$pv.perpetuity <- p13$cf/p13$rate
 ```
 
@@ -655,24 +677,24 @@ $$
 \begin{aligned}
 \text{PV}_{\text{annuity}} &= \text{CF}
   \times \left[\frac{1 - (1 + r)^{-T}}{r}\right]\\\\
-\text{PV}_{\text{15 years}} &= `r pretty(p13$cf, 0)`
+\text{PV}_{\text{15 years}} &= \$`r pretty(p13$cf, 0)`
   \times \left[
     \frac{1 - (1 + `r p13$rate`)^{- `r p13$n[1]`}}{`r p13$rate`}
   \right] \\
-  &= `r pretty(p13$pv[1])`\\\\
-\text{PV}_{\text{40 years}} &= `r pretty(p13$cf, 0)`
+  &= \$`r pretty(p13$pv[1])`\\\\
+\text{PV}_{\text{40 years}} &= \$`r pretty(p13$cf, 0)`
   \times \left[
     \frac{1 - (1 + `r p13$rate`)^{- `r p13$n[2]`}}{`r p13$rate`}
   \right] \\
-  &= `r pretty(p13$pv[2])`\\\\
-\text{PV}_{\text{75 years}} &= `r pretty(p13$cf, 0)`
+  &= \$`r pretty(p13$pv[2])`\\\\
+\text{PV}_{\text{75 years}} &= \$`r pretty(p13$cf, 0)`
   \times \left[
     \frac{1 - (1 + `r p13$rate`)^{- `r p13$n[3]`}}{`r p13$rate`}
   \right] \\
-  &= `r pretty(p13$pv[3], 0)`\\\\
+  &= \$`r pretty(p13$pv[3])`\\\\
 \text{PV}_{\text{perpetuity}} &= \frac{CF}{r}
-   = \frac{`r pretty(p13$cf)`}{`r p13$rate`}\\
-  &= `r pretty(p13$pv.perpetuity)`
+   = \frac{\$`r pretty(p13$cf, 0)`}{`r p13$rate`}\\
+  &= \$`r pretty(p13$pv.perpetuity)`
 \end{aligned}
 $$
 
@@ -718,7 +740,7 @@ r &= \frac{C_0}{\text{PV}_{\text{perpetuity}}} \\
 \end{aligned}
 $$
 
-Book: \$88,461.54, 4.69\%
+Book: \$88,461.54 (the book is wrong here), 4.69\%
 
 ---
 
@@ -730,11 +752,11 @@ Find the EAR in each of the following cases:
 p15 <- new.env()
 p15$apr <- c(.07, .16, .11, .12)
 p15$compound <- c(4, 12, 365, NA)
-p15$tbl <- data.frame(
+p15$tbl <- tibble(
   apr = percent(p15$apr, 1),
   compound = c("Quarterly", "Monthly", "Daily", "Infinite")
 )
-table(p15$tbl)
+ktable(p15$tbl)
 ```
 
 ```{r problem 15; solution, echo=F}
@@ -783,7 +805,7 @@ $$
 ## Completed table
 
 ```{r problem 15; display  table, echo=F}
-table(p15$tbl)
+ktable(p15$tbl)
 ```
 
 ---
@@ -801,7 +823,7 @@ p16$tbl <- data.frame(
   ear = percent(p16$ear),
   compound = c("Semiannually", "Monthly", "Weekly", "Infinite")
 )
-table(p16$tbl)
+ktable(p16$tbl)
 ```
 
 ---
@@ -842,7 +864,7 @@ $$
 ```{r problem 16; display table, echo=F}
 p16$tbl <- cbind(p16$tbl, percent(p16$apr))
 colnames(p16$tbl)[3] <- "apr"
-table(p16$tbl)
+ktable(p16$tbl)
 ```
 
 ---
@@ -1008,11 +1030,11 @@ $$
 \frac{\text{PV}}{C} &= \frac{1 - (1 + r)^{-n}}{r}\\
 \frac{\text{PV} \cdot r}{C} &= 1 - (1 + r)^{-n}\\
 (1 + r)^{-n} &= 1 - \frac{\text{PV} \cdot r}{C}\\
--n \log{(1 + r)} &= \log{(1 - \frac{\text{PV} \cdot r}{C})}\\\\
-n &= - \frac{\log{\left(1 - \frac{\text{PV} \cdot r}{C}\right)}}
-  {\log{(1 + r)}}\\
-  &= - \frac{\log{\left(1 - \frac{`r pretty(p19$balance)` \cdot `r p19$rate`}
-  {`r p19$monthly.payment`}\right)}}{\log{(1 + `r p19$rate`)}}\\
+-n \ln{(1 + r)} &= \ln{\left(1 - \frac{\text{PV} \cdot r}{C}\right)}\\\\
+n &= - \frac{\ln{\left(1 - \frac{\text{PV} \cdot r}{C}\right)}}
+  {\ln{(1 + r)}}\\
+  &= - \frac{\ln{\left(1 - \frac{`r pretty(p19$balance, 0)` \times `r p19$rate`}
+  {`r p19$monthly.payment`}\right)}}{\ln{(1 + `r p19$rate`)}}\\
   &= `r round(p19$n, 2)`\ \text{months}
 \end{aligned}
 $$
@@ -1065,7 +1087,7 @@ $$
 \begin{aligned}
 \text{EAR} &= (1 + r_{\text{weekly}})^{52} - 1\\
   &= (1 + `r round(p20$r, 2)`)^{52} - 1\\
-  &= `r round(p20$ear, 3)`
+  &= `r pretty(p20$ear, 0)`\ \text{percent}
 \end{aligned}
 $$
 
@@ -1091,7 +1113,7 @@ p21$pv <- 1000
 p21$r <- .09
 p21$m <- c(1, 2, 12)
 p21$fv <- p21$pv * (1 + p21$r / p21$m )^(p21$m * p21$t)
-(p21$fv <- c(p21$fv, p21$pv * exp(p21$r * p21$t)))
+p21$fv <- c(p21$fv, p21$pv * exp(p21$r * p21$t))
 ```
 
 We use the future value formula with different compounding periods:
@@ -1099,18 +1121,18 @@ We use the future value formula with different compounding periods:
 $$
 \begin{aligned}
 \text{FV} &= \text{PV} \times (1 + \frac{r}{m})^{mt}\\\\
-\text{FV}_{\text{annually}} &= `r pretty(p21$pv)`
-  \times (1 + `r p21$r`/ `r p21$m[1]`)^{`r p21$m[1]` \cdot `r p21$t`}\\
-  &= `r pretty(p21$fv[1])`\\\\
-\text{FV}_{\text{semiannually}} &= `r pretty(p21$pv)`
-  \times (1 + `r p21$r`/ `r p21$m[2]`)^{`r p21$m[2]` \cdot `r p21$t`}\\
-  &= `r pretty(p21$fv[2])`\\\\
-\text{FV}_{\text{monthly}} &= `r pretty(p21$pv)`
-  \times (1 + `r p21$r`/ `r p21$m[3]`)^{`r p21$m[3]` \cdot `r p21$t`}\\
-  &= `r pretty(p21$fv[3])`\\\\
+\text{FV}_{\text{annually}} &= \$`r pretty(p21$pv, 0)`
+  \times (1 + `r p21$r`/ `r p21$m[1]`)^{`r p21$m[1]` \times `r p21$t`}\\
+  &= \$`r pretty(p21$fv[1])`\\\\
+\text{FV}_{\text{semiannually}} &= \$`r pretty(p21$pv, 0)`
+  \times (1 + `r p21$r`/ `r p21$m[2]`)^{`r p21$m[2]` \times `r p21$t`}\\
+  &= \$`r pretty(p21$fv[2])`\\\\
+\text{FV}_{\text{monthly}} &= \$`r pretty(p21$pv, 0)`
+  \times (1 + `r p21$r`/ `r p21$m[3]`)^{`r p21$m[3]` \times `r p21$t`}\\
+  &= \$`r pretty(p21$fv[3])`\\\\
 \text{FV}_{\text{continuous}} &= \text{PV}\  e^{rT}\\
-  &= `r pretty(p21$pv)`\  e^{`r p21$r` \cdot `r p21$t`}\\
-  &= `r pretty(p21$fv[4])`
+  &= \$`r pretty(p21$pv, 0)`\  e^{`r p21$r` \times `r p21$t`}\\
+  &= \$`r pretty(p21$fv[4])`
 \end{aligned}
 $$
 
@@ -1141,7 +1163,7 @@ p22$r.complex <- (1 + p22$r.simple * p22$t)^(1 / p22$t) - 1
 We simply equate each banks interest rate structure to each other and determine
 what First Complex Bank should set their rate to.
 
-## Simple interest (First Simple Bank)
+Simple interest (First Simple Bank):
 
 $$
 \begin{aligned}
@@ -1149,7 +1171,7 @@ $$
 \end{aligned}
 $$
 
-### Compound interest (First Comples Bank)
+Compound interest (First Comples Bank):
 
 $$
 \begin{aligned}
@@ -1157,7 +1179,7 @@ $$
 \end{aligned}
 $$
 
-## Equate both to each other and solve for $r_{\text{complex}}$
+Equate both to each other and solve for $r_{\text{complex}}$:
 
 $$
 \begin{aligned}
@@ -1207,6 +1229,11 @@ p23$fv.withdrawal <- p23$fv.combined *
 t <- 1:30
 ```
 
+__NOTE__: The following shows the process of deriving the annuity formula from
+the geometric series formula of the future value. This is not necessary for
+answering the problem. Just use the annuity formula. This should be in an
+appendix.
+
 The future value of all the contributions can be calculated:
 
 $$
@@ -1232,7 +1259,7 @@ $$
 $$
 
 
-## Saving for retirement
+### Saving for retirement
 
 We calculate the contribution, each month, over a 30 year window. The stock
 account will return 11 percent a year, and the bond account will return 6
@@ -1258,7 +1285,7 @@ $$
 \end{aligned}
 $$
 
-## Withdrawals during retirement
+### Withdrawals during retirement
 
 We use the annuity equation and solve for the withdrawal cash flows ($W$).
 
@@ -1292,24 +1319,24 @@ We need to find the rate of return that satisfies the following equation:
 
 $$
 \begin{aligned}
-\text{FV} &= \text{PV} \times (1 + r/m)^{mT}\\ 
-4 &= (1 + r/12)^{12}
+(1 + r_q)^4 &= 4\\
+r_q &= 4^{1/4} - 1\\
+r_q &= 41.42\%
 \end{aligned}
 $$
 
-Here we can use `R`s `uniroot` to find `r`:
+Using `R`'s `uniroot` to find $r_q$:
 
 ```{r problem 24; show uniroot, echo=T}
-p24$n <- 12
 p24$fv <- 4
-f <- function(r) (1 + r/p24$n)^(p24$n) - p24$fv
-p24$r <- uniroot(f, upper=10, lower=.01, tol=1e-4)$root
+p24$f <- function(r) (1 + r)^(4) - 4
+(p24$r <- uniroot(p24$f, c(.01, 1))$root)
 ```
 
-The return rate for an investment that quadruples your money in 12 months is: `r percent(p24$r)`.
+The return rate for an investment that quadruples your money in 12 months,
+compounded quarterly, is: `r percent(p24$r)`.
 
 ---
-
 
 # 25. Calculating rates of return
 
@@ -1322,10 +1349,13 @@ higher return?
 
 ```{r problem 25; setup, echo=F}
 p25 <- new.env()
-p25$pv <- 65000
-p25$fv <- c(125000, 185000)
-p25$n <- c(6, 10)
-p25$r <- (p25$fv / p25$pv)^(1/p25$n) - 1
+p25$pv = 65000
+p25$fv = c(125000, 185000)
+p25$n = c(6, 10)
+p25$matrix = matrix(c(p25$n, p25$fv), ncol=2)
+p25$f <- function(r, n, fv) p25$pv * (1 + r)^n - fv
+p25$r = apply(p25$matrix, 1,
+    function(x) uniroot(p25$f, n=x[1], fv=x[2], c(.01, 1))$root)
 ```
 
 We need to find the rate of return for two investments have an up-front cost of
@@ -1340,7 +1370,7 @@ r &= \left(\frac{\text{FV}}{\text{PV}}\right)^{1/n} - 1
 \end{aligned}
 $$
 
-## Investment G: return of \$125,000 in six years.
+### Investment G: return of \$125,000 in six years.
 
 $$
 \begin{aligned}
@@ -1351,7 +1381,7 @@ r_{G} &= \left(\frac{`r pretty(p25$fv[1])`}
 \end{aligned}
 $$
 
-## Investment H: return of \$185,000 in 10 years.
+### Investment H: return of \$185,000 in 10 years.
 
 $$
 \begin{aligned}
@@ -1399,8 +1429,8 @@ We first calculate the present value at year 1:
 $$
 \begin{aligned}
 \text{PV}_{\text{year 1}} &= \frac{C_0}{r - g}\\
-  &= \frac{`r pretty(p26$cf.0)`}{`r p26$discount` - `r p26$growth`}\\
-  &= `r pretty(p26$pv.perpituity)`
+  &= \frac{\$`r pretty(p26$cf.0)`}{`r p26$discount` - `r p26$growth`}\\
+  &= \$`r pretty(p26$pv.perpituity)`
 \end{aligned}
 $$
 
@@ -1409,8 +1439,8 @@ Now we need to discount year 1 back to today:
 $$
 \begin{aligned}
 \text{PV}_{\text{Today}} &= \frac{\text{PV}_{\text{year 1}}}{(1 + r)}\\
-  &= \frac{`r pretty(p26$pv.perpituity)`}{(1 + `r p26$discount`)}\\
-  &= `r pretty(p26$pv.discounted)`
+  &= \frac{\$`r pretty(p26$pv.perpituity)`}{(1 + `r p26$discount`)}\\
+  &= \$`r pretty(p26$pv.discounted)`
 \end{aligned}
 $$
 
@@ -1437,7 +1467,7 @@ p27$pv.div <- p27$dividend / (p27$rate / p27$m)
 
 $$
 \begin{aligned}
-\text{PV}_{\text{dividend}} &= \frac{C_0}{r}\\\\
+\text{PV}_{\text{dividend}} &= \frac{C_0}{r/m}\\\\
  &= \frac{\$`r pretty(p27$dividend)`}{`r p27$rate`/ `r p27$m`}\\
   &= \$`r pretty(p27$pv.div)`
 \end{aligned}
@@ -1458,8 +1488,8 @@ p28 <- new.env()
 p28$cf <- 6500
 p28$start <- 2
 p28$end <- 25
-p28$n.payments <- p28$end - p28$start
 p28$discount <- .07
+p28$n.payments <- p28$end - p28$start
 p28$pv.annuity <- p28$cf * (1 - (1 + p28$discount)^(-p28$n.payments)) /
   p28$discount
 p28$pv.discounted <- p28$pv.annuity / (1 + p28$discount)^(p28$start)
@@ -1474,7 +1504,7 @@ $$
 \begin{aligned}
 \text{PV}_{\text{annuity}} &= C_0 \cdot
   \left[\frac{1 - (1 + r)^{-T}}{r}\right]\\\\
-  &= \$`r pretty(p28$cf)` \cdot
+  &= \$`r pretty(p28$cf, 0)`
   \left[
     \frac{1 - (1 + `r p28$discount`)^{-`r p28$n.payments`}}{`r p28$discount`}
   \right]\\
@@ -1518,13 +1548,13 @@ p29$pv.discounted <- p29$pv.annuity / (1 + p29$r.2)^(p29$n.2)
 To find the value today of a 15 year annuity that pays \$650 per year, beginning
 6 years from today, we need to do the following:
 
-## Step 1: Understand the timing
+### Step 1: Understand the timing
 
 * Payments: \$650 per year for 15 years, starting at year 6 through year 20.
 
 * Interest rates: Years 1-5: 11\%, years 6-20: 13\%
 
-## Step 2: Calculate the present value of the annuity at year 5
+### Step 2: Calculate the present value of the annuity at year 5
 
 $$
 \begin{aligned}
@@ -1537,7 +1567,7 @@ $$
 \end{aligned}
 $$
 
-## Step 3: Discount the annuity back to year 0 (today)
+### Step 3: Discount the annuity back to year 0 (today)
 
 $$
 \begin{aligned}
@@ -1565,33 +1595,34 @@ in eight years?
 
 ```{r problem 30; setup, echo=F}
 p30 <- new.env()
-p30$mortgage <- 550000 * .8
-p30$apr <- .061
-p30$m <- 12
-p30$t <- 30
-p30$n <- p30$m * p30$t
-p30$n.balloon <- p30$n - p30$m * 8
-p30$c <- p30$mortgage / ((1 - (1 + p30$apr/p30$m)^(-p30$n)) / (p30$apr/p30$m))
-p30$balloon <- p30$c * (1 - (1 + p30$apr/p30$m)^(-p30$n.balloon)) /
+# Purchase minus 20 percent down payment
+p30$mortgage = 550000 * .8
+p30$apr = .061
+p30$m = 12
+p30$t = 30
+p30$n = p30$m * p30$t
+# Balloon payment is at the end of year 8.
+p30$n.balloon = p30$n - p30$m * 8
+p30$c = p30$mortgage / ((1 - (1 + p30$apr/p30$m)^(-p30$n)) / (p30$apr/p30$m))
+p30$balloon = p30$c * (1 - (1 + p30$apr/p30$m)^(-p30$n.balloon)) /
   (p30$apr/p30$m)
 ```
 
-## Step 1: Calculate the monthly payments
-
+### Step 1: Calculate the monthly payments
 
 $$
 \begin{aligned}
-\text{PV}_{\text{mortgage}} &= C \times [1 - (1 + r/m)^{-mT}] / (r/m)\\
+\text{PV}_{\text{mortgage}} &= C \frac{[1 - (1 + r/m)^{-mT}]}{r/m}\\\\
 C &= \frac{\text{PV}_{\text{mortgage}}}{([1 - (1 + r/m)^{-mT}] / (r/m))}\\\\
-C &= \frac{`r pretty(p30$mortgage)`}
-  {[1 - (1 + `r p30$apr` / `r p30$m`)^{-`r p30$n`}]}\\
-  &= `r pretty(p30$c)`
+C &= \frac{\$`r pretty(p30$mortgage)`}
+  {[1 - (1 + `r p30$apr` / `r p30$m`)^{-`r p30$n`}] / (`r p30$apr` / `r p30$m`)}\\
+  &= \$`r pretty(p30$c)`
 \end{aligned}
 $$
 
-## Step 2: Calculate the balloon payment
+### Step 2: Calculate the balloon payment
 
-Now, there ia an easy and hard way to determine the balloon payment. The hard
+Now, there is an easy and hard way to determine the balloon payment. The hard
 way is to actually amortize the loan for `r p30$m * 8` months to see what the
 balance is at that time. The easy way is to recognize that after `r p30$m * 8`
 months, we have a `r p30$n.balloon`-month loan. The payment is
@@ -1601,10 +1632,10 @@ value of the remaining payments:
 
 $$
 \begin{aligned}
-\text{Loan balance} & = `r pretty(p30$c)` \times
+\text{Loan balance} & = \$`r pretty(p30$c)` \times
   \left[\frac{1 - (1 + (1 + `r p30$apr` / `r p30$m`)^{-`r p30$n.balloon`}}
   {`r p30$apr` / `r p30$m`}\right]\\\\
-  &= `r pretty(p30$balloon)`
+  &= \$`r pretty(p30$balloon)`
 \end{aligned}
 $$
 
@@ -1630,37 +1661,41 @@ p31$n <- 6
 p31$m <- 12
 p31$r <- .18
 p31$c <- 7500
-p31$pv.intro <- 7500 * (1 + p31$r.intro / p31$m)^p31$n
-p31$pv.after <- p31$pv.intro * (1 + p31$r / p31$m)^p31$n
-p31$interest <- p31$pv.after - p31$c
+p31$balance.6m <- p31$c * (1 + p31$r.intro / p31$m)^p31$n
+p31$balance.12m <- p31$balance.6m * (1 + p31$r / p31$m)^p31$n
+p31$interest <- p31$balance.12m - p31$c
 ```
 
-## Step 1: Calculate the present value for the introductory period
+We compund the \$7,500 through two different monthly rates. For the first 6
+months we compound at the rate of 2.4\% per year, and then for the next 6 months
+we have:
+
+First six months:
 
 $$
 \begin{aligned}
-\text{PV}_{\text{introductory}} &= `r pretty(p31$c)` \times
+\text{Balance} &= \$`r pretty(p31$c, 0)` \times
   \left(1 + \frac{`r p31$r.intro`}{`r p31$m`} \right)^{`r p31$n`}\\
-  &= `r pretty(p31$pv.intro)`
+  &= \$`r pretty(p31$balance.6m)`
 \end{aligned}
 $$
 
-## Step 2: Calculate the present value after the introductory period
+We use the output from the first six months as the input of the next six months of the year:
 
 $$
 \begin{aligned}
-\text{PV}_{\text{after introductory}} &= `r pretty(p31$pv.intro)` \times
+\text{Total Balance} &= \$`r pretty(p31$balance.6m)` \times
   \left(1 + \frac{`r p31$r`}{`r p31$m`} \right)^{`r p31$n`}\\
-  &= `r pretty(p31$pv.after)`
+  &= \$`r pretty(p31$balance.12m)`
 \end{aligned}
 $$
 
-## Step 3: Interest is the amount minus the principal
+The interest paid is found by subtracting the principal from the total payment:
 
 $$
 \begin{aligned}
-\text{Interest} &= `r pretty(p31$pv.after)` - `r pretty(p31$c)`\\
-  &= `r pretty(p31$interest)`
+\text{Interest Paid} &= \$`r pretty(p31$balance.12m)` - \$`r pretty(p31$c, 0)`\\
+  &= \$`r pretty(p31$interest)`
 \end{aligned}
 $$
 
@@ -1687,8 +1722,8 @@ Using the perpetuity equation we can find the rate:
 $$
 \begin{aligned}
 \text{PV}_{\text{Perpetuity}} &= \frac{C}{r}\\\\
-`r pretty(p32$investment)`  &= \frac{`r pretty(p32$cf)`}{r}\\\\
-r &= \frac{`r pretty(p32$cf)`}{`r pretty(p32$investment)`}\\
+\$`r pretty(p32$investment, 0)`  &= \frac{\$`r pretty(p32$cf, 0)`}{r}\\\\
+r &= \frac{\$`r pretty(p32$cf, 0)`}{\$`r pretty(p32$investment, 0)`}\\
   &= `r percent(p32$r)`
   \%
 \end{aligned}
@@ -1716,12 +1751,19 @@ p33$cf <- 21000
 p33$g <- .04
 p33$n <- 5
 p33$r <- .1
-p33$pv <- p33$cf * sum((1 + p33$g)^(0:(p33$n-1)) /
-  (1 + p33$r)^(1:p33$n))
+## If we wanted to calculate the present value incrementally we would use the
+##  following. However, since the cash flows grow at a rate, we will use the
+##  growth annuity formula.
+#p33$pv <- p33$cf * sum((1 + p33$g)^(0:(p33$n-1)) /
+#  (1 + p33$r)^(1:p33$n))
+p33$pv <- p33$cf * ((1 - ((1 + p33$g) / (1 + p33$r))^p33$n) / (p33$r - p33$g))
 p33$npv <- p33$pv - p33$investment
 ```
 
-We use the growth formula for an annuity. Which can be derived:
+We need to find the net present value of revising and releasing the new edition
+of the textbook.
+
+We use the growth formula for an annuity. Which we derive below:
 
 $$
 \begin{aligned}
@@ -1732,28 +1774,28 @@ $$
   + \frac{(1 + g)^{n-1}}{(1 + r)^{n}}\right]\\\\
   &= \text{CF} \times \left[\frac{1 - \left(\frac{1 + g}{1 + r}\right)^N}
      {r - g}\right]\\
-  &= `r pretty(p33$cf)` \times
+  &= \$`r pretty(p33$cf, 0)` \times
   \left[
     \frac{1 - \left(\frac{1 + `r p33$g`}{1 + `r p33$r`}\right)^{`r p33$n`}}
     {`r p33$r` - `r p33$g`}
   \right]\\
-  &= `r pretty(p33$pv)`
+  &= \$`r pretty(p33$pv, 0)`
 \end{aligned}
 $$
 
-We will subtract the initial investment from the calculation of the annuity.
+We subtract the initial investment from the annuity to get the net present
+value.
 
 $$
 \begin{aligned}
 \text{NPV} &= \text{PV}_{\text{annuity}} - \text{Initial investment}\\
-  &= `r pretty(p33$pv)` - `r pretty(p33$investment)`\\
-  &= `r pretty(p33$npv)`
+  &= \$`r pretty(p33$pv, 0)` - \$`r pretty(p33$investment, 0)`\\
+  &= \$`r pretty(p33$npv, 0)`
 \end{aligned}
 $$
 
-\$`r pretty(p33$pv)` is greater than the initial investment of
-\$`r pretty(p33$investment)` by \$`r pretty(p33$npv)`. Yes, Southern California
-Publishing Company should undertake the revision.
+The net present value is \$`r pretty(p33$npv, 0)`. Since the value is positive,
+we should undertake the revision.
 
 ---
 
@@ -1771,22 +1813,20 @@ years from today?
 ---
 
 ```{r problem 34; setup, echo=F}
-p34 <- new.env()
-p34$salary <- 65000
-p34$saving <- p34$salary * .05
-p34$r <- .1
-p34$g <- .04
-p34$n <- 40
-p34$fv <- p34$saving * ((1 + p34$r)^p34$n - (1 + p34$g)^p34$n) /
+p34 = new.env()
+p34$salary = 65000
+p34$saving = p34$salary * .05
+p34$r = .1
+p34$g = .04
+p34$n = 40
+p34$fv = p34$saving * ((1 + p34$r)^p34$n - (1 + p34$g)^p34$n) /
   (p34$r - p34$g)
 ```
-
-__BONUS__: Derive the growing annuity formula
 
 We are calculating the future value of a series of growing deposits into an
 account that will earn interest of 10 percent a year.
 
-## Step 1: Derive the future value formula from the annuity formula
+### Step 1: Derive the future value formula from the annuity formula
 
 We know the present value of a series of growing payments is:
 
@@ -1813,19 +1853,20 @@ $$
 \end{aligned}
 $$
 
-## Step 2: Calculate the future value
+### Step 2: Calculate the future value
 
 The starting amount we are saving (which will grow at 4\%) is:
 
 $$
-\text{Saving} = \$`r p34$salary` \times .05 = \$`r p34$saving`
+\text{Saving} = \$`r pretty(p34$salary, 0)` \times .05
+  = \$`r pretty(p34$saving, 0)`
 $$
 
 Now lets plug in the numbers:
 
 $$
 \begin{aligned}
-\text{FV} &= \$`r p34$saving` \left[\frac{(1 + `r p34$r`)^{`r p34$n`}
+\text{FV} &= \$`r pretty(p34$saving, 0)` \left[\frac{(1 + `r p34$r`)^{`r p34$n`}
   - (1 + `r p34$g`)^{`r p34$n`}}{`r p34$r` - `r p34$g`}\right]\\
   &= \$`r pretty(p34$fv, 0)`
 \end{aligned}
@@ -3513,9 +3554,11 @@ the following salary structure:
 
 ```{r problem 59; setup, echo=F}
 p59 <- new.env()
-p59$time <- seq(0, 6, by=1)
+p59$T <- 0:6
 p59$salary <- c(8.5e6, 3.9e6, 4.6e6, 5.3e6, 5.8e6, 6.4e6, 7.3e6)
-knitr::kable(data.frame(Time = p59$time, Salary = pretty(p59$salary, 0)))
+p59$r <- .05
+p59$m <- 365
+knitr::kable(data.frame(Time = p59$T, Salary = pretty(p59$salary, 0)))
 ```
 
 All salaries are to be paid in a lump sum. The player has asked you as his agent
@@ -3527,11 +3570,165 @@ check? Assume 365 days in a year.
 
 ---
 
-```{r problem59; solution, echo=F}
-p59$bonus <- 10e6
-p59$contract.increase <- 1.5e6
-p59$payment.interval <- 4 # Quarterly
-p59$r <- .05/365
-
-p59$salary <- p59$salary + p59$contract.increase/7
+```{r problem 59; solution, echo=F}
+p59$dr <- p59$r / p59$m
+p59$pv.salary <- sum(p59$salary * (1 + p59$dr)^(-p59$m*p59$T))
+p59$signing.bonus <- 10e6
+p59$pv.negotiated.salary <- p59$pv.salary + 1.5e6
+p59$pv.negotiated.quarters <- p59$pv.negotiated.salary - p59$signing.bonus
+p59$qtrs <- 6*4
+p59$T.qtr <- 1:24
+p59$pvia <- sum((1 + p59$dr)^(-p59$m*p59$T.qtr))
+p59$A <- p59$pv.negotiated.quarters / p59$pvia
 ```
+
+With a five percent, compounded daily, interest rate, we have:
+
+$$
+\text{Daily Rate} = \frac{\text{Annual interest rate}}{365}
+  = \frac{`r p59$r`}{365} = `r p59$dr`
+$$
+
+The present value of the original contract is:
+
+$$
+\begin{aligned}
+\text{PV}_{\text{original}} &= \$`r pretty(p59$salary[1], 0)`
+  + \frac{\$`r pretty(p59$salary[2], 0)`}
+  {(1 + `r p59$dr`)^{-`r p59$m` \times `r p59$T[2]`}}
+  + \frac{\$`r pretty(p59$salary[3], 0)`}
+  {(1 + `r p59$dr`)^{-`r p59$m` \times `r p59$T[3]`}}
+  + \frac{\$`r pretty(p59$salary[4], 0)`}
+  {(1 + `r p59$dr`)^{-`r p59$m` \times `r p59$T[4]`}}\\
+  &+ \frac{\$`r pretty(p59$salary[5], 0)`}
+  {(1 + `r p59$dr`)^{-`r p59$m` \times `r p59$T[5]`}}
+  + \frac{\$`r pretty(p59$salary[6], 0)`}
+  {(1 + `r p59$dr`)^{-`r p59$m` \times `r p59$T[6]`}}
+  + \frac{\$`r pretty(p59$salary[7], 0)`}
+  {(1 + `r p59$dr`)^{-`r p59$m` \times `r p59$T[7]`}}\\\\
+  &= \$`r pretty(p59$pv.salary, 0)`
+\end{aligned}
+$$
+
+The new terms of the contract are:
+
+* A \$10 million sign on bonus,
+
+* an increase of \$1,500,000 in the contract value,
+
+* and the payments made as an annuity every three months.
+
+The value of the potential contract is:
+
+$$
+\begin{aligned}
+\text{PV}_{\text{potential}} &= \text{PV}_{\text{original}} + \$1,500,000\\
+  &= \$`r pretty(p59$pv.salary, 0)` + \$1,500,000\\
+  &= \$`r pretty(p59$pv.negotiated.salary, 0)`
+\end{aligned}
+$$
+
+To calculate the payments of the annuity, we need to remove the sign on bonus:
+
+$$
+\begin{aligned}
+\text{PV}_{\text{annuity}} &= \text{PV}_{\text{potential}} - \$10,000,000\\
+  &= \$`r pretty(p59$pv.negotiated.quarters, 0)`
+\end{aligned}
+$$
+
+The payments will be every three months (quarterly) for 6 years `r p59$qtrs`.
+
+We can calculate the present value interest factor for the quarterly annuity:
+
+$$
+\begin{aligned}
+\text{PV}_{\text{annuity}} &= A * \text{PVIA}(r, T)\\\\
+A &= \frac{\text{PV}_{\text{annuity}}}{\text{PVIA}(r, T)}\\\\
+A &= \frac{\$`r pretty(p59$pv.negotiated.quarters)`}{`r p59$pvia`}\\\\
+A &= \$`r pretty(p59$A, 0)`
+\end{aligned}
+$$
+
+---
+
+# 60. Discount Interest Loans
+
+This question illustrates what is known as _discount interest_. Imagine you are
+discussing a loan with a somewhat unscrupulous lender. You want to borrow
+\$20,000 for one year. The interest rate is 15 percent. You and the lender agree
+that the interest on the loan will be $.15 \times \$20,000 = \$3,000$. So, the
+lender deducts this interest amount from the loan up front and gives you
+$\$17,000$. In this case, we say that the discount is \$3,000. What's wrong
+here?
+
+---
+
+```{r problem 60 setup, echo=F}
+p60 <- new.env()
+p60$loan <- 20e3
+p60$r <- .15
+```
+
+The problem is. You think you are borrowing \$20,000 at 15\% for one year.
+
+But in reality, you are only receiving \$17,000 (because \$3,000 is deducted as
+"interest" up front). You must repay \$20,000 at the end of the year.
+
+You are paying \$3,000 in interest on a loan of \$17,000, not \$20,000.
+
+The actual effective interest rate is:
+
+$$
+\begin{aligned}
+\text{Effective rate} &= \frac{\text{Interest paid}}
+    {\text{amount actually received}}\\\\
+    &= \frac{\$3,000}{\$17,000}\\\\
+    &\approx 0.1765 = 17.65\%
+\end{aligned}
+$$
+
+# 61. Calculating Annuity Values
+
+You are serving on a jury. A plaintiff is suing the city for injuries sustained
+after a freak street sweeper accident. In the trial, doctors testified that it
+will be five years before the plaintiff is able ot return to work. The jury has
+already decided in favor of the plaintiff. You are the foreperson of the jury
+and propose that the jury give the plaintiff an award to cover the following:
+(1) The present value of two years' back pay. The plaintiff's annual salary for
+the last two years would have been \$37,000 and \$39,000, respectively. (2) The
+present value of five years' future salary. You assume the salary will be
+\$43,000 per year. (3) \$150,000 for pain and suffering. (4) \$25,000 for court
+costs. Assume that the salary payments are equal amounts paid at the end of each
+month. If the interest rate you choose is a 9 percent EAR, what is the size of
+the settlement? If you were the plaintiff, would you like to see a higher or
+lower interest rate?
+
+---
+
+```{r problem 61, echo=F}
+p61 <- new.env()
+p61$r <- .09
+p61$backpay <- c(37e3, 39e3)
+p61$pv.backpay <- {
+    pv <- 0
+    # first year's monthly payments months 1..12
+    for(k in 1:12) pv <- pv + (p61$backpay[1]/12) / (1 + p61$r/12)^k
+    # second year's monthly payments months 13..24
+    for(k in 13:24) pv <- pv + (p61$backpay[2]/12) / (1 + p61$r/12)^k
+
+    pv
+}
+```
+
+1. Present value of two years back pay: \$37,000 and \$39,000.
+
+For first year of backpay:
+
+2. The present value of five years' of future salary (assume \$43,000 per year)
+
+$$
+\begin{aligned}
+\text{PV}_{\text{future salary}} &= \$43,000 \times \frac{(1 + .09)^{2}}{.09}
+\end{aligned}
+$$
