@@ -1,0 +1,589 @@
+# Concept Questions
+
+## Options
+
+What is a call option? A put option? Under what circumstances might you want to buy each? Which one has greater _potential_ profit? Why?
+
+---
+
+A call option gives the buyer the right (but not the obligation) to buy an asset (typically a stock) at a specified strike price before or at the expiration date. You would buy call option if you expect the price of the underlying asset to increase in the future.
+
+A put option gives the buyer the right (but not the obligation) to sell an asset at a specified strike price before or at the expiration date. You would buy a put option if you expect the price of the underlying asset to decrease in the future.
+
+A call opiton has theoretically unlimited profit potential, while a put option has a capped maximum profit.
+
+---
+
+## Options
+
+Complete the following sentence for each of these investors:
+
+> a. A buyer of call options.
+> b. A buyer of put options.
+> c. A seller (writer) of call options.
+> d. A seller (writer) of put options.
+
+"The (buyer/seller) of a (put/call) option (pays/receives) money for the (right/obligation) to (buy/sell) a specified asset at a fixed price for a fixed length of time."
+
+---
+
+a. The buyer of a call option pays money for the right to buy a specified asset at a fixed price for a fixed length of time.
+
+b. The buyer of a put option pays money for the right to sell a specified asset at a fixed price for a fixed length of time.
+
+c. A seller of a call option receives money for the obligation to sell a specified asset at a fixed price for a fixed length of time.
+
+d. A seller of a put option receives money for the obligation to buy a specified asset at a fixed price for a fixed amount of time.
+
+---
+
+## American and European options
+
+What is the difference between an American option and a European option?
+
+---
+
+An American option can be exercised at any time, including on the expriation date. A European option can only be exercised on expiration.
+
+---
+
+## Intrinsic value
+
+What is the intrinsic value of a call option? Of a put option? How do we interpret these values?
+
+---
+
+The intrinsic value of a call option is the amount by which the stock price is above the strike price. If $S$ is the current stock price and $K$ is the strike price.
+
+$$
+\text{Intrinsic value (call)} = \text{max}(0, S - K)
+$$
+
+* If $S > K$, the call option has positive intrinsic value ("in the money").
+* If $S \le K$, the intrinsic value is zero because the option would be worthless at expiration ("at the money" or "out of the money").
+
+The intrinsic value of a put option is the amount by which the stock price is below the strike price.
+
+$$
+\text{Intrinsic value (put)} = \text{max}(0, K - S)
+$$
+
+* If $S < K$, the put option has positive intrinsic value ("in the money").
+* If $S \ge K$, the intrinsic value is zero because the option would be worthless at expiration ("at the money" or "out of the money").
+
+Intrinsic value represent the option's worth if exercised immediately. Options can have time value (meaning their total price may be higher than just the intrinsic value due to volatility and time until expiration). At expiration, an option's value is purely its intrins value---there is no remaining time value.
+
+---
+
+## Option pricing
+
+You notice that shares of stock in the Patel Corporation are going for \$50 per share. Call options with an exercise price of \$35 per share are selling for \$10. What's wrong here? Describe how you can take advantage of this mispricing if the option expires today.
+
+---
+
+This situation presents an arbitrage opportunity due to the mispricing of the call option.
+
+### Step 1: Identify the problem
+
+The stock is trading at \$50 per share but the call option has a strike price of \$35 and is selling for \$10. The intrinsic value of the call option should be:
+
+$$
+\text{Intrinsic value} = S - K = 50 - 35 - 15
+$$
+
+Since options cannot be worth less than their intrinsic value, the option should be at least \$15, but it's priced at \$10, meaning it is undervalued by \$5.
+
+### Step 2: Arbitrage strategy
+
+Since the option expires today, the best strategy is to buy the call option and immediately exercise it. The profit per option will be $(50 - 35) - 10 = 5$.
+
+This mispricing creaets a risk-free arbitrage because you're guaranteed a \$5 profit per option contract without any market risk. In reality, such opportunities rarely last because traders will quickly exploit them, causing prices to adjust.
+
+---
+
+## Options and stock risk
+
+If the risk of a stock increases, what is likely to happen to the price of call options on the stock? To the price of put options? Why?
+
+---
+
+If the risk (volatility) of a stock increases, the prices of both call options and put options will generally increase.
+
+### Impact on call option prices
+
+A call option gives the holder the right (but not the obligation) to buy the stock at a fixed price (the strike price). When volatility increases:
+
+* The potential upside gain increases because the stock price has a higher chance of rising significantly.
+* Even though the stock price could also drop, call option holders are not obligated to exercise, so their potential loss is limited to the premium paid.
+* Higher volatility makes the call option more valuable because there's a greater chance of the stock moving into profitable territory.
+
+### Impact on put option prices
+
+A put option gives the holder the right to sell the stock at a fixed price. When volatility increases:
+
+* The downside potential increases, making puts more valuable because there's a higher chance of the stock price dropping below the strike price.
+* Like call options, put options have limited downside risk (just the premium paid), but they benefit from large price swings downward.
+
+### Overall effect
+
+Since options derive their value in part from the probability of the stock moving favorably for the option holder, higher volatility increases the likelihood of extreme price swings, which raises the value of both calls and puts.
+
+This relationship is reflected in option pricing models like the Black-Scholes model where volatility is a key input.
+
+---
+
+## Option risk
+
+True or false: The unsystematic risk of a share of stock is irrelevant for valuing the stock because it can be diversified away; therefore, it is also irrelevant for valuing a call option on the stock. Explain.
+
+---
+
+False. While it is true that unsystematic risk (company-specific risk) of a stock is irrelevant for valuing the stock itself---because it can be diversified away in a well-diversified portfolio---it is not irrelevant for valuing a call option on the stock.
+
+### Stock valuation vs. option valuation
+
+The value of a stock is determined by its expected future cash flows, discounted at an appropriate rate based on its systematic risk (market risk). Since unsystematic risk can be eliminated through diversification, it does not affect the stock's required return or value. The value of an option, however, depends on the volatility of the stock price, which includes both systematic and unsystematic risk.
+
+### Option pricing and volatility
+
+Option prices (especially in models like Black-Scholes) are directly influenced by total volatility (which includes both systematic and unsystematic risk). Even if the unsystematic risk of a stock is diversifiable and irrelevant to its expected return, higher volatility increases the value of both call and put options because it raises the probability of large price swings, increasing the potential for profitable option exercises.
+
+### Key takeaway
+
+Although unsystematic risk doesn't matter for stock valuation, it does affect option valuation because options benefit from higher volatility. Thus, it is incorrect to conclude that unsystematic risk is irrelevant for valuing a call option just because it is irrelevant for valuing the stock.
+
+---
+
+## Option pricing
+
+Suppose a certain stock currently sells for \$30 per share. If a put option and a call option are available with \$30 exercise prices, which do you think will sell for more? Explain.
+
+---
+
+If a put option and a call option both have an exercise price of \$30 (at-the-money options), the put option is likely to sell for more if all other factors (time to expiration, volatility, interest rates, etc.) are equal.
+
+### Put-call parity and interest rates.
+
+The put-call parity formula states:
+
+$$
+C - P = S - \frac{X}{(1 + r)^{t}}
+$$
+
+where:
+
+* C = call option price
+* P = put option price
+* S = stock price
+* X = exercise price
+* r = risk-free interest rate
+* t = time to expiration
+
+Since S = X, the formula simplifies to 
+
+$$
+C - P = -\frac{X}{(1 + r)^{t}} + X
+$$
+
+Since $\frac{X}{(1 + r)^{t}} < X$, this means $P > C$ if interest rates are low or zero.
+
+### Interest rate effect
+
+When interest rates are low, the present value of $\frac{X}{(1 + r)^{t}}$ is close to $X$, making the put option more expensive. When interest rates are high, call options tend to be worth more because investors prefer to defer payments (buying shares later at a fixed price).
+
+### Dividend effect
+
+If the stock pays dividends, puts become more valuable because the stock price is expected to drop when dividends are payed.
+
+### Conclusion
+
+In most typical cases, especially when interest rates are low and the stock pays dividends, the put option will be slightly more expensive than the call option for an at-the-money option.
+
+---
+
+## Option price and interest rates
+
+Suppose the interest rate on T-bills suddenly and unexpectedly rises. All other things being the same, what is the impact on call option values? On put option values?
+
+---
+
+If the interest rae on T-bills (or the risk-free rate) suddenly and unexpectedly rises, the impact on call and put option values can be understood using the Black-Scholes option pricing model and put-call parity.
+
+### Effect on call option values
+
+A rise in interest rates generally increases the value of a call option. The reason is higher interest rates reduce the present value of the exercise, or strike, price. Since buying a stock requires tying up capital, higher interest rates make delaying that purchase (via a call option) more beneficial).
+
+### Effect on put optin values
+
+A rise in interest rates generally decreases the value of a put option. The present value of the exercise price decreases, reducing the value of the guaranteed sale price in the future. A put option benefits from a high present value of the strike price, so when interest rates rise and this present value falls, the put becomes less valuable.
+
+### Mathematical insight (Black-Scholes model)
+
+The Black-Scholes formula for a European call option includes the risk-free rate $r$:
+
+$$
+C = S N(d_1) - X e^{-rt} N(d_2)
+$$
+
+The term $X e^{-rt}$ decreases when $r$ rises, making the call more valuable. Sicne put-call parity states:
+
+$$
+C - P = S - X e^{-rt}
+$$
+
+an increase in $r$ means $X e^{-rt}$ shrinks, making puts less valuable.
+
+### Conclusion
+
+Call options become more valuable when interest rates rise, while put option become less valuable.
+
+---
+
+## Contingent liabilities
+
+When you take out an ordinary student loan, it is usually the case that whoever holds that loan is given a guarantee by the U.S. government, meaning that the government will make up any payments you skip. This is just one example of the many loan guarantees made by the U.S. government. Such guarantees don't show up in calculations of government spending or in official deficit figures. Why not? Should they show up?
+
+---
+
+Loan guarantees by the U.S. government do not show up in official government spending or deficit figures because they are contingent liabilities---the government is only required to make payments if borrowers default. Unlike direct government spending, which immediately affects the budget, loan guarantees are a potential obligation rather than an actual expenditure.
+
+### Why don't they show up in deficit figures?
+
+1. No immediate cash flow - A loan guarantee does not require the government to spend money immediately; it only comes into play if the borrower defaults.
+2. Budget accounting rules - The U.S. government follows cash-based accounting, which means only actual cash outflows (not potential future liabilities) are counted in deficit calculations.
+3. Uncertain costs - It's difficult to estimate when and how much the government will need to pay due to defaults, making it challenging to include in official spending numbers.
+
+### Should they be included?
+
+Many economists argue that yes, they should be reflected, at least as estimated liabilities, because:
+
+* They represent a real financial risk to taxpayers.
+* They create moral hazard---lenders may take more risks, knowing the government will cover losses.
+* They can result in large, unexpected government payouts (e.g., the 2008 financial crisis, where many guarantees turned into actual costs).
+
+A more transparent approach be to estimate the expected cost of guarantees and include that in budget deficit calculations, similar to how businesses account for potential liabilities.
+
+---
+
+## Options and expiration dates
+
+What is the impact of lengthening the time to expiration on an option's value? Explain.
+
+---
+
+Lengthening the time to expiration generally increases the value of both call and put options, assuming all other factors remain constant.
+
+### More time means more uncertainty (higher time value)
+
+The longer the time until expiration, the greater the chance that the stock price will move favorably for the option oholder. For call options, a longer time horizon increases the chance that the stock price will rise above the strike price. For put options, it increases the chance that the stock price will fall below the strike price. More time mean more opportunity for volatility, which benefits option holders.
+
+### Less time decay (slower theta)
+
+Time decay (Theta) is the erosion of an option's value as expiration nears. Longer-term options lose value more gradually, whereas shot-term options experience rapid time decay. This makes longer-term options inhernetly more valuable than shorter-term options.
+
+---
+
+## Options and stock price volatility
+
+What is the impact of an increase in the volatility of the underlying stock's return on an option's value? Explain.
+
+---
+
+An increase in the volatility of the underlying stock increases the value of both call and put options.
+
+### Higher volatility means greater potential gains
+
+Options give the holder the right, but not the obligation, to buy (calls) or sell (puts) the stock at a fixed strike price. More volatility increases the chance that the stock price will move significantly in either direction, making the option more valuable.
+
+### Asymmetry of payoff (limited loss, unlimited gain)
+
+If you own an option, your downside is limited to the premium paid, but your upside is unlimited (for calls) or significant (for puts). When volatility rises, the probability of large price swings increases, which enhances the potential profit of the option.
+
+### Impact on time value
+
+Higher volatility increase the time value component of an option's price. Even if the option is currently out-of-the-money, higher volatility means it is more likely to become profitable before expiration.
+
+### Mathematical justification (Black-Scholes model)
+
+The Black-Scholes option pricing model shows that the price of an option increases as the standard deviation ($\sigma$, volatility) of the stock's return increases. Since volatility is a key input, hihger $\sigma$ always leads to a higher option price, all else being equal.
+
+### Key takeaway
+
+If you expect increased volatility, options become more valuable because the greater probability of profitable price movements. This is why options tend to be expensive when markets are highly uncertain or turbulent.
+
+---
+
+## Insurance as an option
+
+An insurance policy is considered analogous to an option. From the policyholder's point of view, what type of option is an insurance policy? Why?
+
+---
+
+An insurance policy is analogous to a put option from the policyholder's perspective.
+
+### A put option provides downside protection
+
+A put option gives the holder the right to sell an asset at a fixed price (strike price), protecting against a decline in value. Similarly, an insurance policy protects the policyholder against losses from events like accidents, illnesses, or property damage.
+
+### The insurance premium is like an option premium
+
+When buying a put option, you pay a premium to have the right to sell at the strike price. In insurance, you pay premiums to secure coverage in case of a negative event (a "claimable loss").
+
+### The policyholder "Exercises" the insurance when a loss occurs
+
+If the insured event happens (e.g., your house burns down), the insurance company pays out a claim---just like a put option pays off when the stock price falls below the strike price. If no loss occurs, just like an out-of-the-money put option expiring worthless, the policyholder gets no pay out but has still paid the premium.
+
+### Key takeaway
+
+An insurance policy functions like a put option on the insured asset because it provides financial protection against downside risk with the premium acting as the cost of securing that protection.
+
+---
+
+## Equity as a call option
+
+It is said that the equityholders of a levered firm can be thought of as holding a call option on the firm's assets. Explain what is meant by this statement.
+
+---
+
+The statement that equityholders of a levered firm can be thought of as holding a call option on the firm's assets comes from the option pricing perspective of corporate finance, specifically the Merton model of capital structure.
+
+### Equity as a call option on firm assets
+
+A firm's assets can be thought of as the underlying asset. The firm's debt is like the strike price of a call option. Equityholders only receive value if the firm's assets exceed the value of the debt at maturity.
+
+### How this works in a levered firm
+
+If the firm is successful and its assets are worth more than the debt (D) at maturity, equityholders get the residual value.
+
+$$
+\text{Equity value} = \text{max}(A - D, 0)
+$$
+
+where A is the firm's asset value.
+
+If the firm's assets are worth less than the debt, the firm defaults, and equityholders get nothing (since debt holders are paid first).
+
+This is exactly how a call option works: If the asset value is above the strike price (debt), equityholders exercise their option and keep the excess value. If the asset value is below the strike price (debt), equityholders let the option expire worthless, losing their investment.
+
+### Implication of the call option view
+
+Equityholders prefer volatility, since option value sincrease with volatility, equityholders in a levered firm benefit from riskier projects that could increase firm value. Debt holders bear downside risk. If asset values fall below the debt level, debt holders take the hit in bankruptcy. The more debt a firm has, the more its equity resembles a highly leveraged call option.
+
+### Key takeaway
+
+Equity in a levered firm is structurally similar to a call option because shareholders only get paid if the firm's assets exceed its liabilities, just like a call option holder only profits if the underlying stock exceeds the strike price.
+
+---
+
+## Option valuation and NPV
+
+You are the CEO of Titan Industries and have just been awarded a large number of employee stock options. The company has two mutually exclusive projects available. The first project has a large NPV and will reduce the total risk of the company. The second project has a small NPV and will increase the total risk of the company. You have decided to accept the first project when you remember your employee stock options. How might this affect your decision?
+
+---
+
+As the CEO of Titan Industries, your decision about which project to undertake is influenced by two competing incentives:
+
+1. __Maximizing firm value__ (which favors choosing the project with the higher NPV).
+2. __Maximizing the value of your employee stock options__ (Which may favor the project that increases risk).
+
+### How emmployee stock options affect your decision
+
+Employee stock options function like call options on the company's stock. Since the value of call options increases with risk (volatility), you might have an incentive to favor the riskier project, even though it has a lower NPV.
+
+The reasons are:
+
+* __Higher risk increases stock volatility__, which raises the potential upside of the stock price.
+* __Since options have limited downside risk__ (you don't lose money if the stock price drops below the exercise price), increasing risk gives you a better chance of making a large gain without personally bearing the downside. The Black-Scholes model and other option valuation methods show that higher volatility leads to a higher option value.
+
+### Conflict between firm value and personal gain
+
+Without stock options, you would rationally choose the higher NPV project because it maximizes shareholder wealth. With stock options, you might be tempted to pick the riskier project to increase the value of your options, even though it creates less value for the company overall.
+
+### Ethical and fiduciary considerations
+
+As CEO, you have a fiduciary duty to act in the best interests of shareholders. If you choose the riskier, lower-NPV project for personal gain, it could be considered a conflict of interest. However, if shareholders understand this incentive misalignment, they may adjust your compensation (e.g., using restricted stock instead of options) to align your interests with theirs.
+
+### Final decision
+
+Even though your options might tempt you to pick the riskier project, the rational and ethical choice is to accept the higher NPV project---unless your personal gain outweighs potential reputational damage and long-term firm performance.
+
+---
+
+## Put-call parity
+
+You find a put and a call with the same exercise price and maturity. What do you know about the relative prices of the put and call? Prove your answer and provide an intuitive explanation.
+
+---
+
+When you have a put and a call option with the same exercise price (strike price) and maturity, you can use put-call parity to understand the relationship between their prices.
+
+Put-Call Parity states that for European options (which can only be exercised at expiration), the price of a call option (C) and the price of a put option (P) with the same strike price (K) and maturity (T) are related to the spot price (S) of the underlying asset and the risk-free interest rate (r) as in the following:
+
+$$
+C - P = S - Xe^{-rT}
+$$
+
+Where:
+
+* C = call option price
+* P = put option price
+* S = spot price of the underlying asset
+* X = Exercise (stike) price
+* r = Risk-free interest rate
+* T = Time to maturity
+
+### Derivation
+
+#### Replicating portfolio approach:
+
+You can create a portfolio that consists of a long position in a call and a short position in a put that replicates the payoff of being long in the underlying asset (stock). The payoff of a call at expiration is $\text{max}(S_T - K,0)$, and the payoff of a put is $\text{max}(K - S_T, 0)$. If you take a long call and short a put, at maturity, the portfolio payoff will look like being long the stock, i.e., $S_T - K$ (since if the stock goes up, the call profits, and if the stock goes down, the put loses, but the combined effect is equivalent to being long the stock).
+
+#### Equating the portfolio with stock:
+
+A long position in the stock, at time 0, has a value of $, and it grows at the risk-free rate, so at maturity, it will be workth $Xe^{-rT}$, because the initial price grows at the rate $e^{rT}$ to match the strike price. Hence, the price of the call option minus the price of the put option should be equal to the present value of the stock, i.e., $S - Ke^{-rT}$.
+
+### Intuitive explaination
+
+#### Call option price (C):
+
+The price of a call option increases with the spot price of the underlying asset, because if the underlying price increases, the call option becomes more valuable. It gives you the right to buy at the strike price, and the higher the underlying price, the more likely you are to profit from it.
+
+#### Put option price (P):
+
+Conversely, the price of a put option increases as the spot price decreases. A put gives you the right to sell at the strike price, and the lower the underlying price, the more likely you are to profit from it.
+
+Thus, when the strike price and maturity are the same for both the put and the call, the prices of the two options are related through the put-call parity equation, meaning that you cannot have an arbitrage opportunity without violating the relationship.
+
+### Conclusion
+
+From the put-call parity equation, you can infer that if the spot price of the asset increases, the price of the call option will tend to increase relative to the put option, and vice versa. Therefore, the relative prices of the put and call are directly connected through the spot price, strike price, and time to maturity.
+
+In summary:
+
+* If the spot price $S$ increases, the call option price $C$ will increase relative to the put option price $P$, as the call becomes more valuable.
+
+* If the spot price $S$ decreases, the put option price $P$ will increase relative to the call price $C$, as the put becomes more valuable.
+
+---
+
+## Put-call parity
+
+A put and a call have the same maturity and strike price. If they have the same price, which one is in the money? Prove your answer and provide an intuitive explanation.
+
+---
+
+If a put and a call option have the same maturity and strike price and they have the same price, we can analyze their relationship using put-call parity and consider the payoff structures of both options to determine which one is in the money.
+
+The put-call parity relationship for European options:
+
+$$
+C - P = S - Xe^{-rT}
+$$
+
+Where:
+
+* C = call option price
+* P = put option price
+* S = spot price of the underlying asset
+* X = Exercise (stike) price
+* r = Risk-free interest rate
+* T = Time to maturity
+
+If $C = P$, this means the left-hand side of the equation $C - P = 0$, so:
+
+$$
+0 = S - X e^{-rT}
+$$
+
+Which simplifies to:
+
+$$
+S = X e^{-rT}
+$$
+
+This equation shows that if the call and put prices are equal, the spot price of the underlying asset must be equal to the present value of the strike price (adjusted for the risk-free interest rate).
+
+### Intuitive explanation
+
+A call option is in the money if the spot price $S$ is higher than the strike price $X$. This is because the holder of the call option can buy the underlying asset at the strike price, and if the market price (spot price) is higher, there is an immediate profit opportunity.
+
+A put option is in the money if the spot price $S$ is lower than the strike price $X$. This is because the holder of the put opiton can sell the underlying asset at the strike price, and if the market price (spot price) is lower, there is an immediate profit opportunity.
+
+For $C = P$ to hold, the spot price must be exactly equal to $X e^{-rT}$, the discounted strike price. This condition corresponds to the exact point where the underlying asset's price is neither too high nor too low to favor one option over the other. At this point, neither the call nor the put option is "in the money" because neither would provide a profit if exercised immediately (the call would break even if $S = K$, and the put would also break even at the same price). This situation occurs exactly when the spot price is at the strike price, adjusted for the time value of money.
+
+If the spot price is exactly $X e^{-rT}$, then neither the call nor the put is "in the money," because both would have a payoff of zero at expiration. Therefore, neither of the options is in the money at this point. They are effectively at the money, meaning they both have no intrinsic value, only time value.
+
+### Conclusion
+
+If a put and a call have the same maturity, strike price, and price, neither option is in the money. They are both at the money at this particular point because the spot price equals the present value of the strike price, meaning theoptions have no intrinsic value at that moment.
+
+---
+
+## Put-call parity
+
+One thing put-call parity tells us is that given any three of a stock, a call, a put, and a T-bill, the fourth can be synthesized or replicated using the other three. For example, how can we replicate a shre of stock using a call, a put, and a T-bill?
+
+---
+
+To replicate a shre of stock using a call option, a put option, and a T-bill (risk-free bond), we can use the put-call parity relationship. Let's break this down and see how to construct the replication.
+
+### Put-call parity recap
+
+
+$$
+C - P = S - Xe^{-rT}
+$$
+
+Where:
+
+* C = call option price
+* P = put option price
+* S = spot price of the underlying asset
+* X = Exercise (stike) price
+* r = Risk-free interest rate
+* T = Time to maturity
+
+This equation essentially tells us how the prices of a call, a put, and the stock are related. It says that the difference between the price of the call and the price of the put is equal to the difference between the spot price of the stock and the present value of the strike price.
+
+### Replication strategy
+
+To replicate a share of stock using a call option, a put option, and a T-bill, we want to create a portfolio that behaves identically to holding one share of the stock. Let's derive this portfolio step by step.
+
+1. Start with put-call parity
+
+Rearranging the put-call parity equation to isolate $S$ (the stock):
+
+$$
+S = C - P + X e^{-rT}
+$$
+
+This shows that the stock price can be replicated by buying a call option, selling a put option, and holding a position in a T-bill (which will earn $X e^{-rT}$ at maturity).
+
+2. Interpret the components
+
+* $C$: The price of the call option gives you the right to buy the stock at the strike price.
+* $P$: The price of the put option gives you the right to sell the stock at the strike price.
+* $X e^{-rT}$: The present value of the strike price of the options (discounted at the risk-free rate).
+
+### Construct the portfolio
+
+To replicate the stock $S$, you would do the following:
+
+1. Buy one call option ($C$): This gives you the right to buy the stock at the strike price $K$.
+2. Sell one put option ($P$): This obligates you to buy the stock at the strike price $X$ if the option is exercised. In effect, this gives you a position that will pay off similarly to holding the stock if the stock price falls below $X$.
+3. Hold $X e^{-rT}$ in a T-bill: This is the present value of the strike price, and it will grow to $X$ at maturity, which aligns with the strike price of the options.
+
+### Intuitive explanation
+
+* __Call option ($C$)__: By buying the call, you're acquiring the right to buy the stock at the strike price $X$, which is beneficial when the stock price rises above $X$.
+* __Put option ($P$)__: By selling the put, you're agreeing to buy the stock at the strike price $X$ if the stock falls below $X$. This is beneficial when the stock price falls below $X$, effectively allowing you to own the stock at the strike price.
+* T-bill ($X e^{-rT}$): This investment is a way to ensure that you can afford to buy the stock at the strike price when either the call is exercised or the put is assigned, regardless of whether the stock price moves up or down.
+
+Thus, this portfolio is effectively a synthetic long position in the stock, and the payoff will mirror the price movement of the stock. If the stock price goes up, the call option becomes more valuable, and if the stock price goes down, the put option becomes more valuable. The T-bill ensures that you can fulfill your obligations (buying the stock at the strike price) at maturity.
+
+### Conclusion
+
+By suing put-call parity, you can replicate a share of stock by: Buying a call option, selling a put option and holding a T-bill with a value of $X e^{-rt}$, where $X$ is the strike price.
+
+---
+

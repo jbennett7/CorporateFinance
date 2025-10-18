@@ -19,6 +19,8 @@ ktable <- function(df, caption=NULL) {
     kable_styling(latex_options = c("HOLD_position"))
 }
 options(scipen = 999)
+pv <- function(r, t, C=1, m=1) C * (1 + r/m)^(-m*t)
+fv <- function(r, t, C=1, m=1) C * (1 + r/m)^(m*t)
 ```
 
 # 1. Simple interest versus compound interest
@@ -3692,7 +3694,7 @@ $$
 
 You are serving on a jury. A plaintiff is suing the city for injuries sustained
 after a freak street sweeper accident. In the trial, doctors testified that it
-will be five years before the plaintiff is able ot return to work. The jury has
+will be five years before the plaintiff is able to return to work. The jury has
 already decided in favor of the plaintiff. You are the foreperson of the jury
 and propose that the jury give the plaintiff an award to cover the following:
 (1) The present value of two years' back pay. The plaintiff's annual salary for
@@ -3708,27 +3710,82 @@ lower interest rate?
 
 ```{r problem 61, echo=F}
 p61 <- new.env()
-p61$r <- .09
-p61$backpay <- c(37e3, 39e3)
-p61$pv.backpay <- {
-    pv <- 0
-    # first year's monthly payments months 1..12
-    for(k in 1:12) pv <- pv + (p61$backpay[1]/12) / (1 + p61$r/12)^k
-    # second year's monthly payments months 13..24
-    for(k in 13:24) pv <- pv + (p61$backpay[2]/12) / (1 + p61$r/12)^k
-
-    pv
-}
+p61$pv.bp.1 <- sum(fv(.09, (1:12)/12, 39e3/12, 12))
+p61$pv.bp.2 <- sum(fv(.09, (13:24)/12, 37e3/12, 12))
+p61$pv.bp <- p61$pv.bp.1 + p61$pv.bp.2
+p61$pv.fp <- sum(pv(.09, (1:(5*12))/12, 43e3/12, 12))
+p61$payment <- p61$pv.bp + p61$pv.fp + 150e3 + 25e3
 ```
 
-1. Present value of two years back pay: \$37,000 and \$39,000.
+## 1. The present value of the two years of back
 
-For first year of backpay:
+For first previous year of backpay
+(we add 1 year of interest compounded monthly):
 
-2. The present value of five years' of future salary (assume \$43,000 per year)
+\[
+\text{PV}_{\text{backpay year 2}} =
+    \$39,000 \sum^{12}_{k=1}{(1 + .09/12)^{k}} =
+    \$`r pretty(p61$pv.bp.1)`
+\]
 
-$$
-\begin{aligned}
-\text{PV}_{\text{future salary}} &= \$43,000 \times \frac{(1 + .09)^{2}}{.09}
-\end{aligned}
-$$
+The present value of the second year (2 years previous):
+
+\[
+\text{PV}_{\text{backpay year 1}} =
+    \$37,000 \sum^{24}_{k=13}{(1 + .09/12)^{k}} =
+    \$`r pretty(p61$pv.bp.2)`
+\]
+
+The sum of the two years of backpay:
+
+\[
+\$`r pretty(p61$pv.bp.1)` + \$`r pretty(p61$pv.bp.2)` = \$`r pretty(p61$pv.bp)`
+\]
+
+## 2. The present value of five years of future salary.
+
+We assume \$43,000 per year paid monthly.
+
+\[
+\text{PV}_{\text{future pay}} = \$43,000 \sum^{60}_{k=1}{(1 + .09/12)^{k}}
+    = \$`r pretty(p61$pv.fp)`
+\]
+
+## 3. and 4. The \$150,000 pain and suffering, and \$25,000 court costs
+
+We add both the pain and suffering, and court costs payments to present values
+of both the backpay and future pay salaries:
+
+
+\[
+\$`r pretty(p61$pv.bp)` + \$`r pretty(p61$pv.fp)` + \$150,000 + \$25,000
+    = \$`r pretty(p61$payment)`
+\]
+
+---
+
+# 62. Calculating EAR with Points
+
+You are looking at a one-year loan of \$10,000. The interest rate is quoted as 8
+percent plus three points. A _point_ on a loan is simply 1 percent (one
+percentage point) of the loan amount. Quotes similar to this one are very common
+with home mortgages. The interest rate quotation in this example requires the
+borrower to pay three points to the lender up front and repay the loan later
+with 8 percent interest. What rate would you actually be paying here? What is
+the EAR for a one-year loan with a quoted interest rate of 11 percent plus two
+points? Is your answer affected by the loan amount?
+
+---
+
+```{r problem 62; setup, echo=F}
+p62 <- new.env()
+p62$loan <- 10e3
+p62$loan.repay <- 10e3*1.08
+p62$loan.m3p <- 10e3 * .97
+p62$r.effective <- (p62$loan.repay - p62$loan.m3p) / p62$loan.m3p
+p62$loan.m2p <- 10e3*.02
+p62$loan.m2p.repay <- 10e3*1.11
+p62$r.effective.m2p <- (p62$loan.m2p.reapy - p62$loan.m2p) / p62$loan.m2p
+```
+
+---

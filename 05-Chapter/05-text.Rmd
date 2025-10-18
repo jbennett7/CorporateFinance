@@ -1,10 +1,11 @@
 ---
 title: "Net Present Value and Other Investment Rules"
 author: "Ross, Westerfield, Jaffe"
-date: "`r Sys.Date()`"
 output:
   pdf_document:
     toc: true
+    includes:
+      in_header: preamble.tex
 ---
 
 ```{r setup, include=F}
@@ -28,43 +29,50 @@ npv <- function(I, C, r) I + sum(C/(1 + r)^(1:length(C)))
 
 # 5.1 Why use net present value?
 
-* __capital budgeting__ The decision-making process for accepting or rejecting
-  projects.
+\begin{tcolorbox}[title=\textbf{Capital budgeting},
+    colback=red!5!white, colframe=red!75!white]
+The decision-making process for accepting or rejecting projects.
+\end{tcolorbox}
 
-* __Net present value__ The value of future cash flows minus the present value
-  of the cost of the investment.
+\begin{tcolorbox}[title=\textbf{Net present value},
+    colback=red!5!white, colframe=red!75!white]
+The value of future cash flows minus the present value of the cost of the
+investment.
+\end{tcolorbox}
 
-### Example 5.1:
-
-#### Net Present Value
-
+\begin{tcolorbox}[title=\textbf{Example 5.1},
+    colback=blue!5!white, colframe=blue!75!white]
+\textbf{Net Present Value}
 The Alpha Corporation is considering investing in a riskless project costing
 \$100. The project receives \$107 in one year and has no other cash flows. The
 riskless doscount rate is 6 percent.
-
+\\\\
 The NPV of the project can easily be calculated as:
-
-$$
+\[
 \$.94 = -\$100 + \frac{\$107}{1.06}
-$$
-
+\]
 From Chapter 4, we know that th eproject should be accepted because its NPV is
 positive. Had the NPV of the project been negative, as would have been the case
 with an interest rate greater than 7 percent, the project should be rejected.
+\end{tcolorbox}
 
-The basic investment rule for NPV can be genearlized to:
+\begin{tcolorbox}[title=\textbf{NPV investment rule},
+    colback=orange!5!white, colframe=orange!75!white]
+\begin{itemize}
+  \item Accept a project if the NPV is greater than zero.
+  \item Reject a project if NPT is less than zero.
+\end{itemize}
+\end{tcolorbox}
 
-* Accept a project if the NPV is greater than zero.
+\begin{tcolorbox}[title=\textbf{NPV attributes},
+    colback=orange!5!white, colframe=orange!70!white]
+\begin{enumerate}
+  \item NPV uses cash flows.
+  \item NPV uses all the cash flows of the project.
+  \item NPV discounts the cash flows properly.
+\end{enumerate}
+\end{tcolorbox}
 
-* Reject a project if NPT is less than zero.
-
-NPV attributes:
-
-1. NPV uses cash flows.
-
-2. NPV uses all the cash flows of the project.
-
-3. NPV discounts the cash flows properly.
 
 # 5.2 The payback period method
 
@@ -73,46 +81,84 @@ cutoff date, say two years, is selected. All investment projects that have
 payback periods of two years or less are accepted, and all of those that pay off
 in more than two years are rejected.
 
-#### Example
-
+\begin{tcolorbox}[title=\textbf{Payback period example},
+    colback=blue!5!white, colframe=blue!75!white]
 Suppose a project has an initial investment of -\$50,000. The cash flows are
 \$30,000, \$20,000, and \$10,000. If we choose a cutoff of two years, then the
 project pays off in two years and thus we should accept the project.
+\end{tcolorbox}
 
-### Problems with the payback method
+## Problems with the payback method
 
 ```{r Table 5.1; expected cash flows for projects, echo=F}
 Year <- c(0, 1, 2, 3, 4)
 A <- c(-100, 20, 30, 50, 60)
 B <- c(-100, 50, 30, 20, 60)
 C <- c(-100, 50, 30, 20, 60000)
-knitr::kable(data.frame(Year, A, B, C))
+knitr::kable(data.frame(Year, A, B, C),
+    caption='Expected cash flows for projects A through C ($)')
 ```
 
-#### Problem 1: Timing of cash flows within the payback period
-
+\begin{tcolorbox}[
+    title=\textbf{Problem 1: Timing of cash flows within the payback period},
+    colback=orange!5!white, colframe=orange!75!white]
 The payback method does not discount cash flows properly. In the table above, we
 can see that all three projects have the same payback period of three years.
 Therefore, all three would be identical if we use the payback period method of
 choosing projects. However, because the large cash flow of \$50 comes earlier
 for projects B and C, we know that those projects have a higher net present
 value.
+\end{tcolorbox}
 
-#### Problem 2: Payments after the payback period
-
+\begin{tcolorbox}[
+    title=\textbf{Problem 2: Payments after the payback period},
+    colback=orange!5!white, colframe=orange!75!white]
 Considering projects B and C we notice that project C has a rather large cash
 flow in year 4 of \$60,000. However, if we used payback period, this cash flow
 would not be included.
+\end{tcolorbox}
 
-#### Problem 3: Arbitrary standard for payback period
-
+\begin{tcolorbox}[
+    title=\textbf{Problem 3: Arbitrary standard for payback period},
+    colback=orange!5!white, colframe=orange!75!white]
 There is no guide for choosing the payback cutoff date. It is completely
 arbitrary.
+\end{tcolorbox}
 
 # 5.3 The discounted payback period
 
 As an alternative we can use the discounted payback period method which does
 discount the cash flows.
+
+\begin{tcolorbox}[title=\textbf{Discounted payback period},
+    colback=blue!5!white, colframe=blue!75!white]
+Suppose that the discount rate is 10 percent and the cash flows on a project are
+given by:
+
+\[
+(-\$100, \$50, \$50, \$20)
+\]
+
+This investment has a payback period of two years because the investment is paid
+back in that time.
+\\\\
+
+To compute the project's discounted payback period, we first discount each of
+the cash flows at the 10 percent rate. These discounted cash flows are:
+
+\[
+[-\$100, \$50/1.1, \$50(1.1)^2, \$20/(1.1)^3] =
+    (-\$100, \$45.45, \$41.32, \$15.03)
+\]
+
+The discounted payback period of the original investment is simply the payback
+period for these discounted cash flows. The payback period for the discounted
+cash flows is slightly less than three years because the discounted cash flows
+over the three years is \$101.80 (=\$45.45 + 41.32 + 15.03). As long as the cash
+flows and discounted rate are positive, the discounted payback period will never
+be smaller than the payback period because discounting reduces the value of the
+cash flows.
+\end{tcolorbox}
 
 # 5.4 The internal rate of return
 
@@ -120,8 +166,8 @@ The appeal of the internal rate of return (IRR) is that it uses a single number
 to summarize the merits of a project. This number does not depend on any outside
 rate.
 
-#### Example
-
+\begin{tcolorbox}[title=\textbf{Internal rate of return},
+    colback=blue!5!white, colframe=blue!75!white]
 Consider a simple project (-\$100, \$110). The net present value for this
 project is
 
@@ -129,8 +175,10 @@ $$
 \text{NPV} = -\$100 + \frac{\$110}{1 + R}
 $$
 
-where $R$ is the discount rate. The IRR method is used to find $R$. We can use
-`R`'s `uniroot` method to find this
+where $R$ is the discount rate. The IRR method is used to find $R$.
+\end{tcolorbox}
+
+We can use `R`'s `uniroot` method to find this:
 
 ```{r 5.4 IRR example}
 npv <- function(r) 110/(1 + r) - 100
@@ -142,36 +190,45 @@ We find the discount rate as .10.
 We say that the project's internal rate of return is 10 percent. We compare this
 number with the actual discount rate.
 
+\begin{tcolorbox}[title=\textbf{Internal rate of return acceptance criteria},
+    colback=orange!5!white, colframe=orange!75!white]
 Accept the project if the IRR is greater than the discount rate. Reject the
 project if the IRR is less than the discount rate.
+\end{tcolorbox}
 
 # 5.5 Problems with the IRR approach
 
-* __independent project__ is a project whose acceptance or rejection is
-  independent of the acceptance or rejection of other projects.
+\begin{tcolorbox}[title=\textbf{Independent project},
+    colback=red!5!white, colframe=red!75!white]
+A project whose acceptance or rejection is independent of the acceptance or
+rejection of other projects.
+\end{tcolorbox}
 
-* __mutually exclusive investments__ When investing in one project means you
-  cannot invest in the other project.
+\begin{tcolorbox}[title=\textbf{mutually exclusive investments},
+    colback=red!5!white, colframe=red!75!white]
+When investing in one project means you cannot invest in the other project.
+\end{tcolorbox}
 
-#### Problem 1: Investing or financing?
-
+\begin{tcolorbox}[title=\textbf{Problem 1: Investing or financing?},
+    colback=orange!5!white, colframe=orange!75!white]
 Consider a project with cash flows (\$100, -\$130). In this situation the
 positive cash flow comes first, and the payout is later. This usually happens
 with projects where payment is done before receiving the good or service, such
 as when buying tickets to a concert.
-
+\\\\
 In this situation we reverse the rule: Accept the project when the IRR is less
 than the discount rate. Reject the project when the IRR is greater than the
 discount rate.
+\end{tcolorbox}
 
-#### Problem 2: Mutliple rates or return
-
+\begin{tcolorbox}[title=\textbf{Problem 2: Mutliple rates or return},
+    colback=orange!5!white, colframe=orange!75!white]
 Suppose that the cash flows from the project are (-\$100, \$230, -\$132). Here
 we see that there are two sign changes. This means that the project will have
 two IRRs, one is 10 percent and the other is 20 percent. In order to deal with
 projects that have multiple rates of return we use the modified IRR.
+\end{tcolorbox}
 
-#### Problem 3: The scale problem
 
 ```{r 5.5 Problems with IRR; problem 3, echo=F}
 df <- matrix(c(-1, -10, 1.5, 11, .5, 1.00, .5, .10), nrow=2)
@@ -180,21 +237,24 @@ rownames(df) <- c("Opportunity 1", "Opportunity 2")
 knitr::kable(df)
 ```
 
+\begin{tcolorbox}[title=\textbf{Problem 3: The scale problem},
+    colback=orange!5!white, colframe=orange!75!white]
 The table above illustrates a defect with the internal rate of return. The basic
 IRR rule indicates the selection of Opportunity 1 because the IRR is 50 percent.
 The IRR is only 10 percent for Opportunity 2. However, the net present value
 for opportunity 2 is better.
-
-The problem with IRR is that it ignores issues of _scale_. Although Opportunity
+\\\\
+The problem with IRR is that it ignores issues of \textit{scale}. Although Opportunity
 1 has a greater IRR, the investment is much smaller.
+\end{tcolorbox}
 
-### Example 5.2:
-
-#### NPV versus IRR
-
+\begin{tcolorbox}[title=\textbf{Example 5.2},
+    colback=blue!5!white, colframe=blue!75!white]
+\textbf{NPV versus IRR}
 Stanley Jaffe and Sherry Lansing have just purchased the rights to Corporate
 Finance: The Motion Picture. They will produce this major motion picture on
 either a small budget or a big budget. Here are the estimated cash flows:
+\end{tcolorbox}
 
 ```{r example 5.2; NPV versus IRR; setup, echo=F}
 ex5.2 <- new.env()
@@ -214,6 +274,7 @@ colnames(ex5.2$df) <- c("Cash Flow at Date 0",
 knitr::kable(ex5.2$df)
 ```
 
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!white]
 Because of high risk, a 25 percent discount rate is considered appropriate.
 Sherry wants to adopt the large budget because the NPV is higher. Stanley wants
 to adopt the small budget because the IRR is higher. Who is right?
@@ -225,18 +286,25 @@ Sherry justify the large budget to Stanley using the IRR approach?
 This is where incremental IRR comes in. Sherry calculaes the incremental cash
 flows from choosing the large budget instead of the small budget as follows:
 
-||Cash Flow at Date 0|Cash Flow at Date 1|
-|:---:|:---:|:---:|
-| Incremental cash flows | -\$25 - (-10) = -\$15 | \$65 - 40 = \$25 |
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lccc}
+    \toprule
+    & Cash Flow at Date 0 & Cash  Flow at Date 1\\
+    Incremental cash flows & -\$25 - (-10) = -\$15 & \$65 - 40 = \$25\\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 This chart shows that the incremental cash flows are -\$15 million at Date 0 and
 \$25 million at Date 1. Sherry calculates incremental IRR as follows:
 
-##### Formula for calculating the incremental IRR:
-
-$$
+\begin{centering}
+\textbf{Formula for calculating the incremental IRR:}
+\[
 0 = -\$15\ \text{million} + \frac{\$25\ \text{million}}{1 + \text{IRR}}
-$$
+\]
+\end{centering}
 
 IRR equals 66.67 percent in this equation, implying that the incremental IRR
 is 66.67 percent. Incremental IRR is the IRR on the incremental investment from
@@ -244,11 +312,13 @@ choosing the larger project instead of the small project.
 
 In addition, we can calculate the NPV of the incremental cash flows:
 
-##### NPV of incremental cash flows:
+\begin{centering}
+\textbf{NPV of incremental cash flows:}
+\end{centering}
 
-$$
+\[
 -\$15\ \text{million} + \frac{\$25\ \text{million}}{1.25} = \$5\ \text{million}
-$$
+\]
 
 We know the small-budget picture would be acceptable as an independent project
 because its NPV is positive. We want to know whether it is beneficial to invest
@@ -260,10 +330,12 @@ the incremental IRR of 66.67 percent is higher than the discount rate of 25
 percent. For both reasons, the incremental investment can be justified, so the
 large-budget movie should be made. The second reason is what Stanley needed to
 hear to be convinced.
+\end{tcolorbox}
 
-#### Problem 4: The timing problem
-
+\begin{tcolorbox}[title=\textbf{Problem 4: The timing problem},
+    colback=orange!5!white, colframe=orange!75!white]
 Illustrated with the following example
+\end{tcolorbox}
 
 ### Example 5.3
 

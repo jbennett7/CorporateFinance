@@ -1,0 +1,1622 @@
+---
+title: "Chapter 22 Options and Corporate Finance"
+subtitle: "Questions and Problems"
+output:
+    pdf_document:
+        toc: true
+---
+
+```{r setup, include=F}
+require(tidyverse)
+pretty <- function(x, n=2) format(round(x, n), big.mark=',', nsmall=n)
+
+# Black-Scholes
+d.1 <- function(S, E, R, s, t) (log(S/E) + (R + s^2/2)*t)/sqrt(s^2*t)
+d.2 <- function(S, E, R, s, t) d.1(S, E, R, s, t) - sqrt(s^2*t)
+C.blackscholes <- function(S, E, R, s, t) {
+    S * pnorm(d.1(S, E, R, s, t)) - E * exp(-R*t) * pnorm(d.2(S, E, R, s, t))
+}
+
+# Two-State Options
+C.swing <- function(S.low, S.high, E){
+    ifelse((tmp <- c(S.low, S.high) - E) > 0, tmp, 0)
+}
+delta <- function(S.low, S.high, E){
+    diff(C.swing(S.low, S.high, E)) / diff(c(S.low, S.high))
+}
+borrow.payback <- function(S.low, S.high, E){
+    delta(S.low, S.high, E) * S.high - C.swing(S.low, S.high, E)[2]
+}
+borrow <- function(S.low, S.high, E, r, T){
+    borrow.payback(S.low, S.high, E) / (1 + r)^(T)
+}
+C.twostate <- function(S.cur, S.low, S.high, E, r, T){
+    S.cur * delta(S.low, S.high, E) - borrow(S.low, S.high, E, r, T)
+}
+```
+
+# 1. Two-state option pricing model
+
+T-bills currently yield 4.8 percent. Stock in Nina Manufacturing is currently
+selling for \$63 per share. There is no possibility that the stock will be worth
+less than \$61 per share in one year.
+
+a. What is the value of a call option with a \$60 exercise price? What is the
+   intrinsic value?
+
+b. What is the value of a call option with a \$50 exercise price? What is the
+   intrinsic value?
+
+c. What is the value of a put option with a \$60 exercise price? What is the
+   intrinsic value?
+
+## A. Value of call option with a \$60 exercise price
+
+We are not given the upper bound of the stock. We are given only the lower
+bound, which is \$61, and the current price, \$63. If we assume that \$63 is the
+upper bound then we can calculate the value of the call option one year from now:
+
+\[
+\text{Expected value} = \frac{(63 - 60)\frac{1}{2} + (61 - 60)\frac{1}{2} = 2}
+    {(1 + .048)} \approx 1.91
+\]
+
+The intrinsic value, or the immediate value right now is \$3.
+
+## B. Value of call option with a \$50 exercise price.
+
+\[
+\text{Expected value} = \frac{(63 - 50) \times .5 + (61 - 50) \times .5}
+    {(1.048)} \approx 11.45
+\]
+
+## C. Value of put option with a \$60 exercise price.
+
+For a put option with a \$60 exercise price, the option is out of the money.
+Since the stock will never be below \$61, the option will never have value. The
+value of the call option is zero.
+
+---
+
+# 2. Understanding option quotes
+
+Use the option quote information shown here to answer the questions that follow.
+The stock is currently selling for \$83.
+
+```{r problem 2; understanding option quotes, echo=F}
+p2 <- new.env()
+p2$tbl <- tibble(
+    Expiration = c("March", "April", "July", "October"),
+    `Strike Price` = rep(80, 4),
+    `Calls Volume` = c(230, 170, 139, 60),
+    `Calls Last` = c(2.80, 6, 8.05, 10.20),
+    `Puts Volume` = c(160, 127, 43, 11),
+    `Puts Last` = c(.80, 1.40, 3.90, 3.65)
+)
+knitr::kable(p2$tbl)
+```
+
+a. Are the call options in the money? What is the intrinsic value of an RWJ
+   Corp. call option?
+
+b. Are the put options in the money? What is the intrinsic value of an RWJ Corp.
+   put option?
+
+c. Two of the options are clearly mispriced. Which ones? At a minimum, what
+   should the mispriced options sell for? Explain how you could profit from the
+   mispricing in each case.
+
+## A. The call options are in the money, we calculate the intrinsic value
+
+$$
+\text{Intrinsic value} = 83 - 80 = 3
+$$
+
+## B. The put options are not in the money, they are worth 0.
+
+## C. Identifying mispriced options, and arbitrage opportunities with options
+
+To identify mispriced options, we compare the last price of each option with its
+minimum theoretical price.
+
+A call option should be worth at least its intrinsic value of 3. The March call
+is mispriced. It is selling for \$2.80 which is less than the \$3 intrinsic
+value.
+
+A put option should never be priced below its intrinsic value, but since all put
+options have an intrinsic value of 0, they should at least be worth their time
+value. In this case the October put is mispriced. It is selling for \$3.65, but
+the July put is selling for \$3.90. The October put should be at least \$3.90
+because longer-term options should be more expensive than shorter-term ones.
+
+---
+
+# 3. Calculating payoffs
+
+Use the option quote information shown here to answer the questions that follow.
+The stock is currently selling for \$114.
+
+```{r problem 3: calculating payoffs, echo=F}
+p3 <- new.env()
+p3$tbl <- tibble(
+    Expiration = c("February", "March", "May", "August"),
+    `Strike Price` = rep(110, 4),
+    `Calls Volume` = c(85, 61, 22, 3),
+    `Calls Last` = c(7.60, 8.80, 10.25, 13.05),
+    `Puts Volume` = c(40, 22, 11, 3),
+    `Puts Last` = c(.60, 1.55, 2.85, 4.70),
+)
+knitr::kable(p3$tbl)
+```
+
+a. Suppose you buy 10 contracts of the February 110 call option. How much will
+   you pay, ignoring commissions?
+
+b. In part (a), suppose that Macrosoft stock is selling for \$140 per share on
+   the expiration date. How much is your options investment worth? What if the
+   terminal stock price is \$125? Explain.
+
+c. Suppose you buy 10 contracts of the August 110 put option. What is your
+   maximum gain? On the expiration date, Macrosoft is selling for \$104 per share.
+   How much is your options investment worth? What is your net gain?
+
+d. In part (c), suppose you _sell_ 10 of the August 110 put contracts. What is
+   your net gain or loss if Macrosoft is selling for \$103 at expiration? For
+   \$132? What is the break-even price---that is, the terminal stock price that
+   results in a zero profit?
+
+## A. Cost of buying 10 February 110 call contracts.
+
+* 10 contracts purchases 100 shares each contract for a total of 1,000 shares.
+* The last price is \$7.60.
+* __Total cost:__ $1,000 \times 7.60 = 7,600$
+
+## B. Value of call options at expiration
+
+If the stock price is \$140 on expiration then the investment is worth $(140 -
+110) \times 1,000 = 30,000$.
+
+If the stock price is \$125 on expiration then the investment is worth $(125 -
+110) \times 1,000 = 15,000$.
+
+## C. Maximum gain and value of 10 August 110 put contracts
+
+The maximum gain of 10 August 110 put options occuris if the stock price goes to
+\$0. The total value is $10 \times 100 \times 110 = 110,000$. The cost is $10
+\times 100 \times 4.70 = 4,700$. The net gain is $110,000 - 4,700 = 105,300$.
+
+If Macrosoft is selling for \$104 on expiration, then the value is $(110 - 104)
+\times 1,000 = 6,000$.  The net gain is $6,000 - 4,700 = 1,300$.
+
+## D. Selling 10 August 110 put contracts
+
+If the stock price is \$103 on expiration then there is a loss of $(110 - 103)
+\times 1,000 = 7,000$. The net gain is $4,700 - 7,000 = -2,300$.
+
+If the stock price is \$132 on expiration then the option is out of the money
+and is worth zero. You keep \$4,700.
+
+Break-even occurs when net profit is zero. The loss comes from the put being in
+the money: $110 - S_T = 4.70$. Solving for $S_T = 110 - 4.70 = 105.30$.
+
+---
+
+# 4. Two-state option pricing model
+
+The price of Ervin Corp. stock will be either \$74 or \$96 at the end of the
+year. Call options are available with one year to expiration. T-bills currently
+yield 5 percent.
+
+a. Suppose the current price of Ervin stock is \$80. What is the value of the
+   call option if the exercise price is \$70 per share?
+
+b. Suppose the exercise price is \$90 in part (a). What is the value of the call
+   option now?
+
+```{r problem 4, echo=F}
+p4 = new.env()
+p4$S.swing = c(74, 96)
+p4$T = 1
+p4$r = .05
+p4$S.a = 80
+p4$E.a = 70
+p4$C.swing.a = C.swing(p4$S.swing[1], p4$S.swing[2], p4$E.a)
+p4$delta.a = delta(p4$S.swing[1], p4$S.swing[2], p4$E.a)
+p4$bpi.a = borrow.payback(p4$S.swing[1], p4$S.swing[2], p4$E.a)
+p4$borrow.a = borrow(p4$S.swing[1], p4$S.swing[2], p4$E.a, p4$r, p4$T)
+p4$C.a = C.twostate(p4$S.a, p4$S.swing[1], p4$S.swing[2], p4$E.a, p4$r, p4$T)
+```
+
+## A. Price of a call option with exercise price \$70
+
+### Calculate the Delta
+
+The swing of the call is (`r p4$C.swing.a`) = `r diff(p4$C.swing.a)`
+
+The swing of the stock is (`r p4$S.swing`) = `r diff(p4$S.swing)`
+
+$$
+\text{Delta} = \frac{`r diff(p4$C.swing.a)`}{`r diff(p4$S.swing)`} 
+    = `r p4$delta.a`
+$$
+
+### Calculate the amount to borrow
+
+Buying a stock brings us either \$96 or \$74 at expiration. This is \$70 more
+than the payout of \$26 or \$4.
+
+We need to borrow enough money to payoff \$70.
+
+\[
+\text{Borrow} = \frac{70}{1.05} = \$66.67
+\]
+
+### The value of the call is thus
+
+\[
+\begin{aligned}
+\text{Value of call} = \text{Stock price} \times \text{Delta}
+    - \text{Amount borrowed}\\
+V = \$80 \times (1) - \$66.67 = \$13.33
+\end{aligned}
+\]
+
+## B. Price of a call option with exercise price \$90
+
+If the exercise price is \$90 (instead of \$70). Then:
+
+future payouts: $96 - 90 = 6$ or $74 - 90 < 0$.
+
+The swing of the call is: 6. The swing of the stock is 22.
+
+\[
+\text{Delta} = \frac{6}{22} = 0.27
+\]
+
+Buying 0.27 of a share will bring us either $.27 \times 96 \approx 26$ or $.27 \times 74 \approx 20$.
+ This means we need to borrow the present value of \$20.
+
+\[
+\text{Borrow} = \frac{20}{(1.05)} = 19.05
+\]
+
+\[
+V = 80 \times .27 - 19.05 = 2.55
+\]
+
+Book answer \$2.60
+
+---
+
+# 5. Two-state option pricing model
+
+The price of Tara, Inc., stock will be either \$50 or \$70 at the end of the
+year. Call options are available with one year to expiration. T-bills currently
+yield 5 percent.
+
+a. Suppose the current price of Tara stock is \$62. What is the value of the
+   call option if the exercise price is \$35 per share?
+
+b. Suppose the exercise price is \$60 in part (a). What is the value of the call
+   option now?
+
+## A. Current price \$62, Exercise price of \$35
+
+### Calculate the delta
+
+* \(70 - 35 = 35\)
+
+* \(50 - 35 = 15\)
+
+\[
+\text{Delta} = \frac{\text{Call swing}}{\text{Stock swing}}
+    = \frac{35 - 15}{70 - 50} = \frac{20}{20} = 1
+\]
+
+### Calculate the borrowing amount
+
+\[
+\text{Borrow} = \frac{35}{1.05} = \$33.33
+\]
+
+### Calculate the value of the call option
+
+\(V = 62 \times 1 - 33.33 = 28.67\)
+
+## B. Current price \$62, Exercise price of \$60
+
+### Calculate the delta
+
+* \(70 - 60 = 10\)
+
+* \(50 - 70 < 0\)
+
+\[
+\text{Delta} = \frac{10 - 0}{70 - 50} = \frac{10}{20} = \frac{1}{2}
+\]
+
+### Calculate the borrowing amount
+
+\[
+\text{Borrow} = \frac{25}{1.05} = 23.81
+\]
+
+### Calculate the value of the call option
+
+\[
+V = 62 \times .50 - 23.81 = 7.19
+\]
+
+---
+
+# 6. Put-call parity
+
+A stock is currently selling for \$38 per share. A call option with an exercise
+price of \$40 sells for \$3.80 and expires in three months. If the risk-free
+rate of interest is 2.6 percent per year, coumpounded continuously, what is the
+price of a put option with the same exercise price?
+
+\[
+\begin{aligned}
+\text{Stock price} + \text{Price of Put} &=
+    \text{Price of call} + \text{PV}(\text{Exercise price})\\
+    38 + P &= 3.8 + 40 e^{-.026 \times .25}\\
+    P &= 3.8 + 39.74 - 38 = 5.54
+\end{aligned}
+\]
+
+Book answer: \$5.54
+
+---
+
+# 7. Put-call parity
+
+A put option that expires in six months with an exercise price of \$65 sells for
+\$4.89. The stock is currently priced at \$61, and the risk-free rate is 3.6
+percent per year, compounded continuously. What is the price of a call option
+with the same exercise price?
+
+\[
+\begin{aligned}
+\text{Stock price} + \text{Price of Put} &=
+    \text{Price of call} + \text{PV}(\text{Exercise price})\\
+    &= 61 + 4.89 - 65 e^{-.036 \times .5}\\
+    &= 2.05
+\end{aligned}
+\]
+
+---
+
+# 8. Put-call parity
+
+A put option and a call option with an exercise price of \$85 and three months
+to expiration sell for \$2.40 and \$5.09, respectively. If the risk-free rate is
+4.8 percent per year, compounded continuously, what is the current stock price?
+
+\[
+\begin{aligned}
+\text{Stock price} + \text{Price of Put} &=
+    \text{Price of call} + \text{PV}(\text{Exercise price})\\
+    &= 2.4 - 2.4 + 85e^{-.048 \times .25}\\
+    &= 83.99
+\end{aligned}
+\]
+
+---
+
+# 9. Put-call parity
+
+A put option and a call option with an exercise price of \$55 expire in two months and sell for \$2.65 and \$5.32, respectively. If the stock is currently priced at \$57.30, what is the annual continuously compounded rate of interest?
+
+\[
+\begin{aligned}
+\text{Stock price} + \text{Price of Put} &=
+    \text{Price of call} + \text{PV}(\text{Exercise price})\\
+    S + P &= C + Ee^{-Rt}\\
+    S + P - C &= Ee^{-Rt}\\
+    e^{-Rt} &= \frac{S + P - C}{E}\\
+    -Rt &= \ln{\left(\frac{S + P - C}{E}\right)}\\
+    -R &= \frac{1}{t} \ln{\left(\frac{S + P - C}{E}\right)}\\
+    R &= -6 \times \ln{\left(\frac{57.30 + 2.65 - 5.32}{55}\right)}\\
+    R &= .0405
+\end{aligned}
+\]
+
+---
+
+# 10. Black-Scholes
+
+What are the prices of a call option and a put option with the following characteristics?
+
+* Stock price: \$57
+* Exercise price: \$60
+* Risk-free rate: .06 compounded continuously
+* Maturity: 3 months
+* Standard deviation ($\sigma$) = .54 (Variance = $\sigma^2$)
+
+```{r problem 10, Black-Scholes, echo=F}
+p10 <- new.env()
+p10$stock = 57
+p10$exercise.price = 60
+p10$risk.free.rate = .06
+p10$maturity = 3/12
+p10$sd = .54
+
+p10$d.1 <- (log(p10$stock/p10$exercise.price) +
+    (p10$risk.free.rate + p10$sd^2/2) * p10$maturity)/
+    (sqrt(p10$sd^2*p10$maturity))
+
+p10$d.2 <- p10$d.1 - sqrt(p10$sd^2 * p10$maturity)
+
+(p10$C <- p10$stock * pnorm(p10$d.1) - p10$exercise.price *
+    exp(-p10$risk.free.rate * p10$maturity) * pnorm(p10$d.2))
+
+(p10$P <- p10$C + p10$exercise.price * exp(-p10$risk.free.rate * p10$maturity) -
+    p10$stock)
+```
+
+The Black-Scholes model
+
+\[
+\begin{aligned}
+C &= S N(d_1) - E e^{-rT} N(d_2)\\\\
+d_1 &= \frac{\ln(S/E) + (R + \sigma^2/2) T}{\sqrt{\sigma^2 T}}\\
+d_2 &= d1 - \sqrt{\sigma^2 T}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+d_1 &= \frac{\ln(\frac{`r p10$stock`}{`r p10$exercise.price`})
+    + (`r p10$risk.free.rate` + `r p10$sd`^2/2) \times `r p10$maturity`}
+    {\sqrt{`r p10$sd`^2 \times `r p10$maturity`}}\\
+    &= `r p10$d.1`\\\\
+d_2 &= `r p10$d.1` - \sqrt{`r p10$sd`^2 \times `r p10$maturity`}\\
+    &= `r p10$d.2`\\\\
+C &= `r p10$stock` \times `r pnorm(p10$d.1)`
+    - `r p10$exercise.price` \times
+    e^{-`r p10$risk.free.rate` \times `r p10$maturity`}
+    \times `r pnorm(p10$d.2)`\\
+  &= \$`r pretty(p10$C)`
+\end{aligned}
+\]
+
+To find the price of the put option
+
+\[
+P = C + Ee^{-Rt} - S = `r p10$C` + `r p10$exercise.price`
+    \times e^{-`r p10$risk.free.rate` \times `r p10$maturity`}
+    - `r p10$stock`
+  = `r pretty(p10$P)`
+\]
+
+Book answer: Call = \$5.24 Put = \$7.34
+
+---
+
+# 11. Black-Scholes
+
+What are the prices of a call option and a put option with the following
+characteristics?
+
+* Stock price: \$93
+* Exercise price: \$90
+* Risk-free rate: .04
+* Maturity: 5 months
+* Standard deviation: .62
+
+```{r problem 11, Black-Scholes, echo=F}
+p11 <- new.env()
+p11$stock = 93
+p11$exercise.price = 90
+p11$risk.free.rate = .04
+p11$maturity = 5/12
+p11$sd = .62
+
+p11$d.1 <- (log(p11$stock/p11$exercise.price) +
+    (p11$risk.free.rate + p11$sd^2/2) * p11$maturity)/
+    (sqrt(p11$sd^2*p11$maturity))
+
+p11$d.2 <- p11$d.1 - sqrt(p11$sd^2 * p11$maturity)
+
+(p11$C <- p11$stock * pnorm(p11$d.1) - p11$exercise.price *
+    exp(-p11$risk.free.rate * p11$maturity) * pnorm(p11$d.2))
+
+(p11$P <- p11$C + p11$exercise.price * exp(-p11$risk.free.rate * p11$maturity) -
+    p11$stock)
+```
+
+The Black-Scholes model
+
+\[
+\begin{aligned}
+C &= S N(d_1) - E e^{-rT} N(d_2)\\\\
+d_1 &= \frac{\ln(S/E) + (R + \sigma^2/2) T}{\sqrt{\sigma^2 T}}\\
+d_2 &= d1 - \sqrt{\sigma^2 T}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+d_1 &= \frac{\ln(\frac{`r p11$stock`}{`r p11$exercise.price`})
+    + (`r p11$risk.free.rate` + `r p11$sd`^2/2) \times `r p11$maturity`}
+    {\sqrt{`r p11$sd`^2 \times `r p11$maturity`}}\\
+    &= `r p11$d.1`\\\\
+d_2 &= `r p11$d.1` - \sqrt{`r p11$sd`^2 \times `r p11$maturity`}\\
+    &= `r p11$d.2`\\\\
+C &= `r p11$stock` \times `r pnorm(p11$d.1)`
+    - `r p11$exercise.price` \times
+    e^{-`r p11$risk.free.rate` \times `r p11$maturity`}
+    \times `r pnorm(p11$d.2)`\\
+  &= \$`r pretty(p11$C)`
+\end{aligned}
+\]
+
+To find the price of the put option
+
+\[
+P = C + Ee^{-Rt} - S = `r p11$C` + `r p11$exercise.price`
+    \times e^{-`r p11$risk.free.rate` \times `r p11$maturity`}
+    - `r p11$stock`
+  = `r pretty(p11$P)`
+\]
+
+---
+
+# 12. Delta
+
+What are the deltas of a call option and a put option with the following
+characteristics? What does the delta of the option tell you?
+
+* Stock price: \$67
+* Exercise price: \$70
+* Risk-free rate: .05
+* Maturity: 9 months
+* Standard deviation: .49
+
+```{r problem 12; Deltas, echo=F}
+p12 <- new.env()
+p12$S <- 67
+p12$E <- 70
+p12$r <- .05
+p12$t <- 9/12
+p12$sd <- .49
+
+p12$delta.call <- pnorm(d.1(p12$S, p12$E, p12$r, p12$sd, p12$t))
+p12$delta.put <- p12$delta.call - 1
+```
+
+The Black-Scholes model can be compared to the two-state option model:
+
+\[
+\begin{aligned}
+C &= S \times N(d_1) - Ee^{-RT} N(d_2)\\
+\text{Value of call} &= \text{Stock price} \times \text{Delta}
+    - \text{Amount borrowed}
+\end{aligned}
+\]
+
+The $N(d_1)$ is the same as the delta so:
+
+\[
+\text{Delta} = [\ln{(S/E)} + (R + \sigma^2/2)t]/\sqrt{\sigma^2 t}
+ = `r pretty(p12$delta.call, 3)`
+\]
+
+The Delta of the put is 
+\[
+d_1 - 1 = `r pretty(p12$delta.put, 3)`
+\]
+
+| Option | Delta | Interpretation |
+|:---|:---:|:---|
+| Call | 0.578 | For every \$1 $\uparrow$ in stock, call $\uparrow \approx$ \$0.58 |
+| Put | -0.422 | For every \$1 $\uparrow$ in stock, put $\downarrow \approx$ \$0.42 |
+
+---
+
+# 13. Black-Scholes and asset value
+
+You own a lot in Key West, Florida, that is currently unused. Similar lots have
+recently sold for \$1.1 million. Over the past five years, the price of land in
+the area has increased 12 percent per year, with an annual standard deviation of
+25 percent. A buyer has recently approached you and wants an option to buy the
+land in the next 12 months for \$1.25 million. The risk-free rate of interest is
+5 percent per year, compounded continuously. How much should you charge for the
+option?
+
+```{r problem 13; Black-Scholes and asset value, echo=F}
+p13 <- new.env()
+p13$G = .12
+p13$E = 1.25e6
+p13$r = .05
+p13$T = 1
+p13$sd = .25
+#p13$S <- 1.1e6*c(1, exp(p13$G*T))
+p13$S <- 1.1e6#*exp(p13$G*T)
+
+p13$d.1 <- d.1(p13$S, p13$E, p13$r, p13$sd, p13$T)
+p13$d.2 <- d.2(p13$S, p13$E, p13$r, p13$sd, p13$T)
+p13$C <- C.blackscholes(p13$S, p13$E, p13$r, p13$sd, p13$T)
+```
+
+* Price: \$1.1 million
+* Exercise price: \$1.25 million
+* Risk-fre rate: .05
+* Maturity: 12 months
+* Standard deviaion: .25
+
+Using the Black-Scholes model we can calculate the price of the call option
+
+\[
+\begin{aligned}
+d_1 &= \frac{\ln{(S/E)} + (R + \sigma^2/2)t}{\sqrt{\sigma^2 t}}\\
+    &= \frac{\ln{\left(\frac{`r p13$S`}{`r p13$E`}\right)}
+    + \left(`r p13$r` + \frac{`r p13$sd`^2}{2}\right) \times `r p13$T`}
+    {\sqrt{`r p13$sd`^2 \times `r p13$T`}}\\
+    &= `r p13$d.1`\\\\
+d_2 &= d_1 - \sqrt{\sigma^2 t}\\
+    &= `r p13$d.1` - \sqrt{`r p13$sd`^2 \times `r p13$T`}\\
+    &= `r p13$d.2`\\\\
+C   &= S N(d_1) - E e^{-Rt} N(d_2)\\
+    &= `r p13$S` \times `r pnorm(p13$d.1)`
+    - `r p13$E` e^{-`r p13$r` \times `r p13$T`} `r pnorm(p13$d.2)`\\
+    &= \$`r pretty(p13$C)`
+\end{aligned}
+\]
+
+---
+
+# 14. Black-Scholes and asset value
+
+In the previous problem, suppose you wanted the option to sell the land to the
+buyer in one year. Assuming all the facts are the same, describe the transaction
+that would occur today. What is the price of the transaction today?
+
+What you are asking for is a put option in one year:
+
+```{r problem 14; Black-Scholes and asset value, echo=F}
+p14 <- new.env()
+p14$P <- p13$C - p13$S + p13$E * exp(-p13$r*p13$T)
+```
+
+We use the put-call parity to calculate the price of the put option:
+
+\[
+\begin{aligned}
+S + P &= C + \text{PV}(E)\\
+P &= C + E e^{-R t} - S\\\\
+  &= `r pretty(p13$C)` + `r pretty(p13$E)` e^{-`r p13$r` \times `r p13$T`}
+  - `r pretty(p13$S)`\\
+  &= \$`r pretty(p14$P, 0)`
+\end{aligned}
+\]
+
+Book answer: \$163,712.78
+
+---
+
+# 15. Time value of options
+
+You are given the following information concerning options on a particular
+stock:
+
+* Stock price: \$83
+* Exercise price: \$80
+* Risk-free rate: 0.06
+* Maturity: 6 months
+* Standard deviation: .53
+
+a. What is the intrinsic value of the call option? Of the put option?
+
+b. What is the time value of the call option? Of the put option?
+
+c. Does the call or put have the larger time value component? Would you expect
+   this to be true in general?
+
+```{r problem 15, echo=F}
+p15 <- new.env()
+p15$S <- 83
+p15$E <- 80
+p15$r <- .06
+p15$T <- 6/12
+p15$sd <- .53
+
+p15$d.1 <- d.1(p15$S, p15$E, p15$r, p15$sd, p15$T)
+p15$d.2 <- d.2(p15$S, p15$E, p15$r, p15$sd, p15$T)
+p15$C <- C.blackscholes(p15$S, p15$E, p15$r, p15$sd, p15$T)
+p15$P <- p15$C - p15$S + p15$E * exp(-p15$r*p15$T)
+```
+
+## A. Intrinsic value calculation
+
+The intrinsic value of an option is the value it would have if exercised
+immediately. It is given by:
+
+Call: $\text{max}(S - X, 0)$
+
+Put: $\text{max}(X - S, 0)$
+
+$$
+\begin{aligned}
+\text{IV}_{\text{call}} &= \text{max}(83 - 80, 0)\\
+  &= 3\\\\
+\text{IV}_{\text{put}} &= \text{max}(80 - 83, 0)\\
+  &= 0
+\end{aligned}
+$$
+
+## B. Time value calculation
+
+The time value of an option is:
+
+$$
+\text{Time value} = \text{option price} - \text{intrinsic value}
+$$
+
+We can use the Black Scholes model to calculate the price of the option
+
+\[
+\begin{aligned}
+d_1 &= \frac{\ln{(S/E)} + (R + \sigma^2/2)t}{\sqrt{\sigma^2 t}}\\
+    &= \frac{\ln{\left(\frac{`r p15$S`}{`r p15$E`}\right)}
+    + \left(`r p15$r` + \frac{`r p15$sd`^2}{2}\right) \times `r p15$T`}
+    {\sqrt{`r p15$sd`^2 \times `r p15$T`}}\\
+    &= `r p15$d.1`\\\\
+d_2 &= d_1 - \sqrt{\sigma^2 t}\\
+    &= `r p15$d.1` - \sqrt{`r p15$sd`^2 \times `r p15$T`}\\
+    &= `r p15$d.2`\\\\
+C   &= S N(d_1) - E e^{-Rt} N(d_2)\\
+    &= `r p15$S` \times `r pnorm(p15$d.1)`
+    - `r p15$E` e^{-`r p15$r` \times `r p15$T`} `r pnorm(p15$d.2)`\\
+    &= \$`r pretty(p15$C)`
+\end{aligned}
+\]
+
+We can use the put-call parity to calculate the put option price:
+
+\[
+\begin{aligned}
+S + P &= C + \text{PV}(E)\\
+P &= C + E e^{-R t} - S\\\\
+  &= `r pretty(p13$C)` + `r pretty(p13$E)` e^{-`r p13$r` \times `r p13$T`}
+  - `r pretty(p13$S)`\\
+  &= \$`r pretty(p15$P)`
+\end{aligned}
+\]
+
+## C. Which option has the larger time value?
+
+The call option has a larger time value \$`r pretty(p15$C)` than the put option
+\$`r pretty(p15$P)`. This is expected because the stock price
+\$`r pretty(p15$S)` is above the strike price \$`r pretty(p15$E)`, making the
+call in the money and the put out of the money. In general, the time value is
+larger for options that are at the money or slightly in the money because they
+have a higher probability of expiring profitably.
+
+---
+
+# 16. Risk-neutral valuation
+
+A stock is currently priced at \$73. The stock will either increase or decrease
+by 15 percent over the next year. There is a call option on the stock with a
+strike price of \$70 and one year until expiration. If the risk-free rate is 8
+percent, what is the risk-neutral value of the call option?
+
+* Stock price: \$73
+* Stock movement range: $73 \times .15 = 10.95$
+* Exercise price: \$70
+* Maturity: 1 year
+* Risk-free rate: .08
+
+```{r problem 16, echo=F}
+p16 <- new.env()
+p16$S = 73
+p16$E = 70
+p16$r = .08
+p16$T = 1
+p16$sd = .15
+p16$prange = 73*c(.85, 1.15)
+p16$cpayoff = c(ifelse((p16$min <- min(p16$prange)-p16$E) > 0, p16$min, 0),
+                 max(p16$prange)-p16$E)
+p16$delta = diff(p16$cpayoff) / diff(p16$prange)
+p16$bstock = p16$delta * p16$prange
+p16$difference = max(p16$bstock) - max(p16$cpayoff)
+p16$borrow = p16$difference / (1 + p16$r)
+p16$C = p16$S * p16$delta - p16$borrow
+p16$p = uniroot(function(p) p * p16$sd + (1 - p) * -p16$sd - p16$r,
+                c(-1, 1))$root
+p16$C.rn <- (p16$p * max(p16$cpayoff) + (1 - p16$p) * min(p16$cpayoff)) /
+    (1 + p16$r)
+```
+
+## Calculate the Delta
+
+* Stock movement range: (`r p16$prange`)
+* Call payoff range: (83.95 - 70, 0) = (`r p16$cpayoff`)
+
+\[
+\begin{aligned}
+D &= \frac{\text{Swing of the call}}{\text{Swing of the stock}}\\
+  &= \frac{`r diff(p16$cpayoff)`}{`r diff(p16$prange)`}\\
+  &= `r pretty(p16$delta, 3)`
+\end{aligned}
+\]
+
+## Determine the borrowing amount
+
+To determine the borrowing amount we buy a Delta amount of stock. At expiration,
+that will either be \$`r pretty(max(p16$bstock), 2)` on the high
+side, or \$`r pretty(min(p16$bstock), 2)` on the low side. This is exactly
+\$`r pretty(p16$difference)` more than the payoffs of
+\$`r pretty(max(p16$cpayoff))` and \$`r pretty(min(p16$cpayoff))`, respectively,
+from the call. To duplicate the call through a purchase of stock, we should also
+borrow enough money so that we have to pay back exactly
+\$`r pretty(p16$difference)`. We borrow
+
+\[
+B = \frac{`r pretty(p16$difference)`}{(`r 1 + p16$r`)} = \$`r pretty(p16$borrow)`
+\]
+
+## Value of call
+
+The value of the call is calculated:
+
+\[
+\begin{aligned}
+C &= S \times D - B\\
+  &= `r p16$S` \times `r pretty(p16$delta, 3)` - `r pretty(p16$borrow)`\\
+  &= \$`r pretty(p16$C)`
+\end{aligned}
+\]
+
+## Risk-neutral valuation
+
+It should be noted that we found the exact value of the option without even
+knowing the probability that the stock would go up or down. We can calculate the
+_risk-neutral_ case. This case occurs when the expected return on any asset is
+equal to the risk-free rate.
+
+\[
+`r p16$r*100`\% = \text{Probability of a rise} \times `r p16$sd*100`\%
+   + (1 - \text{Probability of rise}) \times -`r p16$sd*100`\%
+\]
+
+Solving this the probability of a rise is `r pretty(p16$p, 3)` and the
+probability of a fall is `r pretty(1 - p16$p, 3)`. If we use these probabilities
+to find the value of the call, we can get the value:
+
+\[
+\text{Value of call} = \frac{`r pretty(p16$p, 3)`
+    \times \$`r pretty(max(p16$cpayoff))`
+    + `r pretty(p16$p, 3)` \times \$`r pretty(min(p16$cpayoff))`}
+    {(`r 1 + p16$r`)}
+    = `r pretty(p16$C.rn)`
+\]
+
+---
+
+# 17. Risk-nuetral valuation
+
+In the previous problem, assume the risk-free rate is only 5 percent. What is
+the risk-neutral value of the option now? What happens to the risk-neutral
+probabilities of a stock price increase and a stock price decrease?
+
+---
+
+```{r problem 17, echo=F}
+p17 = new.env()
+p17$r = .05
+p17$p = uniroot(function(p) p * p16$sd + (1 - p) * -p16$sd - p17$r,
+    c(-1, 1))$root
+p17$C.rn = (p17$p * max(p16$cpayoff) + (1 - p17$p) * min(p16$cpayoff)) /
+    (1 + p17$r)
+```
+
+We calculate the new probability:
+
+\[
+`r p17$r*100`\% = \text{Probability of a rise} \times `r p16$sd*100`\%
+   + (1 - \text{Probability of rise}) \times -`r p16$sd*100`\%
+\]
+
+The new probability of a rise is `r pretty(p17$p, 3)` and the new probability of
+a fall is `r pretty(1 - p17$p, 3)`.
+
+The risk-neutral probability and value is now:
+
+\[
+\text{Value of call} = \frac{`r pretty(p16$p, 3)`
+    \times \$`r pretty(max(p16$cpayoff))`
+    + `r pretty(p17$p, 3)` \times \$`r pretty(min(p16$cpayoff))`}
+    {(`r 1 + p17$r`)}
+    = `r pretty(p17$C.rn)`
+\]
+
+---
+
+# 18. Black-Scholes--Zero exercise price
+
+A call option matures in six months. The underlying stock price is \$75, and the
+stock's return has a standard deviation of 30 percent per year. The risk-free
+rate is 4 percent per year, compounded continuously. If the exercise price is
+\$0, what is the price of the call option?
+
+A call option with an exercise price of \$0 means the option holder
+automatically receives the stock at expiration. It is equivalent to owning the
+stock itself. The price of the option should therefore be equal to the current
+stock price.
+
+---
+
+# 19. Black-Scholes--Zero standard deviation
+
+A call option has an exercise price of \$80 and matures in six months. The
+current stock price is \$84, and the risk-free rate is 5 percent per year,
+compounded continuously. What is the price of the call if the standard deviation
+of the stock is 0 percent per year?
+
+A call option with zero volatility ($\sigma = 0$) means the stock price will not
+change before expiration. The stock will stay at \$84 with certainty. The call
+option will expire in the money because the stock price is $S = 84$ is greater
+than $X = 80$. At expiration, the option's value will be $S - X = 84 - 80 = 4$.
+Since there is no uncertainty, the present value of this payoff is simply the
+discounted value.
+
+---
+
+# 20. Black-Scholes--Infinite standard deviaion
+
+A stock is currently priced at \$35. A call option with an expiration of one
+year has an exercise price of \$50. The risk-free rate is 7 percent per year,
+compounded continuously, and the standard deviation of the stock's return is
+infinitely large. What is the price of the call option?
+
+When the standard deviation is infinity, this means the stock price can take any
+value at expiration. The call option behaves like a 50-50 lottery. There is a
+50-50 chance the option will be above or below the exercise price. Therefore,
+the time value component of the call option does not matter and the call option
+is equal to the stock price.
+
+---
+
+# 21. Equity as an option
+
+Sunburn Sunscreen has a zero coupon bond issue outstanding with a \$25,000 face
+value that matures in one year. The current market value of the firm's assets is
+\$26,300. The standard deviation of the return on the firm's assets is 38
+percent per year, and the annual risk-free rate is 5 percent per year,
+compounded continuously. Based on the Black-Scholes model, what is the market
+value of the firm's equity and debt?
+
+The firm's value:
+
+\[
+V = B + S = 25,000 + 26,300 = 51,300
+\]
+
+* S: 26,300
+* B: 25,000
+* T: 1
+* SD: .38
+* r: .05
+
+The firm has zero-coupon debt, meaning it must pay $D = 25,000$ in one year. The
+firm's equity holders will receive any value of the firm's assets above this
+amount. If the firm's assets are below 25,000, equity holders get nothing, and
+debt holders take over.
+
+This means:
+
+* Equity is a call option on the firm's assets with strike price $D = 25,000$.
+* Debt is equivalent to a risk-free bond minus a short put option.
+
+Using the Black-Scholes call option pricing model, we can determine the equity
+value.
+
+```{r problem 21; equity as an option, echo=F}
+p21 = new.env()
+p21$S <- 26300
+p21$E <- 25000
+p21$T <- 1
+p21$sd <- .38
+p21$r <- .05
+
+p21$d.1 = d.1(p21$S, p21$E, p21$r, p21$sd, p21$T)
+p21$d.2 = d.2(p21$S, p21$E, p21$r, p21$sd, p21$T)
+p21$C = C.blackscholes(p21$S, p21$E, p21$r, p21$sd, p21$T)
+p21$P <- p21$S - p21$C
+```
+
+\[
+\begin{aligned}
+d_1 &= \frac{\ln{\left(\frac{S}{E}\right)} + (R + \sigma^2/2) t}
+    {\sqrt{\sigma^2 t}}\\
+    &= \frac{\ln{\left(\frac{`r pretty(p21$S, 0)`}{`r pretty(p21$E, 0)`}\right)}
+    + (`r p21$r` + `r p21$sd`^2/2) \times `r p21$T`}
+    {\sqrt{`r p21$sd`^2 \times `r p21$T`}}\\
+    &= `r p21$d.1`\\\\
+d_2 &= d_1 - \sqrt{\sigma^2 t}\\
+    &= `r p21$d.1` - \sqrt{`r p21$sd`^2 \times `r p21$T`}\\
+    &= `r p21$d.2`\\\\
+C   &= `r pretty(p21$S, 0)` \times N(`r p21$d.1`) - `r pretty(p21$E, 0)`
+    e^{-`r p21$r` \times `r p21$T`} \times N(`r p21$d.2`)\\
+    &= \$`r pretty(p21$C)`
+\end{aligned}
+\]
+
+The put option can be calculated via the put-call parity model:
+
+\[
+\begin{aligned}
+P &= C + E - S\\
+  &= \$`r pretty(p21$C)` + \$`r pretty(p21$E, 0)` - \$`r pretty(p21$S, 0)`\\
+  &= \$`r pretty(p21$P)`
+\end{aligned}
+\]
+
+---
+
+# 22. Equity as an option and NPV
+
+Suppose the firm in the previous problem is considering two mutually exclusive
+investments. Project A has an NPV of \$1,200, and Project B has an NPV of
+\$1,600. As a result of taking Project A, the standard deviation of the return
+on the firm's assets will increase to 55 percent per year. If Project B is
+taken, the standard deviation will fall to 34 percent per year.
+
+a. What is the value of the firm's equity and debt if Project A is undertaken?
+   If Project B is undertaken?
+
+b. Which project would the stockholders prefer? Can you reconcile your answer
+   with the NPV rule?
+
+c. Suppose the stockholders and bondholders are, in fact, the same group of
+   investors. Would this affect your answer to (b)?
+
+d. What does this problem suggest to you about stockholder incentives?
+
+---
+
+```{r problem 22; equity as an option and NPV, echo=F}
+p22 = new.env()
+p22$S.A <- 26300 + 1200
+p22$S.B <- 26300 + 1600
+p22$E <- 25000
+p22$T <- 1
+p22$sd.A <- .55
+p22$sd.B <- .34
+p22$r <- .05
+
+p22$C.A = C.blackscholes(p22$S.A, p22$E, p22$r, p22$sd.A, p22$T)
+p22$P.A <- p22$S.A - p22$C.A
+p22$C.B = C.blackscholes(p22$S.B, p22$E, p22$r, p22$sd.B, p22$T)
+p22$P.B <- p22$S.B - p22$C.B
+```
+
+From the previous problem:
+
+* Market value of assets: $V = 26,300$
+* Face value of debt (strike price): $D = 25,000$
+* Risk-free rate: $r = .05$
+* Time to maturity: $T = 1$ year
+* Initial volatility: $\sigma = .38$
+
+Now, if the firm undertakes:
+
+* __Project A:__ The NPV increases by \$1,200, and volatility increases to .55
+* __Project B:__ The NPV increases by \$1,600, but volatility decreases to .34
+
+The firm's new asset values will be:
+
+* __Project A:__ $V_A = 26,300 + 1,200 = 27,500, \sigma_A = .55$
+* __Project B:__ $V_B = 26,300 + 1,600 = 27,900, \sigma_B = .34$
+
+We use the Black Scholes model to compute the new Equity and Debt values:
+
+```{r problem 22; table, echo=F}
+p22$tbl = data.frame(
+    `Project A` = pretty(c(1200, p22$S.A, p22$sd.A)),
+    `Project B` = pretty(c(1600, p22$S.B, p22$sd.B))
+)
+
+rownames(p22$tbl) <- c('NPV',
+                       'Market value of firm\'s assets ($20 + NPV)',
+                       'Firm\'s asset return standard deviation')
+knitr::kable(p22$tbl, caption = "Mutually exclusive projects")
+p22$tbl.2 = data.frame(
+    `Project A` = pretty(c(p22$C.A, p22$P.A)),
+    `Project B` = pretty(c(p22$C.B, p22$P.B))
+)
+rownames(p22$tbl.2) <- c("Market value of equity", "Market value of debt")
+knitr::kable(p22$tbl.2, caption = "Vaule of debt and equity")
+```
+
+Book answers:
+
+* Project A: Equity = \$`r pretty(p22$C.A)`, Debt = \$`r pretty(p22$P.A)`
+* Project B: Equity = \$`r pretty(p22$C.B)`, Debt = \$`r pretty(p22$P.B)`
+
+
+---
+
+# 23. Equity as an option
+
+Frostbite Thermalwear has a zero coupon bond issue outstanding with a face value
+of \$30,000 that matures in one year. The current market value of the firm's
+assets is \$36,400. The standard deviation of the return on the firm's assets is
+53 percent per year, and the annual risk-free rate is 5 percent per year,
+compounded continuously. Based on the Black-Scholes model, what is the market
+value of the firm's equity and debt? What is the firm's continuously compounded
+cost of debt?
+
+* Bond face value: \$30,000
+* Market value of firm: \$36,400
+* Standard deviation on the return on the firm's assets: .53
+* Risk-free rate: .05
+
+```{r problem 23; equity as an option, echo=F}
+p23 = new.env()
+p23$E = 30000
+p23$S = 36400
+p23$sd = .53
+p23$r = .05
+p23$T = 1
+
+p23$C = C.blackscholes(p23$S, p23$E, p23$r, p23$sd, p23$T)
+p23$P = p23$S - p23$C
+p23$r.debt = - log(p23$P / p23$E) / p23$T
+```
+
+The market value of the Debt and equity based on Black-Scholes:
+
+* Equity: \$`r pretty(p23$C, 0)`
+* Debt: \$`r pretty(p23$P, 0)`
+
+
+## Continuously compounded cost of debt
+
+$$
+\begin{aligned}
+P &= E e^{-yT}\\
+\ln{P/E} &= -yT\\
+y &= -\frac{\ln{P/E}}{T}\\
+y &= -\frac{\ln{\left(\frac{`r pretty(p23$P, 0)`}{`r pretty(p23$E, 0)`}\right)}}
+    {`r p23$T`}\\
+    &= `r round(p23$r.debt, 4)`
+\end{aligned}
+$$
+
+The continuously compounded cost of debt is `r round(p23$r.debt, 4)*100`\%.
+
+---
+
+# 24. Mergers and equity as an option
+
+Suppose Sunburn Sunscreen and Frostbite Thermalwear in the previous problems
+have decided to merge. Because the two companies have seasonal sales, the
+combined firm's return on assets will have a standard deviation of 29 percent
+per year.
+
+a. What is the combined value of equity in the two existing companies? The value
+   of debt?
+
+b. What is the value of the new firm's equity? The value of debt?
+
+c. What was the gain or loss for shareholders? For bondholders?
+
+d. What happened to shareholder value here?
+
+```{r problem 24; mergers and equity as an option, echo=F}
+p24 = new.env()
+p24$r = .05
+p24$sd = .29
+p24$T = 1
+p24$S = p21$S + p23$S
+p24$E = p21$E + p23$E
+p24$C.s = p21$C + p23$C
+p24$P.s = p21$P + p23$P
+```
+
+## Sunburn Sunscreen (problems 21 + 22)
+
+* Market value of assets: \$`r pretty(p21$S, 0)`
+* Face value of debt: \$`r pretty(p21$E, 0)`
+* Debt maturity: `r p21$T` year
+* Standard deviation of asset return: `r p21$sd`
+* risk-free rate: `r p21$r`
+* Market value of equity: \$`r pretty(p21$C, 0)`
+* Market value of debt: \$`r pretty(p21$P, 0)`
+
+## Frostbite Thermalwear (problem 23)
+
+* Market value of assets: \$`r pretty(p23$S, 0)`
+* Face value of debt: \$`r pretty(p23$E, 0)`
+* Debt maturity: `r p23$T` year
+* Standard deviation of asset return: `r p23$sd`
+* risk-free rate: `r p23$r`
+* Market value of assets: `r pretty(p23$C, 0)`
+* Market value of debt: `r pretty(p23$P, 0)`
+
+## Post merger outlook
+
+* Combined assets: \$`r pretty(p24$S, 0)`
+* Combined debt: \$`r pretty(p24$E, 0)`
+* Debt maturity: `r p24$T` year
+* Standard deviation: `r p24$sd`
+* risk-free rate: `r p24$r`
+
+```{r problem 24; black scholes, echo=F}
+p24$C = C.blackscholes(p24$S, p24$E, p24$r, p24$sd, p24$T)
+p24$P = p24$S - p24$C
+p24$C.diff = p24$C - p24$C.s
+p24$P.diff = p24$P - p24$P.s
+```
+
+If we simply combined the value of the assets from the previous problems we get:
+
+* Combined market value of assets:
+  \$`r pretty(p21$C, 0)` + \$`r pretty(p23$C, 0)` = \$`r pretty(p24$C.s, 0)`
+
+* Combined market value of debt:
+  \$`r pretty(p21$P, 0)` + \$`r pretty(p23$P, 0)` = \$`r pretty(p24$P.s, 0)`
+
+If we use the Black-Scholes model to determine the market value of the combined
+company:
+
+* Market value of assets: \$`r pretty(p24$C, 0)`
+* Market value of debt: \$`r pretty(p24$P, 0)`
+
+If we compare the two:
+
+* Difference in Assets:
+  \$`r pretty(p24$C, 0)` - \$`r pretty(p24$C.s, 0)` = `r pretty(p24$C.diff, 0)`
+
+* Difference in Debt:
+  \$`r pretty(p24$P, 0)` - \$`r pretty(p24$P.s, 0)` = `r pretty(p24$P.diff, 0)`
+
+As can be seen the value of the merger is bad for the stockholders.
+\$`r pretty(p24$P.diff, 0)` has been transfered from the stockholders
+to the bondholders.
+
+---
+
+# 25. Equity as an option and NPV
+
+A company has a single zero coupon bond outstanding that matures in 10 years
+with a face value of \$15 million. The current value of the company's assets is
+\$13.4 million, and the standard deviation of the return on the firm's assets is
+39 percent per year. The risk-free rate is 6 percent per year, compounded
+continuously.
+
+a. What is the current market value of the company's equity?
+
+b. What is the current market value of the company's debt?
+
+c. What is the company's continuously compounded cost of debt?
+
+d. The company has a new project available. The project has an NPV of
+   \$1,200,000. If the company undertakes the project, what will be the new
+   market value of equity? Assume volatility is unchanged.
+
+e. Assuming the company undertakes the new project and does not borrow any
+   additional funds, what is the new continuousy compounded cost of debt? What
+   is happening here?
+
+* Face value of debt: \$15,000,000
+* Time to maturity: 10 years
+* Value of assets: \$13,400,000
+* Standard deviation: .39
+* risk-free rate: .06
+
+```{r problem 25; equity as an option and NPV, echo=F}
+p25 = new.env()
+p25$S = 13.4e6
+p25$E = 15e6
+p25$T = 10
+p25$sd = .39
+p25$r = .06
+
+p25$C = C.blackscholes(p25$S, p25$E, p25$r, p25$sd, p25$T)
+p25$P = p25$S - p25$C
+p25$r.debt = -log(p25$P/p25$E)/p25$T
+```
+
+## Market value of the current equity and debt using Black-Scholes
+
+* Market value of equity: \$`r pretty(p25$C, 0)`.
+
+* Market value of the debt: \$`r pretty(p25$P, 0)`.
+
+## The cost of debt
+
+\[
+r_{\text{debt}} = -\frac{\ln{(P/E)}}{T} =
+    - \frac{
+    \ln{\left(\frac{`r pretty(p25$P, 0)`}{`r pretty(p25$E, 0)`}\right)}}
+    {`r p25$T`} = `r p25$r.debt`
+\]
+
+## Market value of equity with new project: NPV = \$1,200,000
+
+```{r problem 25; equity as an option and NPV: adding a project, echo=F}
+p25$S.project = p25$S + 1.2e6
+
+p25$C.project = C.blackscholes(p25$S.project, p25$E, p25$r, p25$sd, p25$T)
+p25$P.project <- p25$S.project - p25$C.project
+p25$r.debt.project <- -log(p25$P.project/p25$E)/p25$T
+```
+
+* The new market value of the equity: `r pretty(p25$C.project, 0)`.
+
+* The new market value of the debt: `r pretty(p25$P.project, 0)`.
+
+* The new cost of debt: `r p25$r.debt.project`
+
+With the new project, since it is adding value with a positive NPV, the cost of
+debt is decreasing.
+
+---
+
+# 26. Two-state option pricing model
+
+Ken is interested in buying a European call option written on Southeastern
+Airlines, Inc., a non-dividend-paying common stock, with a strike price of \$75
+and one year until expiration. Currently, Southeastern's stock sells for \$78
+per share. In one year Ken knows that Southeastern's stock will be trading at
+either \$93 per share or \$65 per share. Ken is able to borrow and lend at the
+risk-free EAR of 2.5 percent.
+
+a. What should the call option sell for today?
+
+b. If no options currently trade on the stock, is there a way to create a
+   synthetic call option with identical payoffs to the call option just
+   described?  If there is, how would you do it?
+
+c. How much does the synthetic call option cost? Is this greater than, less
+   than, or equal to what the actual call option costs? Does this make sense?
+
+* S: 78
+* E: 75
+* In one year the stock will be trading either: 93, or 65.
+* risk-free EAR: .025
+* T: 1 year
+
+* Swing of call: $93 - 75 = 18$, $18 - 0 = 18$
+* Swing of the stock: $93 - 65 = 28$
+
+```{r problem 26 setup, echo=F}
+p26 = new.env()
+p26$S = 78
+p26$E = 75
+p26$price.range = c(93, 65)
+p26$r = .025
+p26$call.payoff = ifelse((p26$d.tmp <- p26$price.range - p26$E) > 0,
+    p26$d.tmp, 0)
+p26$delta = diff(rev(p26$call.payoff)) / diff(rev(p26$price.range))
+p26$bpi = p26$delta * p26$price.range[1] - p26$call.payoff[1]
+p26$borrow = p26$bpi / (1 + p26$r)
+p26$call = p26$S * p26$delta - p26$borrow
+```
+
+
+## Calculate the delta
+
+\[
+\text{Delta} = \frac{\text{Swing of call}}{\text{Swing of stock}}
+    = \frac{`r p26$call.payoff[1]` - `r p26$call.payoff[2]`}
+    {`r p26$price.range[1]` - `r p26$price.range[2]`}
+    = `r pretty(p26$delta, 3)`
+\]
+
+## Determine the amount of borrowing
+
+Buying `r pretty(p26$delta, 3)` share of stock brings us either
+(`r pretty(p26$delta * p26$price.range)`) which is \$`r pretty(p26$bpi)` more
+than the payoffs (`r pretty(p26$call.payoff)`).
+
+\[
+\text{Borrow} = \frac{`r pretty(p26$bpi)`}{(1 + `r p26$r`)}
+    = \$`r pretty(p26$borrow)`
+\]
+
+The value of the call option is
+
+\[
+\begin{aligned}
+\text{Value of call} &= \text{Stock price} \times \text{Delta}
+    - \text{Amount borrowed}\\
+    `r pretty(p26$call)` &= `r pretty(p26$S)` \times `r pretty(p26$delta, 3)`
+    - `r pretty(p26$borrow)`
+\end{aligned}
+\]
+
+To create a synthetic option what you would do is buy `r pretty(p26$delta, 3)`
+share of the stock and borrow \$`r pretty(p26$borrow)` at `r p26$r` EAR.
+
+The cost of the synthetic call option should be the same as the actual call
+option. In an arbitrage-free market, the cost of the synthetic call option must
+equal the cost of the actual call option. If there were a difference, an
+arbitrageur could create a riskless profit by buying the cheaper option and
+selling the more expensive option.
+
+Book answer:
+
+a. \$9.38
+b. .64; Borrow \$40.77
+c. \$9.38
+
+---
+
+# 27. Two-state option pricing model
+
+Rob wishes to buy a European put option on BioLabs, Inc., a non-dividend-paying
+common stock, with a strike price of \$40 and six months until expiration.
+BioLabs' common stock is currently selling for \$30 per share, and Rob expects
+that the stock price will either rise to \$60 or fall to \$15 in six months. Rob
+can borrow and lend at the risk-free EAR of 5 percent.
+
+a. What should the put option sell for today?
+
+b. If no options currently trade on the stock, is there a way to create a
+   synthetic put option with identical payoffs to the put option just
+   described? If there is, how would you do it?
+
+c. How much does the synthetic put option cost? Is this greater than, less than,
+   or equal to what the actual put option costs? Does this make sense?
+
+* S: 30
+* E: 40
+* T: 6/12 = .5
+* In six months the price will be either \$60 or \$15
+* r (EAR): .05 (we need to convert this to the APR rate)
+
+```{r problem 27; setup, echo=F}
+p27 = new.env()
+p27$S = 30
+p27$E = 40
+p27$r.ear = .05
+p27$r = uniroot(function(r) (1 + r/12)^(12) - 1 - p27$r.ear, c(-1,1))$root
+
+p27$T = 6/12
+p27$S.swing = c(15, 60)
+p27$C.swing = ifelse((p27$d.tmp <- p27$S.swing - p27$E) > 0, p27$d.tmp, 0)
+p27$delta = diff(p27$C.swing) / diff(p27$S.swing)
+p27$bpi = p27$delta * p27$S.swing[1] - p27$C.swing[1]
+p27$borrow = p27$bpi / (1 + p27$r)^(p27$T)
+p27$C = p27$S * p27$delta - p27$borrow
+p27$P = p27$C
+```
+
+## Calculate the Delta
+
+We now need to calculate the delta:
+
+\[
+\begin{aligned}
+\text{Delta} &= \frac{\text{Swing of call}}{\text{Swing of stock}}\\
+  &= \frac{`r p27$C.swing[2]` - `r p27$C.swing[1]`}
+     {`r p27$S.swing[2]` - `r p27$S.swing[1]`}\\
+  &= `r p27$delta`
+\end{aligned}
+\]
+
+## Convert EAR rate to APR rate
+
+We need to convert the EAR rate to APR:
+
+\[
+\text{EAR} = \left(1 + \frac{\text{APR}}{12}\right)^{12} - 1
+\]
+
+Solving this equation we have the APR as: `r pretty(p27$r*100)`\%.
+
+## Calculate the amount to borrow
+
+\[
+\text{Payback} = \text{Delta} \times \text{Expected}_{\text{High}}
+    - \text{Exercise} = `r pretty(p27$delta, 3)` \times `r p27$S.swing[1]`
+    - `r p27$C.swing[1]` = `r pretty(p27$bpi)`
+\]
+
+\[
+\text{Borrow} = \frac{\text{Payback}}{(1 + r)^{T}}
+    = \frac{`r pretty(p27$bpi)`}{(1 + `r pretty(p27$r)`)^{`r p27$T`}}
+    = `r pretty(p27$borrow)`
+\]
+
+## The value of the call option
+
+\[
+\text{Call} = \text{Stock price} \times \text{Delta} - \text{Borrow}
+    = `r pretty(p27$S)` \times `r pretty(p27$delta)` - `r pretty(p27$borrow)`
+    = \$`r pretty(p27$C)`
+\]
+
+## The value of the put option
+
+\[
+\begin{aligned}
+\text{Put} &= \text{Call value} - \text{Stock price}
+    + \text{Exercise price} \times e^{-RT}\\
+    &= `r pretty(p27$C)` - `r pretty(p27$S)`
+    + `r pretty(p27$E)` e^{-`r pretty(p27$r)` \times `r pretty(p27$T)`}\\
+    &= \$`r pretty(p27$P)`
+\end{aligned}
+\]
+
+---
+
+# 28. Two-state option pricing model
+
+Maverick Manufacturing, Inc., must purchase gold in three months for use in its
+operations. Maverick's management has estimated that if the price of gold were
+to rise above \$1,530 per ounce, the firm would go bankrupt. The current price
+of gold is \$1,450 per ounce. The firm's chief financial officer believes that
+the price of gold will either rise to \$1,605 per ounce or fall to \$1,340 per
+ounce over the next three months. Management wishes to eliminate any risk of the
+firm going bankrupt. Maverick can borrow and lend at the risk-free EAR of 6.50
+percent.
+
+a. Should the company buy a call option or a put option on gold? To avoid
+   bankruptcy, what strike price and time to expiration would the company like
+   this option to have?
+
+b. How much should such an option sell for in the open market?
+
+c. If no options currently trade on gold, is there a way for the company to
+   create a synthetic option with identical payoffs to the option just
+   described? If there is, how would the firm do it?
+
+d. How much does the synthetic option cost? Is this greater than less than, or
+   equal to what the actual option costs? Does this make sense?
+
+```{r problem 28, echo=F}
+p28 = new.env()
+p28$S = 1450
+p28$E = 1530
+p28$S.swing = c(1340, 1605)
+p28$r.ear = .065
+p28$T = 3/12
+p28$r = (1 + p28$r.ear)^p28$T - 1
+C.twostate(p28$S, p28$S.swing[1], p28$S.swing[2], p28$E, p28$r, p28$T)
+p28$p = uniroot(function(p){
+        p * (1605/1450 - 1) + (1 - p)*(1340/1450 - 1) - p28$r
+    }, c(0, 1))$root
+(p28$p * 75) / (1 + p28$r)
+```
+
+## A. Type of option
+
+Maverick must buy gold in 3 months, so they are exposed to the risk of gold
+prices rising. In order to protect themselves from gold going over \$1,530. They
+should buy a call option with a strike price of \$1,530 and an expiration date
+of 3 months.
+
+## B. Price of the option
+
+We use the two state option model over three months.
+
+The three month risk free rate is
+
+\[
+r = (1 + `r p28$r.ear`)^{`r p28$T`} - 1 = `r pretty(p28$r, 4)`
+\]
+
+The risk-neutral probability $p$ is calculated using
+
+\[
+`r pretty(p28$r*100)` = p \times (\text{Stock high}/\text{Stock current} - 1)
+    + (1 - p) \times (\text{Stock low}/\text{Stock current} - 1)
+\]
+
+Solving the equation for $p$ gives: `r pretty(p28$p)`
+
+The call's payoffs are: (`r C.swing(p28$S.swing[1], p28$S.swing[2], p28$E)`)
+
+We can now calculate the value of the call:
+
+\[
+\text{Value of the call} = \frac{p \times \text{Stock high}
+    + p \times \text{Stock low}}{(1 + `r pretty(p28$r, 4)`)}
+\]
