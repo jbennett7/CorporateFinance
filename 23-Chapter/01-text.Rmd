@@ -1,0 +1,517 @@
+---
+title: "Chapter 23 - Options and Corporate Finance"
+subtitle: "Extensions and Applications"
+output:
+  pdf_document:
+    toc: true
+    includes:
+      in_headers: preamble.tex
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(echo = F, warning = T)
+require(tidyverse)
+pretty <- function(x, n=2) format(round(x, n), big.mark=',')
+
+# Black-Scholes
+d.1 <- function(S, E, R, s, t) (log(S/E) + (R + s^2/2)*t)/sqrt(s^2*t)
+d.2 <- function(S, E, R, s, t) d.1(S, E, R, s, t) - sqrt(s^2*t)
+C.blackscholes <- function(S, E, R, s, t) {
+    S * pnorm(d.1(S, E, R, s, t)) - E * exp(-R*t) * pnorm(d.2(S, E, R, s, t))
+}
+```
+
+```{r present value}
+# Input, present value type vector with investment (as negative)
+# at the beginning [i.e. cash.flows = c(25, 25, 35, 50)]
+# The discount rate r also is specified
+pv <- function(C, r){
+    sum(C / (1 + r)^(1:length(C)))
+}
+```
+
+```{r payback period}
+# Input, NPV type vector with investment (as negative)
+# at the beginning [i.e. cash.flows = c(-100, 25, 25, 35, 50)]
+payback.period <- function(C, fractional=F){
+    cum_C = cumsum(C)
+    idx = which(cum_C >= 0)[1]
+    if(is.na(idx)) return(Inf)
+    if(!fractional){
+        return(idx-1)
+    } else {
+        prev_cum = cum_C[idx - 1]
+        current_C = C[idx]
+        frac = -prev_cum / current_C
+        return((idx-2) + frac)
+    }
+}
+```
+
+```{r internal rate of return function}
+# Input, NPV type vector with investment (as negative)
+# at the beginning [i.e. cash.flows = c(-100, 25, 25, 35, 50)]
+irr <- function(C) {
+    uniroot(function(r) sum(C / (1 + r)^(0:(length(C)-1))), c(0, 1))$root
+}
+
+mirr <- function(C, r) {
+    n = length(C) - 1
+    t = 0:n
+    pv_neg = sum(ifelse(C < 0, C / (1 + r)^t, 0))
+    fv_pos = sum(ifelse(C > 0, C * (1 + r)^(n-t), 0))
+    mirr_value = (fv_pos / -pv_neg)^(1/n) - 1
+    return(mirr_value)
+}
+```
+
+```{r net present value}
+# Input, NPV type vector with investment (as negative)
+# at the beginning [i.e. cash.flows = c(-100, 25, 25, 35, 50)]
+# The discount rate r also is specified
+npv <- function(C, r) sum(C / (1 + r)^(0:(length(C)-1)))
+```
+
+```{r profitability index}
+# Input, NPV type vector with investment (as negative)
+# at the beginning [i.e. cash.flows = c(-100, 25, 25, 35, 50)]
+# The discount rate r also is specified
+profitability.index <- function(C, r) {
+  I = -head(C, 1)
+  C = tail(C, -1)
+  pv = sum(C / (1 + r)^(1:length(C)))
+  pv / I
+}
+```
+
+# 23.1 Executive stock options
+
+## Why options?
+
+Executive compensation is usually made up of a base salary plus some or all of
+the following elements:
+
+1. Long-term compensation.
+2. Annual bonuses.
+3. Retirement contributions.
+4. Options.
+
+reasons for preferring options over other compensations:
+
+1. Options make executives share the same interests as the stockholders. By
+   aligning interests, executives are more likely to make decisions for the
+   benefit of the stockholders.
+
+2. Options allow the company to lower the executive's base pay. This removes
+   pressures on morale caused by disparities between the salaries of executives
+   and those of other employees.
+
+3. Options put an executive's pay at risk, rather than guaranteeing it,
+   regardless of the preformance of the firm.
+
+4. Options are a tax-efficient way to pay employees. Under current tax law, if
+   an executive is given options to purchase company stock and the options are
+   "at the money," they are not considered part of taxable income to the
+   employee. The options are taxed only when and if they are eventually
+   exercised.
+
+__EXAMPLE 23.1__
+
+#### Options at Starbucks
+
+Stock options are not always restricted to the highest-ranking executives.
+Starbucks, the coffee chain, has pushed options down to the lowest-level
+employees. To quote its founder, Howard Schultz, "Even though we were a private
+company, we would grant stock options to every employee companywide, from the
+top managers to the baristas, in proportion to their level of base pay. They
+could then, through their efforts, help make Starbucks more successful every
+year, and if Starbucks someday went public, their options could eventually be
+worth a good sum of money."
+
+## Valuing executive compensation
+
+__EXAMPLE 23.2__
+
+#### Options at United Express Corporation
+
+According to the proxy statement filed in fiscal year 2011, Rich Pettit, the CEO
+of United Express Corporation, was granted 1.662 million stock options. The
+average exercise price of the options was \$50.99, and we will assume that all
+of the options were granted at the money. We'll also assume that the options
+expire in five years and that the risk-free rate is 5 percent. This information
+implies that:
+
+1. The stock price ($S$) equalt the exercise price (E), \$50.99.
+
+2. The risk-free rate, $R$, equals, .05.
+
+3. The time interval, $t$, equals 5.
+
+In addition, the stock voltatility, $\sigma$, is given as 37.46 percent peryear,
+which implies that the variance, $\sigma^2$, equals $(.3746)^2 = .1403$.
+
+```{r Example 23.2}
+e2 = new.env()
+e2$E = 50.99
+e2$r = .05
+e2$t = 5
+e2$sd = .3746
+e2$d.1 = d.1(e2$E, e2$E, e2$r, e2$sd, e2$t)
+e2$nd.1 = pnorm(e2$d.1)
+e2$d.2 = d.2(e2$E, e2$E, e2$r, e2$sd, e2$t)
+e2$nd.2 = pnorm(e2$d.2)
+e2$C = C.blackscholes(e2$E, e2$E, e2$r, e2$sd, e2$t)
+```
+
+We now have enough information to estimate the value of Rich Pettit's options
+using the Black-Scholes model:
+
+\[
+\begin{aligned}
+C &= SN(d_1) - Ee^{-Rt}N(d_2)\\\\
+d_1 &= \frac{\left(R + \frac{1}{2} \sigma^2\right)}{\sqrt{\sigma^2 t}}
+     = `r pretty(e2$d.1, 4)`\\\\
+d_2 &= d_1 - \sqrt{\sigma^2 t} = `r pretty(e2$d.2, 4)`\\\\
+N(d_1) &= `r pretty(e2$nd.1, 4)`\\
+N(d_2) &= `r pretty(e2$nd.2, 4)`\\
+e^{-Rt} &= `r pretty(exp(-e2$r*e2$t), 4)`\\
+C &= SN(d_1) - Ee^{-Rt}N(d_2) = `r pretty(e2$C)`
+\end{aligned}
+\]
+
+Since Mr. Pettit was granted options on 1.662 million shares, and since each
+option is worth \$20.97, the market value of his options by the above
+calculations is 1.662 million $\times$ \$20.97 = \$34.9 million.
+
+---
+
+# 23.2 Valuing a start-up
+
+## Net present value of Alligator Alley example
+
+Suppose you want to open a restaurant with the following information.
+
+```{r alligator alley}
+aa = new.env()
+aa$sales = c(300e3, 600e3, 900e3, 1000e3, 1000e3)
+aa$cf = c(-100e3, -50e3, 75e3, 250e3, 250e3)
+aa$inc.wc = c(50e3, 20e3, 10e3, 10e3, 0)
+aa$ncf = aa$cf - aa$inc.wc
+aa$matrix = matrix(c(aa$sales, aa$cf, aa$inc.wc, aa$ncf), ncol=5, byrow=T)
+rownames(aa$matrix) = c("(1) Sales", "(2) Cash flows from operations",
+    "(3) Increase in working capital", "(4) Net cash flows [(2) - (3)]")
+colnames(aa$matrix) = c("Year 1", "Year 2", "Year 3",
+    "Year 4", "All Future Years")
+aa$pv.y1.4 = pv(head(aa$ncf, -1), .2)
+aa$pv.perp = 250e3 / .2 * (1.20)^-4
+aa$pv.restaurant = aa$pv.perp + aa$pv.y1.4
+aa$cost.of.building = 700e3
+aa$npv = aa$pv.restaurant - aa$cost.of.building
+knitr::kable(pretty(aa$matrix))
+```
+
+We calculate the present value of net cash flow for the first four years at a
+discount rate of 20\% and we find the value to be `r pretty(aa$pv.y1.4)`.
+
+The present value of all future years net cash flow
+
+\[
+\left[\frac{\$250,000}{.20} \times \frac{1}{(1.20)^4}\right]
+    = \$`r pretty(aa$pv.perp)`
+\]
+
+We calculate the present value of the restaurant business to be:
+\$`r pretty(aa$pv.restaurant)`
+
+With the cost of building: `r pretty(-aa$cost.of.building)`
+
+We have a net present value of restaurant: `r pretty(aa$npv)`
+
+With a negative net present value it seems not worth opening the restaurant.
+
+### Valuing Alligator Alley as an option.
+
+1. The value of a singe restaurant is negative, as indicated above:
+   `r pretty(aa$npv)`. The restaurant would not be funded if there were no
+   possiblity of expansion.
+
+2. If the pilot restaurant is successful, Ralph Simmons plans to create 30
+   additional restaurants around Year 4. This leads to the following
+   observations:
+
+> * The total cost of 30 units is \$21,000,000 (=30 $\times$ \$700,000).
+
+> * The present value of future cash flows as of Year 4 is \$17,476,830
+>   (= 30 $\times$ \$582,561).
+
+> * The present value of these cash flows today is \$8,428,255
+>   [= \$$17.476,830 / (1.20)^4$].
+
+Here, we assume that cash flows from the project are discounted at 20\% per
+annum.
+
+Thus, the business is essentially a call option, where the exercise price is
+\$21,000,000 and the underlying asset is worth \$8,428,255.
+
+3. Ralph Simmons estimates the standard deviation of the annual return on
+   Alligator Alley's stock to be 50\%.
+
+Parameters of the Black-Scholes model:
+
+\[
+\begin{aligned}
+S (\text{stock price}) &= \$8,428,255\\
+E (\text{exercise price}) &= \$21,000,000\\
+t (\text{time to maturity}) &= 4\ \text{years}\\
+\sigma (\text{standard deviation}) &= 50\%\\
+R (\text{continuously compounded interest rate}) &= 3.5\%
+\end{aligned}
+\]
+
+Calculation from Black-Scholes model:
+
+```{r alligator alley example black scholes}
+aa$d.1 = d.1(8428255, 21000000, .035, .5, 4)
+aa$d.2 = d.2(8428255, 21000000, .035, .5, 4)
+aa$C = C.blackscholes(8428255, 21000000, .035, .5, 4)
+```
+
+\[
+\begin{aligned}
+d_1 &= [\ln{(S/E)} + (R + 1/2\sigma^2)t] / \sqrt{\sigma^2 t}\\
+   &= `r pretty(aa$d.1)`\\\\
+d_2 &= d_1 - \sqrt{\sigma^2 t}\\
+   &= `r pretty(aa$d.2)`\\\\
+C &= SN(d_1) - Ee^{-Rt}N(d_2)\\
+  &= `r pretty(aa$C)`
+\end{aligned}
+\]
+
+Value of business including cost of pilot restaurant
+
+\[
+\$1,454,269 - \$117,439 = \$133,831
+\]
+
+The purpose of this exercise was to demonstrate how to view capital investment
+decisions as options.
+
+# 23.3 More about the binomial model
+
+The Black-Scholes model is not the only model to evaluate options. We will now
+re-examine the binomial (or two-state) model.
+
+## Heating Oil
+
+### Two-Date Example
+
+Consider Anthony Meyer, a typical heating oil distributor, whose business
+consists of buying heating oil at the wholesale level and reselling the oil to
+homeowners at a somewhat higher price.
+
+Today, September 1, heating oil sells for \$2.00 per gallon. However, prices can
+vary and on December 1, when most of Anthony's customers will probably be making
+purchases, the cost of heating oil could be either \$2.74 or \$1.46.
+
+\begin{figure}[b]
+\begin{tikzpicture}
+  [
+    grow                    = right,
+    sibling distance        = 6em,
+    level distance          = 10em,
+    edge from parent/.style = {draw, -latex},
+    every node/.style       = {font=\footnotesize},
+    sloped
+  ]
+
+  \node [root] {September 1 \\ \$2.00}
+    child { node [env] {December 1 \\ \$2.74 \\ (\$.64 = \$2.74 - 2.10)}}
+    child { node [env] {December 1 \\ \$1.46 \\ (\$0)}};
+\end{tikzpicture}
+\caption{\textbf{Movement of Heating Oil Prices from September 1 to December 1
+in a Two-Date Example} The price of heating oil on December 1 will be either
+\$2.74 or \$1.46.  Because the price on September 1 is \$2.00, we say that
+u=1.37 (=\$2.74/\$2.00) and d=.73 (=\$1.46/\$2.00). The loss per gallon to Mr.
+Meyer (or, equivalently, the gain per gallon to CECO) of \$.64 in the up state
+or \$0 in the down state is shown in parentheses.}
+\label{fig:23.1}
+\end{figure}
+
+One of Mr. Meyer's customers, CECO is a utility and would like to be able to buy
+\textit{up to} 6 million gallons of oil at \$2.10 per gallon on December 1. With
+this arrangement, if the price of heating oil is \$2.74 then clearly Mr. Meyer
+will be losing money. If the price of oil is \$1.46, then CECO will not be
+buying any oil. (Why would they buy the oil from Mr. Meyer, when they can buy
+all the oil they want on the open market for \$1.46?)
+
+What CECO is asking for is a \textit{call option} on heating oil. To compensate
+Mr. Meyer for the risk of loss, the two parties agree that CECO will pay Mr.
+Meyer \$1,000,000 up front for the right to buy up to 6 million gallons of oil
+at \$2.10 per gallon.
+
+Let's find out if this is a fair deal. We will use the binomial model.
+
+#### Step 1: Determining the Risk-Neutral Probabilities
+
+We determine the probability of a price rise such that the expected return on
+oil exactly equals the risk-free rate. Assuming an 8 percent annual interest
+rate, which implies a 2 percent rate over the next three months, we can solve
+for the probability of a rise as follows:
+
+\[
+2\% = \text{Probability of rise} \times .37 + (1 - \text{Probability of rise})
+\times (-.27)
+\]
+
+```{r probabiltiy calculations}
+ho = new.env()
+ho$S = 2
+ho$E = 2.10
+ho$swing = c(1.46, 2.74)
+ho$t = 3/12
+ho$r = .08/12*3
+ho$up.down = c(ho$swing[2] / ho$S - 1, ho$swing[1] / ho$S - 1)
+ho$p = round(uniroot(
+    function(p){p * ho$up.down[1] + (1 - p) * ho$up.down[2] - .02},
+    c(0, 1))$root, 2)
+ho$v = (ho$p * (ho$E - ho$swing[2]) * 6e6 + abs(1 - ho$p) * 0) /
+    (1 + ho$r) + 1e6
+```
+
+Solving this equation, we find that the probability of a rise is approximately
+`r ho$p*100` percent, implying that the probability of a fall is
+`r (1-ho$p)*100` percent. In other words, if the probability of a price rise is
+`r ho$p*100` percent, the expected return on heating oil is `r ho$r*100`
+percent.  These are the probabilities that are consistent with a world of risk
+neutrality.  That is, under risk neutrality, the expected return on any asset
+would equal the riskless rate of interest. No one would demand an expected
+return above this riskless rate, because risk-neutral individuals do not need to
+be compensated for bearing risk.
+
+
+#### Step 2: Valuing the Contract
+
+If the price of oil rises to \$2.74 on December 1, CECO will want to buy oil
+from Mr. Meyer at \$2.10 per gallon. Mr. Meyer will lose \$.64 per gallon
+because he buys oil in the open market at \$2.74 per gallon, only to resell it
+to CECO at \$2.10 per gallon. Conversely, if the market price of heating oils
+falls to \$1.46 per gallon, CECO will not buy any oil from Mr. Meyer. That is,
+CECO would not want to pay \$2.10 per gallon to him when the utility could buy
+heating oil in the open market at \$1.46 per gallon. Thus, we can say that Mr.
+Meyer neither gains nor loses if the price drops to \$1.46. The gain or loss of
+zero is placed in parentheses under the price of \$1.46. In addition, as
+mentioned earlier, Mr. Meyer receives \$1,000,000 up front.
+
+\begin{equation}
+\underbrace{[.45 \times (\$2.10 - \$2.74) \times 6\ \text{million} + .55 \times
+0]/1.02}_{\text{Value of the call option}} + \$1,000,000 = -\$694,118\tag{23.1}
+\label{eq:23.1}
+\end{equation}
+
+We are valuing an option using risk-neutral pricing. The cash flows of
+\(-\$.64\) (=\$2.10 - \$2,74) and \$0 per gallon are multiplied by their
+risk-neutral probabilities. The entire first term in Equation \ref{eq:23.1} is
+then discounted at 1.02 because the cash flows in that term occur on Devember 1.
+The \$1,000,000 is not discounted because Mr. Meyer receives it today,
+September 1. Because the present value of the contract is negative, Mr. Meyer
+would be wise to reject the contract.
+
+The first term of Equation \ref{eq:23.1} is the value of the call option. This
+value is -\$1,694,118. The value is negative because it is the value of the
+option from Mr. Meyer's perspective. From CECO's perspective the value of the
+call option is +\$1694,118. On a per gallon basis, the value of the option to
+CECO is:
+
+\begin{equation}
+[.45 (\$2.74 - \$2.10) + .55 \times 0]/1.02 = \$.282\tag{23.2}\label{eq:23.2}
+\end{equation}
+
+Equation \ref{eq:23.2} shows that CECO will gain \$.64 (=\$2.74 - \$2.10) per
+gallon in the up state because CECO can buy heating oil worth \$2.74 for only
+\$2.10 under the contract. By contrast, the contract is worth notnhing to CECO
+in the down state becuase the utility will not pay \$2.10 for oil selling for
+only \$1.46 in the open market. Using risk-neutral pricing, the formula tells us
+that the value of the call option on one gallon of heating oil is \$.282.
+
+### Three-Date Example
+
+In Figure \ref{fig:23.2} show the price movement of heating oil in 1.5 month
+intervals from September1 to December 1. It shows the price will be either
+\$2.50 or \$1.60 on October 15. The \$2.50 price is the up state and the \$1.60
+price is the down state. Thus the return on heating oil is either 25 percent
+(=\$2.50/\$2.00 - 1) and -20 percent (=\$1.60/\$2.00 - 1) in the two states.
+
+Moving forward to December 1, we assume the same variablility. Given the price
+of \$2.50 on October 15, the price on December 1 with either be \$3.12 ($=\$2.50
+\times 1.25$) or \$2 ($=\$1.60 \times 1.25$) or \$1.28 ($=\$1.60 \times .80$).
+The assumption of constant variability is plausible because the rate of new
+information impacting heating oil is likely to be similar month to month.
+
+\begin{figure}[t]
+\begin{tikzpicture}
+  [
+    grow                    = right,
+    sibling distance        = 6em,
+    level distance          = 10em,
+    edge from parent/.style = {draw, -latex},
+    every node/.style       = {font=\footnotesize},
+    sloped
+  ]
+
+  \node [root] (Root)
+      {September 1 \\ \$2.00 \\ (\$.22)};
+  \node [env, right of=Root, xshift=4cm, yshift=2cm] (ParentA)
+      {October 15 \\ \$2.50 \\ (\$.474)};
+  \node [env, right of=Root, xshift=4cm, yshift=-2cm] (ParentB)
+      {October 15 \\ \$1.60 \\ (\$0)};
+  \node [env, right of=ParentA, xshift=4cm, yshift=2cm] (ChildU)
+      {December 1 \\ \$3.12 \\ (\$1.02 = \$3.12 - \$2.10)};
+  \node [env, right of=ParentA, xshift=4cm, yshift=-2cm] (ChildM)
+      {December 1 \\ \$2.00 \\ (\$0)};
+  \node [env, right of=ParentB, xshift=4cm, yshift=-2cm] (ChildD)
+      {December 1 \\ \$1.28 \\ (\$0)};
+  \draw[arrow] (Root) -- (ParentA);
+  \draw[arrow] (Root) -- (ParentB);
+  \draw[arrow] (ParentA) -- (ChildU);
+  \draw[arrow] (ParentA) -- (ChildM);
+  \draw[arrow] (ParentB) -- (ChildM);
+  \draw[arrow] (ParentB) -- (ChildD);
+
+\end{tikzpicture}
+\caption{\textbf{Movement of Heating Oil Prices in a Three-Date Model} The
+figure shows the prices of a gallon of heating oil on three dates, given u=1.25
+and d=.80. There are three possible prices for heating oil on December 1. For
+each one of these prices, we calculate the price on December 1 of a call option
+on a gallon of heating oil with an exercise price of \$2.10. These numbers are
+in parentheses. Call prices at earlier dates are determined by the binomial
+model and are also shown in parentheses.}
+\label{fig:23.2}
+\end{figure}
+
+#### Step 1: Determining the Risk-Neutral Probabilities
+
+We determine what the probability of a price rise would be such that the
+expected return on heating oil exactly equals the riskless rate. However, in
+this case we work with an interval of 1.5 months. Assuming an 8 percent annual
+rate of interest, which implies a 1 percent rate over a 1.5 month interval, we
+can solve for the probability of a rise like this:
+
+\[
+1\% = \text{Probability of rise} \times .25 + (1 - \text{Probability of rise})
+    \times (-.20)
+\]
+
+Solving the equation, we find the probability of a rise here is 47 percent,
+implying that the probability of a fall is 53 percent. In other words, if the
+probability of a rise is 47 percent, the expected return on heating oil is 1
+percent per each 1.5-month interval. Again, these probabilites are determined
+under the assumption of risk-neutral pricing.
+
+Note that the probabilities of 47 percent and 53 percent hold for both the
+interval from September 1 to October 15 and the interval from October 15 to
+December 1. This is the case because the return in the up state is 25 percent
+and the return in the down state is -20 percent for each of the two intervals.
+
+#### Step 2: Valuing the Option as of October 15
+
+

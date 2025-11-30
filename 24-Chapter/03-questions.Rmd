@@ -1,0 +1,49 @@
+---
+title: Chapter 24 Warrants and Convertibles
+subtitle: Concept Questions
+output:
+  pdf_document:
+    includes:
+      in_headers: preamble.tex
+---
+
+#### 1. Warrants and Options
+
+What is the primary difference between a warrant and a traded call option?
+
+Both warrants and call options give the holder the right to buy a specified
+number of shares of stock at a specified price. However, warrants are written by
+the company which creates new shares of stock. Call options are written by
+individual investors and trade already exsiting shares of stock.
+
+#### 2. Warrants
+
+Explain the following limits on prices of warrants:
+
+a. If the stock price is below the exercise price of the warrant, the lower
+bound on the price of a warrant is zero.
+
+b. If the stock price is above the exercise price of the warrant, the lower
+bound on the price of a warrant is the difference between the stock price and
+the exercise price.
+
+c. An upper bound on the price of any warrant is the current value of the
+firm's stock.
+
+A warrant behaves in the same way as a call option. When the stock price is
+below the exercise price of the warrant, then the warrant is out of money. The
+value of the warrant is only the time value of the warrant until the stock price
+rises above the exercise price. If the warrant expires out of money then it is
+worthless (zero). Hence, the lower bound of the price of the warrant is zero. If
+the stock price rises above the exercise price, then the warrant has intrinsic
+value. This is the value of exercising the warrant today and pocketing the
+difference between the exercise price and the stock price. However, the warrant
+still has time value as well as intrinsic value which means that the obvious
+upper bound to the price of any warrant (and call option) is the actual price of
+the underlying firm's stock.
+
+#### 3. Convertible bonds and stock volatility
+
+Suppose you are evaluating a callable, convertible bond. If the stock price
+volatility increases, how will this affect the price of the bond?
+

@@ -1,0 +1,478 @@
+---
+title: Options and Corporate Finance
+output:
+  pdf_document:
+    toc: true
+    includes:
+      in_headers: preamble.tex
+---
+
+```{r, include=F}
+knitr::opts_chunk$set(echo=F)
+pretty <- function(x,p=2) format(round(x, p), big.mark=',')
+```
+
+# 1. Employee Stock Options
+
+Gary Levin is the chief executive officer of Mountainbrook Trading Company. The
+board of directors has just granted Mr. Levin 30,000 at-the-money European call
+options on the company's stock, which is currently trading at \$50 per share.
+The stock pays no dividends. The options will expire in five years and the
+standard deviation of the returns on the stock is 56 percent. Treasury bills
+that mature in five years currently yield a continuously compounded interest
+rate of 6 percent.
+
+a. Use the Black-Scholes model to calculate the value of the stock options.
+
+b. You are Mr. Levin's financial adviser. He must choose between the previously
+mentioned stock option package and an immediate \$750,000 bonus. If he is
+risk-neutral, which would you recommend?
+
+c. How would your answer to (b) change if Mr. Levin were risk-averse and he
+could not sell the options prior to expiration?
+
+```{r problem 1}
+p1 = new.env()
+p1$n = 30000
+p1$S = 50
+p1$E = 50
+p1$t = 5
+p1$sd = .56
+p1$r = .06
+p1$bonus = 750000
+p1$d.1 = (log(p1$S/p1$E) + (p1$r + p1$sd^2/2)*p1$t)/sqrt(p1$sd^2 * p1$t)
+p1$d.2 = p1$d.1 - sqrt(p1$sd^2 * p1$t)
+p1$C = p1$S * pnorm(p1$d.1) - p1$E*exp(-p1$r * p1$t)*pnorm(p1$d.2)
+p1$V = p1$C * p1$n
+```
+
+## A. The Black-Scholes model
+
+* The stock price (S) and the exercise price (E) are equal: \$50 per share
+* The risk-free rate (R): 6\%
+* The time interval: 5 years
+* The standard deviation: 56\%
+
+\[
+d_1 = \frac{R + \sigma^2/2)t}{\sqrt{\sigma^2 t}} = `r p1$d.1`
+\]
+
+\[
+d_2 = d_1 - \sqrt{\sigma^2 t} = `r p1$d.2`
+\]
+
+\[
+C = S \times N(d_1) - E e^{-Rt} N(d_2) = \$`r pretty(p1$C)`
+\]
+
+The total value of the stock options is \$`r pretty(p1$V)`
+
+## B. \$750,000 as risk-neutral
+
+The risk-neutral value (~\$821K) exceeds the immediate \$750K bonus. Choose the
+option package.
+
+## C. CEO is risk-adverse
+
+Risk-averse individuals discount risky payoffs relative to their risk-neutral
+value. The CEO cannot short the firm's stock to hedge the options, and has
+excessive exposure to the company's stock. Because of this the Black-Scholes
+pricing model overstates the value of the options.
+
+# 2. Employee Stock Options
+
+Jared Lazarus has just been named the new chief executive officer of BluBell
+Fitness Centers, Inc. In addition to an annual salary of \$410,00, his
+three-year contract states that his compensation will include 15,000
+at-the-money European call options on the company's stock that expire in three
+years. The current stock price is \$37 per share, and the standard deviation of
+the returns on the firm's stock is 65 percent. The company does not pay a
+dividend. Treasury bills that mature in three years yield a continuously
+compounded interest rate of 5 percent. Assume that Mr. Lazarus's annual salary
+payments occur at the end of the year and that these cash flows should be
+discounted at a rate 9 percent. Using the Black-Scholes model to calculate the
+value of the stock options, determine the total value of the compensation
+package on the date the contract is signed.
+
+```{r}
+p2 = new.env()
+p2$A = 410e3
+p2$S = 37
+p2$n = 15e3
+p2$E = 37
+p2$t = 3
+p2$r = .05
+p2$sd = .65
+p2$d = .09
+p2$d.1 = (log(p2$S/p2$E) + (p2$r + p2$sd^2 / 2) * p2$t) / sqrt(p2$sd^2 * p2$t)
+p2$d.2 = p2$d.1 - sqrt(p2$sd^2 * p2$t)
+p2$C = p2$S * pnorm(p2$d.1) - p2$E * exp(-p2$r * p2$t) * pnorm(p2$d.2)
+p2$V = p2$C * p2$n
+p2$PV.A = p2$A * (1/(1.09) + 1/(1.09)^2 + 1/(1.09)^3)
+p2$TV = p2$V + p2$PV.A
+```
+
+## Given
+
+* Annual salary: \$410,000
+* 15,000 at-the-money call options
+* S: \$37
+* Standard deviation: 65\%
+* Time: 3 years
+* Risk free rate: 5\%
+* Salary payments occur at end of the year discounted at 9\%
+
+## Black-Scholes
+
+\[
+d_1 = \frac{\ln{(S/E)} + (R + \sigma^2/2)t}{\sqrt{\sigma^2 t}} = `r p2$d.1`
+\]
+
+\[
+d_2 = d_1 - \sqrt{\sigma^2 t} = `r p2$d.2`
+\]
+
+\[
+C = S N(d_1) - E e^{-Rt} N(d_2) = \$`r pretty(p2$C)`
+\]
+
+The value of the stock options \$`r pretty(p2$V)`.
+
+The salary is discounted using a 9\% discount rate:
+
+\[
+\text{PV}_{\text{salary}} = \sum^{3}_{n=1}{\frac{\$410,000}{(1.09)^{n}}}
+    = \$410,000 \times \left(\frac{1}{1.09} + \frac{1}{(1.09)^2}
+    + \frac{1}{(1.09)^3}\right) = \$`r pretty(p2$PV.A, 0)`
+\]
+
+The total value of the stock options and the discounted salary is
+  \$`r pretty(p2$TV, 0)`.
+
+# 3. Binomial Model
+
+Gasworks, Inc., has been approached to sell up to 5 million gallons of gasoline
+in three months at a price of \$3.65 per gallon. Gasoline is currently selling
+on the wholesale market at \$3.30 per gallon and has a standard deviation of 58
+percent. If the risk-free rate is 6 percent per year, what is the value of this
+option?
+
+```{r}
+p3 = new.env()
+p3$n = 5e6
+p3$t = 3/12
+p3$S = 3.3
+p3$E = 3.65
+p3$sd = .58
+p3$r = .06
+p3$d.1 = (log(p3$S/p3$E) + (p3$r + p3$sd^2/2) * p3$t) / sqrt(p3$sd^2 * p3$t)
+p3$d.2 = p3$d.1 - sqrt(p3$sd^2 * p3$t)
+p3$C = p3$S * pnorm(p3$d.1) - p3$E * exp(-p3$r*p3$t) * pnorm(p3$d.2)
+```
+
+## Given
+
+* Amount: 5,000,000 gallons
+* Current price (S): \$3.30 per gallon
+* Exercise price (E): \$3.65 per gallon
+* Risk-free rate (R): .06
+* Standard deviation: 58\%
+
+
+## Black-Scholes
+
+\[
+d_1 = \frac{\ln{(S/E)} + (R + \sigma^2/2)t}{\sqrt{\sigma^2 t}} = `r p3$d.1`
+\]
+
+\[
+d_2 = d_1 - \sqrt{\sigma^2 t} = `r p3$d.2`
+\]
+
+\[
+C = S N(d_1) - E e^{-Rt} N(d_2) = \$`r pretty(p3$C)`
+\]
+
+The price of the option is \(\$`r pretty(p3$C)` \times 5,000,000
+  = \$`r pretty(p3$C * p3$n)`\)
+
+# 4. Real Options
+
+The Webber Company is an international conglomerate with a real estate division
+that owns the right to erect an office building on a parcel of land in downtown
+Sacramento over the next year. This building would cost \$25 million to
+construct. Due to low demand for office space in the downtown area, such a
+building is worth approximately \$23.5 million today. If demand increases, the
+building would be worth \$26.8 million a year from today. If demand decreases,
+the same office building would be worth only \$22 million in a year. The company
+can borrow and lend at the risk-free annual effective rate of 4.8 percent. A
+local competitor in the real estate business has recently offered \$750,000 for
+the right to build an office building on the land. Should the company accept
+this offer? Use a two-state model to value the real option.
+
+```{r problem 4}
+p4 = new.env()
+p4$S = 23.5e6
+p4$E = 25e6
+p4$S_d = 22e6
+p4$S_u = 26.8e6
+p4$t = 1
+p4$R = .048
+p4$C_offer = .75e6
+p4$ret_u = p4$S_u / p4$S - 1
+p4$ret_d = p4$S_d / p4$S - 1
+p4$p = uniroot(function(p) p * p4$ret_u + (1 - p) * p4$ret_d - p4$R,
+    c(0,1))$root
+#p4$p = uniroot(function(p) p * p4$S_u + (1 - p) * p4$S_d - p4$S * (1 + p4$R),
+#    c(0,1))$root
+p4$C = (p4$p * (p4$S_u - p4$E)) / (1 + p4$R)
+```
+
+## Two-State Model
+
+Given:
+
+* Today's values (S): \$23.5 million
+* Exercise price (E): \$25 million
+* Up State (\(S_u\)): \$26.8 million
+* Down State (\(S_d\)): \$22 million
+* Risk free rate (\(R\)): 4.8\%
+* Time (\(t\)): 1 year
+* Option offer: \$750,000
+
+### Step 1: Determine the Risk-Neutral Probabilities
+
+The value will either rise \((26.8 / 23.5 =) `r round(p4$ret_u*100, 2)`\)\%, or
+fall \((22 / 23.5 - 1 =) `r round(p4$ret_d*100, 2)`\)\%.
+
+The risk-neutral probability the value will rise can be calcualted:
+
+\[
+`r p4$R` = p^* \times `r round(p4$ret_u, 4)` + (1 - p^*)
+    \times (`r round(p4$ret_d, 4)`)
+\]
+
+The probability is found to be: `r round(p4$p, 4)`.
+
+### Step 2: Valuing the option
+
+The payoffs for each state are: \((26.8 - 25 =)\) 1.8 million or \((22 - 25 =)\)
+0.
+
+The value of the call can be calculated:
+
+\[
+V = \frac{`r round(p4$p, 4)` \times 1.8 + (1 - `r round(p4$p, 4)`)
+    \times 0}{(1.048)} = \$`r pretty(p4$C, 0)`
+\]
+
+The value of the option is higher than the offer. I would sell the option.
+
+# 5. Real Options
+
+Jet Black is an international conglomerate with a petroleum division and is
+ucrrently competing in an auction to win the right to drill for crude oil on a
+large piece of land in one year. The current market price of crude oil is \$93
+per barrel, and the land is believed to contain 435,000 barrels of oil. If
+found, the oil would cost \$75 million to extract. Treasury bills that mature in
+one year yield a continuously compounded interest rate of 4 percent, and the
+standard deviation of the returns on the price of crude oil is 50 percent. Use
+the Black-Scholes model to calculate the maximum bid that the company shyould be
+willing to make at the auction.
+
+```{r}
+p5 = new.env()
+p5$S = 93 * 435000
+p5$E = 75e6
+p5$R = .04
+p5$t = 1
+p5$sd = .5
+
+p5$d.1 = (log(p5$S/p5$E) + (p5$R + p5$sd^2/2) * p5$t) / (sqrt(p5$sd^2 * p5$t))
+p5$d.2 = p5$d.1 - sqrt(p5$sd^2 * p5$t)
+p5$C = p5$S * pnorm(p5$d.1) - p5$E * exp(-p5$R * p5$t) * pnorm(p5$d.2)
+```
+
+## Black-Scholes model
+
+Given:
+
+* Number of barrels: 435,000
+* Current market price per barrel: \$93
+* Cost to extract (E): \$75 million
+* Risk-free rate (R): 4 percent
+* Time (t): 1 year
+* Standard deviation on the returns on the price of crude oil: 50 percent
+
+The current value of the crude oil on the land is \$`r pretty(p5$S, 0)`
+(\(= 94 \times 435,000\)).
+
+\[
+d_1 = (\ln{(S/E)} + (R + \sigma^2/2) t) / \sqrt{\sigma^2 t}
+    = `r round(p5$d.1, 4)`
+\]
+
+\[
+d_2 = d_1 - \sqrt{\sigma^2 t} = `r round(p5$d.2, 4)`
+\]
+
+\[
+C = S N(d_1) - Ee^{-Rt}N(d_2) = \$`r pretty(p5$C)`
+\]
+
+# 6. Real Options
+
+Sardano and Sons is a large, publicly held company that is considering leasing a
+warehouse. One of the company's divisions specializes in manufacturing steel,
+and this particular warehouse is the only facility in the area that suits the
+firm's operations. The current price of steel is \$670 per ton. If the price of
+steel falls over the next six months, the company will purchase 500 tons of
+steel and produce 55,000 steel rods. Each steel rod will cost \$18 to
+manufacture, and the company plans to sell the rods for \$29 each. It will take
+only a matter of days to produce and sell the steel rods. If the price of steel
+rises or remains the same, it will not be profitable to undertake the project,
+and the company will allow the lease to expire without producing any steel rods.
+Treasury bills that mature in six months yield a continuously compounded
+interest rate of 4.5 percent, and the standard deviation of the returns on steel
+is 45 percent. Use the Black-Scholes model to determine the maximum amount that
+the company should be willing to pay for the lease.
+
+```{r problem 6}
+p6 = new.env()
+p6$S = 670 * 500
+p6$E = p6$S
+p6$t = 6/12
+p6$sd = .45
+p6$R = .045
+
+p6$d.1 = (log(p6$S/p6$E) + (p6$R + p6$sd^2/2) * p6$t) / sqrt(p6$sd^2 * p6$t)
+p6$d.2 = p6$d.1 - sqrt(p6$sd^2 * p6$t)
+p6$C = p6$S * pnorm(p6$d.1) - p6$E * exp(-p6$R * p6$t) * pnorm(p6$d.2)
+```
+
+## Black-Scholes model
+
+Given:
+
+* Current steel price is \$670 per ton
+* Purchase option: 500 tons of steel
+* Production: 55,000 steel rods
+* Cost: \$18 per rod
+* Sale: \$29 per rod
+* Time (t): 6 months (.5)
+* interest rate (R): 4.5 percent
+* Standard deviation: 45 percent
+
+Black-Scholes Parameters:
+
+* S: \(670 \times 500\)
+* E: \(670 \times 500\)
+* t: 6/12
+* R: .045
+* \(\sigma\): .45
+
+\[
+d_1 = \frac{\log{(S/E)} + (R + \sigma^2/2) t}{\sqrt{\sigma^2 t}}
+    = `r round(p6$d.1, 4)`
+\]
+
+\[
+d_2 = d_1 - \sqrt{\sigma^2 t} = `r round(p6$d.2, 4)`
+\]
+
+\[
+C = S N(d_1) - Ee^{-Rt}N(d_2) = \$`r pretty(p6$C, 0)`
+\]
+
+# 7. Real Options
+
+Wet for the Summer, Inc., manufactures filters for swimming pools. The company
+is deciding whether to implement a new technology in its pool filters. One year
+from now the company will know whether the new technology is accepted in the
+market. If the demand for the new filters is high, the present value of the cash
+flows in one year will be \$14.3 million. Conversely, if the demand is low, the
+value of the cash flows in one year will be \$8 million. The value of the
+project today under these assumptions is \$12.9 million, and the risk-free rate
+is 6 percent. Suppose that in one year, if the demand for the new technology is
+low, the company can sell the technology for \$9.4 million. What is the value of
+the option to abandon?
+
+```{r problem 7}
+p7 = new.env()
+p7$S = 12.9
+p7$E = 9.4
+p7$S_u = 14.3
+p7$S_d = 8
+p7$R = .06
+p7$t = 1
+p7$p = uniroot(function(p) p * p7$S_u + (1 - p) * p7$S_d - p7$S * (1 + p7$R),
+               c(0,1))$root
+p7$C = (p7$p * (p7$S_u - p7$E) + (1 - p7$p) * 0) / (1 + p7$R)
+p7$P = p7$C + p7$E/(1 + p7$R) - p7$S
+```
+
+The steps to compute the option to abondon:
+
+1. Observe the abandonment as a put option.
+2. Compute risk-neutral probability of not abandoning (call option).
+3. Compute the call value using the binomial model.
+4. Use the put-call parity to calculate the put option value.
+
+Given:
+
+* \(S_0\): 12.9 million
+* \(S_u\): 14.3 million
+* \(S_d\): 8 million
+* R: .06
+* t: 1
+
+\[
+12.9 \times (1.06) = p \times 14.3 + (1 - p) \times 8
+\]
+
+The risk-neutral probability of high demand is `r round(p7$p, 4)`.
+
+To calculate the value of the call:
+
+\[
+C = \frac{p \times (S_u - E) + (1 - p) \times 0}{(1 + r)} = \$`r pretty(p7$C)`
+\]
+
+The put option value is:
+
+\[
+P = S + \frac{E}{1 + r} - C = \$`r pretty(p7$P)`
+\]
+
+# 8. Binomial Model
+
+There is a European put option on a stock that expires in two months. The stock
+price is \$73, and the standard deviation of the stock returns is 70 percent.
+The option has a strike price of \$80, and the risk-free interest rate is a 5
+percent annual percentage rate. What is the price of the put option today using
+one-month steps?
+
+```{r problem 8}
+p8 = new.env()
+p8$S = 73
+p8$E = 80
+p8$sd = .7
+p8$R = .05
+p8$t = c(1, 2)
+p8$d.1 = (log(p8$S / p8$E) + (p8$R + p8$sd^2/2) * p8$t) / sqrt(p8$sd^2 * p8$t)
+p8$d.2 = p8$d.1 - sqrt(p8$sd^2 * p8$t)
+p8$C = p8$S * pnorm(p8$d.1) - p8$E * exp(-p8$R * p8$t) * pnorm(p8$d.2)
+```
+
+## Binomial model
+
+Given:
+
+* S: 73
+* E: 80
+* sd: .70
+* R: .05
+* time: one month steps
+
+## First month
+

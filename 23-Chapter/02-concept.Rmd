@@ -1,0 +1,160 @@
+---
+title: "Chapter 23 Options and Corporate Finance"
+subtitle: "Concept Questions"
+output:
+  pdf_document:
+    toc: true
+---
+
+# 1. Employee Stock Options
+
+Why do companies issue options to executives if they cost the company more than
+they are worth to the executive? Why not just give cash and split the
+difference? Wouldn't that make both the company and the executive better off?
+
+From pages __726 and 727__ The main reasons why companies use options as a
+compensation for executives is because it helps to align the interests of the
+executive with the company. By issuing options to buy the company stock, the
+executive has an incentive to increase the value of the company. Other reasons
+are to take away the pay disparity between executives and employees as an issue
+of contention, and options are also a more tax-efficient way to pay employees.
+
+---
+
+# 2. Real Options
+
+What are the two options that many businesses have?
+
+From the last paragraph of __page 732__. The notion of embedded options is at
+the heart of business. There are two possible outcomes for virtually every
+business idea. On the one hand, the business may fail, in which case the
+managers will probably try to shut it down in the most cost-efficient way. On
+the other hand, the business may prosper, in which case the managers will try to
+expand. All businesses have the option to abondon and the option to expand.
+
+---
+
+# 3. Project Analysis
+
+Why does a strict NPV calculation typically understate the value of a company or
+project?
+
+A strict NPV (Net Present Value) calculation understates the true value of a
+company or project because it assumes no managerial flexibility---that is, it
+treats future decisions as fixed and ignores the value of being able to adapt
+when uncertainty is resolved.
+
+## Traditional NPV assumes passive management
+
+The NPV rule values a project as:
+
+\[
+\text{NPV} = \sum^T_{t=1}{\frac{E[\text{Cash Flow}_t]}{(1 + r)^t}}
+    - \text{Initial Investment}
+\]
+
+This formula assumes:
+
+* The investment is made once, now.
+* The firm cannot alter or abandon the project later.
+* Cash flows are fixed and known (or expected) values.
+
+In reality, managers can---and do---respond to changes in circumstances.
+
+## In reality, management has flexibility
+
+Managers can:
+
+* __Delay__ invsting until more information arrives (option to wait),
+* __Expand__ if the project goes well (option to expand),
+* __Abandon__ if it performs poorly (option to abandon),
+* __Switch__ inputs, outputs, or production methods (option to switch).
+
+Each of these is a real option that has value, especially under uncertainty.
+
+## Ignoring flexibility undervalues projects
+
+A strict NPV treats a project like a _commitment_, not an _opportunity_.
+
+* The downside can be limited (you can walk away or scale down).
+* The upside can be large (you can expand or invest more).
+
+Thus, the true value is:
+
+\[
+\text{True value} = \text{NPV}_{\text{static}} + \text{Value of Real Options}
+\]
+
+Because $\text{Value of Real Options} \ge 0$, a simple NPV analysis will
+understate the project's worth.
+
+## Analogy to financial options
+
+Just as owning a call option on a stock gives you the right but not the
+obligation to buy, having a project opportunity gives management the right but
+not the obligation to proceed, expand, or stop. Ignoring that "optionality" is
+like valuing an option at zero---clearly an underestimate.
+
+---
+
+# 4. Real Options
+
+Utility companies often face a decision to build new plants that burn coal, oil,
+or both. If the prices of both coal and gas are highly volatile, how valuable is
+the decision to build a plant that can burn either coal or oil? What happens to
+the value of this option as the correlation between coal and oil prices
+increases?
+
+The ability to choose which fuel to burn is a real option---an option to switch.
+
+* If coal prices rise but oil prices fall $\rightarrow$ you burn oil.
+* If oil rises but coal falls $\rightarrow$ you burn coal.
+* You always choose the lower-cost fuel.
+
+This flexibility reduces your exposure to fuel price uncertainty---it's
+economically valuable, just like owning a portfolio that lets you switch between
+assets.
+
+## The value of the option depends on uncertainty
+
+The value of the option to switch (i.e., to choose between fuels) increases
+when:
+
+* The volatility (uncertainty) of fuel prices increases, and
+* The prices are not perfectly correlated.
+
+This is because:
+
+* More volatility $\rightarrow$ greater potential for one fuel to become much
+  cheaper than the other.
+
+* Lower correlation $\rightarrow$ prices move more independently, creating more
+  opportunities to switch profitably.
+
+## As correlation increases...
+
+If the correlation between coal and oil prices increases, then:
+
+* The two fuel prices move more closely together.
+
+* When coal becomes expensive, oil likely becomes expensive too---and vice
+  versa.
+
+* The advantage of having a choice diminishes, because there are fewer
+  situations where one fuel is much cheaper than the other.
+
+Hence
+
+\[
+\text{Value of the switching option} \downarrow\ \text{as correlation}\ \uparrow
+\]
+
+At the extreme:
+
+* If the correlation = 1 (perfectly correlated), the two prices always move
+  together.
+
+* Then switching has no value, because whichever fuel you use costs the same
+  relative to the other.
+
+---

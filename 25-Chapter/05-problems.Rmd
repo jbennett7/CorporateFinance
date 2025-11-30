@@ -1,0 +1,104 @@
+---
+title: Chapter 25 Derivatives and hedging risk
+subtitle: Questions
+output:
+  pdf_document:
+    includes:
+      in_headers: preamble.tex
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(echo=F)
+pretty <- function(x, n=2) format(round(x, n), big.mark=',')
+require(tidyverse)
+```
+
+# 1. Futures Quotes
+
+Refer to Table 25.2 in the text to answer this question. Suppose you purchase a
+March 2012 cocoa futures contract on November 22, 2011, at the last price of the
+day. What will your profit or loss be if cocoa prices turn out to be \$2,431 per
+metric ton at expiration?
+
+We are buying a futures contract at the price of \$2,313. We will profit only if
+the price of cocoa increases on expriation in March 2012. Since the spot price
+is \$2,431 in March 2012, we will have profited \(\$2,414 - \$2,4312 = \$17\)
+per metric ton. The total profit is \(17 \times 10 \times 1 = \$170\).
+
+
+# 2. Futures Quotes
+
+Refer to Table 25.2 in the text to answer this question. Suppose you sell five
+March 2012 silver futures contracts on November 22, 2011, at the last price of
+the day. What will your profit or loss be if silver prices turn out to be
+\$31.39 per ounce at expiration? What if silver prices are \$30.86 per ounce at
+expiration.
+
+We are selling five contracts. We will profit only if the price of cocoa
+decreases on expiration in March 2012.
+
+The settle price on November 22, 2011 is \$31.187 per troy ounce.
+
+If the price is \$31.39 the __loss per troy once__ is \(31.187 - 31.39 =
+(\$.203)\).  The loss is \(.203 \times 5,000 \times 5 = (\$5,075)\).
+
+If price is \$30.86 the __gain per troy ounce__ is \(31.187 - 30.86 = \$.327\). The gain is \(.327 \times 5,000 \times 5 = \$8,175\).
+
+# 3. Put and Call Payoffs
+
+Suppose a financial manager buys call options on 50,000 barrels of oil with an
+exercise price of \$95 per barrel. She simultaneously sells a put option on
+50,000 barrels of oil with the same exercise price of \$95 per barrel. Consider
+her gains and losses if oil prices are \$90, \$92, \$95, \$98, and \$100. What
+do you notice about the payoff profile?
+
+```{r problem 3}
+p3   = new.env()
+p3$E = 95
+p3$Q = 50000
+p3$S = c(90, 92, 95, 98, 100)
+p3$C = pmax(p3$S - p3$E, 0)
+p3$P = -pmax(p3$E - p3$S, 0)
+```
+
+## Synthetic long futures position
+
+By buying a call and selling a put with the same strike price (\$95) and the
+same notional size (50,000 barrels), the financial manager creates a position
+that behaves almost identically to being long 50,000 barrels of crude oil
+futures (or a forward contract) at exactly \$95 per barrel.
+
+```{r problem 3; table}
+tbl = tibble(
+  `Oil Price` = p3$S,
+  `Call payoff` = p3$C,
+  `Put payoff` = p3$P,
+  `Net` = p3$C + p3$P,
+  `Total payoff` = Net * p3$Q
+)
+knitr::kable(tbl)
+```
+
+## What you should notice about the payoff profile
+
+1. It is a straight line with slope +1. For every \$1 the oil price moves (up or
+   down), the strategy gains or loses exactly \$1 per barrel exactly \$50,000
+   per \$1 move in oil.
+
+2. It is virtually identical to being long an oil futures contract at \$%95. The
+   only minor difference is the net premium paid or received for the two
+   options.
+
+3. Unlimited upside, unlimited downside. Exactly like a naked long futures
+   position. There is no cap and no floor.
+
+4. Zero payoff at exactly the strike (\$95)
+
+## Conclusion
+
+The combination of long call + short put at the same strike creates a synthetic
+long futures contract. The payoff profile is linear, delta \(\approx\) +1.00,
+gamma \(\approx\) 0, and the position profits or loses dollar-for-dollar with
+the price of oil--exactly what the financial manager wanted if she is bullish on
+oil or simply wnants futures-like exposure without posting traditional futures
+margin.

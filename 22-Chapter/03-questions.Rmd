@@ -7,6 +7,7 @@ output:
 ---
 
 ```{r setup, include=F}
+knitr::opts_chunk$set(echo=F)
 require(tidyverse)
 pretty <- function(x, n=2) format(round(x, n), big.mark=',', nsmall=n)
 
@@ -50,31 +51,50 @@ b. What is the value of a call option with a \$50 exercise price? What is the
 c. What is the value of a put option with a \$60 exercise price? What is the
    intrinsic value?
 
+```{r problem 1, echo=F}
+p1 = new.env()
+p1$S0 = 63
+p1$Sd = 61
+p1$r = .048
+p1$E.a = 60
+p1$E.b = 50
+p1$V.a = p1$S0 - p1$E.a/(1 + p1$r)
+p1$V.b = p1$S0 - p1$E.b/(1 + p1$r)
+```
+
 ## A. Value of call option with a \$60 exercise price
 
-We are not given the upper bound of the stock. We are given only the lower
-bound, which is \$61, and the current price, \$63. If we assume that \$63 is the
-upper bound then we can calculate the value of the call option one year from now:
+
+The intrinsic value of the stock is \(\$63 - 60 = \$3\). Since the stock price
+has a floor of \$61 for one year, there is no way the option is worthless in one
+year. This means that the put option is worthless. We should not use the
+risk-neutral model to calculate the value of the call, we should use the
+put-call parity model with the put value = 0.
 
 \[
-\text{Expected value} = \frac{(63 - 60)\frac{1}{2} + (61 - 60)\frac{1}{2} = 2}
-    {(1 + .048)} \approx 1.91
+\begin{aligned}
+\text{Call option value} = 63 - \frac{60}{1.048}
+  = \$`r round(p1$V.a, 2)`
+\end{aligned}
 \]
 
-The intrinsic value, or the immediate value right now is \$3.
+## B. Value of call option with a \$50 exercise price
 
-## B. Value of call option with a \$50 exercise price.
+This is even lower than for part (a). The intrinsic valueof the stock is \(\$63
+- 50 = \$13\). The stock still has a floor above the exercise price of \$50.
+  This means we should use the put-call parity model:
 
 \[
-\text{Expected value} = \frac{(63 - 50) \times .5 + (61 - 50) \times .5}
-    {(1.048)} \approx 11.45
+\begin{aligned}
+\text{Call option value} = 63 - \frac{50}{1.048}
+  = \$`r round(p1$V.b, 2)`
+\end{aligned}
 \]
 
 ## C. Value of put option with a \$60 exercise price.
 
-For a put option with a \$60 exercise price, the option is out of the money.
-Since the stock will never be below \$61, the option will never have value. The
-value of the call option is zero.
+Since the put option exercise price of \$60 is below the floor stock price of
+\$61, then the put option will always be worthless.
 
 ---
 
@@ -181,7 +201,7 @@ If the stock price is \$125 on expiration then the investment is worth $(125 -
 
 ## C. Maximum gain and value of 10 August 110 put contracts
 
-The maximum gain of 10 August 110 put options occuris if the stock price goes to
+The maximum gain of 10 August 110 put options occur if the stock price goes to
 \$0. The total value is $10 \times 100 \times 110 = 110,000$. The cost is $10
 \times 100 \times 4.70 = 4,700$. The net gain is $110,000 - 4,700 = 105,300$.
 
@@ -190,14 +210,16 @@ If Macrosoft is selling for \$104 on expiration, then the value is $(110 - 104)
 
 ## D. Selling 10 August 110 put contracts
 
-If the stock price is \$103 on expiration then there is a loss of $(110 - 103)
-\times 1,000 = 7,000$. The net gain is $4,700 - 7,000 = -2,300$.
+When selling put options, I take on the risk (the obligation) of buying the
+stock at the exercise price on the expiration date. If the stock price is \$103
+then I would incur a loss of \(4.70 \times 10 \times 100 - (110 - 103) \times
+1,000 = \$7,000 = -\$2,300\).
 
 If the stock price is \$132 on expiration then the option is out of the money
-and is worth zero. You keep \$4,700.
+and is worth zero. I keep the \$4,700 premium.
 
 Break-even occurs when net profit is zero. The loss comes from the put being in
-the money: $110 - S_T = 4.70$. Solving for $S_T = 110 - 4.70 = 105.30$.
+the money: \(110 - S_T = \$4.70\). Solving for \(S_T = 110 - 4.70 = \$105.30\).
 
 ---
 
@@ -225,6 +247,8 @@ p4$delta.a = delta(p4$S.swing[1], p4$S.swing[2], p4$E.a)
 p4$bpi.a = borrow.payback(p4$S.swing[1], p4$S.swing[2], p4$E.a)
 p4$borrow.a = borrow(p4$S.swing[1], p4$S.swing[2], p4$E.a, p4$r, p4$T)
 p4$C.a = C.twostate(p4$S.a, p4$S.swing[1], p4$S.swing[2], p4$E.a, p4$r, p4$T)
+p4$p.a = uniroot(function(p) p*96 + (1 - p)*74 - 80*1.05, c(0,1))$root
+p4$V = (p4$p.a * p4$C.swing.a[2] + (1 - p4$p.a)*p4$C.swing.a[1])/(1 + p4$r)
 ```
 
 ## A. Price of a call option with exercise price \$70
@@ -235,10 +259,10 @@ The swing of the call is (`r p4$C.swing.a`) = `r diff(p4$C.swing.a)`
 
 The swing of the stock is (`r p4$S.swing`) = `r diff(p4$S.swing)`
 
-$$
+\[
 \text{Delta} = \frac{`r diff(p4$C.swing.a)`}{`r diff(p4$S.swing)`} 
     = `r p4$delta.a`
-$$
+\]
 
 ### Calculate the amount to borrow
 
@@ -258,6 +282,33 @@ We need to borrow enough money to payoff \$70.
 \text{Value of call} = \text{Stock price} \times \text{Delta}
     - \text{Amount borrowed}\\
 V = \$80 \times (1) - \$66.67 = \$13.33
+\end{aligned}
+\]
+
+### Risk-Neutral Valuation Method
+
+The payoffs are:
+
+* Up: 96 - 70 = 26
+* Down: 74 - 70 = 4
+
+The expected stock price under risk-neutral measure must be the forward price:
+
+\[
+\begin{aligned}
+80 \times 1.05 &= p^* \cdot 96 + (1 - p^*) \cdot 74\\
+84 &= 96p^* + 74 - 74p^*\\
+p &= \frac{10}{22} \approx `r round(p4$p.a, 2)`
+\end{aligned}
+\]
+
+Calculating the value of the call option
+
+\[
+\begin{aligned}
+C &= \frac{p^* \cdot 26 + (1 - p^*) \cdot 4}{1.05}\\
+  &= \frac{0.45 \times 26 + 0.54 \times 4}{1.05}\\
+  &= \frac{11.82 + 2.18}{1.05} = \frac{14}{1.05} \approx `r round(p4$V, 2)`
 \end{aligned}
 \]
 
@@ -284,7 +335,32 @@ Buying 0.27 of a share will bring us either $.27 \times 96 \approx 26$ or $.27 \
 V = 80 \times .27 - 19.05 = 2.55
 \]
 
-Book answer \$2.60
+### Risk-neutral method
+
+* Stock price: \(S_0 = \$80\)
+* Exercise price: \(E = \$90\)
+* Up price: \(S_u = \$96\)
+* Down price: \(S_d = \$74\)
+* Risk-free rate: \(r = .05\)
+
+\[
+S_0 \times (1 + r) = p^* \times S_u + (1 - p^*) \times S_d
+  = `r round(uniroot(function(p) p*96 + (1-p)*74 - 80*1.05, c(0,1))$root, 2)`
+\]
+
+\[
+V = \frac{p^* \times \max(S_u - E, 0) + (1 - p^*) \times \max(S_d - E, 0)}
+    {1 + r} = \$`r round((.45 * 6 + 0)/(1.05),2)`
+\]
+
+Book answer: \$13.33, \$2.60
+\[
+\frac{2.60 - 2.55}{2.60} = `r round((2.6-2.55)/2.6,2)*100`\%
+\]
+
+\[
+\frac{2.60 - 2.57}{2.60} = `r round((2.6 - 2.57)/2.6, 2)*100`\%
+\]
 
 ---
 
@@ -300,28 +376,21 @@ a. Suppose the current price of Tara stock is \$62. What is the value of the
 b. Suppose the exercise price is \$60 in part (a). What is the value of the call
    option now?
 
+```{r problem 5, echo=F}
+p5 = new.env()
+p5$prob = round(uniroot(function(p) p*70+(1-p)*50 - 62*1.05, c(0,1))$root, 2)
+```
+
 ## A. Current price \$62, Exercise price of \$35
 
-### Calculate the delta
-
-* \(70 - 35 = 35\)
-
-* \(50 - 35 = 15\)
+We use the put-call parity model with the put value = 0. This is because a put
+option with an exercise price of \$35 is worthless if the minimum price the
+stock will be is \$50.
 
 \[
-\text{Delta} = \frac{\text{Call swing}}{\text{Stock swing}}
-    = \frac{35 - 15}{70 - 50} = \frac{20}{20} = 1
+V = S_0 - \frac{E}{1 + r} = 62 - \frac{35}{1.05}
+  = \$`r round(62 - 35/1.05, 2)`
 \]
-
-### Calculate the borrowing amount
-
-\[
-\text{Borrow} = \frac{35}{1.05} = \$33.33
-\]
-
-### Calculate the value of the call option
-
-\(V = 62 \times 1 - 33.33 = 28.67\)
 
 ## B. Current price \$62, Exercise price of \$60
 
@@ -338,13 +407,24 @@ b. Suppose the exercise price is \$60 in part (a). What is the value of the call
 ### Calculate the borrowing amount
 
 \[
-\text{Borrow} = \frac{25}{1.05} = 23.81
+\text{Borrow} = \frac{25}{1.05} = \$`r round(25/1.05, 2)`
 \]
 
 ### Calculate the value of the call option
 
 \[
 V = 62 \times .50 - 23.81 = 7.19
+\]
+
+### Risk-Neutral Method
+
+\[
+62 \times (1.05) = p^* \times 70 + (1 - p^*) \times 50
+\]
+
+\[
+V = \frac{p \times \max(S_u - E, 0) + (1 - p) \times \max(S_d - E, 0)}{1+r}
+  = \$`r round((p5$prob*10 + (1 + p5$prob)*0)/1.05, 2)`
 \]
 
 ---
@@ -397,8 +477,8 @@ to expiration sell for \$2.40 and \$5.09, respectively. If the risk-free rate is
 \begin{aligned}
 \text{Stock price} + \text{Price of Put} &=
     \text{Price of call} + \text{PV}(\text{Exercise price})\\
-    &= 2.4 - 2.4 + 85e^{-.048 \times .25}\\
-    &= 83.99
+    &= 5.09 - 2.40 + 85e^{-.048 \times 3/12}\\
+    &= \$86.68
 \end{aligned}
 \]
 
@@ -406,7 +486,9 @@ to expiration sell for \$2.40 and \$5.09, respectively. If the risk-free rate is
 
 # 9. Put-call parity
 
-A put option and a call option with an exercise price of \$55 expire in two months and sell for \$2.65 and \$5.32, respectively. If the stock is currently priced at \$57.30, what is the annual continuously compounded rate of interest?
+A put option and a call option with an exercise price of \$55 expire in two
+months and sell for \$2.65 and \$5.32, respectively. If the stock is currently
+priced at \$57.30, what is the annual continuously compounded rate of interest?
 
 \[
 \begin{aligned}
@@ -613,6 +695,10 @@ d_1 - 1 = `r pretty(p12$delta.put, 3)`
 | Call | 0.578 | For every \$1 $\uparrow$ in stock, call $\uparrow \approx$ \$0.58 |
 | Put | -0.422 | For every \$1 $\uparrow$ in stock, put $\downarrow \approx$ \$0.42 |
 
+The Delta shows how the change in the stock price affects the value of the call
+or put. For call options, the stock price and the value is correlated. For put
+options they are inversely correlated.
+
 ---
 
 # 13. Black-Scholes and asset value
@@ -810,88 +896,32 @@ percent, what is the risk-neutral value of the call option?
 * Risk-free rate: .08
 
 ```{r problem 16, echo=F}
-p16 <- new.env()
+p16 = new.env()
 p16$S = 73
 p16$E = 70
 p16$r = .08
 p16$T = 1
-p16$sd = .15
-p16$prange = 73*c(.85, 1.15)
-p16$cpayoff = c(ifelse((p16$min <- min(p16$prange)-p16$E) > 0, p16$min, 0),
-                 max(p16$prange)-p16$E)
-p16$delta = diff(p16$cpayoff) / diff(p16$prange)
-p16$bstock = p16$delta * p16$prange
-p16$difference = max(p16$bstock) - max(p16$cpayoff)
-p16$borrow = p16$difference / (1 + p16$r)
-p16$C = p16$S * p16$delta - p16$borrow
-p16$p = uniroot(function(p) p * p16$sd + (1 - p) * -p16$sd - p16$r,
-                c(-1, 1))$root
-p16$C.rn <- (p16$p * max(p16$cpayoff) + (1 - p16$p) * min(p16$cpayoff)) /
-    (1 + p16$r)
+p16$swing = .15
+p16$p = uniroot(function(p)
+    p * p16$swing + (1 - p)*(-p16$swing) - p16$r, c(0,1))$root
+p16$C = (p16$p * (p16$S * (1 + p16$swing)-p16$E))/(1 + p16$r)
 ```
 
-## Calculate the Delta
-
-* Stock movement range: (`r p16$prange`)
-* Call payoff range: (83.95 - 70, 0) = (`r p16$cpayoff`)
+The Risk-neutral valuation calculates the probabilities of the two states by
+assuming that the return equals the risk free rate. We can calculate this
+return.
 
 \[
-\begin{aligned}
-D &= \frac{\text{Swing of the call}}{\text{Swing of the stock}}\\
-  &= \frac{`r diff(p16$cpayoff)`}{`r diff(p16$prange)`}\\
-  &= `r pretty(p16$delta, 3)`
-\end{aligned}
+`r p16$r` = p^* \times `r p16$swing` + (1 - p^*) \times (`r -p16$swing`)
 \]
 
-## Determine the borrowing amount
+We solve for \(p^* = .7667\).
 
-To determine the borrowing amount we buy a Delta amount of stock. At expiration,
-that will either be \$`r pretty(max(p16$bstock), 2)` on the high
-side, or \$`r pretty(min(p16$bstock), 2)` on the low side. This is exactly
-\$`r pretty(p16$difference)` more than the payoffs of
-\$`r pretty(max(p16$cpayoff))` and \$`r pretty(min(p16$cpayoff))`, respectively,
-from the call. To duplicate the call through a purchase of stock, we should also
-borrow enough money so that we have to pay back exactly
-\$`r pretty(p16$difference)`. We borrow
+Then the value of the call is calculated:
 
 \[
-B = \frac{`r pretty(p16$difference)`}{(`r 1 + p16$r`)} = \$`r pretty(p16$borrow)`
-\]
-
-## Value of call
-
-The value of the call is calculated:
-
-\[
-\begin{aligned}
-C &= S \times D - B\\
-  &= `r p16$S` \times `r pretty(p16$delta, 3)` - `r pretty(p16$borrow)`\\
-  &= \$`r pretty(p16$C)`
-\end{aligned}
-\]
-
-## Risk-neutral valuation
-
-It should be noted that we found the exact value of the option without even
-knowing the probability that the stock would go up or down. We can calculate the
-_risk-neutral_ case. This case occurs when the expected return on any asset is
-equal to the risk-free rate.
-
-\[
-`r p16$r*100`\% = \text{Probability of a rise} \times `r p16$sd*100`\%
-   + (1 - \text{Probability of rise}) \times -`r p16$sd*100`\%
-\]
-
-Solving this the probability of a rise is `r pretty(p16$p, 3)` and the
-probability of a fall is `r pretty(1 - p16$p, 3)`. If we use these probabilities
-to find the value of the call, we can get the value:
-
-\[
-\text{Value of call} = \frac{`r pretty(p16$p, 3)`
-    \times \$`r pretty(max(p16$cpayoff))`
-    + `r pretty(p16$p, 3)` \times \$`r pretty(min(p16$cpayoff))`}
-    {(`r 1 + p16$r`)}
-    = `r pretty(p16$C.rn)`
+\text{Value of call} = \frac{.7667 \times (84 - 70) + (1 - .7667) \times 0}
+                            {1.08} = \$`r p16$C`
 \]
 
 ---
@@ -907,17 +937,16 @@ probabilities of a stock price increase and a stock price decrease?
 ```{r problem 17, echo=F}
 p17 = new.env()
 p17$r = .05
-p17$p = uniroot(function(p) p * p16$sd + (1 - p) * -p16$sd - p17$r,
-    c(-1, 1))$root
-p17$C.rn = (p17$p * max(p16$cpayoff) + (1 - p17$p) * min(p16$cpayoff)) /
-    (1 + p17$r)
+p17$p = uniroot(function(p)
+    p * p16$swing + (1 - p) * (-p16$swing) - p17$r, c(0, 1))$root
+p17$C = (p17$p * (p16$S * (1 + p16$swing) - p16$E))/(1 + p17$r)
 ```
 
 We calculate the new probability:
 
 \[
-`r p17$r*100`\% = \text{Probability of a rise} \times `r p16$sd*100`\%
-   + (1 - \text{Probability of rise}) \times -`r p16$sd*100`\%
+`r p17$r*100`\% = \text{Probability of a rise} \times `r p16$swing*100`\%
+   + (1 - \text{Probability of rise}) \times -`r p16$swing*100`\%
 \]
 
 The new probability of a rise is `r pretty(p17$p, 3)` and the new probability of
@@ -927,11 +956,14 @@ The risk-neutral probability and value is now:
 
 \[
 \text{Value of call} = \frac{`r pretty(p16$p, 3)`
-    \times \$`r pretty(max(p16$cpayoff))`
-    + `r pretty(p17$p, 3)` \times \$`r pretty(min(p16$cpayoff))`}
-    {(`r 1 + p17$r`)}
-    = `r pretty(p17$C.rn)`
+    \times \$`r pretty(p16$S * (1 + p16$swing))`
+    + (1 - `r pretty(p17$p, 3)`) \times 0)}{(`r 1 + p17$r`)}
+    = `r pretty(p17$C)`
 \]
+
+
+The risk-neutral probability of a stock increase decreases as the risk-free rate
+decreases.
 
 ---
 
@@ -1084,6 +1116,7 @@ p22$S.A <- 26300 + 1200
 p22$S.B <- 26300 + 1600
 p22$E <- 25000
 p22$T <- 1
+p21$sd <- .38
 p22$sd.A <- .55
 p22$sd.B <- .34
 p22$r <- .05
@@ -1579,11 +1612,17 @@ p28$S.swing = c(1340, 1605)
 p28$r.ear = .065
 p28$T = 3/12
 p28$r = (1 + p28$r.ear)^p28$T - 1
-C.twostate(p28$S, p28$S.swing[1], p28$S.swing[2], p28$E, p28$r, p28$T)
+p28$C.swing = C.swing(p28$S.swing[1], p28$S.swing[2], p28$E)
+p28$delta = delta(p28$S.swing[1], p28$S.swing[2], p28$E)
+p28$borrow.payback = borrow.payback(p28$S.swing[1], p28$S.swing[2], p28$E)
+p28$borrow = borrow(p28$S.swing[1], p28$S.swing[2], p28$E, p28$r.ear, p28$T)
+p28$C.ts = C.twostate(p28$S, p28$S.swing[1], p28$S.swing[2],
+                      p28$E, p28$r.ear, p28$T)
 p28$p = uniroot(function(p){
         p * (1605/1450 - 1) + (1 - p)*(1340/1450 - 1) - p28$r
     }, c(0, 1))$root
-(p28$p * 75) / (1 + p28$r)
+p28$C.p = (p28$p * p28$C.swing[2] + (1 - p28$p) * p28$C.swing[1]) /
+          (1 + p28$r)
 ```
 
 ## A. Type of option
@@ -1617,6 +1656,33 @@ The call's payoffs are: (`r C.swing(p28$S.swing[1], p28$S.swing[2], p28$E)`)
 We can now calculate the value of the call:
 
 \[
-\text{Value of the call} = \frac{p \times \text{Stock high}
-    + p \times \text{Stock low}}{(1 + `r pretty(p28$r, 4)`)}
+\begin{aligned}
+\text{Value of the call} &= \frac{p \times \text{Stock high}
+    + (1 - p) \times \text{Stock low}}{(1 + r_{\text{qtr}})}\\
+    &= \frac{`r pretty(p28$p, 4)` \times `r p28$C.swing[2]`
+    + (1 - `r pretty(p28$p, 4)`) \times `r p28$C.swing[1]`}
+      {(1 + `r pretty(p28$r, 4)`)}\\
+    &= \$`r pretty(p28$C.p)`
+\end{aligned}
 \]
+
+## C. Synthetic option
+
+Maverick can buy gold and borrow at the present value of the exercise price.
+
+The delta is
+
+\[
+\text{Delta} = \frac{\text{Swing of call}}{\text{Swing of gold}}
+    = \frac{`r pretty(p28$C.swing[2], 0)` - `r pretty(p28$C.swing[1], 0)`}
+           {`r pretty(p28$S.swing[2], 0)` - `r pretty(p28$S.swing[1], 0)`}\\
+    = `r pretty(p28$delta, 4)`
+\]
+
+We need to borrow
+
+\[
+\text{Borrow} = `r pretty(p28$borrow.payback)`
+\]
+
+## D. The synthetic call is the same as the real option

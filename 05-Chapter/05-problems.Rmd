@@ -1,5 +1,5 @@
 ---
-title: "Net Present Value and Other Investment Rules"
+title: "Chapter 5 Net Present Value and Other Investment Rules"
 subtitle: "Problems"
 author: "Ross, Westerfield, Jaffe"
 output:
@@ -10,1019 +10,459 @@ output:
 ```{r setup, include=F}
 require(tidyverse)
 knitr::opts_chunk$set(echo = TRUE)
-pretty <- function(x, y=0) format(round(x, y), big.mark=",")
+pretty <- function(x, y=2) {
+    ifelse(x == Inf, Inf, format(round(x, y), big.mark = ","))
+}
+```
+
+```{r present value, echo=F}
+# Input, present value type vector with investment (as negative)
+# at the beginning [i.e. cash.flows = c(25, 25, 35, 50)]
+# The discount rate r also is specified
+pv <- function(C, r){
+    sum(C / (1 + r)^(1:length(C)))
+}
+```
+
+```{r Payback period, echo=F}
+# Input, NPV type vector with investment (as negative)
+# at the beginning [i.e. cash.flows = c(-100, 25, 25, 35, 50)]
+payback.period <- function(C, fractional=F){
+    cum_C = cumsum(C)
+    idx = which(cum_C >= 0)[1]
+    if(is.na(idx)) return(Inf)
+    if(!fractional){
+        return(idx-1)
+    } else {
+        prev_cum = cum_C[idx - 1]
+        current_C = C[idx]
+        frac = -prev_cum / current_C
+        return((idx-2) + frac)
+    }
+}
 ```
 
 ```{r Internal Rate of Return function, echo=F}
-# I must be a negative initial investment.
-# C must be positive cash flows.
-irr <- function(I, C) {
-  f <- function(r) I + sum(C/(1+r)^(1:length(C)))
-  uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root
+# Input, NPV type vector with investment (as negative)
+# at the beginning [i.e. cash.flows = c(-100, 25, 25, 35, 50)]
+irr <- function(C) {
+    uniroot(function(r) sum(C / (1 + r)^(0:(length(C)-1))), c(0, 1))$root
+}
+
+mirr <- function(C, r) {
+    n = length(C) - 1
+    t = 0:n
+    pv_neg = sum(ifelse(C < 0, C / (1 + r)^t, 0))
+    fv_pos = sum(ifelse(C > 0, C * (1 + r)^(n-t), 0))
+    mirr_value = (fv_pos / -pv_neg)^(1/n) - 1
+    return(mirr_value)
 }
 ```
 
 ```{r Net present value, echo=F}
-npv <- function(I, C, r) I + sum(C/(1 + r)^(1:length(C)))
+# Input, NPV type vector with investment (as negative)
+# at the beginning [i.e. cash.flows = c(-100, 25, 25, 35, 50)]
+# The discount rate r also is specified
+npv <- function(C, r) sum(C / (1 + r)^(0:(length(C)-1)))
 ```
 
-# Summary and conclusions
-
-1. In this chapter, we covered different investment decision rules. We evaluated
-   the most popular alternatives to the NPV: The payback period, the discounted
-   payback period, the internal rate of return, and the profitability index. In
-   doing so we learned more about the NPV.
-
-2. While we found that the alternatives have some redeeming qualities, when all
-   is said and done, they are not the NPV rule; for those of us in finance, that
-   makes them decidedly second-rate.
-
-3. Of the competitors to NPV, IRR must be ranked above payback. In fact, IRR
-   always reaches the same decision as NPV in the normal case where the initial
-   outflows of an independent investment project are followed only by a series
-   of inflows.
-
-4. We classified the flaws of IRR into two types. First, we considered the
-   general case applying to both independent and mutually exclusive projects.
-   There appeared to be two problems here:
-
-> a. Some projects have cash inflows follwoed by one or more outflows. The IRR rule is inverted here: One should accept the IRR is _below_ the discount rate.
-> b. Some projects have a number of changes of sign in their cash flows. Here, there are likely to be multiple internal rates of return. The practitioner must use either NPV or modified internal rate of return here.
-
-5. Next, we considered the specific problems with the NPV for mutually exclusive
-   projects. We showed that, due to differences in either size or timing, the
-   project with the highest IRR need not have the highest NPV. Hence, the IRR
-   rule should not be applied. (Of course, NPV can still be applied.)
-
-6. We described capital rationing as the case where funds are limited to a fixed
-   dollar amount. With capital rationing the profitability index is a useful
-   method of adjusting the NPV.
-
-# Concept Questions
-
-## 1. Payback period and net present value
-
-If a project with conventional cash flows has a payback period less than the
-project's life, can you definitively state the algebraic sign of the NPV? Why or
-why not? If you know that the discounted payback period is less than the
-project's life, what can you say about the NPV? Explain.
-
-A project's payback period is not enough to tell if the NPV will be positive
-(profitable project). This is because the payback period does not take into
-account the interest rate. However, if the discounted payback period is less
-than the project's life, then we can say that the NPV will be positive.
-
----
-
-## 2. Net present value
-
-Suppose a project has conventional cash flows and a positive NPV. What do you
-know about its payback? Its discounted payback? Its profitability index? Its
-IRR? Explain.
-
-If the project has conventional (positive) cash flows and a positive NPV, then
-we know the payback period will be less than the life of the project, its
-discounted payback will be less than the life of the project, its profitability
-index will be greater than 1, and its IRR will be greater than the discount
-rate. All of this means that the project should be accepted.
-
----
-
-## 3. Comparing investment criteria
-
-Define each of the following investment rules and discuss any potential
-shortcomings of each. In your definition, state the criterion for accepting or
-rejecting independent projects under each rule.
-
-a. Payback period.
-b. Internal rate of return.
-c. Profitability index.
-d. Net present value.
-
-### Payback period
-
-The payback period defines how an investment should be viewed based on how long
-it takes for the investment to pay for itself. The issue with the payback period
-is that it does not take into account the time value of money as well as the
-cash flows after the payback period has lapsed. This makes it difficult to use
-when comparing multiple investment options because it doesn't take into account
-cash flows after the payback period.
-
-A modified version of the payback period is the discounted payback period which
-does take into account the time value of money. However, it still does not take
-into account the cash flows after the payback period. The NPV method is better.
-
-### Internal rate of return
-
-The internal rate of return is a better method of evaluating an investment than
-the payback period. It calculates the investments interal rate, which can be
-used to compare with the discount rate. If the internal rate is greater than the
-discount rate the investment should be made. However, there are problems with
-the internal rate of return:
-
-1. Some investments are inverted. Meaning that the investment has an initial
-   inflow, followed by a sequence of outflows. In this case the IRR rule should
-   be inverted: You should make the investment if the internal rate is less than
-   the discount rate.
-
-2. Sometimes there are a number of sign changes in the cash flows (i.e. there
-   are additional investments that need to be made beside the initial
-   investment). If this is the case there will be multiple internal rates of
-   return. To compensate for this problem you can use the Modified IRR, which
-   addresses the sign change issue by combining cash flows until only one sign
-   change remains. The alternative is to use NPV.
-
-The IRR also has an issue when trying to compare mutually exclusive investments
-due to scale and timing. The IRR does not take into account the scale of the
-investments; meaning that larger investments may generate larger cash flows even
-though the IRR may be lower. This can be compensated using Incremental IRR which
-uses the difference between the two investments when comparing. Timing of the
-cash flows can also affect the validity of the IRR. If larger cash flows occur
-later in the life of the investment, depending on the discount rate, the IRR may
-give the wrong decision.
-
-### Profitability index
-
-The profitability index is a useful way of comparing investments, however it
-does suffer from the same problems as the internal rate of return in terms of
-scaling. It can be compensated using incremental analysis.
-
-### Net present value
-
-The net present value is the most superior method in evaluating an investment.
-In all cases it will yield the right result. The net present value takes into
-account the time value of money of all cash flows including the initial
-investment. If the NPV is positive the investment will pay off. If the NPV is
-negative it will not.
-
----
-
-## 4. Payback and internal rate of return
-
-A project has perpetual cash flows of $C$ per period, a cost of $I$, and a
-required return of $R$. What is the relationship between the project's payback
-and its IRR? What implications does your answer have for long-lived projects
-with relatively constant cash flows?
-
-The payback period takes into account the initial investment and the cash flows
-to determine how long it will take to pay back the investment.
-
-$$
-\begin{aligned}
-\mathbf{Payback\ Period} &= \frac{I}{C}
-\end{aligned}
-$$
-
-Since the cash flows are perpetual the present value of the investment is:
-
-$$
-\begin{aligned}
-\mathbf{PV} &= \frac{C}{r}
-\end{aligned}
-$$
-
-Setting $\mathbf{PV} = I$, the IRR can be calculated:
-
-$$
-\begin{aligned}
-I &= \frac{C}{r}\\\\
-r &= \frac{C}{I}
-\end{aligned}
-$$
-
-Comparing the payback period and the IRR, we can see there is an inverse
-relationship between the two:
-
-$$
-\begin{aligned}
-\mathbf{Payback\ Period} &= \frac{1}{IRR} \\ \\
-\mathbf{IRR} &= \frac{1}{\text{Payback Period}}
-\end{aligned}
-$$
-
-What this means is that a short payback period implies a high IRR because cash
-flows quickly recover the initial investment and continue generating value.
-Conversely, a long payback period implies a low IRR because the initial
-investment takes more time to be recovered.
-
----
-
-## 5. International investment projects
-
-In October 2010, BMW announced plans to spend \$1 billion to expand production
-at its plant in South Carolina. The plant produced the second generation BMW X3
-as well as the company's X5 and X6 models. BMW apparently felt it would be
-better able to compete and create value with a U.S.-based facility. In fact, BMW
-actually expected to export 70 percent of the X3s produced in South Carolina.
-About the same time, Samsung Electronics announced plans to build a \$3.6
-billion plant in Taxes, and Novartis announced plans to open a \$1 billion-plus
-plant in North Carolina. What are some of the reasons that foreign manufacturers
-of products as diverse as automobiles, electronics, and pharmaceuticals might
-arrive at the same conclusion to build plants in the U.S.?
-
-There are many reasons why foreign manufacturers would want to build plants in
-the U.S.:
-
-1. The U.S. is one of the largest consumer markets in the world. To have a
-   manufacturing plant in the U.S. gives them direct access to this market.
-
-2. Producing goods in the U.S. may offer the manufacturer export opportunity
-   benefits they wouldn't have in their host country.
-
-3. Producing goods in the U.S. allows the manufacturer to avoid tariffs and
-   trade barriers.
-
-4. The U.S. has one of the most skilled and educated workforce in the world.
-   Building a plant in the U.S. gives them access to this workforce.
-
-This is by no means an exhaustive list but are some examples as to why foreign
-manufacturers would build plants in the U.S. to produce their products.
-
---
-
-## 6. Capital budgeting problems
-
-What are some of the difficulties that might come up in actual applications of
-the various criteria we discussed in this chapter? Which would be the easiest to
-implement in actual applications? The most difficult?
-
-### Difficulties
-
-#### Payback period
-
-1. Ignores the time value of money.
-
-2. Has an arbitrary cutoff period.
-
-3. Ignores cash flows beyond the cutoff period.
-
-4. Not a measure of profitability.
-
-#### Discounted payback period
-
-1. Because we now discount the relevant cash flows, discounted payback period is
-   more complex than the original payback period.
-
-2. Still ignores cash flows beyond the cutoff period.
-
-3. Still has an arbitrary cutoff period.
-
-#### Internal rate of return (IRR)
-
-1. For projects with non-conventional cash flows, such as multiple outflows,
-   there could be multiple IRRs or no IRR at all.
-
-2. IRR assumes that interim cash flows are reinvested at the IRR, which may be
-   unrealistic. NPV, by contrast, assumes reinvestment at the cost of capital.
-
-3. IRR may give incorrect rankings when comparing mutually exclusive projects
-   when the scale of the projects, or the timing of cash flows differ.
-
-4. Because it is a ratio, IRR does not take into account the scale of the
-   project.
-
-#### Profitability index (PI)
-
-1. Because the PI is a ratio as well, it too does not take into account the
-   scale of the project.
-
-#### Net present value (NPV)
-
-1. Requires accurate estimates to be effective.
-
-2. The net present value method is highly complex, and difficult to explain its
-   conclusions.
-
-3. The net present value method has a bias toward larger projects because it
-   deals with absolute, rather than relative cash flows. Using this method may
-   miss smaller projects with better rates of return.
-
-#### General difficulty issues when using capital budgeting tools
-
-1. Capital budgeting tools require accurate estimates of future cash flows,
-   discount rates, and project life. All of these are difficult to forecast.
-
-2. When trying to compare mutually exclusive projects, it is important to take
-   note of the size of the projects because the ratio based capital budgeting
-   tools do not take into account the scale of the projects. The net present
-   value method, however, does overcome this issue.
-
-3. Because of the issue described in (2), comparing projects in general is
-   difficult.
-
-4. Capital budgeting tools only focus on financial metrics. Although financial
-   metrics should be the main focus, other factors, such as strategic alignment,
-   environmental impact, or regulatory considerations may be overlooked.
-
-The advantages of each of the capital budgeting tools discussed:
-
-#### Payback period
-
-This method is good for quick assessments, or for projects with high risk where
-a fast payback is important to reduce uncertainty.
-
-#### Discounted payback period
-
-Similar to the payback period, but for projects that need to take into account
-the time value of money this method should be used.
-
-#### Net present value
-
-This is the most accurate method and always leads to the correct decision if the
-estimates are accurate. Net present value is very useful for long and complex
-projects with predictable cash flows and where maximizing value is important.
-Net present value is also useful when comparing mutually exclusive projects.
-
-#### Internal rate of return (IRR)
-
-Very useful when comparing projects where the relative rate of return is
-important because it returns this rate as an easily communicable percentage.
-
-#### Profitability index (PI)
-
-An excellent choice when comparing mutually exclusive projects of similar scale
-to determine the most efficient use of resources.
-
----
-
-## 7. Capital budgeting in not-for-profit entities
-
-Are the capital budgeting criteria discussed applicable to not-for-profit
-corporations? How should such entities make capital budgeting decisions? What
-about the U.S. government? Should it evaluate spending proposals using these
-techniques?
-
-Although not-for-profit corporations, or government organizations like the U.S.
-government, have different goals than for-profit corporations, they still need
-to determine the most efficient use of limited resources. Capital budgeting
-techniques such as the profitability index (PI), the internal rate of return
-(IRR), and the net present value (NPV) are excellent choices for these tasks.
-
----
-
-## 8. Net present value
-
-The investment in project A is \$1 million, and the investment in project B is
-\$2 million. Both projects have unique internal rate of return of 20 percent. Is
-the following statement true or false?
-
-> For any discount rate from 0 percent to 20 percent, project B has an NPV twice
-> as great as that of project A.
-
-This statement is true.
-
-$$
-\begin{aligned}
-\mathbf{NPV} &= \sum^{T}_{t=1}{\frac{C_t}{(1 + r)^{t}}} - I
-\end{aligned}
-$$
-
-where:
-
-* $C_t =$ cash flow at period $t$.
-* $r =$ the discount rate.
-* $I =$ the initial investment.
-
-Since both have the same IRR, their cash flow structure are proportional to
-their respective initial investments. Since the cash flows are proportional to
-the investments, then the cash inflows of project B are twice the cash inflows
-of project A.
-
----
-
-## 9. Net present value versus profitability index
-
-Consider the following two mutually exclusive projects available to Global
-Investments, Inc.:
-
-```{r Table for concepts 9, echo=F}
+```{r profitability index, echo=F}
+# Input, NPV type vector with investment (as negative)
+# at the beginning [i.e. cash.flows = c(-100, 25, 25, 35, 50)]
+# The discount rate r also is specified
 profitability.index <- function(C, r) {
-  I <- head(C,1)
-  C <- tail(C,-1)
-  n <- length(C)
-  pv <- sum(C/(1 + r)^(1:n))
-  -pv/I
+  I = -head(C, 1)
+  C = tail(C, -1)
+  pv = sum(C / (1 + r)^(1:length(C)))
+  pv / I
 }
-npv <- function(C, r){
-  n <- length(C)-1
-  sum(C/(1 + r)^(0:n))
-}
-A <- c(-1000, 1000, 500)
-B <- c(-500, 500, 400)
-c9.tb <- as.data.frame(
-  matrix(c(A, round(profitability.index(A, .1), 2), round(npv(A, .1)),
-           B, round(profitability.index(B, .1), 2), round(npv(B, .1))),
-         nrow=2, byrow=T))
-rownames(c9.tb) <- c("A", "B")
-colnames(c9.tb) <- c("C0", "C1", "C2", "PI", "NPV")
-knitr::kable(c9.tb)
 ```
 
-The appropriate rate for the projects is 10 percent. Global Investments chose to
-undertake Project A. At a luncheon for shareholders, the manager of a pension
-fund that owns a substantial amount of the firm's stock asks you why the firm
-chose Project A instead of Project B when Project B has a higher profitability
-index.
-
-How would you, the CFO, justify your firm's action? Are there any circumstances
-under which Global Investments should choose Project B?
-
-Although project B has a higher profitability index rating, Project A has a
-higher net present value. Net present value evaluates the absolute value of the
-projects where as the profitability index evaluates the financial efficiency of
-a project (how much "bang" for your buck). The profitability index is not useful
-when comparing two projects of different scale because it doesn't take into
-account the absolute values of the projects value.
-
----
-
-## 10. Internal rate of return
-
-Projects $A$ and $B$ have the following cash flows:
-
-```{r Table for concept 10, echo=F}
-Year <- c(0,1,2,3)
-A <- c(-1000, "C1A", "C2A", "C3A")
-B <- c(-2000, "C1B", "C2B", "C3B")
-c10.df <- as.data.frame(matrix(c(Year,A,B),ncol=3))
-colnames(c10.df) <- c("Year", "Project A", "Project B")
-knitr::kable(c10.df)
-```
-
-a. If the cash flows from the projects are identical, which of the two projects
-   would have a higher IRR? Why?
-
-b. If C1B = 2C1A, C2B = 2C2A, and C3B = 2C3A, then is
-   $\text{IRR}_A = \text{IRR}_B$?
-
-IRR analysis:
-
-$$
-\begin{aligned}
-\mathbf{NPV} &= -I + \sum^T_{t=1}{\frac{C}{(1 + R)^{t}}}
-\end{aligned}
-$$
-
-To find the internal rate of return we choose an arbitrary rate and solve for
-$\text{NPV}$. If the value is $>0$ than we choose a new lower rate. If the rate
-is $<0$ then we choose a higher rate until we get $\text{NPV}=0$.
-
-This process can be done via `R` using the `uniroot` function.
-
-
-a. If the two projects have identical cash flows, then project A has the higher
-IRR because it has a lower initial investment.
-
-b. If the cash flows for project B are twice the cash flows of project A, then
-the two projects would have the same IRR.
-
-The reason for this result is because the IRR is a percentage that is compared
-to the discount rate. If the value of IRR is greater than the discount rate than
-we choose the project. However, the IRR is a percentage and not an aboslute
-value. Therefore, comparing two projects as such would most likely give us an
-incorrect result and we need to compare these projects using NPV.
-
----
-
-## 11. Net present value
-
-You are evaluating Project A and Project B. Project A has a short period of
-future cash flows, while project B has relatively long future cash flows. Which
-project will be more sensitive to changes in the required return? Why?
-
-Project B would be more sensitive to changes in the required return because its
-cash flows extend for a longer time period and the time value of money effects
-are heavier on cash flows further out into the future.
-
----
-
-## 12. Modified internal rate of return
-
-One of the less flattering interpretations of the acronym MIRR is "meaningless
-internal rate of return." Why do you think this term is applied to MIRR?
-
-1. Loss of original IRR intuition - The MIRR adjusts cash flows based on
-   reinvestment and financing assumptions (reinvestment at a predefined
-   borrowing costs). While these adjustments address some of the shortcomings,
-   they result in a metric that no longer has the same intuitive connection
-   connection to the project's cash flows.
-
-2. Assumptions about the reinvestment rate - The MIRR assumes that all positive
-   cash flows are reinvested at a specified reinvestment rate (the discount
-   rate). However, this may not be the case.
-
-3. MIRR is not a pure rate of return - The MIRR is not purely derived from the
-   project's cash flows since it uses a discount rate.
-
-* Lacks the intuitive appeal of IRR as a breakeven return.
-
-* Relies heavily on assumptions about reinvestment and financing rates.
-
-* Deviates from representing the project's intrinsic profitability.
-
----
-
-## 13. Net present value
-
-It is sometimes stated that "the net present value approach assumes reinvestment
-of the intermediate cash flows at the required return." Is this claim correct?
-To answer, suppose you calculate the NPV of a project in the usual way. Next,
-suppose you do the following:
-
-a. Calculate the future value (as of the end of the project) of all the cash
-flows other than the initial outlay assuming they are reinvested at the required
-return, producing a single future value figure for the project.
-
-b. Calculate the NPV of the project using the single future value calculated in
-the previous step and the initial outlay. It is easy to verify that you will get
-the same NPV as in your original calculation only if you use the required return
-as the reinvestment rate in the previous step.
-
-The statement that the "net present value (NPV) approach assumes reinvestment of
-intermediate cash flows at the required return" is not entirely accurate. The
-NPV method does not explicitly assume any reinvestment rate for intermediate
-cash flows. Instead, it discounts all cash flows back to the present at the
-required return (discount rate) and evaluates the net value created.
-
-### Calculate the future value of intermediate cash flows
-
-Suppose the project's cash flows are $C_0, C_1, C_2, \ldots, C_n$, where $C_0$
-is the initial outlay (negative cash flow), and $C_1, C_2, \ldots, C_n$ are
-positive cash inflows.
-
-1. To calculate the future value (FV) of all cash flows other than the initial
-   outlay:
-
-   * Assume each intermediate cash flow($C_t$) is reinvested at a specific rate
-     $r$ until the end of the project.
-
-   * The future value at time $n$ is:
-
-$$
-\begin{aligned}
-\mathbf{NPV} &= - C_0 + \frac{\text{FV}}{(1 + R)^{n}}
-\end{aligned}
-$$
-
-2. For this calculation to match the original NPV calculated using the standard
-   formula:
-
-$$
-\begin{aligned}
-\mathbf{NPV} &= - C_0 + \sum^n_{t=1}{\frac{C_t}{(1 + R)^t}}\text{,}
-\end{aligned}
-$$
-
-> the reinvestment rate $r$ in Step(a) must equal the required return $R$.
-
-### Key Insights
-
-* The NPV method does not explicitly assume a reinvestment rate for intermediate
-  cash flows. It merely discounts cash flows to the present using the required
-  return $R$.
-
-* The equivalence between the two approaches described in the question arises
-  only if the reinvestment rate $r$ used in Step (a) equals the required areturn
-  $R$. This is a mathematical coincidence rather than an inherent assumption of
-  the NPV method.
-
-### Conclusion
-
-The claim that the NPV approach assumes reinvestment of intermediate cash flows
-at the required return is misleading. The NPV method:
-
-1. Focuses on discounting all cash flows to the present at the required return.
-
-2. Does not explicitly account for the reinvestment of intermediate cash flows.
-
-The equivalence described in the question arises only when the reinvestment rate
-matches the required return, but this is not an assumption of the NPV approach
-itself. Instead, the NPV method evaluates the project's value based on its cash
-flows and the required return, without considering reinvestment explicitly.
-
----
-
-## 14. Internal rate of return
-
-It is sometimes stated that "the internal rate of return approach assumes
-reinvestment of the intermediate cash flows at the internal rate of return." Is
-this claim correct? To answer, suppose you calculate the IRR of a project in the
-usual way. Next, suppose you do the following:
-
-a. Calculate the future value (as of the end of the project) of all the cash
-flows other than the initial outlay assuming they are reinvested at the IRR,
-producing a single future value figure for the project.
-
-b. Calculate the IRR of the project using the single future value calculated in
-the previous step and the initial outlay. It is easy to verify that you will get
-the same IRR as in your original calculation only if you use the IRR as the
-reinvestment rate in the previous step.
-
-The statement that the "internal rate of return (IRR) approach assumes
-reinvestment of the intermediate cash flows at the internal rate of return" is
-correct in a practical sense. The IRR implicitly assumes that intermediate cash
-flows are reinvested at the IRR itself. This is a key limitation of the IRR
-method and one of the reasons it is often criticized.
-
-### Step a: Calculate the future value of intermediate cash flows
-
-Suppose a project has cash flows $C_0, C_1, C_2, \ldots, C_n,$ where $C_0$ is
-the initial outlay (negative cash flow), and $C_1, C_2, \ldots, C_n$ are
-positive inflows. The IRR, denoted as $r$, satisfies:
-
-$$
-\begin{aligned}
-\mathbf{NPV} &= - C_0 + \sum^{n}_{t=1}{\frac{C_t}{(1 + r)^{t}}} = 0
-\end{aligned}
-$$
-
-1. Assume each intermediate cash flow ($C_t$) is reinvested at the IRR $r$ until
-   the end of the project. The future value(FV) at time $n$ is:
-
-$$
-\begin{aligned}
-\mathbf{FV} &= \sum^{n}_{t=1}{C_t (1 + r)^{n-t}}
-\end{aligned}
-$$
-
-2. This future value represents the total value of the cash flows at the end of
-   the project, assuming reinvestment at the IRR.
-
-### Step b: Calculate the IRR using the future value
-
-1. Use the future value $\text{FV}$ calculated in Step (a) and determine the IRR
-   $r$ by solving:
-
-$$
-C_0 (1 + r)^{n} = \text{FV}
-$$
-
-2. This equation is equivalent to solving for $r$ in the original IRR
-   calculation:
-
-$$
-0 = - C_0 + \sum^{n}_{t=1}{\frac{C_t}{(1 + r)^{t}}}
-$$
-
-3. The two IRR values will be identical only if the reinvestment rate used in
-   Step (a) equals the IRR itself.
-
-### Key Insights
-
-* The IRR implicitly assumes that all intermediate cash flows are reinvested at
-  the IRR. This is why the future value described in Step (a) aligns with the
-  IRR calculation only when the reinvestment rate is the IRR.
-
-* If the reinvestment rate differes from the IRR, the results of the two
-  calculations will diverge.
-
-### Limitations of the IRR assumption
-
-1. Unrealistic reinvestment rate - In practice, it is unlikely that intermediate
-   cash flows can consistently be reinvested at the project's IRR, especially if
-   the IRR is high. This makes the IRR's implicit assumption unrealistic in many
-   cases.
-
-2. Alternative methods - The modified internal rate of return (MIRR) addresses
-   this limitation by allowing for a more realistic reinvestment rate, such as
-   the cost of capital.
-
-### Conclusion
-
-The claim that the IRR approach assumes reinvestment of intermediate cash flows
-at the IRR is correct. The equivalence in the steps provided confirms this
-assumption. However, this assumption is a major limitation of the IRR method, as
-it may not reflect reinvestment opportunities. For this reason, decision-makers
-often rely on NPV or MIRR to provide a more accurate assessment of a project's
-value.
-
----
-
-# Questions and Problem
-
-## Calculating payback period and NPV
+# 1. Calculating payback period and NPV
 
 Fuji Software, Inc., has the following mutually exclusive projects.
 
-```{r Question 1 Table, echo=F}
-year <- c(0, 1, 2, 3)
-project.A <- c(-15000, 9500, 6000, 2400)
-project.B <- c(-18000, 10500, 7000, 6000)
-tbl.q1 <- as.data.frame(matrix(c(year,project.A,project.B), ncol=3))
-colnames(tbl.q1) <- c("Year", "Project A", "Project B")
-knitr::kable(tbl.q1)
+```{r problem 1 Table, echo=F}
+p1 = new.env()
+p1$tbl = tibble(
+    Year = c(0, 1, 2, 3),
+    `Project A` = c(-15000, 9500, 6000, 2400),
+    `Project B` = c(-18000, 10500, 7000, 6000)
+)
+p1$payback.A = payback.period(p1$tbl$`Project A`)
+p1$npv.A = npv(p1$tbl$`Project A`, .15)
+p1$payback.B = payback.period(p1$tbl$`Project B`)
+p1$npv.B = npv(p1$tbl$`Project B`, .15)
+knitr::kable(p1$tbl)
 ```
 
-a. Suppose Fuji's payback period cutoff is two years. Which of these two projects should be chosen?
+a. Suppose Fuji's payback period cutoff is two years. Which of these two
+   projects should be chosen?
 
-b. Suppose Fuji uses the NPV rule to rank these two projects. Which project should be chosen if the appropriate discount rate is 15 percent?
+b. Suppose Fuji uses the NPV rule to rank these two projects. Which project
+   should be chosen if the appropriate discount rate is 15 percent?
 
-### A
+## A. Payback cutoff is two years
 
-We can define the payback period:
+For project A, the payback period is `r p1$payback.A`
 
-$$
-  \mathbf{V}_{\text{payback}} = C_0 + \sum^{T}_{t=1}{C_t}
-$$
-* $C_0$ is the initial investment and should be negative.
+For project B, the payback period is `r p1$payback.B`
 
-Using `R` we can determine which project should be chosen based on the payback period.
+If we use a payback cutoff of two years, we should select Project A.
 
-```{r Question 1 payback period}
-payback.period <- function(C) {
-  # Initial investment, if negative then make it positive.
-  ifelse( C[1] < 0, C.0 <- -C[1], C.0 <- C[1])
-  # Cash flows
-  C <- tail(C, -1)
-  # Determine when the initial investment is paid off.
-  for(p in 1:length(C)){
-    if (sum(C[1:p]) >= C.0)
-      break
-  }
-  p
-}
-payback.period(project.A)
-payback.period(project.B)
-```
+##  B. NPV at a discount of 15 percent
 
-We would choose `Project A` because it has a shorter payback period.
+If we use npv with a discount rate of 15 percent.
 
-### B
+\[
+\text{NPV} = C_0 + \sum_{t=1}^{T}{\frac{C_t}{(1 + r)^t}}
+\]
 
-Using net present value.
+Project A, the NPV is \$ `r pretty(p1$npv.A)`
 
-$$
-\mathbf{NPV} = C_0 + \sum^{T}_{t=1}{\frac{C_t}{(1 + r)^{t}}}
-$$
+Project B, the NPV is \$ `r pretty(p1$npv.B)`
 
-```{r Question 1 net present value}
-npv <- function(C, r) {
-  I <- C[1]
-  C <- tail(C,-1)
-  I + sum(C/(1 + r)^(1:length(C)))
-}
-npv(project.A, .15)
-npv(project.B, .15)
-```
-
-Based on net present value, you should choose project A.
+Project A has a negative NPV, Project B is positive. You should choose project
+B.
 
 ---
 
-## Calculating payback
+# 2. Calculating payback
 
-An investment project provides cash inflows of \$840 per year for eight years. What is the project payback period if the initial cost is \$3,200? What if the initial cost is \$4,800? What if it is \$7,300?
+An investment project provides cash inflows of \$840 per year for eight years.
+What is the project payback period if the initial cost is \$3,200? What if the
+initial cost is \$4,800? What if it is \$7,300?
 
-Using `R` we can calculate the payback period by dividing the initial cost by the cash inflows:
+```{r problem 2, echo=F}
+p2 = new.env()
+p2$C.1 = c(-3.2e3, rep(840, 8))
+p2$C.2 = c(-4.8e3, rep(840, 8))
+p2$C.3 = c(-7.3e3, rep(840, 8))
+p2$payback.1 = payback.period(p2$C.1, fractional=T)
+p2$payback.2 = payback.period(p2$C.2, fractional=T)
+p2$payback.3 = payback.period(p2$C.3, fractional=T)
+```
+To calculate the payback period you divide the initial cost by the cash flow.
 
-```{r Question 2 calculating payback period}
-3200/840
-4800/840
-7300/840
+\[
+\text{Payback} = \frac{3,200}{840} = `r pretty(p2$payback.1)`\ \text{years}
+\]
+
+\[
+\text{Payback} = \frac{4,800}{840} = `r pretty(p2$payback.2)`\ \text{years}
+\]
+
+\[
+\text{Payback} = \frac{7,300}{840} = `r pretty(p2$payback.3)`\ \text{years}
+\]
+
+The last investment cost would not payback in eight years.
+
+Book answer: 3.81 years, 5.71 years, Never
+
+# 3. Calculating discounted payback
+
+An investment project has annual cash inflows of \$5,000, \$5,500, \$6,000,
+\$7,000, and a discount rate of 14 percent. What is the discounted payback
+period for these cash flows if the initial cost is \$8,000? What if the initial
+cost is \$12,000? What if it is \$16,000?
+
+```{r problem 3; calculating discounted payback, echo=F}
+p3 = new.env()
+p3$C = c(5e3, 5.5e3, 6e3, 7e3)
+p3$r = .14
+p3$C.discounted = p3$C * (1 + p3$r)^(-(1:length(p3$C)))
+p3$payback.1 = payback.period(c(-8e3, p3$C.discounted), fractional=T)
+p3$payback.2 = payback.period(c(-12e3, p3$C.discounted), fractional=T)
+p3$payback.3 = payback.period(c(-16e3, p3$C.discounted), fractional=T)
 ```
 
-The last initial cost is beyond the 8 years. Therefore, it never pays back.
+To calculate the discounted payback period, you have to first discount each of
+the cash flows:
 
----
+\[
+[5,000/(1.14), 5,500/(1.14)^2, 6,000/(1.14)^3, 7,000/(1.14)^4]
+    = (`r pretty(p3$C.discounted)`)
+\]
 
-## Calculating discounted payback
+We can now calculate the payback period using the discounted cash flows:
 
-An investment project has annual cash inflows of \$5,000, \$5,500, \$6,000, \$7,000, and a discount rate of 14 percent. What is the discounted payback period for these cash flows if the initial cost is \$8,000? What if the initial cost is \$12,000? What if it is \$16,000?
 
 The discounted payback is calculated:
 
-$$
-\mathbf{Payback\ Period} = \frac{C_0}
-  {\sum^{T}_{t=1}{\frac{C_t}{(1 + r)^{t}}}}
-$$
+For an initial cost of \$8,000, the payback period is:
+`r pretty(p3$payback.1)` years.
 
-Using `R` to find the answer:
+For an initial cost of \$12,000, the payback period is:
+`r pretty(p3$payback.2)` years.
 
-```{r Question 3 calculating discounted payback}
-CFs <- c(5000, 5500, 6000, 7000)
-r <- .14
-I <- c(8000, 12000, 16000)
-discounted.payback <- function(I, CFs, r) {
-  discounted.CFs <- CFs/(1 + r)^(1:length(CFs))
-  for(t in 1:length(CFs)){
-    if(sum(CFs[1:t]/(1 + r)^(1:t)) >= I){
-      cat(t, " ")
-      break
-    }
-    if (t == length(CFs)){
-      cat(Inf, " ")
-    }
-  }
-}
-for (i in I)
-  discounted.payback(i, CFs, r)
-```
+For an initial cost of \$16,000, the payback period is:
+`r pretty(p3$payback.3)` years.
 
 ---
 
-## Calculating discounted payback
+# 4. Calculating discounted payback
 
-An investment project costs \$15,000 and has annual cash flows of \$3,800 for six years. What is the discounted payback period if the discount rate is 0 percent? What if the discount rate is 10 percent? If it is 15 percent?
+An investment project costs \$15,000 and has annual cash flows of \$3,800 for
+six years. What is the discounted payback period if the discount rate is 0
+percent? What if the discount rate is 10 percent? If it is 15 percent?
 
-Again the payback period is found:
-
-$$
-\mathbf{Payback\ Period} = \frac{C_0}
-  {\sum^{T}_{t=1}{\frac{C_t}{(1 + r)^{t}}}}
-$$
-
-```{r Question 4 discounted payback}
-options(scipen=999)
-R <- c(0, .1, .15)
-I <- 15000
-CFs <- rep(3800, 6)
-discounted.payback <- function(I, CFs, r) {
-  discounted.CFs <- CFs/(1 + r)^(1:length(CFs))
-  for(t in 1:length(CFs)){
-    if(sum(discounted.CFs[1:t]) >= I){
-      cat(t, "\n")
-      break
-    }
-    if (t == length(CFs)){
-      cat(Inf, "\n")
-      break
-    }
-  }
-}
-
-for(r in R)
-    discounted.payback(I, CFs, r)
+```{r problem 4; calculating discounted payback, echo=F}
+p4 = new.env()
+p4$C = rep(3.8e3, 6)
+p4$C.discounted.1 = p4$C * (1)^(-(1:length(p4$C)))
+p4$C.discounted.2 = p4$C * (1.1)^(-(1:length(p4$C)))
+p4$C.discounted.3 = p4$C * (1.15)^(-(1:length(p4$C)))
+p4$payback.1 = payback.period(c(-15e3, p4$C.discounted.1), fractional=T)
+p4$payback.2 = payback.period(c(-15e3, p4$C.discounted.2), fractional=T)
+p4$payback.3 = payback.period(c(-15e3, p4$C.discoutned.3), fractional=T)
 ```
+
+For a discount rate of 0\%: `r pretty(p4$payback.1)` Years
+
+The discounted cash flows are:
+
+\[
+(`r p4$C.discounted.1`)
+\]
+
+For a discount rate of 10\%: `r pretty(p4$payback.2)` Years
+
+The discounted cash flows are:
+
+\[
+(`r pretty(p4$C.discounted.2)`)
+\]
+
+For a discount rate of 15\%: `r pretty(p4$payback.3)` Years
+
+The discounted cash flows are:
+
+\[
+(`r pretty(p4$C.discounted.3)`)
+\]
+
+This final discount rate means that the project will never be profitable.
 
 ---
 
-## Calculating IRR
+# 5. Calculating IRR
 
 Stone Sour, Inc., has a project with the following cash flows:
 
-```{r question 5 table, echo=F}
-year <- c(0,1,2,3)
-CF <- c(-20000, 8500, 10200, 6200)
-q5.tbl <- as.data.frame(matrix(c(year, CF), ncol=2))
-colnames(q5.tbl) <- c("Year", "Cash Flows ($)")
-knitr::kable(q5.tbl)
+```{r problem 5 table, echo=F}
+p5 = new.env()
+p5$tbl = tibble(
+    Year = c(0, 1, 2, 3),
+    `Cash Flows` = c(-20e3, 8.5e3, 10.2e3, 6.2e3)
+)
+knitr::kable(p5$tbl)
+p5$irr = irr(p5$tbl$`Cash Flows`)
 ```
 
-The company evaluates all projects by applying the IRR rule. If the appropriate interest rate is 9 percent, should the company accept the project?
+The company evaluates all projects by applying the IRR rule. If the appropriate
+interest rate is 9 percent, should the company accept the project?
 
-```{r question 5 calculating IRR}
-I <- CF[1]
-CF <- tail(CF, -1)
-f <- function(r) {
-  I + sum(CF/(1 + r)^(1:length(CF)))
-}
-uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root
-```
+We use the following model to find the internal rate of return.
 
-The internal rate of return is 12.41%. If the interest rate is 9% then Stone Sour, Inc. should accept the project.
+\[
+0 = \text{Initial investment} + \sum^T_{t=1}{\frac{\text{CF}}{(1 + R)^t}}
+\]
+
+In this equation the knowns are $\text{Initial investment}$, and
+$\text{CF}$. We solve for $R$:
+
+\[
+R = `r pretty(p5$irr*100)`\%
+\]
 
 ---
 
-## Calculating IRR
+# 6. Calculating IRR
 
 Compute the internal rate of return for the cash flows of the following two projects:
 
 ```{r question 6 table, echo=F}
-year <- c(0,1,2,3)
-project.A <- c(-5300, 2000, 2800, 1600)
-project.B <- c(-2900, 1100, 1800, 1200)
-q6.tbl <- as.data.frame(matrix(c(year, project.A, project.B), ncol=3))
-colnames(q6.tbl) <- c("Year", "Project A", "Project B")
-knitr::kable(q6.tbl)
+p6 = new.env()
+p6$tbl = tibble(
+    Year = c(0, 1, 2, 3),
+    `Project A` = c(-5.3e3, 2e3, 2.8e3, 1.6e3),
+    `Project B` = c(-2.9e3, 1.1e3, 1.8e3, 1.2e3)
+)
+knitr::kable(p6$tbl)
+p6$irr.A = irr(p6$tbl$`Project A`)
+p6$irr.B = irr(p6$tbl$`Project B`)
 ```
 
-```{r question 6 calculating IRR}
-f <- function(r) {
-  I + sum(CF/(1 + r)^(1:length(CF)))
-}
-I <- project.A[1]
-CF <- tail(project.A,-1)
-(irr.A <- uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root)
-I <- project.B[1]
-CF <- tail(project.B,-1)
-(uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root)
-```
+Again, we use the following model to find the internal rate of return for the
+two projects.
+
+\[
+0 = \text{Initial investment} + \sum^T_{t=1}{\frac{\text{CF}}{(1 + R)^t}}
+\]
+
+In this equation the knowns are $\text{Initial investment}$, and
+$\text{CF}$. We solve for $R$:
+
+\[
+R_{\text{Project A}} = `r pretty(p6$irr.A*100)`\%
+\]
+
+\[
+R_{\text{Project B}} = `r pretty(p6$irr.B*100)`\%
+\]
 
 ---
 
-## Calculating profitability index
+# 7. Calculating profitability index
 
-Bill plans to open a self-serve grooming center in a storefront. The grooming equipment will cost \$385,000, to be paid immediately. Bill expects aftertax cash inflows of \$84,000 annually for seven years, after which he plans to scrap the equipment and retire to the beaches of Nevis. The first cash inflow occurs at the end of the first year. Assume the required return is 13 percent. What is the project's PI? Should it be accepted.
+Bill plans to open a self-serve grooming center in a storefront. The grooming
+equipment will cost \$385,000, to be paid immediately. Bill expects aftertax
+cash inflows of \$84,000 annually for seven years, after which he plans to scrap
+the equipment and retire to the beaches of Nevis. The first cash inflow occurs
+at the end of the first year. Assume the required return is 13 percent. What is
+the project's PI? Should it be accepted.
 
 The profitability index is calculated:
 
+```{r problem 7  calculating profitability index, echo=F}
+p7 = new.env()
+p7$cf <- c(-385e3, rep(84e3, 7))
+p7$r = .13
+p7$pv = pv(tail(p7$cf, -1), p7$r)
+p7$pi = profitability.index(p7$cf, p7$r)
+```
+
 $$
 \begin{aligned}
-\mathbf{PV}_{\text{Cash flows}} &= \sum^{7}_{t=1}{\frac{C_t}{(1 + r)^t}} \\ \\
-\mathbf{Profitability\ Index} &= \frac{\text{PV}_{\text{Cash flows}}}{\text{Initial investment}}
+\text{PV}_{\text{Cash flows}} &= \sum^{T}_{t=1}{\frac{C_t}{(1 + r)^t}}\\
+    &= `r pretty(p7$pv, 0)`\\\\
+\text{Profitability\ Index} &= \frac{\text{PV}_{\text{Cash flows}}}
+    {\text{Initial investment}}\\
+    &= \frac{`r pretty(p7$pv, 0)`}{`r pretty(-head(p7$cf, 1), 0)`}\\
+    &= `r pretty(p7$pi)`
 \end{aligned}
 $$
-
-```{r question 7  calculating profitability index}
-q7.cf <- rep(84000,7)
-I <- 385000
-r <- .13
-sum(q7.cf/(1+r)^(1:length(q7.cf))) / I
-```
 
 The profitability index is 0.965 which is less than 1. The project should not be accpeted.
 
 ---
 
-## Calculating profitability index
+# 8. Calculating profitability index
 
-Suppose the following two independent investment opportunities are available to Greenplain, Inc. The appropriate discount rate is 10 percent.
+Suppose the following two independent investment opportunities are available to
+Greenplain, Inc. The appropriate discount rate is 10 percent.
 
-```{r question 8 table, echo=F}
-year <- c(0,1,2,3)
-project.alpha <- c(-2300, 1200, 1100, 900)
-project.beta <- c(-3900, 800, 2300, 2900)
-q8.tbl <- as.data.frame(matrix(c(year, project.alpha, project.beta), ncol=3))
-colnames(q8.tbl) <- c("Year", "Project Alpha", "Project Beta")
-knitr::kable(q8.tbl)
+```{r problem 8 table, echo=F}
+p8 = new.env()
+p8$tbl = tibble(
+    Year = c(0, 1, 2, 3),
+    Alpha = c(-2.3e3, 1.2e3, 1.1e3, 900),
+    Beta = c(-3.9e3, 800, 2.3e3, 2.9e3)
+)
+p8$r = .1
+knitr::kable(p8$tbl)
+p8$pi.alpha = profitability.index(p8$tbl$Alpha, p8$r)
+p8$pi.beta  = profitability.index(p8$tbl$Beta,  p8$r)
 ```
 
 a. Compute the profitability index for each of the two projects.
 
 b. Which project(s) should Greenplain accept based on the profitability index rule?
 
-```{r question 8 calculating profitability index}
-r <- .1
-I.alpha <- project.alpha[1]
-CF.alpha <- tail(project.alpha, -1)
--sum(CF.alpha/(1+r)^(1:length(CF.alpha))) / I.alpha
-I.beta <- project.beta[1]
-CF.beta <- tail(project.beta, -1)
--sum(CF.beta/(1+r)^(1:length(CF.beta))) / I.beta
-```
+## A. The profitability index
 
-Both projects are $> 1$ therefore both should be accepted.
+The profitability index of both projects are:
+
+* Project Alpha: `r pretty(p8$pi.alpha)`
+* Project Beta:  `r pretty(p8$pi.beta)`
+
+## B. Which projects to accept
+
+These projects are not mutually exclusive so Greenplain should accept both
+projects since their profitability indexes are above 1.
 
 ---
 
-## Cash flow intuition
+# 9. Cash flow intuition
 
 A project has an initial cost of $I$, has a required return of $R$, and pays $C$ annually for $N$ years.
 
 a. Find $C$ in terms of $I$ and $N$ such that the project has a payback period just equal to its life.
-b. Find $C$ in terms of $I$, $N$, and $R$ such that this is a profitable project according tot he NPV decision rule.
+b. Find $C$ in terms of $I$, $N$, and $R$ such that this is a profitable project according to the NPV decision rule.
 c. Find $C$ in terms of $I$, $N$, and $R$ such that the project has a benefit--cost ratio of 2.
 
-$$
+Setting the present value of the cash flows to the initial investment, we
+describe the model below:
+
+## A. $C$ in terms of $I$ and $N$ for a payback period equal to its life.
+
+With payback period we disregard discounting. For a payback period equal to the
+life of the project, the model is:
+
+\[
 \begin{aligned}
-\mathbf{N} &= \text{Life of the project} \\
-\mathbf{I} &= \text{Initial cost} \\
-\mathbf{C} &= \text{Annual cuopon} \\ \\
-\mathbf{N} &= \frac{I}{C} \\ \text{ therefore,} \\ \\
+N &= \frac{I}{C}\\\\
 C &= \frac{I}{N}
 \end{aligned}
-$$
+\]
 
-To find $C$ in terms if $I$, $N$, and $R$ for a profitable project according to NPV
+In words, this says the cash flows should equal the initial investment divided
+by the life of the project.
 
-$$
+## B. An NPV profitable project, find $C$
+
+For a profitable project the NPV model is:
+
+\[
+\text{NPV} = -I + \sum^N_{n=1}{\frac{C}{(1 + R)^{n}}} > 0
+\]
+
+The geometric series can be rewritten as
+
+\[
+\sum^N_{n=1}{\frac{1}{(1 + R)^n}} = \frac{1 - (1 + r)^{-N}}{r}
+\]
+
+Substituting back into the equation
+
+\[
 \begin{aligned}
-\mathbf{NPV} &= \text{net present value} \\
-\mathbf{R} &= \text{interest rate} \\ \\
-\mathbf{NPV} &= -I + \sum^{N}_{n=1}{\frac{C}{(1 + R)^{n}}} \\ \\
-\text{for } \mathbf{NPV} > I, \\
-\mathbf{I} &< \sum^{N}_{n=1}{\frac{C}{(1 + R)^{n}}} \\ \\
-\text{ for a geometric series: } \\
-\sum^{N}_{n=1}{\frac{1}{(1 + R)^{n}}} &= \frac{1 - (1 + R)^{-N}}{R} \\ \\
-\text{substituting in:} \\
-C \cdot \frac{1 - (1 + R)^{-N}}{R} > I \\ \\
-\text{solving for C:} \\
-C &= \frac{I \cdot R}{1 - (1 + R)^{-N}}
+I &< C \times \frac{1 - (1 + r)^{-N}}{r}\\
+C &> \frac{Ir}{1 - (1 + r)^{-N}}
 \end{aligned}
-$$
+\]
 
-For benefit--cost ratio of 2 (profitability index):
+## C. Benefit---cost ratio of 2
 
-$$
+To model a benefit/cost ratio of 2 we use the following equation
+
+\[
 \begin{aligned}
-\mathbf{PI} &= \frac{C \cdot \sum^{N}_{n=1}{(1 + R)^{-n}}}{I} = 2 \\ \\
-\text{therefore,} \\
-C &= \frac{2 \cdot I \cdot R}{1 - (1 + R)^{-N}}
+\text{BC} &= \frac{\text{PV}_{\text{cash flows}}}{\text{initial investment}}\\\\
+   2  &= \frac{C}{I} \frac{1 - (1 + r)^{-N}}{r}\\\\
+   C &= \frac{2Ir}{1 - (1 + r)^{-N}}
 \end{aligned}
-$$
+\]
 
 ---
 
-## Problems with IRR
+# 10. Problems with IRR
 
 Suppose you are offered \$7,000 today but must make the following payments:
 
-```{r question 10 table, echo=F}
+```{r problem 10 table, echo=F}
+p10 = new.env()
+p10$tbl = tibble(
+    Year = c(0, 1, 2, 3, 4),
+    `Cash Flows` = c(7e3, -3.7e3, -2.4e3, -1.5e3, -1.2e3)
+)
 year <- c(0,1,2,3,4)
 cf <- c(7000, -3700, -2400, -1500, -1200)
-q10.tbl <- as.data.frame(matrix(c(year, cf), ncol=2))
-colnames(q10.tbl) <- c("Year", "Cash Flows ($)")
-knitr::kable(q10.tbl)
+knitr::kable(p10$tbl)
+p10$irr = irr(p10$tbl$`Cash Flows`)
+p10$npv.10 = npv(p10$tbl$`Cash Flows`, .10)
+p10$npv.20 = npv(p10$tbl$`Cash Flows`, .20)
 ```
 
 a. What is the IRR of this offer?
@@ -1031,176 +471,268 @@ c. If the appropriate discount rate is 20 percent, should you accept this offer?
 d. What is the NPV of the offer if the appropriate discount rate is 10 percent? 20 percent?
 e. Are the decisions under the NPV rule in part (d) consistent with those of the IRR?
 
-Notice that the cash flows are opposite from the normal cash flows. I.e. There is an initial inflow followed by a series of outflows. This means that the IRR rule is inverted: (accept the project if the IRR < discount rate).
+Notice that the cash flows are opposite from the normal cash flows (i.e. There is an initial inflow followed by a series of outflows.) This means that the IRR rule is inverted: (accept the project if the IRR < discount rate).
 
-To solve this we find the IRR:
+## A. What is the IRR
+
+We solve the following equation for $r$
 
 $$
 \begin{aligned}
-0 = I + \sum^{4}_{n=1}{\frac{C_n}{(1 + r)^{n}}}
+I = \sum^{4}_{n=1}{\frac{C_n}{(1 + r)^{n}}}
 \end{aligned}
 $$
-The known variables are $C_n$ and $I$. (a) So we solve for $r$:
 
-```{r problem 10 problems with IRR}
-n <- 4
-I <- cf[1]
-CF <- tail(cf, -1)
-f <- function(r) {
-  I + sum(CF/(1 + r)^(1:length(CF)))
-}
-uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root
-```
+The internal rate of return is `r pretty(p10$irr*100)`\%.
 
-The internal rate of return is 12.40%. If the discount rate is (b) 10% then we reject this project. If the discount rate is (c) 20% then we accept this project.
+## B. Discount rate is 10\%
+
+The IRR $>$ the discount rate (10\%). Since the cash flows are inverted, we
+invert the IRR rule so we reject this project.
+
+## C. Discount rate is 20\%
+
+With a 20\% discount rate we accept the project since this is less than the
+`r pretty(p10$irr*100)`\% IRR rate.
+
+## D. NPV for discount rates of 10\% and 20\%
 
 The NPV for both 10% and 20% discount rates can be computed:
 
-```{r question 10 npv calculations}
-npv(cf, .1)
-npv(cf, .2)
-```
+For a 10\% discount rate the NPV is `r pretty(p10$npv.10)`.
 
-If you consider the inverted IRR then it will be. However, using a standard rule it does not.
+For a 20\% discount rate the NPV is `r pretty(p10$npv.20)`.
+
+This is consistent with the IRR rule.
 
 ---
 
-## NPV versus IRR
+# 11. NPV versus IRR
 
-Consider the following cash flows on two mutually exclusive projects for the Bahamas Recreation Corporation (BRC). Both projects require an annual return of 14 percent.
+Consider the following cash flows on two mutually exclusive projects for the
+Bahamas Recreation Corporation (BRC). Both projects require an annual return of
+14 percent.
 
-```{r question 11 table}
-year <- c(0,1,2,3)
-cf.dwf <- c(-950000, 370000, 510000, 420000)
-cf.nsr <- c(-1850000, 900000, 800000, 750000)
-q11.tbl <- as.data.frame(matrix(c(year, cf.dwf, cf.nsr), ncol=3))
-colnames(q11.tbl) <- c("Year", "Deepwater Fishing", "New Submarine Ride")
-knitr::kable(q11.tbl)
+```{r problem 11 table, echo=F}
+p11 = new.env()
+p11$year = c(0, 1, 2, 3)
+p11$cf.dwf = c(-950e3, 370e3, 510e3, 420e3)
+p11$cf.nsr = c(-1.850e6, 900e3, 800e3, 750e3)
+p11$tbl = tibble(
+    Year = p11$year,
+    `Deepwater Fishing` = pretty(p11$cf.dwf),
+    `New Submarine Ride` = pretty(p11$cf.nsr)
+)
+p11$irr.dwf = irr(p11$cf.dwf)
+p11$irr.nsr = irr(p11$cf.nsr)
+p11$cf.inc = p11$cf.nsr - p11$cf.dwf
+p11$irr.inc = irr(p11$cf.inc)
+p11$npv.dwf = npv(p11$cf.dwf, .14)
+p11$npv.nsr = npv(p11$cf.nsr, .14)
+knitr::kable(p11$tbl)
 ```
 
 As a financial analyst for BRC, you are asked the following questions:
 
-a. If your decision rule is to accept the project with the greater IRR, which project should you choose?
-b. Because you are fully aware of the IRR rule's scale problem, you calculate the incremental IRR for the cash flows, Based on your computation, which project should you choose?
-c. To be prudent, you compute the NPV for both projects. Which project should you choose? Is it consistent with the incremental IRR rule?
+a. If your decision rule is to accept the project with the greater IRR, which
+   project should you choose?
 
-```{r question 11 part(a): accept greater IRR}
-irr <- function(C){
-  I <- C[1]
-  CF <- tail(C, -1)
-  f <- function(r) I + sum(CF/(1+r)^(1:length(CF)))
-  uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root
-}
-irr(cf.dwf)
-irr(cf.nsr)
+b. Because you are fully aware of the IRR rule's scale problem, you calculate
+   the incremental IRR for the cash flows, Based on your computation, which
+   project should you choose?
+
+c. To be prudent, you compute the NPV for both projects. Which project should
+   you choose? Is it consistent with the incremental IRR rule?
+
+## A. Greater IRR
+
+We calculate the IRR for both projects.
+
+\[
+\begin{aligned}
+\text{IRR} = \sum^N_{n=1}{\frac{\text{CF}}{(1 + r)^{n}}}
+\end{aligned}
+\]
+
+Solving for $r$ for each project we have:
+
+* Deepwater Fishing: `r pretty(p11$irr.dwf*100)`\%
+
+* New Submarine Ride: `r pretty(p11$irr.nsr*100)`\%
+
+Both are above the required annual return. If we were to choose one based on the
+higher IRR than Deepwater fishing would be the choice. However, the two projects
+are not the same size. The IRR method has a problem when comparing projects of
+different scale. In order to fix this, we should use the incremental IRR to
+determine which project to choose.
+
+## B. Incremental IRR
+
+
+Using incremental IRR, we first find the incremental cash flows from Deepwater
+Fishing to New Submarine Ride
+
+```{r problem 11; incremental IRR table, echo=F}
+p11$inc.irr.tbl = cbind(p11$tbl, pretty(p11$cf.inc))
+colnames(p11$inc.irr.tbl) = c(colnames(p11$tbl), 'Incremental')
+knitr::kable(p11$inc.irr.tbl)
 ```
 
-If the decision rule is to accept the project with the greater IRR (a), then we would choose the deepwater fishing project.
+The incremental IRR is `r pretty(p11$irr.inc*100)`\%. This is larger than the
+required annual return of 14\% so we choose the New Submarine Ride project and
+not the Deepwater Fishing project. Notice this is entirely different from the
+previous choice where the larger IRR rate would have had us choose Deepwater
+Fishing.
 
-Using incremental IRR:
+## C. NPV of both projects
 
-```{r question 11 part(b): incremental IRR}
-cf.inc <- cf.nsr - cf.dwf
-cf.inc
-irr(cf.inc)
-```
+To be sure we are making the right choice, we will also use NPV for each
+project:
 
-Because the incremental IRR is greater than the discount rate of 14%, we should choose the New Submarine Ride project.
+\[
+\text{NPV} = \sum^N_{n=1}{\frac{C}{(1 + r)^n}}
+\]
 
-The NPV (c) can be calculated for each project and the incremental:
+* Deepwater Fishing: \$`r pretty(p11$npv.dwf, 0)`
 
-```{r question 11 part(c): NPV}
-r <- .14
-npv(cf.dwf, r)
-npv(cf.nsr, r)
-npv(cf.inc, r)
-```
+* New Submarine Ride: \$`r pretty(p11$npv.nsr, 0)`
 
-The fact that both the NPV for the New Submarine Ride project and the incremental calculation are positive confirms the incremental IRR decision, which adds an additional \$10,798.46 value.
+Both projects have positive NPVs but, since they are mutually exclusive, we want
+to choose the New Submarine Ride project, which confirms our choice using the
+incremental IRR and confirms that comparing projects of different scales using
+IRR is problematic.
 
 ---
 
-## Problems with profitability index
+# 12. Problems with profitability index
 
-The Robb Computer Corporation is trying to choose between the following two mutually exclusive design projects:
+The Robb Computer Corporation is trying to choose between the following two
+mutually exclusive design projects:
 
-```{r question 12 table, echo=F}
-year <- c(0,1,2,3)
-cf.I <- c(-30000, rep(18000, 3))
-cf.II <- c(-12000, rep(7500, 3))
-q12.tbl <- as.data.frame(matrix(c(year,cf.I,cf.II), ncol=3))
-colnames(q12.tbl) <- c("Year", "Cash Flow (I)", "Cash Flow (II)")
-knitr::kable(q12.tbl)
+```{r problem 12 table, echo=F}
+p12 = new.env()
+p12$year = c(0,1,2,3)
+p12$cf.I = c(-30000, rep(18000, 3))
+p12$cf.II = c(-12000, rep(7500, 3))
+p12$tbl = tibble(p12$year, p12$cf.I, p12$cf.II)
+colnames(p12$tbl) = c("Year", "Cash Flow (I)", "Cash Flow (II)")
+knitr::kable(p12$tbl)
+p12$pv.I = pv(head(p12$cf.I, 1), .1)
+p12$pv.II = pv(head(p12$cf.II, 1), .1)
+p12$pi.I = profitability.index(p12$cf.I, .1)
+p12$pi.II = profitability.index(p12$cf.II, .1)
+p12$npv.I = npv(p12$cf.I, .1)
+p12$npv.II = npv(p12$cf.II, .1)
 ```
 
-a. If the required return is 10 percent and Robb Computer applies the profitability index decision rule, which project should the firm accept?
+a. If the required return is 10 percent and Robb Computer applies the
+   profitability index decision rule, which project should the firm accept?
+
 b. If the company applies the NPV decision rule, which project should it take?
+
 c. Explain why your answers in (a) and (b) are different.
 
-If Robb Computer uses the (a) profitability index then, it should accept cash flow II:
+## A. Using the profitability index
 
-```{r question 12 profitability index}
-r <- .1
-I <- cf.I[1]
-CF <- tail(cf.I, -1)
-CF.sum <- sum(CF/(1+r)^(1:length(CF)))
-(PI.I <- -CF.sum/I)
-I <- cf.II[1]
-CF <- tail(cf.II, -1)
-CF.sum <- sum(CF/(1+r)^(1:length(CF)))
-(PI.II <- -CF.sum/I)
-```
+\[
+\begin{aligned}
+\text{PI} &= \frac{\text{PV}}{\text{Initial investment}}\\\\
+\text{PI}_{\text{I}} &= \frac{`r pretty(p12$pv.I)`}
+    {`r pretty(head(p12$cf.I, 1))`}\\
+    &= `r pretty(p12$pi.I)`\\
+\text{PI}_{\text{II}} &= \frac{`r pretty(p12$pv.II)`}
+    {`r pretty(head(p12$cf.II, 1))`}\\
+    &= `r pretty(p12$pi.II)`
+\end{aligned}
+\]
 
-If Robb computer uses the (b) net present value then Robb computer should accept cash flow I:
+Bsed on the profitability index alone, Robb Computer should choose project II.
+However, there are scaling issues using the profitability index to compare the
+two projects. Let's use NPV to understand which project to choose.
 
-```{r question 12 npv}
-r <- .1
-npv(cf.I, r)
-npv(cf.II, r)
-```
+## B. NPV
 
-This is an issue with scale. (c) Notice that cash flow I is more twice the size of cash flow II in terms of initial investment and cash flows. The profitability index is a ratio of the present value of the cash flows over its initial investment. Because it is a ratio it doesn't consider scale. Net present value, on the other hand, is an absolute value and therefore does consider scale.
+\[
+\begin{aligned}
+\text{NPV} &= -I + \sum^N_{n=1}{\frac{C}{(1 + r)^n}}\\\\
+\text{NPV}_{\text{I}} &= \$`r pretty(p12$npv.I, 0)`\\
+\text{NPV}_{\text{II}} &= \$`r pretty(p12$npv.II, 0)`
+\end{aligned}
+\]
+
+Using NPV, we see that project I is clearly the project to select.
+
+## C. Why the difference between Profitability Index and NPV
+
+This is an issue with scale. (c) Notice that cash flow I is more twice the size
+of cash flow II in terms of initial investment and cash flows. The profitability
+index is a ratio of the present value of the cash flows over its initial
+investment. Because it is a ratio it doesn't consider scale. Net present value,
+on the other hand, is an absolute value and therefore does consider scale.
 
 ---
 
-## Problems with IRR
+# 13. Problems with IRR
 
-Cutler Petroleum, Inc., is trying to evaluate a generation project with the following cash flows:
+Cutler Petroleum, Inc., is trying to evaluate a generation project with the
+following cash flows:
 
-```{r question 13 table, echo=F}
-year <- c(0,1,2)
-cf <- c(-85000000, 125000000, -15000000)
-q13.tbl <- as.data.frame(matrix(c(year, cf), ncol=2))
-colnames(q13.tbl) <- c("Year", "Cash Flow")
-knitr::kable(q13.tbl)
+```{r problem 13 table, echo=F}
+p13 = new.env()
+p13$year = c(0,1,2)
+p13$cf = c(-85000000, 125000000, -15000000)
+p13$tbl = tibble(p13$year, pretty(p13$cf, 0))
+colnames(p13$tbl) = c("Year", "Cash Flow")
+knitr::kable(p13$tbl)
+p13$npv = npv(p13$cf, .1)
 ```
 
-a. If the company requires a 10 percent return on its investments, should it accept this project? Why?
-b. Compute the IRR for this project. How many IRRs are there? If you apply the IRR decision rule, should you accept the project or not? What's going on here?
+a. If the company requires a 10 percent return on its investments, should it
+   accept this project? Why?
 
-The best way to analyze a project (a) is to use net present value:
+b. Compute the IRR for this project. How many IRRs are there? If you apply the
+   IRR decision rule, should you accept the project or not? What's going on
+   here?
 
-```{r question 13 NPV}
-npv(cf, .1)
-```
+## A. Return rate of 10\% should we accept this project
+
+We should accept this project if the NPV is positive. This is the NPV rule and
+using NPV is the best method to make such decisions.
+
+* NPV: `r pretty(p13$npv)`
 
 The net present value is positive so we should accept the project.
 
-However, if we want to use IRR (b) we should take issue with the fact that there is two sign changes. This means there are two IRRs which means we cannot use the IRR to analyze this proejct.
+## B. Computing the IRR
+
+There are two signs here so now we will have two IRRs.
 
 ---
 
-## Comparing investment criteria
+# 14. Comparing investment criteria
 
-Mario Brothers, a game manufacturer, has a new idea for an adventure game. It can market the game either as a traditional board game or as an interactive DVD, but not both. Consider the following cash flows of the two mutually exclusive projects for Mario Brothers. Assume the discount rate for Mario Brothers is 10 percent.
+Mario Brothers, a game manufacturer, has a new idea for an adventure game. It
+can market the game either as a traditional board game or as an interactive DVD,
+but not both. Consider the following cash flows of the two mutually exclusive
+projects for Mario Brothers. Assume the discount rate for Mario Brothers is 10
+percent.
 
-```{r question 14 table, echo=F}
-year <- c(0,1,2,3)
-bg <- c(-750, 600, 450, 120)
-dvd <- c(-1800, 1300, 850, 350)
-q14.tbl <- as.data.frame(matrix(c(year, bg, dvd), ncol=3))
-colnames(q14.tbl) <- c("Year", "Board Game", "DVD")
-knitr::kable(q14.tbl)
+```{r problem 14 table, echo=F}
+p14 = new.env()
+p14$year <- c(0,1,2,3)
+p14$bg <- c(-750, 600, 450, 120)
+p14$dvd <- c(-1800, 1300, 850, 350)
+p14$tbl <- tibble(p14$year, p14$bg, p14$dvd)
+colnames(p14$tbl) <- c("Year", "Board Game", "DVD")
+knitr::kable(p14$tbl)
+p14$pp.bg  = payback.period(p14$bg, fractional=T)
+p14$pp.dvd = payback.period(p14$dvd, fractional=T)
+p14$npv.bg = npv(p14$bg, .1)
+p14$npv.dvd = npv(p14$dvd, .1)
+p14$irr.bg = irr(p14$bg)
+p14$irr.dvd = irr(p14$dvd)
+p14$inc = p14$dvd - p14$bg
+p14$irr.inc = irr(p14$inc)
 ```
 
 a. Based on the payback period rule, which project should be chosen?
@@ -1208,123 +740,138 @@ b. Based on the NPV, which project should be chosen?
 c. Based on the IRR, which project should be chosen?
 d. Based on the incremental IRR,w hich porject should be chosen?
 
-Calculating the payback period
+## A. Calculating the payback period
 
-```{r question 14(a): payback period}
-payback.period <- function(C){
-  cumsum.C <- cumsum(C)
-  pb.idx <- which(cumsum.C >= 0)[1]
-  if (pb.idx > 1){
-    prior.cf <- cumsum.C[pb.idx - 1]
-    current.cf <- cumsum.C[pb.idx]
-    additional.time <- abs(prior.cf) / (current.cf - prior.cf)
-    payback.period <- (pb.idx - 1) + additional.time - 1
-  } else {
-    payback.period <- pb.idx - 1
-  }
-  payback.period
-}
-payback.period(bg)
-payback.period(dvd)
-```
+* Board game payback period: `r pretty(p14$pp.bg)`
 
-Based on the payback period rule (a), the board game should be chosen.
+* DVD: `r pretty(p14$pp.dvd)`
 
-Calculating the NPV:
+Based on the payback period the board game should be chosen.
 
-```{r question 14(b): npv}
-npv(bg, .1)
-npv(dvd, .1)
-```
+## B. Calculating the NPV
 
-Based on the NPV rule (b), the DVD should be chosen.
+* Board game NPV: `r pretty(p14$npv.bg)`
 
-Calculating the IRR:
+* DVD: `r pretty(p14$npv.dvd)`
 
-```{r question 14(c): IRR}
-irr(bg)
-irr(dvd)
-```
+Based on the NPV rule, the DVD should be chosen.
 
-Based on the IRR rule (c), the board game should be chosen.
+## C. Calculating the IRR
 
-Calculating the incremental IRR
+* Board game NPV: `r pretty(p14$irr.bg, 4)`
 
-```{r question 14(d): incremental IRR}
-cf.inc <- dvd - bg
-irr(cf.inc)
-```
+* DVD: `r pretty(p14$irr.dvd, 4)`
 
-Based on the incremental IRR rule (d) (that the incremental IRR is higher than the discount rate), The DVD should be chosen.
+Based on the IRR rule, the board game should be chosen.
+
+## D. Calculating the incremental IRR
+
+* Incremental IRR: `r pretty(p14$irr.inc, 4)`
+
+Based on the incremental IRR rule, The DVD should be chosen.
+
+Book answer:
+
+* a. 1.33 years; 1.59 years
+* b. \$257.51; \$347.26
+* c. 33.79\%; 23.31\%
+* d. 15.86\%
 
 ---
 
-## Profitability index versus NPV
+# 15. Profitability index versus NPV
 
-Hanmi Group, a consumer electronics conglomerate, is reviewing its annual budget in wireless technology. It is considering investments in three different technologies to develop wireless communication devices. Consider the following cash flows of the three independent projects for Hanmi. Assume the discount rate for Hanmi is 10 percent. Further, Hanmi Group has only \$20 million to invest in new projects this year.
+Hanmi Group, a consumer electronics conglomerate, is reviewing its annual budget
+in wireless technology. It is considering investments in three different
+technologies to develop wireless communication devices. Consider the following
+cash flows of the three independent projects for Hanmi. Assume the discount rate
+for Hanmi is 10 percent. Further, Hanmi Group has only \$20 million to invest in
+new projects this year.
 
-```{r question 15 table, echo=F}
-year <- c(0,1,2,3)
-cdma <- c(-8, 11, 7.5, 2.5)
-g4 <- c(-12,10, 25, 20)
-wifi <- c(-20, 18, 32, 20)
-q15.tbl <- as.data.frame(matrix(c(year, cdma, g4, wifi), ncol=4))
-colnames(q15.tbl) <- c("Year", "CDMA", "G4", "Wi-Fi")
-knitr::kable(q15.tbl)
+```{r problem 15 table, echo=F}
+p15 = new.env()
+p15$year = c(0, 1, 2, 3)
+p15$cdma = c(-8, 11, 7.5, 2.5)
+p15$g4 = c(-12,10, 25, 20)
+p15$wifi = c(-20, 18, 32, 20)
+p15$tbl = tibble(p15$year, p15$cdma, p15$g4, p15$wifi)
+colnames(p15$tbl) <- c("Year", "CDMA", "G4", "Wi-Fi")
+knitr::kable(p15$tbl)
+p15$cdma.pv = pv(p15$cdma, .1)
+p15$g4.pv = pv(p15$g4, .1)
+p15$wifi.pv = pv(p15$wifi, .1)
+p15$cdma.pi = profitability.index(p15$cdma, .1)
+p15$g4.pi = profitability.index(p15$g4, .1)
+p15$wifi.pi = profitability.index(p15$wifi, .1)
+p15$cdma.npv = npv(p15$cdma, .1)
+p15$g4.npv = npv(p15$g4, .1)
+p15$wifi.npv = npv(p15$wifi, .1)
 ```
 
 a. Based on the profitability index decision rule, rank these investments.
 b. Based on the NPV, rank these investments.
 c. Based on your findings in (a) and (b), what would you recommend to the CEO of Hanmi Group and why?
 
-The profitability index
+## A. The profitability index
 
 $$
 \begin{aligned}
-\mathbf{PV} &= \sum^{N}_{n=1}{\frac{C_{n}}{(1 + r)^{n}}} \\
-\mathbf{Profitability\ Index} &= \frac{\text{PV}}{I}
+\text{PV} &= \sum^{N}_{n=1}{\frac{C_{n}}{(1 + r)^{n}}} \\
+\text{PV}_{\text{CDMA}} &= `r pretty(p15$cdma.pv)`\\
+\text{PV}_{\text{G4}} &= `r pretty(p15$g4.pv)`\\
+\text{PV}_{\text{WIFI}} &= `r pretty(p15$wifi.pv)`\\\\
+\text{Profitability Index} &= \frac{\text{PV}}{I}\\
+\text{Profitability Index}_{\text{CDMA}} &= `r pretty(p15$cdma.pi)`\\
+\text{Profitability Index}_{\text{G4}} &= `r pretty(p15$g4.pi)`\\
+\text{Profitability Index}_{\text{WIFI}} &= `r pretty(p15$wifi.pi)`
 \end{aligned}
 $$
 
-```{r question 15 profitability index}
-- sum(cdma[-1]/(1 + .1)^(1:length(cdma[-1]))) / cdma[1]
-- sum(g4[-1]/(1 + .1)^(1:length(cdma[-1]))) / g4[1]
-- sum(wifi[-1]/(1 + .1)^(1:length(wifi[-1]))) / wifi[1]
-```
+Based on the profitability index, we should choose G4.
 
-Based on the profitability index (a) we should choose G4.
-
-The net present value
+## B. The net present value
 
 $$
 \begin{aligned}
-\mathbf{NPV} &= C_{0} + \sum^{N}_{n=1}{\frac{C_{n}}{(1 + r)^{n}}}
+\text{NPV} &= C_{0} + \sum^{N}_{n=1}{\frac{C_{n}}{(1 + r)^{n}}}\\
+\text{NPV}_{\text{CDMA}} &= `r pretty(p15$cdma.npv)`\\
+\text{NPV}_{\text{G4}} &= `r pretty(p15$g4.npv)`\\
+\text{NPV}_{\text{WIFI}} &= `r pretty(p15$wifi.npv)`
 \end{aligned}
 $$
 
-```{r question 15 npv}
-cdma[1] + sum(cdma[-1]/(1 + .1)^(1:length(cdma[-1])))
-g4[1] + sum(g4[-1]/(1 + .1)^(1:length(g4[-1])))
-wifi[1] + sum(wifi[-1]/(1 + .1)^(1:length(wifi[-1])))
-```
+Based on the net present value, we should choose Wi-Fi.
 
-Based on the net present value (b) we should choose Wi-Fi.
+## C. Recomendation
 
-Because profitability index does not take into account scale, (c) we should rely on the net present value. Since we have \$20 million to invest, we should choose Wi-Fi.
+Because profitability index does not take into account scale, (c) we should rely
+on the net present value. Since we have \$20 million to invest, we should choose
+Wi-Fi.
 
 ---
 
-## Comparing investment criteria
+# 16. Comparing investment criteria
 
-Consider the following cash flows of two mutually exclusive projects for AZ-Motorcars. Assume the discount rate for AZ-Motorcars is 10 percent.
+Consider the following cash flows of two mutually exclusive projects for
+AZ-Motorcars. Assume the discount rate for AZ-Motorcars is 10 percent.
 
-```{r question 16 table, echo=F}
-year <- c(0,1,2,3)
-azm <- c(-450000, 320000, 180000, 150000)
-azf <- c(-800000, 350000, 420000, 290000)
-q16.tbl <- as.data.frame(matrix(c(year, azm, azf), ncol=3))
-colnames(q16.tbl) <- c("Year", "AZM Mini-SUV", "AZF Full-SUV")
-knitr::kable(q16.tbl)
+```{r problem 16 table, echo=F}
+p16 = new.env()
+p16$year = c(0,1,2,3)
+p16$azm = c(-450000, 320000, 180000, 150000)
+p16$azf = c(-800000, 350000, 420000, 290000)
+p16$tbl = tibble(p16$year, pretty(p16$azm, 0), pretty(p16$azf, 0))
+colnames(p16$tbl) <- c("Year", "AZM Mini-SUV", "AZF Full-SUV")
+knitr::kable(p16$tbl)
+p16$azm.pb = payback.period(p16$azm, fractional=T)
+p16$azf.pb = payback.period(p16$azf, fractional=T)
+p16$azm.npv = npv(p16$azm, .1)
+p16$azf.npv = npv(p16$azf, .1)
+FinCal::irr(p16$azm)
+p16$azm.irr = irr(p16$azm)
+p16$azf.irr = irr(p16$azf)
+p16$inc = p16$azf - p16$azm
+p16$inc.irr = irr(p16$inc)
 ```
 
 a. Based on the payback period, which project should be accepted?
@@ -1332,131 +879,147 @@ b. Based on the NPV, which project should be accepted?
 c. Based on the IRR, which project should be accepted?
 d. Based on this analysis, is incremental IRR analysis necessary? If yes, please conduct the analysis.
 
-### Payback period
+## A. Payback period
 
-```{r question 16 payback}
-payback.period <- function(C){
-  cumsum.C <- cumsum(C)
-  pb.idx <- which(cumsum.C >= 0)[1]
-  if (pb.idx > 1){
-    prior.cf <- cumsum.C[pb.idx - 1]
-    current.cf <- cumsum.C[pb.idx]
-    additional.time <- abs(prior.cf) / (current.cf - prior.cf)
-    payback.period <- (pb.idx - 1) + additional.time - 1
-  } else {
-    payback.period <- pb.idx - 1
-  }
-  payback.period
-}
-payback.period(azm)
-payback.period(azf)
-```
+* AZM Mini-SUV: `r pretty(p16$azm.pb)` years.
 
-Based on payback period we should choose the AZF Full-SUV.
+* AZF Full-SUV: `r pretty(p16$azf.pb)` years.
 
-### NPV
+The AZM Mini-SUV has a lower payback period. Based on payback period, we should
+choose the AZM Mini-SUV.
 
-```{r question 16 npv}
-npv <- function(C, r) {
-  C[1] + sum(C[-1] / (1 + r)^(1:length(C[-1])))
-}
-npv(azm, .1)
-npv(azf, .1)
-```
+## B. NPV
 
-Based on NPV (b), we should choose the AZM Mini-SUV.
+* AZM Mini-SUV: \$`r pretty(p16$azm.npv)`
 
-### IRR
+* AZF Full-SUV: \$`r pretty(p16$azf.npv)`
 
-```{r question 16 irr}
-irr <- function(C) {
-  f <- function(r) C[1] + sum(C[-1]/(1+r)^(1:length(C[-1])))
-  uniroot(f, lower=1e-5, upper=1, tol=1e-8)$root
-}
-irr(azm)
-irr(azf)
-```
+The NPV method is the most comprehensive method to use. At a 10\% discount rate,
+we should choose the AZM Mini-SUV.
 
-Based on IRR (c), we should choose AZM Mini-SUV.
+## C. IRR
 
-### Incremental IRR
+* AZM Mini-SUV: `r pretty(p16$azm.irr*100)`\%
 
-```{r question 16 incremental irr}
-inc <- azf - azm
-irr(inc)
-```
+* AZF Full-SUV: `r pretty(p16$azf.irr*100)`\%
 
-Based on the incremental IRR (d), we should choose AZM Mini-SUV.
+Based on IRR, we should choose AZM Mini-SUV. However, it should be noted that
+there is an issue using the IRR method when it comes to scale.
+
+## D. Incremental IRR
+
+* Incremental (AZF Full-SUV - AZM Mini-SUV): `r pretty(p16$inc.irr*100)`\%
+
+Based on the incremental IRR, we should choose AZF Full-SUV.
 
 ---
 
-## Comparing investment criteria
+# 17. Comparing investment criteria
 
-The treasurer of Amaro Canned Fruits, Inc., has projected the cash flows of projects $A$, $B$, and $C$ as follows:
+The treasurer of Amaro Canned Fruits, Inc., has projected the cash flows of
+projects $A$, $B$, and $C$ as follows:
 
-```{r question 17 table, echo=F}
-year <- c(0,1,2)
-project.A <- c(-150000, 110000, 110000)
-project.B <- c(-300000, 200000, 200000)
-project.C <- c(-150000, 120000,  90000)
-q17.tbl <- as.data.frame(matrix(c(year, project.A, project.B, project.C), ncol=4))
-colnames(q17.tbl) <- c("Year", "Project A", "Project B", "Project C")
-knitr::kable(q17.tbl)
+```{r problem 17 table, echo=F}
+p17 = new.env()
+p17$year = c(0,1,2)
+p17$project.A = c(-150000, 110000, 110000)
+p17$project.B = c(-300000, 200000, 200000)
+p17$project.C = c(-150000, 120000,  90000)
+p17$tbl = tibble(p17$year, pretty(p17$project.A, 0),
+                 pretty(p17$project.B, 2), pretty(p17$project.C, 0))
+colnames(p17$tbl) <- c("Year", "Project A", "Project B", "Project C")
+knitr::kable(p17$tbl)
+p17$project.A.pi = profitability.index(p17$project.A, .12)
+p17$project.B.pi = profitability.index(p17$project.B, .12)
+p17$project.C.pi = profitability.index(p17$project.C, .12)
+p17$project.A.npv = npv(p17$project.A, .12)
+p17$project.B.npv = npv(p17$project.B, .12)
+p17$project.C.npv = npv(p17$project.C, .12)
 ```
 
 Suppose the relevant discount rate is 12 percent a year.
 
 a. Compute the profitability index for each of the three projects.
+
 b. Compute the NPV for each of the three projects.
-c. Suppose these three projects are independent. Which project(s) should Amaro accept based on the profitability index rule?
-d. Suppose these three projects are mutually exclusive. Which project(s) should Amaro accept based on the profitability index rule?
-e. Suppose Amaro's budget for these projects is \$450,000. The projects are not divisible. Which project(s) should Amaro accept?
 
-To calculate the profitability index (a) for each of these projects:
+c. Suppose these three projects are independent. Which project(s) should Amaro
+   accept based on the profitability index rule?
 
-$$
-\begin{aligned}
-\mathbf{I} &= \text{initial investment} \\
-\mathbf{C} &= \sum^{N}_{n=1}{\frac{C_{n}}{(1 + r)^{n}}} \\ \\
-\mathbf{Profitability\ Index} &= \frac{C}{I}
-\end{aligned}
-$$
+d. Suppose these three projects are mutually exclusive. Which project(s) should
+   Amaro accept based on the profitability index rule?
 
-```{r question 17 profitability index of each project}
-profitability.index(project.A, .12)
-profitability.index(project.B, .12)
-profitability.index(project.C, .12)
-```
+e. Suppose Amaro's budget for these projects is \$450,000. The projects are not
+   divisible. Which project(s) should Amaro accept?
 
-To calculate the NPV (b) for each project:
+## A. Profitability Index
 
 $$
 \begin{aligned}
-\mathbf{NPV} &= C_0 + \sum^{N}_{n=1}{\frac{C_n}{(1 + r)^{n}}}
+\text{I} &= \text{initial investment}\\
+\text{PV} &= \sum^{N}_{n=1}{\frac{C_{n}}{(1 + r)^{n}}}\\
+\text{Profitability Index} &= \frac{C}{I}\\\\
+\text{PI}_{A} &= `r pretty(p17$project.A.pi)`\\
+\text{PI}_{B} &= `r pretty(p17$project.B.pi)`\\
+\text{PI}_{C} &= `r pretty(p17$project.C.pi)`
 \end{aligned}
 $$
 
-```{r question 17 NPV for each project}
-npv(project.A, .12)
-npv(project.B, .12)
-npv(project.C, .12)
-```
+## B. NPV
 
-Based on the profitability rule, if the three projects are independent (c), then we should choose all three of the projects. If the projects are mutually exclusive (c), meaning we can only choose one of them, then we should choose project A. If Amaro Canned Fruits has \$450,000 to spend (d) on these three projects then the firm should choose projects A and C.
+$$
+\begin{aligned}
+\text{NPV} &= C_0 + \sum^{N}_{n=1}{\frac{C_n}{(1 + r)^{n}}}\\\\
+\text{NPV}_A &= \$`r pretty(p17$project.A.npv)`\\
+\text{NPV}_B &= \$`r pretty(p17$project.B.npv)`\\
+\text{NPV}_C &= \$`r pretty(p17$project.C.npv)`
+\end{aligned}
+$$
+
+## C. Independent projects and the profitability index
+
+All three projects are profitable (> 1), so all three projects should be
+accepted.
+
+## D. Mutually exclusive and the profitability index
+
+If the projects are mutually exclusive and you can only choose one based on
+profitability index alone, then you would choose project A. Keep in mind that
+the profitability index does not take into account the differences in the
+projects scale. This can be shown in the more comprehensive method of capital
+decision making, NPV, which shows that project B should be chosen. Project B is
+the correct answer.
+
+## E. Project budget of \$450,000
+
+We can only choose two of the three projects with this budget. Basing the
+decision on the NPV of the projects you should choose both projects A and B.
+All three projects have positive NPVs meaning they are all profitable. But
+project A and project B yield higher returns.
 
 ---
 
-## Comparing investment criteria
+# 18. Comparing investment criteria
 
-Consider the following cash flows of two mutually exclusive projects for Tokyo Rubber Company. Assume the discount rate for Tokyo Rubber Company is 10 percent.
+Consider the following cash flows of two mutually exclusive projects for Tokyo
+Rubber Company. Assume the discount rate for Tokyo Rubber Company is 10 percent.
 
-```{r question 18 table, echo=F}
-year <- c(0,1,2,3)
-dry<- c(-1700000,1100000,900000,750000)
-solvent <- c(-750000, 375000,600000,390000)
-q18.tbl <- as.data.frame(matrix(c(year, dry, solvent), ncol=3))
-colnames(q18.tbl) <- c("Year", "Dry Prepreg", "Solvent Prepreg")
-knitr::kable(q18.tbl)
+```{r problem 18 table, echo=F}
+p18 = new.env()
+p18$year = c(0, 1, 2, 3)
+p18$dry = c(-1700000, 1100000, 900000, 750000)
+p18$solvent = c(-750000, 375000, 600000, 390000)
+p18$tbl = tibble(p18$year, pretty(p18$dry), pretty(p18$solvent))
+colnames(p18$tbl) = c("Year", "Dry Prepreg", "Solvent Prepreg")
+knitr::kable(p18$tbl)
+p18$dry.pb = payback.period(p18$dry, fractional=T)
+p18$solvent.pb = payback.period(p18$solvent, fractional=T)
+p18$dry.npv = npv(p18$dry, .1)
+p18$solvent.npv = npv(p18$solvent, .1)
+p18$dry.irr = irr(p18$dry)
+p18$solvent.irr = irr(p18$solvent)
+p18$inc = p18$dry - p18$solvent
+p18$inc.irr = irr(p18$inc)
 ```
 
 a. Based on the payback period, which project should be taken?
@@ -1464,87 +1027,411 @@ b. Based on the NPV, which project should be taken?
 c. Based on the IRR, which project should be taken?
 d. Based on this analysis, is incremental IRR analysis necessary? If yes, please conduct the analysis.
 
-To calculate the payback period, we use `R`:
+## A. Payback period
 
-```{r question 18 payback period}
-payback.period(dry)
-payback.period(solvent)
-```
+* Dry Prepreg: `r pretty(p18$dry.pb)`
 
-Based on the payback period both will payback within two years, so they both can be taken. If only one can be chosen then we should choose the Solvent Prepreg project because it pays back faster.
+* Solvent Prepreg: `r pretty(p18$solvent.pb)`
 
-To calculate the net present value:
+For the two mutually exclusive projects, the Solvent Prepreg project should be
+chosen based on the payback period. However, the payback period has issues
+because it doesn't account for the present value of the cash flows.
 
-```{r question 18 npv}
-npv(dry, .1)
-npv(solvent, .1)
-```
+## B. NPV
 
-Based on the net present value (b), you should choose the Dry Prepreg project.
+* Dry Prepreg: \$`r pretty(p18$dry.npv, 0)`
 
-```{r question 18 irr}
-irr(dry)
-irr(solvent)
-```
+* Solvent Prepreg: \$`r pretty(p18$solvent.npv, 0)`
 
-Based on the internal rate of return (c), you should choose the Solvent Prepreg project.
+The NPV method is the most comprehensive method and should be used when making
+capital decisions. Based on the NPV method, we should choose the Dry Prepreg
+project.
 
-The incremental IRR is necessary because of scale (d), to calculate the incremental IRR:
+## C. IRR
 
-```{r question 18 incremental irr}
-inc <- dry - solvent
-irr(inc)
-```
+* Dry Prepreg: `r pretty(p18$dry.irr*100)`\%
 
-The incremental IRR states that you should choose the Dry Prepreg project, which matches the net present value.
+* Solvent Prepreg: `r pretty(p18$solvent.irr*100)`\%
+
+Based on the IRR method we should choose the Solvent Prepreg project which has
+the larger IRR. However, the IRR method does not take into account the scale of
+the project. This means that we should explore this further with the incremental
+IRR method.
+
+## D. Incremental IRR
+
+* Incremental (Dry Prepreg - Solvent Prepreg): `r pretty(p18$inc.irr*100)`\%
+
+Based on the incremental IRR, We should choose the Dry Prepreg project because
+this larger project has a positive incremental IRR. 
 
 ---
 
-## Comparing investment criteria
+# 19. Comparing investment criteria
 
-Consider two mutually exclusive new product launch projects that Nagano Golf is considering. Assume the discount rate for Nagano Golf is 15 percent.
+Consider two mutually exclusive new product launch projects that Nagano Golf is
+considering. Assume the discount rate for Nagano Golf is 15 percent.
 
-Project A:
+## Project A:
+
 * Nagano NP-30.
-* Professional clubs that will take an initial investment of \$550,000 at time 0.
-* Next five years (Years 1--5) of sales will generate a consistent cash flow of \$185,000 per year.
-* Introduction of new product at Year 6 will terminate further cash flows from this project.
 
-Project B:
+* Professional clubs that will take an initial investment of \$550,000 at
+  time 0.
+
+* Next five years (Years 1--5) of sales will generate a consistent cash flow of
+  \$185,000 per year.
+
+* Introduction of new product at Year 6 will terminate further cash flows from
+  this project.
+
+## Project B:
+
 * Nagano NX-20.
-* High-end amateur clubs that will take an initial investment of \$350,000 at time 0.
-* Cash flows at Year 1 is \$100,000. In each subsequent year cash flow will grow at 10 percent per year.
-* Introduction of new product at Year 6 will terminate further cash flows from this project.
+
+* High-end amateur clubs that will take an initial investment of \$350,000 at
+  time 0.
+
+* Cash flows at Year 1 is \$100,000. In each subsequent year cash flow will grow
+  at 10 percent per year.
+
+* Introduction of new product at Year 6 will terminate further cash flows from
+  this project.
 
 ```{r question 19 table, echo=F}
-year <- c(0,1,2,3,4,5)
-np.30 <- c(-550000, rep(185000, 5))
-nx.20 <- c(-350000, 100000*1.1^(0:4))
-q19.tbl <- as.data.frame(matrix(c(year, np.30, nx.20), ncol=3))
-colnames(q19.tbl) <- c("Year", "NP-30", "NX-20")
-knitr::kable(q19.tbl)
+p19 = new.env()
+p19$year = c(0, 1, 2, 3, 4, 5)
+p19$np.30 = c(-550000, rep(185000, 5))
+p19$nx.20 = c(-350000, 100000*1.1^(0:4))
+p19$tbl = tibble(p19$year, pretty(p19$np.30), pretty(p19$nx.20))
+colnames(p19$tbl) <- c("Year", "NP-30", "NX-20")
+knitr::kable(p19$tbl)
+p19$np.30.pb = payback.period(p19$np.30)
+p19$nx.20.pb = payback.period(p19$nx.20)
+p19$np.30.irr = irr(p19$np.30)
+p19$nx.20.irr = irr(p19$nx.20)
+p19$np.30.pi = profitability.index(p19$np.30, .15)
+p19$nx.20.pi = profitability.index(p19$nx.20, .15)
+p19$np.30.npv = npv(p19$np.30, .15)
+p19$nx.20.npv = npv(p19$nx.20, .15)
 ```
 
 Please fill in the following table:
 
-```{r question 19, new table}
-cumsum(nx.20)
-cumsum(np.30)
-pb.nagano <- c(payback.period(np.30), payback.period(nx.20))
-irr.nagano <- c(irr(np.30), irr(nx.20))
-pi.nagano <- c(profitability.index(np.30, .15), profitability.index(nx.20, .15))
-npv.nagano <- c(npv(np.30, .15), npv(nx.20, .15))
-pb.dec <- pb.nagano[1] < pb.nagano[2]
-irr.dec <- irr.nagano[1] > irr.nagano[2]
-pi.dec <- pi.nagano[1] > pi.nagano[2]
-npv.dec <- npv.nagano[1] > npv.nagano[2]
-decisions <- c(pb.dec, irr.dec, pi.dec, npv.dec)
-q19.tbl.sol <- as.data.frame(matrix(c(pb.nagano, irr.nagano, pi.nagano, npv.nagano), ncol=2, byrow=T))
-q19.tbl.sol <- cbind(q19.tbl.sol, decisions)
-colnames(q19.tbl.sol) <- c("NP-30", "NX-20", "Choose NP-30?")
-rownames(q19.tbl.sol) <- c("Payback", "IRR", "PI", "NPV")
-knitr::kable(q19.tbl.sol)
-```
+| | NP-30 | NX-20 | Implications |
+|:---|:---:|:---:|:---|
+| Payback | `r pretty(p19$np.30.pb)` | `r pretty(p19$nx.20.pb)` | Choose NP-30 |
+| IRR | `r pretty(p19$np.30.irr*100)`\% | `r pretty(p19$nx.20.irr*100)`\% | Choose NX-20 |
+| PI | `r pretty(p19$np.30.pi)` | `r pretty(p19$nx.20.pi)` | Choose NX-20 |
+| NPV | \$`r pretty(p19$np.30.npv)` | `r pretty(p19$nx.20.npv)` | Choose NP-30 (Correct choice) |
 
 ---
 
+# 20. NPV and Multiple IRRs
+
+You are evaluating a project that costs \$75,000 today. The project has an
+inflow of \$155,000 in one year and an outflow of \$65,000 in two years. What
+are the IRRs for the project? What discount rate results in the maximum NPV for
+this project? How can you determine that this is the maximum NPV?
+
+```{r problem 20, echo=F}
+p20 = new.env()
+p20$f = function(r) -75 + 155/(1 + r) - 65 / (1 + r)^2
+p20$df = function(r) 130/(1 + r)^3 - 155/(1 + r)^2
+p20$tbl = tibble(
+    r = seq(-.5, .6, by=.01),
+    v = p20$f(r)
+)
+p20$x.intercept = c(
+    uniroot(p20$f, c(-.3, -.5))$root,
+    uniroot(p20$f, c(.4, .5))$root
+)
+p20$vmax = uniroot(p20$df, c(-.2, 0))$root
+ggplot(p20$tbl, aes(x=r, y=v)) +
+    geom_line() +
+    geom_hline(yintercept = 0, col='red') +
+    geom_vline(xintercept = p20$x.intercept, col='blue') +
+    geom_hline(yintercept = p20$f(p20$vmax))
+```
+
+Because of the sign changes, there are two IRRs.
+
+## Set up the equation
+
+\[
+\begin{aligned}
+\text{CF} &= (-75,000, 155,000, -65,000)\\\\
+\text{NPV}(r) &= -75,000 + \frac{155,000}{(1 + r)} - \frac{65,000}{(1 + r)^2}
+\end{aligned}
+\]
+
+## We solve for the IRR. Let $x = \frac{1}{1 + r}$.
+
+\[
+\begin{aligned}
+-75,000 + 155,000x - 65,000x^2 = 0\\
+65x^2 - 155x + 75 = 0
+\end{aligned}
+\]
+
+The roots are:
+
+\[
+x_1 \approx 1.70975477,\ \ \ \ x_2 \approx 0.67486061.
+\]
+
+We convert:
+
+\[
+\begin{aligned}
+r_1 &= \frac{1}{x_1} - 1 \approx `r p20$x.intercept[1]`\\
+r_2 &= \frac{1}{x_2} - 1 \approx  `r p20$x.intercept[2]`
+\end{aligned}
+\]
+
+## Find the discount rate that gives the maximum NPV
+
+\[
+\begin{aligned}
+\text{NPV}(r) &= -75,000 + 155,000(1 + r)^{-1} - 65,000(1 + r)^{-2}\\
+\frac{d\text{NPV}}{dr} &= -155,000(1 + r)^{-2} + 130,000(1 + r)^{-3}
+\end{aligned}
+\]
+
+Equate $d/dr = 0$
+
+\[
+\begin{aligned}
+-155,000(1 + r)^{-2} + 130,000(1 + r)^{-3} &= 0\\
+-155,000(1 + r) + 130,000 &= 0\\
+155,000 + 155,000r &= 130,000\\
+155,000r &= -25,000\\
+r &= \frac{-25}{155} \approx `r p20$vmax`
+\end{aligned}
+\]
+
+---
+
+# 21. Payback and NPV
+
+An investment under consideration has a payback of six years and a cost of
+\$434,000. If the required return is 12 percent, what is the worst-case NPV? The
+best-case NPV? Explain. Assume the cash flows are conventional.
+
+```{r problem 21, echo=F}
+p21 = new.env()
+p21$npv.worst.case = npv(c(-434e3, rep(0, 5), 434e3), .12)
+p21$npv.best.case = npv(c(-434e3, 434e3, rep(0, 5)), .12)
+```
+
+## Wort-case scenario
+
+Under the worst-case scenario all of the cash flow occurs as late as possible
+  (i.e. year 6).
+
+\[
+\text{NPV} = -434,000 + \frac{434,000}{(1.12)^6}
+    = `r pretty(p21$npv.worst.case, 0)`
+\]
+
+## Best-case scenario
+
+The best-case scenario is that all cash flows occur as early as possible (i.e.
+year 1). The cash flows are _front-loaded_.
+
+\[
+\text{NPV} = -434,000 + \frac{434,000}{(1.12)}
+    = `r pretty(p21$npv.best.case, 0)`
+\]
+
+---
+
+# 22. Multiple IRRs
+
+This problem is useful for testing the ability of financial calculators and
+computer software. Consider the following cash flows. How many different IRRs
+are there? (_Hint:_ Search between 20 percent and 70 percent.) When should we
+take this project.
+
+```{r problem 22, echo=F}
+p22 = new.env()
+p22$year = c(0, 1, 2, 3, 4)
+p22$cf = c(-1008, 5724, -12140, 11400, -4000)
+p22$tbl = tibble(
+    Year = p22$year,
+    `Cash Flow` = pretty(p22$cf, 0)
+)
+knitr::kable(p22$tbl)
+p22$f <- function(r) sum(p22$cf / (1 + r)^(0:(length(p22$cf)-1)))
+p22$v = c()
+for(r in (p22$r <- seq(.2, .7, by=.01))){
+  p22$v = c(p22$v, p22$f(r))
+}
+p22$res = tibble(x=p22$r, y=p22$v)
+p22$cf.discounted = p22$cf / (1 + r)^(0:(length(p22$cf)-1))
+p22$zeros = c(
+    uniroot(p22$f, c(.2, .3))$root,
+    uniroot(p22$f, c(.3, .35))$root,
+    uniroot(p22$f, c(.4, .45))$root,
+    uniroot(p22$f, c(.65, .7))$root
+)
+p22$npv.1 = npv(p22$cf, p22$zeros[1])
+```
+
+We can calculate the number of IRRs from the number of sign changes in the cash
+flows. There are four sign changes therefore there are four IRRs. This can be
+represented graphically.
+
+```{r problem 22; graph, echo=F}
+ggplot(p22$res, aes(x=x, y=y)) +
+    geom_line() +
+    geom_hline(yintercept=0, col='red')
+```
+
+Because of the multiple IRRs, we can't use the IRR method for capital budgeting.
+We can use the modified IRR. However, we need a discount rate to do the
+calculations.
+
+The graph shows two regions where the rate is positive. These are the regions
+where we should take this project. These regions are between
+[`r pretty(p22$zeros[1])`, `r pretty(p22$zeros[2])`] and
+[`r pretty(p22$zeros[3])`, `r pretty(p22$zeros[4])`].
+
+We can find the local maximas for each region.
+
+\[
+-1008 + 5724 \times (1 + r)^{-1} - 12,140 \times (1 + r)^{-2}
+    + 11,400 \times (1 + r)^{-3} - 4000 \times (1 + r)^{-4} = 0
+\]
+
+---
+
+# 23. NPV Valuation
+
+The Yurdone Corporation wants to set up a private cemetery business. According
+to the CFO, Barry M. Deep, business is "looking up." As a result, the cemetery
+project will provide a net cash inflow of \$290,000 for the firm during the
+first year, and the cash flows are projected to grow at a rate of 5 percent per
+year forever. The project requires an initial investment of \$3,900,000.
+
+a. If Yurdone requires a return of 11 percent on such undertakings, should the
+   cemertery business be started?
+
+b. The company is somewhat unsure about the assumption of a growth rate of 5
+   percent in its cash flows. At what constant growth rate would the company
+   just break even if it still required a return of 11 percent on investment?
+
+```{r problem 23, echo=F}
+p23 = new.env()
+p23$pv.perpetuity = 290e3 / (.11 - .05)
+p23$investment = 3.9e6
+p23$npv = -p23$investment + p23$pv.perpetuity
+p23$f = function(g) 290e3 / (.11 - g) - 3.9e6
+p23$g = uniroot(p23$f, c(0, .05))$root
+```
+
+## A. Calculate NPV for a growing perpetuity investment at 11\%
+
+We are asked to calculate the NPV of a growing perpetuity investment
+
+\[
+\begin{aligned}
+\text{NPV} &= -\text{Investment} + \text{PV}_{\text{Perpetuity}}\\
+    &= -\$3,900,000 + \frac{\$290,000}{(.11 - .05)}\\
+    &= \$`r pretty(p23$npv, 0)`
+\end{aligned}
+\]
+
+Yes, Yurdone Corporation should invest in this project. It pays very well.
+
+## B. Break even growth rate for a required return of 11\%
+
+If Yurdone wants to know the growth rate that it need to break even for this
+project we need to find $g$ in the following equation:
+
+\[
+-3,900,000 + \frac{290,000}{(.11 - g)} = 0
+\]
+
+Solving for $g$ we get: `r pretty(p23$g*100)`\%
+
+---
+
+# 24. Calculating IRR
+
+The Utah Mining Corporation is set to open a gold mine near Provo, Utah.
+According to the treasurer, Monty Goldstein, "This is a golden opportunity." The
+mine will cost \$2,400,000 to open and will have an economic life of 11 years.
+It will generate a cash inflow of \$345,000 at the end of the first year, and
+the cash inflows are projected to grow at 8 percent per year for the next 10
+years. After 11 years, the mine will be abandoned. Abandonment costs will be
+\$400,000 at the end of year 11.
+
+a. What is the IRR for the gold mine?
+
+b. The Utah Mining Corporation requires a return of 10 percent on such
+   undertakings. Should the mine be opened?
+
+```{r problem 24, echo=F}
+p24 = new.env()
+p24$I = 2.4e6
+p24$f <- function(r)
+    -2.4e6 + 345e3 * sum((1.08)^(0:10)/(1 + r)^(1:11)) - 400e3 / (1 + r)^11
+p24$r = uniroot(p24$f, c(0,.5))$root
+p24$v = c()
+for(r in (p24$r.s <- seq(0, .5, by=.01))){
+    p24$v = c(p24$v, p24$f(r))
+}
+p24$res = tibble(x=p24$r.s, y=p24$v)
+gplot <- ggplot(p24$res, aes(x=x, y=y)) +
+    geom_line() +
+    geom_hline(yintercept=0, col='red')
+```
+
+## A. Calculating the IRR
+
+We need to solve the following equation
+
+\[
+\text{NPV} = -2,400,000 + 345,000 \times \sum^{11}_{t=1}{
+    \frac{(1.08)^{t-1}}{(1 + r)^{t}}} - \frac{400,000}{(1 + r)^{11}}
+\]
+
+Solving for r we get: `r pretty(p24$r*100)`\%.
+
+```{r problem 24; graph, echo=F}
+gplot
+```
+
+## B. Required return is 10\% should the project be undertaken?
+
+Yes. With an IRR of `r pretty(p24$r*100)`\% > 10\%, the project should be
+undertaken.
+
+---
+
+# 25. NPV and IRR
+
+Butler International Limited is evaluating a project in Erewhon. The project
+will create the following cash flows:
+
+```{r problem 25, echo=F}
+p25 = new.env()
+p25$year = seq(0, 4, by=1)
+p25$cf = c(-950e3, 285e3, 345e3, 415e3, 255e3)
+p25$tbl = tibble(
+    Year = p25$year,
+    `Cash Flow` = pretty(p25$cf)
+)
+knitr::kable(p25$tbl)
+```
+
+All cash flows will occur in Erewhon and are expressed in dollars. In an attempt
+to improve its economy, the Erewhonian government has declared that all cash
+flows created by a foreign company are "blocked" and must be reinvested with the
+government for one year. The reinvestment rate for these funds is 4 percent. If
+Butler uses a required return of 11 percent on this project, what are the NPV
+and IRR of the project? Is the IRR you calculated the MIRR of the project? Why
+or why not?
+
+---

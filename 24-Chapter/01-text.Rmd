@@ -1,0 +1,324 @@
+---
+title: "Chapter 24 Warrants and Convertibles"
+output:
+  pdf_document:
+    toc: true
+    includes:
+      in_headers: preamble.tex
+---
+
+# Warrants
+
+Warrants are similar to call options. They give the holder the right but not the
+obligation to buy common stock directly from the company at a fixed price for a
+given period. Each warrant specifies the number of shares of stock that the
+holder can buy, exercise price, and the expiration date. Warrants usually have
+longer maturity periods. Some warrants never expire.
+
+Warrants are referred to as _equity kickers_ because they are usually issued in
+combination with privately placed bonds. In most cases they are attached to the
+bonds when issued. The loan agreement will state whether the warrants are
+detachable from the bond---that is, whether they can be sold separately.
+Usually, the warrant can be detached immediately.
+
+Warrants do have differnces from call options. The most important difference is
+that warrants are issued by firms whereas call options are issued by
+individuals. When warrants are exercised the number of shares outstaning in the
+firm increases.
+
+
+### Example 24.1
+
+#### Warrants and firm value
+
+To see how warrants affect the value of the firm, imgain that Mr. Gould and Ms.
+Rockefeller are two investors who have together purchased six ounces of
+platinum. At the time they bought the platinum, Mr. Gould and Ms. Rockefeller
+each contributed half of the cost, which we will assume was \$3,000 for six
+ounces, or \$500 an ounce (they each contributed \$1,500). They incorporated,
+printed two stock certificates, and nmaed the firm the GR Company. Each
+certificate represensts a one-half claim to the platinum. Mr. Gould and Ms.
+Rockfeller each own one certificate. They have formed a company with platinum as
+its only asset.
+
+#### A call is issued
+
+Suppose Mr. Gould later decides to sell to Ms. Fiske a call option issued on Mr.
+Gould's share. The call option gives Ms. Fiske the right to buy Mr. Gould's
+share for \$1,800 within the next year. If the price of platinum rises above
+\$600 per ounce, the firm will be worth more than \$3,600 and each share will be
+worth more than \$1,800. If Ms. Fiske decides to exercise her option, Mr. Gould
+must turn over his stock certificate and receive \$1,800.
+
+How would the firm be affected by the exercise? The number of shares will remain
+the same. There will still be two shares, now owned by Ms. Rockefeller and Ms.
+Fiske. If the price of platinum rises to \$700 an ounce, each share will be
+worth \$2,100 (=\$4,200/2). If Ms. Fiske exercises her option at this price, she
+will gain \$300.
+
+#### A warrant is issued instead
+
+This story changes if a warrant is issued. Suppose that Mr. Gould does not sell
+a call option to Ms. Fiske. Instead, Mr. Gould and Ms. Rockefeller have a
+stockholders' meeting. They vote that GR Company will issue a warrant and sell
+it to Ms. Fiske. The warrant will give Ms. Fiske the right to receive a share of
+the company at an exercise price of \$1,800. If Ms. Fiske decides to exercise
+the warrant, the firm will issue another stock certificate and give it to Ms.
+Fiske in exchange for \$1,800.
+
+From Ms. Fiske's perspective, the call option and the warrant seem to be the
+same. The exercise prices of the warrant and the call are the same: \$1,800. It
+is still advantageous for Ms. Fiske to exercise the warrant when the price of
+platinum exceeds \$600 per ounce. However, we will shot that Ms. Fiske actually
+makes less in the warrant situation due to dilution.
+
+The GR Company must also consider dilution. Suppose the price of platinum
+increases to \$700 an ounce and Ms. Fiske exercises her warrant. Two things will
+occur:
+
+1. Ms. Fisk will pay \$1,800 to the firm.
+2. The firm will print one stock certificate and give it to Ms. Fiske. The stock
+   certificate will represent a one-third claim on the platinum value of the
+   firm.
+
+Because Ms. Fiske contributes \$1,800 to the firm, the value of the firm
+increases. It is now worth:
+
+\[
+\begin{aligned}
+\text{New value of firm} &= \text{Value of platinum}
+  &+ \text{Contribution to the firm by Ms. Fiske}\\
+  &= \$4,200 &+ \$1,800\\
+  &= \$6,000
+\end{aligned}
+\]
+
+Because Ms. Fiske has a one-third claim on the firm's value, her share is worth
+\$2,000 (=\$6,000/3). By exercising the warrant, Ms. Fiske gains \$2,000 -
+\$1,800 = \$200.
+
+#### Dilution
+
+Why does Ms. Fiske gain only \$200 in the warrant case but gain \$300 in the
+option case? The key is dilution---that is, the creation of another share. In
+the call option case, she contributes \$1,800 and receives one of the two
+outstanding shares. That is, she receives a share worth \$2,100
+(=\(\frac{1}{2} \times \$4,200\)). Her gain is \$300 (=\$2,100 - \$1,800). We
+rewrite this gain like this:
+
+\begin{center}
+\textbf{Gain on exercise of call}
+\end{center}
+\begin{equation}
+\frac{\$4,200}{2} - \$1,800 = \$300\tag{24.1}\label{eq:24.1}
+\end{equation}
+
+In the warrant case, she contributes \$1,800 and receives a newly created share.
+She now owns one of the three outstanding shares. Because the \$1,800 remains in
+the firm, her share is worth \$2,000 [(=\$4,200 + \$1,800)/3]. Her gain is \$200
+(=\$2,000 - \$1,800). We rewrite this gain as follows:
+
+\begin{center}
+\textbf{Gain on exercise of warrant}
+\end{center}
+\begin{equation}
+\frac{\$4,200 + \$1,800}{2 + 1} - \$1,800 = \$200\tag{24.2}\label{eq:24.2}
+\end{equation}
+
+Warrants also affect accounting numbers. Warrants and convertible onds cause the
+number of shares to increase. This causes the firm's net income to be spread
+over more shares, thereby decreasing earnings per share. Firms with significant
+amounts of warrants and convertible issues must report earnings on a _primary_
+basis and a _fully diluted_ basis.
+
+# Warrant pricing and the Black-Scholes model
+
+\begin{center}
+\textbf{Gain from exercising a single call}
+\end{center}
+
+\begin{equation}
+\frac{V_d}{S} - E\tag{24.3}\label{24.3}
+\end{equation}
+
+Where:
+* \(V_d\): Firm's value net of debt
+* \(S\): Number of shares outstanding
+* \(E\): The exercise price
+
+\begin{center}
+\textbf{Gain from exercising a single warrant}
+\end{center}
+
+\begin{equation}
+\frac{V_d + E \times S_w}{S + S_w} - E\tag{24.4}\label{eq:24.4}
+\end{equation}
+
+The numerator of the left term is the firm's value net of debt _after_ the
+warrant is exercised. It is the sum of the firm's value net of debt _prior_ to
+the warrant's exercise plus the proceeds the firm receives from the exercise.
+
+We can rearrange the terms and get the following equation
+
+\begin{equation}
+\frac{S}{S + S_w} \times \left(\frac{V_d}{S} - E\right)\tag{24.5}\label{eq:24.5}
+\end{equation}
+
+Equation \ref{eq:24.5} relates the gain on a warrant to the gain on a call. The
+gain from exercising a warrant is a smaller proportion of the gain from
+exercising a call option.
+
+This means we can use the Black-Scholes model to value the warrant.
+
+# Convertible bonds
+
+A convertible bond is similar to a bond with warrants. The most important
+difference is that a bond with warrants can be separated into disticnt
+securities and a convertible bond cannot. A convertible bond gives the holder
+the right to exchange it for a given number of shares of stock anytime up to and
+including the maturity date of the bond.
+
+Preferred stock can frequently be converted into common stock. A convertible
+preferred stock is the same as a convertible bond except that it has an infinite
+maturity date.
+
+### Example 24.2
+
+#### Convertibles
+
+On June 8, 2010, Microsoft raised \$1.15 billion by issuing zero coupon
+convertible subordinated debentures due in 2013. Each bond was  convertible into
+29.9434 shares of common stock of Microsoft any time before maturity. The number
+of shares received for each bond (29.9434 in this example) is called the
+conversion ratio.
+
+Bond traders also speack of the conversion price of the bond. This price is
+calculated as the ratio of the face value of the bond to the conversion ratio.
+Because the face value of each Microsoft bond was \$1,000, the conversion price
+was \$33.40 (=\$1,000 / 29.9434). If a bondholder chose to convert, she would
+give up a bond with a face value of \$1,000 and receive 29.9434 shares of
+Microsoft common stock in return. THus, the conversion is equivalent to paying
+\$33.40 for each share of Microsoft common stock received.
+
+When Microsoft issued its convertible bonds, its common stock was trading at
+\$25.11 per share. The conversion price of \$33.40 was 33 percent higher than
+the actual common stock price. This option in Microsoft convertible bonds was
+_out of the money_, meaning that immediate conversion would be unprofitable.
+This conversion premium is typical.
+
+Convertibles are almost always protected against stock splits and stock
+dividends. Thus, if Microsoft's common stock were split two-for-one, the
+conversion ratio would increase from 29.9434 to 59.8868.
+
+# The value of convertible bonds.
+
+The value of a convertible bond has three components
+
+## Straight bond value
+
+The straight bond value is what the convertible bonds would sell for if they
+could not be converted into common stock. It will depend on the general level of
+interest rates and on the default risk. Suppose that straight debentures issued
+by Oceandoor had been rated A, and A-rated bonds were priced to yield 4 percent
+per six months. Further suppose the semiannual coupons were \$33.75, the
+principle amount was \$1,000, and maturity 16 years. The straight bond value of
+Oceandoor convertible bonds can be deteremined by discounting the \$33.75
+semiannual coupon payment and principal amount at 4 percent.
+
+\[
+\begin{aligned}
+B &= \sum^{32}_{t=1}\frac{\$33.75}{1.04^t} + \frac{\$1,000}{1.04^{32}}\\
+  &= \$33.75 \times \text{PVIA}(.04, 32) + \frac{\$1,000}{(1.04)^{32}}\\
+  &= \$604.23 + \$285.06\\
+  &= \$888.29
+\end{aligned}
+\]
+
+The straight bond value is a minimum value. The price of Oceandoor's convertible
+bonds could not have gone lower than the straight bond value.
+
+## Conversion value
+
+The value of convertible bonds depends on conversion value. Conversion value is
+what the bonds would be worth if they were immediately converted into common
+stock at the current prices. Typically, we compute conversion value by
+multiplying the number of shares of common stock that will be received when the
+bond is converted byt he current pirce of the common stock.
+
+On September 9, 2011, each Oceandoor convertible bond could have been converted
+into 29.9434 shares of Oceandoor common stock. Oceandoor common stock was
+selling for \$25.74. Thus, the conversion value was \(29.9434 \times \$25.74 =
+\$770.74\). A convertible cannot sell for less than its conversion value.
+Arbitrage prevents this from happening. If Oceandoor's convertible sold for less
+than \$770.74, investors would have bought the bonds and converted them into
+common stock and sold the stock. The profit would have been the difference
+between the value of the stock and the bond's conversion value.
+
+Thus, convertible bonds have two minimum values: The straight bond value and the
+conversion value. The conversion value is determined by the value of the firm's
+underlying common stock.
+
+## Option value
+
+The value of a convertible bond will generally exceed both the straight bond
+value and the conversion value. This occurs because holders of convertibles need
+not convert immediately. Instead, by waiting they can take advantage of
+whichever is greater in the future: The straight bond value or the conversion
+value. This option to wait has value, and it raises the value over both the
+straight bond value and the conversion value.
+
+When the value of the firm is low, the value of convertible bonds is most
+significantly influenced by the underlying value as straight debt. However, when
+the value of the firm is very high, the value of convertible bonds is mostly
+determined by their underlying conversion value.
+
+\[
+V = \max(B, C) + O
+\]
+
+Where:
+
+* The value of convertible bond: V
+* The straight bond value: B
+* Conversion value: C
+* Option value: O
+
+### Example 24.3
+
+#### Conversion
+
+Suppose the Moulton Company has outstanding 1,000 shares of common stock and 100
+bonds. Each bond has a face value of \$1,000 at maturity. They are discount
+bonds and pay no coupons. At maturity each bond can be converted into 10 shares
+of newly issued common stock.
+
+What circumstances will make it advantageous for the holders of Moulton
+convertible bonds to convert to common stock at maturity?
+
+If the holders of the convertible bonds convert, they will receive \(100 \times
+10 = 1,000\) shares of common stock. Because there were already 1,000 shares,
+the total number of shares outstanding becomes 2,000 upon conversion. Thus,
+converting bondholders own 50 percent of the value of the firm, \(V\). If they
+do not convert, they will receive \$100,000 or \(V\), whichever is less. The
+choice for the holders of the Moulton bonds is obvious. They should convert if
+50 percent of \(V\) is greater than \$100,000. This will be true whenever \(V\)
+is greater than \$200,000.
+
+# Reasons for issuing warrants and convertibles
+
+The best way to understand reasons for issuing warrants and convertibles is to
+understand how they relate to straight debt and common stock.
+
+## Convertible debt versus straight debt
+
+Convertible debt pays a lower interest rate than straight debt. However, if
+the stock price rises to initiate a conversion, then the company loses out on
+selling to convertible holders stock at below market prices. If the stock price
+fails to rise to initiate a conversion, then the company enjoys the low interest
+rate without the added penalty of issuing shares below market rate.
+
+## Convertible debt versus stock
+
+Compared with equity, the firm is better off having issued convertible debt if
+the underlying stock subsequently does well. The firm is worse off having issued
+convertible debt if the underlying stock subsequently does poorly. 

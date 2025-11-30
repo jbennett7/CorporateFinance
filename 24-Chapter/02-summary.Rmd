@@ -1,0 +1,66 @@
+---
+title: "Chapter 24 Warrants and convertibles"
+subtitle: Summary
+output:
+  pdf_document:
+    toc: false
+    includes:
+      in_headers: preamble.tex
+---
+
+A warrant gives the holder the right to buy shares of common stock at an
+exercise price for a given period. Typically, warrants are issued in a package
+with privately placed bonds. Afterwards, they become detached and trade
+separately.
+
+A convertible bond is a combination of a straight bond and a call option. The
+holder can give up the bond in exchange for shares of stock.
+
+Convertible bonds and warrants are like call options. However, there are some
+important difference.
+
+a. Warrants and convertible securities are issued by corporations. Call options
+are traded by individual investors.
+
+> i. Warrants are usually issued privately and are combined with a bond. In most
+> cases, the warrants can be detached immediately after the issue. In some
+> cases, warrants are issued with preferred stock, with common stock, or in
+> executive compensation programs.
+
+> ii. Convertibles are usually bonds that can be converted into common stock.
+
+> iii. Calloptions are sold separately by individual investors (called _writers_
+> of call options.
+
+b. Warrants and calloptions are exercised for cash. The holder of a warrant
+gives the company cash and receives new shares of the company's stock. The
+holder of a call option gives another individual cash in exchange for shares of
+stock. When someone converts a bond, it is exchanged for common stock. As a
+consequence, bonds with warrants and convertible bonds have different effects on
+corporate cash flow and capital structure.
+
+c. Warrants and convertibles cause dilution to the existing shareholders. When
+warrants are exercised and convertible bonds converted, the company must issue
+new shares of common stock. The percentage ownership of the existing
+shareholders will decline. New shares are not issued when call ptions are
+exercised.
+
+Many arguments, both plausible and implausible, are given for issuing
+convertible bonds and bonds with warrants. One plausible rationale for such
+bonds has to do with risk. Convertibles and bonds with warrants are associated
+with risky companies. Lenders can do several things to protect themselves from
+high-risk companies:
+
+a. The can require high yields.
+b. They can lend less or not at all to firms whose risk is difficult to assess.
+c. They can impose severe restrictions on such debt.
+
+Another useful way to protect against risk is to issue bonds with equity
+kickers. This gives the lenders the chance to benefit from risks and reduces the
+confflicts between bondholders and stockholders concerning risk.
+
+A certain puzzle particularly vexes financial researchers: Convertible bonds
+usually have call provisions. Companies appear to delay calling convertibles
+until the conversion value greatly exceeds the call price. From the
+shareholders' standpoint, the optimal call policy would be to call the
+convertibles when the conversion value equals the call price.

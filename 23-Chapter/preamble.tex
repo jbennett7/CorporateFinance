@@ -1,0 +1,18 @@
+\usepackage{tikz}
+\usepackage{caption}
+
+\tikzset{
+  treenode/.style = {shape=rectangle, rounded corners,
+                     draw, align=center,
+                     top color=white,
+                     bottom color=blue!20},
+  root/.style     = {treenode, font=\ttfamily\normalsize,
+                     bottom color=red!30},
+  env/.style      = {treenode,
+                     font=\ttfamily\normalsize,
+                     anchor=west},
+  dummy/.style    = {circle,draw},
+  arrow/.style    = {->, thick}
+}
+
+\renewcommand{\thefigure}{23.\arabic{figure}}
