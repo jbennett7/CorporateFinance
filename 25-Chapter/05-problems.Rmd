@@ -44,6 +44,8 @@ If the price is \$31.39 the __loss per troy once__ is \(31.187 - 31.39 =
 
 If price is \$30.86 the __gain per troy ounce__ is \(31.187 - 30.86 = \$.327\). The gain is \(.327 \times 5,000 \times 5 = \$8,175\).
 
+Book: -\$5,075; \$8,175
+
 # 3. Put and Call Payoffs
 
 Suppose a financial manager buys call options on 50,000 barrels of oil with an
@@ -102,3 +104,200 @@ gamma \(\approx\) 0, and the position profits or loses dollar-for-dollar with
 the price of oil--exactly what the financial manager wanted if she is bullish on
 oil or simply wnants futures-like exposure without posting traditional futures
 margin.
+
+# 4. Marking to market
+
+You are long 10 gold futures contracts, established at an initial settle price
+of \$1,580 per ounce, where each contract represents 100 ounces. Over the
+subsequent four trading days, gold settles at \$1,587, \$1,582, \$1,573, and
+\$1,584, respectively. Compute the cash flows at the end of each trading day,
+and compute your total profit or loss at the end of the trading period.
+
+```{r problem 4}
+p4 = new.env()
+p4$S = c(1580, 1587, 1582, 1573, 1584)
+p4$Q = 100 * 10
+p4$mtm = diff(p4$S) * p4$Q
+p4$profit = (last(p4$S) - first(p4$S)) * p4$Q
+```
+
+Contract details:
+
+* Position: Long 10 gold futures contracts.
+
+* Each contract: 100 ounces.
+
+* Total exposure = \(10 \times 100 = `r pretty(p4$Q)`\).
+
+* Initial entry/settle price = \$`r pretty(first(p4$S))`.
+
+* Tick size for gold futurtes = \$`r pretty(10/100)`.
+
+* Daily P&L per contract = (Today's settle - Yesterday's settle) \(\times\) 100
+  ounces.
+
+```{r problem 4 table}
+tbl = tibble(
+    Day = c(0, 1, 2, 3, 4),
+    `Settle price` = p4$S,
+    `Cash Flow` = c(0, p4$mtm),
+)
+knitr::kable(tbl)
+```
+
+Total profit: \$`r pretty(p4$profit)`
+
+# 5. Marking to market
+
+You are short 25 gasoline futures contracts, established at an initial price of
+\$2.46 per gallon, where each contract represents 42,000 gallons. Over the
+subsequent four trading days, gasoline settles at \$2.42, \$2.47, \$2.50, and
+\$2.56 respectively. Compute the cash flows at the end of each trading day, and
+compute your total profit or loss at the end of the trading period.
+
+```{r problem 5}
+p5 = new.env()
+p5$S = c(2.46, 2.42, 2.47, 2.50, 2.56)
+p5$Q = 25 * 42000
+p5$mtm = -diff(p5$S) * p5$Q
+p5$profit = (first(p5$S) - last(p5$S)) * p5$Q
+```
+
+# 6. Duration
+
+What is the duration of a bond with three years to maturity and a coupon of 7
+percent paid annually if the bond sells at par?
+
+```{r problem 6}
+p6 = new.env()
+p6$C.pv = sum(1:3*c(rep(100*.07, 2), 107)/(1.07)^(1:3)/100)
+p6$C.pv
+```
+
+# 7. Duration
+
+What is the duration of a bond with four years to maturity and a coupon of 8
+percent paid annually if the bond sells at par?
+
+```{r problem 7}
+p7 = new.env()
+p7$C.pv = sum(1:4*c(rep(100*.08, 3), 108)/(1.08)^(1:4)/100)
+p7$C.pv
+```
+
+# 8. Duration
+
+Blue Steel Community Bank has the following market value balance sheet:
+
+```{r problem 8}
+p8 = new.env()
+p8$tbl = tibble(
+    account = c("Federal funds deposits",
+                "Accounts receivable",
+                "Short-term loans",
+                "Long-term loans",
+                "Mortgages",
+                "Checking and savings deposits",
+                "Certificates of deposit",
+                "Long-term financing",
+                "Equity"),
+    mvalue = c( 31, 590, 340, 98, 485, 645, 410, 336, 153),
+    duration = c(0, .20, .65, 5.25, 12.85, 0, 1.60, 9.80, NA)
+)
+p8$col.names = c("Asset or Liability", "Market Value (in $ millions)",
+              "Duration (in years)")
+
+knitr::kable(p8$tbl, col.names=p8$col.names)
+
+p8$assets = p8$tbl[1:5,]
+p8$liabilities = p8$tbl[6:8,]
+p8$duration.assets = sum(p8$assets$mvalue / sum(p8$assets$mvalue) *
+                     p8$assets$duration)
+p8$duration.liabilities = sum(p8$liabilities$mvalue /
+                          sum(p8$liabilities$mvalue) * p8$liabilities$duration)
+p8$immune = p8$duration.liabilities > p8$duration.assets
+```
+
+The assets are: `r p8$assets$account`
+
+The liabilities are: `r p8$liabilities$account`
+
+The duration of the assets are:
+
+\[
+\sum{\frac{\text{asset values}}{\text{total asset value}} \times
+    \text{duration}} = `r p8$duration.assets`
+\]
+
+The duration of the liabilities are:
+
+\[
+\sum{\frac{\text{liaibility values}}{\text{total liability value}} \times
+     \text{duration}} = `r p8$duration.liabilities`
+\]
+
+The firm is immune to interest rate risk if liability duration exceeds asset
+duration: `r p8$immune`
+
+# 9. Hedging with futures
+
+Refer to Table 25.2 in the text to answer this question. Suppose today is
+November 22, 2011, and your firm produces breakfast cereal and needs 140,000
+bushels of corn in March 2012 for an upcoming promotion. You would like to lock
+in your costs today because you are concerned that corn prices might go up
+between now and March.
+
+a. How could you use corn futures contracts to hedge your risk exposure? What
+price would you effectively be locking in based on the closing price of the day?
+
+b. Suppose corn prices are \$6.13 per bushel in March. What is the profit or
+loss on your futures position? Explain how your futures position has eliminated
+your exposure to price risk in the corn market.
+
+```{r problem 9}
+p9 = new.env()
+p9$bushels = 140e3
+p9$contracts = 140e3 / 5e3
+p9$entry = 605 # cents
+p9$close = 613 # cents
+# Convert to dollars by / 100
+p9$profit = (p9$close - p9$entry) * p9$bushels / 100
+```
+
+## A. Using futures contracts to hedge risk
+
+To hedge, the firm should buy corn futures contracts today (November 22, 2011)
+(\(140,000 / 5,000 =\)) `r p9$contracts`. This long futures position locks in a
+purchase price of `r p9$settle` cents per bushel.
+
+## B. Profit on delivery date
+
+The long futures position is closed out at `r p9$march.spot` cents for a profit of
+
+\[
+\text{Profit} = (\text{Futures price at close} - \text{Futures price at entry})
+    \times \text{Bushels bought} = `r pretty(p9$profit, 0)`
+\]
+
+# 10. Interest Rate Swaps
+
+ABC Company and XYZ Company need to raise funds to pay for capital improvements
+at their manufacturing plants. ABC Company is a well-established firm with an
+excellent credit rating in the debt market; it can borrow funds either at 11
+percent fixed rate or at LIBOR + 1 percent floating rate. XYZ Company is a
+fledgling start-up firm without a strong credit history. It can borrow funds
+either at 10 percent fixed rate or at LIBOR + 3 percent floating rate.
+
+a. Is there an opportunity here for ABC and XYZ to benefit by means of an
+interest rate swap?
+
+b. Suppose you've just been hired at a bank that acts as a dealer in the swaps
+market, and your boss has shown you the borrowing rate information for your
+clients, ABC and XYZ. Describe how you could bring these two companies together
+in an interest rate swap that would make both firms better off while netting
+your bank a 2 percent profit.
+
+## A. Benefit of interest rate swaps
+
+## B. Third party
+
