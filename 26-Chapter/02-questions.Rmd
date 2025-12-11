@@ -1,0 +1,53 @@
+---
+title: Chapter 26 Short-Term Finance and Planning
+subtitle: Concept Questions
+output:
+  pdf_document:
+    includes:
+      in_headers: preamble.tex
+---
+
+# 1. Operating cycle
+
+What are some of the characteristics of a firm with a long operating cycle?
+
+A firm with a long operating cycle typically exhibits most or all of the
+following characteristics:
+
+1. __Sells goods that take a long time to manufacture or have slow inventory
+   turnover__ Examples would be shipbuilding, aerospace, luxury yachts, heavy
+   machinery, whiskey distillers, timber companies.
+
+2. __Offers generaous or long credit terms to customers__ (long
+   receivables/collection periods) Examples include exporters to developing
+   countries, construction contractors, wholesalers in industries with 90--180
+   day payment terms, manufacturers selling to large retailers or governments.
+
+3. __Operates in a capital-intensive, project-based, or seasonal industry__
+   Examples include defense contractors, commercial aircraft, large-scale
+   construction, wineries, diamond wholesalers, art dealers.
+
+4. __Has high levels of inventory and accounts receivable relative to sales__
+   High inventory days (DSI > 100--200+ days) and high days sales outstanding
+   (DSO > 60--90+ days). Operating cycle = DSI + DSO often exceeds 150--300+
+   days (vs. 40--90 days for most retailers or consumer-goods firms).
+
+5. __Requires significant working-capital financing__ Because cash is tied up
+   for months or years there is a heavy reliance on bank lines, factoring,
+   supply-chain finance, or long-term debt.
+
+6. __Is more vulnerable to interest-rate risk and liquidity shocks__ A long
+   operating cycle amplifies the impact of rising borrowing costs or credit
+   tightening.
+
+7. __Often has lower asset turnover and may show lower ROA__ (all else equal)
+   because capital is locked up longer.
+
+Firms with long operating cycles tend to be producers of expensive, complex,
+customized, or age-dependent products and/or sell to customers who pay very
+slowly. This structural feature forces them to finance a large, prolonged
+investment in working capital.
+
+# 2. Cash cycle
+
+What are some of the characteristics of a firm with a long cash cycle?

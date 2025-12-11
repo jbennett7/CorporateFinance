@@ -157,4 +157,9 @@ At the extreme:
 * Then switching has no value, because whichever fuel you use costs the same
   relative to the other.
 
+# 5. Real Options
+
+Your company owns a vacant lot in a suburban area. What is the advantage of
+waiting to develop the lot?
+
 ---

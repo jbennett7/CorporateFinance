@@ -1,0 +1,360 @@
+---
+title: Chapter 26 Short-Term Finance and Planning
+subtitle: Text
+output:
+  pdf_document:
+    toc: true
+    includes:
+      in_headers: preamble.tex
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(echo=F)
+require(tidyverse)
+pretty <- function(x, n=2) format(round(x, n), big.mark=',')
+```
+
+The term _net working capital_ is associated with short-term financial decision
+making. Short-term financial management is often called _working capital
+management_.
+
+There is no universally accepted definition of short-term finance. The most
+important difference between short-term and long-term finance is in the timing
+of cash flows. Short-term financial decisions typically involve cash inflows and
+outflows that occur within a year. Long-term financial decisions are involve
+decisions that span multiple years.
+
+Typical short-term finance questions:
+
+1. What is a reasonable level of cash to keep on hand (in a bank) to pay bills?
+
+2. How much should the firm borrow in the short term?
+
+3. How much credit should be extended to customers?
+
+# 26.1 Tracing Cash and Net Working Capital
+
+Short-term finance involves funding short-term operating activities of the firm.
+This usually means their impact on cash and net working capital.
+
+_Current assets_ are cash and other assets that are expected to be converted to
+cash within the year. Current assets are presented on the balance sheet in order
+of their accounting liquidity--the ease with which they can be converted to cash
+and the time it takes to convert them.
+
+The four most important items found in the current asset section of the balance
+sheet are:
+
+1. cash and cash equivalents
+
+2. marketable securities
+
+3. accounts receivable
+
+4. inventories.
+
+Short-term debt is called _current liabilities_. Current liabilities are
+obligations that are expected to be paid off within one year (or within the
+operating period). The three most important items in current liabilities are:
+
+1. accounts payable
+
+2. expenses payable
+
+3. notes payable.
+
+We focus on changes in cash. We restate the definition of net working capital
+
+\begin{equation}
+\text{Net working capital} = (\text{Cash} + \text{other current assets})
+  - \text{current liabilities}\tag{26.2}\label{eq:26.2}
+\end{equation}
+
+Using the basic balance sheet identity we can define cash:
+
+\begin{equation}
+\text{Cash} = \text{long-term debt} + \text{equity}
+  + \text{current liabilities}
+  - \text{current assets other than cash}
+  - \text{fixed assets}
+  \tag{26.3}\label{eq:26.3}
+\end{equation}
+
+We can see that some activities increase cash and some activities decrease cash
+
+\textbf{Activities that increase cash}
+
+* Increasing long-term debt (borrowing over the long term)
+
+* Increasing equity (selling some stock)
+
+* Increasing current liabilities (getting a 90-day loan)
+
+* Decreasing current assets other than cash (selling some inventory for cash)
+
+* Decreasing fixed assets (selling some property)
+
+\textbf{Activities that decrease cash}
+
+* Decreasing long-term debt (paying off a long-term debt)
+
+* Decreasing equity (repurchasing some stock)
+
+* Decreasing current liabilties (paying off a 90-day loan)
+
+* Increasing current assets other than cash (buying some inventory for cash)
+
+* Increasing fixed assets (buying some property)
+
+Activites that increase cash are called _sources of cash_, and activities that
+decrease cash are called _uses of cash_.
+
+#### Example 26.1 Sources and Uses
+
+Accounts payable are what we oew our suppliers. This is a short-term debt. If
+accounts payable rises by \$100, we have effectively borrowed the money, which
+is a _source_ of cash. Receivables are what our customers owe to us, so an
+increase of \$100 in accounts receivable means that we have loaned the moeny;
+this is a _use_ of cash.
+
+# 26.2 The Operating Cycle and the Cash Cycle
+
+## Defining the operating and cash cycles
+
+We will start with a simple example. On Day 0, we purchase \$1,000 worth of
+inventory on credit. We pay the bill 30 days later, and, after 30 more days,
+someone buys the \$1,000 in inventory for \$1,400. Our buyer does not actually
+pay for another 45 days. The following table summarizes the events.
+
+```{r example table page 807}
+tbl = tibble(
+  Day = c(0, 30, 60, 105),
+  Activity = c("Acquire inventory",
+               "Pay for inventory",
+               "Sell inventory on credit",
+               "Collect on sale"),
+  `Cash Effect` = c(NA, -1000, NA, 1400)
+)
+tbl.display = tbl
+tbl.display$`Cash Effect` = pretty(tbl.display$`Cash Effect`)
+knitr::kable(tbl.display)
+```
+
+#### The Operating Cycle
+
+The operating cycle consists of the time we acquire some inventory to the time
+we collect the cash, in our example it is 105 days. Therefore, the operating
+cycle is defined as the time it takes to acquire inventory, sell it, and collect
+for it. There are two components to this cycle. First, the time it takes to
+acquire and sell the inventory (60 days in our example) is called the inventory
+period. Second, is the time it takes to collect on the sale (45 days), called
+the accounts receivable period.
+
+Therefore, the operating cycle can be defined:
+
+\begin{equation}
+\text{Operating cycle} = \text{Inventory period}
+  + \text{Accounts receivable period}\tag{26.4}\label{eq:26.4}
+\end{equation}
+
+The operating cycle describes how a product moves through the current asset
+accounts. A product begins as inventory when it is bought, it is converted to a
+receivable when it is sold, and it is finally converted to  cash when we collect
+from the sale.
+
+#### The Cash Cycle
+
+The cash flows and other events are not synchronized. In our example, we don't
+actually pay for the inventory until 30 days after acquiring it. This period is
+called the accounts payable period. Next we spend cash on Day 30, but we don't
+collect until Day 105. We have to finance the \$1,000 for 105 - 30 = 75 days.
+This period is called the cash cycle.
+
+The cash cycle is the number of days that pass before we collect othe cash from
+a sale. This is measured from when we actually pay for the inventory. Based on
+our definitions, the cash cylce is the difference between the operating cycle
+and the accounts payable period:
+
+\begin{equation}
+\text{Cash cycle} = \text{Operating cycle} - \text{Accounts payable period}
+  \tag{26.5}\label{eq:26.5}
+\end{equation}
+
+The gap between short-term inflows and outflows can be filled either by
+borrowing or by holding a liquidity reserve in the form of cash or marketable
+securities. Alternatively, the gap can be shortened by changing the inventory,
+receivable, and payable periods. These are all managerial options.
+
+## The Operating cycle and the firm's organization chart
+
+The following shows a list of manager titles and their relationship with
+short-term financial decision making:
+
+| Title of Manager | Duties related to short-term financial management | Assets/Liabilities Influenced |
+|:---|:---|:---|
+| Cash manager | Collection, concentration, disbursement; short-term investments; short-term borrowing; banking relations | Cash, marketable securities, short-term loans |
+||
+| Credit manager | Monitoring and control of accounts receivable; credit policy descisions | Accounts receivable |
+||
+| Marketing manager | Credit policy decisions | Accounts receivable |
+||
+| Purchasing manager | Decisions on purchases, suppliers; may negotiate payment terms | Inventory, accounts payable |
+||
+| Production manager | Setting of production schedules and materials requirements | Inventory, accounts payable |
+||
+| Payables manager | Decisions on payment policies and on whether to take discounts | Accounts payable |
+||
+| Controller | Accounting information on cash flows; reconciliation of accounts payable; application of payments to accounts receivable | Accounts receivable, accoutns payable |
+||
+
+Examining the table we can see that there are a lot of different financial and
+nonfinancial managers who influence short-term finances. There is potential for
+conflict between these managers.
+
+## Calculating the operating and cash cycles
+
+We can sue some of the ratios stated in chapter 3 here.
+
+### The operating cycle
+
+We can calculate the inventory period.
+
+\[
+\text{Inventory turnover} = \frac{\text{Cost of goods sold}}
+  {\text{Average inventory}} = \frac{\$8.2\ \text{million}}{2.5\ \text{million}}
+  = 3.28\ \text{times}
+\]
+
+This example shows that we bought and sold our inventory 3.28 times during the
+year.
+
+\[
+\text{Inventory period} = \frac{365\ \text{days}}{\text{Inventory turnover}}
+  = \frac{365}{3.28} = 111.3\ \text{days}
+\]
+
+So, the inventory period is about 111 days. On average, in other words,
+inventory sat for about 111 days before it was sold.
+
+Similarly, receivables averaged \$1.8 million, and sales were \$11.5 million.
+Assuming that all sales were credit sales, the receivables turnover is:
+
+\[
+\text{Receivables turnover} = \frac{\text{Credit sales}}
+  {\text{Average accounts receivable}} = \frac{11.5\ \text{million}}
+  {1.8\ \text{million}} = 6.4\ \text{times}
+\]
+
+If we turn over our receivables 6.4 times a year, then the receivables period
+is:
+
+\[
+\text{Receivables period} = \frac{365\ \text{days}}{\text{Receivables turnover}}
+  = \frac{365}{6.4} = 57\ \text{days}
+\]
+
+The receivables period is also called the _days' sales in receivables_, or the
+_average collection period_. Whatever it is called, it tells us that our
+customers took an average of 57 days to pay.
+
+The operating cycle is the sum of the inventory and receivables periods:
+
+\[
+\text{Operating cycle} = \text{Inventory period}
+  + \text{Accounts receivable period} = 111\ \text{days} + 57\ \text{days}
+  = 168\ \text{days}
+\]
+
+This tells us that, on average, 168 days elapse between the time we acquire
+inventory and, having sold it, collect for the sale.
+
+### The cash cycle
+
+We now calculate the payables period.
+
+\[
+\text{Payables turnover} = \frac{\text{Cost of goods sold}}
+  {\text{Average payables}} = \frac{\$8.2\ \text{million}}{.875\ \text{million}}
+  = 9.4\ \text{times}
+\]
+
+The payables period is:
+
+\[
+\text{Payables period} = \frac{365\ \text{days}}{\text{Payables turnover}}
+  = \frac{365}{9.4} = 39\ \text{days}
+\]
+
+Thus, we took an average of 39 days to pay our bills.
+
+Finally, the cash cycle is the difference between the operating cycle and the
+payables period:
+
+\[
+\text{Cash cycle} = \text{Operating cycle} - \text{Accounts payable period}
+  = 168\ \text{days} - 39\ \text{days} = 129\ \text{days}
+\]
+
+So, on average, there is a 129-day delay between the time we pay for merchandise
+and the time we collect on the sale.
+
+#### Example 26.2 The operating and cash cycles
+
+You have collected the following information for the Slowpay Company:
+
+| Item | Beginning | Ending |
+|:---|---:|---:|
+| Inventory | \$5,000 | \$7,000 |
+| Accounts receivable | \ 1,600 | \ 2,400 |
+| Accounts payable | \ 2,700 | \ 4,800 |
+
+Credit sales for the year just ended were \$50,000, and cost of goods sold was
+\$30,000. How long does it take Slowpay to collect on its receivables? How long
+does merchandise stay around before it is sold? How long does Slowpay take to
+pay its bills?
+
+We can first calculate the three turnover ratios:
+
+\[
+\begin{aligned}
+\text{Inventory turnover} &= \$30,000/6,000 &= 5\ \ \text{times}\\
+\text{Receivables turnover} &= \$50,000/2,000 &= 25\ \text{times}\\
+\text{Payables turnover} &= \$30,000/3,750 &= 8\ \ \text{times}
+\end{aligned}
+\]
+
+We use these to get the various periods:
+
+\[
+\begin{aligned}
+\text{Inventory period} &= 365/5 &= 73\ \ \ \text{days}\\
+\text{Receivables period} &= 365/25 &= 14.6\ \text{days}\\
+\text{Payables period} &= 365/8 &= 8\ \ \ \ \text{days}
+\end{aligned}
+\]
+
+All told, Slowpay collects on a sale in 14.6 days, inventory sits around for 73
+days, and bills get paid after about 46 days. The operating cycle here is the
+sum of the inventory and receivables periods: 73 + 14.6 = 87.6 days. The cash
+cycle is the difference between the operating cycle and the payables period: 876
+- 45.6 = 42 days.
+
+## Interpreting the cash cycle
+
+The cash cycle depends on the inventory, receivables, and payables periods. The
+cash cycle increases as the inventory and receivables periods get longer. It
+decreases if the company is able to defer payment of payables and thereby
+lengthen the payables period.
+
+The link between a firm's cash cycle and its profitability can be seen by
+recalling that one of the basic determinants of profitability and growth for a
+firm is its total asset turnover, which is defined as Sales/Total assets. The
+higher this ratio is, the greater are the firm's accounting return on assets,
+ROA, and return on equity, ROE. Thus, all other things being the same, the
+shorter the cash cycle is, the lower is the firm's investment in inventories and
+receivables. As a result, the firm's total assets are lower, and total turnover
+is higher.
+
+## A look at operating and cash cycles
+
+
