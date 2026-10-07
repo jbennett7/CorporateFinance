@@ -2,7 +2,7 @@
 
 ## Part I Overview
 
-### 1 [Introduction to Corporate Finance](00-TOC/01-Part_I.md#introduction-to-corporate-finance)
+### 1 [Introduction to Corporate Finance](00-TOC/01-Part_I.md#chapter-1-introduction-to-corporate-finance)
 
 ### 2 [Financial Statements and Cash Flow](00-TOC/01-Part_I.md#financial-statements-and-cash-flow)
 
