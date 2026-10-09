@@ -1,0 +1,7 @@
+"variable","pessimistic","base","optimistic"
+"market_size",5000,10000,20000
+"market_share",0.2,0.3,0.5
+"price",1900000,2e+06,2200000
+"variable_cost",1200000,1e+06,8e+05
+"fixed_cost",1.891e+09,1.791e+09,1.741e+09
+"investment",1.9e+09,1.5e+09,1e+09
