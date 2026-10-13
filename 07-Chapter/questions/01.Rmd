@@ -1,0 +1,20 @@
+---
+title: Forecasting Risk
+output: pdf_document
+---
+
+What is forecasting risk? In general, would the degree of forecasting risk be
+greater for a new product or a cost-cutting proposal? Why?
+
+> When making an estimate of revenues and costs of a project, the variables
+> need to be identified. Once identified, the values of these variables need to
+> be guestimated in order to develop models for the revenues and costs of the
+> project. forecasting risk is the risk of an error in these forecasting
+> values. A change in a single forecast can greatly alter the NPV estimate of
+> the project.
+>
+> Sensitivity analysis can be used to identify if the NPV value of the project
+> can be trusted. Sensitivity analysis consists of identifying a pessimistic,
+> base, and optimistic values for each of the variables and vary the values of
+> the variables to calculate the NPV. If the dispersion of the NPV values is
+> not wide, then it may be okay to trust the NPV value.

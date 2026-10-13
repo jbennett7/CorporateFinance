@@ -1,0 +1,252 @@
+---
+title: Ulrich Enterprises
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(scales)
+library(ggplot2)
+set.seed(101)
+show_dist <- function(df, value_label, caption) {
+    out <- rbind(Value       = value_label(df$value),
+                 Probability = label_percent()(df$probability))
+    knitr::kable(out, caption = caption, col.names = NULL, align = "r")
+}
+```
+
+Dahlia Simmons, CFO of Ulrich Enterprises, is analyzing a new project to sell
+solar powered batteries for cell phones. Dahlia has estimated the following
+probability distribution for the variables in the project.
+
+```{r project_description, echo = FALSE}
+prob_industry_demand <- data.frame(
+    probability = c(.1, .3, .4, .2),
+    value       = c(80e6, 95e6, 108e6, 124e6)
+)
+show_dist(prob_industry_demand,
+          label_number(scale = 1e-6, suffix = "M"),
+          caption = "Industry Demand")
+
+prob_ulrich_market <- data.frame(
+    probability = c(.05, .2, .2, .25, .2, .1),
+    value       = c(.01, .02, .03, .04, .05, .06)
+)
+show_dist(prob_ulrich_market,
+          label_number(scale = 100, suffix = "%"),
+          caption = "Ulrich Market Share")
+
+prob_initial_cost <- data.frame(
+    probability = c(.2, .7, .1),
+    value       = c(60e6, 65e6, 72e6)
+)
+show_dist(prob_initial_cost,
+          label_number(scale = 1e-6, prefix = "$", suffix = "M"),
+          caption = "Initial Cost")
+
+prob_variable_cost_unit <- data.frame(
+    probability = c(.2, .65, .15),
+    value       = c(24, 26, 29)
+)
+show_dist(prob_variable_cost_unit,
+          label_number(scale = 1, prefix = "$"),
+          caption = "Variable Cost per unit")
+
+prob_fixed_costs <- data.frame(
+    probability = c(.15, .25, .4, .2),
+    value       = c(20e6, 24e6, 27e6, 31e6)
+)
+show_dist(prob_fixed_costs,
+          label_number(scale = 1e-6, prefix = "$", suffix = "M"),
+          caption = "Fixed Costs")
+```
+
+The unit price depends on the industry demand since a greater demand will result in a higher price. Dahlia determines that the price per unit will be given by the equation:
+
+$$
+\text{Price} = \text{Industry demand}\ \ / \ \ 2{,}000{,}000\ \ +/- \$2
+$$
+
+The random "$+/- \$2$" term represents an increase or decrease in price
+according to the following distribution:
+
+```{r price_randomness, echo = FALSE}
+price_randomness <- data.frame(
+    probability = c(.45, .55),
+    value       = c(-2, 2)
+)
+show_dist(price_randomness,
+          label_number(scale = 1, prefix = "$"),
+          caption = "Price Randomness")
+```
+
+The length of the project, tax rate, and required return are:
+
+```{r project_variables, echo = FALSE}
+time_span <- 6
+tax_rate <- .34
+required_return <- .14
+view_project_variables <- data.frame(
+    `Project Length (years)` = time_span,
+    `Tax Rate`               = label_percent()(tax_rate),
+    `Required Return`        = label_percent()(required_return),
+    check.names = FALSE
+)
+knitr::kable(t(view_project_variables))
+```
+
+a. Create a Monte Carlo simulation for the project with at least 500 runs.
+   Calculate the IRR for each run.
+b. Create a graph of the distribution of the IRRs from the Monte Carlo
+   simulation for different ranges of IRR.
+c. Create a graph for the cumulative probability function for the IRR distribution.
+
+---
+
+Below are each of the functions we will be using.
+
+The first function is the present value interest factor for annuities. This is
+used to compute the present value of a stream of the same payments. Just
+multiply this factor by the cash flow.
+
+```{r pvia}
+pvia <- function(r, t) sum((1 + r)^(-(1:t)))
+```
+
+This function is used to calculate the price. Price is dependent on the
+industry demand and the `price_randomness` factor.
+
+```{r calculate_price}
+calc_price <- function(industry_demand) {
+    pr <- price_randomness
+    randomness <- sample(pr$value, size = 1, prob = pr$probability)
+    industry_demand / 2e6 + randomness
+}
+```
+
+This function calculates the cash flow.
+
+```{r calculate_cash_flow}
+calc_cash_flow <- function(industry_demand, market_share, var_unit_cost,
+                           fixed_costs, initial_costs, time_span, tax_rate) {
+    units          <- market_share * industry_demand
+    price          <- calc_price(industry_demand)
+    revenues       <- price * units
+    variable_costs <- units * var_unit_cost
+    total_cost     <- variable_costs + fixed_costs
+    depreciation   <- initial_costs / time_span
+    pretax         <- revenues - total_cost - depreciation
+    tax            <- pretax * tax_rate
+    net_profit     <- pretax - tax
+    cash_flow      <- net_profit + depreciation
+    cash_flow
+}
+```
+
+Finally we calculate the internal rate of return. We need to ensure that the
+cash flows are positive, otherwise `uniroot` will fail because there is no sign
+change and therefore there is no IRR. If cash flows are zero or negative we
+return `NA`. We use an interval equivalent to -100\% to 1,000\% to ensure our
+calculation is within range. `NA` runs count as failing the comparison with the
+required rate of return.
+
+```{r calculate_irr}
+calc_irr <- function(initial_investment, cash_flow, time_span) {
+    f <- function(r) -initial_investment + cash_flow * pvia(r, time_span)
+    if (cash_flow <= 0) return(NA)
+    uniroot(f, interval = c(-1, 10), tol = 1e-9)$root
+}
+```
+
+This function runs the Monte Carlo simulations. Just specify the number of
+iterations to run. The function first samples each of the variables:
+`industry_demand`, `ulrich_market`, `initial_cost`, `variable_cost_unit`,
+`fixed_costs`, and then calculates the `cash_flow` and then finally the `irr`.
+Each irr outcome is collected in a vector and the vector of irr outcomes is
+return. Each run of run_simulation draws once and applies the same cash flow
+for each of the six years.
+
+```{r run_simulation}
+run_simulation <- function(iterations) {
+    outcomes <- c()
+    for(i in 1:iterations) {
+        industry_demand <- sample(prob_industry_demand$value, size = 1,
+                                  prob = prob_industry_demand$probability)
+        ulrich_market <- sample(prob_ulrich_market$value, size = 1,
+                                  prob = prob_ulrich_market$probability)
+        initial_cost <- sample(prob_initial_cost$value, size = 1,
+                                  prob = prob_initial_cost$probability)
+        variable_cost_unit <- sample(prob_variable_cost_unit$value, size = 1,
+                                  prob = prob_variable_cost_unit$probability)
+        fixed_costs <- sample(prob_fixed_costs$value, size = 1,
+                                  prob = prob_fixed_costs$probability)
+        cash_flow <- calc_cash_flow(industry_demand, ulrich_market, variable_cost_unit,
+                                    fixed_costs, initial_cost, time_span, tax_rate)
+        irr <- calc_irr(initial_cost, cash_flow, time_span)
+        outcomes <- c(outcomes, irr)
+    }
+    outcomes
+}
+irr_outcomes <- run_simulation(500)
+mean_irr_positive_cf <- mean(irr_outcomes, na.rm = TRUE)
+median_irr_positive_cf <- median(irr_outcomes, na.rm = TRUE)
+prob_beats_required <- mean(irr_outcomes > required_return & !is.na(irr_outcomes))
+neg_zero_run_rate <- mean(is.na(irr_outcomes))
+```
+
+Among runs with positive cash flow, the mean IRR is 
+`r label_percent()(mean_irr_positive_cf)`. The median IRR is
+`r label_percent()(median_irr_positive_cf)` for the same runs.
+`r label_percent()(neg_zero_run_rate)` of the runs had zero or negative cash
+flow every year and have no IRR. The probability that the project beats the
+required rate of return of `r label_percent()(required_return)` is
+`r label_percent()(prob_beats_required)`.
+
+The distribution graph of the `irr_outcomes` is a simple histogram graph. We use
+`geom_histogram` from `ggplot2` to render the distribution.
+
+```{r histogram}
+irr_df <- data.frame(irr = irr_outcomes[!is.na(irr_outcomes)])
+ggplot(irr_df, aes(x = irr)) +
+    geom_histogram(binwidth = 0.25, boundary = 0, color = "white") +
+    geom_vline(xintercept = required_return, linetype = "dashed") +
+    annotate("text", x = required_return, y = Inf, vjust = 1.5, hjust = -0.1,
+             label = paste0("required return (", label_percent()(required_return), ")"),
+             size = 3) +
+    scale_x_continuous(labels = label_percent(),
+                       breaks = seq(-0.75, 3, by = 0.25)) +
+    labs(title = "Distribution of IRR",
+         x = "IRR", y = "Number of runs",
+         caption = paste0("Excludes ", label_percent()(neg_zero_run_rate),
+                          " of runs with no IRR (zero or negative cash flow)."))
+```
+
+We can use `ggplot2::stat_ecdf` function to graph the cumulative distribution
+function. The ECDF only includes runs that have an IRR, so its probabilities
+are conditional on the cash flow being positive. At the
+`r label_percent()(required_return)` required return, the curve's height is
+`r label_percent(0.1)(mean(irr_df$irr <= required_return))`: the share of runs
+_with an IRR_ that fall at or below the hurdle. The overall failure rate also
+includes the `r label_percent()(neg_zero_run_rate)` of runs with no IRR which
+also fail:
+
+`r label_percent()(neg_zero_run_rate)` +
+`r label_percent()(mean(!is.na(irr_outcomes)))` $\times$
+`r label_percent(0.1)(mean(irr_df$irr <= required_return))` =
+`r label_percent(0.1)(1 - prob_beats_required)`,
+
+which matches the `r label_percent()(prob_beats_required)` probability of
+beating the required return.
+
+```{r cumulative_graph}
+ggplot(irr_df, aes(x = irr)) +
+    stat_ecdf(geom = "step") +
+    geom_vline(xintercept = required_return, linetype = "dashed") +
+    scale_x_continuous(labels = label_percent(),
+                       breaks = seq(-0.75, 3, by = 0.25)) +
+    labs(title = "Cumulative Distribution Function of IRR",
+         x = "IRR",
+         y = "P(IRR <= x)",
+         caption = paste0("Excludes ", label_percent()(neg_zero_run_rate),
+                          " of runs with no IRR (zero or negative cash flow)."))
+```
