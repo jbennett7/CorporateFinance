@@ -1,0 +1,122 @@
+---
+title: Decision Trees
+output: pdf_document
+---
+
+Management will adjust their decisions based on new information. Information
+about a successful launch of a new product will influence the decision to
+expand the product to new markets. Each individual choice the manager has is
+called a real option. A project can essentially be viewed as a series of real
+options, leading to valuation approaches beyond the basic present value
+methodology.
+
+We can return to the Solar Electronics Corporation (SEC) and their
+solar-powered engines to demonstrate how decision trees can represent a project
+that is based on a series of decisions. Imagine before the launch of the
+production of the solar-powered engines, SEC wants to test market the product
+to see how the market will respond to the engine. SEC builds some prototype
+engines and conducts test marketing. Based on the results of the test
+marketing, SEC will decide to carry through with the production of the new
+engine.
+
+So the first decision SEC must make is whether or not to conduct the test
+marketing. If SEC decides to go ahead with the study, based on the study, SEC
+needs to decide whether or not to invest the \$1,500 million to start
+production of the solar-powered engine.
+
+We can represent this project, and its series of options, as a decision tree.
+In order to construct this decision tree, it is best to work backwards and
+consider each branch of the tree.
+
+First let's assume that the test marketing was successful (75% probability). We
+already know the NPV for the production project for five years. Assuming an
+investment of \$1,500 million, with a cash flow of \$900 million for five years
+and a required return rate of 15\%.
+
+$$
+\begin{aligned}
+\text{NPV} &= -\$1{,}500 + \sum^{5}_{t=1}{\frac{\$900}{(1.15)^t}}\\
+  &= -\$1{,}500 + \$900 \times \text{PVIA}(.15, 5)\\
+  &= \$1{,}517
+\end{aligned}
+$$
+
+If the test marketing is successful, the positive NPV value means that SEC
+should go ahead with production.
+
+Next we assume that the test marketing was a failure (25% probability). Again
+we calculate the NPV using the investment of \$1,500 million. The book does not
+give the cash flow or the calculation but does give the final NPV as -\$3,611
+million. Because the NPV is negative SEC should not proceed with production.
+
+Assuming that the test marketing will take a year to conduct and analyze, SEC
+needs to decide whether or not to conduct the test marketing one year before
+production is to take place. Let's assume that the test marketing will take
+\$100 million to conduct. We can find the total expected payoff:
+
+$$
+\begin{aligned}
+\text{Expected payoff} &= (\text{success} \times \text{payoff})
+  + (\text{failure} \times \text{payoff})\\
+  &= (.75 \times \$1{,}517) + (.25 \times \$0)\\
+  &= \$1{,}138
+\end{aligned}
+$$
+
+The payoff for the failure branch is zero because we calculated the NPV to be
+-\$3,611 and thus we expect not to proceed with full-scale production. The NPV
+of testing computed at Date 0 (in millions):
+
+$$
+\begin{aligned}
+\text{NPV} &= -\$100 + \frac{\$1{,}138}{1.15}\\
+  &= \$890
+\end{aligned}
+$$
+
+\$1,517 is the NPV at date 1, when the production decision is made. The
+expected payoff (\$1,138) is a date-1 value, and we divide by 1.15 to bring
+it to date 0. Because the NPV is positive, SEC should proceed with the test
+marketing.
+
+If SEC were to produce regardless of the test result, we would calculate the
+expected payoff:
+
+$$
+\begin{aligned}
+\text{Expected payoff} &= (\text{success} \times \text{payoff})
+  + (\text{failure} \times \text{payoff})\\
+  &= (.75 \times \$1{,}517) + (.25 \times -\$3{,}611)\\
+  &= \$235
+\end{aligned}
+$$
+
+The NPV of testing would be:
+
+$$
+\begin{aligned}
+\text{NPV} &= -\$100 + \frac{\$235}{1.15}\\
+  &= \$104
+\end{aligned}
+$$
+
+The value of walking away from the project is \$890 - \$104 = \$786 million.
+This is the option to abandon if the test fails.
+
+The same discount rate was used for both the test marketing and the investment
+decision for production. You may want to use a higher discount rate for the
+test marketing decision because it is likely to be riskier than the investment
+decision.
+
+# Conclusion
+
+In this specific example SEC needed to make the following two decisions:
+
+1. Whether to develop and test the solar-powered jet engine.
+2. Whether to invest for full-scale production following the results of the test.
+
+In this situation, a decision tree is a natural approach for analysis. Financial
+options are valued with a similar tree structure (the binomial model). The
+difference is the discounting: instead of a risk-adjusted rate like SEC's 15%,
+option pricing values the option relative to the underlying stock and discounts
+at the risk-free rate.
