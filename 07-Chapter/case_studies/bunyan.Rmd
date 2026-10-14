@@ -1,0 +1,98 @@
+---
+title: Bunyan Lumber, LLC
+output: pdf_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(scales)
+```
+
+Bunyan Lumber, LLC, harvests timber and delivers logs to timber mills for sale.
+The company was founded 70 years ago by Pete Bunyan. The current CEO is Paula
+Bunyan, the granddaughter of the founder. The company is currently evaluating a
+5,000-acre forest it owns in Oregon. Paula has asked Steve Boles, the company's
+finance officer, to evaluate the project. Paula's concern is when the company
+should harvest the timber.
+
+Lumber is sold by the company for its "pond value." Pond value is the amount a
+mill will pay for a log delivered to the mill location. The price paid for logs
+delivered to a mill is quoted in dollars per thousands of board feet (MBF), and
+the price depends on the grade of the logs. The forest Bunyan Lumber is
+evaluating was planted by the company 20 years ago and is made up entirely of
+Douglas fir trees. The table here shows the current price per MBF for the three
+grades of timber the company feels will come from the stand:
+
+```{r grade_price}
+price_tbl <- data.frame(
+    grade = c("1P", "2P", "3P"),
+    price = c(620, 605, 595)
+)
+knitr::kable(price_tbl, caption="Price per grade")
+```
+
+Steve believes that the pond value of lumber will increase at the inflation
+rate. The company is planning to thin the forest today, and it expects to
+realize a positive cash flow of \$1,000 per acre from thinning. The thinning is
+done to increase the growth rate of the remaining trees, and it is always done
+20 years following a planting.
+
+The major decision the company faces is when to log the forest. When the
+company logs the forest, it will immediately replant saplings, which will allow
+for a future harvest. The longer the forest is allowed to grow, the larger the
+harvest becomes per acre. Additionally an older forest has a higher grade of
+timber. Steve has compiled the following table with the expected harvest per
+acre in thousands of board feet, along with the breakdown of the timber grades:
+
+```{r harvest_per_acre}
+harvest_per_acre_tbl <- data.frame(
+    harvest_time = c(20, 25, 30, 35),
+    harvest_acre = c(14.1, 16.4, 17.3, 18.1),
+    timber_grade_1P = c(.16, .20, .22, .24),
+    timber_grade_2P = c(.36, .4, .43, .45),
+    timber_grade_3P = c(.48, .4, .35, .31)
+)
+knitr::kable(harvest_per_acre_tbl, caption = "Harvest per Acre")
+```
+
+The company expects to lose 5 percent of the timber it cuts due to defects and
+breakage.
+
+The forest will be clear-cut when the company harvests the timber. This method
+of harvesting allows for faster growth of replanted trees. All of the
+harvesting, processing, replanting, and transportation are to be handled by
+subcontractors hired by Bunyan Lumber. The cost of the logging is expected to
+be \$140 per MBF. A road system has to be constructed and is expected to cost
+\$50 per MBF on average. Sales preparation and administrative costs, excluding
+office overhead costs, are expected to be \$18 per MBF.
+
+As soon as the harvesting is complete, the comapny will reforest the land.
+Reforesting costs include the following:
+
+```{r reforest_costs}
+reforest_cost_tbl <- data.frame(
+    cost = c(150, 300, 145, 225)
+)
+rownames(reforest_cost_tbl) <- c("Excavator piling", "Broadcast burning",
+                                 "Site preparation", "Planting costs")
+knitr::kable(reforest_cost_tbl, caption = "Reforesting Costs")
+```
+
+All costs are expected to increase at the inflation rate.
+
+Assume all cash flows occur at the year of harvest. For example, if the company
+begins harvesting the timber 20 years from today, the cash flow from the
+harvest will be received 20 years from today. When the comapny logs the land,
+it will immediately replant the land with new saplings. The harvest period
+chosen will be repeated for the foreseeable future. The company's nominal
+required return is 10 percent, and the inflation rate is expected to be 3.7
+percent per year. Bunyan Lumber has a 35 percent tax rate.
+
+Clear-cutting is a controversial method of forest management. To obtain the
+necessary permits, Bunyan Lumber has agreed to contribute to a conservation
+fund every time it harvests the lumber. If the company harvested the forest
+today, the required contribution would be \$250,000. The company has agreed
+that the required contribution will grow by 3.2 percent per year. When should
+the company harvest the forest?
+
+---

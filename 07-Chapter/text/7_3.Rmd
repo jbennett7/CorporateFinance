@@ -1,0 +1,153 @@
+---
+title: Real Options
+output: pdf_document
+---
+
+Using just NPV analysis for project valuation does not take into account the
+fact that real projects are dynamic and changes in circumstances can affect
+value. For instance, a project can be expanded if it proves to be successful or
+abandoned if not. NPV analysis does not take this into account and usually
+undervalues projects. In this section we will explore real options,
+specifically the option to expand, the option to abandon, and the timing
+option.
+
+# The option to expand
+
+The book uses the example of opening an ice hotel to explain the option to
+expand. The initial investment was found to be \$12 million and the cash flow
+in perpetuity will be \$2 million. The discount rate to use is 20 percent.
+Based on these figures we can calculate the NPV
+
+$$
+-\$12,000,000 + \$2,000,000 / .20 = -\$2 \text{ million}
+$$
+
+Based on strict NPV, we would reject this project. Now the \$2 million annual
+cash flow is based on the expected value from two forecasts:
+
+* __Optimistic forecast:__ $-\$12 \text{ million} + \$3 \text{ million} / .20 =
+  \$3 \text{ million}$
+
+* __Pessimistic forecast:__ $-\$12 \text{ million} + \$1 \text{ million} / .20
+  = -\$7 \text{ million}$
+
+We calculate the expected value:
+
+$$
+50\% \times \$3 \text{ million} + 50\% \times (-\$7 \text{ million})
+  = -\$2 \text{ million}
+$$
+
+But what if the optimistic forecast turns out to be correct. We may want an
+option to expand the ice hotel operation into say 10 locations. A simplified
+calculation can be made (assuming the unlikely situation where we build all 10
+hotels at once):
+
+$$
+50\% \times 10 \times \$3 \text{ million} + 50\% \times (-\$7 \text{ million})
+  = \$11.5 \text{ million}
+$$
+
+The value of the option is the difference between the two calculations:
+
+$$
+\$11.5 \text{ million} - (-\$2 \text{ million}) = \$13.5 \text{ million}
+$$
+
+Now the expected NPV looks a lot better, and thus the project should go
+forward.
+
+# The option to abandon
+
+On the other hand, what if there is a 50 percent chance the annual cash flows
+will be \$6 million and a 50 percent chance the annual cash flows will be -\$2
+million. We calculate the two forecasts as:
+
+* __Optimistic forecast:__ $-\$12 \text{ million} + \$6 \text{ million} / .2 =
+  \$18 \text{ million}$
+* __Pessimistic forecast:__ $-\$12 \text{ million} - \$2 \text{ million} / .2 =
+  -\$22 \text{ million}$
+
+The expected NPV for the project:
+
+$$
+50\% \times \$18 \text{ million} + 50\% \times (-\$22 \text{ million})
+  = -\$2 \text{ million}
+$$
+
+Again, because the NPV is negative we should not go ahead with the project. But
+what if we consider the option to abandon the project if, after one year, we
+find out that the pessimistic forecast comes true. Then we can recalculate the
+NPV, using the present value of just one year for the pessimistic forecast:
+
+$$
+50\% \times \$18 \text{ million} + 50\% \times (-\$12 \text{ million}
+  - \$2 \text{ million} / 1.20) = \$2.17 \text{ million}
+$$
+
+Again the value of the option is the difference between these two NPV calculations
+
+$$
+\$2.17 \text{ million} - (-\$2 \text{ million}) = \$4.17 \text{ million}
+$$
+
+With the option to abandon, we do not have to experience the negative cash flow
+for the later years if the pessimistic forecast turns true for the first year.
+The NPV turns positive and we should proceed with the project.
+
+# Timing options
+
+The book uses a different example for this option type. That of an empty plot
+of land. What if we bought a plot of land and the best use of the land would be
+to build an office building and charge rent. If construction costs were
+estimated to be \$1 million and total net rent (after all costs) were estimated
+to be \$90,000 per year in perpetuity. We will use a discount rate of 10
+percent. We can calculate the NPV to be:
+
+$$
+-\$1 \text{ million} + \$90,000 / .10 = -\$100,000
+$$
+
+The negative NPV indicates that we should not build. But what if the federal
+government is planning on implementing an urban revitalization program for the
+city. If this program succeeds then we could charge higher rent. If the program
+does not succeed we will not build. This is called a _timing option_. Although
+we do not want to currently build, we want the option to build in the future if
+the environment proves to be favorable. The timing option is why vacant land
+has value. Even though there are costs such as maintenance of the land, taxes,
+etc. Holding onto the land with a timing option to build can substantially
+raise the value of the property. The book doesn't value this option. It only
+explains why waiting can be worth more than building today.
+
+Another example of timing options is in mining. Suppose you own a copper mine,
+but the price of copper does not justify the cost of mining at the moment. You
+would still want to hold onto the mine and wait for a more favorable price.
+
+# Conclusion
+
+Real options allow you to take dynamic and changing circumstances into account
+when valuing a project. Static NPV tends to undervalue projects. In the real
+world, restaurant owners have the option to close if the restaurant does not
+prove fruitful. On the other hand if the restaurant is a success, an owner may
+want to open more restaurants in other locations. Maybe franchise the
+operations and license to others.
+
+This section demonstrates how to value some simple option examples. The values
+and probabilities were given and the calculations are easy to perform. In the
+real world probabilities and outcomes are not known. Most of the time you have
+to make educated guesses based on the information you have. Also, knowing when
+you have arrived at an outcome may be uncertain. A year may not be enough time
+to know if your restaurant will succeed or not. Finally, the discount rate is
+uncertain as well. The option to expand or abandon the project changes the
+project's risk, and therefore the discount rate. Option values are only as
+reliable as these assumptions.
+
+We can see similarities between real options and financial options. For
+instance the option to expand is similar to buying a call option to buy
+shares of stock if the price exceeds the strike price. The option to abandon is
+like buying a put option to sell shares of stock if the price falls below the
+strike price. The timing option is also like a call option. If the price proves
+favorable at a future date, you may want to buy the stock.
+
+Real options are usually represented as a decision tree which will be discussed
+in the next section.
