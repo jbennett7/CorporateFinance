@@ -1,0 +1,221 @@
+---
+title: "Sensitivity Analysis, Scenario Analysis, and Break-Even Analysis"
+output: pdf_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+source("../examples/7_1.R")
+table_7_2 <- read.csv("../data/table_7_2.csv")
+scenarios <- colnames(table_7_2)[-1]
+vars <- table_7_2$variable
+base <- as.list(table_7_2$base)
+names(base) <- vars
+cash_flows <- lapply(table_7_2$variable, function(v) {
+    sapply(table_7_2[table_7_2$variable == v, names(table_7_2)[-1]], function(x) {
+        some_list <- modifyList(base, setNames(list(x), v))
+        do.call(calc_cash_flows, some_list)
+    })
+})
+names(cash_flows) <- vars
+table_7_3 <- as.data.frame(bind_rows(lapply(names(cash_flows),
+                              function(v) unlist(cash_flows[[v]]['npv',]))))
+rownames(table_7_3) <- vars
+```
+
+The net present value technique is used to determine whether a project should
+be accepted. If the project's NPV is positive, the project should be accepted.
+Otherwise it should be rejected. When calculating the NPV, you need to
+understand which variables matter the most and how varying them will affect the
+NPV. Two ways of studying the effects of the variables on NPV are sensitivity
+analysis and scenario analysis.
+
+Sensitivity analysis allows you to vary one variable from a base case. The
+advantage of this analysis is that you can observe how much impact a single
+variable has on the NPV. The disadvantage to sensitivity analysis is that, in
+the real world, most of the variables are related and vary together.
+
+The beginning of the example starts with a breakdown of the cash flow forecasts
+for Solar Electronics Corporation's Jet Engine: Base case.
+
+| | Year 1 | Year 2-6 |
+|:---|:---:|---:|
+| Revenues                 | | `$6,000` |
+| Variable costs           | | ` 3,000` |
+| Fixed costs              | | ` 1,791` |
+| Depreciation             | | `   300` |
+| Pretax profit            | | `$  909` |
+| Tax ($t_c$ = .34)        | | `   309` |
+| Net profit               | | `$  600` |
+| Cash flow                | | `$  900` |
+| Initial investment costs | `$1,500` | |
+
+This cash flow is estimated to be the same for the next five years. We can
+calculate the NPV of the project using a 15 percent discount rate:
+
+$$
+\begin{aligned}
+\text{NPV} &= -\$1{,}500 + \sum^{5}_{i=1}{\frac{\$900}{(1.15)^t}}\\
+  &= -\$1{,}500 + \$900 \times \text{PVIA}(.15, 5)\\
+  &= \$1{,}517
+\end{aligned}
+$$
+
+Because the NPV is positive, we should accept the project. However, we should
+check the underlying assumptions about revenues and costs.
+
+## Revenues
+
+The marketing department has projected the following annual sales for jet engines:
+
+$$
+\begin{aligned}
+\text{Sales} &= \text{SEC market share} \times \text{Market size}\\
+3{,}000 &= .30 \times 10{,}000\\
+\\
+\text{revenues} &= \text{sales} \times \text{price}\\
+\$6{,}000 \text{ million} &= 3{,}000 \times \$2 \text{ million}
+\end{aligned}
+$$
+
+Revenue estimates depend on three assumptions:
+
+1. Market share.
+2. Size of jet engine market.
+3. Price per engine.
+
+## Costs
+
+We divide costs into variable and fixed costs. Variable costs will vary with
+the number of jet engines produced. Fixed costs are a flat annual rate
+regardless of the number of jet engines produced. The engineering department
+estimates costs:
+
+$$
+\begin{aligned}
+\text{annual variable costs} &= \text{unit variable costs}
+  \times \text{number of engines produced}\\
+  \$3{,}000 \text{ million} &= \$1 \text{ million} \times 3{,}000\\
+\\
+\text{annual total costs} &= \text{annual variable costs} + \text{annual fixed costs}\\
+\$4{,}791 \text{ million} &= \$3{,}000 \text{ million} + \$1{,}791 \text{ million}
+\end{aligned}
+$$
+
+These are the expected or best estimates of the different parameters. We could
+also produce optimistic and pessimistic forecasts for comparison.
+
+| Variable | Pessimistic | Expected or Best | Optimistic |
+|:---|---:|---:|---:|
+| Market size (per year) | 5,000 | 10,000 | 20,000 |
+| Market share           | 20\% | 30\% | 50\% |
+| Price                  | \$1.9 million | \$2 million | \$2.2 million |
+| Variable cost (per engine) | \$1.2 million | \$1 million | \$.8 million |
+| Fixed cost (per year)  | \$1,891 million | \$1,791 million | \$1,741 million |
+| Investment | \$1,900 million | \$1,500 million | \$1,000 million |
+
+To conduct sensitivity analysis on the project, we would vary one of these
+variables, and hold the other variables at their expected value.
+
+For instance if we want to calculate the NPV for a pessimistic market size of 5,000:
+
+```{r example}
+ex1 <- unlist(cash_flows$market_size[,'pessimistic'])
+sales         <- pretty(ex1['units'])
+revenues      <- pretty(ex1['revenues']/1e6)
+var_costs     <- pretty(ex1['var_costs']/1e6)
+market_size   <- pretty(table_7_2[table_7_2$variable == 'market_size', 'pessimistic'])
+market_share  <- table_7_2[table_7_2$variable == 'market_share', 'base']
+total_cost    <- pretty(sum(ex1[c('var_costs', 'fixed_costs')])/1e6)
+price         <- pretty(table_7_2[table_7_2$variable == 'price', 'base']/1e6)
+fixed_cost    <- pretty(ex1['fixed_costs']/1e6)
+```
+
+$$
+\begin{aligned}
+\text{Sales} &= \text{SEC market share} \times \text{Market size}\\
+`r sales` &= `r market_share` \times `r market_size`\\
+\\
+\text{revenues} &= \text{sales} \times \text{price}\\
+\$`r revenues` \text{ million} &= `r sales` \times \$`r price` \text{ million}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text{annual variable costs} &= \text{unit variable costs}
+  \times \text{number of engines produced}\\
+  \$`r var_costs` \text{ million} &= \$1 \text{ million} \times `r sales`\\
+\\
+\text{annual total costs} &= \text{annual variable costs} + \text{annual fixed costs}\\
+\$`r total_cost` \text{ million} &= \$`r var_costs` \text{ million}
+  + \$`r fixed_cost` \text{ million}
+\end{aligned}
+$$
+
+We calculate the cash flows:
+
+```{r ex1_cash_flows}
+cf_vars <- c("revenues", "var_costs", "fixed_costs", "depreciation",
+             "pretax", "tax", "net_profit", "cash_flow")
+ex1_cash_flows <- as.data.frame(format(round(ex1[cf_vars]/1e6), big.mark=','))
+rownames(ex1_cash_flows) <- c("Revenues", "Variable costs", "Fixed costs",
+                              "Depreciation", "Pretax profit", "Tax (.34)",
+                              "Net profit", "Cash flow")
+knitr::kable(ex1_cash_flows,
+             col.names = "Years 2-6",
+             caption="Cash flows for pessimistic market size")
+```
+
+The negative taxes assume that SEC has other profitable operations.
+Finally the NPV is
+`r label_dollar(scale = 1e-6, accuracy = 1,
+                suffix = " million")(round(ex1['npv']))`.
+
+Running the sensitivity analysis for all variables we can generate the
+following table:
+
+```{r table_7_3}
+rownames(table_7_3) <- c("Market size", "Market share", "Price",
+                         "Variable cost", "Fixed cost", "Investment")
+
+knitr::kable(round(table_7_3/1e6),
+             caption = "NPV Calculations for the Solar Jet Engine Using Sensitivity Analysis",
+             col.names = c("Pessimistic", "Expected", "Optimistic"))
+```
+
+The following table shows some sensitivity measures that can help in evaluating
+the project.
+
+```{r sensitivity_measures, echo=FALSE}
+sensitivity_measures <- table_7_3 |>
+    transmute(
+        npv_range      = round((optimistic - pessimistic)/1e6),
+        downside_ratio = round((base - pessimistic)/base, 2)) |>
+    arrange(desc(npv_range))
+colnames(sensitivity_measures) <- c("NPV Range", "Downside Ratio")
+knitr::kable(sensitivity_measures, caption="Key Sensitivity Measures")
+```
+
+The range between pessimistic and optimistic outcomes for each variable is
+useful to determine if we need more information about the input. For example,
+in the table above, market size and market share have a very large range when
+compared to the other NPV inputs. We may want to gather more information about
+how these inputs are estimated. This can be done through market research or
+test marketing.
+
+The downside ratio is very useful in showing if a pessimistic outcome
+would reverse the decision (ratio > 1), i.e. if the NPV can turn negative. This
+will be a major factor in accept/reject decision making. The table shows that
+market size and market share are the only two inputs that can make the NPV go
+negative. Variable cost shows a near miss with a downside ratio of
+`r sensitivity_measures['Variable cost', 'Downside Ratio']`. With a pessimistic
+value, the NPV is only
+`r label_dollar(scale=1e-6, accuracy=1,
+                suffix=" million")(table_7_3['Variable cost', 'pessimistic'])`.
+We may want to pay some attention to this input as well.
+
+The market size and market share are clearly the most important inputs to the
+NPV calculation and the decision to go ahead with full-scale production. Their
+ranges are both more than twice the next-largest range and the downside ratios
+for both show a significant risk for negative NPV.
